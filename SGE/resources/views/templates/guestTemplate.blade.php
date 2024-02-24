@@ -10,7 +10,7 @@
 <body>
 <header class="p-1 md:p-1 grid grid-cols-3 gap-10">
     <a href="#" class=" text-center flex justify-center">
-        <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-28" alt="">
+        <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
     </a>
 
     <ul class="hidden md:flex gap-6 justify-center">
