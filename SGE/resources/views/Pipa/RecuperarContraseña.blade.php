@@ -1,3 +1,8 @@
+@extends('../templates/guestTemplate')
+@section('titulo')
+Recuperar Contraseña
+@endsection
+@section('contenido')
 <div class="bg-white rounded-lg p-8 max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-4">Recuperar Contraseña</h2>
     <p class="mb-6">Ingresa tu correo electrónico asociado a tu cuenta y te enviaremos instrucciones para restablecer tu contraseña.</p>
@@ -9,5 +14,7 @@
       <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
         Enviar
       </button>
+      <a href="ChangePassword">Cambiar Contraseña</a>
     </form>
   </div>
+  @endsection

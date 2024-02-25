@@ -1,3 +1,8 @@
+@extends('../templates/guestTemplate')
+@section('titulo')
+    Iniciar Sesión
+@endsection
+@section('contenido')
 <div class="bg-white rounded-lg p-8 max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-4">Inicio de Sesión</h2>
     <form>
@@ -13,7 +18,7 @@
             <img src="/img/ojo.png" id="togglePasswordVisibility" class="w-4 cursor-pointer" alt="">
           </div>
         </div>
-        <a class="mt-2 inline-block align-baseline font-bold text-sm" href="#">¿Olvidaste tu contraseña?</a>
+        <a class="mt-2 inline-block align-baseline font-bold text-sm" href="RecuperarContraseña">¿Olvidaste tu contraseña?</a>
       </div>
       <div class="flex items-center justify-between">
         <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">Iniciar Sesión</button>
@@ -31,3 +36,4 @@
     }
   });
 </script>
+@endsection

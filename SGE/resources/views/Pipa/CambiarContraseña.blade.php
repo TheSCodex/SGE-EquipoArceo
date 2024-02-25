@@ -1,3 +1,8 @@
+@extends('../templates/guestTemplate')
+@section('titulo')
+    Cambiar Contraseña
+@endsection
+@section('contenido')
 <div class="bg-white rounded-lg p-8 max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-4">Cambiar Contraseña</h2>
     <form>
@@ -43,3 +48,4 @@
       }
     });
   </script>
+  @endsection

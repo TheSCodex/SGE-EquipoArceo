@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Welcome');
+});
+
+Route::get('/logout', function () {
+    return view('Pipa.login');
+});
+Route::get('/RecuperarContraseña', function () {
+    return view('Pipa.RecuperarContraseña');
+});
+Route::get('/ChangePassword', function () {
+    return view('Pipa.CambiarContraseña');
 });
