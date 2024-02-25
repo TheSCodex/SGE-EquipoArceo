@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,5 @@ Route::resource('reportes', ReportsController::class);
 //RUTAS PARA CRUD - DOCUMENTOS
 Route::resource('documentos', DocumentsController::class);
 
+//RUTAD DEL PRESIDENTE DE LA ACADEMIA
+Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
