@@ -18,15 +18,19 @@ Reportes
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
            laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <button class="bg-blue-500 text-white py-2 px-4 rounded mt-2 hover:bg-blue-600 w-full m-0">Generar</button>
+        <button class="bg-[#02ab82] text-white rounded mt-2 hover:bg-green w-full m-0">Generar</button>
       </div>
 
-      <div class="bg-white rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-2">Reportes</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+      <div class="bg-white rounded-lg shadow-md relative">
+        <h2 class="text-lg font-bold opacity-30 p-4">Reportes</h2>
+        <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
            laboris nisi ut aliquip ex ea commodo consequat."</p>
-        <button class="bg-blue-500 text-white py-2 px-4 rounded mt-2 hover:bg-blue-600 w-full m-0">Generar</button>
+        <div class="flex justify-between bg-[#02ab82] text-white py-4 px-4 rounded-b mt-2 h-[67px] w-full m-0">
+          <p>Generar</p>
+          <p>Editar</p>
+          </div>
+          <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
       </div>
 
       <div class="bg-white rounded-lg shadow-md p-4">
@@ -40,10 +44,10 @@ Reportes
 
 
     <div class="flex mt-4">
-      <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras" class="w-60 md:w-80 rounded-lg shadow-md mr-2">
+      <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras" class="w-[1020px] h-[440px] rounded-lg shadow-md mr-2">
 
       <!-- Cuadro de Documentos -->
-      <div class="bg-white rounded-lg shadow-md p-4 w-1/3 flex justify-center items-center flex-col ml-2">
+      <div class="bg-white rounded-lg shadow-md p-4 w- flex justify-center items-center flex-col ml-2">
         <h2 class="text-xl font-bold mb-4">Reporte</h2>
         <p class="text-center mb-4">Haz seleccionado actualizar reporte con el título (reporte) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <div class="mt-4">

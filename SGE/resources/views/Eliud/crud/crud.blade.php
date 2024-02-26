@@ -3,23 +3,23 @@
     CRUD
 @endsection
 @section('contenido')
-    <div class="flex justify-between mx-36 mt-10">
-        <h1 class="font-bold text-2xl">CRUD Documentos</h1>
+    <div class="flex justify-between mx-36 mt-10 font-roboto">
+        <h1 class="font-bold font-montserrat text-2xl">CRUD Documentos</h1>
         <div class="flex items-center">
             <div class="flex items-center relative">
                 <img src="{{ asset('img/Eliud/busqueda.png') }}" alt="busqueda" class=" right-12 absolute" />
                 <input type="text" placeholder="Buscar..."
-                    class="border-[#02AB82] border-2 rounded-md font-bold focus:outline-none py-1 pl-3 pr-8 placeholder-[#02AB82] text-[#02AB82] mr-8 w-52" />
+                    class="border-[#02AB82] border-[1.5px] rounded-lg font-bold focus:outline-none py-1 pl-3 pr-8 placeholder-[#02AB82] text-[#02AB82] mr-8 w-52" />
             </div>
             <button>
                 <img src="{{ asset('img/Eliud/dobleFlecha.png') }}" class="mr-8" />
             </button>
-            <button class="bg-[#02AB82] text-[#fff] rounded-[4px] px-6 py-2">AÑADIR FORMATO</button>
+            <button class="bg-[#02AB82] text-[#fff] font-montserrat font-semibold rounded-[4px] px-6 py-2">AÑADIR FORMATO</button>
         </div>
     </div>
-    <div class="bg-[#E5E5E5] border-2 mx-36 mt-4"></div> <!-- Linea separador -->
-    <div class="w-full">
-        <table class="table-auto text-sm text-[#ACACAC] w-[81%] ml-40 mt-5">
+    <div class="bg-[#E5E5E5] h-[2px] mx-36 mt-4"></div> <!-- Linea separador -->
+    <div class="w-full font-montserrat">
+        <table class="table-auto text-sm text-[#ACACAC] w-[81%] ml-[130px] mt-5">
             <thead style="border-bottom: 25px solid transparent">
                 <tr>
                     <th>Titulo</th>
