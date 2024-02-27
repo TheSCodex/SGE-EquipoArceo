@@ -20,7 +20,6 @@ Reportes
            laboris nisi ut aliquip ex ea commodo consequat."</p>
         <div class="flex justify-between bg-[#02ab82] text-white py-4 px-4 rounded-b mt-2 h-[67px] w-full m-0">
           <p>Generar</p>
-          <p>Editar</p>
           </div>
           <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
       </div>
@@ -32,7 +31,6 @@ Reportes
            laboris nisi ut aliquip ex ea commodo consequat."</p>
         <div class="flex justify-between bg-[#02ab82] text-white py-4 px-4 rounded-b mt-2 h-[67px] w-full m-0">
           <p>Generar</p>
-          <p>Editar</p>
           </div>
           <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
       </div>
@@ -44,7 +42,6 @@ Reportes
            laboris nisi ut aliquip ex ea commodo consequat."</p>
         <div class="flex justify-between bg-[#02ab82] text-white py-4 px-4 rounded-b mt-2 h-[67px] w-full m-0">
           <p>Generar</p>
-          <p>Editar</p>
           </div>
           <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
       </div>
@@ -53,22 +50,26 @@ Reportes
       <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras" class=" rounded-lg shadow-md mr-2">
 
       <!-- Cuadro de Documentos -->
-      <div class="bg-white rounded-lg shadow-md p-4 w-1/3 flex justify-center items-center flex-col ml-2">
-        <h2 class="text-xl font-bold mb-4">Documentos</h2>
-        <ul class="list-disc list-inside text-sm">
-          <li class="mb-2">Elsa Luz Rios generó la carta de aprobación para el estudiante: Bello Maldonado Kevin Alexis</li>
-          <span class="text-gray-500 text-xs">El 22 de Julio de 2024</span>
-          <li class="mb-2">Elsa Luz Rios generó la carta de aprobación para el estudiante: Bello Maldonado Kevin Alexis</li>
-          <span class="text-gray-500 text-xs">El 22 de Julio de 2024</span>
-          <li class="mb-2">Elsa Luz Rios generó la carta de aprobación para el estudiante: Bello Maldonado Kevin Alexis</li>
-          <span class="text-gray-500 text-xs">El 22 de Julio de 2024</span>
-          <li class="mb-2">Elsa Luz Rios generó la carta de aprobación para el estudiante: Bello Maldonado Kevin Alexis</li>
-          <span class="text-gray-500 text-xs">El 22 de Julio de 2024</span>
-        </ul>
-        <button class="bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">Visitar Listado</button>
-      </div>
-
-
+      <div class="bg-white mt-20 rounded-lg shadow-md p-4 ml-2">
+        <div class="h-[200px] w-[300px] flex justify-center items-center flex-col">
+            <h3 class="text-xl opacity-30 font-bold mb-2 mt-6">Documentos</h3>
+            <ul class="list-disc list-inside text-sm">
+                <li class="mb-1">Elsa Luz Rios generó la carta de aprobación para el estudiante: </li>
+                <p>Maldonado Kevin Alexis</p>
+                <span class="text-gray-500 text-xs mt-2">El 22 de Julio de 2024</span>
+                <li class="mb-1">Elsa Luz Rios generó la carta de aprobación para el estudiante: </li>
+                <p>Maldonado Kevin Alexis</p>
+                <span class="text-gray-500 text-xs mt-2">El 22 de Julio de 2024</span>
+                <li class="mb-1">Elsa Luz Rios generó la carta de aprobación para el estudiante: </li>
+                <p>Maldonado Kevin Alexis</p>
+                <span class="text-gray-500 text-xs mt-2">El 22 de Julio de 2024</span>
+                <li class="mb-1">Elsa Luz Rios generó la carta de aprobación para el estudiante: </li>
+                <p>Maldonado Kevin Alexis</p>
+                <span class="text-gray-500 text-xs mt-2">El 22 de Julio de 2024</span>
+            </ul>
+            <button class="bg-[#02ab82] text-white py-2 w-[243px] h-[35px] rounded mt-4 hover:bg-[rgb(2,151,171)]">Visitar Listado</button>
+        </div>
+    </div>
 
     </div>
 
