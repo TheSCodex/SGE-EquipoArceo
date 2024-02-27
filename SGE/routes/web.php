@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::resource('reportes', ReportsController::class);
 //RUTAS PARA CRUD - DOCUMENTOS
 Route::resource('documentos', DocumentsController::class);
 
+
+//RUTAS PARA PROYECTOS
+Route::resource('proyectos', ProjectsController::class);
