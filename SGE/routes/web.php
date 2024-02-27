@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/newBook", function(){
+    return view("Luis.newBookForm");
+});
+
+Route::get("/newEvent", function(){
+    return view("Luis.newEventForm");
+});
