@@ -3,7 +3,8 @@
     Cambiar Contraseña
 @endsection
 @section('contenido')
-<div class="bg-white rounded-lg p-8 max-w-md mx-auto">
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-white rounded-lg p-8 max-w-md mx-auto" style="width: 90%;">
     <h2 class="text-2xl font-bold mb-4">Cambiar Contraseña</h2>
     <form>
       <div class="mb-4">
@@ -28,7 +29,8 @@
         Guardar
       </button>
     </form>
-  </div>
+  </div>  </div>
+
   <script>
     document.getElementById("togglePasswordVisibility").addEventListener("click", function() {
       var passwordInput = document.getElementById("password");

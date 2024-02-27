@@ -3,7 +3,8 @@
 Recuperar Contraseña
 @endsection
 @section('contenido')
-<div class="bg-white rounded-lg p-8 max-w-md mx-auto">
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-white rounded-lg p-8 max-w-md mx-auto" style="width: 90%;">
     <h2 class="text-2xl font-bold mb-4">Recuperar Contraseña</h2>
     <p class="mb-6">Ingresa tu correo electrónico asociado a tu cuenta y te enviaremos instrucciones para restablecer tu contraseña.</p>
     <form>
@@ -16,5 +17,7 @@ Recuperar Contraseña
       </button>
       <a href="ChangePassword">Cambiar Contraseña</a>
     </form>
-  </div>
-  @endsection
+  </div></div>
+
+
+@endsection
