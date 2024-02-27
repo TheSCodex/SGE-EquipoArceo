@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Pipa\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('Welcome');
 });
 
+// RUTAS PARA EL INICIO DE SESIÓN
+
 Route::get('/logout', function () {
     return view('Pipa.login');
 });
@@ -26,3 +29,7 @@ Route::get('/RecuperarContraseña', function () {
 Route::get('/ChangePassword', function () {
     return view('Pipa.CambiarContraseña');
 });
+
+// RUTAS PARA EL CRUD DE USUARIOS
+
+Route::resource('user', UserController::class);
