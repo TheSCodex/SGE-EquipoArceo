@@ -30,14 +30,18 @@
                 </div>
 
                 <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <img/>
-                    <p>Tu proyecto esta guardado como borrador</p>
+                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%] ">
+                        <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
+                        <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
+                    </div>
                 </div>
 
                 
                 <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <img/>
-                    <p>Aun no tienes votos</p>
+                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
+                        <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
+                        <p>Aun no tienes votos</p>
+                    </div>
                 </div>
 
                 <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-bold text-sm">
