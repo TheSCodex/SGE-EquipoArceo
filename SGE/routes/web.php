@@ -4,6 +4,7 @@ use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
+use App\Http\Controllers\Michell\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,12 @@ Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 //RUTA DEL ADMINISTRADOR
 Route::resource('admin', AdministratorController::class);
+
+
+// RUTA INICIO DE ESTUDIANTES
+Route::get('inicioEstudiante',[StudentController::class, 'index']);
+Route::get('eventos',[StudentController::class, 'studentEvents']);
+
+// Route::get('inicioEstudiante', function () {
+//     return view('Michell.studentHome.studentHome');
+// });
