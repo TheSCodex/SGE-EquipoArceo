@@ -8,7 +8,7 @@ Reportes
 <div class="container mx-auto px-4 py-4">
   <div class="flex flex-col">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-2xl font-bold">Buenos días Directora!</h1>
+      <h1 class="text-2xl font-bold">Buenos días Norma!</h1>
       <a href="#" class="text-blue-500 hover:underline">Generar nuevo reporte</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
