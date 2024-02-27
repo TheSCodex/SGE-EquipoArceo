@@ -9,12 +9,12 @@
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
                     <a href="#"
-                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
+                        class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Asesores</h3>
                     <a href="#"
-                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
+                        class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
             </div>
             <div class="h-[10%] flex space-x-5 mt-5">
