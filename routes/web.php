@@ -3,6 +3,7 @@
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\companiesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,4 @@ Route::resource('documentos', DocumentsController::class);
 Route::resource('carreras', carrerasController::class);
 
 
+Route::resource('companies', companiesController::class);
