@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Luis\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::get("/newBook", function(){
 Route::get("/newEvent", function(){
     return view("Luis.newEventForm");
 });
+
+Route::get('/events', [EventController::class, 'index'])->name('EventList');
