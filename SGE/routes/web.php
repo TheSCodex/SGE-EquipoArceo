@@ -5,6 +5,7 @@ use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Michell\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,6 @@ Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 //RUTA DEL ADMINISTRADOR
 Route::resource('admin', AdministratorController::class);
+
+//RUTA  ESTUDIANTES
+Route::get('student', [StudentController::class, "index"]);
