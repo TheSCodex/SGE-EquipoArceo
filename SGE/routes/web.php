@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Eliud\Documentos\DocumentsController;
+use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pipa\UserController;
 
@@ -17,6 +19,26 @@ use App\Http\Controllers\Pipa\UserController;
 Route::get('/', function () {
     return view('Welcome');
 });
+
+//RUTAS PARA REPORTES
+Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
+Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
+
+Route::resource('reportes', ReportsController::class);
+
+//RUTAS PARA CRUD - DOCUMENTOS
+Route::resource('documentos', DocumentsController::class);
+
+
+//RUTAS PARA REPORTES
+Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
+Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
+
+Route::resource('reportes', ReportsController::class);
+
+//RUTAS PARA CRUD - DOCUMENTOS
+Route::resource('documentos', DocumentsController::class);
+
 
 // RUTAS PARA EL INICIO DE SESIÓN
 
