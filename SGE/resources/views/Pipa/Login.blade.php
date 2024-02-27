@@ -3,7 +3,8 @@
     Iniciar Sesión
 @endsection
 @section('contenido')
-<div class="bg-white rounded-lg p-8 max-w-md mx-auto">
+<div class="flex items-center justify-center h-screen">
+<div class="bg-white rounded-lg p-8 max-w-md mx-auto" style="width: 90%;">
     <h2 class="text-2xl font-bold mb-4">Inicio de Sesión</h2>
     <form>
       <div class="mb-4">
@@ -24,7 +25,6 @@
         <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">Iniciar Sesión</button>
       </div>
     </form>
-  </div>
 
 <script>
   document.getElementById("togglePasswordVisibility").addEventListener("click", function() {
@@ -36,4 +36,6 @@
     }
   });
 </script>
+</div></div>
+
 @endsection
