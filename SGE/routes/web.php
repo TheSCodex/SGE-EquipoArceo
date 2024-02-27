@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Pipa\ChangePasswordController;
+use App\Http\Controllers\Pipa\LoginController;
+use App\Http\Controllers\Pipa\RecoverPasswordController;
 use App\Http\Controllers\Pipa\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,16 +44,9 @@ Route::resource('documentos', DocumentsController::class);
 
 
 // RUTAS PARA EL INICIO DE SESIÓN
-
-Route::get('/logout', function () {
-    return view('Pipa.login');
-});
-Route::get('/RecuperarContraseña', function () {
-    return view('Pipa.RecuperarContraseña');
-});
-Route::get('/ChangePassword', function () {
-    return view('Pipa.CambiarContraseña');
-});
+Route::resource('login', LoginController::class);
+Route::resource('changepassword', ChangePasswordController::class);
+Route::resource('recover', RecoverPasswordController::class);
 
 // RUTAS PARA EL CRUD DE USUARIOS
 

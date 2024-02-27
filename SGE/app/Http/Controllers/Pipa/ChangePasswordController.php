@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Pipa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pipa\ChangePasswordRequest;
 use Illuminate\Http\Request;
 
-class Login extends Controller
+class ChangePasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('Pipa.changePassword');
     }
 
     /**
@@ -26,9 +27,9 @@ class Login extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ChangePasswordRequest $request)
     {
-        //
+        return ('Procesando...');
     }
 
     /**
