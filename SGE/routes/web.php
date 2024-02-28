@@ -6,6 +6,7 @@ use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\StudentController;
 use App\Http\Controllers\Michell\BajasController;
+use App\Http\Controllers\Michell\AcademicAdvisorController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,3 +52,6 @@ Route::get('eventos',[StudentController::class, 'studentEvents']);
 // });
 //BAJAS
 Route::get('bajas', [BajasController::class, "index"]);
+
+//ASESOR ACADEMICO
+Route::get('academic', [AcademicAdvisorController::class, "index"]);

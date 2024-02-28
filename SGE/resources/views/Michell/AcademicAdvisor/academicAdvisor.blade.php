@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bajas</title>
+    <title>Academic Advisor</title>
 </head>
 <body>
 @extends('templates.studenTemplate')
 @section('contenido')
 <section class="my-[2cm] mx-[2cm]">
     <div class="bg-white rounded-md py-1 flex justify-between items-center mb-10 border-b-2">
-        <h1 class="text-2xl font-bold font-kanit ml-8">Bajas de estudiantes</h1>
+        <h1 class="text-2xl font-bold font-kanit ml-8">Asesores</h1>
         {{-- buscador --}}
         <div class="w-[50%] flex justify-evenly">
             <input placeholder="Buscador" type="search" name="d" id="" class="w-[50%] placeholder:text-green placeholder:px-3 rounded-md mb-4 border-2 border-green focus:outline-none px-3">
@@ -32,16 +32,16 @@
 <thead>
     <tr>
         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Matricula</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asesor academico</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estudiante a cargo</th>
         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Division</th>
     </tr>
 </thead>
 <tbody class="bg-white divide-y divide-gray-200">
     <tr>
-        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
-        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsy Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">elrios@utcancun.edu.mx</td>
+        <td class="px-6 py-4 whitespace-nowrap">Azziel Michell Meza</td>
         <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
     </tr>
     <!-- Más filas aquí -->
