@@ -35,7 +35,6 @@ Route::resource('documentos', DocumentsController::class);
 //RUTAS PARA EL CRUD DE CARRERAS Y DIVISIONES
 Route::resource('/carreras', carrerasController::class);
 
-
 Route::resource('/companies', companiesController::class);
 
 Route::get('/crud', [AsesorController::class, 'index']);
