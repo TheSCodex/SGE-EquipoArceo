@@ -10,11 +10,17 @@
     <main class=" m-12  ml-24 mr-24">
         <div class=" mt-3">
             <div class=" flex  justify-between mb-3">
-                <h1 class="text-2xl font-bold ">Empresas</h1>
-                <div>
-                    <input type="search" placeholder="Buscar...." class="px-2 py-[3px] w-52 border-green border-2 rounded-lg" style="color: green;">
-                    <button class="  px-2 py-1 bg-green text-white rounded-lg">Agregar nueva Empresa</button>
-                </div>
+                <h1 class="text-2xl font-bold "> Empresas</h1>
+                <div class="flex flex-wrap justify-around mb-2 items-center w-[36vw]">
+                    <div>
+                        <div class="flex items-center relative" >
+                        <img src="{{ asset('img/iconosEli/search 1 (1).png')}}" alt="sort" class=" right-[12%] absolute">
+                            <input class="border-[#02AB82] placeholder-[#02AB82] border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                        </div>
+                    </div>
+                        <img src="{{ asset('img/iconosEli/sort 1 (1).png')}}" alt="sort" class="w-[1vw] h-[4vh]">
+                        <button class="py-[0.5%] bg-[#02AB82]  text-white  rounded-lg">Agregar nueva Empresa</button>
+                    </div>
             </div>
             <table class="min-w-full bg-white rounded-lg overflow-hidden">
                 <thead class="  text-gray-400 border-t border-gray-400">
@@ -53,19 +59,15 @@
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                                     <path d="M13.5 6.5l4 4" />
-                                    
-                                  </svg>
+                                    </svg>
                             </div>
-                     
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </main>
-   
-    
+    </main> 
 </body>
 @endsection
 
