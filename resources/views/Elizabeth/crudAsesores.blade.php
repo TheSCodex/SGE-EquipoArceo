@@ -4,26 +4,27 @@
 @endsection
 @section('contenido')
 <div class='flex justify-center w-full'>
-    <div class='pt-8 sm:w-[90%] px-4 flex-col'>
+    <div class='pt-4 sm:w-[90%] px-4 flex-col'>
         <!-- PRIMERA FILA -->
-        <div class="flex-row py-[5%]">
+        <div class="flex-row py-[1%] w-full justify-center">
             <!-- Titulo -->
             <div class="align-center">
             <span class="text-center font-bold align-middle font-roboto text-xl">Asesores empresariales</span>
             </div>
             <!-- SearchBar -->
-            <div class="relative align-middle mx-auto shrink text-emerald-400">
-                <input class="border-2 border-green-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                    type='search' name='search' placeholder="Search">
+            <div class="justify-items-end mx-auto shrink text-emerald-400 border-emerald-400">
+                <input class="border-2 placeholder-emerald-400 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                    type='search' name='search' placeholder="Search...">
                 <button type='submit' class='absolute right-0 top-0 mt-5 mr-4'>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    </svg>
+                    <img class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" src="{{ asset('img/buscador.png') }} " alt="Icono Lupa Buscador"> </img>
                 </button>
             </div>
+            
             <!-- Imagen flecha (sepa para que sirva, que me digan porfa. - Ethan) -->
             <!-- Boton agregar nuevo asesor -->
-            <button class="shrink-0 justify-items-end bg-emerald-400 text-white hover:bg-white hover:text-emerald-400 border-emerald-400 border-2 transition-colors duration-300 hover:rounded-sm px-4 py-2 align-middle"> Insertar nuevo asesor
-            </button>
+            <button class="shrink-0 justify-items-end bg-emerald-400 text-white hover:bg-white hover:text-emerald-400 border-emerald-400 border-2 transition-colors duration-300 hover:rounded-sm px-4 py-2 align-middle">
+                Agregar nuevo asesor empresarial
+        
         </div>
         <!-- TABLA CRUD -->
         <!-- TODO: Mapearlo -->
