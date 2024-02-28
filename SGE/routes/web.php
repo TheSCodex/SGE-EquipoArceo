@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
+use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,5 @@ Route::resource('reportes', ReportsController::class);
 Route::resource('documentos', DocumentsController::class);
 
 //RUTAS PARA ANTEPROYYECTOS
-//fORMULARIO DE ANTEPROYECTO
-
 Route::get('anteproyecto', [FormAnteproyectoController::class, 'index']);
-
+Route::resource('proyectos', ProjectsController::class);
