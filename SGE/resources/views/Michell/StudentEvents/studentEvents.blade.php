@@ -24,13 +24,30 @@
                         </clipPath>
                         </defs>
                         </svg>
-                        <button class="bg-green text-lg p-[1.4%] rounded-md text-white mb-4">Agregar nuevo evento</button>
+                        <button class="bg-green text-lg p-[1.4%] rounded-md text-white mb-4" id="myBtn">Agregar nuevo evento</button>
                 </div>
             </div>
             <div class="grid grid-cols-3 gap-20 ms:grid-rows-1" id="eventsContainer">
             </div>
+            
     </section>
-    </div>
+        <div id="myModal" class="absolute hidden inset-0 h-[115%] justify-center items-center bg-black bg-opacity-50">
+            <div class="w-[30%] bg-white rounded-lg p-8 absolute"> 
+                <span class="absolute top-0 right-0 m-4 cursor-pointer close font-bold text-gray-600 text-2xl">×</span> 
+            <form id="eventForm" class="flex flex-col items-start p-10">
+                <label for="tituloEvento" class="mt-4">Titulo del evento</label>
+                <input type="text" id="tituloEvento" autofocus placeholder="Titulo" class="w-full px-2 py-1 border border-gray-300 rounded-md mt-1 focus:outline-none">
+                <label for="fecha" class="mt-4">Fecha</label>
+                <input type="date" id="fecha"  placeholder="DD/MM/YYYY" class="w-full px-2 py-1 border border-gray-300 rounded-md mt-1 focus:outline-none">
+                <label for="hora" class="mt-4">Hora</label>
+                <input type="time" id="hora"  placeholder="Hora" class="w-full px-2 py-1 border border-gray-300 rounded-md mt-1 focus:outline-none">
+                <input type="submit" placeholder="enviar" value="Añadir" class="bg-green text-white w-full py-2 rounded-md mt-4 cursor-pointer">
+            </form>
+        </div>
+</div>
+    
+    
+    
     <script>
         const events = [
             {id:1,date:"Martes 20/02/2024",cont1:"Revision de memoria",time1:"8:40 a 9:30",cont2:"Reunion con Mario Hugo",time2:"10:50 a 11:40"},
@@ -74,5 +91,75 @@
             `;
             eventsContainer.innerHTML += eventHtml;
         });
+
+        // Obtén el modal
+        var modal = document.getElementById("myModal");
+
+        // Obtén el botón que abre el modal
+        var btn = document.getElementById("myBtn");
+
+        // Obtén el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Cuando el usuario haga clic en el botón, abre el modal 
+        btn.onclick = function() {
+          modal.style.display = "flex";
+        }
+
+        // Cuando el usuario haga clic en <span> (x), cierra el modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // Cuando el usuario haga clic en cualquier lugar fuera del modal, cierra el modal
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        function mostrarError(input, mensaje) {
+    var span = document.createElement('span');
+    span.textContent = mensaje;
+    span.classList.add('text-red', 'text-sm');
+    input.parentNode.insertBefore(span, input.nextSibling);
+}
+
+function limpiarErrores() {
+    var errores = document.querySelectorAll('text-red');
+    errores.forEach(error => error.remove());
+}
+
+function validarFormulario() {
+    limpiarErrores();
+
+    var tituloEvento = document.getElementById('tituloEvento');
+    var fecha = document.getElementById('fecha');
+    var hora = document.getElementById('hora');
+
+    var regex = /^[a-zA-Z0-9]+$/;
+
+    // if (tituloEvento.value.trim() === '' || !regex.test(tituloEvento.value)) {
+    //     mostrarError(tituloEvento, 'El campo "Titulo del evento" es inválido');
+    //     return false;
+    // }
+    // if (fecha.value.trim() === '' || !regex.test(fecha.value)) {
+    //     mostrarError(fecha, 'El campo "Fecha" es inválido');
+    //     return false;
+    // }
+    // if (hora.value.trim() === '' || !regex.test(hora.value)) {
+    //     mostrarError(hora, 'El campo "Hora" es inválido');
+    //     return false;
+    // }
+
+    return true;
+}
+
+document.getElementById('eventForm').addEventListener('submit', function(event) {
+    if (!validarFormulario()) {
+        event.preventDefault();
+    }
+});
+
+
     </script>
 @endsection
