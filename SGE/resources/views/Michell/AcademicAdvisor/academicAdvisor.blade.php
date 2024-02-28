@@ -28,6 +28,7 @@
         </div>
     </div>
 </section>
+<section class="my-[2cm] mx-[2cm]">
 <table class="my-[2cm] mx-[2cm] min-w-full divide-y divide-gray-200">
 <thead>
     <tr>
@@ -45,8 +46,10 @@
         <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
     </tr>
     <!-- Más filas aquí -->
+</section>
 </tbody>
 </table>
+
 @endsection
 </body>
 </html>

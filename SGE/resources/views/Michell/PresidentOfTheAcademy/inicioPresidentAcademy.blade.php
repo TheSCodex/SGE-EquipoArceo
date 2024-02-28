@@ -129,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 font-roboto space-y-3">
+            <div class="mt-2 font-roboto space-y-3">
                 <div class="bg-white rounded-md py-1">
                     <h3 class="text-lg font-medium font-kanit ml-6">Eventos importantes</h3>
                 </div>
