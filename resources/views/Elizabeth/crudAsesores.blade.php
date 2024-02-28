@@ -29,127 +29,114 @@
         </div>
         <!-- TABLA CRUD -->
         <!-- TODO: Mapearlo -->
-        <div class="w-full justify-center flex flex-row space-x-4">
-            <table class="table-auto w-[90%] text-center">
-                <thead>
-                    <tr class="font-bold px-[3%] text-[#ACACAC]">
-                        <th>Nombre</th>
-                        <th>Correo Electronico</th>
-                        <th>Celular</th>
-                        <th>Grado Academico</th>
-                        <th>Departamento</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody class="px-[3%] py-[2%]  text-black font-bold">
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Karthi</td>
-                        <td>karthi@gmail.com</td>
-                        <td>7305477760</td>
-                        <td>Ingenieria</td>
-                        <td>Desarrollo</td>
-                        <td>
-                            <button>
-                                <img src="{{ asset('img/iconosEli/Vector (2).png') }}" alt="Edit" class="w-[1vw] h-[2vh]" />
-                            </button>
-                            <button class="px-[3%]">
-                                <img src="{{ asset('img/iconosEli/trash 1.png') }}" alt="Delete" class="w-[1vw] h-[2vh] " />
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="text-xs md:text-base w-full flex flex-col overflow-hidden justify-center">
+            <table class="min-w-full table-auto text-sm md:text-base text-[#ACACAC] md:w-[81vw] md:ml-[4%] ">
+                <thead style="text-xs md:text-base border-bottom: 25px solid transparent">
+                    <tr class="text-xs md:text-base font-bold md:px-[3%] text-[#ACACAC]" >
+                    <td >Nombre</td>
+                    <td>Correo Electronico</td>
+                    <td>Celular</td>
+                    <td>Grado Academico</td>
+                    <td>Departamento</td>
+                    <td>
+                    
+                    </td>
+                </tr>
+                </thead> 
+            <tbody >
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                    <button>
+                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                    </button>
+                    <button class="text-xs md:text-basemd:px-[3%]">
+                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                    </button>
+                    </td>
+                </tr> 
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                    <button>
+                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                    </button>
+                    <button class="text-xs md:text-basemd:px-[3%]">
+                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                    </button>
+                    </td>
+                </tr> 
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                    <button>
+                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                    </button>
+                    <button class="text-xs md:text-basemd:px-[3%]">
+                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                    </button>
+                    </td>
+                </tr> 
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                    <button>
+                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                    </button>
+                    <button class="text-xs md:text-basemd:px-[3%]">
+                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                    </button>
+                    </td>
+                </tr> 
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                    <button>
+                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                    </button>
+                    <button class="text-xs md:text-basemd:px-[3%]">
+                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                    </button>
+                    </td>
+                </tr> 
+                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
+                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
+                    <td >karthi@gmail.com</td>
+                    <td>7305477760</td>
+                    <td>Ingenieria</td>
+                    <td>Desarrollo</td>
+                    <td>
+                        <button>
+                            <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
+                        </button>
+                        <button class="text-xs md:text-basemd:px-[3%]">
+                            <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
+                        </button>
+                    </td>
+                </tr> 
+            </tbody>
         </div>
+    </table>
     </div>
     </div>
 @endsection
