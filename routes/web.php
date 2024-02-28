@@ -6,6 +6,8 @@ use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Elizabeth\AsesorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,3 +37,5 @@ Route::resource('carreras', carrerasController::class);
 
 
 Route::resource('companies', companiesController::class);
+
+Route::get('/crud', [AsesorController::class, 'index']);
