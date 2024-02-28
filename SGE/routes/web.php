@@ -8,7 +8,9 @@ use App\Http\Controllers\Michell\StudentController;
 use App\Http\Controllers\Michell\BajasController;
 use App\Http\Controllers\Michell\AcademicHomeController;
 use App\Http\Controllers\Michell\AcademicAdvisorController;
+use App\Http\Controllers\Michell\StudentListController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -59,3 +61,6 @@ Route::get('academic', [AcademicAdvisorController::class, "index"]);
 
 //ASESOR ACADEMICO HOME
 Route::get('academichome', [AcademicHomeController::class, "index"]);
+
+//STUDENT LIST
+Route::get('studentL', [StudentListController::class, "index"]);
