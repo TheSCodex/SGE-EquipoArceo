@@ -18,13 +18,13 @@
                 <a href="#">Usuarios</a>
             </li>
             <li>
-                <a href="#">Empresas</a>
+                <a href="/companies">Empresas</a>
             </li>
             <li>
-                <a href="#">Asesores Empresariales</a>
+                <a href="/crud">Asesores Empresariales</a>
             </li>
             <li>
-                <a href="#">Carreras y Divisiones</a>
+                <a href="/carreras">Carreras y Divisiones</a>
             </li>
         </ul>
     
