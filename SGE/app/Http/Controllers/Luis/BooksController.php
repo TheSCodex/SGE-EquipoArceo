@@ -28,7 +28,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('books');
     }
 
     /**

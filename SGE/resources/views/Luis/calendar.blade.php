@@ -9,6 +9,8 @@
 
 </head>
 <body>
+    @extends('templates.academicAdvisorTemplate')
+    @section('contenido')
     <main class="w-full h-full overflow-auto ">
         <div class="flex h-[1020px] w-full ">
             <!-- Lado izquierdo -->
@@ -417,5 +419,6 @@
             </div>
         </div>
     </main>
+    @endsection
 </body>
 </html>

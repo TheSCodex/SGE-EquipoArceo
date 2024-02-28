@@ -6,10 +6,13 @@
     <title>Agregar Nuevo Libro</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 py-8">
-    <div class="max-w-md mx-auto bg-white rounded-xl p-6 shadow-md">
+<body class="py-8">
+    @extends('templates.directorsAsistantTemplate')
+    @section('contenido')
+    <main class="max-w-md mx-auto bg-white rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat">Agregar Nuevo Libro</h1>
-        <form action="#" method="post">
+        <form action="{{url('newBook')}}" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="name_book" class="block text-gray-700 font-montserrat mb-2">Nombre:</label>
                 <input type="text" id="name_book" name="name_book" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el nombre del libro">
@@ -34,6 +37,7 @@
                 <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Añadir libro</button>
             </div>
         </form>
-    </div>
+    </main>
+    @endsection
 </body>
 </html>

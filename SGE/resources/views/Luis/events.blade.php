@@ -8,7 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="bg-white h-screen flex flex-col justify-center items-center">
+    @extends('templates.academicAdvisorTemplate')
+    @section('contenido')
+    <main class="bg-white h-screen flex flex-col justify-center items-center">
         <div class="flex justify-between items-center p-5 border-b-2 space-x-16 lg:space-x-96">
             <div>
                 <h1 class="font-bold font-montserrat text-xl">Lista de eventos</h1>
@@ -94,6 +96,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </main>
+    @endsection
 </body>
 </html>

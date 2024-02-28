@@ -6,9 +6,11 @@
     <title>Agregar Nuevo Evento</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 py-8">
-    <div class="max-w-md mx-auto bg-white rounded-xl p-6 shadow-md">
-        <h1 class="text-2xl font-semibold mb-4 font-montserrat">Agregar Nuevo Evento</h1>
+<body class="py-8">
+    @extends('templates.academicAdvisorTemplate')
+    @section('contenido')
+    <main class="max-w-md mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
+        <h1 class="text-2xl font-semibold mb-4 font-montserrat bg-white">Agregar Nuevo Evento</h1>
         <form action="{{url('newEvent')}}" method="POST">
             @csrf
             <div class="mb-4">
@@ -35,6 +37,7 @@
                 <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Añadir evento</button>
             </div>
         </form>
-    </div>
+    </main>
+    @endsection
 </body>
 </html>
