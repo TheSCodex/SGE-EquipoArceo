@@ -7,6 +7,8 @@ use App\Http\Controllers\Pipa\LoginController;
 use App\Http\Controllers\Pipa\RecoverPasswordController;
 use App\Http\Controllers\Pipa\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Luis\EventController;
+use App\Http\Controllers\Luis\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +53,14 @@ Route::resource('recover', RecoverPasswordController::class);
 // RUTAS PARA EL CRUD DE USUARIOS
 
 Route::resource('user', UserController::class);
+
+// RUTAS PARA LOS EVENTOS - CRUD Y CALENDARIO
+Route::get('/events', [EventController::class, 'index'])->name('EventList');
+Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
+Route::post('/newEvent', [EventController::class, 'store']);
+Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
+
+// RUTAS PARA LOS LIBROS - CRUD
+Route::get('/books', [BooksController::class, 'index']);
+Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
+Route::post("/newBook", [BooksController::class, 'store']);
