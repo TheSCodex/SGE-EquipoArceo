@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Michell\DirectorAssistantController;
+use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
@@ -37,6 +39,9 @@ Route::resource('reportes', ReportsController::class);
 //RUTAS PARA CRUD - DOCUMENTOS
 Route::resource('documentos', DocumentsController::class);
 
+//RUTAS DIRECTOR
+Route::get("/director", [DirectorController::class, "index"]);
+Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 //RUTA DEL PRESIDENTE DE LA ACADEMIA
 Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
