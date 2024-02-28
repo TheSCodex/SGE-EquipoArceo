@@ -7,6 +7,7 @@ use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\StudentController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,8 @@ Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 //RUTA DEL ADMINISTRADOR
 Route::resource('admin', AdministratorController::class);
 
+//RUTA  ESTUDIANTES
+Route::get('student', [StudentController::class, "index"]);
 
 // RUTA INICIO DE ESTUDIANTES
 Route::get('inicioEstudiante',[StudentController::class, 'index']);

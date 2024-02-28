@@ -9,9 +9,16 @@ class StudentController extends Controller
 {
     public function index()
     {
+        return view('Michell.Student.Student');
+    }
+
+    public function studentHome()
+    {
         return view('Michell.StudentHome.studentHome');
     }
-    public function studentEvents(){
+
+    public function studentEvents()
+    {
         return view('Michell.StudentEvents.studentEvents');
     }
 }
