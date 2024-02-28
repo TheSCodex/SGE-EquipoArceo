@@ -44,15 +44,6 @@
         </ul>
     </header>
 
-    <ul class="hidden md:flex gap-6 justify-center">
-        <button
-            class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
-            <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
-            <a href="/logout">Sign Out</a>
-        </button>
-    </ul>
-    </header>
-
     <main class="bg-[#F3F5F9] p-4">
         @yield('contenido')
     </main>
