@@ -56,7 +56,7 @@
                         <td class="py-5 px-6 font-montserrat">Biblioteca</td>
                         <td class="py-5 px-6 font-montserrat">Pendiente</td>
                         <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserratcursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                 </tr>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                 </tr>
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Evaluación intermedia de prácticas profesionales</td>
                         <td class="py-5 px-6 font-montserrat">22-02-2024 08:40 AM</td>
@@ -88,8 +88,8 @@
                         <td class="py-5 px-6 font-montserrat">25-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
                         <td class="py-5 px-6 font-montserrat">Pendiente</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                   
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     </tr>
                 </tbody>
             </table>

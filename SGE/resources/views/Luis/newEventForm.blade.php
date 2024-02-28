@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100 py-8">
-    <div class="max-w-md mx-auto bg-white rounded p-6 shadow-md">
+    <div class="max-w-md mx-auto bg-white rounded-xl p-6 shadow-md">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat">Agregar Nuevo Evento</h1>
         <form action="{{url('newEvent')}}" method="POST">
             @csrf
