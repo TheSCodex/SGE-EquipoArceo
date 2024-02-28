@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <header class="p-1 md:py-[15px] flex justify-around items-center">
         <a href="{{route('admin.index')}}">
             <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-20"
@@ -42,6 +43,37 @@
     </header>
 
     <main class="min-h-screen h-screen bg-[#F3F5F9]">
+=======
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+        <a href="#" class=" text-center flex justify-center">
+            <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
+        </a>
+    
+        <ul class="hidden md:flex gap-6 justify-center items-center">
+            <li>
+                <a href="#">Usuarios</a>
+            </li>
+            <li>
+                <a href="/companies">Empresas</a>
+            </li>
+            <li>
+                <a href="/crud">Asesores Empresariales</a>
+            </li>
+            <li>
+                <a href="/carreras">Carreras y Divisiones</a>
+            </li>
+        </ul>
+    
+        <ul class="hidden md:flex gap-6 justify-center">
+            <button
+                class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
+                <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
+                <a href="/logout">Sign Out</a>
+            </button>
+        </ul>
+    </header>
+    <main class="min-h-screen h-full">
+>>>>>>> 5dfc9f01a74e51026eceff19603eb67ac12452a4
         @yield('contenido')
     </main>
     <footer class="border-t border-secondaryColor text-black text-center p-5">

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 
 <body class="min-h-screen">
     <header class="py-5 grid content-center grid-cols-3 gap-10 border-[#92D2C8] border">
@@ -20,6 +21,16 @@
 
         <ul class="hidden md:flex gap-6 justify-center items-center font-['Roboto'] text-sm">
             <li class="">
+=======
+<body>
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+        <a href="#" class=" text-center flex justify-center">
+            <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
+        </a>
+    
+        <ul class="hidden md:flex gap-6 justify-center items-center">
+            <li>
+>>>>>>> 5dfc9f01a74e51026eceff19603eb67ac12452a4
                 <a href="#">Estudiantes</a>
             </li>
             <li>
@@ -32,9 +43,24 @@
                 <a href="#">Cartas</a>
             </li>
             <li>
+<<<<<<< HEAD
                 <a href="#">Calendario</a>
             </li>
         </ul>
+=======
+                <a href="/calendar">Calendario</a>
+            </li>
+        </ul>
+    
+        <ul class="hidden md:flex gap-6 justify-center">
+            <button
+                class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
+                <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
+                <a href="/logout">Sign Out</a>
+            </button>
+        </ul>
+    </header>
+>>>>>>> 5dfc9f01a74e51026eceff19603eb67ac12452a4
 
         <ul class="hidden md:flex gap-6 justify-center">
             <button class="flex gap-3 h-fit items-center py-2 px-4 text-red-600 text-xs font-medium text-white transition duration-300 font-['Roboto'] ease-in-out rounded-full bg-[#999999]">
