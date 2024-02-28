@@ -5,6 +5,7 @@ use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Michell\BajasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,3 +49,5 @@ Route::get('eventos',[StudentController::class, 'studentEvents']);
 // Route::get('inicioEstudiante', function () {
 //     return view('Michell.studentHome.studentHome');
 // });
+//BAJAS
+Route::get('bajas', [BajasController::class, "index"]);
