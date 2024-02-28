@@ -1,0 +1,122 @@
+[33mcommit 85b870bf40e0444b3f188411d30eb2ede3d74005[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 22:04:14 2024 -0500
+
+    Yaa
+
+[33mcommit d85e678ea3354dcc8e8ab786ca2b34219ff667e9[m
+Merge: 8233605 952a54a
+Author: ElizabethCT26 <133131710+ElizabethCT26@users.noreply.github.com>
+Date:   Tue Feb 27 21:41:09 2024 -0500
+
+    Merge pull request #1 from ElizabethCT26/ethan
+    
+    Ethan
+
+[33mcommit 952a54ab3708e6e6ca86f5ba318ea7950e99bd13[m[33m ([m[1;31morigin/ethan[m[33m)[m
+Merge: 902efab 8233605
+Author: ElizabethCT26 <133131710+ElizabethCT26@users.noreply.github.com>
+Date:   Tue Feb 27 21:40:45 2024 -0500
+
+    Merge branch 'main' into ethan
+
+[33mcommit 8233605e82d5c0b622bc493f1a4da0c082c06e70[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 21:25:27 2024 -0500
+
+    crud carreras
+
+[33mcommit 902efab348493d9c63c5af5837a66af2b504c578[m
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 21:25:08 2024 -0500
+
+    crudAsesores realizado (/crud)
+
+[33mcommit c7ee7acc2c8cfce0ca3ec6bc3aee857aa6ab6f73[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 21:07:23 2024 -0500
+
+    crud carreras
+
+[33mcommit 787892234ddb9f90f489687ea9069390998b7c00[m
+Merge: 30a71ab 9e952db
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 20:40:08 2024 -0500
+
+    Merge branch 'main' into ethan
+
+[33mcommit 9e952db54ab89f77bee04e2425e088aa20d6ecf2[m
+Merge: e13d732 7fa78dc
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 20:39:39 2024 -0500
+
+    merge
+
+[33mcommit 30a71ab60b0afd1ae4cee2638282df9110d0a71e[m
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 20:17:20 2024 -0500
+
+    cambios en el crudAsesores
+
+[33mcommit 7fa78dccc3a660c71c61fe0c0b0839e543cc516b[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 19:44:11 2024 -0500
+
+    crud carreras
+
+[33mcommit 4d2c339ef051b646c6af85e0dc8538bc6323f1c8[m
+Merge: e107954 c90261a
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 17:25:19 2024 -0500
+
+    Merge branch 'main' of https://github.com/ElizabethCT26/EstadiasG
+
+[33mcommit e10795439488b131124220ab6f0e838fffdb8431[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 17:24:20 2024 -0500
+
+    crud carreras
+
+[33mcommit c90261a9cbadf0a9a6f5fa5bbb8ae943dfd49fac[m
+Merge: 26b0f45 a1291fd
+Author: Arbey DzIb <120668243+Joestarb@users.noreply.github.com>
+Date:   Tue Feb 27 16:11:57 2024 -0500
+
+    fix merge
+
+[33mcommit a1291fd4471499c837fd5608681b7b064bf03efe[m[33m ([m[1;31morigin/arbey[m[33m)[m
+Author: Arbey DzIb <120668243+Joestarb@users.noreply.github.com>
+Date:   Tue Feb 27 16:09:24 2024 -0500
+
+    Table companies finished
+
+[33mcommit e13d732a1f5cfcbc568f088ba071c23ab8ad8b64[m
+Merge: 8b853a0 26b0f45
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 14:04:43 2024 -0500
+
+    pagina asesores
+
+[33mcommit 8b853a06055570814540f8ccd4278109d8c64c3a[m
+Author: Can <ethanbarea@gmail.com>
+Date:   Tue Feb 27 12:43:00 2024 -0500
+
+    tabla asesores
+
+[33mcommit a235e105ae77748c694e1d7e85db2e13502d2ec9[m
+Author: Arbey DzIb <120668243+Joestarb@users.noreply.github.com>
+Date:   Tue Feb 27 09:07:15 2024 -0500
+
+    table companie
+
+[33mcommit 26b0f4518cb8311a6aa00d1bf15557053620b0bc[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Tue Feb 27 08:54:26 2024 -0500
+
+    Imagenes
+
+[33mcommit 16b1f4a394aa28e499cd6da3f5861d2aa97eed68[m
+Author: ElizabethCT26 <mariaelizabethchuctun@gmail.com>
+Date:   Sat Feb 24 14:29:43 2024 -0500
+
+    Combinacion
