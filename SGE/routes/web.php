@@ -22,8 +22,6 @@ Route::get("/newBook", function(){
     return view("Luis.newBookForm");
 });
 
-Route::get("/newEvent", function(){
-    return view("Luis.newEventForm");
-});
-
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
+Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
+Route::post('/newEvent', [EventController::class, 'store']);

@@ -11,83 +11,85 @@
     <div class="bg-white h-screen flex flex-col justify-center items-center">
         <div class="flex justify-between items-center p-5 border-b-2 space-x-16 lg:space-x-96">
             <div>
-                <h1 class="font-bold text-xl">Lista de eventos</h1>
+                <h1 class="font-bold font-montserrat text-xl">Lista de eventos</h1>
             </div>
             <div class="flex items-center space-x-7">
                 <div>
-                    <input type="text" placeholder="Buscador" class="border-2 border-primaryColor h-10 p-2 rounded-2xl placeholder:text-darkGreen font-bold"/>
+                    <input type="text" placeholder="Buscador" class="border-2 border-primaryColor h-10 p-2 rounded-2xl placeholder:text-darkGreen font-bold font-montserrat outline-none"/>
+                </div>
+                <div class="flex flex-col">
+                    <button class="text-primaryColor">▲</button>
+                    <button class="text-primaryColor">▼</button>
                 </div>
                 <div>
-                    <p>▲</p>
-                    <p>▼</p>
-                </div>
-                <div>
-                    <button type="button" class="bg-primaryColor h-10 w-48 text-white rounded">
-                        Agregar nuevo evento
+                    <button type="button" class="bg-primaryColor h-10 w-56 text-white rounded">
+                        <a href="{{ route('newEventForm') }}" class="h-10 font-montserrat text-white">Agregar nuevo evento</a>
                     </button>
                 </div>
             </div>
         </div>
-        <div>
-            <table>
+        <div class="overflow-y-auto max-h-[600px] w-10/12">
+            <table class=" table-auto">
                 <thead class="text-lightGray">
                     <tr>
-                        <th class="w-64 py-5">Titulo</th>
-                        <th class="w-40 py-5 px-5">Fecha de inicio</th>
-                        <th class="w-40 py-5 px-5">Fecha de finalización</th>
-                        <th class="py-5">Ubicación</th>
-                        <th class="py-5">Estado</th>
-                        <th></th>
+                        <th class="py-5 px-6 font-montserrat">Titulo</th>
+                        <th class="py-5 px-6 font-montserrat whitespace-nowrap">Fecha de inicio</th>
+                        <th class="py-5 px-6 font-montserrat whitespace-nowrap">Fecha de finalización</th>
+                        <th class="py-5 px-6 font-montserrat">Ubicación</th>
+                        <th class="py-5 px-6 font-montserrat">Estado</th>
                     </tr>
                 </thead>
                 <tbody class="text-center font-bold text-sm">
                     <tr>
-                        <td class="py-2 px-10">Reunión informativa sobre prácticas profesionales</td>
-                        <td class="py-2 px-10">15-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">15-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Cubiculo h-123</td>
-                        <td class="py-2 px-10">Concluido</td>
-                        <td class="py-2">✏︎   &#128465;</td>
+                        <td class="py-5 px-6 font-montserrat">Reunión informativa sobre prácticas profesionales</td>
+                        <td class="py-5 px-6 font-montserrat">15-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">15-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
+                        <td class="py-5 px-6 font-montserrat">Concluido</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>
                     </tr>
                     <tr>
-                        <td class="py-2 px-10">Evaluación intermedia de prácticas profesionales</td>
-                        <td class="py-2 px-10">21-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">21-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Biblioteca</td>
-                        <td class="py-2 px-10">Pendiente</td>
-                        <td class="py-2">✏︎   &#128465;</td>
+                        <td class="py-5 px-6 font-montserrat">Evaluación intermedia de prácticas profesionales</td>
+                        <td class="py-5 px-6 font-montserrat">21-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">21-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Biblioteca</td>
+                        <td class="py-5 px-6 font-montserrat">Pendiente</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserratcursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                 </tr>
+                    <tr>
+                        <td class="py-5 px-6 font-montserrat">Evaluación intermedia de prácticas profesionales</td>
+                        <td class="py-5 px-6 font-montserrat">22-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">22-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
+                        <td class="py-5 px-6 font-montserrat">Cancelada</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                   </tr>
+                    <tr>
+                        <td class="py-5 px-6 font-montserrat">Sesión de retroalimentación para estudiantes</td>
+                        <td class="py-5 px-6 font-montserrat">23-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">23-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
+                        <td class="py-5 px-6 font-montserrat">Pendiente</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td></tr>
+                    <tr>
+                        <td class="py-5 px-6 font-montserrat">Presentación de informes finales de prácticas profesionales</td>
+                        <td class="py-5 px-6 font-montserrat">24-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">24-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
+                        <td class="py-5 px-6 font-montserrat">Cancelada</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>              
                     </tr>
                     <tr>
-                        <td class="py-2 px-10">Evaluación intermedia de prácticas profesionales</td>
-                        <td class="py-2 px-10">22-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">22-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Cubiculo h-123</td>
-                        <td class="py-2 px-10">Cancelada</td>
-                        <td class="py-2">✏︎   &#128465;</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-10">Sesión de retroalimentación para estudiantes</td>
-                        <td class="py-2 px-10">23-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">23-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Cubiculo h-123</td>
-                        <td class="py-2 px-10">Pendiente</td>
-                        <td class="py-2">✏︎   &#128465;</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-10">Presentación de informes finales de prácticas profesionales</td>
-                        <td class="py-2 px-10">24-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">24-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Cubiculo h-123</td>
-                        <td class="py-2 px-10">Cancelada</td>
-                        <td class="py-2">✏︎   &#128465;</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-10">Evaluación final de prácticas profesionales</td>
-                        <td class="py-2 px-10">25-02-2024 08:40 AM</td>
-                        <td class="py-2 px-10">25-02-2024 09:30 AM</td>
-                        <td class="py-2 px-10">Cubiculo h-123</td>
-                        <td class="py-2 px-10">Pendiente</td>
-                        <td class="py-2">✏︎   &#128465;</td>
+                        <td class="py-5 px-6 font-montserrat">Evaluación final de prácticas profesionales</td>
+                        <td class="py-5 px-6 font-montserrat">25-02-2024 08:40 AM</td>
+                        <td class="py-5 px-6 font-montserrat">25-02-2024 09:30 AM</td>
+                        <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
+                        <td class="py-5 px-6 font-montserrat">Pendiente</td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                   
                     </tr>
                 </tbody>
             </table>

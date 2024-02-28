@@ -9,7 +9,8 @@
 <body class="bg-gray-100 py-8">
     <div class="max-w-md mx-auto bg-white rounded p-6 shadow-md">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat">Agregar Nuevo Evento</h1>
-        <form action="#" method="post">
+        <form action="{{url('newEvent')}}" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="event_type" class="block text-gray-700 font-montserrat mb-2">Tipo de evento:</label>
                 <input type="text" id="event_type" name="event_type" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el tipo de evento">
