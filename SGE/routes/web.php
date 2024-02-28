@@ -7,6 +7,7 @@ use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
 use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
+use App\Http\Controllers\Daniel\DashboardAd;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Elizabeth\AsesorController;
@@ -36,11 +37,18 @@ Route::resource('reportes', ReportsController::class);
 Route::resource('documentos', DocumentsController::class);
 
 //RUTAS PARA ANTEPROYECTOS
+//Formulario de anteproyecto
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 //Vista de anteproyecto estudiante
 Route::resource('Mi-anteproyecto', ProjectsController::class);
 //Vista de anteproyecto cualquiera
 Route::resource('anteproyectos', AnteproyectViewAcAd::class);
+
+Route::resource('Dashboard', DashboardAd::class);
+
+//RUTAS DE DASHBOARDS
+//Dashboard Asesor 
+
 
 //RUTAS PARA EL CRUD DE CARRERAS Y DIVISIONES
 Route::resource('/carreras', carrerasController::class);

@@ -18,7 +18,7 @@
 
                 <div class="w-full sm:h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-bold flex flex-wrap justify-center items-center flex-col">
                     <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center">Aun no tienes un Anteproyecto. Empieza a trabajarlo ahora</p>
-                    <button class="bg-[#02AB82] rounded-md px-[2%] py-[1%] m-[2%] font-normal text-white    ">Crea uno ahora</button>
+                    <a href="/Form-anteproyecto" class="block bg-[#02AB82] rounded-md px-[2%] py-[1%] m-[2%] font-normal text-white text-center text-sm">Crea uno ahora</a>
                 </div>
             </div>
 

@@ -18,7 +18,7 @@
             <a href="#">Inicio</a>
         </li>
         <li>
-            <a href="#">Proyectos</a>
+            <a href="/Mi-anteproyecto">Proyectos</a>
         </li>
         <li>
             <a href="/calendar">Calendario</a>
