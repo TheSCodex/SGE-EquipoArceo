@@ -4,7 +4,12 @@ use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
+use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\companiesController;
+use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Elizabeth\AsesorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +35,17 @@ Route::resource('reportes', ReportsController::class);
 //RUTAS PARA CRUD - DOCUMENTOS
 Route::resource('documentos', DocumentsController::class);
 
-//RUTAS PARA ANTEPROYYECTOS
-Route::get('anteproyecto', [FormAnteproyectoController::class, 'index']);
-Route::resource('proyectos', ProjectsController::class);
+//RUTAS PARA ANTEPROYECTOS
+Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
+//Vista de anteproyecto estudiante
+Route::resource('Mi-anteproyecto', ProjectsController::class);
+//Vista de anteproyecto cualquiera
+Route::resource('anteproyectos', AnteproyectViewAcAd::class);
+
+//RUTAS PARA EL CRUD DE CARRERAS Y DIVISIONES
+Route::resource('/carreras', carrerasController::class);
+
+
+Route::resource('/companies', companiesController::class);
+
+Route::get('/crud', [AsesorController::class, 'index']);

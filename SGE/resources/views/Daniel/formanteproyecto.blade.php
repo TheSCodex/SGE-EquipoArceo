@@ -172,9 +172,9 @@
                 <div class="w-[48%] ">
                     <h2 class="font-roboto mb-1 font-medium">Correo Electronico:</h2>
                     @csrf
-                    <input type="email" name="email_student" placeholder="Introduzca su correo electronico"
-                        value="{{ old('email_student') }}" required class=" w-full border-gray-300 rounded-md p-2 "><br>
-                    @error('email_student')
+                    <input type="email" name="email_advisor" placeholder="Introduzca el correo electronico del asesor"
+                        value="{{ old('email_advisor') }}" required class=" w-full border-gray-300 rounded-md p-2 "><br>
+                    @error('email_advisor')
                         <div style='color:red'>{{ $message }}</div>
                     @enderror
                 </div>
