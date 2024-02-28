@@ -49,7 +49,6 @@ Route::resource('Dashboard', DashboardAd::class);
 //RUTAS DE DASHBOARDS
 //Dashboard Asesor 
 
-
 //RUTAS PARA EL CRUD DE CARRERAS Y DIVISIONES
 Route::resource('/carreras', carrerasController::class);
 
