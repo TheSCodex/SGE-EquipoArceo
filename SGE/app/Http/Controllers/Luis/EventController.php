@@ -15,6 +15,12 @@ class EventController extends Controller
         return view('Luis.events');
     }
 
+    /**
+     * Display a calendar view.
+     */
+    public function calendar(){
+        return view('Luis.calendar');
+    }
 
 
     /**

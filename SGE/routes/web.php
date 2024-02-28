@@ -25,3 +25,4 @@ Route::get("/newBook", function(){
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
 Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
 Route::post('/newEvent', [EventController::class, 'store']);
+Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
