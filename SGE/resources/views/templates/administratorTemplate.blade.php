@@ -27,7 +27,7 @@
                 <a href="#" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
+                <a href='/carreras' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
             </li>
         </ul>
     

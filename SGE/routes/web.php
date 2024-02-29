@@ -107,4 +107,4 @@ Route::get('studentL', [StudentListController::class, "index"]);
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
 Route::resource('anteproyectos', AnteproyectViewAcAd::class);
-Route::resource('Dashboard', DashboardAd::class);
+Route::resource('dashboard', DashboardAd::class);
