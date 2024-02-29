@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
+use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Eliud\Documentos\DocumentsController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,6 @@ Route::resource('documentos', DocumentsController::class);
 
 //RUTAS PARA PROYECTOS
 Route::resource('proyectos', ProjectsController::class);
+//Ruta de Observaciones
+Route::resource('observaciones', ObservationsController::class);
+
