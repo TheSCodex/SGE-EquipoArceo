@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +13,6 @@ class ObservationsController extends Controller
     public function index()
     {
         return view('Daniel.Observaciones');
-
     }
 
     /**
