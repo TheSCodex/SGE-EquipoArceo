@@ -1,142 +1,103 @@
-@extends('templates.administratorTemplate')
-@section('titulo')
-    CRUD CARRERAS
-@endsection
-@section('contenido')
-    <div class='flex-col justify-center w-full px-[7%] my-[3%]'>
-        <div class='pt-4 sm:w-[90%] px-4 flex-col'>
-            <!-- PRIMERA FILA -->
-            <div class="w-[95%] flex justify-between gap-2 border-b border-[#E5E5E5] py-[1%]">
-                <!-- Titulo -->
-                <div class="flex justify-between mb-3">
-                    <h1 class="text-2xl font-bold">Asesores Empresariales</h1>
-                </div>
-                <!-- SearchBar -->
-                <div class="flex justify-around mb-2 items-center w-[36vw]">
-                    <div>
-                        <div class="flex items-center relative">
-                            <img src="{{ asset('img/iconosEli/search 1 (1).png') }}" alt="sort"
-                                class=" right-[12%] absolute">
-                            <input class="border-[#02AB82] placeholder-[#02AB82] border-b border rounded-md " type="search"
-                                placeholder="Buscar...." style="color: green;">
-                        </div>
-                    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Usuarios | Sistema Gestor de Estadias</title>
+    @vite('resources/css/app.css')
 
-                    <img src="{{ asset('img/iconosEli/sort 1 (1).png') }}" alt="sort" class="w-[1vw] h-[4vh]">
-                    <button class="py-[1.5%] px-[1%] bg-[#02AB82] text-white rounded-lg">Agregar nuevo Asesor Empresarial</button>
+    {{-- Bootstrap Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+<body>
+<header class="p-1 md:p-1 grid grid-cols-3 gap-10">
+    <a href="#" class=" text-center flex justify-center">
+        <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-28" alt="">
+    </a>
+
+    <ul class="hidden md:flex gap-6 justify-center items-center">
+        <li>
+            <a href="#">Usuarios</a>
+        </li>
+        <li>
+            <a href="#">Empresas</a>
+        </li>
+        <li>
+            <a href="#">Asesores empresariales</a>
+        </li>
+        <li>
+            <a href="#">Carreras y Divisiones</a>
+        </li>
+    </ul>
+
+
+    <ul class="hidden md:flex gap-6 justify-center">
+        <button class="p-2 px-2 text-red-600 font-light text-white transition duration-300 ease-in-out rounded-full bg-lightGray">
+            <a href="#">Sign Out</a>
+        </button>
+    </ul>
+</header>
+    {{-- Test --}}
+    @php
+    $usuarios = [
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+        ['nombre' => 'Edgar', 'correo' => 'correo@gmail.com', 'telefono' => '9331215485', 'Gacademico' => 'Ingeniero', 'Departamento' => 'Desarrollo', ],
+    ];
+    @endphp
+    <main class="min-h-screen h-full">
+        <div class="py-8 px-20">
+            <div class="border-b border-gray-200 pb-2 flex flex-row items-center">
+                <div class="w-4/6">
+                    <h1 class="font-bold text-2xl font-roboto">Asesores Empresariales</h1>
+                </div>
+                <div class="flex items-center space-x-5">
+                    <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
+                        <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-montserrat text-sm font-semibold px-2">
+                        <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
+                    </div>
+                    <div class="p-1 flex flex-x-0 flex-col">
+                        <button><img src="/img/logos/caret.svg"></button>
+                    </div>
+                    <div class="w-[200px]">
+                        <a class="bg-primaryColor text-white p-2 rounded-md font-montserrat w-[200px] text-sm font-semibold"  href="/user/create">Agregar nuevo usuario</a>
+                    </div>
                 </div>
             </div>
+            <div class="mt-6 w-full flex items-center justify-between">
+                <table class="w-full text-center">
+                    <tr>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Correo Electronico</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Grado Academico</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Departamento</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                    </tr>
+                    @foreach($usuarios as $usuario)
+                    <tr>
+                        <td class="font-roboto font-bold py-5">{{ $usuario['nombre'] }}</td>
+                        <td class="font-roboto font-bold py-5">{{ $usuario['correo'] }}</td>
+                        <td class="font-roboto font-bold py-5">{{ $usuario['telefono'] }}</td>
+                        <td class="font-roboto font-bold py-5">{{ $usuario['Gacademico'] }}</td>
+                        <td class="font-roboto font-bold py-5">{{ $usuario['Departamento'] }}</td>
+                        <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
+                        <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
-        <!-- TABLA CRUD -->
-        <!-- TODO: Mapearlo -->
-        <div class="text-xs md:text-base w-full flex flex-col overflow-hidden justify-center">
-            <table class="min-w-full table-auto text-sm md:text-base text-[#ACACAC] md:w-[81vw] md:ml-[4%] ">
-                <thead style="text-xs md:text-base border-bottom: 25px solid transparent">
-                    <tr class="text-xs md:text-base font-bold md:px-[3%] text-[#ACACAC]" >
-                    <td >Nombre</td>
-                    <td>Correo Electronico</td>
-                    <td>Celular</td>
-                    <td>Grado Academico</td>
-                    <td>Departamento</td>
-                    <td>
-                    
-                    </td>
-                </tr>
-                </thead> 
-            <tbody >
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                    <button>
-                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                    </button>
-                    <button class="text-xs md:text-basemd:px-[3%]">
-                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                    </button>
-                    </td>
-                </tr> 
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                    <button>
-                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                    </button>
-                    <button class="text-xs md:text-basemd:px-[3%]">
-                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                    </button>
-                    </td>
-                </tr> 
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                    <button>
-                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                    </button>
-                    <button class="text-xs md:text-basemd:px-[3%]">
-                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                    </button>
-                    </td>
-                </tr> 
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                    <button>
-                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                    </button>
-                    <button class="text-xs md:text-basemd:px-[3%]">
-                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                    </button>
-                    </td>
-                </tr> 
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                    <button>
-                        <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                    </button>
-                    <button class="text-xs md:text-basemd:px-[3%]">
-                        <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                    </button>
-                    </td>
-                </tr> 
-                <tr class="text-xs md:text-base md:px-[3%] md:py-[2%] text-black font-bold" >
-                    <td class="text-xs md:text-base md:py-[2%]" >Karthi</td>
-                    <td >karthi@gmail.com</td>
-                    <td>7305477760</td>
-                    <td>Ingenieria</td>
-                    <td>Desarrollo</td>
-                    <td>
-                        <button>
-                            <img src="{{ asset('img/iconosEli/Vector (2).png')}}" alt="Edit" class="md:w-[1vw] md:h-[2%]"  />
-                        </button>
-                        <button class="text-xs md:text-basemd:px-[3%]">
-                            <img src="{{ asset('img/iconosEli/trash 1.png')}}" alt="Delete" class=" md:w-[1vw] md:h-[2%] "  />
-                        </button>
-                    </td>
-                </tr> 
-            </tbody>
-        </div>
-    </table>
-    </div>
-    </div>
-@endsection
+    </main>
+    <footer class="border-t border-secondaryColor text-black text-center p-5">
+        Copyright © 2024. SM51
+    </footer>
+</body>
+</html>
