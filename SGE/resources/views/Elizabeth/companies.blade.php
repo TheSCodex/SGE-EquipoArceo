@@ -14,8 +14,10 @@
                 <div class="flex flex-wrap justify-around mb-2 items-center w-[36vw]">
                     <div>
                         <div class="flex items-center relative" >
-                        <img src="{{ asset('img/iconosEli/search 1 (1).png')}}" alt="sort" class=" right-[12%] absolute">
-                            <input class="border-[#02AB82] placeholder-[#02AB82] border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                        <img src="{{ asset('img/iconosEli/search 1 (1).png') }}" alt="sort"
+                        class=" right-[12%] absolute">
+                    <input class="border-[#02AB82] placeholder-[#02AB82] border-b border rounded-md " type="search"
+                        placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
                         <img src="{{ asset('img/iconosEli/sort 1 (1).png')}}" alt="sort" class="w-[1vw] h-[4vh]">
