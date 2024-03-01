@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>@yield('titulo') | Sistema Gestor de Estadias</title>
     @vite('resources/css/app.css')
 
@@ -18,7 +19,7 @@
             <a href="#">Inicio</a>
         </li>
         <li>
-            <a href="#">Proyectos</a>
+            <a href="/Mi-anteproyecto">Proyectos</a>
         </li>
         <li>
             <a href="/calendar">Calendario</a>

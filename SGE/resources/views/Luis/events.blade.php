@@ -48,8 +48,8 @@
                         <td class="py-5 px-6 font-montserrat">15-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
                         <td class="py-5 px-6 font-montserrat">Concluido</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     </tr>
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Evaluación intermedia de prácticas profesionales</td>
@@ -57,32 +57,32 @@
                         <td class="py-5 px-6 font-montserrat">21-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Biblioteca</td>
                         <td class="py-5 px-6 font-montserrat">Pendiente</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                 </tr>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Evaluación intermedia de prácticas profesionales</td>
                         <td class="py-5 px-6 font-montserrat">22-02-2024 08:40 AM</td>
                         <td class="py-5 px-6 font-montserrat">22-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
                         <td class="py-5 px-6 font-montserrat">Cancelada</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>                   </tr>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Sesión de retroalimentación para estudiantes</td>
                         <td class="py-5 px-6 font-montserrat">23-02-2024 08:40 AM</td>
                         <td class="py-5 px-6 font-montserrat">23-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
                         <td class="py-5 px-6 font-montserrat">Pendiente</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td></tr>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Presentación de informes finales de prácticas profesionales</td>
                         <td class="py-5 px-6 font-montserrat">24-02-2024 08:40 AM</td>
                         <td class="py-5 px-6 font-montserrat">24-02-2024 09:30 AM</td>
                         <td class="py-5 px-6 font-montserrat">Cubiculo h-123</td>
                         <td class="py-5 px-6 font-montserrat">Cancelada</td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/edit.png" alt="Edit" class="mr-3"></td>
-                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="img/icons/trash.png" alt="Edit" class="ml-3"></td>              
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/editar.svg" alt="Edit" class="mr-3"></td>
+                        <td class="py-5 px-6 font-montserrat cursor-pointer"><img src="/img/logos/eliminar.svg" alt="Edit" class="ml-3"></td>                   
                     </tr>
                     <tr>
                         <td class="py-5 px-6 font-montserrat">Evaluación final de prácticas profesionales</td>

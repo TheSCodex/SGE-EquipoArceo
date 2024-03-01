@@ -7,11 +7,6 @@ MVC (Modelo Vista Controlador): El diseño de SGE sigue el patrón MVC, lo que p
 Livewire: SGE hace uso del framework Livewire de Laravel para crear interfaces de usuario dinámicas e interactivas sin la necesidad de escribir código JavaScript, lo que simplifica el desarrollo y mejora la experiencia del usuario.
 Blade como Motor de Plantillas: Para la generación de las vistas HTML, SGE utiliza Blade, el motor de plantillas integrado en el framework Laravel, que ofrece una sintaxis sencilla y poderosa para la creación de interfaces de usuario.
 
-## Clona el repositorio de SGE en tu servidor web local o remoto:
-
-```bash
-git clone https://github.com/kevin-alexis/SGE-lideres.git
-```
 
 ## Contribución
 Si deseas contribuir al desarrollo de SGE, por favor sigue estos pasos:
