@@ -24,6 +24,7 @@ use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
 use App\Http\Controllers\Daniel\DashboardAd;
+use App\Http\Controllers\Daniel\ObservationsController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -108,3 +109,5 @@ Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
 Route::resource('anteproyectos', AnteproyectViewAcAd::class);
 Route::resource('Dashboard', DashboardAd::class);
+Route::resource('observaciones', ObservationsController::class);
+
