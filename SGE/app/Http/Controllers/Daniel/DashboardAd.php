@@ -12,7 +12,7 @@ class DashboardAd extends Controller
      */
     public function index()
     {
-        return view('daniel.asesor.dasboardAd');
+        return view('daniel.asesor.DasboardAd');
     }
 
     /**

@@ -67,8 +67,8 @@
                         <td class="font-montserrat font-bold py-5 px-6">{{ $usuario['isbn'] }}</td>
                         <td class="font-montserrat font-bold py-5 px-6">{{ $usuario['proporcionadopor'] }}</td>
                         <td class="font-montserrat font-bold py-5 px-6">{{ $usuario['fecha'] }}</td>
-                        <td class="font-montserrat font-bold py-5 px-6 cursor-pointer"><img src="/img/logos/editar.svg" width="60px"></td>
-                        <td class="font-montserrat font-bold py-5 px-6 cursor-pointer"><img src="/img/logos/eliminar.svg" width="60px"></td>
+                        <td class="font-montserrat font-bold py-5 px-6 cursor-pointer"><img src="/img/logos/editar.svg"></td>
+                        <td class="font-montserrat font-bold py-5 px-6 cursor-pointer"><img src="/img/logos/eliminar.svg" ></td>
                     </tr>
                     @endforeach
                 </table>

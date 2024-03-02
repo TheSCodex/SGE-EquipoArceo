@@ -44,6 +44,42 @@
         <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
         <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
     </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+        <td class="px-6 py-4 whitespace-nowrap">22393132</td>
+        <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
     <!-- Más filas aquí -->
 </tbody>
 </table>
