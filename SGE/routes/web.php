@@ -73,17 +73,11 @@ Route::post("/newBook", [BooksController::class, 'store']);
 Route::resource('/carreras', carrerasController::class);
 
 
-//RUTAS PARA EL CRUD DE EMPRESAS
-Route::resource('/companies', companiesController::class);
-
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::get('/crud', [AsesorController::class, 'index']);
+Route::get('/asesores', [AsesorController::class, 'index']);
 
 // Rutas para CRUD de Empresas
-Route::resource('/companies', companiesController::class);
-
-// Rutas para CRUD de Asesores Académicos
-Route::get('/crud', [AsesorController::class, 'index']);
+Route::resource('/empresas', companiesController::class);
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
