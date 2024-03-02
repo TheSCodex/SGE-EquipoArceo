@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     @vite('resources/css/app.css')
 
 </head>
+
 <body>
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
         <a href="#" class=" text-center flex justify-center">
@@ -47,4 +49,5 @@
         Copyright © 2024. SM51
     </footer>
 </body>
+
 </html>
