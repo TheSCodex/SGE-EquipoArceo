@@ -8,12 +8,12 @@
 
 </head>
 <body>
-<header class="p-1 md:p-1 grid grid-cols-3 gap-10">
+<header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
     <a href="#" class=" text-center flex justify-center">
         <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
     </a>
 
-    <ul class="hidden md:flex gap-6 justify-center">
+    <ul class="hidden md:flex gap-6 justify-center items-center">
         <li>
             <a href="#"></a>
         </li>
@@ -23,8 +23,8 @@
     </ul>
 
     <ul class="hidden md:flex gap-6 justify-center">
-        <button class="p-2 px-2 text-red-600 font-light text-white transition duration-300 ease-in-out rounded-full bg-lightGray">
-            <a href="/logout">Sign Out</a>
+        <button class="p-2 px-2 text-red-600 font-light text-primaryColor transition duration-300 ease-in-out rounded-full border-primaryColor border-2">
+            <a href="/login" class="font-roboto font-medium px-6">Login</a>
         </button>
     </ul>
 </header>

@@ -6,6 +6,25 @@ use App\Http\Controllers\Pipa\ChangePasswordController;
 use App\Http\Controllers\Pipa\LoginController;
 use App\Http\Controllers\Pipa\RecoverPasswordController;
 use App\Http\Controllers\Pipa\UserController;
+use App\Http\Controllers\Luis\EventController;
+use App\Http\Controllers\Luis\BooksController;
+use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\companiesController;
+use App\Http\Controllers\Elizabeth\AsesorController;
+use App\Http\Controllers\Michell\DirectorAssistantController;
+use App\Http\Controllers\Michell\DirectorController;
+use App\Http\Controllers\Michell\Administrator\AdministratorController;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
+use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Michell\BajasController;
+use App\Http\Controllers\Michell\AcademicHomeController;
+use App\Http\Controllers\Michell\AcademicAdvisorController;
+use App\Http\Controllers\Michell\StudentListController;
+use App\Http\Controllers\Daniel\FormAnteproyectoController;
+use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
+use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
+use App\Http\Controllers\Daniel\DashboardAd;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,34 +39,74 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Welcome');
+    return view('welcome');
 });
 
-//RUTAS PARA REPORTES
+// Rutas para Reportes
 Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
 Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
-
 Route::resource('reportes', ReportsController::class);
 
-//RUTAS PARA CRUD - DOCUMENTOS
+// Rutas para CRUD de Documentos
 Route::resource('documentos', DocumentsController::class);
 
-
-//RUTAS PARA REPORTES
-Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
-Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
-
-Route::resource('reportes', ReportsController::class);
-
-//RUTAS PARA CRUD - DOCUMENTOS
-Route::resource('documentos', DocumentsController::class);
-
-
-// RUTAS PARA EL INICIO DE SESIÓN
+// Rutas para Inicio de Sesión
 Route::resource('login', LoginController::class);
 Route::resource('changepassword', ChangePasswordController::class);
 Route::resource('recover', RecoverPasswordController::class);
 
-// RUTAS PARA EL CRUD DE USUARIOS
-
+// Rutas para CRUD de Usuarios
 Route::resource('user', UserController::class);
+
+// Rutas para Eventos
+Route::get('/events', [EventController::class, 'index'])->name('EventList');
+Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
+Route::post('/newEvent', [EventController::class, 'store']);
+Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
+
+// Rutas para CRUD de Libros
+Route::get('/books', [BooksController::class, 'index']);
+Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
+Route::post("/newBook", [BooksController::class, 'store']);
+
+// Rutas para CRUD de Carreras y Divisiones
+Route::resource('/carreras', carrerasController::class);
+
+
+//RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+Route::get('/asesores', [AsesorController::class, 'index']);
+
+// Rutas para CRUD de Empresas
+Route::resource('/empresas', companiesController::class);
+
+// Rutas Director
+Route::get("/director", [DirectorController::class, "index"]);
+Route::get("/assistant", [DirectorAssistantController::class, "index"]);
+
+// Ruta Presidente de la Academia
+Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
+
+// Ruta Administrador
+Route::resource('admin', AdministratorController::class);
+
+// Ruta Estudiantes
+Route::get('student', [StudentController::class, "index"]);
+Route::get('inicioEstudiante',[StudentController::class, 'index']);
+Route::get('eventos',[StudentController::class, 'studentEvents']);
+
+// Rutas para Bajas
+Route::get('bajas', [BajasController::class, "index"]);
+
+// Ruta Asesor Académico
+Route::get('academic', [AcademicAdvisorController::class, "index"]);
+Route::get('academichome', [AcademicHomeController::class, "index"]);
+
+// Ruta Lista de Estudiantes
+Route::get('studentL', [StudentListController::class, "index"]);
+
+// Rutas para Anteproyectos
+Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
+Route::resource('Mi-anteproyecto', ProjectsController::class);
+Route::resource('anteproyectos', AnteproyectViewAcAd::class);
+Route::resource('dashboard', DashboardAd::class);
+
