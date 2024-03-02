@@ -1,5 +1,5 @@
 @extends('templates.administratorTemplate')
-@section('titulo','CRUD Usuarios')
+@section('titulo','CRUD Empresas')
 @section('contenido')
     {{-- Test --}}
     @php
@@ -19,7 +19,7 @@
         <div class="py-8 px-20">
             <div class="border-b border-gray-200 pb-2 flex flex-row items-center">
                 <div class="w-4/6">
-                    <h1 class="font-bold text-2xl font-roboto">Lista de usuarios</h1>
+                    <h1 class="font-bold text-2xl font-roboto">Empresas</h1>
                 </div>
                 <div class="flex items-center space-x-5">
                     <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
@@ -29,9 +29,10 @@
                     <div class="p-1 flex flex-x-0 flex-col">
                         <button><img src="/img/logos/caret.svg"></button>
                     </div>
-                    <div>
-                        <button class="bg-primaryColor text-white p-2 rounded-md w-36 font-roboto">Nueva Empresa</button>
+                    <div class="w-52">
+                        <button class="bg-primaryColor text-white p-2 rounded-md font-semibold">Agregar nueva empresa</button>
                     </div>
+
                 </div>
             </div>
             <div class="mt-6 w-full flex items-center justify-between">
