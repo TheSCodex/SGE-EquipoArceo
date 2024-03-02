@@ -1,11 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta de Digitalización</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Carta de Digitalización</title>
+    </head>
+    <body>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .imagen{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .titulo {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 20px;
+                font-weight: 700;
+                margin-top: 30px;
+            }
+            .titulo > input {
+                width: 20%;
+            }
+            .fecha {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-bottom: 20px;
+                font-weight: 700;
+                margin-right: 100px;
+                margin-top: 50px;
+            }
+            .fecha > input {
+                width: 100px;
+                text-align: center;
+            }
+            .fecha > .fechaCorta {
+                width: 50px;
+            }
+            .asunto {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-right: 100px;
+                gap: 10px;
+            }
+            .asunto > h2 {
+                font-size: 20px;
+            }
+            .contenedor {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 50px;
+                margin-bottom: 15px;
+                gap: 10px;
+                font-size: 20px;
+                margin-left: 350px;
+                margin-right: 350px;
+            }
+            .contenedor > input{
+                width: 400px;
+                text-align: center;
+            }
+            .contenedor > .grupo{
+                width: 80px;
+                text-align: center;
+            }
+            .contenedorUno{
+                display: flex;
+                gap: 10px;
+                font-size: 20px;
+                margin-left: 350px;
+                margin-right: 400px;
+            }
+            .contenedorUno > input{
+                width: 90px;
+                text-align: center;
+            }
+            input {
+                border: none;
+                border-bottom: 1px solid black;
+                padding: 4px;
+                font-size: 16px;
+                font-weight: 700;
+                background-color: transparent;
+                outline: none;
+            }
+        </style>
+        <div class="imagen">
+            <img src="../docs/assets/logoUT.png" alt="logoUT">
+        </div>
+        <div class="titulo">
+            <h2>DIRECIÓN DE LA DIVISIÓN</h2>
+            <input />
+        </div>
+        <div class="fecha">
+            <h2>Cancún, Quintana Roo; a</h2>
+            <input class="fechaCorta" type="number" />
+            <h2>de</h2>
+            <input type="text" />
+            <h2>de 20</h2>
+            <input class="fechaCorta" type="number" />
+        </div>
+        <div class="asunto">
+            <h2>ASUNTO:</h2>
+            <h3>Autorización de digitalización.</h3>
+            <h2>Of:</h2>
+            <h3>xxxx</h3>
+        </div>
+        <div class="contenedor">
+            <p>Se autoriza al (a) estudiante</p>
+            <input type="text" />
+            <p>del grupo</p>
+            <input class="grupo"/>
+        </div>
+        <div class="contenedorUno">
+            <p>con número de matricula:</p>
+            <input type="number" />
+            <p>la digitalización de la MEMORIA en modalidad:</p>
+        </div>
+        <div>
+
+        </div>
+    </body>
 </html>
