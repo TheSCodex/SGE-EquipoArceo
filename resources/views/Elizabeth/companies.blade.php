@@ -78,9 +78,10 @@
 
     @foreach($usuarios as $index => $usuario)
     <div id="myModal{{ $index }}" class="myModal hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50">
-        <div class="modal my-8 p-6 mx-2 bg-white h-[90vh] rounded-lg shadow-lg ">
+        <div class="modal my-8 p-6  bg-white w-[80vw] mx-auto h-[90vh] rounded-lg shadow-lg ">
             <h2 class="text-4xl font-extrabold text-center mb-3">Detalles de la empresa</h2>
-            <div class="border-b-2 border-t-2 items-center flex flex-row  gap-1">
+
+            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
                 <p class="text-[#ACACAC] font-roboto">Correo Eletectrónico</p>
                 <p class="font-roboto font-bold py-5">{{ $usuario['correo'] }}</p>
             </div>

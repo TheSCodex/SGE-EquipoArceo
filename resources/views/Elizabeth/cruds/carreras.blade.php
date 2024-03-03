@@ -15,7 +15,7 @@
     ];
     @endphp
     <main class="min-h-screen h-full">
-        <div class="md:py-8 md:px-20">
+        <div class="md:py-8 sm:px-20">
             <div class="border-b border-gray-200 pb-2 flex flex-row items-center">
                 <div class="md:w-4/6">
                     <h1 class="font-bold text-2xl font-roboto">Carreras y Divisiones</h1>
