@@ -10,23 +10,24 @@
 </head>
 
 <body>
-    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
-        <a href="#" class=" text-center flex justify-center">
-            <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
-        </a>
-    
-        <ul class="hidden md:flex gap-6 justify-center items-center">
+<header class="p-1 md:py-[15px] flex justify-around items-center">
+    <a href="{{route('admin.index')}}">
+        <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-20"
+            alt="Logo UT">
+    </a>
+
+        <ul class="hidden md:flex gap-10 justify-center font-roboto text-sm">
             <li>
-                <a href="#">Usuarios</a>
+                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
-                <a href="/companies">Empresas</a>
+                <a href="/panel-empresas" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
             </li>
             <li>
-                <a href="/crud">Asesores Empresariales</a>
+                <a href="/panel-asesores" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
             </li>
             <li>
-                <a href="/carreras">Carreras y Divisiones</a>
+                <a href='/panel-carreras' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
             </li>
         </ul>
     

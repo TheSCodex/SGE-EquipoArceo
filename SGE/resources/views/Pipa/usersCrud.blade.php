@@ -30,7 +30,7 @@
             <a href="#">Carreras y Divisiones</a>
         </li>
     </ul>
-    
+
 
     <ul class="hidden md:flex gap-6 justify-center">
         <button class="p-2 px-2 text-red-600 font-light text-white transition duration-300 ease-in-out rounded-full bg-lightGray">

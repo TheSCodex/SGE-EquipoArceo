@@ -27,7 +27,7 @@
                 <a href="#">Cartas</a>
             </li>
             <li>
-                <a href="#">Libros</a>
+                <a href="/books">Libros</a>
             </li>
         </ul>
     
