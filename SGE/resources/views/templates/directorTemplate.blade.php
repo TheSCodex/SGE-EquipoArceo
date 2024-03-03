@@ -11,15 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-
-<body class="min-h-screen">
-    <header class="py-5 grid content-center grid-cols-3 gap-10 border-[#92D2C8] border">
-        <a href="/" class=" text-center flex justify-center">
-            <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-28" alt="">
-        </a>
-
-        <ul class="hidden md:flex gap-6 justify-center items-center font-['Roboto'] text-sm">
-            <li class="">
 <body>
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
         <a href="#" class=" text-center flex justify-center">
@@ -40,9 +31,11 @@
                 <a href="#">Cartas</a>
             </li>
             <li>
+<<<<<<< HEAD
                 <a href="#">Calendario</a>
             </li>
         </ul>
+=======
                 <a href="/calendar">Calendario</a>
             </li>
         </ul>
@@ -55,11 +48,12 @@
             </button>
         </ul>
     </header>
+>>>>>>> 5dfc9f01a74e51026eceff19603eb67ac12452a4
 
         <ul class="hidden md:flex gap-6 justify-center">
             <button class="flex gap-3 h-fit items-center py-2 px-4 text-red-600 text-xs font-medium text-white transition duration-300 font-['Roboto'] ease-in-out rounded-full bg-[#999999]">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="18" height="18" fill="url(#pattern0)" /><
+                    <rect width="18" height="18" fill="url(#pattern0)" />
                     <defs>
                         <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
                             <use xlink:href="#image0_594_1149" transform="scale(0.00195312)" />
