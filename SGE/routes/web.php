@@ -58,8 +58,8 @@ Route::resource('admin', AdministratorController::class);
 Route::get('student', [StudentController::class, "index"]);
 
 // RUTA INICIO DE ESTUDIANTES
-Route::get('inicioEstudiante',[StudentController::class, 'index']);
-Route::get('eventos',[StudentController::class, 'studentEvents']);
+Route::get('student-home',[StudentController::class, 'studentHome']);
+Route::get('events',[StudentController::class, 'studentEvents']);
 
 // Route::get('inicioEstudiante', function () {
 //     return view('Michell.studentHome.studentHome');
