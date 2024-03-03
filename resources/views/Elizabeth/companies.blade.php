@@ -58,7 +58,7 @@
                         <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
                         <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
                     </tr>
-                    @endforeach
+                 @endforeach
                 </table>
             </div>
         </div>

@@ -15,13 +15,13 @@
     ];
     @endphp
     <main class="min-h-screen h-full">
-        <div class="py-8 px-20">
+        <div class="md:py-8 md:px-20">
             <div class="border-b border-gray-200 pb-2 flex flex-row items-center">
-                <div class="w-4/6">
+                <div class="md:w-4/6">
                     <h1 class="font-bold text-2xl font-roboto">Carreras y Divisiones</h1>
                 </div>
                 <div class="flex items-center space-x-5">
-                    <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
+                    <div class="flex flex-row border border-primaryColor md:p-1 items-center rounded-md">
                         <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-roboto">
                         <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
                     </div>
@@ -29,12 +29,12 @@
                         <button><img src="/img/logos/caret.svg"></button>
                     </div>
                     <div class="w-56">
-                        <button class="bg-primaryColor text-white p-2 rounded-md  font-semibold ">Agregar carrera y division</button>
+                        <button class="bg-primaryColor text-white md:p-2 rounded-md  font-semibold ">Agregar carrera y division</button>
                     </div>
 
                 </div>
             </div>
-            <div class="mt-6 w-full flex items-center justify-between">
+            <div class="md:mt-6 md:w-full flex items-center justify-between">
                 <table class="w-full text-center">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
