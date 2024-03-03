@@ -1,5 +1,5 @@
 @extends('templates.administratorTemplate')
-@section('titulo','CRUD Empresas')
+@section('titulo','Panel Empresas')
 @section('contenido')
     {{-- Test --}}
     @php
