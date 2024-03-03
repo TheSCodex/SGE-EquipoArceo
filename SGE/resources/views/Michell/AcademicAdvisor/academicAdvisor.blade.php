@@ -8,11 +8,11 @@
 <body>
 @extends('templates.studenTemplate')
 @section('contenido')
-<section class="my-[2cm] mx-[2cm]">
-    <div class="bg-white rounded-md py-1 flex justify-between items-center mb-10 border-b-2">
-        <h1 class="text-2xl font-bold font-kanit ml-8">Asesores</h1>
+<section class="my-[2cm] mx-[2cm] max-md:mx-0 max-md:w-full">
+    <div class="bg-white rounded-md py-1 flex justify-between items-center mb-10 border-b-2  max-md:w-full">
+        <h1 class="text-2xl font-bold font-kanit ml-8 max-lg:ml-2">Asesores</h1>
         {{-- buscador --}}
-        <div class="w-[50%] flex justify-evenly">
+        <div class="w-[50%] flex justify-evenly max-md:hidden">
             <input placeholder="Buscador" type="search" name="d" id="" class="w-[50%] placeholder:text-green placeholder:px-3 rounded-md mb-4 border-2 border-green focus:outline-none px-3">
            
             <svg width="28" height="38" viewBox="0 0 14 22" class="mt-3"  fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,10 +26,26 @@
                 </defs>
                 </svg>
         </div>
+        {{-- Buscador response --}}
+        <div class="max-md:mr-3" id="searchContainer">
+            <div class="" id="searchIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search cursor-pointer" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1DAF90" fill="none" stroke-linecap="round" stroke-linejoin="round" id="searchIcon">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
+            </div>
+        </div>
+        <div class="mr-3" id="searchInput" style="display: none;">
+            <input placeholder="Buscador" type="search" name="d" id="" class=" w-54 placeholder:text-green placeholder:px-3 rounded-md border-2 border-green focus:outline-none px-3">
+            <span id="closeButton" class="font-bold text-rose-400 cursor-pointer">X</span>
+        </div>
+        
     </div>
 </section>
-<section class="my-[2cm] mx-[2cm]">
-<table class="my-[2cm] mx-[2cm] min-w-full divide-y divide-gray-200">
+{{-- Desktop --}}
+<section class="my-[2cm] mx-[2cm] max-md:mx-0 ">
+<table class="my-[2cm] mx-[2cm] min-w-full divide-y divide-gray-200 max-md:mx-0 max-md:w-full max-md:hidden">
 <thead>
     <tr>
         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
@@ -46,10 +62,62 @@
         <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
     </tr>
     <!-- Más filas aquí -->
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">Elsy Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">elrios@utcancun.edu.mx</td>
+        <td class="px-6 py-4 whitespace-nowrap">Azziel Michell Meza</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap">Elsy Luz Rios</td>
+        <td class="px-6 py-4 whitespace-nowrap">elrios@utcancun.edu.mx</td>
+        <td class="px-6 py-4 whitespace-nowrap">Azziel Michell Meza</td>
+        <td class="px-6 py-4 whitespace-nowrap">Ingenieria </td>
+    </tr>
 </section>
 </tbody>
 </table>
-
+{{-- Responsive --}}
+<section class="">
+    <div class="hidden max-md:flex max-md:flex-wrap max-md:m-2 max-md:w-full">
+        {{-- card --}}
+        <div class="max-md:bg-[#ffffff] max-md:shadow-md max-md:m-1 max-md:w-[95%] max-md:p-3">
+            <p class="font-bold text-lg">Nombre: <b class="font-semibold">Elsy Luz Rios Romagnoli</b></p>
+            <p class="font-bold text-lg">Correo: <b class="font-semibold">elrios@utcancun.edu.mx</b></p>
+            <p class="font-bold text-lg">Estudiante a cargo: <b class="font-semibold">Azziel Michell Meza</b></p>
+            <p class="font-bold text-lg">División: <b class="font-semibold">Ingenieria</b></p>
+        </div>
+        {{-- card --}}
+        <div class="max-md:bg-[#ffffff] max-md:shadow-md max-md:m-1 max-md:w-[95%] max-md:p-3">
+            <p class="font-bold text-lg">Nombre: <b class="font-semibold">Elsy Luz Rios Romagnoli</b></p>
+            <p class="font-bold text-lg">Correo: <b class="font-semibold">elrios@utcancun.edu.mx</b></p>
+            <p class="font-bold text-lg">Estudiante a cargo: <b class="font-semibold">Azziel Michell Meza</b></p>
+            <p class="font-bold text-lg">División: <b class="font-semibold">Ingenieria</b></p>
+        </div>
+        {{-- card --}}
+        <div class="max-md:bg-[#ffffff] max-md:shadow-md max-md:m-1 max-md:w-[95%] max-md:p-3">
+            <p class="font-bold text-lg">Nombre: <b class="font-semibold">Elsy Luz Rios Romagnoli</b></p>
+            <p class="font-bold text-lg">Correo: <b class="font-semibold">elrios@utcancun.edu.mx</b></p>
+            <p class="font-bold text-lg">Estudiante a cargo: <b class="font-semibold">Azziel Michell Meza</b></p>
+            <p class="font-bold text-lg">División: <b class="font-semibold">Ingenieria</b></p>
+        </div>
+    </div>
+</section>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('searchIcon').addEventListener('click', function() {
+        document.getElementById('searchContainer').style.display = 'none';
+        document.getElementById('searchInput').style.display = 'block';
+        document.getElementById('searchInput').focus(); // Para enfocar automáticamente el input
+    });
+    document.getElementById('closeButton').addEventListener('click', function() {
+        document.getElementById('searchInput').style.display = 'none';
+        document.getElementById('searchContainer').style.display = 'block'; // Mostrar de nuevo el ícono de búsqueda
+    });
+});
+
+
+</script>
 </body>
 </html>
