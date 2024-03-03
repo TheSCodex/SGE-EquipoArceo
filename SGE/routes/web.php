@@ -56,7 +56,7 @@ Route::resource('changepassword', ChangePasswordController::class);
 Route::resource('recover', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
-Route::resource('user', UserController::class);
+Route::resource('panel-users', UserController::class);
 
 // Rutas para Eventos
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
@@ -83,7 +83,7 @@ Route::resource('/empresas', companiesController::class);
 Route::get("/director", [DirectorController::class, "index"]);
 Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
-// Ruta Presidente de la Academia
+// Ruta Presidente de la Academia   
 Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 // Ruta Administrador
