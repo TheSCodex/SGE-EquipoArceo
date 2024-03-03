@@ -37,7 +37,7 @@
     @section('contenido')
     <main class="min-h-screen h-full flex flex-col">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros</h1>
             <div class="flex items-center flex-row justify-end">
                 <div class="flex-1 md:mr-2">
                     <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
