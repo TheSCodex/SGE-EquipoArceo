@@ -22,14 +22,14 @@
                 </div>
                 <div class="flex items-center space-x-5">
                     <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
-                        <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-roboto">
+                        <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-montserrat text-sm font-semibold px-2">
                         <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
                     </div>
                     <div class="p-1 flex flex-x-0 flex-col">
                         <button><img src="/img/logos/caret.svg"></button>
                     </div>
-                    <div>
-                        <button class="bg-primaryColor text-white p-2 rounded-md font-roboto">Agregar nuevo usuario</button>
+                    <div class="w-[200px]">
+                        <a class="bg-primaryColor text-white p-2 rounded-md font-montserrat w-[200px] text-sm font-semibold"  href="/user/create">Agregar nuevo usuario</a>
                     </div>
                 </div>
             </div>
