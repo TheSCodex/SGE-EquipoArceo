@@ -9,9 +9,9 @@
 <body class="py-8">
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
-    <main class="max-w-md mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
+    <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat bg-white">Agregar Nuevo Evento</h1>
-        <form action="{{url('newEvent')}}" method="POST">
+        <form action="{{route('eventos.store')}}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="event_type" class="block text-gray-700 font-montserrat mb-2">Tipo de evento:</label>

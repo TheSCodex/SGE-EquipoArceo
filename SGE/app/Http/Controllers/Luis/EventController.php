@@ -12,7 +12,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('Luis.events');
+        // return view('Luis.events');
+        return view('Luis.eventsDash');
     }
 
     /**
@@ -36,13 +37,13 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('events');
+        return redirect('eventos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }

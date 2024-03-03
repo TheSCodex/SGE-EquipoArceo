@@ -59,15 +59,14 @@ Route::resource('recover', RecoverPasswordController::class);
 Route::resource('user', UserController::class);
 
 // Rutas para Eventos
-Route::get('/events', [EventController::class, 'index'])->name('EventList');
-Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
-Route::post('/newEvent', [EventController::class, 'store']);
-Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
+Route::resource('eventos', EventController::class);
+Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
 // Rutas para CRUD de Libros
-Route::get('/books', [BooksController::class, 'index']);
-Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
-Route::post("/newBook", [BooksController::class, 'store']);
+Route::resource('libros', BooksController::class);
+// Route::get('/books', [BooksController::class, 'index']);
+// Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
+// Route::post("/newBook", [BooksController::class, 'store']);
 
 // Rutas para CRUD de Carreras y Divisiones
 Route::resource('/carreras', carrerasController::class);
@@ -92,7 +91,7 @@ Route::resource('admin', AdministratorController::class);
 // Ruta Estudiantes
 Route::get('student', [StudentController::class, "index"]);
 Route::get('inicioEstudiante',[StudentController::class, 'index']);
-Route::get('eventos',[StudentController::class, 'studentEvents']);
+// Route::get('eventos',[StudentController::class, 'studentEvents']);
 
 // Rutas para Bajas
 Route::get('bajas', [BajasController::class, "index"]);
