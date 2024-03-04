@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone', 20)->nullable();
             $table->integer('companie_id')->nullable()->index('companie_id');
+            $table->timestamps();
         });
     }
 

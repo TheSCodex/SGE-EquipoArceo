@@ -11,4 +11,9 @@ class AsesorController extends Controller
     {
         return view('Elizabeth.crudAsesores');
     }
+
+    public function create()
+    {
+        return view('Elizabeth.formAsesores');
+    }
 }
