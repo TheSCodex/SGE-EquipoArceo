@@ -21,13 +21,13 @@
                 <a href="#" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
-                <a href="/panel-empresas" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
+                <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
             </li>
             <li>
-                <a href="/panel-asesores" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
+                <a href="/panel-advisors" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
             </li>
             <li>
-                <a href='/panel-carreras' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
+                <a href='/panel-careers' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
             </li>
         </ul>
     

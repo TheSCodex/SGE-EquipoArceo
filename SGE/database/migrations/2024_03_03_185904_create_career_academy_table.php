@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->integer('career_id')->nullable()->index('career_id');
             $table->integer('academy_id')->nullable()->index('academy_id');
+            $table->timestamps();
         });
     }
 

@@ -70,14 +70,14 @@ Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
 Route::post("/newBook", [BooksController::class, 'store']);
 
 // Rutas para CRUD de Carreras y Divisiones
-Route::resource('/panel-carreras', carrerasController::class);
+Route::resource('/panel-careers', carrerasController::class);
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::get('/panel-asesores', [AsesorController::class, 'index']);
+Route::get('/panel-advisors', [AsesorController::class, 'index']);
 
 // Rutas para CRUD de Empresas
-Route::resource('/panel-empresas', companiesController::class);
+Route::resource('/panel-companies', companiesController::class);
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);

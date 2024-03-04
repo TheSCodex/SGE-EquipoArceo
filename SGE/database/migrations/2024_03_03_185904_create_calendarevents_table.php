@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->timestamp('date')->nullable();
             $table->enum('status', ['programada', 'en proceso', 'Terminada', 'cancelada'])->nullable();
+            $table->timestamps();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id')->nullable()->index('user_id');
             $table->integer('max_advisors')->nullable();
             $table->integer('quantity_advised')->nullable();
+            $table->timestamps();
         });
     }
 

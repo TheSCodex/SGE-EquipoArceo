@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('internship_type', function (Blueprint $table) {
             $table->integer('id')->primary();
             $table->string('name')->nullable();
+            $table->timestamps();
+
         });
     }
 

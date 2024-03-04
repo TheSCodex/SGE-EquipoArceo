@@ -20,15 +20,15 @@
                     <h1 class="font-bold text-2xl font-roboto">Carreras y Divisiones</h1>
                 </div>
 
-                    <div class=" flex justify-center ">
-                        <div class="flex flex-row border border-primaryColor sm:p-1 items-center rounded-md">
+                    <div class="flex justify-center items-center">
+                        <div class="hidden p-1 md:flex flex-row border border-primaryColor sm:p-1 items-center rounded-md">
                             <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor  max-sm:w-20  focus:outline-none font-roboto">
                             <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
                         </div>
-                        <div class="p-1 flex flex-x-0 flex-col">
+                        <div class="hidden p-1 md:flex flex-x-0 flex-col justify-center items-center px-5">
                             <button><img src="/img/logos/caret.svg"></button>
                         </div>
-                        <div class="md:w-[15.5vw]">
+                        <div class="my-5 md:m-0 md:w-[15.5vw]">
                             <button class="bg-primaryColor text-white p-2 rounded-md font-semibold ">Agregar carrera y division</button>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <div class=" flex  items-center justify-center gap-5">
                                 <button class="font-roboto font-bold py-[2.5%]"><img src="/img/logos/pencil.svg"></button>
                                 <button class="font-roboto font-bold py-[2.5%]"><img src="/img/logos/trash.svg"></button>
-                                <button id="openModalBtn{{ $index }}" class="openModalBtn">
+                                <button id="openModalBtn{{ $index }}" class="md:hidden openModalBtn">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1DAF90" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />

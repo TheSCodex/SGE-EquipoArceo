@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('student_status', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name')->nullable();
+            $table->timestamps();
+
         });
     }
 
