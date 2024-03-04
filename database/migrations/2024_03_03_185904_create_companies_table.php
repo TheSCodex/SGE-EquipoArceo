@@ -22,6 +22,8 @@ return new class extends Migration
             $table->date('registration_date')->nullable();
             $table->string('rfc', 20)->nullable();
             $table->integer('business_sector_id')->nullable()->index('business_sector_id');
+            $table->timestamps();
+
         });
     }
 
