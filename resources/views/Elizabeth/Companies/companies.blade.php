@@ -54,7 +54,7 @@
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-users/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva empresa
+                <a href="/panel-empresas-create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva empresa
                     </a>
             </div>
         </div>

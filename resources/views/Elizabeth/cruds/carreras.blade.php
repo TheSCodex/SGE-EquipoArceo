@@ -4,14 +4,14 @@
     {{-- Test --}}
     @php
     $users = [
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'Division' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
     ];
     @endphp
     <style>
@@ -46,7 +46,7 @@
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
                 <a href="/panel-carreras/create"
-                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera y division</a>
+                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera y división</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
@@ -54,7 +54,7 @@
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-carreras/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y division</a>
+                <a href="/panel-carreras/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -65,7 +65,7 @@
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                             <h2 class="text-lg font-bold">{{ $user['Carrera'] }}</h2>
                             <h2 class="text-lg font-bold">{{ $user['Director'] }}</h2>
-                            <p class="text-sm text-gray-500">Division: {{ $user['Division'] }}</p>
+                            <p class="text-sm text-gray-500">División: {{ $user['División'] }}</p>
                             <p class="text-sm text-gray-500">Nivel: {{ $user['Nivel'] }}</p>
                             <p class="text-sm text-gray-500">Clave: {{ $user['Clave'] }}</p>
                             <div class="flex justify-end mt-4">
@@ -82,7 +82,7 @@
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Director</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Division</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">División</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Nivel</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Clave</th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
@@ -92,7 +92,7 @@
                         <tr>
                             <td class="font-roboto font-bold py-5">{{ $user['Carrera'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['Director'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Division'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['División'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['Nivel'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['Clave'] }}</td>
                             <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
