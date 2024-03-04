@@ -75,8 +75,8 @@ Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::get('/panel-asesores', [AsesorController::class, 'index']);
-Route::get('/panel-asesores/crear', [AsesorController::class, 'crear']);
+Route::resource('/panel-asesores', AsesorController::class);
+Route::get('/panel-asesores-create', [AsesorController::class, 'create'])->name('formAsesores');
 
 // Rutas para CRUD de Empresas
 Route::resource('/panel-empresas', companiesController::class);
