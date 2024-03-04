@@ -18,7 +18,7 @@
 
         <ul class="hidden md:flex gap-10 justify-center font-roboto text-sm">
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
+                <a href="/panel-users" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
                 <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>

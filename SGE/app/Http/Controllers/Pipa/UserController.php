@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('Pipa.usersCrud');
+        return view('Pipa.panel-users');
     }
 
     /**
@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Pipa.addUser');
+        return view('Pipa.add-user');
     }
 
     /**
