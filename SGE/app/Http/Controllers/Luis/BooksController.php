@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
-
+use App\Models\Book;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -12,7 +13,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return view('Luis.book');
+        $books = Book::paginate(5);
+        return view('Luis.book', compact('books'));
     }
 
     /**
@@ -28,7 +30,16 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('books');
+
+        $books = new \App\Models\Book;
+        $books->title = $request->title_book;
+        $books->author = $request->author_book;
+        $books->isbn = $request->isbn_book;
+        // $books->birthdate = $request->identifier_student;
+
+        $books->save();
+
+        return redirect('libros');
     }
 
     /**
@@ -44,22 +55,31 @@ class BooksController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book=Book::find($id);
+        return view('Luis.editBookForm', compact('book'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id):RedirectResponse
     {
-        //
+        $book=Book::find($id);
+        // dd($student);
+        $book->update($request->all());
+        return redirect()->route('libros.index')->with('notificacion', 'Libro editado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+
+        $book=Book::find($id);
+
+        $book->delete();
+
+        return redirect()->route('libros.index');
     }
 }
