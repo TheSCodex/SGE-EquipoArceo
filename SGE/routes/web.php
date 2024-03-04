@@ -52,8 +52,8 @@ Route::resource('documentos', DocumentsController::class);
 
 // Rutas para Inicio de Sesión
 Route::resource('login', LoginController::class);
-Route::resource('change-password', ChangePasswordController::class);
-Route::resource('recover', RecoverPasswordController::class);
+Route::resource('cambiar-contraseña', ChangePasswordController::class);
+Route::resource('recuperar-contraseña', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
 Route::resource('panel-users', UserController::class);
