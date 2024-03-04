@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/events', [EventController::class, 'index'])->name('list');
+Route::get('/events', [EventController::class, 'index'])->name('calendario');
