@@ -71,6 +71,7 @@ Route::post("/newBook", [BooksController::class, 'store']);
 
 // Rutas para CRUD de Carreras y Divisiones
 Route::resource('/panel-carreras', carrerasController::class);
+Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
