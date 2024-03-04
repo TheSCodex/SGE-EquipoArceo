@@ -1,46 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Usuarios | Sistema Gestor de Estadias</title>
-    @vite('resources/css/app.css')
-
-    {{-- Bootstrap Icons --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-</head>
-<body>
-<header class="p-1 md:p-1 grid grid-cols-3 gap-10">
-    <a href="#" class=" text-center flex justify-center">
-        <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-28" alt="">
-    </a>
-
-    <ul class="hidden md:flex gap-6 justify-center items-center">
-        <li>
-            <a href="#">Usuarios</a>
-        </li>
-        <li>
-            <a href="#">Empresas</a>
-        </li>
-        <li>
-            <a href="#">Asesores empresariales</a>
-        </li>
-        <li>
-            <a href="#">Carreras y Divisiones</a>
-        </li>
-    </ul>
-
-
-    <ul class="hidden md:flex gap-6 justify-center">
-        <button class="p-2 px-2 text-red-600 font-light text-white transition duration-300 ease-in-out rounded-full bg-lightGray">
-            <a href="#">Sign Out</a>
-        </button>
-    </ul>
-</header>
+@extends('templates.administratorTemplate')
+@section('titulo', 'Panel de Usuarios')
+@section('contenido')
     {{-- Test --}}
     @php
-    $usuarios = [
+    $users = [
         ['nombre' => 'Manuel', 'apellido' => 'Pasos', 'correo' => '22393126@gmail.com', 'rol' => 'Estudiante', 'nomina' => '22393126', 'especialidad' => 'Desarrollo de software',],
         ['nombre' => 'Kevin', 'apellido' => 'Bello', 'correo' => '22393124@gmail.com', 'rol' => 'Estudiante', 'nomina' => '22393124', 'especialidad' => 'Desarrollo de software',],
         ['nombre' => 'Luis', 'apellido' => 'Broca', 'correo' => '22393177@gmail.com', 'rol' => 'Estudiante', 'nomina' => '22393177', 'especialidad' => 'Desarrollo de software',],
@@ -51,27 +14,74 @@
         ['nombre' => 'Kevin', 'apellido' => 'Bello', 'correo' => '22393124@gmail.com', 'rol' => 'Estudiante', 'nomina' => '22393124', 'especialidad' => 'Desarrollo de software',],
     ];
     @endphp
-    <main class="min-h-screen h-full">
-        <div class="py-8 px-20">
-            <div class="border-b border-gray-200 pb-2 flex flex-row items-center">
-                <div class="w-4/6">
-                    <h1 class="font-bold text-2xl font-roboto">Lista de usuarios</h1>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            /* Espacio vertical entre filas */
+            width: 100%;
+        }
+        /* Estilo para las celdas de la tabla */
+        th,
+        td {
+            /* Espacio interno de las celdas */
+            padding: 10px;
+        }
+    </style>
+
+
+    <main class="min-h-screen h-full flex flex-col">
+        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div class="flex-1 md:mr-2">
+                    <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
+                        <input id="search" placeholder="Buscador" type="text"
+                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
+                        <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
+                    </div>
                 </div>
-                <div class="flex items-center space-x-5">
-                    <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
-                        <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-montserrat text-sm font-semibold px-2">
-                        <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
-                    </div>
-                    <div class="p-1 flex flex-x-0 flex-col">
-                        <button><img src="/img/logos/caret.svg"></button>
-                    </div>
-                    <div class="w-[200px]">
-                        <a class="bg-primaryColor text-white p-2 rounded-md font-montserrat w-[200px] text-sm font-semibold"  href="/user/create">Agregar nuevo usuario</a>
-                    </div>
+                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
+                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                </div>
+                <a href="/panel-users/create"
+                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo
+                    usuario</a>
+            </div>
+            <!-- Elementos que se mostrarán solo en dispositivos móviles -->
+            <div class="flex justify-between md:hidden mt-2 mx-auto">
+                <div class="flex">
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
+                </div>
+                <a href="/panel-users/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo
+                    usuario</a>
+            </div>
+        </div>
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            {{-- cards --}}
+            <div class="lg:hidden w-full mb-5">
+                <div class="grid md:grid-cols-2 gap-4 w-full">
+                    @foreach ($users as $user)
+                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                            <h2 class="text-lg font-bold">{{ $user['nombre'] }}</h2>
+                            <h2 class="text-lg font-bold">{{ $user['apellido'] }}</h2>
+                            <p class="text-sm text-gray-500">Correo: {{ $user['correo'] }}</p>
+                            <p class="text-sm text-gray-500">Rol: {{ $user['rol'] }}</p>
+                            <p class="text-sm text-gray-500">Nomina: {{ $user['nomina'] }}</p>
+                            <p class="text-sm text-gray-500">Especialidad: {{ $user['especialidad'] }}</p>
+                            <div class="flex justify-end mt-4">
+                                <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
+                                <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="mt-6 w-full flex items-center justify-between">
-                <table class="w-full text-center">
+            <!-- Display table on larger screens -->
+            <div class="hidden lg:block w-full">
+                <table class="text-center">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Apellidos</th>
@@ -82,24 +92,20 @@
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
-                    @foreach($usuarios as $usuario)
-                    <tr>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['nombre'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['apellido'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['correo'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['rol'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['nomina'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $usuario['especialidad'] }}</td>
-                        <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
-                        <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
-                    </tr>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td class="font-roboto font-bold py-5">{{ $user['nombre'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['apellido'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['correo'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['rol'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['nomina'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['especialidad'] }}</td>
+                            <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
+                            <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                        </tr>
                     @endforeach
                 </table>
             </div>
         </div>
     </main>
-    <footer class="border-t border-secondaryColor text-black text-center p-5">
-        Copyright © 2024. SM51
-    </footer>
-</body>
-</html>
+@endsection
