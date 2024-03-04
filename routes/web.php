@@ -71,6 +71,7 @@ Route::post("/newBook", [BooksController::class, 'store']);
 
 // Rutas para CRUD de Carreras y Divisiones
 Route::resource('/panel-carreras', carrerasController::class);
+Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
@@ -79,6 +80,7 @@ Route::get('/panel-asesores/crear', [AsesorController::class, 'crear']);
 
 // Rutas para CRUD de Empresas
 Route::resource('/panel-empresas', companiesController::class);
+Route::get('/panel-empresas-create', [companiesController::class, 'store'])->name('companies.companies_form');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
