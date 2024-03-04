@@ -23,7 +23,7 @@
 <body>
     @extends('templates.directorsAssistantTemplate')
         {{-- Test --}}
-        @php
+        {{-- @php
         $books = [
             ['nombre' => 'Clean Code: A Handbook of  Software ', 'autor' => 'Robert C. Martin', 'isbn' => '978-0-13-235088-4', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
             ['nombre' => 'The Pragmatic Programmer', 'autor' => 'Andrew Hunt, David Thomas', 'isbn' => '978-0-13-595705-9', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
@@ -33,7 +33,7 @@
             ['nombre' => 'The Mythical Man-Month', 'autor' => 'Frederick P. Brooks Jr.', 'isbn' => '978-0-201-83595-3', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
            
         ];
-        @endphp
+        @endphp --}}
     @section('contenido')
     <main class="min-h-screen h-full flex flex-col">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
@@ -49,7 +49,7 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="{{route('eventos.create')}}" class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento</a>
+                <a href="{{route('libros.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2 hidden md:block">Agregar nuevo libro</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
@@ -57,30 +57,44 @@
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
-                <a href="{{route('eventos.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo evento</a>
+                <a href="{{route('libros.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo libro</a>
             </div>
         </div>
-            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            <div class="mt-6 w-11/12 mx-auto flex flex-col items-center justify-between">
                 {{-- cards --}}
                 <div class="lg:hidden w-full mb-5">
                     <div class="grid md:grid-cols-2 gap-4 w-full">
                         @foreach($books as $book)
                             <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                                <h2 class="text-lg font-bold">{{ $book['nombre'] }}</h2>
-                                <p class="text-sm text-gray-500">Autor: {{ $book['autor'] }}</p>
+                                <h2 class="text-lg font-bold">{{ $book['title'] }}</h2>
+                                <p class="text-sm text-gray-500">Autor: {{ $book['author'] }}</p>
                                 <p class="text-sm text-gray-500">ISBN: {{ $book['isbn'] }}</p>
-                                <p class="text-sm text-gray-500">Proporcionado por: {{ $book['proporcionadopor'] }}</p>
-                                <p class="text-sm text-gray-500">Fecha de adición: {{ $book['fecha'] }}</p>
+                                <p class="text-sm text-gray-500">Proporcionado por: {{ $book['isbn'] }}</p>
+                                <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book['created_at'], 0, 10) }}</p>
                                 <div class="flex justify-end mt-4">
-                                    <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                                    <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                    <div class="flex justify-center align-middle">
+                                        <a href="{{route('libros.edit', $book->id)}}">
+                                            <img src="/img/logos/pencil.svg"></td>
+                                        </a>
+                                    </div>
+                                    {{-- <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"> --}}
+                                    {{-- <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer"> --}}
+                                    <div class="flex justify-center align-middle">
+                                        <form action="{{ route('libros.destroy', $book->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">
+                                                <img src="/img/logos/trash.svg">
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
                 <!-- Display table on larger screens -->
-                <div class="hidden lg:block w-full">
+                <div class="hidden lg:block w-full mb-10">
                     <table class="text-center">
                         <tr>
                             <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
@@ -93,17 +107,31 @@
                         </tr>
                         @foreach($books as $book)
                         <tr>
-                            <td class="font-roboto font-bold py-5">{{ $book['nombre'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $book['autor'] }}</td>
+                            <td class="font-roboto font-bold py-5 w-3/12">{{ $book['title'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $book['author'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $book['isbn'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $book['proporcionadopor'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $book['fecha'] }}</td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer"><img src="/img/logos/pencil.svg"></td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer"><img src="/img/logos/trash.svg"></td>
+                            <td class="font-roboto font-bold py-5">{{ $book['isbn'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ substr($book['created_at'], 0, 10) }}</td>
+                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                                <a href="{{route('libros.edit', $book->id)}}">
+                                    <img src="/img/logos/pencil.svg"></td>
+                                </a>
+                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                                <form action="{{ route('libros.destroy', $book->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg">
+                                    </button>
+                                </form>    
+                            </td>
                         </tr>
                         @endforeach
                     </table>
                 </div>
+            </div>
+            <div class="my-5 mx-auto">
+                {{$books->links()}}
             </div>
     </main>
     @endsection
