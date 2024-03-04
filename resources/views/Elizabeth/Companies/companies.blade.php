@@ -44,8 +44,9 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="/rutaqdebocrearjajaxd"
-                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa</a>
+                <a href="/panel-empresas-create"
+                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa
+                </a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
@@ -65,9 +66,9 @@
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                             <h2 class="text-lg font-bold">{{ $user['nombre'] }}</h2>
                             <h2 class="text-lg font-bold">{{ $user['correo'] }}</h2>
-                            <p class="text-sm text-gray-500">correo: {{ $user['celular'] }}</p>
-                            <p class="text-sm text-gray-500">Rol: {{ $user['fecha_de_registro'] }}</p>
-                            <p class="text-sm text-gray-500">Nomina: {{ $user['dirección'] }}</p>
+                            <p class="text-sm text-gray-500">celular: {{ $user['celular'] }}</p>
+                            <p class="text-sm text-gray-500">Fecha de registro: {{ $user['fecha_de_registro'] }}</p>
+                            <p class="text-sm text-gray-500">dirección: {{ $user['dirección'] }}</p>
                             <p class="text-sm text-gray-500">rfc: {{ $user['rfc'] }}</p>
                             <p class="text-sm text-gray-500">Especialidad: {{ $user['area_de_especialización'] }}</p>
                             <div class="flex justify-end mt-4">

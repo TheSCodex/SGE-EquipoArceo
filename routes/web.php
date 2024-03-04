@@ -78,6 +78,7 @@ Route::get('/panel-asesores', [AsesorController::class, 'index']);
 
 // Rutas para CRUD de Empresas
 Route::resource('/panel-empresas', companiesController::class);
+Route::get('/panel-empresas-create', [companiesController::class, 'store'])->name('companies.companies_form');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
