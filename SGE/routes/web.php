@@ -52,11 +52,11 @@ Route::resource('documentos', DocumentsController::class);
 
 // Rutas para Inicio de Sesión
 Route::resource('login', LoginController::class);
-Route::resource('changepassword', ChangePasswordController::class);
-Route::resource('recover', RecoverPasswordController::class);
+Route::resource('cambiar-contraseña', ChangePasswordController::class);
+Route::resource('recuperar-contraseña', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
-Route::resource('user', UserController::class);
+Route::resource('panel-users', UserController::class);
 
 // Rutas para Eventos
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
@@ -83,7 +83,7 @@ Route::resource('/panel-empresas', companiesController::class);
 Route::get("/director", [DirectorController::class, "index"]);
 Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
-// Ruta Presidente de la Academia
+// Ruta Presidente de la Academia   
 Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 // Ruta Administrador

@@ -13,7 +13,7 @@ class RecoverPasswordController extends Controller
      */
     public function index()
     {
-        return view('Pipa.recoverPassword');
+        return view('Pipa.recover-password');
     }
 
     /**
