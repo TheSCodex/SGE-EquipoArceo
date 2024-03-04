@@ -12,15 +12,24 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('Luis.events');
+        // return view('Luis.events');
+        return view('Luis.eventsDash');
     }
+
+    /**
+     * Display a calendar view.
+     */
+    public function calendar(){
+        return view('Luis.calendar');
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('Luis.newEventForm');
     }
 
     /**
@@ -28,13 +37,13 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('eventos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
