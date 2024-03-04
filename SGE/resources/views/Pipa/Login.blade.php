@@ -28,7 +28,7 @@
                 @error('user_password')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
-                <a class="mt-3 inline-block align-baseline font-semibold text-lg hover:text-primaryColor" href="recover">¿Olvidaste tu contraseña?</a>
+                <a class="mt-3 inline-block align-baseline font-semibold text-lg hover:text-primaryColor" href="recuperar-contraseña">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="flex items-center justify-center">
                 <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-lg text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline font-montserrat">Iniciar sesión</button>
