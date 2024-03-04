@@ -13,6 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = \App\Models\User::all();
+        return view('Pipa.panel-users', compact('users'));
+    
         return view('Pipa.panel-users');
     }
 

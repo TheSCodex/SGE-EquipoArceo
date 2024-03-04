@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessSector extends Model
+class Career extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
+        'division_id',
     ];
 
-    public function companies()
+    public function division()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsTo(Division::class);
     }
 }

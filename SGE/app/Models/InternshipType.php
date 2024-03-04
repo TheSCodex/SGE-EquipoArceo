@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessSector extends Model
+class InternshipType extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
     ];
 
-    public function companies()
+    public function projects()
     {
-        return $this->hasMany(Company::class);
+        return $this->hasMany(Project::class, 'internship_type_id');
     }
 }
