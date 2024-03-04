@@ -1,142 +1,112 @@
 @extends('templates.administratorTemplate')
-@section('titulo','Panel Empresas')
+@section('titulo', 'Panel de Usuarios')
 @section('contenido')
     {{-- Test --}}
     @php
-    $usuarios = [
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
-        ['nombre' => 'Empresa', 'apellido' => '998213314', 'correo' => '22393126@gmail.com', 'rol' => '11/12/2024', 'nomina' => '22393126', 'especialidad' => 'Hoteleria',],
+    $users = [
+        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
+        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
+        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
+        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
+        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
+
+    
     ];
     @endphp
-    <main class="min-h-screen h-full">
-        <div class="py-8 sm:px-20">
-            <div class="border-b border-gray-200 pb-2 flex  flex-row max-sm:flex-col items-center">
-                <div class="md:w-4/6">
-                    <h1 class="font-bold text-2xl font-roboto">Empresas</h1>
-                </div>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            /* Espacio vertical entre filas */
+            width: 100%;
+        }
+        /* Estilo para las celdas de la tabla */
+        th,
+        td {
+            /* Espacio interno de las celdas */
+            padding: 10px;
+        }
+    </style>
 
-                    <div class=" flex justify-center ">
-                        <div class="flex flex-row border border-primaryColor sm:p-1 items-center rounded-md">
-                            <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor  max-sm:w-20  focus:outline-none font-roboto">
-                            <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
-                        </div>
-                        <div class="p-1 flex flex-x-0 flex-col">
-                            <button><img src="/img/logos/caret.svg"></button>
-                        </div>
-                        <div class="md:w-[15vw]">
-                            <button class="bg-primaryColor text-white p-2 rounded-md font-semibold ">Agregar nueva empresa</button>
-                        </div>
+
+    <main class="min-h-screen h-full flex flex-col">
+        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div class="flex-1 md:mr-2">
+                    <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
+                        <input id="search" placeholder="Buscador" type="text"
+                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
+                        <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
                     </div>
-                    
-                    
-
+                </div>
+                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
+                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                </div>
+                <a href="/rutaqdebocrearjajaxd"
+                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa</a>
             </div>
-            <div class="sm:mt-[2%] w-full flex items-center justify-between">
-                <table class="w-full text-center">
+            <!-- Elementos que se mostrarán solo en dispositivos móviles -->
+            <div class="flex justify-between md:hidden mt-2 mx-auto">
+                <div class="flex">
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
+                </div>
+                <a href="/panel-users/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva empresa
+                    </a>
+            </div>
+        </div>
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            {{-- cards --}}
+            <div class="lg:hidden w-full mb-5">
+                <div class="grid md:grid-cols-2 gap-4 w-full">
+                    @foreach ($users as $user)
+                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                            <h2 class="text-lg font-bold">{{ $user['nombre'] }}</h2>
+                            <h2 class="text-lg font-bold">{{ $user['correo'] }}</h2>
+                            <p class="text-sm text-gray-500">correo: {{ $user['celular'] }}</p>
+                            <p class="text-sm text-gray-500">Rol: {{ $user['fecha_de_registro'] }}</p>
+                            <p class="text-sm text-gray-500">Nomina: {{ $user['dirección'] }}</p>
+                            <p class="text-sm text-gray-500">rfc: {{ $user['rfc'] }}</p>
+                            <p class="text-sm text-gray-500">Especialidad: {{ $user['area_de_especialización'] }}</p>
+                            <div class="flex justify-end mt-4">
+                                <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
+                                <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <!-- Display table on larger screens -->
+            <div class="hidden lg:block w-full">
+                <table class="text-center">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto sm:hidden text-xs">Acciones</th>
-                        <th class="text-[#ACACAC] font-roboto  max-sm:hidden text-xs">Correo Eletectrónico</th>
-                        <th class="text-[#ACACAC] font-roboto  max-sm:hidden text-xs">Celular</th>
-                        <th class="text-[#ACACAC] font-roboto  max-sm:hidden text-xs">Registro</th>
-                        <th class="text-[#ACACAC] font-roboto  max-sm:hidden text-xs">Dirección</th>
-                        <th class="text-[#ACACAC] font-roboto  max-sm:hidden text-xs">Sector comercial</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Fecha de registro</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
-                    @foreach($usuarios as $index => $usuario)
-                    <tr>
-                        <td class="font-roboto font-bold py-[2.5%]">{{ $usuario['nombre'] }}</td>
-                        <td class="font-roboto font-bold max-sm:hidden py-[2.5%]">{{ $usuario['correo'] }}</td>
-                        <td class="font-roboto font-bold max-sm:hidden py-[2.5%]">{{ $usuario['apellido'] }}</td>
-                        <td class="font-roboto font-bold max-sm:hidden py-[2.5%]">{{ $usuario['rol'] }}</td>
-                        <td class="font-roboto font-bold max-sm:hidden py-[2.5%]">{{ $usuario['nomina'] }}</td>
-                        <td class="font-roboto font-bold max-sm:hidden py-[2.5%]">{{ $usuario['especialidad'] }}</td>
-                        <td class="font-roboto font-bold  py-5">
-                            <div class=" flex  items-center justify-center gap-5">
-                                <button class="font-roboto font-bold py-[2.5%]"><img src="/img/logos/pencil.svg"></button>
-                                <button class="font-roboto font-bold py-[2.5%]"><img src="/img/logos/trash.svg"></button>
-                                <button id="openModalBtn{{ $index }}" class="openModalBtn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1DAF90" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                 @endforeach
+                    @foreach ($users as $user)
+                        <tr>
+                            <td class="font-roboto font-bold py-5">{{ $user['nombre'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['correo'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['celular'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['fecha_de_registro'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['dirección'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['rfc'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['area_de_especialización'] }}</td>
+                            <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
+                            <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>
     </main>
-
-    @foreach($usuarios as $index => $usuario)
-    <div id="myModal{{ $index }}" class="myModal hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50">
-        <div class="modal my-[4%] p-[3%]  bg-white  w-[74vw] mx-auto h-[85vh] rounded-lg shadow-lg ">
-            <h2 class="text-2xl  font-extrabold text-center mb-3">Detalles de la empresa</h2>
-
-            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
-                <p class="text-[#ACACAC] font-roboto">Correo Eletectrónico</p>
-                <p class="font-roboto font-bold py-[2.5%]">{{ $usuario['correo'] }}</p>
-            </div>
-            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
-                <p class="text-[#ACACAC] font-roboto">Celular</p>
-                <p class="font-roboto font-bold py-[2.5%]">{{ $usuario['apellido'] }}</p>
-            </div>
-            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
-                <p class="text-[#ACACAC] font-roboto">Registro</p>
-                <p class="font-roboto font-bold py-5">{{ $usuario['rol'] }}</p>
-            </div>
-            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
-                <p class="text-[#ACACAC] font-roboto">Dirección</p>
-                <p class="font-roboto font-bold py-5">{{ $usuario['nomina'] }}</p>
-            </div>
-            <div class="border-b-2 border-t-2 items-center flex flex-row justify-between">
-                <p class="text-[#ACACAC] font-roboto">Sector comercial</p>
-                <p class="font-roboto font-bold py-5">{{ $usuario['especialidad'] }}</p>
-            </div>
-            <button class="close bg-red rounded-lg md:px-2 lg:py-4 md:mt-6 w-full text-white">Cerrar Modal</button>
-        </div>
-    </div>
-
-    @endforeach
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Seleccionar todos los botones de apertura de modal
-        var modalBtns = document.querySelectorAll(".openModalBtn");
-
-        // Asignar el evento click a cada botón
-        modalBtns.forEach(function(btn, index) {
-            btn.addEventListener("click", function() {
-                // Obtener el modal correspondiente al índice actual
-                var modal = document.getElementById("myModal" + index);
-                // Mostrar el modal
-                modal.style.display = "block";
-            });
-        });
-
-        // Asignar el evento click al botón de cierre de modal y al fondo oscuro
-        var closeBtns = document.querySelectorAll(".close");
-        closeBtns.forEach(function(btn) {
-            btn.addEventListener("click", function() {
-                // Ocultar el modal al hacer clic en el botón de cierre
-                this.closest('.myModal').style.display = "none";
-            });
-        });
-
-        // Ocultar el modal al hacer clic en el fondo oscuro
-        window.onclick = function(event) {
-            if (event.target.classList.contains('myModal')) {
-                event.target.style.display = "none";
-            }
-        };
-    });
-    </script>
 @endsection
