@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('business_advisors', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id', true);
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone', 20)->nullable();
             $table->integer('companie_id')->nullable()->index('companie_id');
+            $table->timestamps();
         });
     }
 

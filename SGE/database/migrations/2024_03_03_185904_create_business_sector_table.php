@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('business_sector', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('title')->nullable();
+            $table->timestamps();
         });
     }
 

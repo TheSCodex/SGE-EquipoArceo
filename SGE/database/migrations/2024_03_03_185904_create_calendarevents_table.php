@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('calendarevents', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id', true);
             $table->integer('requester_id')->nullable()->index('requester_id');
             $table->integer('receiver_id')->nullable()->index('receiver_id');
             $table->text('title')->nullable();
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->timestamp('date')->nullable();
             $table->enum('status', ['programada', 'en proceso', 'Terminada', 'cancelada'])->nullable();
+            $table->timestamps();
         });
     }
 
