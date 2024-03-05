@@ -13,7 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('Pipa.usersCrud');
+        $users = \App\Models\User::all();
+        return view('Pipa.panel-users', compact('users'));
+    
+        return view('Pipa.panel-users');
     }
 
     /**
@@ -21,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Pipa.addUser');
+        return view('Pipa.add-user');
     }
 
     /**
