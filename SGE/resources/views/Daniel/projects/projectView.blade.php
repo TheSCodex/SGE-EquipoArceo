@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
-                    <p class=' text-center text-black opacity-[60%]'>Aun no tienes un proyecto Empieza a trabajarlo ahora</p>
+                    <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a trabajarlo ahora</p>
                 </div>
             </div>
         </div>
