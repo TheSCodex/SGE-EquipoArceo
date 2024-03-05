@@ -83,7 +83,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Grado Acdemico</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Grado Académico</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Departamento</th>
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
