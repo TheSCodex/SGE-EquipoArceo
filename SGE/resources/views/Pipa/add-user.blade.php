@@ -1,7 +1,7 @@
 @extends('templates.administratorTemplate')
 @section('contenido')
 <div class="w-full h-screen flex justify-center items-center bg-white">
-    <form action="{{url('user')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-[500px]">
+    <form action="{{url('user')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-[20rem] md:w-[30rem]">
         <div class="w-full h-fit flex justify-start">
             <h1 class="text-3xl font-bold">Añadir usuario</h1>
             @csrf
@@ -62,7 +62,7 @@
                 @enderror
             </div>
         </div>
-        <button type="submit" class="p-2 bg-primaryColor w-[500px] rounded-md text-white">Añadir usuario</button>
+        <button type="submit" class="p-2 bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white">Añadir usuario</button>
     </form>
 </div>
 @endsection('contenido')
