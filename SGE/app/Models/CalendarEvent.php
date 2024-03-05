@@ -17,7 +17,8 @@ class CalendarEvent extends Model
         'eventType',
         'description',
         'location',
-        'date',
+        'date_start',
+        'date_end',
         'status',
     ];
 

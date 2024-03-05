@@ -43,11 +43,13 @@ class EventController extends Controller
         $validatedData = $request->validated();
 
         $event = new \App\Models\CalendarEvent;
-        $event->title = $request->input('title');
-        $event->eventType = $request->input('eventType');
-        $event->description = $request->input('description');
-        $event->location = $request->input('location');
-        $event->date = $request->input('date');
+        $event->title = $request->title;
+        $event->eventType = $request->eventType;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date_start = $request->date_start;
+        $event->date_end = $request->date_end;
+        $event->status = 'programada';
         $event->save();
         return redirect('eventos');
     }
@@ -72,15 +74,17 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NewEventFormRequest $request, string $id)
     {
         $event = CalendarEvent::find($id);
 
-        $event->title = $request->input('title');
-        $event->eventType = $request->input('eventType');
-        $event->description = $request->input('description');
-        $event->location = $request->input('location');
-        $event->date = $request->input('date');
+        $event->title = $request->title;
+        $event->eventType = $request->eventType;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date_start = $request->date_start;
+        $event->date_end = $request->date_end;
+        $event->status = $request->status;
         $event->update();
         return redirect('eventos');
     }

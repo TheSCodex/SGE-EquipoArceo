@@ -22,11 +22,14 @@ class NewEventFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|alpha',
-            'eventType' => 'bail|required|alpha',
-            'description' => 'bail|required|alpha|string',
-            'location' => 'bail|required|alpha|string',
-            'date' => 'bail|required|date',
+            'receiver_id' => 'bail|required',
+            'title' => 'bail|required|regex:/^[a-zA-Z0-9\s\W]+$/',
+            'eventType' => 'bail|required|regex:/^[a-zA-Z0-9\s\W]+$/',
+            'description' => 'bail|required|regex:/^[a-zA-Z0-9\s\W]+$/',
+            'location' => 'bail|required|regex:/^[a-zA-Z0-9\s\W]+$/',
+            'date_start' => 'bail|required|date',
+            'date_end' => 'bail|required|date',
+            'status' => 'bail|required|regex:/^[a-zA-Z0-9\s\W]+$/',
         ];
     }
 }

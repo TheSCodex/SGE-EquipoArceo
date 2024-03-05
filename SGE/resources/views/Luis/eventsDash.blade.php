@@ -64,35 +64,35 @@
                                     <h4 class="text-lg font-semibold">{{$event['title']}}</h4>
                                 </div>
                                 <div class="ml-4">
-                                    <time class="text-[#888] text-sm">{{$event['eventType']}}</time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
-                                    <h4 class="text-lg font-semibold">{{$event['location']}}</h4>
+                                    <time class="text-[#888] text-sm">Proposito: {{$event['eventType']}}</time>
                                 </div>
                                 <div class="ml-4">
-                                    <time class="text-[#888] text-sm">{{$event['status']}}</time>
+                                    <time class="text-[#888] text-sm">Lugar: {{$event['location']}}</time>
+                                </div>
+                                <div class="ml-4">
+                                    <time class="text-[#888] text-sm">Estatus: {{$event['status']}}</time>
+                                </div>
+                                <div class="ml-4">
+                                    <time class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
                                 </div>
                             </li>
-                            <div class="flex justify-center space-x-12 mt-4">
-                                <div class="flex justify-center align-middle">
-                                    <a href="{{route('eventos.edit', $event->id)}}">
-                                        <img src="/img/logos/pencil.svg">
-                                    </a>
-                                </div>
-                                <div class="flex justify-center align-middle">
-                                    <form action="{{ route('eventos.destroy', $event->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">
-                                            <img src="/img/logos/trash.svg">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
                         </ul>
+                        <div class="flex justify-center space-x-12 mt-4">
+                            <div class="flex justify-center align-middle">
+                                <a href="{{route('eventos.edit', $event->id)}}">
+                                    <img src="/img/logos/pencil.svg">
+                                </a>
+                            </div>
+                            <div class="flex justify-center align-middle">
+                                <form action="{{ route('eventos.destroy', $event->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach
