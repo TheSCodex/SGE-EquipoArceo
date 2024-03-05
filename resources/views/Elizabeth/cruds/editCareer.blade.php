@@ -52,7 +52,7 @@
                     </p>
                 @enderror
         </div>
-        <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Añadir carrera y división</button>
+        <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Editar carrera y división</button>
     </form>
 </div>
 </div>

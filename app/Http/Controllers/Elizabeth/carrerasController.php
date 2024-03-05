@@ -29,7 +29,7 @@ class carrerasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('editCareer');
     }
 
     /**

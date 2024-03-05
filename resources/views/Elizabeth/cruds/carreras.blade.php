@@ -45,7 +45,7 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-carreras/create"
+                <a href="/panel-careers/create"
                     class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera y división</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
@@ -54,7 +54,7 @@
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-carreras/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
+                <a href="/panel-careers/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -69,8 +69,12 @@
                             <p class="text-sm text-gray-500">Nivel: {{ $user['Nivel'] }}</p>
                             <p class="text-sm text-gray-500">Clave: {{ $user['Clave'] }}</p>
                             <div class="flex justify-end mt-4">
-                                <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                                <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                   <a href="/panel-careers/store">
+                                    <button> <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"></button>
+                                   </a>
+                                    <a >
+                                        <button><img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer"></button>
+                                    </a>
                             </div>
                         </div>
                     @endforeach
@@ -95,8 +99,12 @@
                             <td class="font-roboto font-bold py-5">{{ $user['División'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['Nivel'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['Clave'] }}</td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                            <td class="font-roboto font-bold py-5">
+                                <a href="/panel-careers/store"> <button><img src="/img/logos/pencil.svg"></button></a>
+                            </td>
+                            <td class="font-roboto font-bold py-5">
+                                <button><img src="/img/logos/trash.svg"></button>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
