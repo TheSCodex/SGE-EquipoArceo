@@ -6,12 +6,13 @@
 
 @section('contenido')
     
-    <section class="flex flex-col justify-center items-center bg-[#F3F5F9]">
-        <div class="sm:p-8 text-left w-[90%]">
+    <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
+        <div class="sm:p-8 text-left w-[90%] ">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">Mi Anteproyecto </h1>
-        <div class="w-[91w] sm:w-[85vw] h-[80vh] flex flex-wrap sm:justify-between">
 
-            <div class="w-full sm:w-[68%] h-fit  sm:h-full flex flex-wrap flex-col justify-between">
+        <div class="w-[91w] sm:w-[85vw] sm:h-[80vh] flex flex-wrap sm:justify-between flex-grow">
+
+            <div class="w-full sm:w-[68%] h-fit  sm:h-full flex flex-wrap flex-col justify-between ">
                 <div class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                     <h3>Nombre del proyecto</h3>
                 </div>
@@ -22,7 +23,7 @@
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Asesor empresarial</p>
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Área de desempeño</p>
                     </div>
-                    <div class="flex flex-wrap flex-col items-center justify-between h-[57vh] mt-[1.5%]">
+                    <div class="flex flex-wrap flex-col flex-grow items-center justify-between min-h-[57vh] mt-[1.5%] gap-[10] "> <!-- Esta linea es salida de los confines del inframundo -->
                         <div class="w-full flex flex-wrap justify-center">
                             <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Área de desempeño</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
@@ -102,3 +103,6 @@
         </div>
     </section>  
 @endsection
+
+
+
