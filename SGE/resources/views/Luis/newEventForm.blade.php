@@ -15,23 +15,23 @@
             @csrf
             <div class="mb-4">
                 <label for="event_type" class="block text-gray-700 font-montserrat mb-2">Tipo de evento:</label>
-                <input type="text" id="event_type" name="event_type" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el tipo de evento">
+                <input type="text" id="event_type" name="eventType" value="{{ old('eventType') }}" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" placeholder="Introduce el tipo de evento">
             </div>
             <div class="mb-4">
                 <label for="event_title" class="block text-gray-700 font-montserrat mb-2">Titulo:</label>
-                <input type="text" id="event_title" name="event_title" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el titulo del evento">
+                <input type="text" id="event_title" name="title" value="{{ old('title') }}" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" placeholder="Introduce el titulo del evento">
             </div>
             <div class="mb-4">
                 <label for="event_desc" class="block text-gray-700 font-montserratmb-2">Descripción:</label>
-                <input type="text" id="event_desc" name="event_desc" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-blue-primaryColor" required placeholder="Describe brevemente de que tratara el evento">
+                <input type="text" id="event_desc" name="description" value="{{ old('description') }}" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-blue-primaryColor" placeholder="Describe brevemente de que tratara el evento">
             </div>
             <div class="mb-4">
                 <label for="event_location" class="block text-gray-700font-montserrat mb-2">Ubicación del evento:</label>
-                <textarea id="event_location" name="event_location" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" rows="3" required placeholder="Indica donde se llevara a cabo el evento"></textarea>
+                <textarea id="event_location" name="location" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" rows="3" placeholder="Indica donde se llevara a cabo el evento">{{ old('location') }}</textarea>
             </div>
             <div class="mb-4">
                 <label for="event_datetime" class="block text-gray-700font-montserrat mb-2">Hora y fecha del evento:</label>
-                <input type="datetime-local" id="event_datetime" name="event_datetime" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Indica la hora dle evento">
+                <input type="datetime-local" id="event_datetime" name="date" value="{{ old('date') }}" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" placeholder="Indica la hora dle evento">
             </div>
             <div class="mt-6 flex">
                 <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Añadir evento</button>
