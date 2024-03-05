@@ -12,8 +12,8 @@ class companiesController extends Controller
      */
     public function index()
     {
-        $companies = Companie::all();
-        return view('Elizabeth/companies', compact('companies'));
+        // $companies = Companie::all();
+        return view('Elizabeth/Companies/companies');
     }
 
     /**
@@ -21,7 +21,6 @@ class companiesController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -29,7 +28,7 @@ class companiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('Elizabeth/Companies/companies_form');
     }
 
     /**

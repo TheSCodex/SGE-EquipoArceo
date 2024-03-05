@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessSector extends Model
+class Academy extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
     ];
 
-    public function companies()
+    public function careerAcademies()
     {
-        return $this->hasMany(Company::class);
+        return $this->hasMany(CareerAcademy::class);
     }
 }

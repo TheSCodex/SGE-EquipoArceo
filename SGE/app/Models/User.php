@@ -2,44 +2,61 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\CareerAcademy;
+use App\Models\Role;
+use App\Models\AcademicAdvisor;
+use App\Models\Intern;
+use App\Models\CalendarEvent;
+use App\Models\Comment;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
+        'identifier',
+        'career_academy_id',
+        'rol_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function careerAcademy()
+    {
+        return $this->belongsTo(CareerAcademy::class, 'career_academy_id');
+    }    
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'rol_id');
+    }
+
+    public function academicAdvisor()
+    {
+        return $this->hasOne(AcademicAdvisor::class, 'user_id');
+    }
+
+    public function interns()
+    {
+        return $this->hasOne(Intern::class, 'user_id');
+    }
+
+    public function requestedEvents()
+    {
+        return $this->hasMany(CalendarEvent::class, 'requester_id');
+    }
+
+    public function receivedEvents()
+    {
+        return $this->hasMany(CalendarEvent::class, 'receiver_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'academic_advisor_id');
+    }
 }

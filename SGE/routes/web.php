@@ -52,11 +52,11 @@ Route::resource('documentos', DocumentsController::class);
 
 // Rutas para Inicio de Sesión
 Route::resource('login', LoginController::class);
-Route::resource('changepassword', ChangePasswordController::class);
-Route::resource('recover', RecoverPasswordController::class);
+Route::resource('cambiar-contraseña', ChangePasswordController::class);
+Route::resource('recuperar-contraseña', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
-Route::resource('user', UserController::class);
+Route::resource('panel-users', UserController::class);
 
 // Rutas para Eventos
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
@@ -69,20 +69,25 @@ Route::get('/books', [BooksController::class, 'index']);
 Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
 Route::post("/newBook", [BooksController::class, 'store']);
 
+
 // Rutas para CRUD de Carreras y Divisiones
-Route::resource('/carreras', carrerasController::class);
+Route::resource('/panel-careers', carrerasController::class);
+Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+
+
+//RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+Route::resource('/panel-advisors', AsesorController::class);
+Route::get('/panel-advisors-create', [AsesorController::class, 'create'])->name('formAsesores');
 
 // Rutas para CRUD de Empresas
-Route::resource('/companies', companiesController::class);
-
-// Rutas para CRUD de Asesores Académicos
-Route::get('/crud', [AsesorController::class, 'index']);
+Route::resource('/panel-companies', companiesController::class);
+Route::get('/panel-companies-create', [companiesController::class, 'store'])->name('companies.companies_form');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
 Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
-// Ruta Presidente de la Academia
+// Ruta Presidente de la Academia   
 Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 // Ruta Administrador
@@ -108,3 +113,4 @@ Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
 Route::resource('anteproyectos', AnteproyectViewAcAd::class);
 Route::resource('dashboard', DashboardAd::class);
+
