@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Pipa;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pipa\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -46,24 +48,30 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = \App\Models\User::find($id);
+        return view('Pipa.edit-user', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id):RedirectResponse
     {
-        //
+        $user = \App\Models\User::find($id);
+        $user->update($request->all());
+        dd($user);
+        // return redirect()->route('panel-users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
-        //
+        $user = \App\Models\User::find($id);
+        $user->delete();
+        return redirect()->route('panel-users.index');
     }
 }

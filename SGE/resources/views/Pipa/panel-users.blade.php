@@ -37,7 +37,7 @@
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
                     <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $user->careerAcademy->name }}</p>
+                    <p class="text-sm text-gray-500">Especialidad: {{ $user->careerAcademy->career->name }}</p>
                     <div class="flex justify-end mt-4">
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
@@ -66,8 +66,14 @@
                     <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->careerAcademy->career->name}}</td>
-                    <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
-                    <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                    <td class="font-roboto font-bold py-5"><a href="{{route ('panel-users.edit',$user->id)}}"><img src="/img/logos/pencil.svg"></a></td>
+                    <td class="font-roboto font-bold py-5">
+                        <form action="{{route ('panel-users.destroy',$user->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"><img src="/img/logos/trash.svg"></button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </table>
