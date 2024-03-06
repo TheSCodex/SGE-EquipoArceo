@@ -81,6 +81,6 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
-        return redirect()->route('panel-roles.index')->with('success', 'Rol eliminado exitosamente');
+        return redirect('panel-roles')->with('success', 'Rol eliminado exitosamente');
     }
 }
