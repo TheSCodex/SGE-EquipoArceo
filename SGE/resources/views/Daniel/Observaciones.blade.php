@@ -17,8 +17,8 @@
     <div class="border border-black"></div> 
 
     {{-- Cuadro de observación del tutor --}}
-    <div class="sm:flex pb-10">
-        <div class="sm:w-full md:w-2/3 border-t border-gray-200 bg-white border h-64 p-4">
+    <div class="sm:flex w-[95%] mt-4 mx-auto  pb-10">
+        <div class="sm:w-full md:w-2/3 border-t rounded-l-lg border-gray-200 bg-white border h-64 p-4">
             <div class="flex flex-col h-full">
                 <div class="flex items-center">
                     <div class="ml-4">
@@ -36,7 +36,7 @@
             </div>
         </div>
         
-        <div class="sm:w-full md:w-1/3 bg-green h-64 p-4 flex flex-col justify-between items-center text-center">
+        <div class="sm:w-full md:w-1/3 bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
             <div>
                 <h4 class="text-lg font-medium text-white">
                     Resolver
@@ -54,7 +54,7 @@
     {{-- Cuadros normales --}}
     <div class="sm:flex flex-wrap pb-10">
         <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5">
-            <div class="border-t border-gray-200 bg-white border w-full h-64 p-4">
+            <div class="border-t border-gray-200 rounded-l-lg bg-white border w-full h-64 p-4">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center">
                         <div class="ml-4">
@@ -72,7 +72,7 @@
                 </div>
             </div>
             
-            <div class="sm:bg-green w-full md:w-full h-64 p-4 flex flex-col justify-between items-center text-center ">
+            <div class="sm:bg-primaryColor w-full rounded-r-lg md:w-full h-64 p-4 flex flex-col justify-between items-center text-center ">
                 <div>
                     <h4 class="text-lg font-medium text-white">
                         Resolver
@@ -88,7 +88,7 @@
         </div>
 
         <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5 ">
-            <div class="border-t border-gray-200 bg-white border w-full h-64 p-4">
+            <div class="border-t border-gray-200 rounded-l-lg bg-white border w-full h-64 p-4">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center">
                         <div class="ml-4">
@@ -106,7 +106,7 @@
                 </div>
             </div>
             
-            <div class="sm:bg-green w-full md:w-full h-64 p-4 flex flex-col justify-between items-center text-center">
+            <div class="sm:bg-primaryColor w-full rounded-r-lg md:w-full h-64 p-4 flex flex-col justify-between items-center text-center">
                 <div>
                     <h4 class="text-lg font-medium text-white">
                         Resolver
