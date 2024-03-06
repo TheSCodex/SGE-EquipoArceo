@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Pipa;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pipa\UserRequest;
+use App\Models\Career;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -24,7 +26,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Pipa.add-user');
+        $roles = Role::all(); 
+        $careers = Career::all();
+        return view('Pipa.add-user', compact('roles', 'careers'));
+        // return view('Pipa.add-user');
     }
 
     /**

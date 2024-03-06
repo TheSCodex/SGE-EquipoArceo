@@ -36,7 +36,11 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Rol</p>
-                <input type="text" name="rol_id" value="{{old('rol_id')}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Rol">
+                <select name="rol_id" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3">
+                    @foreach($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->title }}</option>
+                    @endforeach
+                </select>
                 @error('rol_id')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
@@ -54,8 +58,12 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Especialidad</p>
-                <input type="text" name="career_academy_id" value="{{old('career_academy_id')}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Especialidad">
-                @error('career_academy_id')
+                <select name="career_academy_id" value="{{old('career_academy_id')}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Especialidad">
+                    @foreach($careers as $career)
+                        <option value="{{$career->id}}">{{$career->name}}</option>
+                    @endforeach
+                </select>
+                    @error('career_academy_id')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
