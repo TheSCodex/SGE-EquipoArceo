@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Pipa;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pipa\UserRequest;
+use App\Models\Career;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,8 +19,6 @@ class UserController extends Controller
     {
         $users = \App\Models\User::all();
         return view('Pipa.panel-users', compact('users'));
-    
-        return view('Pipa.panel-users');
     }
 
     /**
@@ -24,7 +26,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Pipa.add-user');
+        $roles = Role::all(); 
+        $careers = Career::all();
+        return view('Pipa.add-user', compact('roles', 'careers'));
+        // return view('Pipa.add-user');
     }
 
     /**
@@ -32,7 +37,20 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        return ('Procesando..');
+        $user = new \App\Models\User;
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->rol_id = $request->rol_id;
+        $user->identifier = $request->identifier;
+        $user->career_academy_id = $request->career_academy_id;
+        // crear una password aleatoria para el usuario la primera vez que se crea
+        $randomPassword = Str::random(8);
+        $user->password = bcrypt($randomPassword);
+        $user->save();
+
+        $users=User::all();
+        return view ('Pipa.panel-users', compact('users'));
     }
 
     /**
