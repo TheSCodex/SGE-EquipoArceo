@@ -10,7 +10,7 @@ use App\Http\Controllers\Luis\EventController;
 use App\Http\Controllers\Luis\BooksController;
 use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
-use App\Http\Controllers\Elizabeth\AsesorController;
+use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Michell\DirectorAssistantController;
 use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
@@ -77,8 +77,11 @@ Route::post("/editCareer", [carrerasController::class, 'store'])->name('editCare
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::resource('/panel-advisors', AsesorController::class);
-Route::get('/panel-advisors-create', [AsesorController::class, 'create'])->name('formAsesores');
+Route::resource('/panel-advisors', AdvisorController::class);
+Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
+Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
+Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
+
 
 // Rutas para CRUD de Empresas
 Route::resource('/panel-companies', companiesController::class);
