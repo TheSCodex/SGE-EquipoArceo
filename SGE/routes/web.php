@@ -103,8 +103,8 @@ Route::resource('admin', AdministratorController::class);
 
 // Ruta Estudiantes
 Route::get('student', [StudentController::class, "index"]);
-Route::get('student-home',[StudentController::class, 'studentHome']);
-// Route::get('events',[StudentController::class, 'studentEvents']);
+Route::get('inicioEstudiante',[StudentController::class, 'index']);
+// Route::get('eventos',[StudentController::class, 'studentEvents']);
 
 // Rutas para Bajas
 Route::get('bajas', [BajasController::class, "index"]);
@@ -114,7 +114,7 @@ Route::get('academic', [AcademicAdvisorController::class, "index"]);
 Route::get('academichome', [AcademicHomeController::class, "index"]);
 
 // Ruta Lista de Estudiantes
-Route::resource('studentL', StudentListController::class);
+Route::get('studentL', [StudentListController::class, "index"]);
 
 // Rutas para Anteproyectos
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
