@@ -6,7 +6,12 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\BusinessSector;
+use App\Models\CareerAcademy;
+use App\Models\Academy;
+use App\Models\Career;
 use App\Models\User;
+use App\Models\Division;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +28,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Division::factory()->count(5)->create();
+        Academy::factory()->count(5)->create();
+        Career::factory()->count(5)->create();
+        Role::factory()->count(10)->create();
+        CareerAcademy::factory()->count(5)->create();
         User::factory()->count(10)->create();
     }
 }
