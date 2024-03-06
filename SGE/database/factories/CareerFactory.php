@@ -18,7 +18,7 @@ class CareerFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'division_id' => $this->faker->numberBetween(1, 10),
+            'division_id' => $this->faker->numberBetween(1, 5),
 
         ];
     }
