@@ -27,9 +27,8 @@ class carrerasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // equivalente a tu post
     {
-        //
     }
 
     /**
@@ -45,7 +44,8 @@ class carrerasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('Elizabeth.cruds.editCareer');
+
     }
 
     /**
