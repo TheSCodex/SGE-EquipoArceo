@@ -107,7 +107,7 @@ Route::get('academic', [AcademicAdvisorController::class, "index"]);
 Route::get('academichome', [AcademicHomeController::class, "index"]);
 
 // Ruta Lista de Estudiantes
-Route::get('studentL', [StudentListController::class, "index"]);
+Route::resource('studentL', StudentListController::class);
 
 // Rutas para Anteproyectos
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
