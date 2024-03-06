@@ -25,10 +25,10 @@ class RoleRequest extends FormRequest
     {
         return [
             'rol_name' => 'required|string|max:255',
-            'permissions' => 'required|array',
-            'permissions.permiso1' => 'nullable|boolean',
-            'permissions.permiso2' => 'nullable|boolean',
-            'permissions.permiso3' => 'nullable|boolean',
+            'permissions' => 'required',
+            // 'permissions.permiso1' => 'nullable|boolean',
+            // 'permissions.permiso2' => 'nullable|boolean',
+            // 'permissions.permiso3' => 'nullable|boolean',
         ];
     }
 }
