@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-@extends('templates.administratorTemplate')
+
+@extends('./templates/studenTemplate')
 
 @section('contenido')
     <div class="flex h-full gap-8">
