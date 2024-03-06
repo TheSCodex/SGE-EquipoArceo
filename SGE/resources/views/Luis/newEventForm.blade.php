@@ -62,6 +62,18 @@
                 @enderror
                 <input type="datetime-local" id="date_end" name="date_end" value="{{ old('date_end') }}" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" placeholder="Indica la hora del evento">
             </div>
+            <div class="mb-4">
+                <label for="status" class="block text-gray-700font-montserrat mb-2">Estatus del evento:</label>
+                @error('status')
+                <h1 class="text-red text-md font-semibold">{{ $message }}</h1>
+                @enderror
+                <select type="text" id="status" name="status" value="{{old('status')}}" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" placeholder="Indica la hora del evento">
+                    <option value='Programada' selected>Programada</option>
+                    {{-- <option value='En proceso'>En proceso</option>
+                    <option value='Terminada'>Terminada</option>
+                    <option value='Cancelada'>Cancelada</option> --}}
+                </select>
+            </div>
             <div class="mt-6 flex">
                 <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Añadir evento</button>
             </div>
