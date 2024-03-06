@@ -1,6 +1,7 @@
 @extends('templates.administratorTemplate')
 @section('titulo', 'Panel de Usuarios')
 @section('contenido')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <main class="min-h-screen h-full flex flex-col">
     <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
@@ -36,8 +37,10 @@
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
-                    <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
-                    <p class="text-sm text-gray-500">Especialidad: {{ $user->careerAcademy->career->name }}</p>
+                    {{-- <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p> --}}
+                    <p class="text-sm text-gray-500">Rol: {{ $user->rol_id }}</p>
+                    {{-- <p class="text-sm text-gray-500">Academia: {{ $user->careerAcademy->name }}</p> --}}
+                    <p class="text-sm text-gray-500">Academia: {{ $user->career_academy_id }}</p>
                     <div class="flex justify-end mt-4">
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
@@ -63,15 +66,23 @@
                     <td class="font-roboto font-bold py-5">{{ $user->name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
+                    {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id->title }}</td> --}}
+                    <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->careerAcademy->career->name}}</td>
-                    <td class="font-roboto font-bold py-5"><a href="{{route ('panel-users.edit',$user->id)}}"><img src="/img/logos/pencil.svg"></a></td>
-                    <td class="font-roboto font-bold py-5">
-                        <form action="{{route ('panel-users.destroy',$user->id)}}" method="POST">
+                    {{-- <td class="font-roboto font-bold py-5">{{ $user->career_academy_id->career->name}}</td> --}}
+                    <td class="font-roboto font-bold py-5">{{ $user->career_academy_id}}</td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a href="{{ route('panel-users.edit', $user->id) }}">
+                            <img src="/img/logos/pencil.svg">
+                        </a>
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <form class="flex" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"><img src="/img/logos/trash.svg"></button>
+                            <button type="button" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
+                                <img src="/img/logos/trash.svg">
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -80,4 +91,24 @@
         </div>
     </div>
 </main>
+
+<script>
+    function confirmDelete(userName, userId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + userId).submit();
+            }
+        });
+    }
+</script>
+
+
 @endsection

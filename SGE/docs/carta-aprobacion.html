@@ -1,11 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta de Aprobación</title>
+    <title>Carta de Aprobación de Memoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo {
+            width: 500px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .date {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .content {
+            margin-top: 40px;
+        }
+
+        .paragraph {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .signature {
+            display: inline-block;
+            margin-top: 40px;
+            text-align: center;
+            width: 45%;
+        }
+
+        .signature p {
+            margin: 10px 0;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid black;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table td, .table th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .table th {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="header">
+            <img src="../docs/assets/logoUT.png" class="logo" alt="logoUT">
+            <h1 class="title">Universidad Tecnológica de Cancún</h1>
+            <h2 class="title">Organismo Público Descentralizado del Gobierno del Estado de Quintana Roo</h2>
+        </div>
+        <div class="date">
+            Cancún, Quintana Roo; a ___ de ___ de 20___
+        </div>
+        <div class="content">
+            <p class="paragraph">
+                NOMBRE DEL DIRECTOR<br>
+                DIRECTOR DE LA CARRERA DE ___<br>
+                DIVISIÓN<br>
+                PRESENTE
+            </p>
+            <p class="paragraph">
+                Sirva la presente para informarle que el (la) estudiante <strong>_________________________</strong> ha concluido satisfactoriamente la elaboración de su memoria titulada <strong>_________________________</strong> como requisito para la conclusión de su estadía y proceso de titulación que establece la normatividad de la Universidad Tecnológica de Cancún.
+            </p>
+            <p class="paragraph">
+                Así mismo, hago de su conocimiento que la memoria en mención cuenta con la correspondiente revisión y por consiguiente aprobación por quienes fungimos como asesores en el ámbito empresarial y académico.
+            </p>
+            <p class="paragraph">
+                Sin otro particular al respecto, quedamos de usted.
+            </p>
+            <div class="signature">
+                <p>ASESOR EMPRESARIAL</p>
+                <p>_________________________</p>
+                <p>Nombre y firma</p>
+            </div>
+            <div class="signature">
+                <p>ASESOR ACADÉMICO</p>
+                <p>_________________________</p>
+                <p>Nombre y firma</p>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Fecha de Revisión</th>
+                    <th>Revisión No.</th>
+                    <th>Folio</th>
+                </tr>
+                <tr>
+                    <td>31 de julio de 2023</td>
+                    <td>8</td>
+                    <td>AEP-P03-F03</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

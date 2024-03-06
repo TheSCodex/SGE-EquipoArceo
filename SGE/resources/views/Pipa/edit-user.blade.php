@@ -37,7 +37,8 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Rol</p>
-                <input type="text" name="role_user" value="{{$user->role->title}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Rol">
+                {{-- <input type="text" name="role_user" value="{{$user->role->title}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Rol"> --}}
+                <input type="text" name="role_user" value="{{$user->rol_id}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Rol">
                 @error('role_user')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
@@ -55,7 +56,8 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Especialidad</p>
-                <input type="text" name="field_user" value="{{$user->careerAcademy->career->name}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Especialidad">
+                {{-- <input type="text" name="field_user" value="{{$user->careerAcademy->career->name}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Especialidad"> --}}
+                <input type="text" name="field_user" value="{{$user->career_academy_id}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Especialidad">
                 @error('field_user')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}

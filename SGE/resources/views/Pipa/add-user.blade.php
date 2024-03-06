@@ -44,7 +44,7 @@
                 @enderror
             </div>
             <div class="w-full space-y-2">
-                <p class="text-sm">Nomina</p>
+                <p class="text-sm">Nómina o matrícula</p>
                 <input type="text" name="id_user" value="{{old('id_user')}}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Nomina">
                 @error('id_user')
                     <p class="text-[#ff0000] text-sm">

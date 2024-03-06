@@ -57,7 +57,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id):RedirectResponse
+    // public function update(UserRequest $request, string $id):RedirectResponse
+    public function update(Request $request, string $id):RedirectResponse
     {
         $user = \App\Models\User::find($id);
         $user->update($request->all());
