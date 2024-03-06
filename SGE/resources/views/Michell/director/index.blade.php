@@ -10,22 +10,23 @@
         <section class="col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-1 rounded-md">Propuestas</p>
 
-            <div class="grid grid-cols-2 gap-x-3 h-[200px]  xl:w-[1118px] mx-auto">
-                <div class="bg-[#02AB82] rounded-md grid place-content-center gap-9">
-                    <p class="text-2xl text-white font-semibold">Estudiantes</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-3 h-[200px] xl:w-[1118px] mx-auto">
+    <div class="bg-[#02AB82] rounded-md flex flex-col justify-center items-center gap-3 p-4">
+        <p class="text-xl lg:text-2xl text-white font-semibold">Estudiantes</p>
 
-                    <button type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-sm shadow-md">
-                        Ver todo
-                    </button>
-                </div>
-                <div class="bg-[#02AB82] rounded-md grid place-content-center gap-9">
-                    <p class="text-2xl text-white font-bold">Proyectos</p>
+        <button type="button" class="bg-white text-gray-500 rounded-md px-4 lg:px-6 py-2 lg:py-1 text-sm lg:text-base shadow-md">
+            Ver todo
+        </button>
+    </div>
+    <div class="bg-[#02AB82] rounded-md flex flex-col justify-center items-center gap-3 p-4">
+        <p class="text-xl lg:text-2xl text-white font-bold">Proyectos</p>
 
-                    <button type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-sm shadow-md">
-                        Ver todo
-                    </button>
-                </div>
-            </div>
+        <button type="button" class="bg-white text-gray-500 rounded-md px-4 lg:px-6 py-2 lg:py-1 text-sm lg:text-base shadow-md">
+            Ver todo
+        </button>
+    </div>
+</div>
+
             <div class="grid grid-cols-3 gap-x-2">
                 <div class="bg-white grid grid-cols-3 p-2 rounded-md">
                     <!-- ICON -->
