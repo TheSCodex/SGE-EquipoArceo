@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('academic_advisor_id')->nullable()->index('academic_advisor_id');
             $table->integer('project_id')->nullable()->index('project_id');
             $table->integer('parent_comment_id')->nullable();
+            $table->timestamps();
+
         });
     }
 

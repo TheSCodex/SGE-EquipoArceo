@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('academies', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name')->nullable();
+            $table->timestamps();
         });
     }
 

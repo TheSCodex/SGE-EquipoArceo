@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Daniel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardAd extends Controller
+class DashboardAdvisorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('daniel.asesor.DasboardAd');
+        return view('daniel.asesor.DashboardAdvisor');
     }
 
     /**

@@ -4,7 +4,7 @@
 @endsection
 
 @section('contenido')
-    <div class="bg-[#F3F5F9]">
+    <section class="bg-[#F3F5F9]">
         <div class=" w-[93%] h-auto mx-auto bg-white rounded-md my-6">
             {{-- Datos Personales --}}
             <div class="my-4">
@@ -269,5 +269,5 @@
                     </button>
                 </div>
         </div>
-    </div>
+    </section>
 @endsection

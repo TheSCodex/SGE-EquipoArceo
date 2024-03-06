@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('project_id')->nullable()->index('project_id');
             $table->integer('book_id')->nullable()->index('book_id');
             $table->integer('student_status_id')->nullable()->index('student_status_id');
+            $table->timestamps();
+
         });
     }
 

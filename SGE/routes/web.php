@@ -23,9 +23,9 @@ use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
-use App\Http\Controllers\Daniel\DashboardAd;
 use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
+use App\Http\Controllers\Daniel\DashboardAdvisorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,11 +53,11 @@ Route::resource('documentos', DocumentsController::class);
 
 // Rutas para Inicio de Sesión
 Route::resource('login', LoginController::class);
-Route::resource('changepassword', ChangePasswordController::class);
-Route::resource('recover', RecoverPasswordController::class);
+Route::resource('cambiar-contraseña', ChangePasswordController::class);
+Route::resource('recuperar-contraseña', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
-Route::resource('user', UserController::class);
+Route::resource('panel-users', UserController::class);
 
 // Rutas para Eventos
 Route::get('/events', [EventController::class, 'index'])->name('EventList');
@@ -70,21 +70,25 @@ Route::get('/books', [BooksController::class, 'index']);
 Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
 Route::post("/newBook", [BooksController::class, 'store']);
 
+
 // Rutas para CRUD de Carreras y Divisiones
-Route::resource('/panel-carreras', carrerasController::class);
+Route::resource('/panel-careers', carrerasController::class);
+Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::get('/panel-asesores', [AsesorController::class, 'index']);
+Route::resource('/panel-advisors', AsesorController::class);
+Route::get('/panel-advisors-create', [AsesorController::class, 'create'])->name('formAsesores');
 
 // Rutas para CRUD de Empresas
-Route::resource('/panel-empresas', companiesController::class);
+Route::resource('/panel-companies', companiesController::class);
+Route::get('/panel-companies-create', [companiesController::class, 'store'])->name('companies.companies_form');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
 Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
-// Ruta Presidente de la Academia
+// Ruta Presidente de la Academia   
 Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
 
 // Ruta Administrador
@@ -109,6 +113,6 @@ Route::get('studentL', [StudentListController::class, "index"]);
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
 Route::resource('anteproyectos', AnteproyectViewAcAd::class);
-Route::resource('Dashboard', DashboardAd::class);
+Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
 Route::resource('observaciones', ObservationsController::class);
 Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
