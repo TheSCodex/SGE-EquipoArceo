@@ -45,15 +45,12 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href=""
-                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Generar nuevo
-                    documento</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
                 <div class="flex">
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
+                    <button class="bg-green py-2 px-4 rounded-md text-white mr-2">▲</button>
+                    <button class="bg-green py-2 px-4 rounded-md text-white">▼</button>
                 </div>
                 <a href="" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Generar Nuevo Documento</a>
             </div>
