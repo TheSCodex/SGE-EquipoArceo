@@ -1,4 +1,4 @@
-@extends('templates.directorTemplate')
+@extends('templates.presidentOfTheAcademyTemplate')
 
 @section('titulo')
     Inicio
