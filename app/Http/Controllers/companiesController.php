@@ -60,16 +60,37 @@ class companiesController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
-    }
+{
+    $businessSector = BusinessSector::all(); // Asegúrate de tener los sectores empresariales disponibles para el formulario
+    $company = Company::findOrFail($id); // Encuentra la empresa que se está editando
+    return view('Elizabeth/Companies/companies_form_edit', compact('company', 'businessSector'));
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        // Validar los datos entrantes
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255',
+            'registration_date' => 'required|date',
+            'rfc' => 'required|string|max:255',
+            'business_sector_id' => 'required|exists:business_sector,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
+        ]);
+    
+        // Encuentra la empresa por su ID
+        $company = Company::findOrFail($id);
+    
+        // Actualiza los datos de la empresa con los datos validados
+        $company->update($validatedData);
+    
+        // Redirige con un mensaje de éxito
+        return redirect()->back()->with('success', '¡Empresa actualizada exitosamente!');
     }
 
     /**
