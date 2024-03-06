@@ -71,7 +71,7 @@
                         <td class="font-roboto font-bold py-5">{{ $company['registration_date'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $company['address'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $company['business_sector_id'] }}</td>
+                        <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td>
                         <td class="font-roboto font-bold py-5">
                             <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
                                 @csrf
