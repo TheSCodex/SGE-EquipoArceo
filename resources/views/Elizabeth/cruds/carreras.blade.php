@@ -4,14 +4,14 @@
     {{-- Test --}}
     @php
     $users = [
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
     ];
     @endphp
     <style>
@@ -64,12 +64,11 @@
                     @foreach ($users as $user)
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                             <h2 class="text-lg font-bold">{{ $user['Carrera'] }}</h2>
-                            <h2 class="text-lg font-bold">{{ $user['Director'] }}</h2>
+
                             <p class="text-sm text-gray-500">División: {{ $user['División'] }}</p>
-                            <p class="text-sm text-gray-500">Nivel: {{ $user['Nivel'] }}</p>
-                            <p class="text-sm text-gray-500">Clave: {{ $user['Clave'] }}</p>
+      
                             <div class="flex justify-end mt-4">
-                                   <a href="/panel-careers/store">
+                                   <a href="/editCareer">
                                     <button> <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"></button>
                                    </a>
                                     <a >
@@ -85,22 +84,16 @@
                 <table class="text-center">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Director</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">División</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Nivel</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Clave</th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
                     @foreach ($users as $user)
                         <tr>
                             <td class="font-roboto font-bold py-5">{{ $user['Carrera'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Director'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['División'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Nivel'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Clave'] }}</td>
                             <td class="font-roboto font-bold py-5">
-                                <a href="/panel-careers/store"> <button><img src="/img/logos/pencil.svg"></button></a>
+                                <a href="/editCareer"> <button><img src="/img/logos/pencil.svg"></button></a>
                             </td>
                             <td class="font-roboto font-bold py-5">
                                 <button><img src="/img/logos/trash.svg"></button>
