@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Division>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
  */
-class DivisionFactory extends Factory
+class BookFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,9 @@ class DivisionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-
+            'title'=>$this->faker->sentence(),
+            'author'=>$this->faker->name(),
+            'isbn'=>$this->faker->randomNumber(5, true),
         ];
     }
 }
