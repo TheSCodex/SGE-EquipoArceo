@@ -4,14 +4,14 @@
     {{-- Test --}}
     @php
     $users = [
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
-        ['Carrera' => 'Desarollo de software', 'Director' => 'Juan Pérez', 'División' => 'Software', 'Nivel' => 'TSU', 'Clave' => '7305477760'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
+        ['Carrera' => 'Desarollo de software', 'División' => 'Software'],
     ];
     @endphp
     <style>
@@ -45,7 +45,7 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-carreras/create"
+                <a href="/panel-careers/create"
                     class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera y división</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
@@ -54,7 +54,7 @@
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-carreras/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
+                <a href="/panel-careers/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -64,13 +64,16 @@
                     @foreach ($users as $user)
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                             <h2 class="text-lg font-bold">{{ $user['Carrera'] }}</h2>
-                            <h2 class="text-lg font-bold">{{ $user['Director'] }}</h2>
+
                             <p class="text-sm text-gray-500">División: {{ $user['División'] }}</p>
-                            <p class="text-sm text-gray-500">Nivel: {{ $user['Nivel'] }}</p>
-                            <p class="text-sm text-gray-500">Clave: {{ $user['Clave'] }}</p>
+      
                             <div class="flex justify-end mt-4">
-                                <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                                <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                   <a href="/editCareer">
+                                    <button> <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"></button>
+                                   </a>
+                                    <a >
+                                        <button><img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer"></button>
+                                    </a>
                             </div>
                         </div>
                     @endforeach
@@ -81,22 +84,20 @@
                 <table class="text-center">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Director</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">División</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Nivel</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Clave</th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
                     @foreach ($users as $user)
                         <tr>
                             <td class="font-roboto font-bold py-5">{{ $user['Carrera'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Director'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $user['División'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Nivel'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Clave'] }}</td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                            <td class="font-roboto font-bold py-5">
+                                <a href="/editCareer"> <button><img src="/img/logos/pencil.svg"></button></a>
+                            </td>
+                            <td class="font-roboto font-bold py-5">
+                                <button><img src="/img/logos/trash.svg"></button>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
