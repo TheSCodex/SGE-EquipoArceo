@@ -9,7 +9,7 @@
 <body>
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
-    @php
+    {{-- @php
         $eventos = [
             ['id' => 1, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
             ['id' => 2, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
@@ -21,7 +21,8 @@
             ['id' => 8, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
             ['id' => 9, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40']
         ];
-    @endphp
+    @endphp --}}
+
 
     <main class="bg-white flex flex-col justify-center align-middle">
         <div class="border-b border-gray-200 pb-2 mx-auto mt-5 w-11/12 md:flex md:items-center md:justify-between">
@@ -52,30 +53,46 @@
         
         </div>
         <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 mb-5">
-            @foreach ($eventos as $evento)
+            @foreach ($events as $event)
                 <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl">
                     <div class="p-4">
-                        <h3 class="text-darkBlue font-bold text-xl">{{$evento['date']}}</h3>
+                        <h3 class="text-darkBlue font-bold text-xl">{{$event['date']}}</h3>
                         <ul class="border-l border-dashed border-primaryColor font-montserrat">
                             <li>
                                 <div class="flex-start flex items-center pt-3">
                                     <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
-                                    <h4 class="text-lg font-semibold">{{$evento['cont1']}}</h4>
+                                    <h4 class="text-lg font-semibold">{{$event['title']}}</h4>
                                 </div>
                                 <div class="ml-4">
-                                    <time class="text-[#888] text-sm">{{$evento['time1']}}</time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
-                                    <h4 class="text-lg font-semibold">{{$evento['cont2']}}</h4>
+                                    <time class="text-[#888] text-sm">Proposito: {{$event['eventType']}}</time>
                                 </div>
                                 <div class="ml-4">
-                                    <time class="text-[#888] text-sm">{{$evento['time2']}}</time>
+                                    <time class="text-[#888] text-sm">Lugar: {{$event['location']}}</time>
+                                </div>
+                                <div class="ml-4">
+                                    <time class="text-[#888] text-sm">Estatus: {{$event['status']}}</time>
+                                </div>
+                                <div class="ml-4">
+                                    <time class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
                                 </div>
                             </li>
                         </ul>
+                        <div class="flex justify-center space-x-12 mt-4">
+                            <div class="flex justify-center align-middle">
+                                <a href="{{route('eventos.edit', $event->id)}}">
+                                    <img src="/img/logos/pencil.svg">
+                                </a>
+                            </div>
+                            <div class="flex justify-center align-middle">
+                                <form action="{{ route('eventos.destroy', $event->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach

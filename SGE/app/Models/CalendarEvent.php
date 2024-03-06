@@ -9,6 +9,7 @@ class CalendarEvent extends Model
 {
     use HasFactory;
 
+    protected $table = 'calendarevents';
     protected $fillable = [
         'requester_id',
         'receiver_id',
@@ -16,7 +17,8 @@ class CalendarEvent extends Model
         'eventType',
         'description',
         'location',
-        'date',
+        'date_start',
+        'date_end',
         'status',
     ];
 
