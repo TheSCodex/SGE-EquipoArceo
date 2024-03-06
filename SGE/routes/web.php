@@ -24,7 +24,7 @@ use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
 use App\Http\Controllers\Daniel\DashboardAd;
-
+use App\Http\Controllers\Pipa\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +57,7 @@ Route::resource('recuperar-contraseña', RecoverPasswordController::class);
 
 // Rutas para CRUD de Usuarios
 Route::resource('panel-users', UserController::class);
+Route::resource('panel-roles', RoleController::class);
 
 // Rutas para Eventos
 Route::get('/events', [EventController::class, 'index'])->name('EventList');

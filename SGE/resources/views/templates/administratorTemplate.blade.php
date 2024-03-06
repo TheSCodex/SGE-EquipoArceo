@@ -21,6 +21,9 @@
                 <a href="/panel-users" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
+                <a href="/panel-roles" class="hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>
+            </li>
+            <li>
                 <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
             </li>
             <li>
