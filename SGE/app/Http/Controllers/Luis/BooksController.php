@@ -39,7 +39,7 @@ class BooksController extends Controller
 
         $books->save();
 
-        return redirect('libros');
+        return redirect('libros')->with('success', 'El libro se ha agregado correctamente');
     }
 
     /**
@@ -67,7 +67,7 @@ class BooksController extends Controller
         $book=Book::find($id);
         // dd($student);
         $book->update($request->all());
-        return redirect()->route('libros.index')->with('notificacion', 'Libro editado correctamente');
+        return redirect()->route('libros.index')->with('edit_success', 'Libro ha sido editado correctamente');
     }
 
     /**
@@ -80,6 +80,6 @@ class BooksController extends Controller
 
         $book->delete();
 
-        return redirect()->route('libros.index');
+        return redirect()->route('libros.index')->with('delete','ok');
     }
 }
