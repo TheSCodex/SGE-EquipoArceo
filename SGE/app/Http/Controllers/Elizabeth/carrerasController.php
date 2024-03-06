@@ -21,7 +21,7 @@ class carrerasController extends Controller
      */
     public function create()
     {
-        //
+        return view('Elizabeth.cruds.newCareer');
     }
 
     /**

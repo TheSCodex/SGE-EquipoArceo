@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('author')->nullable();
             $table->string('isbn', 13)->nullable();
+            $table->timestamps();
         });
     }
 

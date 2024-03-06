@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('business_sector', function (Blueprint $table) {
+        Schema::create('business_sectors', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('title')->nullable();
+            $table->timestamps();
         });
     }
 

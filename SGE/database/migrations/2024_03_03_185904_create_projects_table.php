@@ -24,6 +24,8 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->integer('adviser_id')->nullable()->index('adviser_id');
             $table->integer('internship_Type')->nullable()->index('internship_type');
+            $table->timestamps();
+
         });
     }
 

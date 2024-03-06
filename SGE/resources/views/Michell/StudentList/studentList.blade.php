@@ -9,7 +9,7 @@
 @extends('templates.studenTemplate')
 @section('contenido')
 
-<div class="bg-[#F3F5F9] h-screen flex flex-col justify-center items-center  mb-10 border-b-2">
+<div class="bg-[#F3F5F9] min-h-screen flex flex-col justify-center items-center">
 <section class="w-full p-4 flex items-center">
     <h1 class="text-2xl font-bold font-kanit ml-4">Estudiantes asesorados</h1>
     {{-- buscador --}}
@@ -29,7 +29,7 @@
 </section>
 
     <section class="w-full flex-grow">
-    <div class="mx-8">
+    <div class="mx-8 my-5">
         <table class="w-full min-w-[600px] divide-y divide-gray-200">
             <thead>
                 <tr>
@@ -37,38 +37,39 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penalizacion</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hrs de servicio</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
-                    <td class="px-6 py-4 whitespace-nowrap">en curso</td>
-                    <td class="px-6 py-4 whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
-                    <td class="px-6 py-4 whitespace-nowrap">en curso</td>
-                    <td class="px-6 py-4 whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
-                    <td class="px-6 py-4 whitespace-nowrap">en curso</td>
-                    <td class="px-6 py-4 whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Elsa Luz Rios</td>
-                    <td class="px-6 py-4 whitespace-nowrap">en curso</td>
-                    <td class="px-6 py-4 whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
-                </tr>
+                @foreach ( $interns as $intern )
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $intern->user->name }} {{ $intern->user->last_name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $intern->studentStatus->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
+                        <td>
+                            <div class="flex gap-3 justify-center">
+                                <button class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                    Editar
+                                </button>
+
+                                <form action="{{ route('studentL.destroy', ['studentL' => $intern->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este registro?')" class="bg-rose-500 text-white px-5 py-1 rounded-md text-sm">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </section>
-   
-            </div>
+
+</div>
 @endsection
 </body>
 </html>
