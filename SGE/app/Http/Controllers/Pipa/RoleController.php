@@ -33,17 +33,15 @@ class RoleController extends Controller
     /**
  * Store a newly created resource in storage.
  */
-public function store(RoleRequest $request)
-{
-    $role = new \App\Models\Role;
-    $role->title = $request->rol_name;
-    $role->permissions = json_encode($request->permissions);
-    $role->save();
-
-    return redirect()->route('panel-roles.index')->with('success', 'Rol creado exitosamente');
-}
-
-    
+    public function store(RoleRequest $request)
+    {
+        $role = new \App\Models\Role;
+        $role->title = $request->rol_name;
+        $role->permissions = json_encode($request->permissions);
+        $role->save();
+        
+        return redirect('panel-roles')->with('success', 'Rol creado exitosamente');
+    }
 
     /**
      * Display the specified resource.
@@ -65,9 +63,15 @@ public function store(RoleRequest $request)
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+    public function update(RoleRequest $request, string $id)
     {
-        // 
+        $role = Role::findOrFail($id);
+        $role->title = $request->rol_name;
+        $role->permissions = json_encode($request->permissions);
+        $role->save();
+        
+        return redirect('panel-roles')->with('success', 'Rol actualizado exitosamente');
     }
 
     /**
