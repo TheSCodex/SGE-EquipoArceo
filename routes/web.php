@@ -80,8 +80,8 @@ Route::resource('/panel-advisors', AsesorController::class);
 Route::get('/panel-advisors-create', [AsesorController::class, 'create'])->name('formAsesores');
 
 // Rutas para CRUD de Empresas
-Route::resource('/panel-companies', companiesController::class);
-Route::get('/panel-companies-create', [companiesController::class, 'store'])->name('companies.companies_form');
+Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);

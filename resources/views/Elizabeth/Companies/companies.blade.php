@@ -2,17 +2,7 @@
 @section('titulo', 'Panel de Usuarios')
 @section('contenido')
     {{-- Test --}}
-    @php
-    $users = [
-        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
-        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
-        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
-        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
-        ['nombre' => 'Empresa', 'correo' => 'Empresa@empresa.com', 'celular' => '22393126@gmail.com', 'fecha_de_registro' => '12/12/12', 'dirección' => 'calle bonita', 'rfc' => '121221', 'rfc' => '121221', 'area_de_especialización' => 'Hotelería'],
 
-    
-    ];
-    @endphp
     <style>
         table {
             border-collapse: separate;
@@ -44,7 +34,7 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="/panel-empresas-create"
+                <a href="/panel-companies-create"
                     class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa
                 </a>
             </div>
@@ -62,18 +52,27 @@
             {{-- cards --}}
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($users as $user)
+                    @foreach ($companies as $company)
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                            <h2 class="text-lg font-bold">{{ $user['nombre'] }}</h2>
-                            <h2 class="text-lg font-bold">{{ $user['correo'] }}</h2>
-                            <p class="text-sm text-gray-500">celular: {{ $user['celular'] }}</p>
-                            <p class="text-sm text-gray-500">Fecha de registro: {{ $user['fecha_de_registro'] }}</p>
-                            <p class="text-sm text-gray-500">dirección: {{ $user['dirección'] }}</p>
-                            <p class="text-sm text-gray-500">rfc: {{ $user['rfc'] }}</p>
-                            <p class="text-sm text-gray-500">Especialidad: {{ $user['area_de_especialización'] }}</p>
+                            <h2 class="text-lg font-bold">{{ $company['name'] }}</h2>
+                            <h2 class="text-lg font-bold">{{ $company['email'] }}</h2>
+                            <p class="text-sm text-gray-500">celular: {{ $company['phone'] }}</p>
+                            <p class="text-sm text-gray-500">Fecha de registro: {{ $company['registration_date'] }}</p>
+                            <p class="text-sm text-gray-500">dirección: {{ $company['address'] }}</p>
+                            <p class="text-sm text-gray-500">rfc: {{ $company['rfc'] }}</p>
+                            <p class="text-sm text-gray-500">Especialidad: {{ $company['business_sector_id'] }}</p>
                             <div class="flex justify-end mt-4">
                                 <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                                 <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                            </div>
+                            <div class="font-roboto font-bold py-5">
+                                <form action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg" alt="Eliminar">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @endforeach
@@ -93,20 +92,33 @@
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
-                    @foreach ($users as $user)
+                    @foreach ($companies as $company)
                         <tr>
-                            <td class="font-roboto font-bold py-5">{{ $user['nombre'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['correo'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['celular'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['fecha_de_registro'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['dirección'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['rfc'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['area_de_especialización'] }}</td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
-                            <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                            <td class="font-roboto font-bold py-5">{{ $company['name'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['email'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['phone'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['registration_date'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['address'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $company['business_sector_id'] }}</td>
+                            <td class="font-roboto font-bold py-5">
+                                <a href="{{ route('panel-companies.edit', $company['id']) }}">
+                                    <img src="/img/logos/pencil.svg" alt="Editar">
+                                </a>
+                            </td>
+                            <td class="font-roboto font-bold py-5">
+                                <form action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg" alt="Eliminar">
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
+                
             </div>
         </div>
     </main>
