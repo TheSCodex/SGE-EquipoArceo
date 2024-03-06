@@ -15,8 +15,10 @@
         </p>
     </div>
     <div class="border border-black"></div> 
-    <div class="h-64 flex">
-        <div class="border-t border-gray-200 bg-white border w-2/3 h-64 p-4">
+
+    {{-- Cuadro de observación del tutor --}}
+    <div class="sm:flex pb-10">
+        <div class="sm:w-full md:w-2/3 border-t border-gray-200 bg-white border h-64 p-4">
             <div class="flex flex-col h-full">
                 <div class="flex items-center">
                     <div class="ml-4">
@@ -34,7 +36,7 @@
             </div>
         </div>
         
-        <div class="bg-green w-1/3 h-64 p-4 flex flex-col justify-between items-center text-center">
+        <div class="sm:w-full md:w-1/3 bg-green h-64 p-4 flex flex-col justify-between items-center text-center">
             <div>
                 <h4 class="text-lg font-medium text-white">
                     Resolver
@@ -49,8 +51,9 @@
         </div>
     </div>
 
-    <div class="flex">
-        <div class="w-1/2 h-64 flex p-5">
+    {{-- Cuadros normales --}}
+    <div class="sm:flex flex-wrap pb-10">
+        <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5">
             <div class="border-t border-gray-200 bg-white border w-full h-64 p-4">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center">
@@ -61,7 +64,7 @@
                             <p class="text-sm text-gray-500">
                                 20/01/2024 a las 14:52 pm
                             </p>
-                            <p class="text-base text-gray-600">
+                            <p class="text-base text-gray-600 overflow-ellipsis overflow-hidden max-h-28">
                                 Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
                             </p>
                         </div>
@@ -69,7 +72,7 @@
                 </div>
             </div>
             
-            <div class="bg-green w-full h-64 p-4 flex flex-col justify-between items-center text-center ">
+            <div class="sm:bg-green w-full md:w-full h-64 p-4 flex flex-col justify-between items-center text-center ">
                 <div>
                     <h4 class="text-lg font-medium text-white">
                         Resolver
@@ -84,7 +87,7 @@
             </div>
         </div>
 
-        <div class="w-1/2 h-64 flex p-5">
+        <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5 ">
             <div class="border-t border-gray-200 bg-white border w-full h-64 p-4">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center">
@@ -95,7 +98,7 @@
                             <p class="text-sm text-gray-500">
                                 20/01/2024 a las 14:52 pm
                             </p>
-                            <p class="text-base text-gray-600">
+                            <p class="text-base text-gray-600 overflow-ellipsis overflow-hidden max-h-28">
                                 Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
                             </p>
                         </div>
@@ -103,7 +106,7 @@
                 </div>
             </div>
             
-            <div class="bg-green w-full h-64 p-4 flex flex-col justify-between items-center text-center">
+            <div class="sm:bg-green w-full md:w-full h-64 p-4 flex flex-col justify-between items-center text-center">
                 <div>
                     <h4 class="text-lg font-medium text-white">
                         Resolver
