@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD Libros</title>
     @vite('resources/css/app.css')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -49,7 +51,7 @@
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
-                <a href="{{route('libros.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2 hidden md:block">Agregar nuevo libro</a>
+                <a href="{{route('libros.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2 hidden md:block create-book">Agregar nuevo libro</a>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
@@ -117,7 +119,7 @@
                                     <img src="/img/logos/pencil.svg"></td>
                                 </a>
                             <td class="font-roboto font-bold py-5 cursor-pointer">
-                                <form action="{{ route('libros.destroy', $book->id) }}" method="POST">
+                                <form action="{{ route('libros.destroy', $book->id) }}" class="delete-book" method="POST" >
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit">
@@ -136,4 +138,81 @@
     </main>
     @endsection
 </body>
+
+
+@section('scripts-book')
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            title: "¡Agregado!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
+    @endif
+
+    @if (session('edit_success'))
+    <script>
+        Swal.fire({
+            title: "¡Editado!",
+            text: "{{ session('edit_success') }}",
+            icon: "success"
+        });
+    </script>
+    @endif
+   
+   
+   
+   
+    @if (session('delete') == 'ok')
+        <script>
+            Swal.fire({
+                title: "¡Eliminado!",
+                text: "El libro ha sido eliminado con éxito",
+                icon: "success"
+                });
+        </script>
+        
+    @endif
+
+   
+
+
+    <script>
+        $('.delete-book').submit(function(e){
+            e.preventDefault();
+
+            Swal.fire({
+            title: "¿Estás Seguro?",
+            text: "Este libro se eliminara definitivamente",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "¡Si, eliminar!",
+            cancelButtonText: "Cancelar"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire({
+                // title: "Deleted!",
+                // text: "Your file has been deleted.",
+                // icon: "success"
+                // });
+
+                this.submit();
+            }
+            });
+
+        });
+
+        
+
+        
+    </script>
+ 
+@endsection
+
 </html>

@@ -11,7 +11,7 @@
     @section('contenido')
     <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto bg-white rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat">Agregar Nuevo Libro</h1>
-        <form action="{{route('libros.store')}}" method="POST">
+        <form action="{{route('libros.store')}}" method="POST" class="add-book">
             @csrf
             <div class="mb-4">
                 <label for="title_book" class="block text-gray-700 font-montserrat mb-2">Nombre:</label>
@@ -34,10 +34,11 @@
                 <input type="date" id="aggregation_date" name="aggregation_date" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required>
             </div> --}}
             <div class="mt-6 flex">
-                <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Añadir libro</button>
+                <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto create-book">Añadir libro</button>
             </div>
         </form>
     </main>
     @endsection
 </body>
 </html>
+
