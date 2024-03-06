@@ -12,7 +12,6 @@ class BusinessSectorController extends Controller
      */
     public function index()
     {
-     
     }
 
     /**
@@ -20,7 +19,7 @@ class BusinessSectorController extends Controller
      */
     public function create()
     {
-        //
+        // return view('business_sectors.create');
     }
 
     /**
