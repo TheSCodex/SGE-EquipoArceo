@@ -61,19 +61,25 @@
             {{-- cards --}}
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($users as $user)
+                    @foreach ($careers as $career)
                         <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                            <h2 class="text-lg font-bold">{{ $user['Carrera'] }}</h2>
+                            <h2 class="text-lg font-bold">{{ $career['name'] }}</h2>
 
-                            <p class="text-sm text-gray-500">División: {{ $user['División'] }}</p>
-      
+                            <p class="text-sm text-gray-500">División: {{ $career['division_id'] }}</p>
+
                             <div class="flex justify-end mt-4">
-                                   <a href="/editCareer">
+                                    <a href="/panel-careers/{id}/edit">
                                     <button> <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"></button>
-                                   </a>
-                                    <a >
-                                        <button><img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer"></button>
                                     </a>
+                                    <form action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('¿Estás seguro?')">
+                                            <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                        </button>
+                                    </form>
+                        
+                                    
                             </div>
                         </div>
                     @endforeach
@@ -88,16 +94,25 @@
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
-                    @foreach ($users as $user)
+                    @foreach ($careers as $career)
                         <tr>
-                            <td class="font-roboto font-bold py-5">{{ $user['Carrera'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['División'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $career['name'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $career['division_id'] }}</td>
                             <td class="font-roboto font-bold py-5">
-                                <a href="/editCareer"> <button><img src="/img/logos/pencil.svg"></button></a>
+                                <a href="/panel-careers/{id}/edit">
+                                    <button> <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer"></button>
+                                    </a>
                             </td>
                             <td class="font-roboto font-bold py-5">
-                                <button><img src="/img/logos/trash.svg"></button>
+                                <form action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('¿Estás seguro?')">
+                                        <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                    </button>
+                                </form>
                             </td>
+                    
                         </tr>
                     @endforeach
                 </table>
