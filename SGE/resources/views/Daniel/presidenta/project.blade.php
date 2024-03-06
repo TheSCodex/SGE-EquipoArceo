@@ -1,136 +1,100 @@
-@extends('templates.presidentOfTheAcademyTemplate')
-
-@section('titulo')
-Proyectos
-@endsection
-
+@extends('templates.academicAdvisorTemplate')
+@section('titulo', 'Proyectos')
 @section('contenido')
-<div class="bg-[#F3F5F9] ">
-    <div class="sm:rounded-lg">
-        <div class="px-4 py-5 sm:px-6">
-            <div class="flex items-center ">
-                <h2 class="text-xl leading-6 font-medium text-gray-900 mr-4">
-                    Anteproyectos de asesorados
-                </h2>
-                <label for="search" class="ml-auto block text-sm font-medium text-gray-600 ">
-                    <input type="text" id="search" class="p-2 border border-green-500 rounded-md bg-green-500 text-black" placeholder="Buscar...">
-                </label>
+    {{-- Test --}}
+    @php
+    $users = [
+        ['Estudiantes Designados' => 'Manuel Pasos', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Rafael Villegas', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+        ['Estudiantes Designados' => 'Kevin Bello', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '2', 'Asesor Academico' => 'Rafael Villegas', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+        ['Estudiantes Designados' => 'Luis Broca', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Irvin Chan', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+        ['Estudiantes Designados' => 'Michelle Meza', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '0', 'Asesor Academico' => 'Irvin Chan', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Borrador',],
+        ['Estudiantes Designados' => 'Pipa peguero', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '2', 'Asesor Academico' => 'Luis Villafaña', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+        ['Estudiantes Designados' => 'Emmanuel Arceo', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '0', 'Asesor Academico' => 'Luis Villafaña', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Borrador',],
+        ['Estudiantes Designados' => 'Elizabeth Chuc', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Franklin Aranda', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+        ['Estudiantes Designados' => 'Daniel Dolores', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Franklin Aranda', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
+    ];
+    @endphp
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            /* Espacio vertical entre filas */
+            width: 100%;
+        }
+        /* Estilo para las celdas de la tabla */
+        th,
+        td {
+            /* Espacio interno de las celdas */
+            padding: 10px;
+        }
+    </style>
 
 
-            </div>
-        </div>
-        <div class="border-t-2 border-gray-400"></div>
-        <div class="flex" id="projectList">
-            <div class="px-4 py-5 sm:grid sm:gap-4 sm:px-6">
-                <div class="bg-white text-sm font-medium text-dark-500">
-                    <h2 class="text-xl">Proyecto 1</h2>
-                    <div class="border-t-2 border-gray-900 mx-auto"></div>
-                    <div class="bg-white p-4">
-                        <p class="font-semibold text-gray-600">Objetivo del proyecto, osea de que se va a tratar el proyecto vaya xd</p><br><br>
-                        <p class="font-semibold text-gray-600">Rodrigo Bojorquez</p>
-                        <p class="font-semibold text-gray-600">Juanpa Zurita</p>
+    <main class="min-h-screen h-full flex flex-col">
+        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de la division</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div class="flex-1 md:mr-2">
+                    <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
+                        <input id="search" placeholder="Buscador" type="text"
+                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
+                        <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
                     </div>
                 </div>
+                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
+                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                </div>
             </div>
-            <div class="px-4 py-5 sm:grid sm:gap-4 sm:px-6">
-                <div class="bg-white text-sm font-medium text-dark-500">
-                    <h2 class="text-xl">Proyecto 2</h2>
-                    <div class="border-t-2 border-gray-900 mx-auto"></div>
-                    <div class="bg-white p-4">
-                        <p class="font-semibold text-gray-600">Objetivo del proyecto, osea de que se va a tratar el proyecto vaya xd</p><br><br>
-                        <p class="font-semibold text-gray-600">Rodrigo Bojorquez 1</p>
-                        <p class="font-semibold text-gray-600">Juanpa Zurita 1</p>
-                    </div>
+            <!-- Elementos que se mostrarán solo en dispositivos móviles -->
+            <div class="flex justify-between md:hidden mt-2 mx-auto">
+                <div class="flex">
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
+                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script>
-        document.getElementById('search').addEventListener('input', function () {
-            const searchTerm = this.value.toLowerCase();
-            const projects = document.querySelectorAll('.bg-white.text-sm.font-medium.text-dark-500');
-
-            projects.forEach(project => {
-                const projectName = project.querySelector('h2').innerText.toLowerCase();
-                project.style.display = projectName.includes(searchTerm) ? 'block' : 'none';
-            });
-        });
-    </script>
-
-<div class="mt-8 overflow-hidden sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Proyectos de la división
-        </h3>
-    </div>
-    <div class="border-t-2 border-gray-400"></div>
-    <div class="rounded-md shadow-md overflow-x-auto sm:-mx-2">
-        <div class="inline-block min-w-full overflow-hidden sm:px-6 lg:px-8">
-            <div class="rounded-md">
-                <table class="min-w-full mx-auto text-left text-lg font-light text-gray-900 rounded-md"
-                style="border-collapse: separate; border-spacing: 22px; border-radius: 15px;">
-                    <thead class="border-b font-medium dark:border-neutral-500">
-                            <tr>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Estudiante designado
-                                </th>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Nombre del proyecto
-                                </th>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Votos recibido
-                                </th>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Asesor Academico
-                                </th>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Fecha de publicacion
-                                </th>
-                                <th scope="col" class="px-6 py-4 ">
-                                    Estado
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="rounded-[1.375rem]  my-2 mx-2">
-                                <td class="whitespace-nowrap px-6 py-4 text-black ">karti</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Proyecto nombre</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">2</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">juanito alcachofas</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">08-Dec,2021</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Aprobado</td>
-                            </tr>
-                            <tr class="bg-white rounded-[1.375rem] my-2 mx-2">
-                                <td class="whitespace-nowrap px-6 py-4 text-black">karti</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Proyecto nombre</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">1</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">juanito alcachofas</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">08-Dec,2021</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">En resolucion</td>
-                            </tr>
-                            <tr class="bg-white  rounded-[1.375rem] my-2 mx-2">
-                                <td class="whitespace-nowrap px-6 py-4 text-black">karti</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Proyecto nombre</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">0</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">juanito alcachofas</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">08-Dec,2021</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">En espera</td>
-                            </tr>
-                            <tr class="bg-white rounded-[1.375rem]  my-2 mx-2">
-                                <td class="whitespace-nowrap px-6 py-4 text-black">karti</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Proyecto nombre</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">1</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">juanito alcachofas</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">08-Dec,2021</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-black">Aprobado</td>
-                            </tr>
-                        </tbody>
-
-                    </table>
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            {{-- cards --}}
+            <div class="lg:hidden w-full mb-5">
+                <div class="grid md:grid-cols-2 gap-4 w-full">
+                    @foreach ($users as $user)
+                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                            <h2 class="text-lg font-bold">{{ $user['Nombre del Anteproyecto'] }}</h2>
+                            <h2 class="text-lg font-bold">{{ $user['Estudiantes Designados'] }}</h2>
+                            <p class="text-sm text-gray-500">Votos: {{ $user['Votos recibidos'] }}</p>
+                            <p class="text-sm text-gray-500"> Asesor academico: {{ $user['Asesor Academico'] }}</p>
+                            <p class="text-sm text-gray-500">Fecha: {{ $user['Fecha de publicacion'] }}</p>
+                            <p class="text-sm text-gray-500">Estado: {{ $user['Estado'] }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
+            <!-- Display table on larger screens -->
+            <div class="hidden lg:block w-full">
+                <table class="text-center">
+                    <tr>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Estudiantes Designados</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Nombre del Anteproyecto</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Votos recibidos</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Asesor Academico</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Fecha de publicacion</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs">Estado</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                    </tr>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td class="font-roboto font-bold py-5">{{ $user['Estudiantes Designados'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['Nombre del Anteproyecto'] }}</td>
+                            <td class="font-roboto font-bold py-5">Votos: {{ $user['Votos recibidos'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['Asesor Academico'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['Fecha de publicacion'] }}</td>
+                            <td class="font-roboto font-bold py-5">{{ $user['Estado'] }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
-    </div>
-</div>
+    </main>
 @endsection

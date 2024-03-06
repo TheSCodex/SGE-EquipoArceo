@@ -25,6 +25,7 @@ use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
 use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
+use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
 use Illuminate\Support\Facades\Route;
 
@@ -112,8 +113,8 @@ Route::get('studentL', [StudentListController::class, "index"]);
 // Rutas para Anteproyectos
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
-Route::resource('anteproyectos', AnteproyectViewAcAd::class);
 Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
 Route::resource('observaciones', ObservationsController::class);
 Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
 Route::get('proyectos',[ ProjectsController::class, 'project']);
+Route::resource('anteproyectos', ProyectsAdvisorController::class);
