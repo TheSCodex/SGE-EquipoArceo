@@ -116,3 +116,4 @@ Route::resource('anteproyectos', AnteproyectViewAcAd::class);
 Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
 Route::resource('observaciones', ObservationsController::class);
 Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
+Route::get('proyectos',[ ProjectsController::class, 'project']);
