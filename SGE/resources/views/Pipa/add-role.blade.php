@@ -20,15 +20,15 @@
                 <p class="text-sm">Permisos</p>
                 <div class="flex flex-col space-y-2">
                     <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="permissions[permiso1]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ old('permissions.permiso1') ? 'checked' : '' }}>
+                        <input type="checkbox" name="permissions[permiso1]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ isset($role->permissions['permiso1']) && $role->permissions['permiso1'] ? 'checked' : '' }}>
                         <label for="permiso1" class="text-sm">Permiso 1</label>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="permissions[permiso2]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ old('permissions.permiso2') ? 'checked' : '' }}>
+                        <input type="checkbox" name="permissions[permiso2]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ isset($role->permissions['permiso2']) && $role->permissions['permiso2'] ? 'checked' : '' }}>
                         <label for="permiso2" class="text-sm">Permiso 2</label>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="permissions[permiso3]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ old('permissions.permiso3') ? 'checked' : '' }}>
+                        <input type="checkbox" name="permissions[permiso3]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ isset($role->permissions['permiso3']) && $role->permissions['permiso3'] ? 'checked' : '' }}>
                         <label for="permiso3" class="text-sm">Permiso 3</label>
                     </div>
                 </div>

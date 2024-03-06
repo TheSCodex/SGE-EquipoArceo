@@ -80,7 +80,7 @@
                 
                         @foreach($decodedPermissions as $permission => $value)
                             @if($value)
-                                {{ $permission }}: {{ $value }}<br>
+                                {{ $permission }}<br>
                             @endif
                         @endforeach
                     </td>

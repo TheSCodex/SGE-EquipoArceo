@@ -15,7 +15,7 @@ export default {
             darkGreen: "#009680",
             oceanBlue: "#165BAA",
             orange: "#FF9900",
-            green: "#1DAF90",
+            green: "#09AD60",
             red: "#FF0000"
           },
             fontFamily: {

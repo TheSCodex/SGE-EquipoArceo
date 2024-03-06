@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('eventType')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->nullable();
-            $table->timestamp('date')->nullable();
-            $table->enum('status', ['programada', 'en proceso', 'Terminada', 'cancelada'])->nullable();
+            $table->timestamp('date_start')->nullable();
+            $table->timestamp('date_end')->nullable();
+            $table->enum('status', ['Programada', 'En proceso', 'Terminada', 'Cancelada'])->nullable();
             $table->timestamps();
         });
     }

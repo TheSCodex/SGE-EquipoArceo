@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Daniel\asesor;
 
-use App\Models\BusinessSector;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BusinessSectorController extends Controller
+class ProyectsAdvisorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-     
+        return view('Daniel.asesor.ProyectsAdvisor');
     }
 
     /**

@@ -22,12 +22,12 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_user' => 'bail|required|alpha',
-            'lastname_user' => 'bail|required|alpha',
-            'email_user' => 'bail|required',
-            'role_user' => 'bail|required',
-            'id_user' => 'bail|required',
-            'field_user' => 'bail|required|alpha'
+            'name' => 'bail|required|alpha',
+            'last_name' => 'bail|required|alpha',
+            'email' => 'bail|required',
+            'rol_id' => 'bail|required',
+            'identifier' => 'bail|required',
+            'career_academy_id' => 'bail|required'
         ];
     }
 }

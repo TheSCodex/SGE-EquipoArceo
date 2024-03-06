@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BusinessSector extends Model
 {
+    // protected $table = 'business_sector';
+
     use HasFactory;
 
     protected $fillable = [

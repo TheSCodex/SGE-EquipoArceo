@@ -10,7 +10,7 @@ use App\Http\Controllers\Luis\EventController;
 use App\Http\Controllers\Luis\BooksController;
 use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
-use App\Http\Controllers\Elizabeth\AsesorController;
+use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Michell\DirectorAssistantController;
 use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
@@ -22,8 +22,10 @@ use App\Http\Controllers\Michell\AcademicAdvisorController;
 use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
-use App\Http\Controllers\Daniel\AnteproyectViewAcAd;
-use App\Http\Controllers\Daniel\DashboardAd;
+use App\Http\Controllers\Daniel\ObservationsController;
+use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
+use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
+use App\Http\Controllers\Daniel\DashboardAdvisorController;
 use App\Http\Controllers\Pipa\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +41,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('login');
 });
 
 // Rutas para Reportes
@@ -60,29 +63,33 @@ Route::resource('panel-users', UserController::class);
 Route::resource('panel-roles', RoleController::class);
 
 // Rutas para Eventos
-Route::get('/events', [EventController::class, 'index'])->name('EventList');
-Route::get('/newEvent', [EventController::class, 'create'])->name('newEventForm');
-Route::post('/newEvent', [EventController::class, 'store']);
-Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
+Route::resource('eventos', EventController::class);
+Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
 // Rutas para CRUD de Libros
-Route::get('/books', [BooksController::class, 'index']);
-Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
-Route::post("/newBook", [BooksController::class, 'store']);
+Route::resource('libros', BooksController::class);
+// Route::get('/books', [BooksController::class, 'index']);
+// Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
+// Route::post("/newBook", [BooksController::class, 'store']);
 
 
 // Rutas para CRUD de Carreras y Divisiones
 Route::resource('/panel-careers', carrerasController::class);
 Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
 
 
 //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-Route::resource('/panel-advisors', AsesorController::class);
-Route::get('/panel-advisors-create', [AsesorController::class, 'create'])->name('formAsesores');
+Route::resource('/panel-advisors', AdvisorController::class);
+Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
+Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
+Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
+
 
 // Rutas para CRUD de Empresas
-Route::resource('/panel-companies', companiesController::class);
-Route::get('/panel-companies-create', [companiesController::class, 'store'])->name('companies.companies_form');
+Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
+Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
 // Rutas Director
 Route::get("/director", [DirectorController::class, "index"]);
@@ -97,7 +104,7 @@ Route::resource('admin', AdministratorController::class);
 // Ruta Estudiantes
 Route::get('student', [StudentController::class, "index"]);
 Route::get('student-home',[StudentController::class, 'studentHome']);
-Route::get('events',[StudentController::class, 'studentEvents']);
+// Route::get('events',[StudentController::class, 'studentEvents']);
 
 // Rutas para Bajas
 Route::get('bajas', [BajasController::class, "index"]);
@@ -112,6 +119,8 @@ Route::resource('studentL', StudentListController::class);
 // Rutas para Anteproyectos
 Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
 Route::resource('Mi-anteproyecto', ProjectsController::class);
-Route::resource('anteproyectos', AnteproyectViewAcAd::class);
-Route::resource('dashboard', DashboardAd::class);
-
+Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
+Route::resource('observaciones', ObservationsController::class);
+Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
+Route::get('proyectos',[ ProjectsController::class, 'project']);
+Route::resource('anteproyectos', ProyectsAdvisorController::class);
