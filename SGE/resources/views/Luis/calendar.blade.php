@@ -19,7 +19,6 @@
         $daysMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         $months = ["01" => "Enero","02" => "Febrero", "03" => "Marzo", "04" =>  "Abril", "05" =>  "Mayo", "06" =>  "Junio", "07" =>  "Julio", "08" =>  "Agosto", "09" =>  "Septiembre", "10" => "Octubre", "11" =>  "Noviembre", "12" =>  "Diciembre"];
         $inicialday = date('N', strtotime("$year-$month-01")); 
-        $events = App\Models\CalendarEvent::all();
     @endphp
     <main class="w-full h-full overflow-auto ">
         <div class="flex  w-full ">
@@ -31,10 +30,10 @@
                     </div>
                     <div class="flex ">
                         <h2 class="text-lg text-white font-roboto">{{$months[$month]}} <span class=" text-[#054759]"> {{$year}} </span> </h2>
-                    <div class="ml-12">
+                    {{-- <div class="ml-12">
                         <button class="text-white text-lg mr-2 font-bold">&lt;</button>
                         <button class="text-white text-lg font-bold">&gt;</button>
-                    </div>
+                    </div> --}}
                     </div>
                 </div>
                 <!-- Calendario -->
@@ -56,63 +55,61 @@
                         @endif
                         @for ($i = 1; $i <= $daysMonth; $i++)
                             <div class="flex flex-col cursor-default">
+                                @if ($i == $day)
+                                <h1 class="mx-auto text-zinc-900 font-mono rounded-full bg-white px-2 text-center">{{$i}}</h1>                                
+                                @else
                                 <h1 class="mx-auto text-white font-mono">{{$i}}</h1>
-                                @foreach ($events as $event)
-                                @if (date('d', strtotime($event->date)) == $i)
-                                <div class="flex mt-1">
-                                    <div class="mr-1 w-1 h-1 rounded-full bg-blue-500"></div>
-                                    <div class="mr-1 w-1 h-1 rounded-full bg-purple-500"></div>
-                                    <div class=" w-1 h-1 rounded-full bg-emerald-900"></div>
-                                </div>   
                                 @endif
-                                @endforeach
+
                             </div>
                         @endfor
                     </div>
                 </div>
                 <!-- Línea gris -->
                 <hr class="border-white my-4 w-5/4 m-4">
-                <!-- Hoy y fecha -->
+                <!-- Eventos -->
+                @if ($todayEvent)
+                                <!-- Hoy y fecha -->
                 <div class="px-4 mb-2">
                     <p class="font-bold text-[#193c45]">Hoy <span class="text-sm text-[#054759]"> {{$day}}/{{$month}}/{{$year}}</span></p>
                 </div>
-                <!-- Eventos -->
-                @foreach ($events as $event)
-                @if (date('d', strtotime($event->date)) == $day)
-                <div class="px-4 text-white text-sm">
-                    <p><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{date('h:i A', strtotime($event->start_time)) }} - {{date('h:i A', strtotime($event->end_time))}}</p>
-                    <p class=" ml-6">{{$event->title}}</p>
+                <!-- Detalles del evento de hoy -->
+                <div class="px-4 mt-4 text-white text-sm">
+                    <p><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
+                    <p class=" ml-6">Asunto: {{ $todayEvent->title }}</p>
+                    <p class=" ml-6">Propósito: {{ $todayEvent->eventType }}</p>
                 </div>
-                @endif
-                @endforeach
-    
+                <!-- Separador -->
                 <hr class="border-white my-4 w-5/4 m-4">
+                @endif
+                
+                @if ($tomorrowEvent)
                 <!-- Mañana -->
                 <div class="px-4 mb-2 ">
-                    <p class="  text-white">Mañana <span class="text-sm"> {{$day+1}}/{{$month}}/{{$year}}</span></p>
+                    <p class="text-white">Mañana <span class="text-sm">{{ $day+1 }}/{{$month}}/{{$year}}</span></p>
                 </div>
-                <!-- Eventos -->
-                @foreach ($events as $event)
-                @if (date('d', strtotime($event->date)) == $day)
+                <!-- Detalles del evento de mañana -->
                 <div class="px-4 text-white text-sm">
-                    <p><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{date('h:i A', strtotime($event->start_time)) }} - {{date('h:i A', strtotime($event->end_time))}}</p>
-                    <p class=" ml-6">{{$event->title}}</p>
+                    <p><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($tomorrowEvent->date_start, 11)}} - {{ substr($tomorrowEvent->date_end, 11)}}</p>
+                    <p class=" ml-6"> Asunto:{{ $tomorrowEvent->title }}</p>
+                    <p class=" ml-6"> Propósito:{{ $tomorrowEvent->eventType }}</p>
                 </div>
                 @endif
-                @endforeach
-    
+                
+            
                 <hr class="border-white my-4 w-5/4 m-4">
             </div>
             <!-- Lado derecho -->
             <div class="w-full overflow-hidden">
-                <table class="w-full text-sm text-left h-auto font-montserrat">
+                <table class="w-full text-sm text-left h-auto font-montserrat ">
                     <thead class="text-xs uppercase w-full">
                         @php
                         $actualDate = date('Y-m-d');                        
                         $actualDayWeek = date('w', strtotime($actualDate));                        
                         $sundayDate = date('Y-m-d', strtotime("-$actualDayWeek days", strtotime($actualDate)));                        
                         $weekDays = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-                        $weekDayscel = array('Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb');                        
+                        $weekDayscel = array('Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb');
+                        
                         @endphp                    
                         <tr class="text-center w-full">
                             <th class="px-2 py-2 text-gray-500">EST <br>GMT-5</br></th>
@@ -127,38 +124,51 @@
                         </tr>
                     </thead>
                     <tbody class="w-full">
-                        @php
-                            $hours = ['7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM'];
-                        @endphp
-                        @foreach ($hours as $hour)
+                        @for ($hour = 7; $hour <= 17; $hour++)
+                            <!-- Filas para cada hora del día -->
                             <tr class="bg-white">
-                                <th class="px-2 py-2 md:py-8 border font-medium text-gray-500 whitespace-nowrap">{{ $hour }}</th>
-                                @for ($i = 0; $i < 7; $i++)
-                                    <td class="px-6 py-3 md:py-4 border">
-                                        @php
-                                            $cellDate = date('Y-m-d', strtotime("$sundayDate +$i days"));
-                                            $cellHour = date('H', strtotime($hour));
-                                        @endphp
-                                    @foreach ($events as $event)
-                                    @php
-                                        $eventHour = date('H', strtotime($event->date));
-                                        $eventDay = date('Y-m-d', strtotime($event->date));
-                                    @endphp
-                                    @if ($eventHour == $cellHour && $eventDay == $cellDate)
-                                        <p>Tipo de Evento: {{ $event->eventType }}</p>
-                                        <p>Tipo de Evento: {{ $event->title }}</p>
-                                        <p>Tipo de Evento: {{ $event->description }}</p>
-                                    @endif
-                                @endforeach
+                                <!-- Columna para la hora -->
+                                <th class="px-2 py-2 md:py-8 border font-medium text-gray-500 whitespace-nowrap">
+                                    {{ $hour < 10 ? '0'.$hour : $hour }} {{ $hour < 12 ? 'AM' : 'PM' }}
+                                </th>
+                                <!-- Columnas para cada día de la semana -->
+                                @for ($day = 0; $day < 7; $day++)
+                                <!-- Verificar si hay eventos para este día y hora -->
+                                @php
+                                    $eventDateTime = date('Y-m-d H:i:s', strtotime("$sundayDate +$day days $hour:00:00"));
+                                    $eventsForDateTime = $events->where('date_start', '<=', $eventDateTime)
+                                                                ->where('date_end', '>=', $eventDateTime);
+                                @endphp
+                                    <!-- Mostrar detalles del evento si hay uno para este día y hora -->
+                                    <td class="px-2 py-3 md:py-4 border">
+                                        @if ($eventsForDateTime->isNotEmpty())
+                                            <!-- Detalles del evento -->
+                                            @foreach ($eventsForDateTime as $event)
+                                                @if (!$loop->first) <!-- Evitar la repetición de eventos -->
+                                                    @continue
+                                                @endif
+                                                <div class="px-4 mb-2">
+                                                    <p class="font-bold text-[#193c45]">Hoy <span class="text-sm text-[#054759]">{{ date('d/m/Y', strtotime($event->date_start)) }}</span></p>
+                                                </div>
+                                                <!-- Detalles del evento de hoy -->
+                                                <div class="px-4 mt-4 text-red text-sm">
+                                                    <p class="ml-6">Asunto: {{ $event->title }}</p>
+                                                    <p class="ml-6">Propósito: {{ $event->eventType }}</p>
+                                                </div>
+                                                <!-- Separador -->
+                                                <hr class="border-white my-4 w-5/1 m-4">
+                                            @endforeach
+                                        @endif
                                     </td>
                                 @endfor
-                                <td class="px-2 py-3 md:py-8 border font-medium text-gray-500 whitespace-nowrap hidden lg:block">{{ $hour }}</td>
+                                <!-- Columna adicional para la hora -->
+                                <th class="px-2 py-2 md:py-8 border font-medium text-gray-500 whitespace-nowrap hidden lg:block">
+                                    {{ $hour < 10 ? '0'.$hour : $hour }} {{ $hour < 12 ? 'AM' : 'PM' }}
+                                </th>
                             </tr>
-                        @endforeach
+                        @endfor
                     </tbody>
                 </table>
-
-                
                 {{-- <hr class="border-zinc-100 w-full mt-5 md:hidden"> --}}
                 <div class="flex w-11/12 mx-auto flex-col items-center">
                     <h1 class=" text-center font-montserrat font-semibold md:hidden text-xl my-5">Eventos proximos</h1>

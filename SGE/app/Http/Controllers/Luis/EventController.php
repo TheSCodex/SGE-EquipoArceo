@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Luis;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Luis\NewEventFormRequest;
 use App\Models\CalendarEvent;
-use Carbon\Carbon;
-
 
 class EventController extends Controller
 {
@@ -16,15 +15,28 @@ class EventController extends Controller
     public function index()
     {
         // return view('Luis.events');
-        
-        return view('Luis.eventsDash');
+        $events = CalendarEvent::paginate(5);
+        return view('Luis.eventsDash', compact('events'));
     }
 
     /**
      * Display a calendar view.
      */
     public function calendar(){
-        return view('Luis.calendar');
+        $events = CalendarEvent::all(); // Obtener todos los eventos
+
+        // Obtener el evento para hoy
+        $todayEvent = $events->where('date_start', '>=', now()->startOfDay())
+                            ->where('date_start', '<', now()->endOfDay())
+                            ->first();
+    
+        // Obtener el evento para mañana
+        $tomorrowEvent = $events->where('date_start', '>=', now()->addDay()->startOfDay())
+                                ->where('date_start', '<', now()->addDay()->endOfDay())
+                                ->first();
+    
+        return view('Luis.calendar', compact('events', 'todayEvent', 'tomorrowEvent'));
+
     }
 
 
@@ -39,32 +51,20 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewEventFormRequest $request)
     {
-        
-    // Validar los datos del formulario
-    $request->validate([
-        'eventType' => 'required',
-        'title' => 'required',
-        'description' => 'required',
-        'location' => 'required',
-        'date' => 'required|date_format:Y-m-d\TH:i', // Asegura que la fecha sea en el formato correcto
-    ]);
+        $validatedData = $request->validated();
 
-    // Convertir la fecha y hora en un objeto Carbon
-    $date = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('date'));
-
-    // Crear un nuevo evento en la base de datos
-    $event = CalendarEvent::create([
-        'event_type' => $request->input('eventType'),
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-        'location' => $request->input('location'),
-        'date' => $date,
-    ]);
-
-    // Redirigir a la página deseada después de guardar el evento
-    return redirect()->route('calendar')->with('success', 'Evento creado exitosamente.');
+        $event = new \App\Models\CalendarEvent;
+        $event->title = $request->title;
+        $event->eventType = $request->eventType;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date_start = $request->date_start;
+        $event->date_end = $request->date_end;
+        $event->status = 'Programada';
+        $event->save();
+        return redirect('eventos');
     }
 
     /**
@@ -78,24 +78,38 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $event = CalendarEvent::find($id);
+        return view('Luis.editEventForm', compact('event'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NewEventFormRequest $request, string $id)
     {
-        //
+        $event = CalendarEvent::find($id);
+
+        $event->title = $request->title;
+        $event->eventType = $request->eventType;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->date_start = $request->date_start;
+        $event->date_end = $request->date_end;
+        $event->status = $request->status;
+        $event->update();
+        return redirect('eventos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $event = CalendarEvent::find($id);
+
+        $event->delete();
+        return redirect('eventos');
     }
 }
