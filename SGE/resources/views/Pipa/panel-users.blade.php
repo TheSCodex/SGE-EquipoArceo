@@ -14,11 +14,11 @@
                 </div>
             </div>
             <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
-                <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
-                <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                <button class="bg-primaryColor text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                <button class="bg-primaryColor text-base py-1 px-3 rounded-md text-white">▼</button>
             </div>
             <a href="/panel-users/create"
-                class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo
                 usuario</a>
         </div>
         <div class="flex justify-between md:hidden mt-2 mx-auto">
@@ -26,7 +26,7 @@
                 <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
                 <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
             </div>
-            <a href="/panel-users/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo
+            <a href="/panel-users/create" class="bg-primaryColor text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo
                 usuario</a>
         </div>
     </div>
