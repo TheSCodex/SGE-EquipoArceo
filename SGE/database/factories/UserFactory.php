@@ -28,8 +28,8 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'), 
             'identifier' => $this->faker->unique()->randomNumber(8),
-            'career_academy_id' => $this->faker->numberBetween(1, 5), 
-            'rol_id' => $this->faker->numberBetween(1, 5), 
+            // 'career_academy_id' => $this->faker->numberBetween(1, 5), 
+            'rol_id' => $this->faker->numberBetween(1,5), 
         ];
     }
 }
