@@ -67,8 +67,7 @@
                 <tr>
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Permisos</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs"></th>
-                    <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Acciones</th>
                 </tr>
                 @foreach ($roles as $role)
                 <tr>
@@ -84,8 +83,10 @@
                             @endif
                         @endforeach
                     </td>
-                    <td class="font-roboto font-bold py-5"><a href="{{ route('panel-roles.edit', $role->id) }}"><img src="/img/logos/pencil.svg" alt="Edit"></a></td>
-                    <td class="font-roboto font-bold py-5">
+                    <td class="flex justify-around items-center font-roboto font-bold py-5">
+                        <a href="{{ route('panel-roles.edit', $role->id) }}">
+                            <img src="/img/logos/pencil.svg" alt="Edit">
+                        </a>
                         <form action="{{ route('panel-roles.destroy', $role->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
