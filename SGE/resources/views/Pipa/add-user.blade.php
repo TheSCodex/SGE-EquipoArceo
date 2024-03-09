@@ -82,9 +82,9 @@
                             </div>
 
                     </div>
-                    <div class="flex justify-center items-center space-y-2 mb-4 w-full">
-                        <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] rounded-md text-white hover:bg-darkgreen">Añadir usuario</button>
-                    </div>
+
+                    <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir usuario</button>
+
                     
                 </form>
             </div>
