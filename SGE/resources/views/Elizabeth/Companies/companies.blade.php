@@ -84,13 +84,14 @@
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $company->name }} {{ $company->address }}', '{{ $company->id }}')">
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $company->name }}', '{{ $company->id }}')">
                         <form class="flex justify-center" id="deleteForm{{ $company->id }}" action="{{ route('panel-companies.destroy', $company->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                                <img src="/img/logos/trash.svg">
+                            <img src="/img/logos/trash.svg">
                         </form>
                     </td>
+                    
                 </tr>
                 @endforeach
             </table>
