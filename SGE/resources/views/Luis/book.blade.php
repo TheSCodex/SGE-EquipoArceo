@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
-                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
-                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                    <button class="bg-primaryColor text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                    <button class="bg-primaryColor text-base py-1 px-3 rounded-md text-white">▼</button>
                 </div>
                 <a href="{{route('libros.create')}}" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2 hidden md:block create-book">Agregar nuevo libro</a>
             </div>
@@ -109,7 +109,7 @@
                         </tr>
                         @foreach($books as $book)
                         <tr>
-                            <td class="font-roboto font-bold py-5 w-3/12">{{ $book['title'] }}</td>
+                            <td class="font-roboto font-bold py-5 w-3/12 text-left">{{ $book['title'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $book['author'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $book['isbn'] }}</td>
                             <td class="font-roboto font-bold py-5">{{ $book['isbn'] }}</td>

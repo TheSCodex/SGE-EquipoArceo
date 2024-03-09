@@ -61,7 +61,7 @@ Route::resource('panel-roles', RoleController::class);
 
 // Rutas para Eventos
 Route::resource('eventos', EventController::class);
-Route::get('calendar', [EventController::class, 'calendar'])->name('calendar');
+Route::get('calendario', [EventController::class, 'calendar'])->name('calendario');
 
 // Rutas para CRUD de Libros
 Route::resource('libros', BooksController::class);
