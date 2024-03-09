@@ -11,7 +11,7 @@
                         <h1 class="text-3xl font-bold">Añadir usuario</h1>
                         @csrf
                     </div>
-                    <div class="w-full flex flex-col space-y-2">
+                    <div class="w-full flex flex-col space-y-1">
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4">
                                 <p class="text-sm">Nombre</p>
