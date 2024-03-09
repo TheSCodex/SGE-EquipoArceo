@@ -38,9 +38,9 @@
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
                     {{-- <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p> --}}
-                    {{-- <p class="text-sm text-gray-500">Rol: {{ $user->rol_id }}</p> --}}
+                    <p class="text-sm text-gray-500">Rol: {{ $user->rol_id }}</p>
                     {{-- <p class="text-sm text-gray-500">Academia: {{ $user->careerAcademy->name }}</p> --}}
-                    {{-- <p class="text-sm text-gray-500">Academia: {{ $user->career_academy_id }}</p> --}}
+                    <p class="text-sm text-gray-500">Academia: {{ $user->career_academy_id }}</p>
                     <div class="flex justify-end mt-4">
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
