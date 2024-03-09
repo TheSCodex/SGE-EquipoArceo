@@ -21,6 +21,9 @@
                 <a href="/panel-users" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
+                <a href="/panel-roles" class="hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>
+            </li>
+            <li>
                 <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
             </li>
             <li>
@@ -40,7 +43,10 @@
         </ul>
     </header>
     <main class="min-h-screen h-full">
+        {{-- <div class="sm:p-8 text-left w-[90%]"> --}}
+
         @yield('contenido')
+        {{-- </div> --}}
     </main>
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51

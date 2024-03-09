@@ -85,15 +85,10 @@ class carrerasController extends Controller
      */
     public function destroy(string $id)
     {
-
-       
             {
-               
                 $career = Career::findOrFail($id);
                 $career->delete();
                 return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
-            }
-
-        
+            }        
     }
 }

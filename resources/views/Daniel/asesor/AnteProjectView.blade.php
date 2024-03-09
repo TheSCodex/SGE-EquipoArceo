@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center bg-[#F3F5F9]">
+    <section class="flex flex-col justify-center items-center bg-[#F3F5F9] ">
         <div class="sm:p-8 text-left w-[90%]">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
                 Anteproyecto del Alumno: </h1>
@@ -44,7 +44,7 @@
 
 
 
-                <div class="sm:w-[30%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0">
+                <div class="sm:w-[30%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 ">
                     <div
                         class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                         <h3>Estado del proyecto</h3>
