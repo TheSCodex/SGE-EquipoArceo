@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BusinessAdvisor;
 use Illuminate\Http\RedirectResponse;
+// use App\Models\BusinessAdvisor;
 
 
 class AdvisorController extends Controller
@@ -27,6 +28,8 @@ class AdvisorController extends Controller
      */
     public function create()
     {
+    $advisor = BusinessAdvisor::factory()->count(25)->create();
+    
         return view('Elizabeth.formAsesores');
     }
 

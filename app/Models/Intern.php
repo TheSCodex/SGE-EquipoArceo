@@ -39,6 +39,6 @@ class Intern extends Model
 
     public function studentStatus()
     {
-        return $this->belongsTo(StudentStatus::class);
+        return $this->belongsTo(StudentStatus::class, "student_status_id");
     }
 }
