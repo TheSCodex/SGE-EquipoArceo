@@ -33,30 +33,20 @@
     <main class="min-h-screen h-full flex flex-col">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
-            <div class="flex items-center flex-row justify-end">
-                <div class="flex-1 md:mr-2">
-                    <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
-                        <input id="search" placeholder="Buscador" type="text"
-                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
-                        <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
-                    </div>
+            <div class="flex items-center space-x-5">
+                <div class="flex flex-row border border-primaryColor p-1 items-center rounded-md">
+                    <input id='search' placeholder="Buscador" type="text" class="placeholder-primaryColor focus:outline-none font-roboto">
+                    <label for="search" class="items-center"><img src="/img/logos/search.svg"></label>
                 </div>
-                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
-                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
-                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+                <div class="p-1 flex flex-x-0 flex-col">
+                    <button><img src="/img/logos/caret.svg"></button>
                 </div>
-                <a href="/panel-users/create"
-                    class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo
-                    usuario</a>
-            </div>
-            <!-- Elementos que se mostrarán solo en dispositivos móviles -->
-            <div class="flex justify-between md:hidden mt-2 mx-auto">
-                <div class="flex">
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
+                <div class="w-52">
+                    <button onclick="window.location.href='/panel-users/create'" class="bg-primaryColor text-white p-2 rounded-md font-semibold">
+                        Agregar nuevo usuario
+                    </button>
                 </div>
-                <a href="/panel-users/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nuevo
-                    usuario</a>
+
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -102,10 +92,48 @@
                             <td class="font-roboto font-bold py-5">{{ $user['especialidad'] }}</td>
                             <td class="font-roboto font-bold py-5"><img src="/img/logos/pencil.svg"></td>
                             <td class="font-roboto font-bold py-5"><img src="/img/logos/trash.svg"></td>
+                             {{-- <td class="font-roboto font-bold py-5">
+                        <form id="deleteForm" action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirmDelete();">
+                                <img src="/img/logos/trash.svg" alt="Eliminar">
+                            </button>
+                        </form>
+                    </td>  --}}
                         </tr>
                     @endforeach
                 </table>
             </div>
         </div>
     </main>
+    <script>
+        function confirmDelete() {
+            return confirm("¿Estás seguro de que deseas borrar este elemento?");
+        }
+    
+        function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
+    </script>
 @endsection
