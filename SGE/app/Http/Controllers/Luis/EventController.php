@@ -15,7 +15,7 @@ class EventController extends Controller
     public function index()
     {
         // return view('Luis.events');
-        $events = CalendarEvent::paginate(5);
+        $events = CalendarEvent::paginate(9);
         return view('Luis.eventsDash', compact('events'));
     }
 
@@ -92,7 +92,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = 'Programada';
         $event->save();
-        return redirect('eventos');
+        return redirect('eventos')->with('success', 'El evento se ha agregado correctamente');
     }
 
     /**
@@ -128,7 +128,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = $request->status;
         $event->update();
-        return redirect('eventos');
+        return redirect('eventos')->with('edit_success', 'El Evento ha sido editado correctamente');
     }
 
     /**
@@ -136,9 +136,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = CalendarEvent::find($id);
+        $event=CalendarEvent::find($id);
 
         $event->delete();
-        return redirect('eventos');
+
+        return redirect()->route('eventos.index')->with('delete','ok');
     }
 }

@@ -117,7 +117,7 @@
             </div>
 
             <!-- right side -->
-            <div class="w-full overflow-hidden">
+            <div class="w-full overflow-auto md:overflow-hidden ">
                 <table class="w-full text-sm text-left h-auto font-montserrat ">
                     <thead class="text-xs uppercase w-full">
                         @php
@@ -230,34 +230,27 @@
                 </table>
                 {{-- <hr class="border-zinc-100 w-full mt-5 md:hidden"> --}}
                 <div class="flex w-11/12 mx-auto flex-col items-center">
-                    <h1 class=" text-center font-montserrat font-semibold md:hidden text-xl my-5">Eventos proximos</h1>
+                    <h1 class=" text-center font-montserrat font-semibold md:hidden text-xl my-5">Eventos de hoy: {{$eventsPerDay[$day]}}</h1>
                     <button class="bg-green py-2 px-2 rounded-md text-white mb-5 md:hidden">
                         <a href="{{route('eventos.create')}}">Agregar nuevo evento</a>
                     </button>
                 </div>
-                <div class="md:hidden w-11/12 grid grid-cols-2 gap-3 mt-5 mx-auto mb-5">
+                <div class="md:hidden w-11/12 grid grid-cols-1 gap-3 mt-5 mx-auto mb-5">
+                    @foreach($todayEvents as $todayEvent)
                     <div class="bg-green rounded-lg mx-auto flex flex-col align-middle justify-center">
                         <p class="font-bold text-white mt-5 text-center">{{$day}}/{{$month}}/{{$year}}</p>
-                        <p class="font-bold text-white text-center mb-5">8:00 - 9:00 AM</p>
-                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-5 text-darkGreen">
-                            <h1 class="p-3 font-montserrat font-semibold">Reunión con Jose Roberto</h1>
+                        <p class="font-bold text-white text-center mb-2">{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
+                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-2 text-darkGreen">
+                            <h1 class="p-3 font-montserrat font-semibold">{{ $todayEvent->title }}</h1>
+                            <p class="p-3 font-montserrat font-semibold">Con: {{ $todayEvent->receiver_id }}</p>
+                            <p class="p-3 font-montserrat font-semibold">Propósito: {{ $todayEvent->eventType }}</p>
+                            <p class="p-3 font-montserrat font-semibold">Descripción: {{ $todayEvent->description }}</p>
+                            <p class="p-3 font-montserrat font-semibold">Lugar: {{ $todayEvent->location }}</p>
+                            <p class="p-3 font-montserrat font-semibold">Estatus: {{ $todayEvent->status }}</p>
                         </div>
                     </div>
-                    <div class="bg-green rounded-lg mx-auto flex flex-col align-middle justify-center">
-                        <p class="font-bold text-white mt-5 text-center">{{$day}}/{{$month}}/{{$year}}</p>
-                        <p class="font-bold text-white text-center mb-5">8:00 - 9:00 AM</p>
-                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-5 text-darkGreen">
-                            <h1 class="p-3 font-montserrat font-semibold">Reunión con Jose Roberto</h1>
-                        </div>
-                    </div>
-                    <div class="bg-green rounded-lg mx-auto flex flex-col align-middle justify-center">
-                        <p class="font-bold text-white mt-5 text-center">{{$day}}/{{$month}}/{{$year}}</p>
-                        <p class="font-bold text-white text-center mb-5">8:00 - 9:00 AM</p>
-                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-5 text-darkGreen">
-                            <h1 class="p-3 font-montserrat font-semibold">Reunión con Jose Roberto</h1>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                </div>                
             </div>
         </div>
     </main>

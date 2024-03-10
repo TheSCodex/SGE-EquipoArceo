@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Luis\BookFormRequest;
 use App\Models\Book;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,14 +29,14 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookFormRequest $request)
     {
 
         $books = new \App\Models\Book;
-        $books->title = $request->title_book;
-        $books->author = $request->author_book;
-        $books->isbn = $request->isbn_book;
-        // $books->birthdate = $request->identifier_student;
+        $books->title = $request->title;
+        $books->author = $request->author;
+        $books->isbn = $request->isbn;
+        // $books->identifier_student = $request->identifier_student;
 
         $books->save();
 
@@ -62,12 +63,12 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
+    public function update(BookFormRequest $request, string $id):RedirectResponse
     {
         $book=Book::find($id);
         // dd($student);
         $book->update($request->all());
-        return redirect()->route('libros.index')->with('edit_success', 'Libro ha sido editado correctamente');
+        return redirect()->route('libros.index')->with('edit_success', 'El libro ha sido editado correctamente');
     }
 
     /**
