@@ -43,7 +43,10 @@
         </ul>
     </header>
     <main class="min-h-screen h-full">
+        {{-- <div class="sm:p-8 text-left w-[90%]"> --}}
+
         @yield('contenido')
+        {{-- </div> --}}
     </main>
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51
