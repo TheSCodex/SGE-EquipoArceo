@@ -10,6 +10,11 @@
     <h2 class="text-3xl font-bold mb-6">Iniciar sesión</h2>
         <form action="{{ route('login') }}" method="POST">
             @csrf
+            <div class="text-primaryColor">
+                @if(session()->has('status'))
+                    {{session('status')}}
+                @endif
+            </div>
             <div class="mb-6">
                 <label for="user_email" class="block text-lg font-semibold text-gray-800 mb-2">Correo electrónico</label>
                 <input type="email" id="user_email" name="email" value="{{ old('email') }}" placeholder="user@gmail.com" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-800 leading-tight focus:outline-none focus:shadow-outline font-montserrat">
