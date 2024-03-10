@@ -29,6 +29,7 @@ use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
 
 /*
@@ -56,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('login', LoginController::class)->middleware('guest');
     Route::resource('cambiar-contraseña', ChangePasswordController::class)->middleware('guest');
     Route::resource('recuperar-contraseña', RecoverPasswordController::class)->middleware('guest');
+    Route::resource('cambiar-contraseña-primera-vez', ChangePasswordFirstTime::class);
 
     // ! LAS SIGUIENTES RUTAS SE DEBEN CONFIGURAR AUN PARA SEPARAR SEGUN ROL Y SEGUN PERMISOS
 

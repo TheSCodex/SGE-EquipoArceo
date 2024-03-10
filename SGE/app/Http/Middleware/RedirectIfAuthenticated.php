@@ -36,7 +36,7 @@ class RedirectIfAuthenticated
 
 protected function getRedirectRoute($userRole)
 {
-    switch ($userRole) {
+    switch ($userRole->title) {
         case 'estudiante':
             return RouteServiceProvider::ESTUDIANTE;
         case 'asesorAcademico':

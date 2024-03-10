@@ -29,9 +29,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Si es primera vez debe cambiar su contraseña
+        if (Auth::user()->created_at == Auth::user()->updated_at) {
+            // dd('son iguales');
+            return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
+        }
+
         // Obtener el rol del usuario
         $userRole = Auth::user()->role;
-        // dd($userRole -> title);
         // Redirigir según el rol del usuario
         switch ($userRole -> title) {
             case 'estudiante':
