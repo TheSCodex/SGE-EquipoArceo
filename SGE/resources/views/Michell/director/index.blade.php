@@ -1,30 +1,32 @@
-@extends('templates.directorTemplate')
+@extends('templates.presidentOfTheAcademyTemplate')
 
 @section('titulo')
     Inicio
 @endsection
 
 @section('contenido')
+<div class="bg-[#F3F5F9] flex h-screen gap-2">
     <article class="grid grid-cols-3 gap-x-3 font-['Kanit'] h-full">
         <section class="col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-1 rounded-md">Propuestas</p>
 
-            <div class="grid grid-cols-2 gap-x-3 h-full">
-                <div class="bg-[#02AB82] rounded-md grid place-content-center gap-9">
-                    <p class="text-2xl text-white font-semibold">Estudiantes</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-3 h-[200px] xl:w-[1118px] mx-auto">
+    <div class="bg-[#02AB82] rounded-md flex flex-col justify-center items-center gap-3 p-4">
+        <p class="text-xl lg:text-2xl text-white font-semibold">Estudiantes</p>
 
-                    <button type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-sm shadow-md">
-                        Ver todo
-                    </button>
-                </div>
-                <div class="bg-[#02AB82] rounded-md grid place-content-center gap-9">
-                    <p class="text-2xl text-white font-bold">Proyectos</p>
+        <button type="button" class="bg-white text-gray-500 rounded-md px-4 lg:px-6 py-2 lg:py-1 text-sm lg:text-base shadow-md">
+            Ver todo
+        </button>
+    </div>
+    <div class="bg-[#02AB82] rounded-md flex flex-col justify-center items-center gap-3 p-4">
+        <p class="text-xl lg:text-2xl text-white font-bold">Proyectos</p>
 
-                    <button type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-sm shadow-md">
-                        Ver todo
-                    </button>
-                </div>
-            </div>
+        <button type="button" class="bg-white text-gray-500 rounded-md px-4 lg:px-6 py-2 lg:py-1 text-sm lg:text-base shadow-md">
+            Ver todo
+        </button>
+    </div>
+</div>
+
             <div class="grid grid-cols-3 gap-x-2">
                 <div class="bg-white grid grid-cols-3 p-2 rounded-md">
                     <!-- ICON -->
@@ -107,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-md py-7 px-10">
+            <div class="bg-white rounded-md py-14 px-10">
                 <p class="uppercase text-gray-700 font-medium text-center mb-5">Proyectos de estudiantes</p>
 
                 <div class="grid grid-cols-4">
@@ -140,7 +142,7 @@
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-1 rounded-md">Bajas de estudiantes</p>
+            <p class="font-semibold px-2 bg-white py-1 rounded-md  justify-center">Bajas de estudiantes</p>
 
             <div class="bg-white rounded-md py-5 flex flex-col gap-3">
                 <div class="flex gap-3 justify-center items-center font-['Jost']">
@@ -179,14 +181,14 @@
             <p class="bg-white font-semibold px-2 py-1 rounded-md">Divisiones</p>
 
             <div class="flex flex-col gap-2">
-                <div class="bg-white rounded-md p-2 flex gap-4 items-center">
+                <div class="bg-white rounded-md p-2 flex gap-4 items-center  justify-center">
                     <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
                         <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>  
                     <p class="font-['Jost'] text-sm">Tecnologías de la información</p> 
                 </div>
-                <div class="bg-white rounded-md p-2 flex gap-4 items-center">
+                <div class="bg-white rounded-md p-2 flex gap-4 items-center  justify-center">
                     <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
                         <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
