@@ -38,6 +38,12 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'rol_id');
     }
 
+    public function hasRole($role)
+    {
+        // return $this->roles->contains('title', $role);
+        return $this->role && $this->role->title === $role;
+    }
+    
     public function academicAdvisor()
     {
         return $this->hasOne(AcademicAdvisor::class, 'user_id');
