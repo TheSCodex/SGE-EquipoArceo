@@ -38,6 +38,10 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+         // correo electrónico único
+        $request->validate([
+            'email' => 'unique:users,email',
+        ]);
         $user = new \App\Models\User;
         $user->name = $request->name;
         $user->last_name = $request->last_name;
@@ -45,11 +49,10 @@ class UserController extends Controller
         $user->rol_id = $request->rol_id;
         $user->identifier = $request->identifier;
         $user->career_academy_id = $request->career_academy_id;
-        // crear una password aleatoria para el usuario la primera vez que se crea
+        // password aleatoria
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
         $user->save();
-
         $users=User::all();
         return view ('Pipa.panel-users', compact('users'));
     }
