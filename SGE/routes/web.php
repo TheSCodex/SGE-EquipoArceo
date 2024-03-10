@@ -86,10 +86,7 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para CRUD de Libros
     Route::resource('libros', BooksController::class);
-    // Route::get('/books', [BooksController::class, 'index']);
-    // Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
-    // Route::post("/newBook", [BooksController::class, 'store']);
-
+    
 
     // Rutas para CRUD de Carreras y Divisiones
     Route::resource('/panel-careers', carrerasController::class);

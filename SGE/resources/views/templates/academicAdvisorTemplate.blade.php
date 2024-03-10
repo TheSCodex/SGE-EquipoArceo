@@ -40,5 +40,6 @@
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
+    @yield('scripts-event')
 </body>
 </html>
