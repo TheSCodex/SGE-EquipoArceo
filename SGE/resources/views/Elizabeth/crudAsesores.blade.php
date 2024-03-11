@@ -90,8 +90,6 @@
             <a href="{{ route('panel-advisors.edit', $advisor->id) }}" data-toggle="modal" data-target="#editModal">
                 <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
             </a>
-        </td>
-        <td class="font-roboto font-bold py-5">
             <form action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
                 @csrf
                 @method('DELETE')

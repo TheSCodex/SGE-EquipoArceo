@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\CareerAcademy;
 use App\Models\Role;
 use App\Models\AcademicAdvisor;
 use App\Models\Intern;
 use App\Models\CalendarEvent;
 use App\Models\Comment;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -35,6 +37,12 @@ class User extends Model
         return $this->belongsTo(Role::class, 'rol_id');
     }
 
+    public function hasRole($role)
+    {
+        // return $this->roles->contains('title', $role);
+        return $this->role && $this->role->title === $role;
+    }
+    
     public function academicAdvisor()
     {
         return $this->hasOne(AcademicAdvisor::class, 'user_id');

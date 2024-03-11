@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Pipa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Pipa\LoginRequest;    
+use App\Http\Requests\Pipa\LoginRequest; 
+use Illuminate\Support\Facades\Auth;   
 
 class LoginController extends Controller
 {
