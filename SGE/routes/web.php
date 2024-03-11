@@ -121,7 +121,7 @@ Route::middleware('auth')->group(function () {
 
     // Ruta Estudiantes
     Route::get('student', [StudentController::class, "index"]);
-    Route::get('inicioEstudiante',[StudentController::class, 'index']);
+    Route::get('inicio-estudiante',[StudentController::class, 'studentHome']);
     // Route::get('eventos',[StudentController::class, 'studentEvents']);
 
     // Rutas para Bajas

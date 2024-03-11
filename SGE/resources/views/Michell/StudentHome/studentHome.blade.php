@@ -203,7 +203,7 @@
                         </div>
 
                     </div>
-                    <a href="events" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3 max-md:my-2 max-md:w-[95%] max-md:ml-2">Ver
+                    <a href="eventos" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3 max-md:my-2 max-md:w-[95%] max-md:ml-2">Ver
                         más</a>
                 </div>
             </div>
