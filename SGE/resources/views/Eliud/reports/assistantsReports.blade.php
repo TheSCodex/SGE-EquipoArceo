@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <div class="container mx-auto px-4 py-4 bg-[#F3F5F9] font-roboto">
+    <div class="container mx-auto px-4 py-4 bg-[#F3F5F9] font-roboto w-full">
         <div class="flex flex-col">
             <div class="flex items-center justify-between">
                 <h1 class="text-2xl mt-2 font-bold">Buenos días Directora!</h1>
