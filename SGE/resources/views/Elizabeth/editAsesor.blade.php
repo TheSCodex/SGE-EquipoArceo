@@ -16,7 +16,7 @@
                         {{ $message }}
                     </p>
                 @enderror
-            </div>
+                </div>
             <div class="w-full space-y-2">
                 <p class="text-sm space-y-2">Correo</p>
                 <input type="text" name="email" value="{{ old('email', $advisor->email) }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Correo">
