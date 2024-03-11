@@ -53,6 +53,10 @@ class UserController extends Controller
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
         $user->save();
+
+        // manda la contraseña al correo del usuario
+        $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
+
         $users=User::all();
         return view ('Pipa.panel-users', compact('users'));
     }
