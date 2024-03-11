@@ -29,8 +29,33 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Si es primera vez debe cambiar su contraseña
+        if (Auth::user()->created_at == Auth::user()->updated_at) {
+            // dd('son iguales');
+            return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
+        }
+
+        // Obtener el rol del usuario
+        $userRole = Auth::user()->role;
+        // Redirigir según el rol del usuario
+        switch ($userRole -> title) {
+            case 'estudiante':
+                return redirect(RouteServiceProvider::ESTUDIANTE);
+            case 'asesorAcademico':
+                return redirect(RouteServiceProvider::ASESORACADEMICO);
+            case 'presidenteAcademia':
+                return redirect(RouteServiceProvider::PRESIDENTEACADEMIA);
+            case 'director':
+                return redirect(RouteServiceProvider::DIRECTOR);
+            case 'asistenteDireccion':
+                return redirect(RouteServiceProvider::ASISTENTEDIRECCION);
+            case 'admin':
+                return redirect(RouteServiceProvider::ADMIN);
+            default:
+                return redirect(RouteServiceProvider::HOME);
+        }
     }
+
 
     /**
      * Destroy an authenticated session.
