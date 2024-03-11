@@ -9,7 +9,7 @@
         <div class="flex items-center flex-row justify-end">
             <div>
                 <div class="hidden md:flex items-center relative" >
-                    <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                    <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
             <a href="/panel-users/create"
@@ -108,6 +108,29 @@
             }
         });
     }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
 </script>
 
 
