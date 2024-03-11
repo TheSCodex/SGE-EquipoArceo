@@ -74,7 +74,7 @@
                             <button class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] max-xl:w-full">Ampliar observación</button>
                         </div>
                     </div>
-                    <a href="#" class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
+                    <a href="" class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
                 </div>
             </div>
         </section>
@@ -203,8 +203,8 @@
                         </div>
 
                     </div>
-                    <button href="#" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3 max-md:my-2 max-md:w-[95%] max-md:ml-2">Ver
-                        más</button>
+                    <a href="events" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3 max-md:my-2 max-md:w-[95%] max-md:ml-2">Ver
+                        más</a>
                 </div>
             </div>
             <div class="mt-3 flex h-auto gap-4 max-md:block max-md:m-3 max-xl:block">
