@@ -34,19 +34,19 @@
                         <table class=" divide-y divide-[#999] h-[50%]">
                             <thead class="text-[#555] text-base">
                                 <tr>
-                                    <th scope="col" class="pr-[10rem] pb-4">Nombre de estudiantes</th>
-                                    <th scope="col" class="pr-[10rem] pb-4">Carrera</th>
+                                    <th scope="col" class="pr-[8rem] pb-4">Nombre de estudiantes</th>
+                                    <th scope="col" class="pr-[15rem] pb-4">Carrera</th>
                                     <th scope="col" class="pr-[10rem] pb-4">Asesor academico</th>
-                                    <th scope="col" class="pr-[10rem] pb-4">Division</th>
                                 </tr>
                             </thead>
                             <tbody class="text-sm">
-                                <tr class="border-b border-[#999]">
-                                    <td class="py-4">Kevin Bello</td>
-                                    <td class="py-4">TSU desarrollo de software</td>
-                                    <td class="py-4">Elsa Luz Rios</td>
-                                    <td class="py-4">Ingenieria</td>
-                                </tr>
+                                @foreach ($dataStudents as $data)
+                                    <tr class="border-b border-[#999]">
+                                        <td class="py-4">{{ $data->user->name }}</td>
+                                        <td class="py-4">TSU desarrollo de software</td>
+                                        <td class="py-4">{{ $data->academicAdvisor->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </section>
