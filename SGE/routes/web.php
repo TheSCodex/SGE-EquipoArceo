@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
     Route::resource('observaciones', ObservationsController::class);
+    
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
     Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
