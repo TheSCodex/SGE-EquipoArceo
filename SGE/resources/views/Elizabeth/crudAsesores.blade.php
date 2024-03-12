@@ -35,7 +35,7 @@
                 class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva asesor
             </a>
             </div>
-        </div>
+            </div>
 
         <!-- Elementos que se mostrarán solo en dispositivos móviles -->
         <div class="flex justify-between md:hidden mt-2 mx-auto">

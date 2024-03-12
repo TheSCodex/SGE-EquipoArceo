@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <!-- Display table on larger screens -->
+        {{-- <-- Display table on larger screens --> --}}
         <div class="hidden lg:block w-full">
             <table class="text-center">
                 <tr>
@@ -87,9 +87,8 @@
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
                 </tr>
-                @foreach ($proyects as $proyect)
-                 <tr {{-- onclick="window.location.href = '/anteproyecto-Asesor' {{ route('/anteproyecto-Asesor' ,  ['id' => $proyect->id]-) }}'; " style="cursor:pointer;" --}}>  
-
+                @foreach($proyects as $proyect)
+                <tr>
                         <td class="font-roboto font-bold py-5">{{ $proyect['Estudiantes Designados'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $proyect['Nombre del Anteproyecto'] }}</td>
                         <td class="font-roboto font-bold py-5">Votos: {{ $proyect['Votos recibidos'] }}</td>
