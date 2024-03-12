@@ -69,6 +69,7 @@
                             <p class="text-sm text-gray-500"> Asesor academico: {{ $proyect['Asesor Academico'] }}</p>
                             <p class="text-sm text-gray-500">Fecha: {{ $proyect['Fecha de publicacion'] }}</p>
                             <p class="text-sm text-gray-500">Estado: {{ $proyect['Estado'] }}</p>
+                            <p></p>
                         </div>
                     @endforeach
                 </div>
@@ -88,7 +89,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
                 </tr>
                 @foreach ($proyects as $proyect)
-                 <tr {{-- onclick="window.location.href = '/anteproyecto-Asesor' {{ route('/anteproyecto-Asesor' ,  ['id' => $proyect->id]} }}'; " style="cursor:pointer;" --}}>  
+                 <tr>  
 
                         <td class="font-roboto font-bold py-5">{{ $proyect['Estudiantes Designados'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $proyect['Nombre del Anteproyecto'] }}</td>
