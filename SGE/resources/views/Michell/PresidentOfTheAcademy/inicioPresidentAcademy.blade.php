@@ -8,12 +8,12 @@
             <div class="font-kanit mt-3 flex space-x-5 h-1/3">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="#"
+                    <a href="studentL"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Asesores</h3>
-                    <a href="#"
+                    <h3 class="font-bold text-3xl">Proyectos</h3>
+                    <a href="academic"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                         </div>
 
                     </div>
-                    <a href="#" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
+                    <a href="eventos" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
                         más</a>
                 </div>
             </div>

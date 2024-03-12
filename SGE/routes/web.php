@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
 
     // Ruta Estudiantes
     Route::get('student', [StudentController::class, "index"]);
-    Route::get('inicioEstudiante',[StudentController::class, 'index']);
+    Route::get('inicio-estudiante',[StudentController::class, 'studentHome']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
     Route::resource('observaciones', ObservationsController::class);
@@ -96,7 +96,6 @@ Route::middleware('auth')->group(function () {
 
     //TODO - PRESIDENTE DE ACADEMIA
     Route::group(['middleware' => 'role:presidenteAcademia'], function () {
-
     Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
     Route::get('academic', [AcademicAdvisorController::class, "index"]);
     Route::get('studentL', [StudentListController::class, "index"]);
