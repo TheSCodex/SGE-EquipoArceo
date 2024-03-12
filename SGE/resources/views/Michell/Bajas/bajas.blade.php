@@ -10,10 +10,10 @@
             <div class="md:w-full md:h-[80%] md:flex justify-center md:mt-6">
                 <section class="">
                     <div class=" font-montserrat md:flex items-center justify-between border-b pb-3">
-                        <h1 class="text-xl font-bold">Lista de bajas</h1>
+                        <h1 id="tableTitle" class="text-xl font-bold">Lista de bajas</h1>
                         <div class="flex items-center">
                             <div class="flex items-center border border-primaryColor rounded-md px-4">
-                                <input type="text" id="bajaSearch" name="searchEngine" placeholder="Buscardor"
+                                <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscardor"
                                     class="text-sm font-bold placeholder-primaryColor border-none rounded-md focus:ring-0 text-[#888]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primaryColor">
@@ -31,28 +31,68 @@
                         </div>
                     </div>
                     <section class=" font-roboto mt-10">
-                        <table class=" divide-y divide-[#999] h-[50%]">
-                            <thead class="text-[#555] text-base">
+                        <table id="dataTable" class=" divide-y divide-[#999] h-[50%]">
+                            <thead id="tableHeader" class="text-[#555] text-base">
                                 <tr>
-                                    <th scope="col" class="pr-[10rem] pb-4">Nombre de estudiantes</th>
-                                    <th scope="col" class="pr-[10rem] pb-4">Carrera</th>
+                                    <th scope="col" class="pr-[8rem] pb-4">Nombre de estudiantes</th>
+                                    <th scope="col" class="pr-[15rem] pb-4">Carrera</th>
                                     <th scope="col" class="pr-[10rem] pb-4">Asesor academico</th>
-                                    <th scope="col" class="pr-[10rem] pb-4">Division</th>
                                 </tr>
                             </thead>
                             <tbody class="text-sm">
-                                <tr class="border-b border-[#999]">
-                                    <td class="py-4">Kevin Bello</td>
-                                    <td class="py-4">TSU desarrollo de software</td>
-                                    <td class="py-4">Elsa Luz Rios</td>
-                                    <td class="py-4">Ingenieria</td>
-                                </tr>
+                                @foreach ($dataStudents as $data)
+                                    <tr class="data-row border-b border-[#999]">
+                                        <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
+                                        <td class="py-4">{{ $data->user->careerAcademy->career->name }}</td>
+                                        <td class="py-4">{{ $data->academicAdvisor->user->name }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">Datos no encontrados</p>
                     </section>
                 </section>
-
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('bajaSearch');
+                const rows = document.querySelectorAll('.data-row');
+                const noDataMessage = document.getElementById('noDataMessage');
+                const tableTitle = document.getElementById('tableTitle');
+                const tableHeader = document.getElementById('tableHeader');
+
+                searchInput.addEventListener('keyup', function() {
+                    const searchText = this.value.trim().toLowerCase();
+                    let foundData = false;
+
+                    rows.forEach(row => {
+                        let found = false;
+                        row.querySelectorAll('td').forEach(cell => {
+                            const cellText = cell.innerText.trim().toLowerCase();
+                            if (cellText.includes(searchText)) {
+                                found = true;
+                                foundData = true;
+                            }
+                        });
+
+                        if (found) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+
+                    if (!foundData) {
+                        noDataMessage.style.display = 'block';
+                        tableHeader.style.color = 'white';
+                    } else {
+                        noDataMessage.style.display = 'none';
+                        tableTitle.style.color = '';
+                        tableHeader.style.color = '';
+                    }
+                });
+            });
+        </script>
     </section>
 @endsection
