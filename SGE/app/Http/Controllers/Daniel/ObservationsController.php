@@ -13,17 +13,23 @@ class ObservationsController extends Controller
     public function index($projectId)
     {
         $intern = Intern::where('user_id', Auth::id())
-            ->where('project_id', $projectId) //por si hacen lo del id por url
+            ->where('project_id', $projectId)
             ->first();
 
-        $tutorComment = Comment::where('academic_advisor_id', $intern->academic_advisor_id) //id del tutor jeje
+        // Obtener el id del asesor académico asociado al internado
+        $academicAdvisorId = $intern->academic_advisor_id;
+
+        // Obtener el comentario del asesor académico
+        $tutorComment = Comment::where('project_id', $projectId)
+            ->where('academic_advisor_id', $academicAdvisorId)
             ->first();
 
+        // Obtener otros comentarios para el proyecto
         $otherComments = Comment::where('project_id', $projectId)
-            ->where('academic_advisor_id', '<>', $intern->academic_advisor_id)
+            ->where('academic_advisor_id', '<>', $academicAdvisorId)
             ->get();
 
-        return view('Daniel.Observation', compact('tutorComment', 'otherComments'));// los comentarios x (ya dejenme dormir)
+        return view('Daniel.Observation', compact('tutorComment', 'otherComments'));
     }
 
     public function create()
@@ -56,6 +62,7 @@ class ObservationsController extends Controller
         // Implementar si es necesario.
     }
 }
+
 //por si no jala jajaja
 /*
 <?php
