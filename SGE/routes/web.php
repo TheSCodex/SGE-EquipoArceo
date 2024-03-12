@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
-    Route::resource('observaciones', ObservationsController::class);
+    Route::get('/observations', [ObservationsController::class, 'index']);
     
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
