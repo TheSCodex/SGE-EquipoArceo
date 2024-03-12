@@ -18,16 +18,19 @@
 
         <ul class="hidden md:flex gap-10 justify-center font-roboto text-sm">
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
+                <a href="/panel-users" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
+                <a href="/panel-roles" class="hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
+                <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
             </li>
             <li>
-                <a href='/carreras' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
+                <a href="/panel-advisors" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
+            </li>
+            <li>
+                <a href='/panel-careers' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
             </li>
         </ul>
     
@@ -40,7 +43,10 @@
         </ul>
     </header>
     <main class="min-h-screen h-full">
+        {{-- <div class="sm:p-8 text-left w-[90%]"> --}}
+
         @yield('contenido')
+        {{-- </div> --}}
     </main>
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51

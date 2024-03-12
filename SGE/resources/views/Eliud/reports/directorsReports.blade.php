@@ -14,8 +14,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Cuadros de Reportes  -->
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Asistencia</h2>
-                    <p class='p-4'>Este reporte proporciona un resumen de la asistencia de los estudiantes durante el período escolar, incluyendo ausencias y tardanzas.</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
+                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat."</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
                         <p>Generar</p>
                         <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +32,11 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Calificaciones</h2>
-                    <p class='p-4'>Este reporte ofrece un análisis detallado de las calificaciones de los estudiantes en cada materia, incluyendo promedios y desempeño individual.</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
+                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat."</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
                         <p>Generar</p>
                         <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +51,11 @@
 
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Actividades de curso</h2>
-                    <p class='p-4'>Este reporte detalla las actividades extraescolares realizadas por los estudiantes, incluyendo participación y logros.</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
+                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat."</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
                         <p>Generar</p>
                         <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
@@ -59,16 +68,20 @@
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
 
-            </div>
-            <div class="flex lg:flex-row flex-col mt-4 w-full h-auto">
-                <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras" class="rounded-lg shadow-md lg:mb-0 mb-4 lg:mr-6">
+                    </div>
+
+                    <div class="grid grid-row-2 xl:grid-cols-4 flex-col gap-2 xs:gap-5 mt-4 w-full h-auto">
+                        <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras"
+                            class="rounded-lg shadow-md lg:mb-0 mb-4 lg:mr-6 xl:col-span-3">
 
                 <div class="bg-white rounded-lg shadow-md w-[360px] h-full">
                     <div class="duration-300" id="updateInputs" style="display:none;">
                         <div class="border-b-2 border-gray-2  00">
                             <h1 class="font-bold opacity-30 mb-4 pt-4 pl-4 font-montserrat">Reporte</h1>
                         </div>
-                        <p class="font-bold p-4">Haz seleccionado actualizar el reporte de actividades extraescolares. A continuación, puedes ingresar los nuevos datos:</p>
+                        <p class="font-bold p-4">Haz seleccionado actualizar reporte con el título (reporte) Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.</p>
                         <div class="mt-4 flex flex-col justify-center items-center p-4">
                             <input type="text" placeholder="Nuevo código..."
                                 class="border rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2">

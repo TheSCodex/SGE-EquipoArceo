@@ -13,7 +13,7 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        return view('Pipa.changePassword');
+        return view('Pipa.change-password');
     }
 
     /**

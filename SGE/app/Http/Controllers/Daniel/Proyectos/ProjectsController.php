@@ -13,6 +13,11 @@ class ProjectsController extends Controller
     public function index()
     {
         return view('Daniel.Projects.ProjectView');
+
+    }
+    public function project()
+    {
+        return view('Daniel.presidenta.project');
     }
 
     /**

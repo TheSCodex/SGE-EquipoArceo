@@ -21,7 +21,7 @@
             <a href="/Dashboard">Proyectos</a>
         </li>
         <li>
-            <a href="/calendar">Calendario</a>
+            <a href="calendario">Calendario</a>
         </li>
     </ul>
 

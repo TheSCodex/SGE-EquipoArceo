@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class BusinessSector extends Model
 {
+    // protected $table = 'business_sector';
+
     use HasFactory;
-    protected $table = 'business_sector';
+
+    protected $fillable = [
+        'title',
+    ];
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }
