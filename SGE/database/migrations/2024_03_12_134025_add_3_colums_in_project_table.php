@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('project', function (Blueprint $table) {
+        Schema::table('projects', function (Blueprint $table) {
             $table->longText('problem_statement')->nullable();
             $table->longText('project_justificaction')->nullable();
             $table->longText('activities_to_do')->nullable();
