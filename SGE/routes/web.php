@@ -29,6 +29,7 @@ use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
 
@@ -130,6 +131,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
     Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
     });
+
+    //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
+    Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
 
     //TODO - Administrador
 

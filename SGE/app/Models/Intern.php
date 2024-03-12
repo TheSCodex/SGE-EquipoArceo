@@ -24,7 +24,7 @@ class Intern extends Model
 
     public function academicAdvisor()
     {
-        return $this->belongsTo(User::class, 'academic_advisor_id');
+        return $this->belongsTo(AcademicAdvisor::class, 'academic_advisor_id');
     }
 
     public function project()
