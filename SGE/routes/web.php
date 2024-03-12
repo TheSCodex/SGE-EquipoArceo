@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    // ! LAS SIGUIENTES RUTAS SE DEBEN CONFIGURAR AUN PARA SEPARAR SEGUN ROL Y SEGUN PERMISOS
+    /*! LAS SIGUIENTES RUTAS SE DEBEN CONFIGURAR AUN PARA SEPARAR SEGUN ROL Y SEGUN PERMISOS*/
 
     // Rutas para Reportes
     Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
