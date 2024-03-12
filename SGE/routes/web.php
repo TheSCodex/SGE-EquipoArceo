@@ -58,9 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-
-
-
     // ! LAS SIGUIENTES RUTAS SE DEBEN CONFIGURAR AUN PARA SEPARAR SEGUN ROL Y SEGUN PERMISOS
 
     // Rutas para Reportes
