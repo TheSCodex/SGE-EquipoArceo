@@ -1,4 +1,4 @@
-@extends('templates.directorTemplate')
+@extends('templates.directorsAssistantTemplate')
 
 @section('titulo')
     Inicio
