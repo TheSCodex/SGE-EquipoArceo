@@ -17,12 +17,16 @@ class ProjectsController extends Controller
     {
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
-        $project = $intern->project_id;
+        if(!$intern){
+            return view('Daniel.Projects.ProjectView');
+        }
+        $projectId = $intern->project_id;
+        $project = Project::where("id", $projectId)->first();
         $data = Json_encode([
             $userId,
-            $project
-         ]);
-        return view('Daniel.Projects.ProjectView', compact('data'));
+            $projectId
+        ]);
+        return view('Daniel.Projects.ProjectView', compact('project','data'));
         
 
     }

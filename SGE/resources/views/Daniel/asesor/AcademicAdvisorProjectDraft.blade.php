@@ -10,15 +10,15 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">Mi Anteproyecto </h1>
 
-        <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow">
+<div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow">
 
-        <div class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
-    <div class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
-        <h3>Nombre del proyecto</h3>
-    </div>
+    <div class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
+        <div class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
+            <h3>Nombre del proyecto</h3>
+        </div>
 
-    <div class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-bold flex flex-wrap items-center flex-col">
-                    <div class="w-full px-[3%] self-start">
+        <div class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-bold flex flex-wrap items-center flex-col">
+            <div class="w-full px-[3%] self-start">
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Nombre de la empresa</p>
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Asesor empresarial</p>
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Área de desempeño</p>
