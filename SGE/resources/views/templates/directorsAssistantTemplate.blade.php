@@ -53,7 +53,7 @@
         </ul>
     </header>
 
-    <main class="min-h-screen h-full">
+    <main class="min-h-screen h-full w-full">
         @yield('contenido')
     </main>
     <footer class="border-t border-secondaryColor text-black text-center p-5">

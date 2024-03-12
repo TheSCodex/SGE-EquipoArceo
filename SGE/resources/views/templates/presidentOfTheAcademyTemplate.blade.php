@@ -20,7 +20,7 @@
                 <a href="#">Estudiantes</a>
             </li>
             <li>
-                <a href="#">Proyectos</a>
+                <a href="/anteproyectos-presidente">Proyectos</a>
             </li>
             <li>
                 <a href="#">Reportes</a>

@@ -6,10 +6,10 @@
     <title>Editar Evento</title>
     @vite('resources/css/app.css')
 </head>
-<body class="py-8">
+<body>
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
-    <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
+    {{-- <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat bg-white">Editar Evento</h1>
         <form action="{{ route('eventos.update', $event->id) }}" method="POST">
             @csrf
@@ -79,7 +79,108 @@
                 <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Actualizar evento</button>
             </div>
         </form>
-    </main>
+    </main> --}}
+    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">        
+                <form action="{{route('eventos.update', $event->id)}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
+                    @csrf
+                    @method('PUT')
+                    <div class="w-full h-fit flex justify-center md:justify-start">
+                        <h1 class="text-3xl font-bold">Editar evento</h1>
+                    </div>
+                    <div class="w-full flex flex-col space-y-1">
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class="space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">¿Con quien desea la cita?:</p>
+                                <input type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
+                                @error('receiver_id')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">Titulo:</p>
+                                <input type="text" id="title" name="title" value="{{ $event->title }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el titulo del evento">
+                                @error('title')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Tipo de evento:</p>
+                                <input type="text" id="eventType" name="eventType" value="{{ $event->eventType }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
+                                @error('eventType')
+                                <p class="text-[#ff0000] text-sm">
+                                    {{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Descripción:</p>
+                                <input id="description" name="description" value="{{ $event->description }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Describe brevemente de que tratara el evento"></input>
+                                @error('description')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Ubicación del evento:</p>
+                                <input type="text" id="location" name="location" value="{{ $event->location }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo el evento">
+                                @error('location')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Fecha y hora de inicio del evento:</p>
+                                <input type="datetime-local" id="date_start" name="date_start" value="{{ $event->date_start }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                @error('date_start')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Fecha y hora de fin del evento:</p>
+                                <input type="datetime-local" id="date_end" name="date_end" value="{{ $event->date_end }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                @error('date_end')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Estatus del evento:</p>
+                                <select type="text" id="status" name="status" value="{{ $event->status }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                    <option @if($event->status == 'Programada') selected @endif>Programada</option>
+                                    <option @if($event->status == 'En proceso') selected @endif>En proceso</option>
+                                    <option @if($event->status == 'Terminada') selected @endif>Terminada</option>
+                                    <option @if($event->status == 'Cancelada') selected @endif>Cancelada</option>                                    
+                                </select>                                
+                                @error('status')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                    @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="p-2 self-center mx-auto bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Editar evento</button>
+                </form>
+            </div>
+        </div>
+    </section>
     @endsection
 </body>
 </html>

@@ -61,6 +61,7 @@
     <footer class="border-t border-secondaryColor text-xs text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
+    <script src="{{ asset('js/director.js') }}"></script>
 </body>
 
 </html>

@@ -13,12 +13,13 @@
         <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
     </a>
 
+    
     <ul class="hidden md:flex gap-6 justify-center items-center">
         <li>
             <a href="#">Estudiantes</a>
         </li>
         <li>
-            <a href="/anteproyectos">Proyectos</a>
+            <a href="/anteproyecto-asesor">Proyectos</a>
         </li>
         <li>
             <a href="calendario">Calendario</a>
@@ -51,5 +52,6 @@
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
+    @yield('scripts-event')
 </body>
 </html>
