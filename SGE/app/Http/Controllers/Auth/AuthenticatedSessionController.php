@@ -37,6 +37,8 @@ class AuthenticatedSessionController extends Controller
 
         // Obtener el rol del usuario
         $userRole = Auth::user()->role;
+        // Obtener el id del usuario
+        $userId = Auth::user() -> id;
         // Redirigir según el rol del usuario
         switch ($userRole -> title) {
             case 'estudiante':
