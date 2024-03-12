@@ -12,69 +12,40 @@
                     <div class="flex items-center justify-between">
                         <h1 class="text-2xl mt-2 font-bold">Buenos días Directora!</h1>
                     </div>
-                    <div class="bg-black opacity-25 h-[2px] mb-6 mt-6"></div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                        <!-- Cuadros de Reportes  -->
-                        <div class="bg-white rounded-lg shadow-md relative">
-                            <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                            <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat."</p>
-                            <div
-                                class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
-                                <p>Generar</p>
-                                <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
-                                    width="19" height="19" viewBox="0 0 19 19" fill="none">
-                                    <path
-                                        d="M18.3042 2.08777L16.9123 0.695801C16.4488 0.231934 15.8409 0 15.2331 0C14.6252 0 14.0174 0.231934 13.5535 0.69543L0.476893 13.772L0.00560345 18.0107C-0.0537716 18.5443 0.366678 19 0.888807 19C0.921834 19 0.954861 18.9981 0.988631 18.9944L5.2243 18.5265L18.3046 5.44617C19.232 4.51881 19.232 3.01514 18.3042 2.08777ZM4.67916 17.3924L1.22687 17.775L1.61133 14.3175L11.4041 4.52475L14.4757 7.59629L4.67916 17.3924ZM17.4648 4.60676L15.3151 6.7565L12.2435 3.68496L14.3933 1.53521C14.6174 1.31107 14.9158 1.1875 15.2331 1.1875C15.5504 1.1875 15.8483 1.31107 16.0729 1.53521L17.4648 2.92719C17.9276 3.39031 17.9276 4.14363 17.4648 4.60676Z"
-                                        fill="white" />
-                                </svg>
-                            </div>
-                            <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
-                        </div>
+                    <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                </div>
 
-                        <div class="bg-white rounded-lg shadow-md relative">
-                            <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                            <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat."</p>
-                            <div
-                                class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
-                                <p>Generar</p>
-                                <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
-                                    width="19" height="19" viewBox="0 0 19 19" fill="none">
-                                    <path
-                                        d="M18.3042 2.08777L16.9123 0.695801C16.4488 0.231934 15.8409 0 15.2331 0C14.6252 0 14.0174 0.231934 13.5535 0.69543L0.476893 13.772L0.00560345 18.0107C-0.0537716 18.5443 0.366678 19 0.888807 19C0.921834 19 0.954861 18.9981 0.988631 18.9944L5.2243 18.5265L18.3046 5.44617C19.232 4.51881 19.232 3.01514 18.3042 2.08777ZM4.67916 17.3924L1.22687 17.775L1.61133 14.3175L11.4041 4.52475L14.4757 7.59629L4.67916 17.3924ZM17.4648 4.60676L15.3151 6.7565L12.2435 3.68496L14.3933 1.53521C14.6174 1.31107 14.9158 1.1875 15.2331 1.1875C15.5504 1.1875 15.8483 1.31107 16.0729 1.53521L17.4648 2.92719C17.9276 3.39031 17.9276 4.14363 17.4648 4.60676Z"
-                                        fill="white" />
-                                </svg>
-                            </div>
-                            <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Cuadros de Reportes  -->
+                    <div class="bg-white rounded-lg shadow-md relative">
+                        <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Asistencia</h2>
+                        <p class='p-4'>Este reporte ofrece un resumen de la asistencia de los estudiantes durante el período escolar, incluyendo ausencias y tardanzas.</p>
+                        <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-2 h-[67px] w-full rounded-b-lg">
+                            <p class="hover:cursor-pointer ">Generar</p>
                         </div>
-
-
-                        <div class="bg-white rounded-lg shadow-md relative">
-                            <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                            <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat."</p>
-                            <div
-                                class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
-                                <p>Generar</p>
-                                <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
-                                    width="19" height="19" viewBox="0 0 19 19" fill="none">
-                                    <path
-                                        d="M18.3042 2.08777L16.9123 0.695801C16.4488 0.231934 15.8409 0 15.2331 0C14.6252 0 14.0174 0.231934 13.5535 0.69543L0.476893 13.772L0.00560345 18.0107C-0.0537716 18.5443 0.366678 19 0.888807 19C0.921834 19 0.954861 18.9981 0.988631 18.9944L5.2243 18.5265L18.3046 5.44617C19.232 4.51881 19.232 3.01514 18.3042 2.08777ZM4.67916 17.3924L1.22687 17.775L1.61133 14.3175L11.4041 4.52475L14.4757 7.59629L4.67916 17.3924ZM17.4648 4.60676L15.3151 6.7565L12.2435 3.68496L14.3933 1.53521C14.6174 1.31107 14.9158 1.1875 15.2331 1.1875C15.5504 1.1875 15.8483 1.31107 16.0729 1.53521L17.4648 2.92719C17.9276 3.39031 17.9276 4.14363 17.4648 4.60676Z"
-                                        fill="white" />
-                                </svg>
-                            </div>
-                            <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                        <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                    </div>
+    
+                    <div class="bg-white rounded-lg shadow-md relative">
+                        <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Calificaciones</h2>
+                        <p class='p-4'>Este reporte proporciona un análisis detallado de las calificaciones de los estudiantes en cada materia.</p>
+                        <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
+                            <p class="hover:cursor-pointer">Generar</p>
                         </div>
+                        <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                    </div>
+    
+    
+                    <div class="bg-white rounded-lg shadow-md relative">
+                        <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Actividades de curso</h2>
+                        <p class='p-4'>Este reporte detalla las actividades de curso realizadas por los estudiantes, incluyendo participación y logros.</p>
+                        <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
+                            <p class="hover:cursor-pointer">Generar</p>
+                        </div>
+                        <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
+                    </div>
+    
+                </div>
 
                     </div>
 
