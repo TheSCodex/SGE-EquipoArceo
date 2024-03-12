@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
     Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+    Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
     });
 
     //TODO - PRESIDENTE DE ACADEMIA
@@ -123,6 +124,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('asistente/reportes', ReportsController::class);
     Route::resource('asistente/documentos', DocumentsController::class);
     Route::resource('asistente/libros', BooksController::class);
+    Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
     Route::get('asistente/bajas', [BajasController::class, "index"]);
     Route::get('asistente/proyectos',[ ProjectsController::class, 'project']);
     Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);

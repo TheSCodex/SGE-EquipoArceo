@@ -14,31 +14,28 @@
 <body>
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
-    {{-- @php
-        $eventos = [
-            ['id' => 1, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 2, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 3, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 4, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 5, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 6, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 7, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 8, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40'],
-            ['id' => 9, 'date' => 'Martes 20/02/2024', 'cont1' => 'Revision de memoria', 'time1' => '8:40 a 9:30', 'cont2' => 'Reunion con Mario Hugo', 'time2' => '10:50 a 11:40']
-        ];
-    @endphp --}}
-
-
     <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de eventos</h1>
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md py-2 px-4" type="search" placeholder="Buscar...." style="color: green;">
+                <form action="{{ route('eventos.filter') }}" method="POST" class="hidden md:block">
+                    @csrf
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                        </div>
+                        <select name="status" class="border-primaryColor rounded-md py-2 px-4 focus:outline-none focus:border-blue-500">
+                            <option value="all">Todos</option>
+                            <option value="Programada">Programada</option>
+                            <option value="En proceso">En proceso</option>
+                            <option value="Terminada">Terminada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                        <button type="submit" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Filtrar</button>
                     </div>
-                </div>
+                </form>
+
                 <a href="{{route('eventos.create')}}"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento
                 </a>
@@ -50,12 +47,12 @@
                     </div>
                 </div>
                 <a href="{{route('eventos.create')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento
                 </a>
             </div>
         </div>
         <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5">
-            @foreach ($events as $event)
+            @foreach ($allEvents as $event)
                 <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl">
                     <div class="p-4">
                         <h3 class="text-darkBlue font-bold text-xl">{{$event['date']}}</h3>
@@ -100,7 +97,7 @@
             @endforeach
         </div>
         <div class="my-5 mx-auto">
-            {{$events->links()}}
+            {{$allEvents->links()}}
         </div>
     </main>      
 @endsection

@@ -137,11 +137,15 @@
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros</h1>
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md py-2 px-4" type="search" placeholder="Buscar...." style="color: green;">
+                <form action="{{ route('libros.filter') }}" method="POST" class="hidden md:block">
+                    @csrf
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                        </div>
+                        <button type="submit" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Filtrar</button>
                     </div>
-                </div>
+                </form>
                 <a href="{{route('libros.create')}}"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
                 </a>
@@ -149,7 +153,7 @@
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                 <div>
                     <div class="flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 py-2 px-4 " type="search" placeholder="Buscar...." style="color: green;">
+                        <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
                     </div>
                 </div>
                 <a href="{{route('libros.create')}}"
@@ -165,7 +169,15 @@
                         <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
                         <p class="text-sm text-gray-500">Autor: {{ $book->author }}</p>
                         <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
-                        <p class="text-sm text-gray-500">proporcionado por: {{ $book->isbn }}</p>
+                        <p class="text-sm text-gray-500">proporcionado por: 
+                            @if (isset($userInfoByBookId[$book->id]))
+                            @foreach ($userInfoByBookId[$book->id] as $user)
+                                <p class="text-sm text-gray-500">{{ $user->identifier }}</p>
+                            @endforeach
+                            @else
+                                <p class="text-sm text-gray-500">Sin información</p>
+                            @endif
+                        </p>
                         <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book->created_at, 0, 10) }}</p>
                         <div class="flex justify-end mt-4">
                             <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
@@ -191,7 +203,15 @@
                         <td class="font-roboto font-bold py-5 w-3/12 text-left">{{ $book->title }}</td>
                         <td class="font-roboto font-bold py-5">{{ $book->author }}</td>
                         <td class="font-roboto font-bold py-5">{{ $book->isbn }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $book->isbn }}</td>
+                        <td class="font-roboto font-bold py-5">
+                            @if (isset($userInfoByBookId[$book->id]))
+                                @foreach ($userInfoByBookId[$book->id] as $user)
+                                    <p>{{ $user->identifier }}</p>
+                                @endforeach
+                            @else
+                                <p>Sin información</p>
+                            @endif
+                        </td>
                         <td class="font-roboto font-bold py-5">{{ substr($book->created_at, 0, 10) }}</td>
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                             <a href="{{route('libros.edit', $book->id)}}" class="flex justify-center">

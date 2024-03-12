@@ -14,10 +14,36 @@ class EventController extends Controller
      */
     public function index()
     {
-        // return view('Luis.events');
-        $events = CalendarEvent::paginate(9);
-        return view('Luis.eventsDash', compact('events'));
+        $allEvents = CalendarEvent::paginate(9);
+        return view('Luis.eventsDash', compact('allEvents'));
     }
+
+        /**
+     * Display a filter view.
+     */
+    public function filter(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $status = $request->input('status');
+    
+        $filteredEvents = CalendarEvent::query();
+    
+        if (!empty($searchTerm)) {
+            $filteredEvents->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')->orWhere('description', 'like', '%' . $searchTerm . '%')->orWhere('eventType', 'like', '%' . $searchTerm . '%');
+            });
+        }
+    
+        if ($status !== 'all') {
+            $filteredEvents->where('status', $status);
+        }
+    
+        $filteredEvents = $filteredEvents->orderBy('date_start')->paginate(9);
+
+        // dd($filteredEvents);
+        return view('Luis.eventsDash', compact('filteredEvents'));
+    }
+    
 
     /**
      * Display a calendar view.
@@ -73,6 +99,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        //Todos los asesores
         return view('Luis.newEventForm');
     }
 
