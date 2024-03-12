@@ -76,7 +76,7 @@
                     </div>
                     <div class="space-y-2 mb-4 lg:mx-5">
                         <p class="text-sm">Matrículas:</p>
-                        <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="1"  placeholder="Introduce la o las matriculas de los estudiantes que han entregado el libro, separa cada matricula con una coma" value="{{ $book->identifier_student }}"></textarea>
+                        <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="1" placeholder="Introduce la o las matriculas de los estudiantes que han entregado el libro, separa cada matricula con una coma">@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</textarea>
                         @error('identifier_student')
                             <p class="text-[#ff0000] text-sm">
                                 {{ $message }}
