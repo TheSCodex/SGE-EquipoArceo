@@ -120,7 +120,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin', AdministratorController::class);
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('estudiante', [StudentController::class, "studenthome"]);
     Route::get('inicio-estudiante',[StudentController::class, 'index']);
     // Route::get('eventos',[StudentController::class, 'studentEvents']);
 
@@ -128,11 +128,11 @@ Route::middleware('auth')->group(function () {
     Route::get('bajas', [BajasController::class, "index"]);
 
     // Ruta Asesor Académico
-    Route::get('academic', [AcademicAdvisorController::class, "index"]);
-    Route::get('academichome', [AcademicHomeController::class, "index"]);
+    Route::get('lista-proyectos', [AcademicAdvisorController::class, "index"]);
+    Route::get('inicio-asesor', [AcademicHomeController::class, "index"]);
 
     // Ruta Lista de Estudiantes
-    Route::get('studentL', [StudentListController::class, "index"]);
+    Route::get('lista-estudiantes', [StudentListController::class, "index"]);
 
     // Rutas para Anteproyectos
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
