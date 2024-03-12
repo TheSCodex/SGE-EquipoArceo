@@ -89,7 +89,6 @@
                 </tr>
                 @foreach ($proyects as $proyect)
                  <tr {{-- onclick="window.location.href = '/anteproyecto-Asesor' {{ route('/anteproyecto-Asesor' ,  ['id' => $proyect->id]-) }}'; " style="cursor:pointer;" --}}>  
-
                         <td class="font-roboto font-bold py-5">{{ $proyect['Estudiantes Designados'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $proyect['Nombre del Anteproyecto'] }}</td>
                         <td class="font-roboto font-bold py-5">Votos: {{ $proyect['Votos recibidos'] }}</td>
