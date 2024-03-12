@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <section class="flex flex-col justify-center items-center min-h-full flex-grow">
         <div class="sm:px-8 text-left w-full mb-[2vh] sm:mb-0">
             <div class="container mx-auto bg-[#F3F5F9] font-roboto">
                 <div class="flex flex-col">
@@ -78,33 +78,26 @@
 
                     </div>
 
-                    <div class="grid grid-row-2 xl:grid-cols-4 flex-col gap-2 xs:gap-5 mt-4 w-full h-auto">
-                        <img src="{{ asset('img/Eliud/grafica.jpg') }}" alt="Gráfica de Barras"
-                            class="rounded-lg shadow-md lg:mb-0 mb-4 lg:mr-6 xl:col-span-3">
+                    <div class="flex lg:flex-row sm:flex-col gap-12 h-full">
 
-                        <div class="bg-white rounded-lg shadow-md h-full">
-                            <div class="duration-300" id="updateInputs" style="display:none;">
-                                <div class="border-b-2 border-gray-2  00">
-                                    <h1 class="font-bold opacity-30 mb-4 pt-4 pl-4 font-montserrat">Reporte</h1>
-                                </div>
-                                <p class="font-bold p-4">Haz seleccionado actualizar reporte con el título (reporte) Lorem
-                                    ipsum
-                                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                    et
-                                    dolore magna aliqua.</p>
-                                <div class="mt-4 flex flex-col justify-center items-center p-4">
-                                    <input type="text" placeholder="Nuevo código..."
-                                        class="border rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2">
-                                    <input type="text" placeholder="Nueva fecha de revisión..."
-                                        class="border rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2">
-                                    <button
-                                        class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
-                                </div>
+                        <div class="w-[70vw] h-[55vh] bg-white mt-[2%] rounded-md shadow-md relative">
+                            <div class="absolute left-[95%]">
+                                <img src="{{ asset('img/Eliud/info.png') }}" class="mr-16 mt-5 "/>
                             </div>
-                            <div class="duration-300" id="reportSummary" style="display:block;">
+                            <div class=" m-5 ml-16 absolute">
+                                <h2 class=" text-[#828282]">APROBACIÓN DE PROYECTOS</h2>
+                                <p class="text-[#828282] text-xs">Por academia</p>
+                            </div>
+                            <div class="h-96 mt-20 ml-10 mr-10">
+                                <canvas id="myChart" width="1000" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white w-[25%] rounded-lg shadow-md h-[55vh] mt-[2%]">
+
+                            <div id="reportSummary" style="display:block;" class="h-full">
                                 <h3 class="text-xl opacity-30 font-bold mb-4 pl-6 pt-6">Documentos</h3>
                                 <div class="bg-black opacity-25 h-[1px]"></div> <!-- Linea separador -->
-                                <div class="flex items-center flex-col p-6">
+                                <div class="flex items-center flex-col p-6 space-y-4">
                                     <div class="text-xs mb-2 font-semibold">
                                         Elsa Luz Rios generó la carta de aprobación para el estudiante:
                                         <p>Maldonado Kevin Alexis</p>
@@ -132,4 +125,61 @@
             </div>
             <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Mayo", "Junio", "Julio"],
+                datasets: [{
+                        label: 'Tecnologías de la Información',
+                        data: [65, 20, 10],
+                        backgroundColor: '#0FA987',
+                        borderColor: '#ffffffff',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Mantenimiento',
+                        data: [39, 45, 85],
+                        backgroundColor: '#3E5366',
+                        borderColor: '#ffffffff',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            min: 0,
+                            max: 120,
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                indexAxis: 'x', 
+                elements: {
+                    bar: {
+                        borderWidth: 2, 
+                        borderRadius: 5, 
+                        barThickness: 200 
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: 120
+                    }
+                }
+            }
+
+        });
+    </script>
 @endsection
