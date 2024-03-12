@@ -9,9 +9,9 @@
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de empresas</h1>
         <div class="flex items-center flex-row justify-end">
             <div>
-                < class="hidden md:flex items-center relative" >
+                <div class="hidden md:flex items-center relative" >
                     <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
-            </div>
+                </div>
             </div>
             <a href="/panel-companies-create"
                 class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa
