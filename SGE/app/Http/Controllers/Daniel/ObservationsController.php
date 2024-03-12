@@ -12,7 +12,7 @@ class ObservationsController extends Controller
      */
     public function index()
     {
-        return view('Daniel.Observaciones');
+        return view('Daniel.Observation');
     }
 
     /**
