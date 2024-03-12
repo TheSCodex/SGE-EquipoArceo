@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnteproyectViewAcAd extends Controller
 {
@@ -12,7 +13,8 @@ class AnteproyectViewAcAd extends Controller
      */
     public function index()
     {
-        return view('daniel.asesor.AnteProjectView');
+        $userId = Auth::id();
+        return view('daniel.asesor.AnteProjectView')->with('userId', $userId);
     }
 
     /**

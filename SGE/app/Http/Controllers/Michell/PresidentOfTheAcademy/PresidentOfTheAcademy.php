@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Michell\PresidentOfTheAcademy;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\AcademicAdvisor;
+use App\Http\Controllers\Controller;
 
 class PresidentOfTheAcademy extends Controller
 {
@@ -12,7 +14,9 @@ class PresidentOfTheAcademy extends Controller
      */
     public function index()
     {
-        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy');
+        $advisors=AcademicAdvisor::all();
+        $businessConsultants = User::where('rol_id', 7)->get();
+        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants'));
     }
 
     /**
