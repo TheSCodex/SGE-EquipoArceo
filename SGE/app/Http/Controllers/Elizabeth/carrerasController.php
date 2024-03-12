@@ -13,12 +13,12 @@ class carrerasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $careers = Career::all();
-        return view('Elizabeth.cruds.carreras',compact('careers'));
-    }
-    
+  public function index()
+{
+    $careers = Career::all();
+    return view('Elizabeth.cruds.carreras', compact('careers'));
+}
+
 
     /**
      * Show the form for creating a new resource.
