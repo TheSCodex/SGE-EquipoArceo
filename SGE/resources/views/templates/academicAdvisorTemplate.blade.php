@@ -18,7 +18,7 @@
             <a href="#">Estudiantes</a>
         </li>
         <li>
-            <a href="/anteproyectos">Proyectos</a>
+            <a href="/anteproyecto-asesor">Proyectos</a>
         </li>
         <li>
             <a href="calendario">Calendario</a>
