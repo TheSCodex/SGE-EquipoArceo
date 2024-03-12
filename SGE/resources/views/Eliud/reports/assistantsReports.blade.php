@@ -8,42 +8,33 @@
     <div class="container mx-auto px-4 py-4 bg-[#F3F5F9] font-roboto">
         <div class="flex flex-col">
             <div class="flex items-center justify-between">
-                <h1 class="text-2xl mt-2 font-bold">Buenos días Directora!</h1>
+                <h1 class="text-2xl mt-2 font-bold">Buenos días Norma!</h1>
             </div>
             <div class="bg-black opacity-25 h-[2px] mb-6 mt-6"></div> <!-- Linea separador -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Cuadros de Reportes  -->
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat."</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Asistencia</h2>
+                    <p class='p-4'>Este reporte ofrece un resumen de la asistencia de los estudiantes durante el período escolar, incluyendo ausencias y tardanzas.</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
-                      <p class="hover:cursor-pointer">Generar</p>
+                        <p class="hover:cursor-pointer">Generar</p>
                     </div>
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat."</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Calificaciones</h2>
+                    <p class='p-4'>Este reporte proporciona un análisis detallado de las calificaciones de los estudiantes en cada materia.</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
-                      <p class="hover:cursor-pointer">Generar</p>
+                        <p class="hover:cursor-pointer">Generar</p>
                     </div>
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
 
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte</h2>
-                    <p class='p-4'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat."</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Actividades de curso</h2>
+                    <p class='p-4'>Este reporte detalla las actividades de curso realizadas por los estudiantes, incluyendo participación y logros.</p>
                     <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 rounded-b mt-2 h-[67px] w-full m-0">
                         <p class="hover:cursor-pointer">Generar</p>
                     </div>
