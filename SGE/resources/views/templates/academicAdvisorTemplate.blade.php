@@ -26,11 +26,22 @@
     </ul>
 
     <ul class="hidden md:flex gap-6 justify-center">
-        <button
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            @method('post')
+            <x-dropdown-link :href="route('logout')"
+                class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
+                <img src="/img/logos/cerrar-sesion.svg"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                {{ __('Cerrar sesión') }}
+            </x-dropdown-link>
+        </form>
+        {{-- <button
             class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
             <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
             <a href="/logout">Sign Out</a>
-        </button>
+        </button> --}}
     </ul>
 </header>
 
