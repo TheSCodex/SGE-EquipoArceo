@@ -95,9 +95,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{-- <div class="bg-blue-400 text-black w-full h-24">
                 {{ $datos->links() }}
-            </div> --}}
         </section>
         {{-- Responsive --}}
         <section class="">
