@@ -11,26 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class ObservationsController extends Controller
 {
     public function index($projectId)
-    {
-        $intern = Intern::where('user_id', Auth::id())
-            ->where('project_id', $projectId)
-            ->first();
+{
+    $intern = Intern::where('user_id', Auth::id())
+        ->where('project_id', $projectId)
+        ->first();
 
-        // Obtener el id del asesor académico asociado al internado
-        $academicAdvisorId = $intern->academic_advisor_id;
+    // Obtener el id del asesor académico asociado al internado
+    $academicAdvisorId = $intern->academic_advisor_id;
 
-        // Obtener el comentario del asesor académico
-        $tutorComment = Comment::where('project_id', $projectId)
-            ->where('academic_advisor_id', $academicAdvisorId)
-            ->first();
+    // Obtener el comentario del asesor académico
+    $tutorComment = Comment::where('project_id', $projectId)
+        ->where('academic_advisor_id', $academicAdvisorId)
+        ->first();
 
-        // Obtener otros comentarios para el proyecto
-        $otherComments = Comment::where('project_id', $projectId)
-            ->where('academic_advisor_id', '<>', $academicAdvisorId)
-            ->get();
+    // Obtener otros comentarios para el proyecto
+    $otherComments = Comment::where('project_id', $projectId)
+        ->where('academic_advisor_id', '<>', $academicAdvisorId)
+        ->get();
 
-        return view('Daniel.Observation', compact('tutorComment', 'otherComments'));
-    }
+    return view('Daniel.Observation', compact('tutorComment', 'otherComments'));
+}
+
 
     public function create()
     {
