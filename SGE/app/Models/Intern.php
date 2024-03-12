@@ -15,6 +15,8 @@ class Intern extends Model
         'project_id',
         'book_id',
         'student_status_id',
+        'performance_area',
+        'Group'
     ];
 
     public function user()

@@ -138,10 +138,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
-    Route::resource('observaciones', ObservationsController::class);
-    Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
-    Route::get('proyectos',[ ProjectsController::class, 'project']);
-    Route::resource('anteproyectos', ProyectsAdvisorController::class);
+    Route::resource('Mis-observaciones', ObservationsController::class);
+    Route::resource('anteproyecto-asesor', ProjectDraftController::class);
+    Route::get('anteproyectos-presidente',[ ProjectsController::class, 'project']);
+    Route::resource('anteproyectos-Asesor', ProyectsAdvisorController::class);
 
 
 
