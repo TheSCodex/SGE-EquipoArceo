@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Daniel\Proyectos;
 
+use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Intern;
 
 class ProjectsController extends Controller
 {
@@ -12,7 +15,15 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        return view('Daniel.Projects.ProjectView');
+        $userId = Auth::id();
+        $intern = Intern::where("user_id", $userId)->first();
+        $project = $intern->project_id;
+        $data = Json_encode([
+            $userId,
+            $project
+         ]);
+        return view('Daniel.Projects.ProjectView', compact('data'));
+        
 
     }
     public function project()
