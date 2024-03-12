@@ -14,6 +14,7 @@ class BusinessAdvisor extends Model
         'email',
         'phone',
         'companie_id',
+        'position'
     ];
 
     public function company()

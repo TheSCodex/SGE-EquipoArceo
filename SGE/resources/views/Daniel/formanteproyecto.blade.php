@@ -11,7 +11,7 @@
                 <h1 class="font-roboto text-xl font-semibold my-4 ml-4">Datos del alumno</h1>
             </div>
             <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
-            <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4">
+            <form method="POST" action="{{ route('Mi-anteproyecto.store') }}" class="space-y-4 ml-4">
                 <div class="Datos Personales flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
@@ -107,13 +107,11 @@
                         @enderror
                     </div>
                 </div>
-            </form>
             {{-- Parte Empresa --}}
             <div class="my-4">
-                <h1 class="font-roboto text-xl font-semibold mt-4 ml-4">Datos de la empresa</h1>
+                <h1 class="font-roboto text-xl font-semibold mt-4">Datos de la empresa</h1>
             </div>
-            <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] mx-4"></div>
-            <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4">
+            <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] "></div>
                 <div class="Datos de la empresa 2 flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre de la empresa:</h2>
@@ -185,7 +183,6 @@
                     <h1 class="font-roboto text-xl font-semibold mt-4">Datos del proyecto</h1>
                 </div>
                 <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] mr-4"></div>
-                <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4 flex">
                     <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre del anteproyecto:</h2>
                         <input type="text" name="name_proyect" placeholder="Introduzca el nombre del anteproyecto"
@@ -227,7 +224,6 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                </form>
                 <div class="my-4 mr-4 gap-4 flex justify-end">
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
@@ -237,6 +233,8 @@
                     </button>
                 </div>
             </form>
+            
         </div>
     </section>
 @endsection
+
