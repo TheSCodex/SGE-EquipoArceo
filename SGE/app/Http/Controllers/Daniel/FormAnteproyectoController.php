@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
+use DragonCode\Contracts\Cashier\Auth\Auth;
 use Illuminate\Http\Request;
 
 class FormAnteproyectoController extends Controller
@@ -62,4 +63,6 @@ class FormAnteproyectoController extends Controller
     {
         //
     }
+
+    
 }
