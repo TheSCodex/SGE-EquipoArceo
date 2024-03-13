@@ -125,7 +125,10 @@ Route::middleware('auth')->group(function () {
         Route::get('director/anteproyectos',[ ProjectsController::class, 'project']);
         Route::resource('director/libros', BooksController::class);
         Route::get('director/reportes', [ReportsController::class, "index"]);
-        Route::get('asistente/exportar', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('asistente/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('asistente/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
+        Route::get('asistente/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
+        Route::get('asistente/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');    
 
     });
 
@@ -155,7 +158,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
         Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
         Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
-        Route::get('/Download/Sancion', [ReportsController::class, 'printReport'])-> name('cata.aprobacion');
+        Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
+        Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
+        Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');    
 
 
     });
