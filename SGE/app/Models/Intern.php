@@ -43,4 +43,9 @@ class Intern extends Model
     {
         return $this->belongsTo(StudentStatus::class, "student_status_id");
     }
+
+    public function event()
+    {
+        return $this->hasMany(CalendarEvent::class);
+    }
 }
