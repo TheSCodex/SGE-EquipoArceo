@@ -47,7 +47,6 @@
                 <div class="Datos escolares flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">División Académica:</h2>
-                        @csrf
                         <select name="division_academica" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
                             <option value="" disabled selected>Selecciona una división académica</option>
                             <option value="division1">División 1</option>

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="min-h-screen">
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
         <a href="#" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
@@ -44,13 +44,12 @@
         </ul>
     </header>
 
-    <main class="bg-[#F3F5F9] p-4">
+    <main class="bg-[#F3F5F9] p-4 h-full">
         @yield('contenido')
     </main>
     <footer class="border-t border-secondaryColor text-xs text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
-    <script src="{{ asset('js/director.js') }}"></script>
 </body>
 
 </html>

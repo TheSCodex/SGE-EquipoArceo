@@ -6,33 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('titulo') | Sistema Gestor de Estadias</title>
     @vite('resources/css/app.css')
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-
-<body>
-    <header class="p-1 md:p-[1rem] md:flex justify-around items-center border-b-[1px] border-secondaryColor">
+<body class="min-h-screen">
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
         <a href="#" class=" text-center flex justify-center">
-            <img src="/img/logos/logo-utCancún.png" class="w-20 h-7" alt="Logo-ut">
+            <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
-
-        <ul class="hidden md:flex md:gap-10 justify-center font-roboto items-center text-sm">
+    
+        <ul class="hidden md:flex gap-6 justify-center items-center">
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
+                <a href="#">Estudiantes</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Proyectos</a>
+                <a href="#">Proyectos</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Reportes</a>
+                <a href="#">Reportes</a>
             </li>
             <li>
-                <a href="#" class="hover:border-b-2 hover:border-primaryColor">Cartas</a>
+                <a href="#">Cartas</a>
             </li>
             <li>
-                <a href="/books" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
+                <a href="/calendar">Calendario</a>
             </li>
         </ul>
-
+    
         <ul class="hidden md:flex gap-6 justify-center">
             <button
                 class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
@@ -42,15 +44,12 @@
         </ul>
     </header>
 
-    <main class="min-h-screen h-full w-full">
+    <main class="bg-[#F3F5F9] p-4 h-full">
         @yield('contenido')
     </main>
-    <footer class="border-t border-secondaryColor text-black text-center p-5">
+    <footer class="border-t border-secondaryColor text-xs text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
-
-    @yield('scripts-book')
-
 </body>
 
 </html>
