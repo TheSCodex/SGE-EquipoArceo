@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
-        Route::resource('estudiante/anteproyecto', ProjectsController::class);
+        Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
         Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
         Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
         Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');

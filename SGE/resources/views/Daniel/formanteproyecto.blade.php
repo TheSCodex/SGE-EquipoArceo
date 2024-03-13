@@ -11,7 +11,7 @@
                 <h1 class="font-roboto text-xl font-semibold my-4 ml-4">Datos del alumno</h1>
             </div>
             <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
-            <form method="POST" class="space-y-4 ml-4">
+            <form method="POST" action="{{ route('Mi-anteproyecto.store') }}" class="space-y-4 ml-4">
                 <div class="Datos Personales flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
@@ -227,13 +227,12 @@
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
                     </button>
-                    <button onclick="window.location.href = '/Mi-anteproyecto'" class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
+                    <a href="{{ url('estudiante/anteproyecto') }}" class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
                         Cerrar
-                    </button>
+                    </a>
                 </div>
             </form>
             
         </div>
     </section>
 @endsection
-

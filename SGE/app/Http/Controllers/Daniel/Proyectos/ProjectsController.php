@@ -107,7 +107,7 @@ class ProjectsController extends Controller
 
         $businessAdvisor->companie_id = $company->id;
 
-        return redirect('/Mi-anteproyecto')->with('success', 'Proyecto creado correctamente');
+        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto creado correctamente');
     }
 
     /**
@@ -124,7 +124,7 @@ class ProjectsController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            return redirect()->route('Mi-anteproyecto.index')->with('error', 'Proyecto no encontrado.');
+            return redirect()->route('estudiante/anteproyecto')->with('error', 'Proyecto no encontrado.');
         }
 
         $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
@@ -182,7 +182,7 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
-        return redirect('/Mi-anteproyecto')->with('success', 'Proyecto actualizado correctamente');
+        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
     }
 
     /**
