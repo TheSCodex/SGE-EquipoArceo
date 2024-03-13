@@ -16,6 +16,7 @@ class BooksController extends Controller
      */
     public function index()
     {
+
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
@@ -35,9 +36,10 @@ class BooksController extends Controller
     /**
      * Display a filter list of the resources.
      */
-    public function filter(Request $request)
+    public function search(Request $request)
     {
         $searchTerm = $request->input('search');
+        // dd($searchTerm);
     
         $filteredBooks = Book::query();
     
@@ -47,11 +49,22 @@ class BooksController extends Controller
             });
         }
     
-        $filteredBooks = $filteredBooks->orderBy('id')->paginate(9);
-        // dd($filteredBooks);
-
-        return view('Luis.book', compact('filteredBooks'));
+        $books = $filteredBooks->orderBy('id')->paginate(9);
+    
+        $internsWithUserInfo = Intern::whereNotNull('book_id')
+            ->with('user')
+            ->get();
+    
+        // Preparar un arreglo que contenga la información del usuario asociada a cada libro
+        $userInfoByBookId = [];
+        foreach ($internsWithUserInfo as $intern) {
+            $bookId = $intern->book_id;
+            $userInfoByBookId[$bookId][] = $intern->user;
+        }
+    
+        return view('Luis.book', compact('books', 'userInfoByBookId'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

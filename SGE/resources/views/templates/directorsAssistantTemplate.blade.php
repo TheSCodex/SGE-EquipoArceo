@@ -31,7 +31,7 @@
                 <a href="#">Cartas</a>
             </li>
             <li>
-                <a href="/calendar">Calendario</a>
+                <a href="/asistente/libros" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
             </li>
         </ul>
     
