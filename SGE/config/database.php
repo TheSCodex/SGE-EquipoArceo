@@ -63,6 +63,13 @@ return [
             ]) : [],
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'dsn' => env('DB_URI'),
+            'database' => env('MONGODB_DATABASE'),
+        ],
+        
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
