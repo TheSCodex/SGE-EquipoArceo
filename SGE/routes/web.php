@@ -85,9 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
         Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
         Route::put("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
-
-        // NO FUNCIONA
-        // Route::get("anteproyecto/observaciones/{projectId}", [ObservationsController::class, "index"]);
+        Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto.index');
         
         // Rutas para Eventos
         Route::get('estudiante/eventos', [EventController::class, "index"]);
