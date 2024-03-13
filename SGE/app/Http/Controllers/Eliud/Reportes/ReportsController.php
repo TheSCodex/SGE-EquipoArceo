@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
+    public function printReport() {
+        $pdf = Pdf::loadView('Eliud.reports.docs.sancion');
+        Pdf::setOption(['dpi' => 150, 'debugCss' => true]);
+        return $pdf->stream();
+    }
+
     /**
      * Display a listing of the resource.
      */

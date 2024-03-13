@@ -134,6 +134,8 @@ Route::middleware('auth')->group(function () {
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
     Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/Download/Sancion', [ReportsController::class, 'printReport'])-> name('cata.aprobacion');
+
 
     //TODO - Administrador
 
@@ -158,8 +160,11 @@ Route::middleware('auth')->group(function () {
     Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     // Rutas para CRUD de Documentos
     Route::resource('documentos', DocumentsController::class);
+
+
     });
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
