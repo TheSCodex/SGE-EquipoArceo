@@ -22,8 +22,8 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|alpha',
-            'last_name' => 'bail|required|alpha',
+            'name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
+            'last_name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
             'email' => 'bail|required',
             'rol_id' => 'bail|required',
             'identifier' => 'bail|required',

@@ -52,14 +52,18 @@
                                 <div id="permissions_{{ $role->id }}" class="hidden">
                                     <h3 class="font-bold">Permisos:</h3>
                                     <ul>
-                                        @php
-                                            $decodedPermissions = json_decode($role->permissions, true);
-                                        @endphp
-                                        @foreach($decodedPermissions as $permission => $value)
-                                            @if($value)
-                                                <li>{{ $permission }}</li>
-                                            @endif
-                                        @endforeach
+                                        @isset($role->permissions)
+                                            @php
+                                                $decodedPermissions = json_decode($role->permissions, true);
+                                            @endphp
+                                            @foreach($decodedPermissions as $permission => $value)
+                                                @if($value)
+                                                    <li>{{ $permission }}</li>
+                                                @endif
+                                            @endforeach
+                                        @else  
+                                            Sin permisos
+                                        @endisset
                                     </ul>
                                 </div>
                                 <div class="flex justify-end mt-4">
@@ -88,15 +92,18 @@
                         <tr>
                             <td class="font-roboto font-bold py-5">{{ $role->title }}</td>
                             <td class="font-roboto font-bold py-5">
+                                @isset($role->permissions)
                                 @php
                                     $decodedPermissions = json_decode($role->permissions, true);
                                 @endphp
-                        
                                 @foreach($decodedPermissions as $permission => $value)
                                     @if($value)
-                                        {{ $permission }}<br>
+                                        <li>{{ $permission }}</li>
                                     @endif
                                 @endforeach
+                            @else  
+                                Sin permisos
+                            @endisset
                             </td>
                             <td class="font-roboto font-bold py-5 cursor-pointer ">
                                 <a href="{{ route('panel-roles.edit', $role->id) }}" class="flex justify-center">
