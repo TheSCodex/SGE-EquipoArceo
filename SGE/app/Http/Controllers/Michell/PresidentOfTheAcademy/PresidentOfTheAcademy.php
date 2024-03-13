@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\AcademicAdvisor;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 
 class PresidentOfTheAcademy extends Controller
 {
@@ -16,7 +17,8 @@ class PresidentOfTheAcademy extends Controller
     {
         $advisors=AcademicAdvisor::all();
         $businessConsultants = User::where('rol_id', 7)->get();
-        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants'));
+        $votes=Project::sum('like');
+        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes'));
     }
 
     /**
