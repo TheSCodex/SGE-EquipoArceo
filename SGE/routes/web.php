@@ -88,7 +88,6 @@ Route::middleware('auth')->group(function () {
 
     //TODO - ASESOR ACADEMICO
     Route::group(['middleware' => 'role:asesorAcademico'], function () {
-
     Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
     Route::resource('anteproyectos', ProyectsAdvisorController::class);
     Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
