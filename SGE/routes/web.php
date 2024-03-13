@@ -166,25 +166,28 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'role:admin'], function () {
 
-        Route::resource('admin', AdministratorController::class);
-        // Rutas para CRUD de Usuarios
-        Route::resource('panel-users', UserController::class);
-        // Rutas para CRUD de Empresas
-        Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
-        Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-        Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
-        //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-        Route::resource('/panel-advisors', AdvisorController::class);
-        Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
-        Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
-        Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
-        // Rutas para CRUD de Carreras y Divisiones
-        Route::resource('/panel-careers', carrerasController::class);
-        Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
-        Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
-        // Rutas para CRUD de Documentos
-        Route::resource('documentos', DocumentsController::class);
-        
+    Route::resource('admin', AdministratorController::class);
+    // Rutas para CRUD de Usuarios
+    Route::resource('panel-users', UserController::class);
+    Route::resource('panel-roles', RoleController::class);
+    // Rutas para CRUD de Empresas
+    Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+    Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
+    Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
+    //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+    Route::resource('/panel-advisors', AdvisorController::class);
+    Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
+    Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
+    Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
+    // Rutas para CRUD de Carreras y Divisiones
+    Route::resource('/panel-careers', carrerasController::class);
+    Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer');
+    Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+    Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
+    // Rutas para CRUD de Documentos
+    Route::resource('documentos', DocumentsController::class);
+
+
     });
 });
 
