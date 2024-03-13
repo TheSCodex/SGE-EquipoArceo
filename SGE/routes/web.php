@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('estudiante', [StudentController::class, "index"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::get('Mi-anteproyecto-create', [ProjectsController::class, 'create'])->name('formanteproyecto');
@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function () {
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
     Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
-    Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
+    Route::post('/eventos/search', [EventController::class, 'search'])->name('eventos.search');
     });
 
     //TODO - PRESIDENTE DE ACADEMIA
@@ -127,7 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('asistente/reportes', ReportsController::class);
     Route::resource('asistente/documentos', DocumentsController::class);
     Route::resource('asistente/libros', BooksController::class);
-    Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
+    Route::post('asistente/libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
     Route::get('asistente/bajas', [BajasController::class, "index"]);
     Route::get('asistente/proyectos',[ ProjectsController::class, 'project']);
     Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
@@ -135,7 +135,9 @@ Route::middleware('auth')->group(function () {
     });
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
-    Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/Download/Sancion', [ReportsController::class, 'printReport'])-> name('cata.aprobacion');
+
 
     //TODO - Administrador
 
@@ -160,8 +162,11 @@ Route::middleware('auth')->group(function () {
     Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     // Rutas para CRUD de Documentos
     Route::resource('documentos', DocumentsController::class);
+
+
     });
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
