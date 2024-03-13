@@ -60,7 +60,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Telefono</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Fecha de registro</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th>
+                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Giro empresarial</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
@@ -68,13 +68,13 @@
                 </tr>
                 @foreach ($companies as $company)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $company->name }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->email }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->phone }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->registration_date }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->address }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->rfc }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->business_sector_id }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->email }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->phone }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->registration_date }}</td>
+                    {{-- <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->address }}</td> --}}
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->rfc }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->business_sector_id }}</td>
 
 
 

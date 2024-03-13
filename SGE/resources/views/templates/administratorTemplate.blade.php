@@ -21,16 +21,16 @@
                 <a href="/panel-users">Usuarios</a>
             </li>
             <li>
-                <a href="/panel-roles">Roles y permisos</a>
+                <a href="/panel-roles" class="text-nowrap">Roles y permisos</a>
             </li>
             <li>
                 <a href="/panel-companies">Empresas</a>
             </li>
             <li>
-                <a href="/panel-advisors">Asesores empresariales</a>
+                <a href="/panel-advisors" class="text-nowrap">Asesores empresariales</a>
             </li>
             <li>
-                <a href="/panel-careers">Carreras y divisiones</a>
+                <a href="/panel-careers" class="text-nowrap">Carreras y divisiones</a>
             </li>
         </ul>
     
