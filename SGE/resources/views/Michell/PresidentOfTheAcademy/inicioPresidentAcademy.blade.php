@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl">{{$votes}}</p>
                         <p class="text-sm text-lightGray">Votos</p>
                     </div>
                 </div>
