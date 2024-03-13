@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('student', [StudentController::class, "studentHome"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
