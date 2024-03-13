@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
         // Ruta Estudiantes
-        Route::get('estudiante', [StudentController::class, "index"]);
+        Route::get('estudiante', [StudentController::class, "studentHome"]);
         Route::get("estudiante/principal", [StudentController::class, "studentHome"]);
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
