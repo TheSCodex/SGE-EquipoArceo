@@ -33,7 +33,7 @@ class ObservationsController extends Controller
                                     ->where('academic_advisor_id', '!=', $academicAdvisorId)
                                     ->get();
 
-            return view('Daniel.Observation')->with([
+            return view('Daniel.Projects.Observation')->with([
                 'userId' => $userId,
                 'tutorComment' => $tutorComment,
                 'normalComments' => $normalComments,
