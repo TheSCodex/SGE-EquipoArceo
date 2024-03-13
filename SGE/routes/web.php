@@ -77,9 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::get('Mi-anteproyecto-create', [ProjectsController::class, 'create'])->name('formanteproyecto');
     Route::get('Mi-anteproyecto/{id}/edit', [ProjectsController::class, 'edit'])->name('editAnteproyecto');
+    Route::get('/observaciones', [ObservationsController::class, 'index'])->name('observations.index');
 
-
-    Route::get('/observaciones/{projectId}', [ObservationsController::class, 'index']);
     
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
