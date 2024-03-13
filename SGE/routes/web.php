@@ -29,6 +29,7 @@ use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
 
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
+    Route::resource('observaciones', ObservationsController::class);
     Route::get('/observaciones/{projectId}', [ObservationsController::class, 'index']);
     
     // Rutas para Eventos
@@ -92,6 +94,7 @@ Route::middleware('auth')->group(function () {
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
     Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+    Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
     });
 
     //TODO - PRESIDENTE DE ACADEMIA
@@ -123,11 +126,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('asistente/reportes', ReportsController::class);
     Route::resource('asistente/documentos', DocumentsController::class);
     Route::resource('asistente/libros', BooksController::class);
+    Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
     Route::get('asistente/bajas', [BajasController::class, "index"]);
     Route::get('asistente/proyectos',[ ProjectsController::class, 'project']);
     Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
     Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
     });
+
+    //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
+    Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
 
     //TODO - Administrador
 

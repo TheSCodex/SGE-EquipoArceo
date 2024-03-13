@@ -12,6 +12,7 @@ use App\Models\Career;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\Role;
+use App\Models\Project_division;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
 
@@ -102,6 +103,9 @@ class DatabaseSeeder extends Seeder
         $rolAdmin = Role::where('title', 'admin')->first();
         $admin->role()->associate($rolAdmin);
         $admin->save();
+
+        // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
+        $project_division = Project_division::factory()->count(30)->create();
 
     }
 }

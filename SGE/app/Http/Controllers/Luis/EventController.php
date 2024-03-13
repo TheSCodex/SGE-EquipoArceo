@@ -14,16 +14,83 @@ class EventController extends Controller
      */
     public function index()
     {
-        // return view('Luis.events');
-        $events = CalendarEvent::paginate(5);
-        return view('Luis.eventsDash', compact('events'));
+        $allEvents = CalendarEvent::paginate(9);
+        return view('Luis.eventsDash', compact('allEvents'));
     }
+
+        /**
+     * Display a filter view.
+     */
+    public function filter(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $status = $request->input('status');
+    
+        $filteredEvents = CalendarEvent::query();
+    
+        if (!empty($searchTerm)) {
+            $filteredEvents->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')->orWhere('description', 'like', '%' . $searchTerm . '%')->orWhere('eventType', 'like', '%' . $searchTerm . '%');
+            });
+        }
+    
+        if ($status !== 'all') {
+            $filteredEvents->where('status', $status);
+        }
+    
+        $filteredEvents = $filteredEvents->orderBy('date_start')->paginate(9);
+
+        // dd($filteredEvents);
+        return view('Luis.eventsDash', compact('filteredEvents'));
+    }
+    
 
     /**
      * Display a calendar view.
      */
     public function calendar(){
-        return view('Luis.calendar');
+        $events = CalendarEvent::all();
+        
+        // Cambiar el estatus cuando el evento ya paso
+        foreach ($events as $event) {
+            if ($event->date_end <= date('Y-m-d H:i:s')) {
+                $event->status = 'Terminada';
+                $event->save();
+            }
+        }
+        
+        // Obtener el evento para hoy
+        $todayEvents = $events->where('date_start', '>=', now()->startOfDay())
+                            ->where('date_start', '<', now()->endOfDay());
+    
+        // Obtener el evento para mañana
+        $tomorrowEvents = $events->where('date_start', '>=', now()->addDay()->startOfDay())
+                                ->where('date_start', '<', now()->addDay()->endOfDay());
+
+
+        $date = date('Y-m-d');
+        $year = date('Y', strtotime($date));
+        $month = date('m', strtotime($date));
+        $day = date('d', strtotime($date));
+        $daysMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $months = ["01" => "Enero","02" => "Febrero", "03" => "Marzo", "04" =>  "Abril", "05" =>  "Mayo", "06" =>  "Junio", "07" =>  "Julio", "08" =>  "Agosto", "09" =>  "Septiembre", "10" => "Octubre", "11" =>  "Noviembre", "12" =>  "Diciembre"];
+        $inicialday = date('N', strtotime("$year-$month-01")); 
+        // quantity of events per day
+        $eventsPerDay = [];
+        for ($i = 1; $i <= $daysMonth; $i++) {
+            $dayOfMonth = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $eventsPerDay[$dayOfMonth] = 0;
+        }
+        foreach ($events as $event) {
+    // Solo contar los eventos pendientes
+        if ($event->status === 'Programada') {
+            $eventDate = $event->date_start;
+            $eventDay = date('d', strtotime($eventDate));
+            $eventsPerDay[$eventDay]++;
+        }
+        }
+        // dd($eventsPerDay);
+        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay'));
     }
 
 
@@ -32,6 +99,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        //Todos los asesores
         return view('Luis.newEventForm');
     }
 
@@ -51,7 +119,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = 'Programada';
         $event->save();
-        return redirect('eventos');
+        return redirect('eventos')->with('success', 'El evento se ha agregado correctamente');
     }
 
     /**
@@ -59,7 +127,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = CalendarEvent::find($id);
+        return view('Luis.showEvent', compact('event'));
     }
 
     /**
@@ -86,7 +155,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = $request->status;
         $event->update();
-        return redirect('eventos');
+        return redirect('eventos')->with('edit_success', 'El Evento ha sido editado correctamente');
     }
 
     /**
@@ -94,9 +163,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = CalendarEvent::find($id);
+        $event=CalendarEvent::find($id);
 
         $event->delete();
-        return redirect('eventos');
+
+        return redirect()->route('eventos.index')->with('delete','ok');
     }
 }

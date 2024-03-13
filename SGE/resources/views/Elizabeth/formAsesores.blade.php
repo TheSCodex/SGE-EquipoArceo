@@ -17,7 +17,7 @@
                         {{ $message }}
                     </p>
                 @enderror
-            </div>
+                </div>
 
             <div class="w-full space-y-2">
                 <p class="text-sm">Correo Electronico</p>
