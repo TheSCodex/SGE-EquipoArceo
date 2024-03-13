@@ -12,7 +12,7 @@
 <body>
     <header class="p-1 md:py-[15px] flex justify-around items-center">
         <a href="{{ route('admin.index') }}">
-            <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-20"
+            <img src="/img/logos/logo-utCancún.png" class="w-28"
                 alt="Logo UT">
         </a>
 
@@ -35,16 +35,12 @@
         </ul>
 
         <ul class="hidden md:flex gap-6 justify-center">
-            <form method="POST" action="{{ route('logout') }}">
+            <form id="logout-form" method="POST" action="{{ route('logout') }}">
                 @csrf
-
-                <x-dropdown-link :href="route('logout')"
-                    class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
-                    <img src="/img/logos/cerrar-sesion.svg"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                <button type="submit" class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <img src="/img/logos/cerrar-sesion.svg">
                     {{ __('Cerrar sesión') }}
-                </x-dropdown-link>
+                </button>
             </form>
             {{-- <button
                 class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
