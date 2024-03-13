@@ -1,20 +1,19 @@
 @extends('templates.administratorTemplate')
-@section('titulo', 'Panel de Compañias')
+@section('titulo', 'Panel de Carrera y academia')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de carreras</h1>
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Carreras y Academias</h1>
         <div class="flex items-center flex-row justify-end">
-            <div class="hidden md:flex items-center relative">
-               
-                    <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+            <div>
+                <div class="hidden md:flex items-center relative" >
+                    <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                </div>
             </div>
-            </div>
-            <a href="/panel-companies-create"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+            <a href="/panel-careers-create"
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar carrera y academia
             </a>
         </div>
         
@@ -25,8 +24,8 @@
                     <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="/panel-companies-create"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+            <a href="/panel-careers-create"
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
             </a>
 
         </div>
@@ -37,14 +36,9 @@
                 @foreach ($careers as $career)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $career->name }}</h2>
-                    <p class="text-sm text-gray-500">Direccion: {{ $career->address }}</p>
-                    <p class="text-sm text-gray-500">Correo: {{ $career->email}}</p>
-                    <p class="text-sm text-gray-500">Telefono: {{ $career->phone }}</p>
-                    <p class="text-sm text-gray-500">Fecha de registro: {{ $career->registration_date }}</p>
-                    <p class="text-sm text-gray-500">RFC: {{ $career->rfc }}</p>
-                    <p class="text-sm text-gray-500">Giro Empresarial: {{ $career->business_sector_id }}</p>
-
-
+                    <p class="text-sm text-gray-500">Correo: {{ $career->division_name }}</p>
+                    <td class="font-roboto font-bold py-5">{{ $career->academy_name }}</td>
+                    <p class="text-sm text-gray-500">Rol: {{ $career->president_name }}</p>
                     <div class="flex justify-end mt-4">
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
@@ -59,32 +53,28 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Division</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Academia</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Fecha de registro</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Presidenta</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                 </tr>
                 @foreach ($careers as $career)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->division_id }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->phone }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->registration_date }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->address }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->rfc }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $career->business_sector_id }}</td>
-
-
-
-
+                    <td class="font-roboto font-bold py-5">{{ $career->career_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->division_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->academy_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->president_name}}</td>
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
-                        <a  class="flex justify-center">
+                        <a href="{{ route('panel-careers.edit', $career->id_career) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" >
-                        <form class="flex justify-center" >
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id_career}}')">
+                        <form class="flex justify-center" id="deleteForm{{ $career->id_career}}" action="{{ route('panel-careers.destroy', $career->id_career) }}" method="POST">
                             @csrf
-                          
+                            @method('DELETE')
                             <img src="/img/logos/trash.svg">
                         </form>
+                        
                     </td>
                     
                 </tr>
@@ -97,10 +87,10 @@
 </section>
 
 <script>
-    function confirmDelete(userName, userId) {
+    function confirmDelete(careerName, careerId) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            text: `Estás a punto de eliminar a ${careerName}. Esta acción no se puede revertir.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -108,10 +98,35 @@
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + userId).submit();
+                document.getElementById('deleteForm' + careerId).submit();
             }
         });
     }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
 </script>
+
+
 
 @endsection
