@@ -125,7 +125,7 @@
                             </div>
                             <button
                                 class="bg-[#02ab82] text-white py-2 w-[243px] h-[35px] mt-5 rounded hover:bg-[rgb(2,151,171)]">
-                                <a href="/asistente/documentos">
+                                <a href="/director/documentos">
                                     Visitar Listado
                                 </a>
                             </button>

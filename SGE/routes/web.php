@@ -112,7 +112,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get("/director", [DirectorController::class, "index"]);
     Route::get('proyectos',[ ProjectsController::class, 'project']);
-    Route::resource('/director/documentos', DocumentsController::class);
     Route::resource('libros', BooksController::class);
     Route::resource('reportes', ReportsController::class);
     Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
