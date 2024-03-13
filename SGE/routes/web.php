@@ -115,6 +115,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:presidenteAcademia'], function () {
 
         Route::get('presidente', [PresidentOfTheAcademy::class, "index"]);
+        Route::get('presidente/observaciones', [ObservationsController::class, "index"]);
+        Route::get('presidente/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
         Route::get('presidente/proyectos', [AcademicAdvisorController::class, "index"]);
         Route::get('presidente/estudiantes', [StudentListController::class, "index"]);
         Route::get('presidente/documentos', [DocumentsController::class, "index"]);
