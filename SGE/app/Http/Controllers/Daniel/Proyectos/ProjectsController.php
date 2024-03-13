@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Daniel\Proyectos;
 
-use App\Models\Project;
+
+use App\Models\AcademicAdvisor;
+use App\Models\BusinessSector;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Daniel\AnteproyectoRequest;
 use App\Models\BusinessAdvisor;
+use App\Models\Comment;
 use App\Models\Company;
 use App\Models\Intern;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -25,11 +29,20 @@ class ProjectsController extends Controller
         }
         $projectId = $intern->project_id;
         $project = Project::where("id", $projectId)->first();
-        $data = Json_encode([
-            $userId,
-            $projectId
-        ]);
-        return view('Daniel.Projects.ProjectView', compact('project', 'data'));
+
+
+        $businessAdvisor = BusinessAdvisor::where("id", $project->adviser_id)->first();
+        $company = Company::where("id", $businessAdvisor->companie_id)->first();
+
+        $businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
+
+        $comments = Comment::where("project_id", $projectId)->get();
+        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
+        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+        
+        return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'businessSector','commenters'));
+        
+
     }
     public function project()
     {
