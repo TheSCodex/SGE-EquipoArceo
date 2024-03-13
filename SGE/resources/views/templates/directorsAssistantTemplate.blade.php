@@ -17,7 +17,7 @@
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
     
-        <ul class="hidden md:flex gap-6 justify-center items-center">
+        <ul class="hidden md:flex gap-6 justify-center items-center w-full">
             <li>
                 <a href="#">Estudiantes</a>
             </li>
