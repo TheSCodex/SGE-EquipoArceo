@@ -132,8 +132,9 @@ Route::middleware('auth')->group(function () {
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
     Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
-    Route::get('/Download/Sancion', [ReportsController::class, 'printReport'])-> name('cata.aprobacion');
-
+    Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
+    Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
+    Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');        
 
     //TODO - Administrador
 
@@ -162,7 +163,6 @@ Route::middleware('auth')->group(function () {
 
     });
 });
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
