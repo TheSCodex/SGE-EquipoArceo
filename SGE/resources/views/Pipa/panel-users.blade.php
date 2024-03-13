@@ -62,6 +62,11 @@
             </div>
         </div>
         <div class="hidden lg:block w-full">
+            @if(session('error'))
+                <div class="text-red text-center mb-6">
+                    {{session('error')}}
+                </div>
+            @endif
             <table class="text-center w-full">
                 <tr>
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
