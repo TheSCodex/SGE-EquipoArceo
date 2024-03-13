@@ -207,8 +207,8 @@ require __DIR__.'/auth.php';
     // Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
     // Rutas Director
-    // Route::get("/director", [DirectorController::class, "index"]);
-    // Route::get("/assistant", [DirectorAssistantController::class, "index"]);
+    Route::get("/director", [DirectorController::class, "index"]);
+    Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
     // Ruta Presidente de la Academia   
     // Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
