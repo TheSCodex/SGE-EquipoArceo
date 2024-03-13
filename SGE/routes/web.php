@@ -29,6 +29,8 @@ use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Daniel\Director\ProjectsDirectorController;
+use App\Http\Controllers\Daniel\Presidenta\ProjectsPresidentController;
 use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
@@ -105,6 +107,8 @@ Route::middleware('auth')->group(function () {
     Route::get('academic', [AcademicAdvisorController::class, "index"]);
     Route::get('studentL', [StudentListController::class, "index"]);
     Route::resource('documentos', DocumentsController::class);
+    Route::resource('anteproyectos-presidente', ProjectsPresidentController::class);
+
     });
 
 
@@ -113,7 +117,7 @@ Route::middleware('auth')->group(function () {
     
 
     Route::get("/director", [DirectorController::class, "index"]);
-    Route::get('proyectos',[ ProjectsController::class, 'project']);
+    Route::get('proyectos',[ ProjectsDirectorController::class, 'project']);
     Route::resource('libros', BooksController::class);
     Route::resource('reportes', ReportsController::class);
     Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
