@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('estudiante', [StudentController::class, "index"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
@@ -133,7 +133,7 @@ Route::middleware('auth')->group(function () {
     });
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
-    Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
 
     //TODO - Administrador
 
