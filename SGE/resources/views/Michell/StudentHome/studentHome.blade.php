@@ -7,11 +7,11 @@
                 <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
             </div>
             <div class="font-kanit mt-3 flex space-x-5 h-1/3 max-xl:h-1/4">
-                <div class=" bg-primaryColor text-white rounded-md w-[100%] flex flex-col justify-evenly max-md:block max-xl:w-full max-xl:h-full">
+                <div class=" bg-primaryColor text-white rounded-md w-[100%] flex flex-col justify-evenly max-md:block max-xl:w-full max-xl:h-full max-md:pb-3">
                     <h3 class="font-bold text-3xl px-5 max-md:text-2xl ">Tu propuesta</h3>
                     <p class="px-4 max-md:mb-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
-                    <button href="#"
-                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:mb-3">iniciar</button>
+                    <a href="Mi-anteproyecto"
+                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:px-36">iniciar</a>
                 </div>
             </div>
             <div class="h-[10%] flex space-x-5 max-md:block max-md:space-x-0 mt-5 max-xl:block max-xl:space-x-0 max-xl:mb-3 max-xl:h-48">    
@@ -64,17 +64,17 @@
                                 <p class="text-xl text-[#555]">Elsa Luz Rios</p>
                                 <p class=" text-[#888] w-3/4 line-clamp-3 max-md:w-full">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
-                            <button class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] max-xl:w-full">Ampliar observación</button>
+                            <a href="observaciones" class="bg-primaryColor rounded-md text-white text-center max-md:w-full py-1 w-[28%] max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                         <div class="flex items-center space-x-8 max-md:block max-md:space-x-0 mt-4">
                             <div>
                                 <p class="text-xl text-[#555]">Elsa Luz Rios</p>
                                 <p class=" text-[#888] w-3/4 line-clamp-3 max-md:w-full">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
-                            <button class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] max-xl:w-full">Ampliar observación</button>
+                            <a href="observaciones" class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] text-center max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                     </div>
-                    <a href="#" class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
+                    <a href="observaciones"observaciones class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
                 </div>
             </div>
         </section>
@@ -94,16 +94,6 @@
                         </div>
                         <p>Elsa Luz Rios</p>
                     </div>
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Elsa Luz Rios</p>
-                    </div>
                 </div>
             </div>
             <div class="mt-5 max-md:m-3">
@@ -111,16 +101,6 @@
                     <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores empresariales</h3>
                 </div>
                 <div class="mt-2 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Luis Villafaña</p>
-                    </div>
                     <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
                         <div class="bg-primaryColor rounded-full p-1 ml-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -203,8 +183,8 @@
                         </div>
 
                     </div>
-                    <button href="#" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3 max-md:my-2 max-md:w-[95%] max-md:ml-2">Ver
-                        más</button>
+                    <a href="eventos" class="block bg-primaryColor text-white px-14 font-bold text-center text-sm py-1 rounded-md mb-3 max-md:w-[90%] max-md:ml-4">Ver más</a>
+
                 </div>
             </div>
             <div class="mt-3 flex h-auto gap-4 max-md:block max-md:m-3 max-xl:block">

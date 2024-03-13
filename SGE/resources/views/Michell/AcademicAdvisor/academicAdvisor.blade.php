@@ -12,7 +12,7 @@
     @section('contenido')
         <section class="my-[2cm] mx-[2cm] max-md:mx-0 max-md:w-full">
             <div class="bg-white rounded-md py-1 flex justify-between items-center mb-10 border-b-2  max-md:w-full">
-                <h1 class="text-2xl font-bold font-kanit ml-8 max-lg:ml-2"> Lista de Proyectos </h1>
+                <h1 class="text-2xl font-bold font-kanit ml-8 max-lg:ml-2">Lista de proyectos de la división</h1>
                 {{-- buscador --}}
                 <div class="w-[50%] flex justify-evenly max-md:hidden">
                     <input placeholder="Buscador" type="search" name="d" id="searchDesktop"
@@ -95,9 +95,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{-- <div class="bg-blue-400 text-black w-full h-24">
                 {{ $datos->links() }}
-            </div> --}}
         </section>
         {{-- Responsive --}}
         <section class="">

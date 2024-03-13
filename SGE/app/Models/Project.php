@@ -19,6 +19,9 @@ class Project extends Model
         'end_date',
         'adviser_id',
         'internship_type_id',
+        'problem_statement',
+        'project_justificaction',
+        'activities_to_do'
     ];
 
     public function adviser()

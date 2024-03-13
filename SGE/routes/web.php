@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('estudiante', [StudentController::class, "index"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     // Rutas para Eventos
     Route::resource('eventos', EventController::class);
     Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+    Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
     });
 
     //TODO - PRESIDENTE DE ACADEMIA
@@ -124,6 +125,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('asistente/reportes', ReportsController::class);
     Route::resource('asistente/documentos', DocumentsController::class);
     Route::resource('asistente/libros', BooksController::class);
+    Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
     Route::get('asistente/bajas', [BajasController::class, "index"]);
     Route::get('asistente/proyectos',[ ProjectsController::class, 'project']);
     Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
@@ -205,8 +207,8 @@ require __DIR__.'/auth.php';
     // Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
     // Rutas Director
-    // Route::get("/director", [DirectorController::class, "index"]);
-    // Route::get("/assistant", [DirectorAssistantController::class, "index"]);
+    Route::get("/director", [DirectorController::class, "index"]);
+    Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
     // Ruta Presidente de la Academia   
     // Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);

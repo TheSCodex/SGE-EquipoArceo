@@ -4,14 +4,14 @@
 @endsection
 
 @section('contenido')
-    <section class="bg-[#F3F5F9]">
-        <div class="w-[93%] h-auto mx-auto bg-white rounded-md my-6">
+    <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 h-auto mx-auto bg-white rounded-md my-6">
             {{-- Datos Personales --}}
             <div class="my-4">
                 <h1 class="font-roboto text-xl font-semibold my-4 ml-4">Datos del alumno</h1>
             </div>
-            <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[97%] mx-4"></div>
-            <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4">
+            <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
+            <form method="POST" action="{{ route('Mi-anteproyecto.store') }}" class="space-y-4 ml-4">
                 <div class="Datos Personales flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
@@ -22,7 +22,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[20%]">
+                    <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
                         <input type="number" name="matricula" placeholder="Matricula" value="{{ old('matricula') }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -82,7 +82,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[18%]">
+                    <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
                         <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero') }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -90,7 +90,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[13%]">
+                    <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Inicio:</h2>
                         <input type="date" name="Fecha_Inicio" placeholder="SM51" value="{{ old('Fecha_Inicio') }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -98,7 +98,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[13%]">
+                    <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Final:</h2>
                         <input type="date" name="Fecha_Final" placeholder="SM51" value="{{ old('Fecha_Final') }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -107,13 +107,11 @@
                         @enderror
                     </div>
                 </div>
-            </form>
             {{-- Parte Empresa --}}
             <div class="my-4">
-                <h1 class="font-roboto text-xl font-semibold mt-4 ml-4">Datos de la empresa</h1>
+                <h1 class="font-roboto text-xl font-semibold mt-4">Datos de la empresa</h1>
             </div>
-            <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[97%] mx-4"></div>
-            <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4">
+            <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] "></div>
                 <div class="Datos de la empresa 2 flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre de la empresa:</h2>
@@ -163,7 +161,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[18%]">
+                    <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
                         <input type="number" name="Phone_advisor" placeholder="998XXXXXXX"
                             value="{{ old('Phone_advisor') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -171,8 +169,8 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[28%]">
-                        <h2 class="font-roboto mb-1 font-medium">Area donde se desempeñará:</h2>
+                    <div class="w-[31%]">
+                        <h2 class="font-roboto mb-1 font-medium">Area de desempeño:</h2>
                         <input type="text" name="position_student" placeholder="Introduzca el area donde trabajara"
                             value="{{ old('position_student') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('position_student')
@@ -184,9 +182,8 @@
                 <div class="my-4">
                     <h1 class="font-roboto text-xl font-semibold mt-4">Datos del proyecto</h1>
                 </div>
-                <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[97%] mr-4"></div>
-                <form method="POST" action="{{ url('alumno') }}" class="space-y-4 ml-4 flex">
-                    <div class="w-[98%]">
+                <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] mr-4"></div>
+                    <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre del anteproyecto:</h2>
                         <input type="text" name="name_proyect" placeholder="Introduzca el nombre del anteproyecto"
                             value="{{ old('name_proyect') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
@@ -194,7 +191,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[98%]">
+                    <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Objetivo General:</h2>
                         <textarea name="objetivo_general" rows="4" placeholder="Define el objetivo general del anteproyecto" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general') }}</textarea><br>
@@ -202,7 +199,7 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[98%]">
+                    <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Planteamiento del problema:</h2>
                         <textarea name="planteamiento" rows="4"
                             placeholder="Exponen los aspectos, elementos y relaciones del problema de tu proyecto." required
@@ -211,17 +208,14 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="w-[98%]">
-                        <h2 class="font-roboto mb-1 font-medium">Justificacion:</h2>
-                        <textarea name="Justificacion" rows="4"
-                            placeholder="Escribe tu justificacion, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la 
-                        investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion') }}</textarea><br>
+                    <div class="w-[97%]">
+                        <h2 class="font-roboto mb-1 font-medium">Justificación:</h2>
+                        <textarea name="Justificacion" rows="4" placeholder="Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion') }}</textarea>
                         @error('Justificacion')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
-                    </div>
-                    <div class="w-[98%]">
+                    </div>                    
+                    <div class="w-[97%]">
                         <h2 class="font-roboto mb-4 m font-medium">Actividades a realizar:</h2>
                         <textarea name="activities" rows="4"
                             placeholder="Enlista las actividades que vas a llevar a cabo de manera ordenada." required
@@ -230,7 +224,6 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
-                </form>
                 <div class="my-4 mr-4 gap-4 flex justify-end">
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
@@ -240,6 +233,8 @@
                     </button>
                 </div>
             </form>
+            
         </div>
     </section>
 @endsection
+

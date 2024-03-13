@@ -15,7 +15,7 @@
                         {{ $message }}
                     </p>
                 @enderror
-            </div>
+                </div>
             <div class="w-full space-y-2">
                 <p class="text-sm space-y-2">División</p>
                 <input type="text" name="" value="{{old('')}}" class="text-sm  w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="División">
