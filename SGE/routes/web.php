@@ -29,6 +29,8 @@ use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Daniel\Director\ProjectsDirectorController;
+use App\Http\Controllers\Daniel\Presidenta\ProjectsPresidentController;
 use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
@@ -77,9 +79,11 @@ Route::middleware('auth')->group(function () {
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
-        Route::get("estudidante/anteproyecto", [ProjectsController::class, "index"]);
-        Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, "create"]);
-        Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, "store"]);
+        Route::resource('estudiante/anteproyecto', ProjectsController::class);
+        Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
+        Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
+        Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
+        Route::put("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
 
         // NO FUNCIONA
         // Route::get("anteproyecto/observaciones/{projectId}", [ObservationsController::class, "index"]);
@@ -112,7 +116,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('presidente', [PresidentOfTheAcademy::class, "index"]);
         Route::get('presidente/proyectos', [AcademicAdvisorController::class, "index"]);
-        Route::get('presidente/estudiantes', [StudentListController::class, "index"]);
+        Route::get('presidente/estudiantes', ProjectsPresidentController::class);
         Route::get('presidente/documentos', [DocumentsController::class, "index"]);
 
     });
@@ -122,7 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:director'], function () {
 
         Route::get("director", [DirectorController::class, "index"]);
-        Route::get('director/anteproyectos',[ ProjectsController::class, 'project']);
+        Route::get('director/anteproyectos', ProjectsDirectorController::class);
         Route::resource('director/libros', BooksController::class);
         Route::get('/reportes', [ReportsController::class, "index"]);
         Route::resource('/director/documentos', DocumentsController::class);

@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Daniel;
+namespace App\Http\Controllers\Daniel\Presidenta;
 
 use App\Http\Controllers\Controller;
-use DragonCode\Contracts\Cashier\Auth\Auth;
 use Illuminate\Http\Request;
 
-class FormAnteproyectoController extends Controller
+class ProjectsPresidentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('daniel.formanteproyecto');
+        return view('daniel.presidenta.project');
     }
 
     /**
@@ -63,6 +62,4 @@ class FormAnteproyectoController extends Controller
     {
         //
     }
-
-    
 }
