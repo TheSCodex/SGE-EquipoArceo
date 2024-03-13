@@ -29,7 +29,7 @@
                 <a href="#" class="hover:border-b-2 hover:border-primaryColor">Cartas</a>
             </li>
             <li>
-                <a href="/books" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
+                <a href="/asistente/libros" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
             </li>
         </ul>
 
