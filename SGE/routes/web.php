@@ -73,7 +73,6 @@ Route::middleware('auth')->group(function () {
 
         // Ruta Estudiantes
         Route::get('estudiante', [StudentController::class, "index"]);
-        Route::get("estudiante/principal", [StudentController::class, "studentHome"]);
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
@@ -117,6 +116,9 @@ Route::middleware('auth')->group(function () {
         Route::get('presidente/proyectos', [AcademicAdvisorController::class, "index"]);
         Route::get('presidente/estudiantes', [StudentListController::class, "index"]);
         Route::get('presidente/documentos', [DocumentsController::class, "index"]);
+        Route::get('presidente/reportes', [ReportsController::class, "index"]);
+        Route::get('presidente/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
+
 
     });
 
@@ -128,7 +130,8 @@ Route::middleware('auth')->group(function () {
         Route::get('director/anteproyectos',[ ProjectsController::class, 'project']);
         Route::resource('director/libros', BooksController::class);
         Route::get('director/reportes', [ReportsController::class, "index"]);
-        Route::get('asistente/exportar', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('director/exportar', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('director/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
     });
 
@@ -144,6 +147,7 @@ Route::middleware('auth')->group(function () {
         Route::get('asistente/anteproyectos',[ ProjectsController::class, 'project']);
         Route::resource('asistente/anteproyecto', ProjectDraftController::class);
         Route::get('asistente/exportar', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('asistente/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
     });
 
