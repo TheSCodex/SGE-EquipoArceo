@@ -14,33 +14,40 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Cuadros de Reportes  -->
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Asistencia</h2>
-                    <p class='p-4'>Este reporte ofrece un resumen de la asistencia de los estudiantes durante el período escolar, incluyendo ausencias y tardanzas.</p>
-                    <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-2 h-[67px] w-full rounded-b-lg">
-                        <p class="hover:cursor-pointer ">Generar</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Formato Control de Estadías</h2>
+                    <p class='p-4'>Formato donde asesores llevan el registro de sus asesorados a lo largo del proceso
+                        de estadías.
+                    </p>
+                    <div
+                        class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
+                        <a href="/asistente/exportar/1" class="hover:cursor-pointer ">Generar</a>
                     </div>
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Calificaciones</h2>
-                    <p class='p-4'>Este reporte proporciona un análisis detallado de las calificaciones de los estudiantes en cada materia.</p>
-                    <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                        <p class="hover:cursor-pointer">Generar</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Formato Carta de Aprobación</h2>
+                    <p class='p-4'>Formato de la carta de aprobación generada por los asesores para los alumnos a la
+                        conclusión de sus estadías.</p>
+                    <div
+                        class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
+                        <a href="asistente/Download/CartaAprobacion" class="hover:cursor-pointer">Generar</a>
                     </div>
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
 
 
                 <div class="bg-white rounded-lg shadow-md relative">
-                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Reporte de Actividades de curso</h2>
-                    <p class='p-4'>Este reporte detalla las actividades de curso realizadas por los estudiantes, incluyendo participación y logros.</p>
-                    <div class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
-                        <p class="hover:cursor-pointer">Generar</p>
+                    <h2 class="font-bold opacity-30 p-4 font-montserrat">Formato Carta de Digitalización</h2>
+                    <p class='p-4'>Formato de la carta de digitalización generada por los asesores para los alumnos a
+                        la
+                        conclusión de sus estadías.</p>
+                    <div
+                        class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
+                        <a href="asistente/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
                     </div>
                     <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                 </div>
-
             </div>
             <div class="flex lg:flex-row sm:flex-col gap-12 h-full mb-8">
 
