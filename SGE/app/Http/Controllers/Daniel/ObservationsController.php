@@ -30,8 +30,13 @@ class ObservationsController extends Controller
 
             // Buscamos los comentarios normales relacionados con el project_id del intern
             $normalComments = Comment::where('project_id', $projectId)
-                                    ->where('academic_advisor_id', '!=', $academicAdvisorId)
-                                    ->get();
+    ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
+        $query->select('id')
+            ->from('comments')
+            ->where('academic_advisor_id', $academicAdvisorId);
+    })
+    ->get();
+
 
             return view('Daniel.Projects.Observation')->with([
                 'userId' => $userId,

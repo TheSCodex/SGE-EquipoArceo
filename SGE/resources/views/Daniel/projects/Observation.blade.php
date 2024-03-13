@@ -56,13 +56,13 @@
     {{-- Cuadros normales --}}
     <div class="sm:flex flex-wrap pb-10">
         @foreach($normalComments as $comment)
-        <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5">
+        <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5 mb-5">
             <div class="border-t border-gray-200 rounded-l-lg bg-white border w-full h-64 p-4">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center">
                         <div class="ml-4">
                             <h4 class="text-base font-medium text-gray-900">
-                                {{ $comment->academicAdvisor->name }}
+                                Asesor Académico
                             </h4>
                             <p class="text-sm text-gray-500">
                                 {{ is_string($comment->fecha_hora) ? $comment->fecha_hora : $comment->fecha_hora->format('d/m/Y \a \l\a\s H:i') }}
