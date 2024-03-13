@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
     // Ruta Estudiantes
-    Route::get('student', [StudentController::class, "index"]);
+    Route::get('estudiante', [StudentController::class, "index"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
     Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
@@ -133,7 +133,9 @@ Route::middleware('auth')->group(function () {
     });
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
-    Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+    Route::get('/Download/Sancion', [ReportsController::class, 'printReport'])-> name('cata.aprobacion');
+
 
     //TODO - Administrador
 
@@ -158,8 +160,11 @@ Route::middleware('auth')->group(function () {
     Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     // Rutas para CRUD de Documentos
     Route::resource('documentos', DocumentsController::class);
+
+
     });
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
