@@ -9,7 +9,7 @@
             <div class="font-kanit mt-3 flex space-x-5 h-[36%]">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="#"
+                    <a href="panel-users"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
