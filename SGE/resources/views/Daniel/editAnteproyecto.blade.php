@@ -11,20 +11,21 @@
                 <h1 class="font-roboto text-xl font-semibold my-4 ml-4">Datos del alumno</h1>
             </div>
             <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
-            <form method="POST" action="{{ route('Mi-anteproyecto.store') }}" class="space-y-4 ml-4">
+            <form method="POST" action="{{ route('Mi-anteproyecto.update', $project->id) }}" class="space-y-4 ml-4">
                 <div class="Datos Personales flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
                         @csrf
+                        @method('PUT')
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
-                            value="{{ old('name_student') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_student', $user->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
-                        <input type="number" name="matricula" placeholder="Matricula" value="{{ old('matricula') }}"
+                        <input type="number" name="matricula" placeholder="Matricula" value="{{ old('matricula', $user->identifier) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('matricula')
                             <div style='color:red'>{{ $message }}</div>
@@ -32,7 +33,7 @@
                     </div>
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
-                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group') }}" required
+                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
@@ -76,7 +77,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Correo Electronico:</h2>
                         <input type="email" name="email_student" placeholder="Introduzca su correo electronico"
-                            value="{{ old('email_student') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('email_student', $user->email) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('email_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -91,7 +92,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Inicio:</h2>
-                        <input type="date" name="Fecha_Inicio" placeholder="SM51" value="{{ old('Fecha_Inicio') }}"
+                        <input type="date" name="Fecha_Inicio" placeholder="SM51" value="{{ old('Fecha_Inicio', $project->start_date) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Fecha_Inicio')
                             <div style='color:red'>{{ $message }}</div>
@@ -99,7 +100,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Final:</h2>
-                        <input type="date" name="Fecha_Final" placeholder="SM51" value="{{ old('Fecha_Final') }}"
+                        <input type="date" name="Fecha_Final" placeholder="SM51" value="{{ old('Fecha_Final', $project->end_date) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Fecha_Final')
                             <div style='color:red'>{{ $message }}</div>
@@ -115,7 +116,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre de la empresa:</h2>
                         <input type="text" name="name_enterprise" placeholder="Introduzca el nombre de la empresa"
-                            value="{{ old('name_enterprise') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_enterprise', $company->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_enterprise')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -123,7 +124,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Direccion:</h2>
                         <input type="text" name="direction_enterprise"
-                            placeholder="Introduzca la direccion de la empresa" value="{{ old('direction_enterprise') }}"
+                            placeholder="Introduzca la direccion de la empresa" value="{{ old('direction_enterprise', $company->address) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('direction_enterprise')
                             <div style='color:red'>{{ $message }}</div>
@@ -134,7 +135,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre del asesor:</h2>
                         <input type="text" name="name_advisor"
-                            placeholder="Introduzca el nombre del asesor empresarial" value="{{ old('name_advisor') }}"
+                            placeholder="Introduzca el nombre del asesor empresarial" value="{{ old('name_advisor', $businessAdvisor->name) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_advisor')
                             <div style='color:red'>{{ $message }}</div>
@@ -143,7 +144,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Cargo que desempeña:</h2>
                         <input type="text" name="advisor_position" placeholder="Introduzca el cargo del asesor"
-                            value="{{ old('advisor_position') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('advisor_position', $businessAdvisor->position) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('advisor_position')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -154,7 +155,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Correo Electronico:</h2>
                         <input type="email" name="email_advisor"
-                            placeholder="Introduzca el correo electronico del asesor" value="{{ old('email_advisor') }}"
+                            placeholder="Introduzca el correo electronico del asesor" value="{{ old('email_advisor', $businessAdvisor->email) }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('email_advisor')
                             <div style='color:red'>{{ $message }}</div>
@@ -163,7 +164,7 @@
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
                         <input type="number" name="Phone_advisor" placeholder="998XXXXXXX"
-                            value="{{ old('Phone_advisor') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('Phone_advisor', $businessAdvisor->phone) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Phone_advisor')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -171,7 +172,7 @@
                     <div class="w-[31%]">
                         <h2 class="font-roboto mb-1 font-medium">Area de desempeño:</h2>
                         <input type="text" name="position_student" placeholder="Introduzca el area donde trabajara"
-                            value="{{ old('position_student') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('position_student',$intern->performance_area) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('position_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -185,7 +186,7 @@
                     <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre del anteproyecto:</h2>
                         <input type="text" name="name_proyect" placeholder="Introduzca el nombre del anteproyecto"
-                            value="{{ old('name_proyect') }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_proyect', $project->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_proyect')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -193,7 +194,7 @@
                     <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Objetivo General:</h2>
                         <textarea name="objetivo_general" rows="4" placeholder="Define el objetivo general del anteproyecto" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general') }}</textarea><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general', $project->description) }}</textarea><br>
                         @error('objetivo_general')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -202,14 +203,15 @@
                         <h2 class="font-roboto mb-1 font-medium">Planteamiento del problema:</h2>
                         <textarea name="planteamiento" rows="4"
                             placeholder="Exponen los aspectos, elementos y relaciones del problema de tu proyecto." required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('planteamiento') }}</textarea><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('planteamiento', $project->problem_statement) }}</textarea><br>
                         @error('planteamiento')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Justificación:</h2>
-                        <textarea name="Justificacion" rows="4" placeholder="Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion') }}</textarea>
+                        <textarea name="Justificacion" rows="4" placeholder="Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?" 
+                        required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion', $project->project_justificaction) }}</textarea>
                         @error('Justificacion')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -218,14 +220,14 @@
                         <h2 class="font-roboto mb-4 m font-medium">Actividades a realizar:</h2>
                         <textarea name="activities" rows="4"
                             placeholder="Enlista las actividades que vas a llevar a cabo de manera ordenada." required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities') }}</textarea><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities', $project->activities_to_do) }}</textarea><br>
                         @error('activities')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                 <div class="my-4 mr-4 gap-4 flex justify-end">
-                    <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
-                        Guardar
+                    <button type="submit" class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
+                        Actualizar
                     </button>
                     <button onclick="window.location.href = '/Mi-anteproyecto'" class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
                         Cerrar

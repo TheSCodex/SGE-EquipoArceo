@@ -41,24 +41,27 @@ Bienvenido
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Planteamiento del problema</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
-                                    {{ $project->description }}
+                                    {{ $project->problem_statement }}
                                 </p>
                             </div>
 
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Justificación</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-center">
-                                    {{ $project->description }}
+                                    {{ $project->project_justificaction }}
                                 </p>
                             </div>
 
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Actividades a realizar</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
-                                    {{ $project->description }}
+                                    {{ $project->activities_to_do }}
                                 </p>
                             </div>
                         </div>
+
+                        <a href="{{ route('Mi-anteproyecto.edit', $project->id) }}" class="text-green-500 hover:text-green-700">Editar</a>
+
 
                         @else
 
@@ -66,7 +69,7 @@ Bienvenido
 
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center ">Aun no tienes un
                             Anteproyecto. Empieza a trabajarlo ahora</p>
-                        <a href="/Form-anteproyecto"
+                        <a href="{{ route('Mi-anteproyecto.create') }}"
                             class="block bg-[#02AB82] rounded-md px-[2%] py-[1%] m-[2%] font-normal text-white text-center text-sm">Crea
                             uno ahora</a>
                             </div>

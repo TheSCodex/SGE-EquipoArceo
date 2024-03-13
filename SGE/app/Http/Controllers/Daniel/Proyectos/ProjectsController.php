@@ -20,7 +20,7 @@ class ProjectsController extends Controller
     {
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
-        if(!$intern){
+        if (!$intern) {
             return view('Daniel.Projects.ProjectView');
         }
         $projectId = $intern->project_id;
@@ -29,9 +29,7 @@ class ProjectsController extends Controller
             $userId,
             $projectId
         ]);
-        return view('Daniel.Projects.ProjectView', compact('project','data'));
-        
-
+        return view('Daniel.Projects.ProjectView', compact('project', 'data'));
     }
     public function project()
     {
@@ -42,7 +40,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view ('daniel.formanteproyecto');
+        return view('daniel.formanteproyecto');
     }
 
     /**
@@ -56,19 +54,19 @@ class ProjectsController extends Controller
             'name' => $validatedData['name_proyect'],
             'description' => $validatedData['objetivo_general'],
             'problem_statement' => $validatedData['planteamiento'],
-            'project_justification' => $validatedData['Justificacion'],
+            'project_justificaction' => $validatedData['Justificacion'],
             'activities_to_do' => $validatedData['activities'],
             'start_date' => $validatedData['Fecha_Inicio'],
             'end_date' => $validatedData['Fecha_Final']
         ]);
         $project->save();
-    
+
         $company = new Company([
             'name' => $validatedData['name_enterprise'],
             'address' => $validatedData['direction_enterprise'],
         ]);
         $company->save();
-    
+
         $businessAdvisor = new BusinessAdvisor([
             'name' => $validatedData['name_advisor'],
             'email' => $validatedData['email_advisor'],
@@ -76,11 +74,11 @@ class ProjectsController extends Controller
             'position' => $validatedData['advisor_position'],
         ]);
         $businessAdvisor->save();
-    
+
         // Crear y guardar el internado
         $intern = new Intern([
             'performance_area' => $validatedData['position_student'],
-            'group' => $validatedData['Group']
+            'Group' => $validatedData['Group']
         ]);
         $intern->save();
 
@@ -90,7 +88,7 @@ class ProjectsController extends Controller
         $intern->user_id = $user->id;
         $intern->save();
 
-        $project->adviser_id = $businessAdvisor->id; 
+        $project->adviser_id = $businessAdvisor->id;
         $project->save();
 
         $businessAdvisor->companie_id = $company->id;
@@ -103,7 +101,6 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -111,15 +108,67 @@ class ProjectsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $project = Project::find($id);
+        if (!$project) {
+            return redirect()->route('Mi-anteproyecto.index')->with('error', 'Proyecto no encontrado.');
+        }
+
+        $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
+        $company = Company::findOrFail($businessAdvisor->companie_id);
+        $intern = Intern::where('project_id', $project->id)->first();
+        $user = auth()->user();
+
+        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AnteproyectoRequest $request, string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $validatedData = $request->validated();
+
+        $project->update([
+            'name' => $validatedData['name_proyect'],
+            'description' => $validatedData['objetivo_general'],
+            'problem_statement' => $validatedData['planteamiento'],
+            'project_justificaction' => $validatedData['Justificacion'],
+            'activities_to_do' => $validatedData['activities'],
+            'start_date' => $validatedData['Fecha_Inicio'],
+            'end_date' => $validatedData['Fecha_Final']
+        ]);
+
+        if ($project->BusinessAdvisor) {
+            $project->BusinessAdvisor->Company()->update([
+                'name' => $validatedData['name_enterprise'],
+                'address' => $validatedData['direction_enterprise'],
+            ]);
+        }
+
+        if ($project->BusinessAdvisor) {
+            $project->BusinessAdvisor->update([
+                'name' => $validatedData['name_advisor'],
+                'email' => $validatedData['email_advisor'],
+                'phone' => $validatedData['Phone_advisor'],
+                'position' => $validatedData['advisor_position'],
+            ]);
+    
+            // También puedes actualizar la compañía si existe
+            if ($project->BusinessAdvisor->companie) {
+                $project->BusinessAdvisor->companie->update([
+                    'name' => $validatedData['name_enterprise'],
+                    'address' => $validatedData['direction_enterprise'],
+                ]);
+            }
+        }
+
+        $intern = Intern::where('project_id', $project->id)->first();
+        $intern->update([
+            'performance_area' => $validatedData['position_student'],
+            'group' => $validatedData['Group']
+        ]);
+        return redirect('/Mi-anteproyecto')->with('success', 'Proyecto actualizado correctamente');
     }
 
     /**

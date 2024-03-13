@@ -75,7 +75,10 @@ Route::middleware('auth')->group(function () {
     Route::get('student', [StudentController::class, "index"]);
     Route::get('inicioEstudiante',[StudentController::class, 'index']);
     Route::resource('Mi-anteproyecto', ProjectsController::class);
-    Route::resource('Form-anteproyecto', [StudentController::class, 'create']);
+    Route::get('Mi-anteproyecto-create', [ProjectsController::class, 'create'])->name('formanteproyecto');
+    Route::get('Mi-anteproyecto/{id}/edit', [ProjectsController::class, 'edit'])->name('editAnteproyecto');
+
+
     Route::get('/observaciones/{projectId}', [ObservationsController::class, 'index']);
     
     // Rutas para Eventos
@@ -202,8 +205,8 @@ require __DIR__.'/auth.php';
     // Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
     // Rutas Director
-    Route::get("/director", [DirectorController::class, "index"]);
-    Route::get("/assistant", [DirectorAssistantController::class, "index"]);
+    // Route::get("/director", [DirectorController::class, "index"]);
+    // Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
     // Ruta Presidente de la Academia   
     // Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
