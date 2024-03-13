@@ -10,30 +10,30 @@
 </head>
 
 <body>
-    <header class="p-1 md:py-[15px] flex justify-around items-center">
-        <a href="{{ route('admin.index') }}">
-            <img src="/img/logos/logo-utCancún.png" class="w-28"
-                alt="Logo UT">
-        </a>
 
-        <ul class="hidden md:flex gap-10 justify-center font-roboto text-sm">
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+        <a href="#" class=" text-center flex justify-center">
+            <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
+        </a>
+    
+        <ul class="hidden md:flex gap-6 justify-center items-center w-full">
             <li>
-                <a href="/panel-users" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
+                <a href="/panel-users">Usuarios</a>
             </li>
             <li>
-                <a href="/panel-roles" class="hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>
+                <a href="/panel-roles" class="text-nowrap">Roles y permisos</a>
             </li>
             <li>
-                <a href="/panel-companies" class="hover:border-b-2 hover:border-primaryColor">Empresas</a>
+                <a href="/panel-companies">Empresas</a>
             </li>
             <li>
-                <a href="/panel-advisors" class="hover:border-b-2 hover:border-primaryColor">Asesores empresariales</a>
+                <a href="/panel-advisors" class="text-nowrap">Asesores empresariales</a>
             </li>
             <li>
-                <a href='/panel-careers' class="hover:border-b-2 hover:border-primaryColor">Carreras y Divisones</a>
+                <a href="/panel-careers" class="text-nowrap">Carreras y divisiones</a>
             </li>
         </ul>
-
+    
         <ul class="hidden md:flex gap-6 justify-center">
             <form id="logout-form" method="POST" action="{{ route('logout') }}">
                 @csrf

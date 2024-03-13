@@ -13,8 +13,11 @@
                     <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('formAsesores')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo asesor
+            <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
+                <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
+                <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
+            </div>
+            <a href="{{ route('formAsesores')}}" class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva asesor
             </a>
         </div>
         

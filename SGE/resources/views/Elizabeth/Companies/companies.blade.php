@@ -8,10 +8,10 @@
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de empresas</h1>
         <div class="flex items-center flex-row justify-end">
-            <div class="hidden md:flex items-center relative">
-               
+            <div>
+                <div class="hidden md:flex items-center relative" >
                     <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
-            </div>
+                </div>
             </div>
             <a href="/panel-companies-create"
                 class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa
@@ -53,14 +53,14 @@
                 @endforeach
             </div>
         </div>
-        <div class="hidden lg:block w-full">
+        <div class="hidden lg:block">
             <table class="text-center w-full">
                 <tr>
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Telefono</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Fecha de registro</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th>
+                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Giro empresarial</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
@@ -68,13 +68,13 @@
                 </tr>
                 @foreach ($companies as $company)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $company->name }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->email }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->phone }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->registration_date }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->address }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->rfc }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->business_sector_id }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->email }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->phone }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->registration_date }}</td>
+                    {{-- <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->address }}</td> --}}
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->rfc }}</td>
+                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->business_sector_id }}</td>
 
 
 
