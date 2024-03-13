@@ -9,10 +9,8 @@ use App\Http\Requests\Daniel\AnteproyectoRequest;
 use App\Models\BusinessAdvisor;
 use App\Models\Company;
 use App\Models\Intern;
-use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 
 class ProjectsController extends Controller
