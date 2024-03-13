@@ -19,7 +19,7 @@
     
         <ul class="hidden md:flex gap-6 justify-center items-center w-full">
             <li>
-                <a href="#">Estudiantes</a>
+                <a href="/estudiante">Estudiantes</a>
             </li>
             <li>
                 <a href="#">Proyectos</a>
