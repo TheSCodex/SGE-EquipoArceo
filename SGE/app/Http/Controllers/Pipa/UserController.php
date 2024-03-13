@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -54,11 +55,14 @@ class UserController extends Controller
         $user->password = bcrypt($randomPassword);
         $user->save();
 
-        // manda la contraseña al correo del usuario
-        $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
-
-        $users=User::all();
-        return view ('Pipa.panel-users', compact('users'));
+        if (!$this->checkInternetConnection()) {
+            session()->flash('error', 'No se pudo enviar el correo electrónico a la dirección ' . $request->email . ' debido a la falta de conexión a Internet.');
+            return redirect()->route('panel-users.index');
+        } else {
+            $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
+            $users=User::all();
+            return view ('Pipa.panel-users', compact('users'));
+        }
     }
 
     /**
@@ -102,5 +106,15 @@ class UserController extends Controller
         $user = \App\Models\User::find($id);
         $user->delete();
         return redirect()->route('panel-users.index');
+    }
+
+    private function checkInternetConnection(): bool
+    {
+        try{
+            $response = Http::get('http://www.google.com');
+            return $response->successful();
+        } catch(\Exception $e){
+            return false;
+        }
     }
 }
