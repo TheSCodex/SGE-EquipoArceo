@@ -1,5 +1,4 @@
-@extends('./templates/guestTemplate')
-
+@extends('./templates/studenTemplate')
 @section('titulo')
     Observaciones
 @endsection
