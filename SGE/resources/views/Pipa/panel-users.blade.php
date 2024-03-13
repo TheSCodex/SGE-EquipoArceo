@@ -69,6 +69,7 @@
                     <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
                     {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td> --}}
                     <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
+<<<<<<< HEAD
                     <td class="font-roboto font-bold py-5">
                         @isset($user->career_academy_id)
                             @php
@@ -85,11 +86,17 @@
                     </td>
                                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                         <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
+=======
+                    {{-- <td class="font-roboto font-bold py-5">{{ $user->career_academy_id->career->name}}</td> --}}
+                    <td class="font-roboto font-bold py-5">{{ $user->career_academy_id}}</td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        <a href="" class="flex justify-center">
+>>>>>>> web
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
+                        <form class="flex justify-center" id="deleteForm{{ $user->id }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">

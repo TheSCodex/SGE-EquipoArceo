@@ -11,8 +11,13 @@
 
 <body>
     <header class="p-1 md:py-[15px] flex justify-around items-center">
+<<<<<<< HEAD
         <a href="{{ route('admin.index') }}">
             <img src="/img/logos/logo-utCancún.png" class="w-28"
+=======
+        <a href="">
+            <img src="http://www.utcancun.edu.mx/wp-content/uploads/2016/06/1200px-LogoBIS-01.png" class="w-20"
+>>>>>>> web
                 alt="Logo UT">
         </a>
 
