@@ -66,12 +66,24 @@
                     <td class="font-roboto font-bold py-5">{{ $user->name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
-                    {{-- <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td> --}}
-                    <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
+                    {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td> --}}
                     <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
-                    {{-- <td class="font-roboto font-bold py-5">{{ $user->career_academy_id->career->name}}</td> --}}
-                    <td class="font-roboto font-bold py-5">{{ $user->career_academy_id}}</td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                    <td class="font-roboto font-bold py-5">
+                        @isset($user->career_academy_id)
+                            @php
+                                $career = App\Models\Career::find($user->career_academy_id);
+                            @endphp
+                            @if($career)
+                                {{ $career->name }}
+                            @else
+                                Sin especialidad
+                            @endif
+                        @else
+                            Sin especialidad
+                        @endisset
+                    </td>
+                                        <td class="font-roboto font-bold py-5 cursor-pointer ">
                         <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
                         </a>
