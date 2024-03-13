@@ -37,21 +37,21 @@
                 <div class="flex-1 md:mr-2">
                     <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
                         <input id="search" placeholder="Buscador" type="text"
-                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
+                            class="placeholder-primaryColor outline-none focus:outline-none font-montserrat py-1 px-2 justify-start">
                         <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
                     </div>
                 </div>
-                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
+                {{-- <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
                     <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                     <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
-                </div>
+                </div> --}}
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between md:hidden mt-2 mx-auto">
-                <div class="flex">
+                {{-- <div class="flex">
                     <button class="bg-green py-2 px-4 rounded-md text-white mr-2">▲</button>
                     <button class="bg-green py-2 px-4 rounded-md text-white">▼</button>
-                </div>
+                </div> --}}
                 <a href="" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Generar Nuevo Documento</a>
             </div>
         </div>
