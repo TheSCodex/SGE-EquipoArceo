@@ -19,19 +19,19 @@
     
         <ul class="hidden md:flex gap-6 justify-center items-center">
             <li>
-                <a href="#">Estudiantes</a>
+                <a href="estudiante">Estudiantes</a>
             </li>
             <li>
-                <a href="#">Proyectos</a>
+                <a href="asistente/anteproyectos">Proyectos</a>
             </li>
             <li>
-                <a href="#">Reportes</a>
+                <a href="asistente/reportes">Reportes</a>
             </li>
             <li>
                 <a href="#">Cartas</a>
             </li>
             <li>
-                <a href="/calendar">Calendario</a>
+                <a href="asistente/eventos/calendario">Calendario</a>
             </li>
         </ul>
     

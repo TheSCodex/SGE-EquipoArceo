@@ -17,13 +17,13 @@
 
         <ul class="hidden md:flex gap-6 justify-center items-center">
             <li>
-                <a href="#">Estudiantes</a>
+                <a href="estudiante">Estudiantes</a>
             </li>
             <li>
                 <a href="/anteproyectos-presidente">Proyectos</a>
             </li>
             <li>
-                <a href="#">Reportes</a>
+                <a href="presidente/reportes">Reportes</a>
             </li>
             <li>
                 <a href="#">Cartas</a>

@@ -16,13 +16,13 @@
 
     <ul class="hidden md:flex gap-6 justify-center items-center">
         <li>
-            <a href="#">Inicio</a>
+            <a href="estudiante">Inicio</a>
         </li>
         <li>
             <a href="/Mi-anteproyecto">Proyectos</a>
         </li>
         <li>
-            <a href="/calendar">Calendario</a>
+            <a href="estudiante/eventos/calendarios">Calendario</a>
         </li>
     </ul>
 
