@@ -26,6 +26,7 @@ use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\ObservationsController;
+use App\Http\Controllers\Daniel\ObservationsAcademicAdvisor;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
@@ -87,6 +88,7 @@ Route::middleware('auth')->group(function () {
 
     //TODO - ASESOR ACADEMICO
     Route::group(['middleware' => 'role:asesorAcademico'], function () {
+        Route::get('/observacionesAsesor', [ObservationsAcademicAdvisor::class, 'index'])->name('observationsAdvisor.index');
 
     Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
     Route::resource('anteproyectos', ProyectsAdvisorController::class);

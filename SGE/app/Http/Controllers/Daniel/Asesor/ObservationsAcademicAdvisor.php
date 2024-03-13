@@ -12,7 +12,7 @@ class ObservationsAcademicAdvisor extends Controller
      */
     public function index()
     {
-        //
+        return view('Daniel.Asesor.ObservationsAcademicAdvisor');
     }
 
     /**
