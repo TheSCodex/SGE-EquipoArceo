@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
-        Route::resource('estudiante/anteproyecto', ProjectsController::class);
+        Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
         Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
         Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
         Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
@@ -115,8 +115,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:presidenteAcademia'], function () {
 
         Route::get('presidente', [PresidentOfTheAcademy::class, "index"]);
-        Route::get('presidente/proyectos', [AcademicAdvisorController::class, "index"]);
-        Route::get('presidente/estudiantes', ProjectsPresidentController::class);
+        Route::resource('presidente/proyectos', AcademicAdvisorController::class);
+        Route::get('presidente/estudiantes', [ProjectsPresidentController::class, 'index']);
         Route::get('presidente/documentos', [DocumentsController::class, "index"]);
 
     });
@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:director'], function () {
 
         Route::get("director", [DirectorController::class, "index"]);
-        Route::get('director/anteproyectos', ProjectsDirectorController::class);
+        Route::resource('director/anteproyectos', ProjectsDirectorController::class);
         Route::resource('director/libros', BooksController::class);
         Route::get('/reportes', [ReportsController::class, "index"]);
         Route::resource('/director/documentos', DocumentsController::class);
