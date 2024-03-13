@@ -34,14 +34,15 @@ class ProjectsController extends Controller
         $businessAdvisor = BusinessAdvisor::where("id", $project->adviser_id)->first();
         $company = Company::where("id", $businessAdvisor->companie_id)->first();
 
-        $businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
+        //$businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
 
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
-        
-        return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'businessSector','commenters'));
-        
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters'));
+        //return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'commenters'));
+
 
     }
     public function project()
@@ -106,7 +107,7 @@ class ProjectsController extends Controller
 
         $businessAdvisor->companie_id = $company->id;
 
-        return redirect('/Mi-anteproyecto')->with('success', 'Proyecto creado correctamente');
+        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto creado correctamente');
     }
 
     /**
@@ -123,7 +124,7 @@ class ProjectsController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            return redirect()->route('Mi-anteproyecto.index')->with('error', 'Proyecto no encontrado.');
+            return redirect()->route('estudiante/anteproyecto')->with('error', 'Proyecto no encontrado.');
         }
 
         $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
@@ -166,7 +167,7 @@ class ProjectsController extends Controller
                 'phone' => $validatedData['Phone_advisor'],
                 'position' => $validatedData['advisor_position'],
             ]);
-    
+
             // También puedes actualizar la compañía si existe
             if ($project->BusinessAdvisor->companie) {
                 $project->BusinessAdvisor->companie->update([
@@ -181,7 +182,7 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
-        return redirect('/Mi-anteproyecto')->with('success', 'Proyecto actualizado correctamente');
+        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
     }
 
     /**

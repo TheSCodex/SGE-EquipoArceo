@@ -227,13 +227,12 @@
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
                     </button>
-                    <button onclick="window.location.href = '/Mi-anteproyecto'" class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
+                    <a href="{{ url('estudiante/anteproyecto') }}" class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
                         Cerrar
-                    </button>
+                    </a>
                 </div>
             </form>
             
         </div>
     </section>
 @endsection
-
