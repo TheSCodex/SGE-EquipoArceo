@@ -5,6 +5,10 @@ Bienvenido
 @endsection
 
 @section('contenido')
+<script>
+  console.log('Received message from controller:', JSON.parse('{{ $data }}')[1]);
+</script>
+
 
 <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
