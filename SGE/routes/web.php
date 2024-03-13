@@ -72,12 +72,13 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:estudiante'], function () {
 
         // Ruta Estudiantes
-        Route::get('estudiante', [StudentController::class, "index"]);
-        Route::get("estudiante/principal", [StudentController::class, "studentHome"]);
+        // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
+        Route::get('estudiante', [StudentController::class, "studentHome"]);
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
         Route::get("estudidante/anteproyecto", [ProjectsController::class, "index"]);
+        Route::get("estudiante/observaciones", [ObservationsController::class, "index"]);
         Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, "create"]);
         Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, "store"]);
 
@@ -126,6 +127,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get("director", [DirectorController::class, "index"]);
         Route::get('director/anteproyectos',[ ProjectsController::class, 'project']);
+        Route::get('director/estudiantes',[StudentListController::class, "index"]);
         Route::resource('director/libros', BooksController::class);
         Route::get('director/reportes', [ReportsController::class, "index"]);
         Route::get('asistente/exportar', [ExcelExportController::class, 'downloadExcelFile']);
@@ -142,6 +144,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('asistente/libros', BooksController::class);
         Route::get('asistente/bajas', [BajasController::class, "index"]);
         Route::get('asistente/anteproyectos',[ ProjectsController::class, 'project']);
+        Route::get('asistente/estudiantes',[StudentListController::class, "index"]);
         Route::resource('asistente/anteproyecto', ProjectDraftController::class);
         Route::get('asistente/exportar', [ExcelExportController::class, 'downloadExcelFile']);
 

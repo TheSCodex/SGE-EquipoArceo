@@ -9,7 +9,7 @@
             <div class="font-kanit mt-3 flex space-x-5 h-[36%]">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="#"
+                    <a href="panel-users"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
@@ -24,11 +24,15 @@
                         <h3 class="text-[#828282] font-semibold uppercase text-sm">Aprobación de proyectos</h3>
                         <p class="text-[#4f4f4f] text-xs">Por academia</p>
                     </div>
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-lightGray" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                             clip-rule="evenodd" />
                     </svg>
+                </div>
+                <div class="h-96 mt-20 ml-10 mr-10">
+                    <canvas id="myChart" width="1000" height="300"></canvas>
                 </div>
             </div>
         </section>
@@ -92,4 +96,60 @@
             </div>
         </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Mayo", "Junio", "Julio"],
+                datasets: [{
+                        label: 'Tecnologías de la Información',
+                        data: [65, 20, 10],
+                        backgroundColor: '#0FA987',
+                        borderColor: '#ffffffff',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Mantenimiento',
+                        data: [39, 45, 85],
+                        backgroundColor: '#3E5366',
+                        borderColor: '#ffffffff',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            min: 0,
+                            max: 120,
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                indexAxis: 'x', 
+                elements: {
+                    bar: {
+                        borderWidth: 2, 
+                        borderRadius: 5, 
+                        barThickness: 200 
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: 120
+                    }
+                }
+            }
+
+        });
+    </script>
 @endsection
