@@ -46,16 +46,27 @@ class ExcelExportController extends Controller
         // Los campos que se poblan por filas (la información de los asesorados se va para abajo a partir de la fila 10)
         $row = 10;
         
+        $jsonData = [];
+
     
         foreach ($interns as $intern) {
             $student = User::find($intern->user_id);
     
+            $jsonData[] = [
+                'student_id' => $student->identifier,
+                'student_name' => $student->name,
+                'period' => $intern->period,
+            ];
+
             $sheet->setCellValue('C' . $row, $student->identifier);
             $sheet->setCellValue('D' . $row, $student->name);
             $sheet->setCellValue('Z3', $intern->period);
     
             $row++;
         }
+
+        $jsonData = json_encode($jsonData);
+
     
         // Se guarda en un nuevo archivo dentro del mismo directorio
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
