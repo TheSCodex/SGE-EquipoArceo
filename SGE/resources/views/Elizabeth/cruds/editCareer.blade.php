@@ -16,14 +16,46 @@
                     </p>
                 @enderror
             <div class="w-full space-y-2">
-                <p class="text-sm space-y-2">División</p>
-                <input type="text" name="" value="{{old('')}}" class="text-sm  w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="División">
-                @error('')
-                < class="text-[#ff0000] text-sm">
-                    {{ $message }}
-            </p>
+                <p class="text-sm">Nombre de la division</p>
+                <select name="division_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($divisions as $division)
+                        <option value="{{ $division->id }}">{{ $division->name }}</option>
+                    @endforeach
+                </select>
+                @error('name')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
                 @enderror
             </div>
+            <div class="w-full space-y-2">
+                <p class="text-sm">Nombre de la academia</p>
+                <select name="academy_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($academies as $academy)
+                        <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                    @endforeach
+                </select>
+                @error('name')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            <div class="w-full space-y-2">
+                <p class="text-sm">Nombre del presidente</p>
+                <select name="academy_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                @error('name')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
            
         <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Editar carrera y división</button>
     </form>
