@@ -4,7 +4,7 @@
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
                 
-                <form action="{{route('eventos.store')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
+                <form method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
                     <div class="w-full h-fit flex justify-center md:justify-start">
                         <h1 class="text-3xl font-bold">Añadir evento</h1>
                         @csrf
