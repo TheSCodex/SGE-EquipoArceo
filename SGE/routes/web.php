@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('presidente', [PresidentOfTheAcademy::class, "index"]);
         Route::get('presidente/proyectos', [AcademicAdvisorController::class, "index"]);
-        Route::get('presidente/estudiantes', ProjectsPresidentController::class);
+        Route::get('presidente/estudiantes', [ProjectsPresidentController::class]);
         Route::get('presidente/documentos', [DocumentsController::class, "index"]);
 
     });
@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:director'], function () {
 
         Route::get("director", [DirectorController::class, "index"]);
-        Route::get('director/anteproyectos', ProjectsDirectorController::class);
+        Route::get('director/anteproyectos', [ProjectsDirectorController::class]);
         Route::resource('director/libros', BooksController::class);
         Route::get('/reportes', [ReportsController::class, "index"]);
         Route::resource('/director/documentos', DocumentsController::class);
