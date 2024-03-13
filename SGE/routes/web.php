@@ -156,6 +156,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
     // Rutas para CRUD de Carreras y Divisiones
     Route::resource('/panel-careers', carrerasController::class);
+    Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer');
     Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
     Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     // Rutas para CRUD de Documentos

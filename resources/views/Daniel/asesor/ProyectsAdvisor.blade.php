@@ -89,7 +89,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs"></th>
                 </tr>
                 @foreach ($proyects as $proyect)
-                 <tr>  
+                    <tr>  
 
                         <td class="font-roboto font-bold py-5">{{ $proyect['Estudiantes Designados'] }}</td>
                         <td class="font-roboto font-bold py-5">{{ $proyect['Nombre del Anteproyecto'] }}</td>
