@@ -82,13 +82,11 @@ class carrerasController extends Controller
 public function update(Request $request, $id)
 {
     $career = Career::findOrFail($id);
-    
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
-    ]);
-    
-    $career->update($validatedData);
 
+    ]);
+    $career->update($validatedData);
     return redirect('/panel-careers')->with('success', 'Career updated successfully!');
 }
     /**
