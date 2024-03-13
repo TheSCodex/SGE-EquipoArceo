@@ -5,6 +5,8 @@
 @endsection
 
 @section('contenido')
+<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
 <div class="bg-gray-100">
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -92,5 +94,6 @@
         @endforeach
     </div>
 </div>
-
+    </div>
+</section>
 @endsection
