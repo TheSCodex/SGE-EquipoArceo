@@ -101,7 +101,7 @@
                         </a>
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $user->id }}" method="POST">
+                        <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
