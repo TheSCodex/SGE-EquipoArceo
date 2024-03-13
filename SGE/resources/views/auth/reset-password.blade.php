@@ -29,7 +29,7 @@
         <div class="mb-6">
             <label for="password" class="block text-lg font-semibold text-gray-700 mb-2">Contraseña</label>
             <div class="relative">
-                <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="Password" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="Contraseña" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                     <img src="/img/invisible.png" id="togglePasswordVisibility" class="w-6 cursor-pointer" alt="">
                 </div>
