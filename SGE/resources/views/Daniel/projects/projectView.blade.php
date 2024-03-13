@@ -26,11 +26,11 @@ Bienvenido
 
                         @if(isset($project))
                         
-                        <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Nombre de la empresa</p>
-                        <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Asesor empresarial</p>
-                        <p class=" w-[80%] sm:w-[38%] text-lg sm:text-lg">Área de desempeño</p>
+                        <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: {{ $company->name }}</p>
+                        <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Asesor empresarial: {{ $businessAdvisor->name }}</p>
+                        <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Área de desempeño: {{ $businessSector->title }}</p>
                     </div>
-                    <div class="flex flex-wrap flex-col flex-grow items-center justify-evenly min-h-[57vh] mt-[1.5%] gap-[10] "> <!-- Esta linea es salida de los confines del inframundo -->
+                    <div class="flex flex-wrap flex-col flex-grow items-center justify-evenly min-h-[57vh] mt-[1.5%] gap-[10] w-full"> <!-- Esta linea es salida de los confines del inframundo -->
                         <div class="w-full flex flex-wrap justify-center">
                             <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Área de desempeño</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
@@ -41,23 +41,25 @@ Bienvenido
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Planteamiento del problema</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
-                                    {{ $project->description }}
+                                    {{ $project->problem_statement }}
                                 </p>
                             </div>
 
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Justificación</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-center">
-                                    {{ $project->description }}
+                                    {{ $project->project_justificaction }}
                                 </p>
                             </div>
 
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Actividades a realizar</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
-                                    {{ $project->description }}
+                                    {{ $project->activities_to_do }}
                                 </p>
+                                
                             </div>
+                            <button class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</button>
                         </div>
 
                         @else
@@ -67,7 +69,7 @@ Bienvenido
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center ">Aun no tienes un
                             Anteproyecto. Empieza a trabajarlo ahora</p>
                         <a href="/Form-anteproyecto"
-                            class="block bg-[#02AB82] rounded-md px-[2%] py-[1%] m-[2%] font-normal text-white text-center text-sm">Crea
+                            class="block bg-[#02AB82] text-white rounded-md px-[2%] py-[1%] m-[2%] font-normal  text-center text-sm">Crea
                             uno ahora</a>
                             </div>
                         </div>
@@ -106,11 +108,21 @@ Bienvenido
                     <h3>Observaciones</h3>
                 </div>
 
-                <div
-                    class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
-                    <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a trabajarlo
-                        ahora</p>
-                </div>
+                @if(isset($comments))
+                    <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        @foreach($comments as $comment)
+                        <div class='flex flex-wrap w-full'>
+                            <p class=' text-black w-full font-normal text-sm'>Asesor</p>
+                            <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
+                        </div>
+                        @endforeach
+                        <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver observaciones</button>
+                    </div>
+                @else 
+                    <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                        <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a trabajarlo ahora</p>
+                    </div>  
+                @endif
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('templates.academicAdvisorTemplate')
+@extends('templates.presidentOfTheAcademyTemplate')
 @section('titulo', 'Proyectos')
 @section('contenido')
     {{-- Test --}}

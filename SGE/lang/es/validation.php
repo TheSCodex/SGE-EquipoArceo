@@ -242,6 +242,12 @@ return [
         'location'                  => 'lugar',
         'date_start'                => 'fecha y hora inicial',
         'date_end'                  => 'fecha y hora final',
-        'status'                    => 'estatus'
+        'status'                    => 'estatus',
+
+        // Validation Books Form
+        'title'                => 'título',
+        'author'               => 'autor',
+        'isbn'                 => 'ISBN',
+        'identifier_student'        => 'matricula del estudiante',
     ],
 ];

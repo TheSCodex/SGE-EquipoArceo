@@ -56,7 +56,7 @@
                 </div>
                 <a href="/panel-careers/create" class="bg-green text-lg py-2 px-4 rounded-md text-white ml-2">Agregar nueva carrera y división</a>
             </div>
-        </div>
+            </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
             {{-- cards --}}
             <div class="lg:hidden w-full mb-5">

@@ -19,9 +19,9 @@
                 <p class="text-sm space-y-2">División</p>
                 <input type="text" name="" value="{{old('')}}" class="text-sm  w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="División">
                 @error('')
-                <p class="text-[#ff0000] text-sm">
+                < class="text-[#ff0000] text-sm">
                     {{ $message }}
-                </p>
+            </p>
                 @enderror
             </div>
            
