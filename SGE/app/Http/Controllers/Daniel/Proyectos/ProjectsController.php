@@ -34,14 +34,15 @@ class ProjectsController extends Controller
         $businessAdvisor = BusinessAdvisor::where("id", $project->adviser_id)->first();
         $company = Company::where("id", $businessAdvisor->companie_id)->first();
 
-        $businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
+        //$businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
 
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
-        
-        return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'businessSector','commenters'));
-        
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters'));
+        //return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'commenters'));
+
 
     }
     public function project()
@@ -166,7 +167,7 @@ class ProjectsController extends Controller
                 'phone' => $validatedData['Phone_advisor'],
                 'position' => $validatedData['advisor_position'],
             ]);
-    
+
             // También puedes actualizar la compañía si existe
             if ($project->BusinessAdvisor->companie) {
                 $project->BusinessAdvisor->companie->update([

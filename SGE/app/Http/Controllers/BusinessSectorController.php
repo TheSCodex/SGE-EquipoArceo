@@ -19,7 +19,7 @@ class BusinessSectorController extends Controller
      */
     public function create()
     {
-        // return view('business_sectors.create');
+        // return view('business_sector.create');
     }
 
     /**
