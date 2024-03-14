@@ -24,11 +24,11 @@ class CalendarEvent extends Model
 
     public function requester()
     {
-        return $this->belongsTo(User::class, 'requester_id');
+        return $this->belongsTo(AcademicAdvisor::class);
     }
 
     public function receiver()
     {
-        return $this->belongsTo(User::class, 'receiver_id');
+        return $this->belongsTo(Intern::class);
     }
 }

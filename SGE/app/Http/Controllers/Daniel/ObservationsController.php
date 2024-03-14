@@ -10,20 +10,43 @@ use Illuminate\Support\Facades\Auth;
 
 class ObservationsController extends Controller
 {
-    public function index($projectId)
+    public function index()
     {
-        $intern = Intern::where('user_id', Auth::id())
-            ->where('project_id', $projectId) //por si hacen lo del id por url
-            ->first();
+        // Obtenemos el ID del usuario autenticado
+        $userId = Auth::id();
 
-        $tutorComment = Comment::where('academic_advisor_id', $intern->academic_advisor_id) //id del tutor jeje
-            ->first();
+        // Buscamos el intern relacionado con el usuario autenticado
+        $intern = Intern::where('user_id', $userId)->first();
+        
+        if ($intern) {
+            // Obtenemos el academic_advisor_id y el project_id del intern
+            $academicAdvisorId = $intern->academic_advisor_id;
+            $projectId = $intern->project_id;
 
-        $otherComments = Comment::where('project_id', $projectId)
-            ->where('academic_advisor_id', '<>', $intern->academic_advisor_id)
-            ->get();
+            // Buscamos el comentario del tutor
+            $tutorComment = Comment::where('academic_advisor_id', $academicAdvisorId)
+                                    ->where('project_id', $projectId)
+                                    ->first();
 
-        return view('Daniel.Observation', compact('tutorComment', 'otherComments'));// los comentarios x (ya dejenme dormir)
+            // Buscamos los comentarios normales relacionados con el project_id del intern
+            $normalComments = Comment::where('project_id', $projectId)
+    ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
+        $query->select('id')
+            ->from('comments')
+            ->where('academic_advisor_id', $academicAdvisorId);
+    })
+    ->get();
+
+
+            return view('Daniel.Projects.Observation')->with([
+                'userId' => $userId,
+                'tutorComment' => $tutorComment,
+                'normalComments' => $normalComments,
+            ]);
+        } else {
+            // Si no se encuentra un intern relacionado con el usuario autenticado, retorna un error o redirecciona según la lógica de tu aplicación
+            return redirect()->route('/student')->with('error', 'No se encontró intern relacionado con este usuario.');
+        }
     }
 
     public function create()
@@ -56,6 +79,7 @@ class ObservationsController extends Controller
         // Implementar si es necesario.
     }
 }
+
 //por si no jala jajaja
 /*
 <?php

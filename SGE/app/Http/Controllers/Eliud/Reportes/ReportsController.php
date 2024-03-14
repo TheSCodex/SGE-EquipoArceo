@@ -3,10 +3,41 @@
 namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
+    public function printSansion()
+    {
+        $path = public_path('img\Eliud\docs\Sansion.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'Sansion' . '"'
+        ]);
+    }
+
+    public function printCartaAprobacion()
+    {
+        $path = public_path('img\Eliud\docs\CartAprobacion.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'CartaAprobacion' . '"'
+        ]);
+    }
+    public function printCartaMemoria()
+    {
+        $path = public_path('img\Eliud\docs\CartaMemoria.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'CartaMemoria' . '"'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
