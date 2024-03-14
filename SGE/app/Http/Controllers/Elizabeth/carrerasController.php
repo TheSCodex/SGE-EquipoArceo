@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Elizabeth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academy;
 use App\Models\careers_info_view;
 use Illuminate\Http\Request;
 use App\Models\Career;   
 use App\Models\Division;
+use App\Models\User;
 
 
 class carrerasController extends Controller
@@ -67,38 +69,26 @@ class carrerasController extends Controller
     public function edit($id)
 {
     $career = careers_info_view::findOrFail($id);
-    return view('Elizabeth.cruds.editCareer', compact('career'));
+    $divisions = Division::all();
+    $academies = Academy::all();
+    $users = User::where('rol_id', '!=', 1)->get();
+    return view('Elizabeth.cruds.editCareer', compact('career','divisions','academies','users'));
 }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+public function update(Request $request, $id)
 {
-    // Validar los datos del formulario
+    $career = Career::findOrFail($id);
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
-        'division_name' => 'required|string|max:255',
-        'academy_name' => 'required|string|max:255',
-        'president_name' => 'required|string|max:255',
+
     ]);
-
-    // Encontrar la carrera que se va a actualizar
-    $career = careers_info_view::findOrFail($id);
-
-    // Actualizar los datos de la carrera
-    $career->update([
-        'name' => $validatedData['name'],
-        'division_name' => $validatedData['division_name'],
-        'academy_name' => $validatedData['academy_name'],
-        'president_name' => $validatedData['president_name'],
-    ]);
-
-    // Redireccionar a alguna vista después de la actualización
-    return redirect()->back()->with('success', '¡Carrera actualizada exitosamente!');
+    $career->update($validatedData);
+    return redirect('/panel-careers')->with('success', 'Career updated successfully!');
 }
-
     /**
      * Remove the specified resource from storage.
      */
