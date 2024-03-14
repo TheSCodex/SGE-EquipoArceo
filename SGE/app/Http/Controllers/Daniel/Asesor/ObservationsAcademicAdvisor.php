@@ -16,7 +16,7 @@ class ObservationsAcademicAdvisor extends Controller
     {
         $userId = Auth::id();
         return view('Daniel.Asesor.ObservationsAdvisor')->with('userId', $userId);
-        //quiero que con el $userId busques en la tabla interns 
+        //quiero que con el $userId busque en la tabla interns  pero aun no lo termino jaja
     }
 
     /**
