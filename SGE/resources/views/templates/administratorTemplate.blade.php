@@ -20,9 +20,9 @@
             <li>
                 <a href="/panel-users">Usuarios</a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="/panel-roles" class="text-nowrap">Roles y permisos</a>
-            </li>
+            </li> --}}
             <li>
                 <a href="/panel-companies">Empresas</a>
             </li>
