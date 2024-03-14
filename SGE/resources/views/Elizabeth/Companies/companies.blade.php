@@ -53,7 +53,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="hidden lg:block">
+        <div class="hidden lg:block w-full">
             <table class="text-center w-full">
                 <tr>
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
