@@ -68,11 +68,9 @@
                                 </p>
 
                             </div>
-                            <button class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</button>
+                            <a href="{{ route('editAnteproyecto', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
 
-                        <a href="{{ route('estudiante.anteproyecto.edit', $project->id) }}"
-                            class="text-green-500 hover:text-green-700">Editar</a>
                     @else
                         <div
                             class="flex flex-wrap flex-col flex-grow items-center justify-center sm:min-h-[70vh] mt-[1.5%] gap-[10] ">
@@ -80,7 +78,7 @@
 
                             <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center ">Aun no tienes un
                                 Anteproyecto. Empieza a trabajarlo ahora</p>
-                            <a href="{{ route('estudiante.create') }}"
+                            <a href="{{ route('formanteproyecto') }}"
                                 class="block bg-[#02AB82] text-white rounded-md px-[2%] py-[1%] m-[2%] font-normal  text-center text-sm">Crea
                                 uno ahora</a>
                         </div>
