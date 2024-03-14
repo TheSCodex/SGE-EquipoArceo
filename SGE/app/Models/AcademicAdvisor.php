@@ -21,6 +21,12 @@ class AcademicAdvisor extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function likedProjects()
+    {
+        return $this->hasMany(ProjectAdvisorsLikes::class, 'id_academic_advisor');
+    }
+
     
     public function event()
     {
