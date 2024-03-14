@@ -29,10 +29,10 @@
                         <div class="w-full px-[3%] self-start">
 
                             @if (isset($project))
-                                <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: {{ $company->name }}
+                                <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: 
                                 </p>
                                 <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Asesor empresarial:
-                                    {{ $businessAdvisor->name }}</p>
+                                </p>
                                 <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Área de desempeño:
                                     {{-- {{ $businessSector->title }} --}}
                                 </p>
@@ -121,13 +121,13 @@
                     <div
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
-                            <div class='flex flex-wrap w-full'>
-                                <p class=' text-black w-full font-normal text-sm'>Asesor</p>
-                                <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
+                            <div class='flex flex-wrap w-full mx-[.5vw] self-center'>
+                                <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
+                                <p class=' text-black w-full font-normal text-sm text-black opacity-[80%]'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
-                        <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver
-                            observaciones</button>
+                        <a href="{{ route('observationsAnteproyecto') }}" class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%]">Ver observaciones</a>
+
                     </div>
                 @else
                     <div

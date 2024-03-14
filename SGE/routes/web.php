@@ -26,7 +26,7 @@ use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\ObservationsController;
-use App\Http\Controllers\Daniel\ObservationsAcademicAdvisor;
+use App\Http\Controllers\Daniel\Asesor\ObservationsAcademicAdvisor;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
         Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
         Route::put("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
-        Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto.index');
+        Route::get("estudiante/anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
         
         // Rutas para Eventos
         Route::get('estudiante/eventos', [EventController::class, "index"]);
@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
         Route::get('asesor/eventos', [EventController::class, "index"]);
         Route::get('asesor/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
         Route::get('asesor/eventos/filtro', [EventController::class, 'filter'])->name('eventos.filter');
+        Route::get("asesor/anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
     });
 

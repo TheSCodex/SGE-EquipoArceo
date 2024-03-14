@@ -32,7 +32,7 @@ class ProjectsController extends Controller
 
 
         $businessAdvisor = BusinessAdvisor::where("id", $project->adviser_id)->first();
-        $company = Company::where("id", $businessAdvisor->companie_id)->first();
+       // $company = Company::where("id", $businessAdvisor->companie_id)->first();
 
         //$businessSector = BusinessSector::where("id", $company->business_sector_id)->first();
 
@@ -40,7 +40,7 @@ class ProjectsController extends Controller
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'businessAdvisor', 'commenters'));
         //return view('Daniel.Projects.ProjectView', compact('comments','project','company','businessAdvisor', 'commenters'));
 
 

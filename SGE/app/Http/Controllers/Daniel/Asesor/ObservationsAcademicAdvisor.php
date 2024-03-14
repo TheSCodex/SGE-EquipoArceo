@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Daniel\Asesor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+use App\Models\Intern;
 class ObservationsAcademicAdvisor extends Controller
 {
     /**
@@ -12,7 +14,9 @@ class ObservationsAcademicAdvisor extends Controller
      */
     public function index()
     {
-        return view('Daniel.Asesor.ObservationsAcademicAdvisor');
+        $userId = Auth::id();
+        return view('Daniel.Asesor.ObservationsAdvisor')->with('userId', $userId);
+        //quiero que con el $userId busques en la tabla interns 
     }
 
     /**
