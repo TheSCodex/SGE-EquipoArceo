@@ -106,7 +106,10 @@
                             @else
                                 <p>Este proyecto cuenta con {{$project->like}} voto(s)</p>
                             @endif
-                            <button class="bg-[#02AB82] absolute text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
+                            <form method="POST" action="{{ route('anteproyecto-Asesor.store')}}">
+                                @csrf
+                                <button type="submit" class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
+                            </form>
                         </div>
                     </div>
                 </div>

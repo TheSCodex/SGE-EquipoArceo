@@ -68,7 +68,24 @@ class ProjectDraftController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $request->validate([
+            'id_academic_advisor' => 'required',
+            ]);
+    
+        // Create new instance of your model
+        $ProjectAdvisorLikes = new ProjectAdvisorLikes();
+    
+        // Assign values to the model properties
+        $ProjectAdvisorLikes->id_projects = $request->id_projects;
+        $ProjectAdvisorLikes->id_academic_advisor = $request->id_academic_advisor;
+    
+        // Save the model to the database
+        $ProjectAdvisorLikes->save();
+    
+        // Optionally, you can return a response indicating success
+        return response()->json(['message' => 'Items added successfully'], 200);
+        
     }
 
     /**
