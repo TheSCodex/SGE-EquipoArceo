@@ -46,7 +46,7 @@ use App\Http\Controllers\Pipa\RoleController;
 
 Route::get('/', function () {
     return redirect()->route('login');
-})->middleware('guest'); 
+})->middleware('guest');
 
 Route::middleware('auth')->group(function () {
 
@@ -71,98 +71,101 @@ Route::middleware('auth')->group(function () {
     //TODO - ESTUDIANTE
     Route::group(['middleware' => 'role:estudiante'], function () {
 
-    // Ruta Estudiantes
-    Route::get('estudiante', [StudentController::class, "index"]);
-    Route::get('inicioEstudiante',[StudentController::class, 'index']);
-    Route::resource('Mi-anteproyecto', ProjectsController::class);
-    Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
-    Route::resource('observaciones', ObservationsController::class);
-    
-    // Rutas para Eventos
-    Route::resource('eventos', EventController::class);
-    Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+        // Ruta Estudiantes
+        Route::get('estudiante', [StudentController::class, "index"]);
+        Route::get('inicioEstudiante', [StudentController::class, 'index']);
+        Route::resource('Mi-anteproyecto', ProjectsController::class);
+        Route::resource('Form-anteproyecto', FormAnteproyectoController::class);
+        Route::resource('observaciones', ObservationsController::class);
+
+        // Rutas para Eventos
+        Route::resource('eventos', EventController::class);
+        Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
     });
 
     //TODO - ASESOR ACADEMICO
     Route::group(['middleware' => 'role:asesorAcademico'], function () {
 
-    Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
-    Route::resource('anteproyectos', ProyectsAdvisorController::class);
-    Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
-    Route::get('academichome', [AcademicHomeController::class, "index"]);
-    // Rutas para Eventos
-    Route::resource('eventos', EventController::class);
-    Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
-    Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
+        Route::resource('Dashboard-Asesor', DashboardAdvisorController::class);
+        Route::resource('anteproyectos', ProyectsAdvisorController::class);
+        Route::resource('anteproyecto-Asesor', ProjectDraftController::class);
+        Route::get('academichome', [AcademicHomeController::class, "index"]);
+        // Rutas para Eventos
+        Route::resource('eventos', EventController::class);
+        Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+        Route::post('/eventos/filter', [EventController::class, 'filter'])->name('eventos.filter');
     });
 
     //TODO - PRESIDENTE DE ACADEMIA
     Route::group(['middleware' => 'role:presidenteAcademia'], function () {
 
-    Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
-    Route::get('academic', [AcademicAdvisorController::class, "index"]);
-    Route::get('studentL', [StudentListController::class, "index"]);
-    Route::resource('documentos', DocumentsController::class);
+        Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
+        Route::get('academic', [AcademicAdvisorController::class, "index"]);
+        Route::get('studentL', [StudentListController::class, "index"]);
+        Route::resource('documentos', DocumentsController::class);
     });
 
 
     //TODO - DIRECTORA
     Route::group(['middleware' => 'role:director'], function () {
-    
 
-    Route::get("/director", [DirectorController::class, "index"]);
-    Route::get('proyectos',[ ProjectsController::class, 'project']);
-    Route::resource('libros', BooksController::class);
-    Route::resource('reportes', ReportsController::class);
-    Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
+
+        Route::get("/director", [DirectorController::class, "index"]);
+        Route::get('proyectos', [ProjectsController::class, 'project']);
+        Route::resource('libros', BooksController::class);
+        Route::resource('reportes', ReportsController::class);
+        Route::get('reportes/director', [ReportsController::class, 'directorIndex']);
     });
 
 
     //TODO - Asistente directora
     Route::group(['middleware' => 'role:asistenteDireccion'], function () {
 
-    Route::get("/asistente", [DirectorAssistantController::class, "index"]);
-    Route::resource('asistente/reportes', ReportsController::class);
-    Route::resource('asistente/documentos', DocumentsController::class);
-    Route::resource('asistente/libros', BooksController::class);
-    Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
-    Route::get('asistente/bajas', [BajasController::class, "index"]);
-    Route::get('asistente/proyectos',[ ProjectsController::class, 'project']);
-    Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
-    Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
+        Route::get("/asistente", [DirectorAssistantController::class, "index"]);
+        Route::resource('asistente/reportes', ReportsController::class);
+        Route::resource('asistente/documentos', DocumentsController::class);
+        Route::resource('asistente/libros', BooksController::class);
+        Route::post('asistente/libros/filter', [BooksController::class, 'filter'])->name('libros.filter');
+        Route::get('asistente/bajas', [BajasController::class, "index"]);
+        Route::get('asistente/proyectos', [ProjectsController::class, 'project']);
+        Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
+        Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
     });
 
     //RUTAS PARA LA GENERACIÓN DE DOCUMENTOS
     Route::get('/export', [ExcelExportController::class, 'downloadExcelFile']);
-    Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
-    Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
-    Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');        
+    Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])->name('download.sansion');
+    Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])->name('cata.memoria');
+    Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])->name('cata.aprobacion');
+
+    Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+    Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+    Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+
 
     //TODO - Administrador
 
     Route::group(['middleware' => 'role:admin'], function () {
 
-    Route::resource('admin', AdministratorController::class);
-    // Rutas para CRUD de Usuarios
-    Route::resource('panel-users', UserController::class);
-    Route::resource('panel-roles', RoleController::class);
-    // Rutas para CRUD de Empresas
-    Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
-    Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-    Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
-    //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-    Route::resource('/panel-advisors', AdvisorController::class);
-    Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
-    Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
-    Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
-    // Rutas para CRUD de Carreras y Divisiones
-    Route::resource('/panel-careers', carrerasController::class);
-    Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
-    Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
-    // Rutas para CRUD de Documentos
-    Route::resource('documentos', DocumentsController::class);
-
-
+        Route::resource('admin', AdministratorController::class);
+        // Rutas para CRUD de Usuarios
+        Route::resource('panel-users', UserController::class);
+        Route::resource('panel-roles', RoleController::class);
+        // Rutas para CRUD de Empresas
+        Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+        Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
+        Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
+        //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+        Route::resource('/panel-advisors', AdvisorController::class);
+        Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
+        Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
+        Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
+        // Rutas para CRUD de Carreras y Divisiones
+        Route::resource('/panel-careers', carrerasController::class);
+        Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+        Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
+        // Rutas para CRUD de Documentos
+        Route::resource('documentos', DocumentsController::class);
     });
 });
 
@@ -170,45 +173,45 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 // // Rutas para CRUD de Documentos
-    // Route::resource('documentos', DocumentsController::class);
+// Route::resource('documentos', DocumentsController::class);
 
-    // // Rutas para CRUD de Usuarios
-    // Route::resource('panel-users', UserController::class);
-    // Route::resource('panel-roles', RoleController::class);
+// // Rutas para CRUD de Usuarios
+// Route::resource('panel-users', UserController::class);
+// Route::resource('panel-roles', RoleController::class);
 
-    // // Rutas para Eventos
-    // Route::resource('eventos', EventController::class);
-    // Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+// // Rutas para Eventos
+// Route::resource('eventos', EventController::class);
+// Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
-    // Rutas para CRUD de Libros
-    // Route::resource('libros', BooksController::class);
-    // Route::get('/books', [BooksController::class, 'index']);
-    // Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
-    // Route::post("/newBook", [BooksController::class, 'store']);
+// Rutas para CRUD de Libros
+// Route::resource('libros', BooksController::class);
+// Route::get('/books', [BooksController::class, 'index']);
+// Route::get("/newBook", [BooksController::class, 'create'])->name('newBookForm');
+// Route::post("/newBook", [BooksController::class, 'store']);
 
-    // // Rutas para CRUD de Carreras y Divisiones
-    // Route::resource('/panel-careers', carrerasController::class);
-    // Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
-    // Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
+// // Rutas para CRUD de Carreras y Divisiones
+// Route::resource('/panel-careers', carrerasController::class);
+// Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+// Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
 
-    // //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
-    // Route::resource('/panel-advisors', AdvisorController::class);
-    // Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
-    // Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
-    // Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
+// //RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+// Route::resource('/panel-advisors', AdvisorController::class);
+// Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores');
+// Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit');
+// Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy');
 
-    // // Rutas para CRUD de Empresas
-    // Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
-    // Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-    // Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
+// // Rutas para CRUD de Empresas
+// Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+// Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
+// Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
-    // Rutas Director
-    Route::get("/director", [DirectorController::class, "index"]);
-    Route::get("/assistant", [DirectorAssistantController::class, "index"]);
+// Rutas Director
+Route::get("/director", [DirectorController::class, "index"]);
+Route::get("/assistant", [DirectorAssistantController::class, "index"]);
 
     // Ruta Presidente de la Academia   
     // Route::resource('presidenteDeLaAcademia', PresidentOfTheAcademy::class);
