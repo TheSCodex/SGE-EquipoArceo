@@ -162,8 +162,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('asistente/anteproyecto-Asesor', ProjectDraftController::class);
         Route::get('reportes/asistente', [ReportsController::class, 'assistantIndex']);
         Route::get('asistente/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
-        Route::get('asistente/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
-        Route::get('asistente/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
+        Route::get('asistente/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.sancion');
+        Route::get('asistente/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.digitalizacion');
         Route::get('asistente/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');    
 
 
