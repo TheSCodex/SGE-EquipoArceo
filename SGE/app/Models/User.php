@@ -23,14 +23,14 @@ class User extends Authenticatable
         'email',
         'password',
         'identifier',
-        'career_academy_id',
+        // 'career_academy_id',
         'rol_id',
     ];
 
-    public function careerAcademy()
-    {
-        return $this->belongsTo(CareerAcademy::class, 'career_academy_id');
-    }    
+    // public function careerAcademy()
+    // {
+    //     return $this->belongsTo(CareerAcademy::class, 'career_academy_id');
+    // }    
 
     public function role()
     {
