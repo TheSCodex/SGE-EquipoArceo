@@ -68,7 +68,7 @@
                 </div>
             @endif
             <table class="text-center w-full">
-                <tr>
+                <tr class="w-full">
                     <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Apellidos</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
@@ -79,7 +79,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                 </tr>
                 @foreach ($users as $user)
-                <tr>
+                <tr class="w-full">
                     <td class="font-roboto font-bold py-5">{{ $user->name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
