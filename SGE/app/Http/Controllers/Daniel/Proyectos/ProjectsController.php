@@ -124,14 +124,14 @@ class ProjectsController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            return redirect()->route('estudiante/anteproyecto')->with('error', 'Proyecto no encontrado.');
+            return redirect()->route('formanteproyecto')->with('error', 'Proyecto no encontrado.');
         }
-
+    
         $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
         $company = Company::findOrFail($businessAdvisor->companie_id);
         $intern = Intern::where('project_id', $project->id)->first();
         $user = auth()->user();
-
+    
         return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user'));
     }
 

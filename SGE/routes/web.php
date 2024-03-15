@@ -80,11 +80,12 @@ Route::middleware('auth')->group(function () {
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
-        Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
-        Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
-        Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
-        Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
-        Route::put("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
+Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
+Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
+Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
+Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
+Route::put("estudiante/anteproyecto/update/{id}", [ProjectsController::class, 'update'])->name('updateAnteproyecto'); // Cambiado el nombre de la ruta PUT
+
         Route::get("estudiante/anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
         
         // Rutas para Eventos

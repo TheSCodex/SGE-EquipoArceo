@@ -68,7 +68,7 @@
                                 </p>
 
                             </div>
-                            <a href="{{ route('editAnteproyecto', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                            <a href="{{ route('updateAnteproyecto', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
 
                     @else
