@@ -31,36 +31,36 @@ class EventController extends Controller
         /**
      * Display a filter view.
      */
-    public function search(Request $request)
-    {
-        $user = auth()->user();
+    // public function search(Request $request)
+    // {
+    //     $user = auth()->user();
     
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+    //     $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
     
-        $searchTerm = $request->input('search');
-        $status = $request->input('status');
+    //     $searchTerm = $request->input('search');
+    //     $status = $request->input('status');
     
-        $filteredEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id);
+    //     $filteredEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id);
 
     
-        // Aplicar filtro por término de búsqueda si está presente
-        if (!empty($searchTerm)) {
-            $filteredEvents->where(function ($query) use ($searchTerm) {
-                $query->where('calendarevents.title', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('calendarevents.description', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('calendarevents.eventType', 'like', '%' . $searchTerm . '%');
-            });
-        }
+    //     // Aplicar filtro por término de búsqueda si está presente
+    //     if (!empty($searchTerm)) {
+    //         $filteredEvents->where(function ($query) use ($searchTerm) {
+    //             $query->where('calendarevents.title', 'like', '%' . $searchTerm . '%')
+    //                 ->orWhere('calendarevents.description', 'like', '%' . $searchTerm . '%')
+    //                 ->orWhere('calendarevents.eventType', 'like', '%' . $searchTerm . '%');
+    //         });
+    //     }
     
-        // Aplicar filtro por estado si no es 'all'
-        if ($status !== 'all') {
-            $filteredEvents->where('calendarevents.status', $status);
-        }
+    //     // Aplicar filtro por estado si no es 'all'
+    //     if ($status !== 'all') {
+    //         $filteredEvents->where('calendarevents.status', $status);
+    //     }
     
-        $allEvents = $filteredEvents->orderBy('calendarevents.date_start')->paginate(9);
+    //     $allEvents = $filteredEvents->orderBy('calendarevents.date_start')->paginate(9);
     
-        return view('Luis.eventsDash', compact('allEvents'));
-    }
+    //     return view('Luis.eventsDash', compact('allEvents'));
+    // }
     
 
     /**
@@ -70,7 +70,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
     
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user['id'])->first();
     
         $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
         
@@ -161,7 +161,7 @@ class EventController extends Controller
 
         // dd($event);
         $event->save();
-        return redirect('eventos')->with('success', 'El evento se ha agregado correctamente');
+        return redirect('asesor/actividades')->with('success', 'La actividad se ha agregado correctamente');
     }
 
     /**
@@ -210,7 +210,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = $request->status;
         $event->update();
-        return redirect('eventos')->with('edit_success', 'El Evento ha sido editado correctamente');
+        return redirect('asesor/actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
     }
 
     /**
@@ -222,6 +222,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('eventos.index')->with('delete','ok');
+        return redirect('asesor/actividades')->with('delete','ok');
     }
 }
