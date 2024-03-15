@@ -11,8 +11,8 @@
 @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
-        <form action="{{ route('libros.update', $book->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
+            <div class="w-full md:px-[7em] md:my-[2em] flex ">
+        <form action="{{ route('libros-asistente.update', $book->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
             @csrf
             @method('PUT')
             <div class="w-full h-fit flex justify-center md:justify-start">

@@ -12,8 +12,8 @@
 @section('contenido')
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
-        <div class="w-full md:px-[7em] md:my-[2em] flex bg-white"> 
-            <form action="{{route('libros.store')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
+        <div class="w-full md:px-[7em] md:my-[2em] flex "> 
+            <form action="{{route('libros-asistente.store')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
                     @csrf
                     <div class="w-full h-fit flex justify-center md:justify-start">
                         <h1 class="text-3xl font-bold">Añadir libro</h1>
@@ -59,7 +59,7 @@
                                 @enderror
                             </div>
                         </div>
-                    <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir evento</button>
+                    <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir libro</button>
                 </form>
             </div>
     </div>

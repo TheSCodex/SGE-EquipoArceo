@@ -49,12 +49,15 @@
         </ul>
     </header>
 
-    <main class="bg-[#F3F5F9] p-4 h-full">
+    <main class="bg-[#F3F5F9] p-4 h-full my-auto">
         @yield('contenido')
     </main>
-    <footer class="border-t border-secondaryColor text-xs text-black text-center p-5">
+    <footer class="border-t border-secondaryColor text-xs text-black text-center p-5 mt-auto">
         Copyright © 2024. SM51
     </footer>
+
+    @yield('scripts-book')
+
 </body>
 
 </html>
