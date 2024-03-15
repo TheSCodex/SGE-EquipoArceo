@@ -8,7 +8,6 @@
             @csrf
         </div>
         <div class="w-full h-fit flex flex-col space-y-2">
-        
             <div class="w-full space-y-2">
                 <p class="text-sm">Nombre de la empresa</p>
                 <input type="text" name="name" value="{{ old('name') }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Nombre">
@@ -18,7 +17,7 @@
                     </p>
                 @enderror
             </div>
-            < class="w-full space-y-2">
+            <div class="w-full space-y-2">
                 <p class="text-sm">Correo Electrónico</p>
                 <input type="email" name="email" value="{{ old('email') }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Correo">
                 @error('email')
@@ -26,7 +25,7 @@
                         {{ $message }}
                     </p>
                 @enderror
-                </div>
+            </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Celular </p>
                 <input type="number" name="phone" value="{{ old('phone') }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Celular">

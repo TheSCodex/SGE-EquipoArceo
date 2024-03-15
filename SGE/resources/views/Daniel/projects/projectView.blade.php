@@ -58,7 +58,7 @@ Bienvenido
                                 </p>
                                 
                             </div>
-                            <button class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</button>
+                            <a href="{{ route('editAnteproyecto', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
 
                         @else

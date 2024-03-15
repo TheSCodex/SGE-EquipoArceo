@@ -11,10 +11,23 @@ use App\Models\Academy;
 use App\Models\Career;
 use App\Models\User;
 use App\Models\Division;
-use App\Models\Role;
 use App\Models\Project_division;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\BusinessAdvisor;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\Intern;
+use Carbon\Carbon;
+use App\Models\Role;
+use App\Models\StudentStatus;
+
+
+
+
+
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,12 +49,42 @@ class DatabaseSeeder extends Seeder
         Career::factory()->count(5)->create();
         // Role::factory()->count(10)->create();
         CareerAcademy::factory()->count(5)->create();
+        BusinessAdvisor::factory()->count(10)->create();
+
         // User::factory()->count(10)->create();
 
+        DB::table('Careers')->insert([
+            'name' => Str::random(10),
+            'division_id' => rand(1, 10), 
+
+        ]);
+
+        DB::table('divisions')->insert([
+            'name' => Str::random(10),
+
+        ]);
 
 
-        //* Test
-        $this->call(RolesSeeder::class);
+
+        Role::create(['title' => 'estudiante']);
+        Role::create(['title' => 'asesorAcademico']);
+        Role::create(['title' => 'presidenteAcademia']);
+        Role::create(['title' => 'director']);
+        Role::create(['title' => 'asistenteDireccion']);
+        Role::create(['title' => 'admin']);
+
+        User::factory()->count(15)->create();
+
+
+        StudentStatus::factory()->count(5)->create();
+
+        Intern::factory()->count(10)->create();
+
+
+
+
+        // //* Test
+        // $this->call(RolesSeeder::class);
 
         // Crear un usuario estudiante
         $estudiante = User::factory()->create([
@@ -103,6 +146,19 @@ class DatabaseSeeder extends Seeder
         $rolAdmin = Role::where('title', 'admin')->first();
         $admin->role()->associate($rolAdmin);
         $admin->save();
+
+        // for ($i = 1; $i <= 5; $i++) {
+        //     DB::table('comments')->insert([
+        //         'content' => "Contenido del comentario $i",
+        //         'fecha_hora' => Carbon::now(),
+        //         'status' => rand(1, 3),
+        //         'academic_advisor_id' => rand(1, 3),
+        //         'project_id' => 1,
+        //         'parent_comment_id' => null,
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //     ]);
+        // }
 
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
         $project_division = Project_division::factory()->count(30)->create();

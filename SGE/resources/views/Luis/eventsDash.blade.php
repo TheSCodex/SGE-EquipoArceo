@@ -19,13 +19,13 @@
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de eventos</h1>
             <div class="flex items-center flex-row justify-end">
-                <form action="{{ route('eventos.filter') }}" method="POST" class="hidden md:block">
+                <form action="{{ route('eventos.search') }}" method="POST" class="hidden md:block">
                     @csrf
                     <div class="flex items-center space-x-4">
                         <div class="relative">
                             <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
                         </div>
-                        <select name="status" class="border-primaryColor rounded-md py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <select name="status" class="border-primaryColor rounded-md py-2 px-4 focus:outline-none focus:border-blue-500 w-36">
                             <option value="all">Todos</option>
                             <option value="Programada">Programada</option>
                             <option value="En proceso">En proceso</option>
@@ -66,6 +66,9 @@
                                     <time class="text-[#888] text-sm">Proposito: {{$event['eventType']}}</time>
                                 </div>
                                 <div class="ml-4">
+                                    <time class="text-[#888] text-sm">Con: {{$event['receiver']['user']['name']}} {{$event['receiver']['user']['lastname']}}</time>
+                                </div>
+                                <div class="ml-4">
                                     <time class="text-[#888] text-sm">Lugar: {{$event['location']}}</time>
                                 </div>
                                 <div class="ml-4">
@@ -74,6 +77,7 @@
                                 <div class="ml-4">
                                     <time class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
                                 </div>
+                                
                             </li>
                         </ul>
                         <div class="flex justify-center space-x-12 mt-4">

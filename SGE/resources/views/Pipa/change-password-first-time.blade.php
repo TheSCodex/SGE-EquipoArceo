@@ -8,7 +8,7 @@
     <h2 class="text-3xl font-bold mb-6">Cambiar contraseña</h2>
     <p class="mb-6">Para garantizar la seguridad de tu cuenta, te sugerimos encarecidamente que cambies la contraseña predeterminada por una que solo tú conozcas.</p>
     {{-- <p>Este paso es crucial, especialmente al acceder por primera vez, y contribuirá significativamente a proteger tus datos personales.</p> --}}
-    <form action="{{url('cambiar-contraseña-primera-vez')}}" method="POST">
+    <form action="{{url('primer-cambio-contra')}}" method="POST">
       @csrf
       <div class="mb-6">
         <label for="new_password" class="block text-lg font-semibold text-gray-700 mb-2">Contraseña</label>

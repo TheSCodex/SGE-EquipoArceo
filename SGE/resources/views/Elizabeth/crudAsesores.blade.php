@@ -31,8 +31,7 @@
                 <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
                 <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
             </div>
-            <a href="{{ route('formAsesores')}}"
-                class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva asesor
+            <a href="{{ route('formAsesores')}}" class="hidden md:block bg-green text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva asesor
             </a>
             </div>
             </div>

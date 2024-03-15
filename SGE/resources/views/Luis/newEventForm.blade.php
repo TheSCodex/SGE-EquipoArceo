@@ -4,7 +4,7 @@
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
                 
-                <form action="{{route('eventos.store')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
+                <form method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
                     <div class="w-full h-fit flex justify-center md:justify-start">
                         <h1 class="text-3xl font-bold">Añadir evento</h1>
                         @csrf
@@ -13,7 +13,11 @@
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">¿Con quien desea la cita?:</p>
-                                <input type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
+                                <select type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
+                                    @foreach ($internsWithUser as $internWithUser)
+                                        <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['lastname']}}</option>
+                                    @endforeach
+                                </select>
                                 @error('receiver_id')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
@@ -33,7 +37,13 @@
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Tipo de evento:</p>
-                                <input type="text" id="eventType" name="eventType" value="{{ old('eventType') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
+                                <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
+                                    <option value="Planificación de practica">Planificación de proyecto</option>
+                                    <option value="Revisión de memoria">Revisión de memoria</option>
+                                    <option value="Asesoria">Asesoria</option>
+                                    <option value="Liberación de documento">Liberación de documento</option>
+                                    <option value="Sanción">Sanción</option>
+                                </select>
                                 @error('eventType')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}

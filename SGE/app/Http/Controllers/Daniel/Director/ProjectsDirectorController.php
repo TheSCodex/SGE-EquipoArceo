@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Daniel;
+namespace App\Http\Controllers\Daniel\Director;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AnteproyectViewAcAd extends Controller
+class ProjectsDirectorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $userId = Auth::id();
-        return view('daniel.asesor.AnteProjectView')->with('userId', $userId);
+        return view('daniel.director.projects.');
     }
 
     /**
