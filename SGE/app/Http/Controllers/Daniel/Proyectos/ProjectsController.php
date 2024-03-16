@@ -30,6 +30,7 @@ class ProjectsController extends Controller
         $projectId = $intern->project_id;
         $project = Project::where("id", $projectId)->first();
 
+
         $businessSector = null;
         $businessAdvisor = null;
         $company = null;
@@ -50,6 +51,7 @@ class ProjectsController extends Controller
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
         return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
+
     }
     public function project()
     {
