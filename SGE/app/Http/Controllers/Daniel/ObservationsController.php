@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Comment;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
