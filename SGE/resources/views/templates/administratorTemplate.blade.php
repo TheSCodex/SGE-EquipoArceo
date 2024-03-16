@@ -26,9 +26,9 @@
             <li>
                 <a href="{{ route('panel-roles.index') }}" class="text-nowrap">Roles y permisos</a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('panel-companies.index') }}">Empresas</a>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('panel-advisors.index') }}" class="text-nowrap">Asesores empresariales</a>
             </li>

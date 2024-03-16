@@ -9,10 +9,52 @@ use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReport() {
-        $pdf = Pdf::loadView('Eliud.reports.docs.sancion');
-        Pdf::setOption(['dpi' => 150, 'debugCss' => true]);
-        return $pdf->stream();
+    public function printReportSancion() {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf-> loadView('Eliud.reports.docs.sancion');
+        return $pdf -> stream();
+    }
+
+    public function printSansion()
+    {
+        $path = public_path('img\Eliud\docs\Sansion.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'Sansion' . '"'
+        ]);
+    }
+
+    public function printCartaAprobacion()
+    {
+        $path = public_path('img\Eliud\docs\CartAprobacion.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'CartaAprobacion' . '"'
+        ]);
+    }
+
+    public function printReportCartaAprobacion() {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf-> loadView('Eliud.reports.docs.aprobacion');
+        return $pdf -> stream();
+    }
+
+    public function printCartaMemoria()
+    {
+        $path = public_path('img\Eliud\docs\CartaMemoria.pdf');
+
+        return response()->make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . 'CartaMemoria' . '"'
+        ]);
+    }
+
+    public function printReportCartaMemoria() {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf-> loadView('Eliud.reports.docs.memoria');
+        return $pdf -> stream();
     }
 
     /**

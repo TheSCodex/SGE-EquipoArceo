@@ -190,7 +190,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('panel-roles', RoleController::class)->names('panel-roles');
 
         // Rutas para CRUD de Empresas
-        Route::resource('/panel-companies', companiesController::class)->names('panel-companies');
+        Route::resource('/panel-companies', companiesController::class)->names(['index'=>'companies.index']);
         Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
         Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
 
@@ -204,7 +204,7 @@ Route::middleware('auth')->group(function () {
 
         // Rutas para CRUD de Carreras y Academias
         Route::resource('/panel-careers', carrerasController::class)->names('panel-careers');
-        Route::get('/newCareer', [carrerasController::class, 'create'])->name('newCareer');
+        Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer');
         Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     });
 });

@@ -13,8 +13,12 @@ class Academy extends Model
         'name',
     ];
 
+    public function academies(){
+        return $this->belongsTo(Division::class);
+    }
+
     public function careerAcademies()
     {
-        return $this->hasMany(CareerAcademy::class);
+        return $this->hasMany(Career::class);
     }
 }
