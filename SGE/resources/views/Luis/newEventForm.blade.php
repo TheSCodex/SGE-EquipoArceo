@@ -26,7 +26,7 @@
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Titulo:</p>
-                                <input type="text" id="title" name="title" value="{{ old('title') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el titulo del evento">
+                                <input type="text" id="title" name="title" value="{{ old('title') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el titulo de la actividad">
                                 @error('title')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
@@ -36,8 +36,8 @@
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Tipo de evento:</p>
-                                <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
+                                <p class="text-sm space-y-2">Tipo de actividad:</p>
+                                <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de actividad">
                                     <option value="Planificación de practica">Planificación de proyecto</option>
                                     <option value="Revisión de memoria">Revisión de memoria</option>
                                     <option value="Asesoria">Asesoria</option>
@@ -52,7 +52,7 @@
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Descripción:</p>
-                                <input id="description" name="description" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="3" placeholder="Describe brevemente de que tratara el evento">{{ old('description') }}</input>
+                                <input id="description" name="description" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="3" placeholder="Describe brevemente de que tratara la actividad">{{ old('description') }}</input>
                                 @error('description')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -62,8 +62,8 @@
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Ubicación del evento:</p>
-                                <input type="text" id="location" name="location" value="{{ old('location') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo el evento">
+                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
+                                <input type="text" id="location" name="location" value="{{ old('location') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad">
                                 @error('location')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -71,8 +71,8 @@
                                 @enderror
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Fecha y hora de inicio del evento:</p>
-                                <input type="datetime-local" id="date_start" name="date_start" value="{{ old('date_start') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                <p class="text-sm space-y-2">Fecha y hora de inicio de la actividad:</p>
+                                <input type="datetime-local" id="date_start" name="date_start" value="{{ old('date_start') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad">
                                 @error('date_start')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -82,8 +82,8 @@
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Fecha y hora de fin del evento:</p>
-                                <input type="datetime-local" id="date_end" name="date_end" value="{{ old('date_end') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                <p class="text-sm space-y-2">Fecha y hora de fin de la actividad:</p>
+                                <input type="datetime-local" id="date_end" name="date_end" value="{{ old('date_end') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad">
                                 @error('date_end')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -91,8 +91,8 @@
                                 @enderror
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Estatus del evento:</p>
-                                <select type="text" id="status" name="status" value="{{old('status')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora del evento">
+                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
+                                <select type="text" id="status" name="status" value="{{old('status')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad">
                                     <option value='Programada' selected>Programada</option>
                                 </select>                                
                                 @error('status')
