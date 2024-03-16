@@ -3,18 +3,12 @@
 namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
-use App\Models\Intern;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ObservationsController extends Controller
 {
-    public function index($projectId)
-{
-    $intern = Intern::where('user_id', Auth::id())
-        ->where('project_id', $projectId)
-        ->first();
     public function index()
     {
         // Obtenemos el ID del usuario autenticado
@@ -28,22 +22,11 @@ class ObservationsController extends Controller
             $academicAdvisorId = $intern->academic_advisor_id;
             $projectId = $intern->project_id;
 
-    // Obtener el id del asesor académico asociado al internado
-    $academicAdvisorId = $intern->academic_advisor_id;
-
-    // Obtener el comentario del asesor académico
-    $tutorComment = Comment::where('project_id', $projectId)
-        ->where('academic_advisor_id', $academicAdvisorId)
-        ->first();
             // Buscamos el comentario del tutor
             $tutorComment = Comment::where('academic_advisor_id', $academicAdvisorId)
                                     ->where('project_id', $projectId)
                                     ->first();
 
-    // Obtener otros comentarios para el proyecto
-    $otherComments = Comment::where('project_id', $projectId)
-        ->where('academic_advisor_id', '<>', $academicAdvisorId)
-        ->get();
             // Buscamos los comentarios normales relacionados con el project_id del intern
             $normalComments = Comment::where('project_id', $projectId)
     ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
@@ -52,9 +35,6 @@ class ObservationsController extends Controller
             ->where('academic_advisor_id', $academicAdvisorId);
     })
     ->get();
-
-    return view('Daniel.Observation', compact('tutorComment', 'otherComments'));
-}
 
 
             return view('Daniel.Projects.Observation')->with([
@@ -98,7 +78,6 @@ class ObservationsController extends Controller
         // Implementar si es necesario.
     }
 }
-
 
 //por si no jala jajaja
 /*
