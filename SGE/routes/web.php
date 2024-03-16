@@ -175,7 +175,6 @@ Route::middleware('auth')->group(function () {
         Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
 
 
->>>>>>> e00237ba3cff3e1ad932fbc7b657ea0903937100
     });
 
     //TODO - Administrador
@@ -209,6 +208,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer');
     });
 });
+
 
 require __DIR__.'/auth.php';
 
