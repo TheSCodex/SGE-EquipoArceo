@@ -80,13 +80,14 @@ Route::middleware('auth')->group(function () {
         Route::get("estudiante/eventos", [StudentController::class, "studentEvents"]);
 
         // Anteproyecto
-Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
-Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
-Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
-Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
-Route::put("estudiante/anteproyecto/update/{id}", [ProjectsController::class, 'update'])->name('updateAnteproyecto'); // Cambiado el nombre de la ruta PUT
+        Route::get('estudiante/anteproyecto', [ProjectsController::class, 'index']);
+        Route::get("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
+        Route::post("estudiante/anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
+        Route::get("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
+        Route::put("estudiante/anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
 
-        Route::get("estudiante/anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
+        // NO FUNCIONA
+        // Route::get("anteproyecto/observaciones/{projectId}", [ObservationsController::class, "index"]);
         
         // Rutas para Eventos
         Route::get('estudiante/eventos', [EventController::class, "index"]);
@@ -108,7 +109,6 @@ Route::put("estudiante/anteproyecto/update/{id}", [ProjectsController::class, 'u
         Route::get('asesor/eventos', [EventController::class, "index"]);
         Route::get('asesor/eventos/calendario', [EventController::class, 'calendar'])->name('events.calendar');
         Route::get('asesor/eventos/filtro', [EventController::class, 'filter'])->name('eventos.filter');
-        Route::get("asesor/anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
     });
 

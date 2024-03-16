@@ -1,3 +1,4 @@
+
 @extends('./templates/guestTemplate')
 
 @section('titulo')
