@@ -113,7 +113,7 @@
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
                         <a class="flex justify-center" id="deleteForm{{ $user->id }}">
-                            <p class="underline text-primaryColor">Ver</p>
+                            <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </td>
                 </tr>
