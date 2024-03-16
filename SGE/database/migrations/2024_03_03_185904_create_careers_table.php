@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->integer('division_id')->nullable()->index('division_id');
             $table->timestamps();
-
         });
     }
 
