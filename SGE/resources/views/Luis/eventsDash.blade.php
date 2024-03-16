@@ -144,7 +144,7 @@
             });
         }
 
-        // Función para filtrar por estatus
+        // Función para filtrar por el estatus
         function filterByStatus() {
             var status = document.getElementById("statusFilter").value.toLowerCase().trim(); // Convertir a minúsculas y quitar espacios en blanco
             var events = document.querySelectorAll(".event");
