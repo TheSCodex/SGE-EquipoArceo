@@ -120,7 +120,7 @@
                             <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                         </div>
                         @endforeach
-                        <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver observaciones</button>
+                        <a href="{{ route('observationsAnteproyecto') }}" class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%]">Ver observaciones</a>
                     </div>
                 @elseif(isset($comments) && count($comments) == 0)
                 <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
