@@ -17,9 +17,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->string('name')->nullable();
             $table->integer('division_id')->nullable()->index('division_id');
-            $table->integer('academy_id')->nullable()->index('academy_id');
             $table->timestamps();
-
         });
     }
 
