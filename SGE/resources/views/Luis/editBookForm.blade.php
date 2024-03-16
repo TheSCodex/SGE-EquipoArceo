@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir evento</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Editar libro</button>
         </form>
     </div>
         </div>
