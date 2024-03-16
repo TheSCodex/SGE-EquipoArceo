@@ -12,7 +12,7 @@ class DirectorAssistantController extends Controller
      */
     public function index()
     {
-        return view("Michell.directorAssistant.index");
+        return view("Michell.assistant.index");
     }
 
     /**

@@ -17,7 +17,7 @@
                         {{ $message }}
                     </p>
                 @enderror
-            </div>
+                </div>
 
             <div class="w-full space-y-2">
                 <p class="text-sm">Correo Electronico</p>
@@ -33,6 +33,16 @@
                 <p class="text-sm space-y-2">Numero Celular</p>
                 <input type="text" name="phone" value="{{ old('phone') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Numero celular">
                 @error('phone')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            <div class="w-full space-y-2">
+                <p class="text-sm space-y-2">Posición</p>
+                <input type="text" name="position" value="{{ old('position') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Posicion">
+                @error('position')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>

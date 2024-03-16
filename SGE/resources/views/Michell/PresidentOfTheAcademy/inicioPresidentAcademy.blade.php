@@ -8,12 +8,12 @@
             <div class="font-kanit mt-3 flex space-x-5 h-1/3">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="#"
+                    <a href="presidente/estudiantes"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Asesores</h3>
-                    <a href="#"
+                    <h3 class="font-bold text-3xl">Proyectos</h3>
+                    <a href="presidente/proyectos"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl">{{$votes}}</p>
                         <p class="text-sm text-lightGray">Votos</p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                         <div class="flex items-center space-x-8 mt-7">
                             <div>
@@ -67,10 +67,10 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                     </div>
-                    <a href="#" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
+                    <a href="presidente/observaciones" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
                 </div>
             </div>
         </section>
@@ -80,26 +80,22 @@
                     <h3 class="text-lg font-medium font-kanit ml-6">Asesores academicos</h3>
                 </div>
                 <div class="mt-3 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Elsa Luz Rios</p>
-                    </div>
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Elsa Luz Rios</p>
-                    </div>
+                    @php $counter = 0; @endphp
+                    @foreach ($advisors as $advisor)
+                        @if ($counter < 3)
+                            <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
+                                <div class="bg-primaryColor rounded-full p-1 ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <p>{{ $advisor->user->name }}</p>
+                            </div>
+                            @php $counter++; @endphp
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="mt-5">
@@ -107,26 +103,22 @@
                     <h3 class="text-lg font-medium font-kanit ml-6">Asesores empresariales</h3>
                 </div>
                 <div class="mt-2 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Luis Villafaña</p>
-                    </div>
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Luis Villafaña</p>
-                    </div>
+                    @php $counter= 0; @endphp
+                    @foreach ($businessConsultants as $data)
+                        @if ($counter < 2)
+                            <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
+                                <div class="bg-primaryColor rounded-full p-1 ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <p>{{ $data->name }}</p>
+                            </div>
+                            @php $counter++; @endphp
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="mt-2 font-roboto space-y-3">
@@ -140,8 +132,7 @@
                             <ol class="border-l border-dashed border-primaryColor font-roboto">
                                 <li>
                                     <div class="flex-start flex items-center pt-3">
-                                        <div
-                                            class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
+                                        <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
                                         </div>
                                         <h4 class="text-sm font-semibold">Revision de memoria</h4>
                                     </div>
@@ -153,8 +144,7 @@
                                 </li>
                                 <li>
                                     <div class="flex-start flex items-center pt-3">
-                                        <div
-                                            class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
+                                        <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
                                         </div>
                                         <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
                                     </div>
@@ -171,8 +161,7 @@
                             <ol class="border-l border-dashed border-primaryColor font-roboto">
                                 <li>
                                     <div class="flex-start flex items-center pt-3">
-                                        <div
-                                            class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
+                                        <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
                                         </div>
                                         <h4 class="text-sm font-semibold">Revision de memoria</h4>
                                     </div>
@@ -184,8 +173,7 @@
                                 </li>
                                 <li>
                                     <div class="flex-start flex items-center pt-3">
-                                        <div
-                                            class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
+                                        <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
                                         </div>
                                         <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
                                     </div>
@@ -199,7 +187,7 @@
                         </div>
 
                     </div>
-                    <a href="#" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
+                    <a href="presidente/eventos/calendario" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
                         más</a>
                 </div>
             </div>

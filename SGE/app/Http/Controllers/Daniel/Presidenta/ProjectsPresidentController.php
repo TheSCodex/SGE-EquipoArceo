@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Daniel;
+namespace App\Http\Controllers\Daniel\Presidenta;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AnteproyectViewAcAd extends Controller
+class ProjectsPresidentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('daniel.asesor.AnteProjectView');
+        return view('daniel.presidenta.project');
     }
 
     /**

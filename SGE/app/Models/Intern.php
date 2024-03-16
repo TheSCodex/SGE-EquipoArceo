@@ -15,6 +15,8 @@ class Intern extends Model
         'project_id',
         'book_id',
         'student_status_id',
+        'performance_area',
+        'Group'
     ];
 
     public function user()
@@ -24,12 +26,12 @@ class Intern extends Model
 
     public function academicAdvisor()
     {
-        return $this->belongsTo(User::class, 'academic_advisor_id');
+        return $this->hasOne(AcademicAdvisor::class, 'academic_advisor_id');
     }
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->hasOne(Project::class);
     }
 
     public function book()

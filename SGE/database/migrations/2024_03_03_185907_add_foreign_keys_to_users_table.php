@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign(['career_academy_id'], 'users_ibfk_1')->references(['id'])->on('career_academy')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['career_id'], 'users_ibfk_1')->references(['id'])->on('careers')->onUpdate('no action')->onDelete('no action');
             $table->foreign(['rol_id'], 'users_ibfk_2')->references(['id'])->on('roles')->onUpdate('no action')->onDelete('no action');
         });
     }

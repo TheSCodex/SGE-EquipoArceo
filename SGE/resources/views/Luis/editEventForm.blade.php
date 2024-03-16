@@ -6,12 +6,12 @@
     <title>Editar Evento</title>
     @vite('resources/css/app.css')
 </head>
-<body class="py-8">
+<body>
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
     <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
         <h1 class="text-2xl font-semibold mb-4 font-montserrat bg-white">Editar Evento</h1>
-        <form action="{{ route('eventos.update', $event->id) }}" method="POST">
+        <form method="PUT">
             @csrf
             @method('PUT')
             <div class="mb-4">

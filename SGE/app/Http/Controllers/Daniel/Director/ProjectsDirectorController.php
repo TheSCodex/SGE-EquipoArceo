@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Daniel;
+namespace App\Http\Controllers\Daniel\Director;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FormAnteproyectoController extends Controller
+class ProjectsDirectorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('daniel.formanteproyecto');
+        return view('daniel.director.projects.');
     }
 
     /**

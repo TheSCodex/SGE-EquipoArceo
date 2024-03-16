@@ -13,22 +13,25 @@
 </head>
 <body class="min-h-screen">
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
-        <a href="#" class=" text-center flex justify-center">
+        <a href="{{ route('inicio-director') }}" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
     
         <ul class="hidden md:flex gap-6 justify-center items-center">
             <li>
+                <a href="{{ route('inicio-director') }}">Inicio</a>
+            </li> 
+            <li>
                 <a href="#">Estudiantes</a>
             </li>
             <li>
-                <a href="#">Proyectos</a>
+                <a href="#">Anteproyectos</a>
             </li>
             <li>
-                <a href="#">Reportes</a>
+                <a href="{{ route('reportes-director') }}">Reportes</a>
             </li>
             <li>
-                <a href="#">Cartas</a>
+                <a href="{{ route('documentos-director.index') }}">Documentos</a>
             </li>
             <li>
                 <a href="/calendar">Calendario</a>
@@ -36,11 +39,13 @@
         </ul>
     
         <ul class="hidden md:flex gap-6 justify-center">
-            <button
-                class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
-                <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
-                <a href="/logout">Sign Out</a>
-            </button>
+            <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <img src="/img/logos/cerrar-sesion.svg">
+                    {{ __('Cerrar sesión') }}
+                </button>
+            </form>
         </ul>
     </header>
 

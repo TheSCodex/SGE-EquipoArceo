@@ -6,14 +6,19 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\BusinessSector;
-use App\Models\CareerAcademy;
 use App\Models\Academy;
-use App\Models\Career;
-use App\Models\User;
-use App\Models\Division;
-use App\Models\Role;
+use App\Models\Project_division;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\BusinessAdvisor;
+use Database\Seeders\CareersSeeder;
+
+
+
+
+
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,19 +27,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
         BusinessSector::factory()->count(10)->create();
         Book::factory(10)->create();
         Company::factory()->count(10)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        Division::factory()->count(5)->create();
-        Academy::factory()->count(5)->create();
-        Career::factory()->count(5)->create();
-        Role::factory()->count(10)->create();
-        CareerAcademy::factory()->count(5)->create();
-        User::factory()->count(10)->create();
+        BusinessAdvisor::factory()->count(10)->create();
+        $this->call(DivisionSeeder::class);
+        $this->call(CareersSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(UserSeeder::class); 
+        $this->call(AcademiesSeeder::class); 
+        $this->call(StudentStatusSeeder::class);
+        $this->call(InternSeeder::class);
+
+        // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
+        $project_division = Project_division::factory()->count(30)->create();
+
     }
 }

@@ -9,7 +9,7 @@
         <div class="flex items-center flex-row justify-end">
             <div>
                 <div class="hidden md:flex items-center relative" >
-                    <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                    <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
             <a href="/panel-users/create"
@@ -50,27 +50,43 @@
             </div>
         </div>
         <div class="hidden lg:block w-full">
-            <table class="text-center w-full">
-                <tr>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Apellidos</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Rol</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nomina</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+            @if(session('error'))
+                <div class="text-red text-center mb-6">
+                    {{session('error')}}
+                </div>
+            @endif
+            <table class="text-start w-full">
+                <tr class="w-full">
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre completo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
+                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th> --}}
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Editar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                 </tr>
                 @foreach ($users as $user)
-                <tr>
-                    <td class="font-roboto font-bold py-5">{{ $user->name }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->last_name }}</td>
+                <tr class="w-full">
+                    <td class="font-roboto font-bold py-5">{{ $user->name }} {{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
-                    {{-- <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td> --}}
-                    <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
-                    {{-- <td class="font-roboto font-bold py-5">{{ $user->career_academy_id->career->name}}</td> --}}
-                    <td class="font-roboto font-bold py-5">{{ $user->career_academy_id}}</td>
+                    <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
+                    {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td> --}}
+                    <td class="font-roboto font-bold py-5 text-center">{{ $user->identifier }}</td>
+                    {{-- <td class="font-roboto font-bold py-5">
+                        @isset($user->career_academy_id)
+                            @php
+                                $career = App\Models\Career::find($user->career_academy_id);
+                            @endphp
+                            @if($career)
+                                {{ $career->name }}
+                            @else
+                                Sin especialidad
+                            @endif
+                        @else
+                            Sin especialidad
+                        @endisset
+                    </td> --}}
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
                         <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
@@ -82,6 +98,11 @@
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
                         </form>
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
+                        <a class="flex justify-center" id="deleteForm{{ $user->id }}">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -108,6 +129,29 @@
             }
         });
     }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
 </script>
 
 
