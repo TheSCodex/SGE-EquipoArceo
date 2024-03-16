@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('identifier', 100)->nullable();
-            $table->integer('career_academy_id')->nullable()->index('career_academy_id');
+            // $table->integer('career_academy_id')->nullable()->index('career_academy_id');
             $table->integer('rol_id')->nullable()->index('rol_id');
             $table->timestamps();
         });

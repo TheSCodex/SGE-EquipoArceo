@@ -6,122 +6,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        p {
+            mso-style-unhide: no;
+            mso-style-qformat: yes;
+            mso-style-next: Normal;
+            margin: 0cm;
+            mso-pagination: widow-orphan;
+            page-break-after: avoid;
+            mso-outline-level: 3;
+            font-size: 12pt;
+            mso-bidi-font-size: 10.0pt;
+            font-family: "Arial", sans-serif;
+            mso-bidi-font-family: "Times New Roman";
+            mso-ansi-language: ES-TRAD;
+            mso-fareast-language: ES;
+            mso-bidi-font-weight: normal;
+        }
+
+        table {
+            mso-style-unhide: no;
+            mso-style-qformat: yes;
+            mso-style-next: Normal;
+            margin: 0cm;
+            mso-pagination: widow-orphan;
+            page-break-after: avoid;
+            mso-outline-level: 3;
+            font-size: 11pt;
+            mso-bidi-font-size: 10.0pt;
+            font-family: "Arial", sans-serif;
+            mso-bidi-font-family: "Times New Roman";
+            mso-ansi-language: ES-TRAD;
+            mso-fareast-language: ES;
+            mso-bidi-font-weight: normal;
+        }
+    </style>
 </head>
 
-<body style="font-family: Arial; font: Arial ; padding: 10px;">
-    <div style="width:100%">
-        <img style=" width:100%;" src="{{ public_path('img/Eliud/img_01.png') }}" alt="Logo UT" />
+<body style="font-family: Arial; font: Arial ; padding: 35px; padding-left: 45; padding-right: 40">
+    <div style="width:115%; position: relative; right:30; ">
+        <img style=" width:100%; height: 110px" src="{{ public_path('img/Eliud/img_01.png') }}" alt="Logo UT" />
     </div>
-    <div style="text-align: right; margin-top:10px;">
-        <p style="margin-bottom: 2px; margin-top:2px; "><span style=" font-weight: bold;">Asunto:</span>Sancion por
-            incumplimiento.</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Cancún, Q.Roo; a {{ date('d') - 1 }} de {{ date('F') }} de
-            {{ date('Y') }}
+
+    <div style="width:100%">
+        <p style=" font-weight:bolder;text-align:center; font-size:12pt; margin-top:10px; marger: 10px;">
+            DIRECCIÓN DE LA DIVISIÓN ______________________________
         </p>
     </div>
-    <div style="font-weight:bolder; text-decoration: underline;">
-        <p style="margin-bottom: 2px; margin-top:2px; ">Nombre del (a) Estudiante</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Matricula</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Programa Educativo</p>
+
+    <div style="text-align: right; margin-top:20px; marger: 20px;">
+
+        <p style="marger: 2px; margin-top:10px; font-size:12t; ">Cancún, Quintana Roo; a {{ date('d') - 1 }} de
+            {{ date('F') }} de
+            {{ date('Y') }}
+        </p>
+        <p style="marger: 2px; margin-top:30px; position: relative;right:25px "><span
+                style=" font-weight: bold;">Asunto:
+            </span>Autorización de digitalización.</p>
+
+        <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
+            </span> xxxx</p>
     </div>
 
-    <p style="width: 100%; margin-top:20px;">
-        Debido a que a la fecha no ha cumplido con la entrega de los avances de memoria y/o
-        documentación para Gestión Empresarial, por este conducto le informo que de conformidad
-        con el Procedimiento y el Reglamento de las Prácticas Profesionales se ha hecho acreedor a
-        una sanción que consiste en:
 
+    <p
+        style="width: 100%; text-align:justify;width:100%; margin-top:20px; margin-top:10px; marger: 10px;line-height: none; ">
+        Se autoriza al (a) estudiante ___________________________ del grupo________ <br style="margin:10px"></br> con
+        número de matrícula:
+        ____________ la digitalización de la MEMORIA en <br style="margin:10px"></br> modalidad:
     </p>
 
-
-    <div style="position: relative; height:100px; width: 100%; display: flex; justify-content: center;">
-        <div style="position:absolute; margin: 10px;">
-            <table style="width: 90%; border-collapse: collapse; border: 1px solid black; font-size: 12px;">
-                <thead>
-                    <tr>
-                        <th colspan="2" style=" padding: 17px; text-align: center; border-bottom: 1px solid black;">
-                            POR MOTIVOS ACADÉMICOS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Amonestación escrita</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Cancelación de Estadía.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="position:absolute; right :-35px; margin: 10px;">
-            <table style="width: 90%; border-collapse: collapse; border: 1px solid black; font-size: 12px;">
-                <thead>
-                    <tr>
-                        <th colspan="2" style="padding: 10px; text-align: center; border-bottom: 1px solid black;">
-                            POR TEMAS RELACIONADOS <br/> EN GESTIÓN EMPRESARIAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Amonestación escrita</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid black;">Cancelación de Estadía.</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div style="position:absolute; width:100% ; margin: 10px; left:95;">
+        <table style="width: 75%; border-collapse: collapse; border: 0.5px solid black;">
+            <tr>
+                <td style="width:34px  ; border: 0.5px solid black;"></td>
+                <td
+                    style="padding-left:8px;font-weight: normal; text-align:justify; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Tradicional</td>
+                <td
+                    style="padding-left:8px;font-weight: normal;width:50%; text-align:center; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Escribir el título</td>
+            </tr>
+            <tr>
+                <td style="width:34px  ; border: 0.5px solid black;"></td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Excelencia académica
+                </td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Experiencia Laboral
+                </td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Movilidad internacional
+                </td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Proyecto de investigación
+                </td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
+                    Certificación Profesional
+                </td>
+                <td
+                    style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                </td>
+            </tr>
+        </table>
     </div>
-    
-    <p style="margin-top: 200px;">Asimismo, y con el fin de evitar la cancelación del proceso, se le exhorta a cumplir dentro de 
-    los cinco días hábiles a partir de la recepción de la presente. </p>
-    
-    <p>Sin otro particular, quedo de usted para cualquier aclaración al respecto. 
+
+    <p style="margin-top: 250px; text-align:justifty;;line-height: none; font-size:12pt">
+        Lo anterior para los trámites correspondientes a su titulación.
+
     </p>
-    
-    <div style="position: relative; height:100px; width: 100%; display: flex; justify-content: center;">
-        <div style="position:absolute; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
-            <p style="text-align: center">A T E N T A M E N T E</p>
-            <p style="text-align: center; margin-top: 40px">_____________________</p>
-            <p style="text-align: center;">Nombre y firma del Asesor (a) 
-                Académico (a) </p>
+    <div style="width:100%">
+        <p style=" font-weight:bolder;text-align:center; font-size:12pt; margin-top:20px; marger: 10px;">
+            Vo. Bo.
+        </p>
+    </div>
+
+
+    <div
+        style="position: relative; height:100px; width: 100%; display: flex; justify-content: center; margin-top:40px; marger: 10px;">
+        <div
+            style="position:absolute;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            <p style="text-align: center; font-weight: 700;">ASESOR ACADÉMICO</p>
+            <p style="text-align: center;font-weight:100 ; margin-top: 40px">____________________________________</p>
+            <p style="text-align: center;font-size:12pt; ">Nombre y firma
+            </p>
         </div>
-        <div style="position:absolute; right :30px; margin: 10px;">
-            <p style="text-align: center;">ENTERADO</p>
-            <p style="text-align: center; margin-top: 40px">_____________________</p>
-            <p style="text-align: center;"> Nombre y firma del (a) Estudiante </p>
+        <div style="position:absolute; right :-20px; margin: 10px;">
+            <p style="text-align: center; font-weight: 700;">COMISIÓN ACADÉMICA</p>
+            <p style="text-align: center; font-weight:100 ;margin-top: 40px">____________________________________</p>
+            <p style="text-align: center; font-size:12pt;">Nombre, cargo, firma y sello de </br>
+                Dirección</p>
         </div>
     </div>
 
-    <p style="margin-top: 60px">* Nota: La sanción deberá ser entre 10 a 20 horas de labor social en la Dirección o departamento que 
-        correspondan las amonestaciones. </p>
-
-    <p style=" font-size: 12px; margin:0px">C.c.p. Dirección de División. </p>
-    <p style=" font-size: 12px; margin:0px">C.c.p. Expediente del (a) estudiante. </p>
-
-    <div style="margin-top: 40px; padding-right: 50px; padding-left:50px">
-        <table style="width: 100%; border-collapse: collapse; border: 1px solid black; font-size: 12px;">
-                <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
-                <td style="padding: 10px; text-align: center; border: 1px solid black;"></td>
+    <div style="margin-top: 60px; width:100%; padding:50px; position: absolute; right:-75">
+        <table style="width: 85%; border-collapse: collapse; border: 0.5px solid black; font-size: 12px;">
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: 31 de julio
+                de 2023</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. 5</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">AEP-P03-F06</td>
 
         </table>
     </div>
 
-</div>
+    </div>
 </body>
 
 </html>

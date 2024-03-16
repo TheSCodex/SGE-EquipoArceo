@@ -61,7 +61,7 @@
                         </p>
                     @enderror
                 </div>
-                <div class=" space-y-2">
+                {{-- <div class=" space-y-2">
                     <p class="text-sm">Especialidad</p>
                     <select name="career_academy_id" value="{{old('career_academy_id')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Especialidad">
                         @foreach($careers as $career)
@@ -74,7 +74,7 @@
                         </p>
                     @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
             <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir usuario</button>
 

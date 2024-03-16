@@ -67,26 +67,25 @@
                     {{session('error')}}
                 </div>
             @endif
-            <table class="text-center w-full">
+            <table class="text-start w-full">
                 <tr class="w-full">
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Apellidos</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Rol</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nomina</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre completo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
+                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th> --}}
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Editar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                 </tr>
                 @foreach ($users as $user)
                 <tr class="w-full">
-                    <td class="font-roboto font-bold py-5">{{ $user->name }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->last_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $user->name }} {{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
                     {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td> --}}
-                    <td class="font-roboto font-bold py-5">{{ $user->identifier }}</td>
-                    <td class="font-roboto font-bold py-5">
+                    <td class="font-roboto font-bold py-5 text-center">{{ $user->identifier }}</td>
+                    {{-- <td class="font-roboto font-bold py-5">
                         @isset($user->career_academy_id)
                             @php
                                 $career = App\Models\Career::find($user->career_academy_id);
@@ -99,7 +98,7 @@
                         @else
                             Sin especialidad
                         @endisset
-                    </td>
+                    </td> --}}
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
                         <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
@@ -111,6 +110,11 @@
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
                         </form>
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
+                        <a class="flex justify-center" id="deleteForm{{ $user->id }}">
+                            <p class="underline text-primaryColor">Ver</p>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
