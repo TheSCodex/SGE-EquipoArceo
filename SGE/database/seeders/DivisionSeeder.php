@@ -2,24 +2,20 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-
-
+use App\Models\Division;
 
 class DivisionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('divisions')->insert([
-            'name' => Str::random(10),
-
-        ]);
+        // Insertar las divisiones de la UT Cancún
+        Division::create(['name' => 'División de Turismo']);
+        Division::create(['name' => 'División de Ingeniería y Tecnología']);
+        Division::create(['name' => 'División de Gastronomía']);
+        Division::create(['name' => 'División Económico-Administrativa']);
     }
 }
-

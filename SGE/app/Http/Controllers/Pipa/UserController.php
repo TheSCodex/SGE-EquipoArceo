@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->rol_id = $request->rol_id;
         $user->identifier = $request->identifier;
-        $user->career_academy_id = $request->career_academy_id;
+        // $user->career_academy_id = $request->career_academy_id;
         // password aleatoria
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
