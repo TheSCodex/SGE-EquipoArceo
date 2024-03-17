@@ -14,7 +14,8 @@ class StudentController extends Controller
 
     public function studentHome()
     {
-        return view('Michell.StudentHome.studentHome');
+        dd(now());
+        // return view('Michell.StudentHome.studentHome');
     }
 
     public function studentEvents()
