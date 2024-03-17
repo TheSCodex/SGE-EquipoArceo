@@ -36,6 +36,10 @@ use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Pipa\RoleController;
 
+
+use Illuminate\Support\Facades\Auth; // Para el sistema de autenticación
+use App\Models\User; // Si necesitas acceder a la información del usuario
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,7 +99,6 @@ Route::middleware('auth')->group(function () {
     //TODO - ASESOR ACADEMICO
     Route::prefix('asesor')->middleware('role:asesorAcademico')->group(function () {
 
-        //Ruta de la lista de los anteproyectos
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         
         // ! Ruta de las observaciones del asesor
@@ -128,10 +131,10 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'role:director'], function () {
 
         //inicio director
-        Route::get("/", [DirectorController::class, "index"])->name('inicio-director');
+        Route::get("/director", [DirectorController::class, "index"])->name('inicio-director');
 
         // El apartado de reportes para la directora
-        Route::get('/reportes', [ReportsController::class, "index"])->name('reportes-director');
+        Route::get('/director/reportes', [ReportsController::class, "index"])->name('reportes-director');
         
         // El acceso al CRUD/Listado de documentos para la directora
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');

@@ -8,8 +8,8 @@
 </head>
 <body>
     
-@extends('templates.academicAdvisorTemplate')
-@section('contenido')
+    @extends('templates/authTemplate')
+    @section('contenido')
 
 <div class="w-full min-h-screen m-auto flex flex-col">
     <div class="w-6/12 bg-white rounded-xl shadow-2xl p-6 border-2 border-secondaryColor m-auto">

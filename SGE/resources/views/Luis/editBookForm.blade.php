@@ -7,8 +7,8 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-@extends('templates.directorsAssistantTemplate')
-@section('contenido')
+    @extends('templates/authTemplate')
+    @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-full md:px-[7em] md:my-[2em] flex ">

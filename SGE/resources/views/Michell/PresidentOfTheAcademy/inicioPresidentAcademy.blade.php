@@ -1,4 +1,6 @@
-@extends('templates.presidentOfTheAcademyTemplate')
+{{-- @extends('templates.presidentOfTheAcademyTemplate') --}}
+@extends('./templates/authTemplate')
+
 @section('contenido')
     <div class="bg-[#F3F5F9] flex h-screen gap-8">
         <section class="mt-[10px] ml-[30px] w-2/3">

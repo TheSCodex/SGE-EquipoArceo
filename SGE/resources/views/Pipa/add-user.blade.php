@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 <div class="w-full md:px-[7em] md:mt-[2em] h-fit flex bg-white">
     <form action="{{url('panel-users')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">

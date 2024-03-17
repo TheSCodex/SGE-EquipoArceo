@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 
 @section('contenido')
     <div class="flex h-full gap-8">

@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 <div class="w-full h-screen flex justify-center items-center bg-white">
 

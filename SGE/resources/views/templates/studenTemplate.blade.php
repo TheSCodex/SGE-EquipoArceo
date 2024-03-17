@@ -22,7 +22,7 @@
             <a href="{{ route('anteproyecto') }}">Proyectos</a>
         </li>
         <li>
-            <a href="{{ route('events.calendar') }}">Calendario</a>
+            <a href="/estudiante/calendario">Calendario</a>
         </li>
     </ul>
 

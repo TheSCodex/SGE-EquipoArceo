@@ -1,4 +1,4 @@
-@extends('./templates/studenTemplate')
+@extends('templates/authTemplate')
 
 @section('titulo')
     Bienvenido

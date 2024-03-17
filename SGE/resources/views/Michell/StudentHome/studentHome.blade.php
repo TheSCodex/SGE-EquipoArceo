@@ -1,4 +1,4 @@
-@extends('templates.studenTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 
     <div class="bg-[#F3F5F9] flex max-md:block h-screen max-md:h-full gap-8">

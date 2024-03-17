@@ -6,8 +6,8 @@
     <title>Academic Home</title>
 </head>
 <body>
-@extends('templates.studenTemplate')
-@section('contenido')
+    @extends('templates/authTemplate')
+    @section('contenido')
 
 <div class="bg-[#F3F5F9] h-screen flex flex-col justify-center items-center  mb-10 border-b-2">
 <section class="w-full p-4 flex items-center">

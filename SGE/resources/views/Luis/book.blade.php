@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    @extends('templates.directorsAssistantTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">

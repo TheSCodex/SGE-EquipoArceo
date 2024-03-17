@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('titulo', 'Panel de Carrera y academia')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

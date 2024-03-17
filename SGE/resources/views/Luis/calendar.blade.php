@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     <main class="w-full h-full overflow-auto font-montserrat ">
         <div class="flex  w-full ">
