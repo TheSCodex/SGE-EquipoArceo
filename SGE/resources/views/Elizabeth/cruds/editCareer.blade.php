@@ -21,7 +21,11 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Nombre de la division</p>
-                <input type="text" name="email" value="{{ $career->division_name }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Correo">
+                <select name="division_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($divisions as $division)
+                        <option value="{{ $division->id }}">{{ $division->name }}</option>
+                    @endforeach
+                </select>
                 @error('name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
@@ -30,22 +34,32 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Nombre de la academia</p>
-                <input type="text" name="phone" value="{{ $career->academy_name }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Celular">
+                <select name="academy_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($academies as $academy)
+                        <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                    @endforeach
+                </select>
                 @error('name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
                 @enderror
             </div>
+
             <div class="w-full space-y-2">
-                <p class="text-sm">Nombre de la presidenta</p>
-                <input type="text" name="registration_date" value="{{ $career->president_name }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="fecha de registro">
+                <p class="text-sm">Nombre del presidente</p>
+                <select name="academy_id" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
                 @error('name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
                 @enderror
             </div>
+
            
         <button type="submit" class="p-[3%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Actualizar empresa</button>
     </form>

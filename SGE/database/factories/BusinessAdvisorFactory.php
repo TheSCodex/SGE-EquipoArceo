@@ -20,6 +20,7 @@ class BusinessAdvisorFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
+            'position' => $this->faker->word
             // Agrega más atributos y valores según sea necesario
         ];
     }

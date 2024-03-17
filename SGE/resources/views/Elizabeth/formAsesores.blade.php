@@ -38,6 +38,16 @@
                     </p>
                 @enderror
             </div>
+
+            <div class="w-full space-y-2">
+                <p class="text-sm space-y-2">Posición</p>
+                <input type="text" name="position" value="{{ old('position') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Posicion">
+                @error('position')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
         </div>
 
         <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Añadir asesor</button>

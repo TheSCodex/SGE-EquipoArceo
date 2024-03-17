@@ -1,26 +1,21 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
-use App\Models\Career;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-class CareerFactory extends Factory
+class CareersSeeder extends Seeder
 {
     /**
-     * The name of the factory's corresponding model.
+     * Run the database seeds.
      *
-     * @var string
+     * @return void
      */
-    protected $model = Career::class;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function run()
     {
+        // Lógica de inserción de carreras
         $careers = [
             'TSU en Administración área Capital Humano',
             'TSU en Desarrollo de Negocios área Mercadotecnia',
@@ -44,9 +39,11 @@ class CareerFactory extends Factory
             'Licenciatura en Terapia Física',
         ];
 
-        return [
-            'name' => $this->faker->unique()->randomElement($careers),
-            'division_id' => $this->faker->numberBetween(1, 5),
-        ];
+        foreach ($careers as $career) {
+            DB::table('Careers')->insert([
+                'name' => $career,
+                'division_id' => rand(1, 4),
+            ]);
+        }
     }
 }

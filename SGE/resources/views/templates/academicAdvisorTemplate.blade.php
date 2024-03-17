@@ -17,33 +17,24 @@
     
     <ul class="hidden md:flex gap-6 justify-center items-center">
         <li>
-            <a href="#">Estudiantes</a>
+            <a href="/estudiante">Estudiantes</a>
         </li>
         <li>
-            <a href="/anteproyecto-asesor">Proyectos</a>
+            <a href="{{ route('anteproyectos-asesor') }}">Anteproyectos</a>
         </li>
         <li>
-            <a href="calendario">Calendario</a>
+            <a href="{{ route('events.calendar') }}">Calendario</a>
         </li>
     </ul>
 
     <ul class="hidden md:flex gap-6 justify-center">
-        <form method="POST" action="{{ route('logout') }}">
+        <form id="logout-form" method="POST" action="{{ route('logout') }}">
             @csrf
-            @method('post')
-            <x-dropdown-link :href="route('logout')"
-                class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
-                <img src="/img/logos/cerrar-sesion.svg"
-                    onclick="event.preventDefault();
-                                this.closest('form').submit();">
+            <button type="submit" class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <img src="/img/logos/cerrar-sesion.svg">
                 {{ __('Cerrar sesión') }}
-            </x-dropdown-link>
+            </button>
         </form>
-        {{-- <button
-            class="flex justify-center items-center px-4 p-2 transition duration-300 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]">
-            <img src="/img/logos/cerrar-sesion.svg" alt="" class="pr-2">
-            <a href="/logout">Sign Out</a>
-        </button> --}}
     </ul>
 </header>
 

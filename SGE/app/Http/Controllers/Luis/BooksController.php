@@ -32,38 +32,6 @@ class BooksController extends Controller
         $books = Book::paginate(5);
         return view('Luis.book', compact('books', 'userInfoByBookId'));
     }
-
-    /**
-     * Display a filter list of the resources.
-     */
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('search');
-        // dd($searchTerm);
-    
-        $filteredBooks = Book::query();
-    
-        if (!empty($searchTerm)) {
-            $filteredBooks->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'like', '%' . $searchTerm . '%')->orWhere('author', 'like', '%' . $searchTerm . '%')->orWhere('isbn', 'like', '%' . $searchTerm . '%');
-            });
-        }
-    
-        $books = $filteredBooks->orderBy('id')->paginate(9);
-    
-        $internsWithUserInfo = Intern::whereNotNull('book_id')
-            ->with('user')
-            ->get();
-    
-        // Preparar un arreglo que contenga la información del usuario asociada a cada libro
-        $userInfoByBookId = [];
-        foreach ($internsWithUserInfo as $intern) {
-            $bookId = $intern->book_id;
-            $userInfoByBookId[$bookId][] = $intern->user;
-        }
-    
-        return view('Luis.book', compact('books', 'userInfoByBookId'));
-    }
     
 
     /**
@@ -155,7 +123,7 @@ class BooksController extends Controller
         }
         
         $book->update($request->all());
-        return redirect()->route('libros.index')->with('edit_success', 'El libro ha sido editado correctamente');
+        return redirect()->route('libros-asistente.index')->with('edit_success', 'El libro ha sido editado correctamente');
     }
 
     /**
@@ -174,7 +142,7 @@ class BooksController extends Controller
 
         $book->delete();
     
-        return redirect()->route('libros.index')->with('delete', 'ok');
+        return redirect()->route('libros-asistente.index')->with('delete', 'ok');
     }
     
 }
