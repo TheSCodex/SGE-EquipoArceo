@@ -12,10 +12,10 @@ class BajasController extends Controller
 {
     public function index()
     {
-        // Obtener solo los alumnos con student_status_id igual a 3 (Cancelado)
+        // Obtener solo los alumnos con student_status_id igual a 2 (Cancelado)
         $dataStudents = Intern::whereHas('studentStatus', function ($query) {
-            $query->where('id', 3);
-        })->with('academicAdvisor.user', 'user.careerAcademy.career')->get();
+            $query->where('id', 1);
+        })->with('academicAdvisor.users', 'users.careerAcademy.career')->get();
 
         return view('Michell.bajas.bajas', compact('dataStudents'));
     }
