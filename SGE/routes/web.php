@@ -107,9 +107,8 @@ Route::middleware('auth')->group(function () {
         // Ruta para la vista del calendario del asesor
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
-        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
-        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
-
+        // Ruta para cancelar la actividad
+        Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
 
     });
 
@@ -121,6 +120,8 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente');
+
+        Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
     });
 
     //TODO - DIRECTORA
@@ -143,6 +144,10 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index']);
+
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
     });
 
@@ -174,6 +179,10 @@ Route::middleware('auth')->group(function () {
 
         // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
         Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
+
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
 
     });
