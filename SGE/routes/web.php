@@ -15,7 +15,6 @@ use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
-use App\Http\Controllers\Daniel\ObservationsController;
 use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Pipa\ChangePasswordController;
 use App\Http\Controllers\Michell\AcademicHomeController;
