@@ -1,101 +1,108 @@
 @extends('templates.administratorTemplate')
 
 @section('contenido')
-    <div class="flex h-full gap-8">
-        <section class="mt-[10px] ml-[30px] w-2/3">
-            <div class="bg-white rounded-md py-1">
+    <div class="bg-[#F3F5F9] grid grid-cols-1 lg:grid-cols-3 lg:gap-5 px-5 py-7">
+        <section class="col-span-2 flex flex-col gap-3">
+
+            <div class="bg-white rounded-md p-2">
                 <h1 class="text-lg font-medium font-kanit ml-6">Bienvenido, Administrador!</h1>
             </div>
-            <div class="font-kanit mt-3 flex space-x-5 h-[36%]">
-                <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="panel-users"
-                        class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
+
+            <div class="grid grid-cols-2 gap-x-3 h-full">
+                <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
+                    <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
+
+                    <a href="panel-users" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                        Ver todo
+                    </a>
                 </div>
-                <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Proyectos</h3>
-                    <a href="#"
-                        class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
+                <div class="bg-[#02AB82] rounded-md grid place-content-center px-2 py-5 gap-3 md:gap-9">
+                    <p class="text-lg md:text-2xl text-white font-bold">Anteproyectos</p>
+
+                    <a href="" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                        Ver todo
+                    </a>
                 </div>
             </div>
-            <div class="bg-white font-roboto shadow-md py-3 mt-3 rounded-md h-[53%]">
-                <div class="flex w-full justify-between items-center px-10 border-b-2 pb-3">
-                    <div>
-                        <h3 class="text-[#828282] font-semibold uppercase text-sm">Aprobación de proyectos</h3>
-                        <p class="text-[#4f4f4f] text-xs">Por academia</p>
-                    </div>
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-lightGray" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                            clip-rule="evenodd" />
+
+            <div class="bg-white rounded-md py-7 px-10">
+                <div class="flex justify-between">
+                    <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
+                    <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="12.8856" cy="10.8065" rx="12.0282" ry="10.3881" fill="#BDBDBD"/>
+                    <rect x="10.8809" y="8.49805" width="4.00938" height="9.23382" rx="2.00469" fill="white"/>
+                    <rect x="10.8809" y="3.88135" width="4.00938" height="3.46268" rx="1.73134" fill="white"/>
                     </svg>
                 </div>
-                <div class="h-96 mt-20 ml-10 mr-10">
-                    <canvas id="myChart" width="1000" height="300"></canvas>
-                </div>
+
+                <p class="text-[#828282]">Carreras de la division</p>
+
+                <hr class="border-2 border-[#ECECEC] my-5" />
+
+                <canvas id="myChart" class="max-h-[250px]"></canvas>
             </div>
         </section>
-        <section class="mt-[10px] mr-[30px] w-1/3">
-            <div>
-                <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Empresas</h3>
+
+        <section class="col-span-1 flex flex-col gap-3 mt-5 lg:mt-0">
+
+            <div class="bg-white rounded-md">
+                <h3 class="text-lg font-medium font-kanit ml-6 py-2">Empresas</h3>
+            </div>
+
+            <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
+                <div class="bg-primaryColor rounded-full p-1 ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="white" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
                 </div>
-                <div class="mt-3 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Bimbo SA de CV</p>
+                <p>Bimbo SA de CV</p>
+            </div>
+
+            <div class="bg-white rounded-md py-2">
+                <h3 class="text-lg font-medium font-kanit ml-6">Asesores empresariales</h3>
+            </div>
+
+            <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
+                <div class="bg-primaryColor rounded-full p-1 ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="white" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+                <p>Luis Villafaña</p>
+            </div>
+
+            <div class="bg-white rounded-md py-2">
+                <h3 class="text-lg font-medium font-kanit ml-6">Carreras y Divisiones</h3>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
+                    <div class="bg-primaryColor rounded-full p-1 ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="white" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                     </div>
+                    <p>Ingenieria y Tecnologia</p>
                 </div>
             </div>
-            <div class="mt-5">
-                <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Asesores empresariales</h3>
-                </div>
-                <div class="mt-2 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Luis Villafaña</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-5">
-                <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Carreras y Divisiones</h3>
-                </div>
-                <div class="mt-2 space-y-2">
-                    <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                        <div class="bg-primaryColor rounded-full p-1 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <p>Ingenieria y Tecnologia</p>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md mt-3 py-3 px-6 font-roboto h-[53%]">
-                <div class="space-y-1 flex flex-col w-full pt-5 pl-5">
-                    <h3 class="text-sm text-[#828282] font-semibold">Total de proyectos</h3>
-                    <p class="text-xs text-[#4f4f4f]">Índice de aprobacion</p>
+
+            <div class="bg-white rounded-md px-6 py-8 font-roboto">
+                <h3 class="text-sm md:text-lg text-center text-[#828282] font-semibold">Indice de aprobación</h3>
+                <hr class="border-2 border-[#ECECEC] my-5">
+                
+                <div class="p-3 flex justify-center">
+                    <img src="{{ asset('img/administratorDashboardChart.png') }}" alt="Total proyectos" class="max-h-[200px]" />
                 </div>
             </div>
         </section>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');

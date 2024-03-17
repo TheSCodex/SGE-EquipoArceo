@@ -11,7 +11,7 @@
 
 <body>
 
-    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor bg-white">
         <a href="{{ route('admin.index') }}" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
@@ -47,13 +47,10 @@
             </form>
         </ul>
     </header>
-    <main class="min-h-screen h-full">
-        {{-- <div class="sm:p-8 text-left w-[90%]"> --}}
-
+    <main class="">
         @yield('contenido')
-        {{-- </div> --}}
     </main>
-    <footer class="border-t border-secondaryColor text-black text-center p-5">
+    <footer class="border-t border-secondaryColor text-black text-center p-5 bg-white">
         Copyright © 2024. SM51
     </footer>
 </body>
