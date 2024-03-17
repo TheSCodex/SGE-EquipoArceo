@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen">
-    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor bg-white">
         <a href="{{ route('inicio-director') }}" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
@@ -49,10 +49,10 @@
         </ul>
     </header>
 
-    <main class="bg-[#F3F5F9] p-4 h-full">
+    <main class="bg-[#F3F5F9] p-4 flex flex-col flex-1">
         @yield('contenido')
     </main>
-    <footer class="border-t border-secondaryColor text-xs text-black text-center p-5">
+    <footer class="border-t border-secondaryColor bg-white text-xs text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>
 </body>

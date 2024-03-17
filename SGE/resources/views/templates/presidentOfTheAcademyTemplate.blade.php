@@ -9,8 +9,8 @@
 
 </head>
 
-<body>
-    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+<body class="min-h-screen">
+    <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor bg-white">
         <a href="{{ route('inicio-presidente') }}" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="Logo-ut">
         </a>
@@ -25,6 +25,15 @@
             <li>
                 <a href="{{ route('anteproyectos-presidente') }}">Anteproyectos</a>
             </li>
+            <li>
+                <a href="">Reportes</a>
+            </li>
+            <li>
+                <a href="">Documentos</a>
+            </li>
+            <li>
+                <a href="">Calendario</a>
+            </li>
         </ul>
 
         <ul class="hidden md:flex gap-6 justify-center">
@@ -38,10 +47,10 @@
         </ul>
     </header>
 
-    <main class="min-h-screen h-full">
+    <main>
         @yield('contenido')
     </main>
-    <footer class="border-t border-secondaryColor text-black text-center p-5">
+    <footer class="border-t border-secondaryColor text-black text-center p-5 bg-white">
         Copyright © 2024. SM51
     </footer>
 </body>
