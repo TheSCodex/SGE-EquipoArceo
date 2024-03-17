@@ -106,9 +106,8 @@ Route::middleware('auth')->group(function () {
         // Ruta para la vista del calendario del asesor
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
-        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
-        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
-
+        // Ruta para cancelar la actividad
+        Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
 
     });
 
