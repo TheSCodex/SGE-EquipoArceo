@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academy;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -61,13 +62,15 @@ class ReportsController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('Eliud.reports.directorsReports');
+    {        
+        $academie = Academy::paginate(1);
+        return view('Eliud.reports.directorsReports', compact('academie'));
     }
 
     public function directorIndex()
     {
-        return view('Eliud.reports.directorsReports');
+        $academie = Academy::paginate(1);
+        return view('Eliud.reports.directorsReports', compact('academie'));
     }
 
     public function assistantIndex()
