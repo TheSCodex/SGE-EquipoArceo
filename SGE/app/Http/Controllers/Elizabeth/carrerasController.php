@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Elizabeth;
-
+// testeando que todo funcione
 use App\Http\Controllers\Controller;
 use App\Models\Academy;
 use App\Models\careers_info_view;
