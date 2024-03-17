@@ -34,7 +34,7 @@
                 <a href="{{ route('documentos-director.index') }}">Documentos</a>
             </li>
             <li>
-                <a href="/calendar">Calendario</a>
+                <a href="/calendario">Calendario</a>
             </li>
         </ul>
     

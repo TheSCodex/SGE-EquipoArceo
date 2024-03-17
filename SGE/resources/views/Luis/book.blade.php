@@ -137,26 +137,22 @@
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros</h1>
             <div class="flex items-center flex-row justify-end">
-                <form action="{{ route('libros.filter') }}" method="POST" class="hidden md:block">
-                    @csrf
                     <div class="flex items-center space-x-4">
                         <div class="relative">
-                            <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                            <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                         </div>
-                        <button type="submit" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Filtrar</button>
                     </div>
-                </form>
-                <a href="{{route('libros.create')}}"
+                <a href="{{route('libros-asistente.create')}}"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
                 </a>
             </div>
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                 <div>
-                    <div class="flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                    <div class="hidden md:flex items-center relative" >
+                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <a href="{{route('libros.create')}}"
+                <a href="{{route('libros-asistente.create')}}"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
                 </a>
             </div>
@@ -214,12 +210,12 @@
                         </td>
                         <td class="font-roboto font-bold py-5">{{ substr($book->created_at, 0, 10) }}</td>
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
-                            <a href="{{route('libros.edit', $book->id)}}" class="flex justify-center">
+                            <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <form action="{{ route('libros.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
+                            <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
@@ -237,6 +233,30 @@
         {{$books->links()}}
     </div>
     </section>
+    <script>
+        function searchTable() {
+            var searchText = document.getElementById("search").value.toLowerCase();
+            var rows = document.querySelectorAll("table tr");
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var found = false;
+                for (var j = 0; j < row.cells.length; j++) {
+                    var cell = row.cells[j];
+                    if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
+    </script>
     @endsection
 </body>
 
