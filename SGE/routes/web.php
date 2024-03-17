@@ -144,6 +144,10 @@ Route::middleware('auth')->group(function () {
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index']);
 
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+
     });
 
     //TODO - Asistente directora
@@ -174,6 +178,10 @@ Route::middleware('auth')->group(function () {
 
         // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
         Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
+
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
 
     });
