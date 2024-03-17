@@ -29,7 +29,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
+                        <p class="text-sm text-black opacity-50">Comentarios en la version mas reciente de tu propuesta</p>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Votos de los asesores</p>
+                        <p class="text-sm text-black opacity-50">Votos de aprobacion</p>
                     </div>
                 </div>
 
@@ -56,15 +56,14 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 400 hrs</p>
-                        <p class="text-sm text-black opacity-50">Horas completadas</p>
+                        <p class="font-bold text-2xl">24 / 120</p>
+                        <p class="text-sm text-black opacity-50">Dias restantes</p>
                     </div>
                 </div>
 
             </div>
 
             <div class="bg-white rounded-md font-kanit py-8">
-                <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
                     <div class="flex flex-col gap-5">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -109,7 +108,7 @@
         <section class="flex flex-col flex-1 gap-3 w-full col-span-1">
 
             <div class="bg-white rounded-md py-1 mt-3 lg:mt-0">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores academicos</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor academico</h3>
             </div>
 
             <div class="space-y-2">
@@ -126,7 +125,7 @@
             </div>
 
             <div class="bg-white rounded-md py-1">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores empresariales</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor empresarial</h3>
             </div>
 
             <div class="space-y-2">
@@ -144,7 +143,7 @@
 
             <div class=" font-roboto bg-white p-5 rounded-md">
 
-                <h3 class="text-lg font-medium font-kanit mb-3">Eventos importantes</h3>
+                <h3 class="text-lg font-medium font-kanit mb-3">Actividades importantes</h3>
                     
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
