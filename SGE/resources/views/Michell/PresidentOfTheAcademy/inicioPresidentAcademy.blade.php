@@ -10,12 +10,12 @@
             <div class="font-kanit mt-3 flex space-x-5 h-1/3">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="lista-estudiantes"
+                    <a href="presidente/estudiantes"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
                     <h3 class="font-bold text-3xl">Proyectos</h3>
-                    <a href="lista-proyectos"
+                    <a href="presidente/proyectos"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl">{{$votes}}</p>
                         <p class="text-sm text-lightGray">Votos</p>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button onclick="window.location.href='/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                         <div class="flex items-center space-x-8 mt-7">
                             <div>
@@ -69,10 +69,10 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button onclick="window.location.href='/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                     </div>
-                    <a href="observaciones" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
+                    <a href="presidente/observaciones" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
                 </div>
             </div>
         </section>
@@ -189,7 +189,7 @@
                         </div>
 
                     </div>
-                    <a href="eventos" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
+                    <a href="presidente/eventos/calendario" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
                         más</a>
                 </div>
             </div>

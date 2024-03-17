@@ -15,8 +15,8 @@
         <a href="{{ route('admin.index') }}" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
-    
-        <ul class="hidden md:flex gap-6 justify-center items-center w-full">
+
+        <ul class="hidden md:flex gap-10 justify-center font-roboto text-sm">
             <li>
                 <a href="{{ route('admin.index') }}">Inicio</a>
             </li>    
@@ -36,7 +36,7 @@
                 <a href="{{ route('panel-careers.index') }}" class="text-nowrap">Carreras y divisiones</a>
             </li>
         </ul>
-    
+
         <ul class="hidden md:flex gap-6 justify-center">
             <form id="logout-form" method="POST" action="{{ route('logout') }}">
                 @csrf

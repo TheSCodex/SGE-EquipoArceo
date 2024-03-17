@@ -17,7 +17,7 @@
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
     
-        <ul class="hidden md:flex gap-6 justify-center items-center w-full">
+        <ul class="hidden md:flex gap-6 justify-center items-center">
             <li>
                 <a href="{{ route('inicio-asistente') }}">Inicio</a>
             </li>    

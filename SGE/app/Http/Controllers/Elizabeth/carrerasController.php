@@ -16,13 +16,12 @@ class carrerasController extends Controller
     /**
      * Display a listing of the resource.
      */
-  public function index()
-{
-    $careers = careers_info_view::all();
+    public function index()
+    {
+        $careers = Career::all();
+        return view('Elizabeth.cruds.carreras',compact('careers'));
+    }
     
-    return view('Elizabeth.cruds.carreras', compact('careers'));
-}
-
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +44,7 @@ class carrerasController extends Controller
 
     $division = Division::where('name', $validatedData['division'])->first();
 
-    $career = new careers_info_view();
+    $career = new Career();
     $career->name = $validatedData['name'];
 
     $career->division_id = $division->id;
@@ -75,6 +74,12 @@ class carrerasController extends Controller
     return view('Elizabeth.cruds.editCareer', compact('career','divisions','academies','users'));
 }
 
+        $careers = Career::all(); 
+        $careers = Career::findOrFail($id);
+        return view('Elizabeth.cruds.editCareer', compact('careers'));
+
+
+    }
 
     /**
      * Update the specified resource in storage.
@@ -93,11 +98,12 @@ public function update(Request $request, $id)
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-{
-    $career = Career::findOrFail($id);
-    $career->delete();
-    
-    return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
-}
-
+    {
+            {
+            
+                $career = Career::findOrFail($id);
+                $career->delete();
+                return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
+            }        
+    }
 }

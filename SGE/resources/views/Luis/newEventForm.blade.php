@@ -13,11 +13,7 @@
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">¿Con quien desea la cita?:</p>
-                                <select type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
-                                    @foreach ($internsWithUser as $internWithUser)
-                                        <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['lastname']}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
                                 @error('receiver_id')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
@@ -37,13 +33,7 @@
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Tipo de evento:</p>
-                                <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
-                                    <option value="Planificación de practica">Planificación de proyecto</option>
-                                    <option value="Revisión de memoria">Revisión de memoria</option>
-                                    <option value="Asesoria">Asesoria</option>
-                                    <option value="Liberación de documento">Liberación de documento</option>
-                                    <option value="Sanción">Sanción</option>
-                                </select>
+                                <input type="text" id="eventType" name="eventType" value="{{ old('eventType') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de evento">
                                 @error('eventType')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
