@@ -123,7 +123,7 @@ Route::middleware('auth')->group(function () {
     });
 
     //TODO - DIRECTORA
-    Route::group(['middleware' => 'role:director'], function () {
+    Route::prefix("director")->middleware("role:director")->group( function () {
 
         //inicio director
         Route::get("/", [DirectorController::class, "index"])->name('inicio-director');
