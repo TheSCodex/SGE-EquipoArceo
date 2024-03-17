@@ -1,56 +1,53 @@
 @extends('templates.administratorTemplate')
 @section('contenido')
-<div class="w-full md:h-full xl:h-screen flex justify-center xl:items-center bg-white">
-    <form action="{{ route('panel-advisors.store') }}" method="POST" class="flex flex-col font-montserrat mx-10 space-y-5 lg:w-[40vw] sm:w-[60vw]">
+<div class="w-full h-screen flex justify-center items-center bg-white">
+    <form action="{{ route('panel-advisors.store') }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-[20rem] md:w-[30rem]">
         @csrf
-
-        <div class="w-full h-fit flex justify-center mt-4">
-            <h1 class="text-3xl font-bold">Añadir Asesores</h1>
+        <div class="w-full h-fit flex justify-start">
+            <h1 class="text-3xl font-bold">Añadir Asesor</h1>
         </div>
-
         <div class="w-full h-fit flex flex-col space-y-2">
             <div class="w-full space-y-2">
-                <p class="text-sm">Nombre</p>
-                <input type="text" name="name" value="{{ old('name') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Nombre">
+                <p class="text-sm">Nombre del Asesor</p>
+                <input type="text" name="name" value="{{ old('name') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Nombre del Asesor">
                 @error('name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
                 @enderror
+            </div>
+            <div class="w-full h-fit flex flex-col space-y-2">
+                <div class="w-full space-y-2">
+                    <p class="text-sm">Correo electronico</p>
+                    <input type="text" name="email" value="{{ old('email') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Correo electronico">
+                    @error('email')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
-
-            <div class="w-full space-y-2">
-                <p class="text-sm">Correo Electronico</p>
-                <input type="text" name="email" value="{{ old('email') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="nombre@ejemplo.com">
-                @error('email')
-                    <p class="text-[#ff0000] text-sm">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            <div class="w-full space-y-2">
-                <p class="text-sm space-y-2">Numero Celular</p>
-                <input type="text" name="phone" value="{{ old('phone') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Numero celular">
-                @error('phone')
-                    <p class="text-[#ff0000] text-sm">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
-
-            <div class="w-full space-y-2">
-                <p class="text-sm space-y-2">Posición</p>
-                <input type="text" name="position" value="{{ old('position') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Posicion">
-                @error('position')
-                    <p class="text-[#ff0000] text-sm">
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
+                <div class="w-full h-fit flex flex-col space-y-2">
+                    <div class="w-full space-y-2">
+                        <p class="text-sm">Numero telefonico</p>
+                        <input type="text" name="phone" value="{{ old('phone') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Telefono">
+                        @error('phone')
+                            <p class="text-[#ff0000] text-sm">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+                    <div class="w-full h-fit flex flex-col space-y-2">
+                        <div class="w-full space-y-2">
+                            <p class="text-sm">Posición</p>
+                            <input type="text" name="position" value="{{ old('position') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Posición">
+                            @error('position')
+                                <p class="text-[#ff0000] text-sm">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
         </div>
-
-        <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Añadir asesor</button>
+        <button type="submit" class="p-2 bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white">Añadir Asesor</button>
     </form>
 </div>
 @endsection
