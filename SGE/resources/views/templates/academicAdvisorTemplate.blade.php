@@ -17,7 +17,7 @@
     
     <ul class="hidden md:flex gap-6 justify-center items-center">
         <li>
-            <a href="#">Estudiantes</a>
+            <a href="/estudiante">Estudiantes</a>
         </li>
         <li>
             <a href="{{ route('anteproyectos-asesor') }}">Anteproyectos</a>

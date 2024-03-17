@@ -15,7 +15,8 @@
             <div class=" w-72 bg-primaryColor hidden sm:block h-auto">
                 <div class=" justify-between items-center p-4 ">
                     <div>
-                    <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="{{route('eventos.create')}}" class="px-4 py-2 text-center flex">+</a></button>
+                    <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="{{route('actividades.create')}}" class="px-4 py-2 text-center flex">+</a></button>
+                    <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="actividades" class="px-4 py-2 text-center flex">Ver actividades</a></button>
                     </div>
                     <div class="flex ">
                         <h2 class="text-lg text-white font-roboto font-semibold">{{$months[$month]}} <span class=" text-[#054759]"> {{$year}} </span> </h2>
@@ -165,7 +166,7 @@
                                     @if ($eventInHour)
                                         @if ($hour == $startHour && !$infoShown)
                                             <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer ">
-                                                <a href="{{route('eventos.show', $event->id)}}">
+                                                <a href="{{route('actividades.show', $event->id)}}">
                                                     <div class="px-4">
                                                         <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{$hour >= 12 ? 'PM' : 'AM'}}</p>
                                                         {{-- <p class="font-bold text-white text-center">{{substr($event['date_end'], 11, 5)}} {{substr($event['date_end'], 11, 5) > 12 ? 'AM' : 'PM'}}</p> --}}
@@ -178,7 +179,7 @@
                                             @endphp
                                         @elseif($hour == $endHour)
                                             <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer">
-                                                <a href="{{route('eventos.show', $event->id)}}">
+                                                <a href="{{route('actividades.show', $event->id)}}">
                                                     <div class="px-4">
                                                         {{-- <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{substr($event['date_start'], 11, 5) > 12 ? 'AM' : 'PM'}}</p> --}}
                                                         <p class="font-bold text-white text-center">{{substr($event['date_end'], 11, 5)}} {{$hour >= 12 ? 'PM' : 'AM'}}</p>
@@ -188,7 +189,7 @@
                                             </td>
                                         @else
                                             <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer">
-                                                <a href="{{route('eventos.show', $event->id)}}">
+                                                <a href="{{route('actividades.show', $event->id)}}">
                                                     <div class="px-4">
                                                         <p class="font-bold  text-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} text-center"> - </p>
                                                     </div>
@@ -232,7 +233,7 @@
                 <div class="flex w-11/12 mx-auto flex-col items-center">
                     <h1 class=" text-center font-montserrat font-semibold md:hidden text-xl my-5">Eventos de hoy: {{$eventsPerDay[$day]}}</h1>
                     <button class="bg-green py-2 px-2 rounded-md text-white mb-5 md:hidden">
-                        <a href="{{route('eventos.create')}}">Agregar nuevo evento</a>
+                        <a href="{{route('actividades.create')}}">Agregar nuevo evento</a>
                     </button>
                 </div>
                 <div class="md:hidden w-11/12 grid grid-cols-1 gap-3 mt-5 mx-auto mb-5">

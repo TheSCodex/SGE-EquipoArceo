@@ -14,42 +14,62 @@ class EventController extends Controller
      */
     public function index()
     {
-        $allEvents = CalendarEvent::paginate(9);
+        $user = auth()->user();
+
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
+
+        $allEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->paginate(9);
+
+        // dd($allEvents);
         return view('Luis.eventsDash', compact('allEvents'));
     }
 
         /**
      * Display a filter view.
      */
-    public function filter(Request $request)
-    {
-        $searchTerm = $request->input('search');
-        $status = $request->input('status');
+    // public function search(Request $request)
+    // {
+    //     $user = auth()->user();
     
-        $filteredEvents = CalendarEvent::query();
+    //     $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
     
-        if (!empty($searchTerm)) {
-            $filteredEvents->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'like', '%' . $searchTerm . '%')->orWhere('description', 'like', '%' . $searchTerm . '%')->orWhere('eventType', 'like', '%' . $searchTerm . '%');
-            });
-        }
+    //     $searchTerm = $request->input('search');
+    //     $status = $request->input('status');
     
-        if ($status !== 'all') {
-            $filteredEvents->where('status', $status);
-        }
-    
-        $filteredEvents = $filteredEvents->orderBy('date_start')->paginate(9);
+    //     $filteredEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id);
 
-        // dd($filteredEvents);
-        return view('Luis.eventsDash', compact('filteredEvents'));
-    }
+    
+    //     // Aplicar filtro por término de búsqueda si está presente
+    //     if (!empty($searchTerm)) {
+    //         $filteredEvents->where(function ($query) use ($searchTerm) {
+    //             $query->where('calendarevents.title', 'like', '%' . $searchTerm . '%')
+    //                 ->orWhere('calendarevents.description', 'like', '%' . $searchTerm . '%')
+    //                 ->orWhere('calendarevents.eventType', 'like', '%' . $searchTerm . '%');
+    //         });
+    //     }
+    
+    //     // Aplicar filtro por estado si no es 'all'
+    //     if ($status !== 'all') {
+    //         $filteredEvents->where('calendarevents.status', $status);
+    //     }
+    
+    //     $allEvents = $filteredEvents->orderBy('calendarevents.date_start')->paginate(9);
+    
+    //     return view('Luis.eventsDash', compact('allEvents'));
+    // }
     
 
     /**
      * Display a calendar view.
      */
-    public function calendar(){
-        $events = CalendarEvent::all();
+    public function calendar()
+    {
+        $user = auth()->user();
+    
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user['id'])->first();
+    
+        $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
+        
         
         // Cambiar el estatus cuando el evento ya paso
         foreach ($events as $event) {
@@ -119,7 +139,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = 'Programada';
         $event->save();
-        return redirect('eventos')->with('success', 'El evento se ha agregado correctamente');
+        return redirect('asesor/actividades')->with('success', 'La actividad se ha agregado correctamente');
     }
 
     /**
@@ -155,7 +175,7 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = $request->status;
         $event->update();
-        return redirect('eventos')->with('edit_success', 'El Evento ha sido editado correctamente');
+        return redirect('asesor/actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
     }
 
     /**
@@ -167,6 +187,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('eventos.index')->with('delete','ok');
+        return redirect('asesor/actividades')->with('delete','ok');
     }
 }

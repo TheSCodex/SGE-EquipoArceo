@@ -4,9 +4,9 @@
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
                 
-                <form method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
+                <form method="POST" action="{{route('actividades.store')}}" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
                     <div class="w-full h-fit flex justify-center md:justify-start">
-                        <h1 class="text-3xl font-bold">Añadir evento</h1>
+                        <h1 class="text-3xl font-bold">Añadir actividad</h1>
                         @csrf
                     </div>
                     <div class="w-full flex flex-col space-y-1">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
 
-                    <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir evento</button>
+                    <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir actividad</button>
 
                     
                 </form>
