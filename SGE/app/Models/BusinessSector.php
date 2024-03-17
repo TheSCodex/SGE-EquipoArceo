@@ -17,6 +17,6 @@ class BusinessSector extends Model
 
     public function companies()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }
