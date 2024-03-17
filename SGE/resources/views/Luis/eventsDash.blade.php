@@ -17,7 +17,7 @@
     <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de eventos</h1>
+                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de actividades</h1>
                 <div class="flex items-center flex-row justify-end">
                     <div class="flex items-center space-x-4">
                         <div class="relative">
@@ -31,7 +31,7 @@
                             <option value="Cancelada">Cancelada</option>
                         </select>
                     </div>
-                    <a href="{{route('actividades.create')}}" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento</a>
+                    <a href="{{route('actividades.create')}}" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva actividad</a>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                     <div>
@@ -39,7 +39,7 @@
                             <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 py-2 px-4 " type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
-                    <a href="{{route('actividades.create')}}" class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento</a>
+                    <a href="{{route('actividades.create')}}" class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva actividad</a>
                 </div>
             </div>
             <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5">
