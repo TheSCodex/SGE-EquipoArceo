@@ -120,6 +120,8 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente');
+
+        Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
     });
 
     //TODO - DIRECTORA
