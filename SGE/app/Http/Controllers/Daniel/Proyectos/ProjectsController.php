@@ -35,16 +35,16 @@ class ProjectsController extends Controller
         $businessAdvisor = null;
         $company = null;
     
-        if ($project->adviser_id) {
-            $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
+        // if ($project->adviser_id) {
+        //     $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
     
-            if ($businessAdvisor) {
-                $company = Company::find($businessAdvisor->companie_id);
-                if ($company) {
-                    //$businessSector = BusinessSector::find($company->business_sector_id);
-                }
-            }
-        }
+        //     if ($businessAdvisor) {
+        //         $company = Company::find($businessAdvisor->companie_id);
+        //         if ($company) {
+        //             //$businessSector = BusinessSector::find($company->business_sector_id);
+        //         }
+        //     }
+        // }
     
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();

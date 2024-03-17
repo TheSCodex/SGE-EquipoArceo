@@ -101,11 +101,11 @@
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class=" flex justify-between flex-wrap flex-row-reverse">
-                            @if($project->like == 0)
+                            {{-- @if($project->like == 0)
                                 <p>Aun no tienes votos</p>
                             @else
                                 <p>Tienes {{$project->like}} voto(s)</p>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>
