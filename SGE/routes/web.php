@@ -1,39 +1,40 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\Eliud\Documentos\DocumentsController;
-use App\Http\Controllers\Eliud\Reportes\ReportsController;
-use App\Http\Controllers\Pipa\ChangePasswordController;
-use App\Http\Controllers\Pipa\LoginController;
-use App\Http\Controllers\Pipa\RecoverPasswordController;
-use App\Http\Controllers\Pipa\UserController;
-use App\Http\Controllers\Luis\EventController;
-use App\Http\Controllers\Luis\BooksController;
-use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
-use App\Http\Controllers\Elizabeth\AdvisorController;
-use App\Http\Controllers\Michell\DirectorAssistantController;
-use App\Http\Controllers\Michell\DirectorController;
-use App\Http\Controllers\Michell\Administrator\AdministratorController;
-use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
-use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Pipa\RoleController;
+use App\Http\Controllers\Pipa\UserController;
+use App\Http\Controllers\Luis\BooksController;
+use App\Http\Controllers\Luis\EventController;
+use App\Http\Controllers\Pipa\LoginController;
 use App\Http\Controllers\Michell\BajasController;
-use App\Http\Controllers\Michell\AcademicHomeController;
-use App\Http\Controllers\Michell\AcademicAdvisorController;
-use App\Http\Controllers\Michell\StudentListController;
-use App\Http\Controllers\Daniel\FormAnteproyectoController;
-use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
+use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Michell\DirectorController;
+use App\Http\Controllers\Elizabeth\AdvisorController;
+use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Daniel\ObservationsController;
-use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
-use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
+use App\Http\Controllers\Michell\StudentListController;
+use App\Http\Controllers\Pipa\ChangePasswordController;
+use App\Http\Controllers\Michell\AcademicHomeController;
+use App\Http\Controllers\Pipa\RecoverPasswordController;
+use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
+use App\Http\Controllers\Daniel\FormAnteproyectoController;
+use App\Http\Controllers\Michell\AcademicAdvisorController;
+use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
+use App\Http\Controllers\Michell\DirectorAssistantController;
+use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
+use App\Http\Controllers\Eliud\Documentos\DocumentsController;
+use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
+use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\Director\ProjectsDirectorController;
 use App\Http\Controllers\Daniel\Presidenta\ProjectsPresidentController;
-use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
-use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
-use App\Http\Controllers\Pipa\RoleController;
+use App\Http\Controllers\Michell\Administrator\AdministratorController;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
 
 /*
 |--------------------------------------------------------------------------

@@ -26,7 +26,7 @@ class Intern extends Model
 
     public function academicAdvisor()
     {
-        return $this->hasOne(AcademicAdvisor::class, 'academic_advisor_id');
+        return $this->belongsTo(AcademicAdvisor::class, 'academic_advisor_id', 'id');
     }
 
     public function project()
