@@ -4,14 +4,14 @@
     <div class="bg-[#F3F5F9] flex max-md:block h-screen max-md:h-full gap-8">
         <section class="mt-[10px] ml-[30px] max-md:mx-3 w-2/2">
             <div class="bg-white rounded-md py-1">
-                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
+                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Anteproyecto</h1>
             </div>
             <div class="font-kanit mt-3 flex space-x-5 h-1/3 max-xl:h-1/4">
                 <div class=" bg-primaryColor text-white rounded-md w-[100%] flex flex-col justify-evenly max-md:block max-xl:w-full max-xl:h-full max-md:pb-3">
                     <h3 class="font-bold text-3xl px-5 max-md:text-2xl ">Tu propuesta</h3>
                     <p class="px-4 max-md:mb-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
                     <a href="estudidante/anteproyecto"
-                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:px-36">iniciar</a>
+                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:px-36">Iniciar</a>
                 </div>
             </div>
             <div class="h-[10%] flex space-x-5 max-md:block max-md:space-x-0 mt-5 max-xl:block max-xl:space-x-0 max-xl:mb-3 max-xl:h-48">    
@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-lightGray">Comentarios de alumnos</p>
+                        <p class="text-sm text-lightGray">Comentarios en la version mas reciente de tu propuesta</p>
                     </div>
                 </div>
                 <div class="bg-white font-kanit flex w-2/6 max-md:w-full max-md:p-3 max-md:my-2 rounded-md space-x-5 items-center max-xl:w-full max-xl:justify-center max-xl:mb-3">
@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-lightGray">Votos de los asesores</p>
+                        <p class="text-sm text-lightGray">Votos de aprobacion</p>
                     </div>
                 </div>
                 <div class="bg-white font-kanit flex w-2/6 max-md:w-full max-md:p-3 max-md:my-2 rounded-md space-x-5 items-center max-xl:w-full max-xl:justify-center max-xl:mb-3">
@@ -50,13 +50,12 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 400 hrs</p>
-                        <p class="text-sm text-lightGray">Horas completadas</p>
+                        <p class="font-bold text-2xl">24 / 120</p>
+                        <p class="text-sm text-lightGray">Dias restantes</p>
                     </div>
                 </div>
             </div>
             <div class="bg-white mt-5 rounded-md font-kanit py-8 max-xl:mt-3">
-                <h3 class="font-semibold ml-10 max-md:text-center">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col h-full justify-between">
                     <div>
                         <div class="flex items-center space-x-8 max-md:block max-md:space-x-0 mt-4">
@@ -81,7 +80,7 @@
         <section class="mt-[10px] mr-[30px] w-1/3 max-md:w-full">
             <div>
                 <div class="bg-white rounded-md py-1 max-md:m-3">
-                    <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores academicos</h3>
+                    <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor academico</h3>
                 </div>
                 <div class="mt-3 space-y-2 max-md:m-3">
                     <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
@@ -98,7 +97,7 @@
             </div>
             <div class="mt-5 max-md:m-3">
                 <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores empresariales</h3>
+                    <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor empresarial</h3>
                 </div>
                 <div class="mt-2 space-y-2">
                     <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
@@ -115,7 +114,7 @@
             </div>
             <div class="mt-4 font-roboto space-y-3 max-md:m-3">
                 <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Eventos importantes</h3>
+                    <h3 class="text-lg font-medium font-kanit ml-6">Actividades importantes</h3>
                 </div>
                 <div class="flex flex-col justify-center items-center bg-white max-md:block ">
                     <div class="flex mt-3 space-x-10 mb-5 max-md:block max-md:space-x-0 max-md:ml-6 max-xl:block max-xl:space-x-0 ">
@@ -189,7 +188,7 @@
             </div>
             <div class="mt-3 flex h-auto gap-4 max-md:block max-md:m-3 max-xl:block">
                 <div class="bg-white w-1/2 p-5 font-black max-md:w-full max-md:text-justify max-md:mb-3 max-xl:w-full">
-                    <p>No has recebido ninguna penalización hasta el momento, buen trabajo!</p>
+                    <p>No has recebido ninguna amonestación hasta el momento, buen trabajo!</p>
                     <div class="flex justify-center p-5">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled" width="130" height="130" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -199,7 +198,7 @@
                     </div>
                 </div>
                 <div class="bg-white w-1/2 p-5 font-black max-md:w-full max-md:text-center max-md:h-full max-xl:w-full">
-                    <p class="mb-5">Progreso de tu estadía</p>
+                    <p class="mb-5">Progreso </p>
                     <div class="flex justify-center">
                         <canvas id="myChart"></canvas>
                     </div>
