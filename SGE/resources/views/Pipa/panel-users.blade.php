@@ -37,13 +37,23 @@
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
-                    {{-- <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p> --}}
-                    <p class="text-sm text-gray-500">Rol: {{ $user->rol_id }}</p>
-                    {{-- <p class="text-sm text-gray-500">Academia: {{ $user->careerAcademy->name }}</p> --}}
-                    <p class="text-sm text-gray-500">Academia: {{ $user->career_academy_id }}</p>
-                    <div class="flex justify-end mt-4">
-                        <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                        <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                    <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
+                    <div class="flex justify-end mt-4 space-x-2">
+                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                            <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
+                                <img src="/img/logos/pencil.svg">
+                            </a>
+                        </td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer px-2" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
+                            <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <img src="/img/logos/trash.svg">
+                            </form>
+                        </td>
+                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
                     </div>
                 </div>
                 @endforeach

@@ -5,7 +5,7 @@
     <form action="{{ url('panel-users/' . $user->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
         @csrf
         @method('PUT')
-        <div class="w-full h-fit flex justify-start">
+        <div class="w-full h-fit flex justify-center md:justify-start">
             <h1 class="text-3xl font-bold">Editar usuario</h1>
         </div>
         <div class="w-full flex flex-col space-y-2 ">
