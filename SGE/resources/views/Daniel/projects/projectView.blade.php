@@ -91,7 +91,7 @@ Bienvenido
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
                         @else
-                            <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
+                            <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
                         @endif
                     </div>
