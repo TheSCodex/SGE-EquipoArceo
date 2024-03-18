@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academy;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion() {
+    public function printReportSancion()
+    {
         $pdf = App::make('dompdf.wrapper');
-        $pdf-> loadView('Eliud.reports.docs.sancion');
-        return $pdf -> stream();
+        $pdf->loadView('Eliud.reports.docs.sancion');
+        return $pdf->stream();
     }
 
     public function printSansion()
@@ -35,10 +38,11 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaAprobacion() {
+    public function printReportCartaAprobacion()
+    {
         $pdf = App::make('dompdf.wrapper');
-        $pdf-> loadView('Eliud.reports.docs.aprobacion');
-        return $pdf -> stream();
+        $pdf->loadView('Eliud.reports.docs.aprobacion');
+        return $pdf->stream();
     }
 
     public function printCartaMemoria()
@@ -51,10 +55,11 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaMemoria() {
+    public function printReportCartaMemoria()
+    {
         $pdf = App::make('dompdf.wrapper');
-        $pdf-> loadView('Eliud.reports.docs.memoria');
-        return $pdf -> stream();
+        $pdf->loadView('Eliud.reports.docs.memoria');
+        return $pdf->stream();
     }
 
     /**
@@ -62,17 +67,28 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        return view('Eliud.reports.directorsReports');
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $academie = Academy::paginate(1);
+        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
     }
 
     public function directorIndex()
     {
-        return view('Eliud.reports.directorsReports');
+        
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $academie = Academy::paginate(1);
+        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
     }
 
     public function assistantIndex()
     {
-        return view('Eliud.reports.assistantsReports');
+        
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $academie = Academy::paginate(1);
+        return view('Eliud.reports.assistantsReports', compact('academie','userData'));
     }
 
     /**
