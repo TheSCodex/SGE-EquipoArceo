@@ -65,12 +65,13 @@ Route::middleware('guest')->group(function () {
     // Ruta para recuperar contraseña (la que envía el correo)
     Route::resource('recuperar-contra', RecoverPasswordController::class);
 
-    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
-    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
 });
 
 // Rutas para Usuarios Autenticados
 Route::middleware('auth')->group(function () {
+
+    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
+    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
 
     //TODO - ESTUDIANTE
     Route::prefix('estudiante')->middleware('role:estudiante')->group(function () {
