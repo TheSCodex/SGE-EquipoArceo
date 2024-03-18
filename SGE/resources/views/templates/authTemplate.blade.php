@@ -39,7 +39,7 @@
                 </li>
                 @elseif($user->rol_id === 2) {{-- Rol de asesor académico --}}
                 <li>
-                    <a href="/estudiante">Estudiantes</a>
+                    <a href="/asesor/estudiante">Estudiantes</a>
                 </li>
                 <li>
                     <a href="{{ route('anteproyectos-asesor') }}">Anteproyectos</a>
@@ -127,7 +127,7 @@
             <form id="logout-form" method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="flex justify-center items-center px-4 p-2 transition duration-300 pr-2 ease-in-out rounded-full text-red-600 font-light text-white bg-[#999999]" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <img src="/img/logos/cerrar-sesion.svg">
+                    <img src="/img/logos/cerrar-sesion.svg" class="mr-2">
                     {{ __('Cerrar sesión') }}
                 </button>
             </form>
