@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pipa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pipa\UserRequest;
 use App\Models\Career;
+use App\Models\Intern;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -71,9 +72,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user=User::find($id);
-        return view ('Pipa.show-user', compact('user'));
+        $user = User::findOrFail($id);
+        $intern = $user->interns;
+        $career = $intern ? $intern->career : null;
+        return view('Pipa.show-user', compact('user', 'intern', 'career'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -87,7 +91,9 @@ class UserController extends Controller
         $roles = Role::all(); 
         $careers = Career::all();
         $user = \App\Models\User::find($id);
-        return view('Pipa.edit-user', compact('user','roles', 'careers'));
+        $intern = $user->interns;
+        $career = $intern ? $intern->career : null;
+        return view('Pipa.edit-user', compact('user','roles', 'intern', 'career', 'careers'));
     }
 
     /**
