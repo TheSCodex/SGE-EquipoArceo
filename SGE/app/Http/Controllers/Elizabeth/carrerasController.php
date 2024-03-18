@@ -18,8 +18,9 @@ class carrerasController extends Controller
      */
   public function index()
 {
-    $careers = careers_info_view::all();
-    
+    $careers = Career::all();
+    $divisions = Division::all();
+
     return view('Elizabeth.cruds.carreras', compact('careers'));
 }
 
@@ -45,7 +46,7 @@ class carrerasController extends Controller
 
     $division = Division::where('name', $validatedData['division'])->first();
 
-    $career = new careers_info_view();
+    $career = new Career();
     $career->name = $validatedData['name'];
 
     $career->division_id = $division->id;
@@ -68,7 +69,7 @@ class carrerasController extends Controller
      */
     public function edit($id)
 {
-    $career = careers_info_view::findOrFail($id);
+    $career = Career::findOrFail($id);
     $divisions = Division::all();
     $academies = Academy::all();
     $users = User::where('rol_id', '!=', 1)->get();

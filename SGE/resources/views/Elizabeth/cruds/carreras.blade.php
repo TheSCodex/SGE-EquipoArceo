@@ -59,17 +59,19 @@
                 </tr>
                 @foreach ($careers as $career)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $career->career_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $career->division_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $career->academy_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $career->president_name}}</td>
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
-                        <a href="{{ route('panel-careers.edit', $career->id_career) }}" class="flex justify-center">
+                        {{--
+                            <a href="{{ route('panel-careers.edit', $career->id_career) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
                         </a>
+                        --}}
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id_career}}')">
-                        <form class="flex justify-center" id="deleteForm{{ $career->id_career}}" action="{{ route('panel-careers.destroy', $career->id_career) }}" method="POST">
+                        <form class="flex justify-center" id="deleteForm{{ $career->id}}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg">
