@@ -1,5 +1,5 @@
-@extends('templates.administratorTemplate')
-@section('titulo', 'Panel de Carreras y Divisiones')
+@extends('templates/authTemplate')
+@section('titulo', 'Panel de Carrera y academia')
 @section('contenido')
     {{-- Test --}}
     @php

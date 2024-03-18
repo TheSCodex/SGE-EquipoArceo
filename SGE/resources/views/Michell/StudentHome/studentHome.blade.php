@@ -1,4 +1,4 @@
-@extends('templates.studenTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 
     <div class="bg-[#F3F5F9] p-5 lg:gap-5 grid grid-cols-1 lg:grid-cols-3 grow">
