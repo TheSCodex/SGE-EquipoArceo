@@ -7,7 +7,7 @@
 @section('contenido')
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-1 rounded-md">Propuestas</p>
+            <p class="font-semibold px-2 bg-white py-1 rounded-md">Bienvenido, Asistente de Direccion!</p>
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 p-2 lg:p-0 md:gap-9">
@@ -101,15 +101,13 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/400hrs</p>
-                        <p class="text-gray-500 text-xs">Horas de servicio completadas</p>
+                        <p class="text-base font-normal">24/120</p>
+                        <p class="text-gray-500 text-xs">Dias restantes</p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-md py-7 px-10">
-                <p class="uppercase text-gray-700 font-medium text-center mb-5">Proyectos de estudiantes</p>
-
+           
                 <div class="md:grid md:grid-cols-4 px-3">
                     <div class="col-span-3">
                         <p class="text-gray-700 mb-1">Rodrigo Bojorquez Chi</p>
@@ -204,12 +202,12 @@
 
             <div class="grid grid-cols-2 gap-2">
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center p-5">
-                    <p class="text-md font-medium">Penalizaciones</p>
+                    <p class="text-md font-medium">Amonestaciones</p>
                     <p class="text-5xl font-light">6</p>
                 </div>
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center p-5">
-                    <p class="text-md font-medium">Progreso de estadías</p>
+                    <p class="text-md font-medium">Progreso </p>
                     <div>
                         <svg width="100" height="100" viewBox="0 0 143 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M96.7607 20.9314C84.0435 13.5659 68.9159 11.5681 54.7073 15.3737C40.4994 19.1791 28.3741 28.4754 20.9957 41.2149C13.6173 53.9544 11.5877 69.0978 15.3573 83.3154C19.1269 97.5335 28.3877 109.661 41.105 117.026" stroke="#3E5366" stroke-width="10"/>

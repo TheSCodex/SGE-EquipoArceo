@@ -198,7 +198,7 @@
                     </div>
                 </div>
                 <div class="bg-white w-1/2 p-5 font-black max-md:w-full max-md:text-center max-md:h-full max-xl:w-full">
-                    <p class="mb-5">Progreso </p>
+                    <p class="mb-5 text-center">Progreso </p>
                     <div class="flex justify-center">
                         <canvas id="myChart"></canvas>
                     </div>

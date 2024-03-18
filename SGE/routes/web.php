@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
         // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
         Route::get('/', [StudentController::class, "studentHome"])->name('inicio-estudiante');   
-        
+
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
         

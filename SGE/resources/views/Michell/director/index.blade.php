@@ -5,9 +5,10 @@
 @endsection
 
 @section('contenido')
+
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-1 rounded-md">Propuestas</p>
+            <p class="font-bold px-2 bg-white py-1 rounded-md">Bienvenida, Directora!</p>
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 p-2 lg:p-0 md:gap-9">
@@ -101,45 +102,72 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/400hrs</p>
-                        <p class="text-gray-500 text-xs">Horas de servicio completadas</p>
+                        <p class="text-base font-normal">24/120</p>
+                        <p class="text-gray-500 text-xs">Dias restantes</p>
                     </div>
                 </div>
             </div>
-
-            <div class="bg-white rounded-md py-7 px-10">
-                <p class="uppercase text-gray-700 font-medium text-center mb-5">Proyectos de estudiantes</p>
-
-                <div class="md:grid md:grid-cols-4 px-3">
-                    <div class="col-span-3">
-                        <p class="text-gray-700 mb-1">Rodrigo Bojorquez Chi</p>
-                        <p class="text-gray-500 text-sm md:text-base">Tu introducción es demasiado ambigua y redundante, por favor reestructurala o hazla de nuevo</p>
-                    </div>
-                    <div class="flex items-center justify-normal mt-3 md:mt-0 md:justify-center">
-                        <button type="button" class="bg-[#02AB82] text-white text-xs rounded-md px-5 py-1 w-fit h-fit">
-                            Ver propuesta
-                        </button>
-                    </div>
-                </div>
-
-                <hr class="border-[0.5px] border-[#999999] w-[75%] my-5">
-
-                <div class="md:grid md:grid-cols-4 px-3">
-                    <div class="col-span-3">
-                        <p class="text-gray-700 mb-1">Rodrigo Bojorquez Chi</p>
-                        <p class="text-gray-500 text-sm md:text-base">Tu introducción es demasiado ambigua y redundante, por favor reestructurala o hazla de nuevo</p>
-                    </div>
-                    <div class="flex items-center justify-normal mt-3 md:justify-center md:mt-0">
-                        <button type="button" class="bg-[#02AB82] text-white text-xs rounded-md px-5 py-1 w-fit h-fit">
-                            Ver propuesta
-                        </button>
-                    </div>
-                </div>
-
-                <p class="opacity-50 text-right text-sm mt-2">
-                    <a href="">Ver más</a>
-                </p>
+            <canvas id="myChart" style="height: 500px;"></canvas>
+     </section>
             </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Mayo", "Junio", "Julio"],
+                datasets: [{
+                        label: 'Tecnologías de la Información',
+                        data: [65, 20, 10],
+                        backgroundColor: '#0FA987',
+                        borderColor: '#ffffffff',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Mantenimiento',
+                        data: [39, 45, 85],
+                        backgroundColor: '#3E5366',
+                        borderColor: '#ffffffff',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            min: 0,
+                            max: 120,
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                indexAxis: 'x', 
+                elements: {
+                    bar: {
+                        borderWidth: 2, 
+                        borderRadius: 5, 
+                        barThickness: 200 
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: 120
+                    }
+                }
+            }
+
+        });
+    </script>
+    
         </section>
 
 
@@ -219,6 +247,8 @@
                     </div>
                 </div>
             </div>
-        </section>
+    
+  
     </article>
+    
 @endsection

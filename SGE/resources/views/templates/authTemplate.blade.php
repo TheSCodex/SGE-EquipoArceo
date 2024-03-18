@@ -58,6 +58,12 @@
                 <li>
                     <a href="{{ route('anteproyectos-presidente') }}">Anteproyectos</a>
                 </li>
+                <li>
+                    <a href="#">Reportes</a>
+                </li>
+                <li>
+                    <a href="{{ route('events.calendar') }}">Calendario</a>
+                </li>
                 @elseif($user->rol_id === 4) {{-- Rol de Directora --}}
                 <li>
                     <a href="{{ route('inicio-director') }}">Inicio</a>
