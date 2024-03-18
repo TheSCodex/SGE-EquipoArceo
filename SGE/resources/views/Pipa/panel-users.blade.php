@@ -61,7 +61,6 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
-                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs ">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
@@ -99,8 +98,8 @@
                                 <img src="/img/logos/trash.svg">
                         </form>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                        <a class="flex justify-center" id="deleteForm{{ $user->id }}">
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </td>
