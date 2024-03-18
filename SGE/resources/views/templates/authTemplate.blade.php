@@ -97,7 +97,7 @@
                     <a href="#" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
                 <li>
-                    <a href="{{ route('reportes-asistente.index') }}" class="hover:border-b-2 hover:border-primaryColor">Reportes</a>
+                    <a href="{{ route('reportes-asistente') }}" class="hover:border-b-2 hover:border-primaryColor">Reportes</a>
                 </li>
                 <li>
                     <a href="{{ route('documentos-asistente.index') }}" class="hover:border-b-2 hover:border-primaryColor">Documentos</a>
