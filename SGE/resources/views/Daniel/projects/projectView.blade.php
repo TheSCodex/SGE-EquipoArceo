@@ -87,8 +87,13 @@ Bienvenido
                 <div
                     class=" w-full h-fit min-h-[12vh] my-[1%] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
-                        <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
+                        @if(isset($project))
+                            <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
+                            <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
+                        @else
+                            <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
+                            <p class="w-[70%]">Aun no hay nada que guardar</p>
+                        @endif
                     </div>
                 </div>
 
@@ -98,11 +103,16 @@ Bienvenido
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class=" flex justify-between flex-wrap flex-row-reverse">
-                        {{--    @if($project->like == 0)
-                                <p>Aun no tienes votos</p>
+                            @if(isset($project))
+                                @if($project->like == 0)
+                                    <p>Aun no tienes votos</p>
+                                @else
+                                    <p>Tienes {{$project->like}} voto(s)</p>
+                                @endif
+                                
                             @else
-                                <p>Tienes {{$project->like}} voto(s)</p>
-                            @endif--}}
+                                <p>Aun no hay nada que votar</p>
+                            @endif
                         </div>
                     </div>
                 </div>
