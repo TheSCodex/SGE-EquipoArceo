@@ -33,6 +33,7 @@ use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
 use App\Http\Controllers\Daniel\Director\ProjectsDirectorController;
 use App\Http\Controllers\Daniel\Presidenta\ProjectsPresidentController;
 use App\Http\Controllers\Michell\Administrator\AdministratorController;
+use App\Http\Controllers\Michell\DirectorAssistantController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
 
@@ -93,6 +94,9 @@ Route::middleware('auth')->group(function () {
 
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+        //Ruta para ver información de la actividad
+        Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
+
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
         //Ruta para ver información de la actividad
         Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
