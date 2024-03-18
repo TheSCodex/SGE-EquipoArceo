@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->created_at == Auth::user()->updated_at) {
             return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
         }
-
+        
         switch (Auth::user()->role->title) {
             case 'estudiante':
                 return RouteServiceProvider::ESTUDIANTE;

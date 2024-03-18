@@ -31,6 +31,6 @@ class ChangePasswordFirstTime extends Controller
         // Cambiar la contraseña del usuario
         $user->update(['password' => Hash::make($request->input('new_password'))]);
 
-        return redirect('login');
+        return redirect('/');
     }
 }
