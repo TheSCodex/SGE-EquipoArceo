@@ -1,4 +1,4 @@
-@extends('./templates/authTemplate')
+@extends('templates.authTemplate')
 
 @section('titulo')
     {{ $student->user->name }}

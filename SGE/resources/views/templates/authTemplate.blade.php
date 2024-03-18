@@ -58,7 +58,7 @@
                     <a href="{{ route('inicio-presidente') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
                 </li>
                 <li>
-                    <a href="/presidente/estudiantes" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
+                    <a href="{{route('presidente.index')}}" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
                 </li>
                 <li>
                     <a href="#" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
