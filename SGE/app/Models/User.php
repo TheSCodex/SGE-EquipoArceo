@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\CareerAcademy;
 use App\Models\Role;
 use App\Models\AcademicAdvisor;
 use App\Models\Intern;
@@ -23,14 +22,14 @@ class User extends Authenticatable
         'email',
         'password',
         'identifier',
-        // 'career_academy_id',
+        'career_id',
         'rol_id',
     ];
 
-    // public function careerAcademy()
-    // {
-    //     return $this->belongsTo(CareerAcademy::class, 'career_academy_id');
-    // }    
+    public function career()
+    {
+        return $this->belongsTo(Career::class, 'career_id');
+    }    
 
     public function role()
     {

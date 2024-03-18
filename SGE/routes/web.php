@@ -1,39 +1,45 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\Eliud\Documentos\DocumentsController;
-use App\Http\Controllers\Eliud\Reportes\ReportsController;
-use App\Http\Controllers\Pipa\ChangePasswordController;
-use App\Http\Controllers\Pipa\LoginController;
-use App\Http\Controllers\Pipa\RecoverPasswordController;
-use App\Http\Controllers\Pipa\UserController;
-use App\Http\Controllers\Luis\EventController;
-use App\Http\Controllers\Luis\BooksController;
-use App\Http\Controllers\Elizabeth\carrerasController;
 use App\Http\Controllers\companiesController;
-use App\Http\Controllers\Elizabeth\AdvisorController;
-use App\Http\Controllers\Michell\DirectorAssistantController;
-use App\Http\Controllers\Michell\DirectorController;
-use App\Http\Controllers\Michell\Administrator\AdministratorController;
-use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
-use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Pipa\RoleController;
+use App\Http\Controllers\Pipa\UserController;
+use App\Http\Controllers\Luis\BooksController;
+use App\Http\Controllers\Luis\EventController;
+use App\Http\Controllers\Pipa\LoginController;
 use App\Http\Controllers\Michell\BajasController;
-use App\Http\Controllers\Michell\AcademicHomeController;
-use App\Http\Controllers\Michell\AcademicAdvisorController;
+use App\Http\Controllers\Michell\StudentController;
+use App\Http\Controllers\Michell\DirectorController;
+use App\Http\Controllers\Elizabeth\AdvisorController;
+use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Michell\StudentListController;
+use App\Http\Controllers\Pipa\ChangePasswordController;
+use App\Http\Controllers\Michell\AcademicHomeController;
+use App\Http\Controllers\Pipa\RecoverPasswordController;
+use App\Http\Controllers\Eliud\Reportes\ReportsController;
+use App\Http\Controllers\Daniel\DashboardAdvisorController;
 use App\Http\Controllers\Daniel\FormAnteproyectoController;
+use App\Http\Controllers\Michell\AcademicAdvisorController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\ObservationsController;
+use App\Http\Controllers\Daniel\Asesor\ObservationsAcademicAdvisor;
 use App\Http\Controllers\Daniel\Asesor\ProjectDraftController;
+use App\Http\Controllers\Eliud\Documentos\DocumentsController;
+use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
 use App\Http\Controllers\Daniel\asesor\ProyectsAdvisorController;
-use App\Http\Controllers\Daniel\DashboardAdvisorController;
 use App\Http\Controllers\Daniel\Director\ProjectsDirectorController;
 use App\Http\Controllers\Daniel\Presidenta\ProjectsPresidentController;
-use App\Http\Controllers\Eliud\Reportes\ExcelExportController;
-use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
-use App\Http\Controllers\Pipa\RoleController;
+use App\Http\Controllers\Michell\Administrator\AdministratorController;
+use App\Http\Controllers\Michell\DirectorAssistantController;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
+
+
+use Illuminate\Support\Facades\Auth; // Para el sistema de autenticación
+use App\Models\User; // Si necesitas acceder a la información del usuario
 
 /*
 |--------------------------------------------------------------------------
@@ -55,24 +61,25 @@ Route::middleware('guest')->group(function () {
     Route::resource('login', LoginController::class);
     
     // Ruta para cambiar la contraseña
-    Route::resource('cambiar-contra', RecoverPasswordController::class);
-    
-    // Ruta para recuperar contraseña (la que envía el correo)
-    Route::resource('recuperar-contra', ChangePasswordController::class);
+    Route::resource('cambiar-contra', ChangePasswordController::class);
 
-    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
-    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
+    // Ruta para recuperar contraseña (la que envía el correo)
+    Route::resource('recuperar-contra', RecoverPasswordController::class);
+
 });
 
 // Rutas para Usuarios Autenticados
 Route::middleware('auth')->group(function () {
+
+    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
+    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
 
     //TODO - ESTUDIANTE
     Route::prefix('estudiante')->middleware('role:estudiante')->group(function () {
 
         // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
         Route::get('/', [StudentController::class, "studentHome"])->name('inicio-estudiante');   
-        
+
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
         
@@ -87,14 +94,20 @@ Route::middleware('auth')->group(function () {
 
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+        //Ruta para ver información de la actividad
+        Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
+
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
+        //Ruta para ver información de la actividad
+        Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
 
     });
 
     //TODO - ASESOR ACADEMICO
     Route::prefix('asesor')->middleware('role:asesorAcademico')->group(function () {
 
-        //Ruta de la lista de los anteproyectos
+        Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor');
+
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         
         // ! Ruta de las observaciones del asesor
@@ -106,9 +119,8 @@ Route::middleware('auth')->group(function () {
         // Ruta para la vista del calendario del asesor
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
 
-        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
-        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
-
+        // Ruta para cancelar la actividad
+        Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
 
     });
 
@@ -120,16 +132,18 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente');
+
+        Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
     });
 
     //TODO - DIRECTORA
     Route::group(['middleware' => 'role:director'], function () {
 
         //inicio director
-        Route::get("/", [DirectorController::class, "index"])->name('inicio-director');
+        Route::get("/director", [DirectorController::class, "index"])->name('inicio-director');
 
         // El apartado de reportes para la directora
-        Route::get('/reportes', [ReportsController::class, "index"])->name('reportes-director');
+        Route::get('/director/reportes', [ReportsController::class, "index"])->name('reportes-director');
         
         // El acceso al CRUD/Listado de documentos para la directora
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');
@@ -143,6 +157,10 @@ Route::middleware('auth')->group(function () {
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index']);
 
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+
     });
 
     //TODO - Asistente directora
@@ -150,6 +168,7 @@ Route::middleware('auth')->group(function () {
 
         //inicio asistente
         Route::get("/", [DirectorAssistantController::class, "index"])->name('inicio-asistente');
+        
         //crud asistente
         Route::get('estudiantes',[StudentListController::class, "index"])->name('estudiantes-asistente');
 
@@ -173,6 +192,10 @@ Route::middleware('auth')->group(function () {
 
         // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
         Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
+
+        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
+        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
 
     });

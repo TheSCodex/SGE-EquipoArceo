@@ -1,13 +1,13 @@
-@extends('templates.directorTemplate')
+@extends('templates/authTemplate')
 
 @section('titulo')
     Reportes
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center min-h-full flex-grow">
+    <section class="flex flex-col justify-center items-center min-h-full flex-grow bg-[#F3F5F9]">
         <div class="sm:px-8 text-left w-full mb-[2vh] sm:mb-0">
-            <div class="container mx-auto bg-[#F3F5F9] font-roboto">
+            <div class="container mx-auto  font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
                         <h1 class="text-2xl mt-2 font-bold">Buenos días Directora!</h1>

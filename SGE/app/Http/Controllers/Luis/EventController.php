@@ -8,7 +8,10 @@ use App\Http\Requests\Luis\NewEventFormRequest;
 use App\Models\AcademicAdvisor;
 use App\Models\CalendarEvent;
 use App\Models\Intern;
+use App\Models\Role;
 use App\Models\User;
+use DateTime;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -19,47 +22,41 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
+        // Aqui deberia ser UserId
+        $allEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->paginate(6);
         
+        foreach($allEvents as $event){
+            if($event->status !== 'Cancelada'){
+                if($event->date_end <= now()){
+                    $event->status = 'Terminada';
+                    $event->save();
+                }
+                if($event->date_start >= now()){
+                    $event->status = 'Programada';
+                    $event->save();
+                }
+                if($event->date_start <= now() && $event->date_end >= now()){
+                    $event->status = 'En curso';
+                    $event->save();
+                }
+            }
+        }
 
-        $allEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->paginate(9);
-
-        // dd($allEvents);
         return view('Luis.eventsDash', compact('allEvents'));
     }
-
-        /**
-     * Display a filter view.
+    
+    /**
+     * Change status activity
      */
-    public function search(Request $request)
-    {
-        $user = auth()->user();
-    
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
-    
-        $searchTerm = $request->input('search');
-        $status = $request->input('status');
-    
-        $filteredEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id);
 
-    
-        // Aplicar filtro por término de búsqueda si está presente
-        if (!empty($searchTerm)) {
-            $filteredEvents->where(function ($query) use ($searchTerm) {
-                $query->where('calendarevents.title', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('calendarevents.description', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('calendarevents.eventType', 'like', '%' . $searchTerm . '%');
-            });
-        }
-    
-        // Aplicar filtro por estado si no es 'all'
-        if ($status !== 'all') {
-            $filteredEvents->where('calendarevents.status', $status);
-        }
-    
-        $allEvents = $filteredEvents->orderBy('calendarevents.date_start')->paginate(9);
-    
-        return view('Luis.eventsDash', compact('allEvents'));
+     public function cancelActivity($id){
+        // dd($id);
+        $event = CalendarEvent::find($id);
+        $event->status = 'Cancelada';
+        $event->save();
+
+        return redirect('asesor/actividades');
     }
     
 
@@ -69,17 +66,43 @@ class EventController extends Controller
     public function calendar()
     {
         $user = auth()->user();
+
+        $rol = Role::where('id', $user->rol_id)->first();
+        $events = [];
+        $isAcademicAdvisor = False;
+        $isIntern = False;
+
+
+        if($rol->title === 'asesorAcademico'){
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user['id'])->first();   
+            $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
+            $isAcademicAdvisor = True;
+        }
+
+        if($rol->title === 'estudiante'){
+            $intern = Intern::where('user_id', $user['id'])->first();
+            $events = CalendarEvent::with('requester.user')->where('receiver_id', $intern->id)->get();
+            // dd($events);
+            $isIntern = True;
+        }
     
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
-    
-        $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
         
         
         // Cambiar el estatus cuando el evento ya pasó
-        foreach ($events as $event) {
-            if ($event->date_end <= now()) {
-                $event->status = 'Terminada';
-                $event->save();
+        foreach($events as $event){
+            if($event->status !== 'Cancelada'){
+                if($event->date_end <= now()){
+                    $event->status = 'Terminada';
+                    $event->save();
+                }
+                if($event->date_start >= now()){
+                    $event->status = 'Programada';
+                    $event->save();
+                }
+                if($event->date_start <= now() && $event->date_end >= now()){
+                    $event->status = 'En curso';
+                    $event->save();
+                }
             }
         }
     
@@ -119,7 +142,7 @@ class EventController extends Controller
             }
         }
     
-        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay'));
+        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
     }
     
 
@@ -143,7 +166,6 @@ class EventController extends Controller
      */
     public function store(NewEventFormRequest $request)
     {
-        $validatedData = $request->validated();
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -159,9 +181,16 @@ class EventController extends Controller
         $event->date_end = $request->date_end;
         $event->status = 'Programada';
 
+        $dateOne = DateTime::createFromFormat('Y-m-d\TH:i', $request->date_start);
+        $dateTwo = DateTime::createFromFormat('Y-m-d\TH:i', $request->date_end);
+        
+        if ($dateOne > $dateTwo) {
+            return redirect()->back()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
+        }
+
         // dd($event);
         $event->save();
-        return redirect('eventos')->with('success', 'El evento se ha agregado correctamente');
+        return redirect('asesor/actividades')->with('success', 'La actividad se ha agregado correctamente');
     }
 
     /**
@@ -169,8 +198,34 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = CalendarEvent::find($id);
-        return view('Luis.showEvent', compact('event'));
+        $user = auth()->user();
+        $rol = Role::where('id', $user->rol_id)->first();
+
+        if($rol->title === 'asesorAcademico'){
+            $rol = 'asesorAcademico';
+
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+
+            $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
+    
+            $event = CalendarEvent::find($id);
+    
+            $intern = Intern::with('user')->where('id', $event->receiver_id)->first();
+            
+            return view('Luis.showEvent', compact('event', 'intern', 'rol'));
+        }
+        if($rol->title === 'estudiante'){
+            $rol = 'estudiante';
+
+            $intern = Intern::where('user_id', $user->id)->first();
+
+            $event = CalendarEvent::find($id);
+
+            $academicAdvisor = AcademicAdvisor::with('user')->where('id', $event->requester_id)->first();
+
+            return view('Luis.showEvent', compact('event', 'academicAdvisor', 'intern', 'rol', 'user'));
+        }
+
     }
 
     /**
@@ -209,8 +264,17 @@ class EventController extends Controller
         $event->date_start = $request->date_start;
         $event->date_end = $request->date_end;
         $event->status = $request->status;
+
+        $dateOne = DateTime::createFromFormat('Y-m-d\TH:i', $request->date_start);
+        $dateTwo = DateTime::createFromFormat('Y-m-d\TH:i', $request->date_end);
+
+        
+        if ($dateOne > $dateTwo) {
+            return redirect()->back()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
+        }
+
         $event->update();
-        return redirect('eventos')->with('edit_success', 'El Evento ha sido editado correctamente');
+        return redirect('asesor/actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
     }
 
     /**
@@ -222,6 +286,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('eventos.index')->with('delete','ok');
+        return redirect('asesor/actividades')->with('delete','ok');
     }
 }

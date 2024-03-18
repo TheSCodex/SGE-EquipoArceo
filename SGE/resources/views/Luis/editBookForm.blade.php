@@ -7,12 +7,46 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-@extends('templates.directorsAssistantTemplate')
-@section('contenido')
+    @extends('templates/authTemplate')
+    @section('contenido')
+    {{-- <main class="w-10/12 md:w-7/12 xl:w-1/3 mx-auto bg-white rounded-xl p-6 shadow-2xl border-2 border-secondaryColor my-10">
+        <form action="{{ route('libros.update', $book->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700 font-montserrat mb-2">Nombre:</label>
+                <input type="text" id="title" name="title" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el nombre del libro" value="{{ $book->title }}">
+            </div>
+            <div class="mb-4">
+                <label for="author" class="block text-gray-700 font-montserrat mb-2">Autor:</label>
+                <input type="text" id="author" name="author" class="w-full border-2 border-zinc-100  rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" required placeholder="Introduce el autor del libro" value="{{ $book->author }}">
+            </div>
+            <div class="mb-4">
+                <label for="isbn" class="block text-gray-700 font-montserratmb-2">ISBN:</label>
+                <input type="text" id="isbn" name="isbn" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-blue-primaryColor" required placeholder="Introduce el ISBN del libro" value="{{ $book->isbn }}">
+            </div>
+            <div class="mb-4">
+                <label for="identifier_student" class="block text-gray-700font-montserrat mb-2">Matrículas:</label>
+                <textarea id="identifier_student" name="identifier_student" class="w-full border-2 border-zinc-100 rounded-md px-4 py-2 focus:outline-none focus:border-primaryColor" rows="3" required placeholder="Introduce la o las matriculas de los estudiantes que han entregado el libro">{{ $book->identifier_student }}</textarea>
+            </div>
+            <div class="mt-6 flex">
+                <button type="submit" class="bg-primaryColor text-white py-2 px-20 rounded-md hover:bg-secondaryColor focus:outline-none focus:bg-secondaryColor mx-auto">Editar libro</button>
+            </div>
+        </form>
+    </main> --}}
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
-        <form action="{{ route('libros.update', $book->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
+            @if(session('problems'))
+            <div class=" w-full bg-[#B31312] rounded-xl flex flex-col justify-center align-middle">
+                <ul class="my-5 w-full">
+                    @foreach(session('problems') as $problem)
+                        <li class=" text-lg text-white font-montserrat ml-2">&bull; {{ $problem }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+            <div class="w-full md:px-[7em] md:my-[2em] flex ">
+        <form action="{{ route('libros-asistente.update', $book->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
             @csrf
             @method('PUT')
             <div class="w-full h-fit flex justify-center md:justify-start">
@@ -50,8 +84,15 @@
                         @enderror
                     </div>
                     <div class="space-y-2 mb-4 lg:mx-5">
-                        <p class="text-sm">Matrículas:</p>
-                        <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="1" placeholder="Introduce la o las matriculas de los estudiantes que han entregado el libro, separa cada matricula con una coma">@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</textarea>
+                        <div class="flex flex-row w-full justify-between">
+                            <p class="text-sm space-y-2">Matrículas:</p>
+                            <div>
+                                <div class=" relative before:content-[attr(data-tip)] before:absolute before:px-3 before:py-2 before:-left-3 before:-top-2 before:w-max before:max-w-xs before:-translate-x-1/2 before:-translate-y-full before:bg-gray-700 before:text-white before:rounded-md before:opacity-0 before:transition-all after:absolute after:-left-1.5 after:-top-2 after:h-0 after:w-0 after:translate-x-1/2 after:border-8 after:border-t-gray-700 after:border-l-transparent after:border-b-transparent after:border-r-transparent after:opacity-0 after:transition-all hover:before:opacity-100 hover:after:opacity-100" data-tip="Ej: 22393171, 22393172, 22393173">
+                                    <img src="/img/Eliud/info.png" alt="Información" class="w-5 h-5 my-auto cursor-pointer" id="info-icon">
+                                </div>
+                            </div>
+                        </div>                        
+                        <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma">@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</textarea>
                         @error('identifier_student')
                             <p class="text-[#ff0000] text-sm">
                                 {{ $message }}
@@ -60,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir evento</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Editar libro</button>
         </form>
     </div>
         </div>

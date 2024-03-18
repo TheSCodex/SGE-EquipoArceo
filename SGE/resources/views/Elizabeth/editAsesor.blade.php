@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 <div class="w-full md:h-full xl:h-screen flex justify-center xl:items-center bg-white">
     <form action="{{ route('panel-advisors.update', $advisor->id) }}" method="POST" class="flex flex-col font-montserrat mx-10 space-y-5 lg:w-[40vw] sm:w-[60vw]">

@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->rol_id = $request->rol_id;
         $user->identifier = $request->identifier;
-        // $user->career_academy_id = $request->career_academy_id;
+        $user->career_id = $request->career_id;
         // password aleatoria
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
@@ -60,17 +60,19 @@ class UserController extends Controller
             return redirect()->route('panel-users.index');
         } else {
             $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
+            session()->flash('success', '¡El usuario se ha agregado exitosamente!');
             $users=User::all();
             return view ('Pipa.panel-users', compact('users'));
-        }
+        }   
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $user=User::find($id);
+        return view ('Pipa.show-user', compact('user'));
     }
 
     /**
@@ -94,7 +96,7 @@ class UserController extends Controller
         $careers = Career::all();
         $user = \App\Models\User::find($id);
         $user->update($request->all());
-        // dd($user);
+        session()->flash('success', 'El usuario ' . $user->name . ' ' . $user->last_name . ' se ha editado correctamente.');
         return redirect()->route('panel-users.index');
     }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eventos</title>
+    <title>Actividades</title>
     @vite('resources/css/app.css')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -12,105 +12,90 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de eventos</h1>
-            <div class="flex items-center flex-row justify-end">
-                <form action="{{ route('eventos.search') }}" method="POST" class="hidden md:block">
-                    @csrf
+                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de actividades</h1>
+                <div class="flex items-center flex-row justify-end">
                     <div class="flex items-center space-x-4">
                         <div class="relative">
-                            <input class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                            <input id="search" class="border-primaryColor placeholder-primaryColor border-b rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
                         </div>
-                        <select name="status" class="border-primaryColor rounded-md py-2 px-4 focus:outline-none focus:border-blue-500 w-36">
+                        <select id="statusFilter" class="border-primaryColor rounded-md py-2 px-4 focus:outline-none focus:border-blue-500 w-36">
                             <option value="all">Todos</option>
                             <option value="Programada">Programada</option>
                             <option value="En proceso">En proceso</option>
                             <option value="Terminada">Terminada</option>
                             <option value="Cancelada">Cancelada</option>
                         </select>
-                        <button type="submit" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Filtrar</button>
                     </div>
-                </form>
-
-                <a href="{{route('eventos.create')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento
-                </a>
-            </div>
-            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
-                <div>
-                    <div class="flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 py-2 px-4 " type="search" placeholder="Buscar...." style="color: green;">
-                    </div>
+                    <a href="{{route('actividades.create')}}" class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva actividad</a>
                 </div>
-                <a href="{{route('eventos.create')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo evento
-                </a>
+                <div class="flex sm:flex-row md:hidden mt-2 mx-auto justify-center">
+                    <a href="{{route('actividades.create')}}" class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white">Agregar nueva actividad</a>
+                </div>
             </div>
-        </div>
-        <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5">
-            @foreach ($allEvents as $event)
-                <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl">
-                    <div class="p-4">
-                        <h3 class="text-darkBlue font-bold text-xl">{{$event['date']}}</h3>
-                        <ul class="border-l border-dashed border-primaryColor font-montserrat">
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
-                                    <h4 class="text-lg font-semibold">{{$event['title']}}</h4>
+            <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5">
+                @foreach ($allEvents as $event)
+                    <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl event">
+                        <div class="p-4">
+                            <a href="{{route('actividades.show', $event->id)}}">
+                                <ul class="border-l border-dashed border-primaryColor font-montserrat cursor-pointer" id="moreInfo">
+                                    <li>
+                                        <div class="flex-start flex items-center pt-3">
+                                            <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
+                                            <h4 class="text-lg font-semibold event-title">{{$event['title']}}</h4>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h3 class="text-[#888] text-sm event-date">Fecha: {{ substr($event['date_start'], 0, 10) }}</h3>
+                                            <h1 class="text-[#888] text-sm event-type">Propósito: {{$event['eventType']}}</h1>
+                                            <h1 class="text-[#888] text-sm event-user">Con: {{$event['receiver']['user']['name']}} {{$event['receiver']['user']['last_name']}}</h1>
+                                            <h1 class="text-[#888] text-sm event-place">Lugar: {{$event['location']}}</h1>
+                                            <h1 class="text-[#888] text-sm event-status">Estatus: {{$event['status']}}</h1>
+                                            <h1 class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </a>
+                            <div class="flex justify-center align-middle space-x-10 mt-4">
+                                <div class="flex justify-center align-middle my-auto">
+                                    <a href="{{route('actividades.edit', $event->id)}}">
+                                        <img src="/img/logos/pencil.svg">
+                                    </a>
                                 </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">Proposito: {{$event['eventType']}}</time>
+                                <div class="flex justify-center align-middle my-auto">
+                                    <form action="{{ route('actividades.destroy', $event->id) }}" class="delete-event" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">
+                                            <img src="/img/logos/trash.svg">
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">Con: {{$event['receiver']['user']['name']}} {{$event['receiver']['user']['lastname']}}</time>
+                                <div class="flex justify-center align-middle">
+                                    <form action="{{ route('actividades.cancel', $event->id) }}" class="cancel-event" method="POST">
+                                        @csrf
+                                        <button class="bg-primaryColor px-3 py-2 rounded-xl font-semibold font-montserrat text-white">Cancelar</button>
+                                    </form>
                                 </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">Lugar: {{$event['location']}}</time>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">Estatus: {{$event['status']}}</time>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
-                                </div>
-                                
-                            </li>
-                        </ul>
-                        <div class="flex justify-center space-x-12 mt-4">
-                            <div class="flex justify-center align-middle">
-                                <a href="{{route('eventos.edit', $event->id)}}">
-                                    <img src="/img/logos/pencil.svg">
-                                </a>
-                            </div>
-                            <div class="flex justify-center align-middle">
-                                <form action="{{ route('eventos.destroy', $event->id) }}" class="delete-event" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">
-                                        <img src="/img/logos/trash.svg">
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="my-5 mx-auto">
+                {{$allEvents->links()}}
+            </div>
         </div>
-        <div class="my-5 mx-auto">
-            {{$allEvents->links()}}
-        </div>
-    </main>      
+    </main>
 @endsection
 
-</body>
 @section('scripts-event')
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   
+
     @if (session('success'))
         <script>
             Swal.fire({
@@ -121,7 +106,6 @@
         </script>
     @endif
 
-    
     @if (session('edit_success'))
         <script>
             Swal.fire({
@@ -131,46 +115,78 @@
             });
         </script>
     @endif
-   
+
     @if (session('delete') == 'ok')
         <script>
             Swal.fire({
                 title: "¡Eliminado!",
-                text: "El libro ha sido eliminado con éxito",
+                text: "La actividad ha sido eliminada con éxito",
                 icon: "success"
-                });
+            });
         </script>
     @endif
 
-    
     <script>
+        // Función para filtrar por búsqueda de texto
+        function filterByText() {
+            var searchText = document.getElementById("search").value.toLowerCase();
+            console.log(searchText);
+            var events = document.querySelectorAll(".event");
+            console.log(events);
+            events.forEach(function(event) {
+                var title = event.querySelector(".event-title").textContent.toLowerCase();
+                var date = event.querySelector(".event-date").textContent.toLowerCase();
+                var type = event.querySelector(".event-type").textContent.toLowerCase();
+                var user = event.querySelector(".event-user").textContent.toLowerCase();
+                var place = event.querySelector(".event-place").textContent.toLowerCase();
+                if (title.includes(searchText) || date.includes(searchText) || type.includes(searchText) || user.includes(searchText) || place.includes(searchText)) {
+                    event.style.display = "block";
+                } else {
+                    event.style.display = "none";
+                }
+            });
+        }
+
+        // Función para filtrar por el estatus
+        function filterByStatus() {
+            var status = document.getElementById("statusFilter").value.toLowerCase().trim(); // Convertir a minúsculas y quitar espacios en blanco
+            var events = document.querySelectorAll(".event");
+            events.forEach(function(event) {
+                var eventStatus = event.querySelector(".event-status").textContent.toLowerCase().trim(); // Convertir a minúsculas y quitar espacios en blanco
+                // Extraer el estatus del texto completo
+                eventStatus = eventStatus.split(":")[1].trim(); // Dividir el texto por ":" y tomar la segunda parte, luego quitar espacios en blanco
+                if (status === "all" || eventStatus === status) {
+                    event.style.display = "block";
+                } else {
+                    event.style.display = "none";
+                }
+            });
+        }
+
+        // Event listener para búsqueda de texto
+        document.getElementById("search").addEventListener("input", filterByText);
+
+        // Event listener para filtrado por estatus
+        document.getElementById("statusFilter").addEventListener("change", filterByStatus);
+
+
         $('.delete-event').submit(function(e){
             e.preventDefault();
-
             Swal.fire({
-            title: "¿Estás Seguro?",
-            text: "Este evento se eliminara definitivamente",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "¡Si, eliminar!",
-            cancelButtonText: "Cancelar"
+                title: "¿Estás Seguro?",
+                text: "Esta actividad se eliminará definitivamente",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "¡Sí, eliminar!",
+                cancelButtonText: "Cancelar"
             }).then((result) => {
-            if (result.isConfirmed) {
-                // Swal.fire({
-                // title: "Deleted!",
-                // text: "Your file has been deleted.",
-                // icon: "success"
-                // });
-
-                this.submit();
-            }
+                if (result.isConfirmed) {
+                    this.submit();
+                }
             });
-
         });
     </script>
-
- 
 @endsection
 </html>

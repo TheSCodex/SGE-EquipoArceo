@@ -1,19 +1,21 @@
-@extends('templates.presidentOfTheAcademyTemplate')
+{{-- @extends('templates.presidentOfTheAcademyTemplate') --}}
+@extends('./templates/authTemplate')
+
 @section('contenido')
     <div class="bg-[#F3F5F9] flex h-screen gap-8">
         <section class="mt-[10px] ml-[30px] w-2/3">
             <div class="bg-white rounded-md py-1">
-                <h1 class="text-lg font-medium font-kanit ml-6">Asignación de asesorados</h1>
+                <h1 class="text-lg font-medium font-kanit ml-6">Bienvenida, Presidenta de academia!</h1>
             </div>
             <div class="font-kanit mt-3 flex space-x-5 h-1/3">
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Estudiantes</h3>
-                    <a href="lista-estudiantes"
+                    <h3 class="font-bold text-3xl">Anteproyectos</h3>
+                    <a href="presidente/estudiantes"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
                 <div class=" bg-primaryColor text-white rounded-md w-1/2 flex flex-col justify-evenly items-center">
-                    <h3 class="font-bold text-3xl">Proyectos</h3>
-                    <a href="lista-proyectos"
+                    <h3 class="font-bold text-3xl">Asesores academicos</h3>
+                    <a href="presidente/proyectos"
                         class="text-[#555] bg-white hover:bg-[#eee] py-2 px-10 font-normal font-roboto rounded-md text-center">Ver todo</a>
                 </div>
             </div>
@@ -27,8 +29,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-lightGray">Votos</p>
+                        <p class="font-bold text-2xl">{{$votes}}</p>
+                        <p class="text-sm text-lightGray">proyectos de aprobacion</p>
                     </div>
                 </div>
                 <div class="bg-white font-kanit flex w-1/2 rounded-md space-x-5 items-center">
@@ -57,7 +59,7 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button onclick="window.location.href='/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                         <div class="flex items-center space-x-8 mt-7">
                             <div>
@@ -67,17 +69,17 @@
                                     justificación e incluyas
                                     referencias para tus argumentos</p>
                             </div>
-                            <button onclick="window.location.href='/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
+                            <button onclick="window.location.href='presidente/observaciones'" class="bg-primaryColor rounded-md text-white py-1 w-[28%]">Ampliar observación</button>
                         </div>
                     </div>
-                    <a href="observaciones" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
+                    <a href="presidente/observaciones" class="flex w-full justify-end items-end text-[#888] text-sm">Ver todo</a>
                 </div>
             </div>
         </section>
         <section class="mt-[10px] mr-[30px] w-1/3">
             <div>
                 <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Asesores academicos</h3>
+                    <h3 class="text-lg font-medium font-kanit ml-6">Alumnos sin asesor</h3>
                 </div>
                 <div class="mt-3 space-y-2">
                     @php $counter = 0; @endphp
@@ -187,18 +189,11 @@
                         </div>
 
                     </div>
-                    <a href="eventos" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
+                    <a href="presidente/eventos/calendario" class="bg-primaryColor text-white px-14 font-bold text-sm py-1 rounded-md mb-3">Ver
                         más</a>
                 </div>
             </div>
-            <div class="mt-3 flex h-auto gap-4">
-                <div class="bg-white w-1/2">
-                    <p>Penalizaciones</p>
-                </div>
-                <div class="bg-white w-1/2">
-                    <p>Progreso de estadias</p>
-                </div>
-            </div>
+
         </section>
     </div>
 @endsection
