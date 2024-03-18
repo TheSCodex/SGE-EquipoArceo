@@ -31,11 +31,11 @@ class DatabaseSeeder extends Seeder
         Book::factory(10)->create();
         Company::factory()->count(10)->create();
         BusinessAdvisor::factory()->count(10)->create();
-        $this->call(DivisionSeeder::class);
-        $this->call(CareersSeeder::class);
         $this->call(RolesSeeder::class);
-        $this->call(UserSeeder::class); 
+        $this->call(UserSeeder::class);
+        $this->call(DivisionSeeder::class);
         $this->call(AcademiesSeeder::class); 
+        $this->call(CareersSeeder::class);
         $this->call(StudentStatusSeeder::class);
         $this->call(InternSeeder::class);
         $this->call(AcademicAdvisorSeeder::class);

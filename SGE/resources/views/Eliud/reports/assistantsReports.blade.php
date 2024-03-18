@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <div class="container mx-auto px-4 py-4 bg-[#F3F5F9] font-roboto w-full">
+    <div class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
         <div class="flex flex-col">
             <div class="flex items-center justify-between">
                 <h1 class="mt-2 text-2xl font-bold">Buenos días {{$userData->name}} {{$userData->last_name}}!</h1>

@@ -19,7 +19,7 @@
     </style>
 
 
-    <main class="flex flex-col h-full min-h-screen">
+    <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
             <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Lista de Documentos</h1>
             <div class="flex flex-row items-center justify-end">
@@ -34,17 +34,9 @@
                         </div>
                     </form>
                 </div>
-                {{-- <div class="hidden md:flex md:flex-col md:items-center md:mx-3">
-                    <button class="px-3 py-1 mb-1 text-base text-white rounded-md bg-green">▲</button>
-                    <button class="px-3 py-1 text-base text-white rounded-md bg-green">▼</button>
-                </div> --}}
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             <div class="flex justify-between mx-auto mt-2 md:hidden">
-                {{-- <div class="flex">
-                    <button class="px-4 py-2 mr-2 text-white rounded-md bg-green">▲</button>
-                    <button class="px-4 py-2 text-white rounded-md bg-green">▼</button>
-                </div> --}}
                 <a href="" class="px-4 py-2 ml-2 text-lg text-white rounded-md bg-green">Generar Nuevo Documento</a>
             </div>
         </div>
@@ -76,7 +68,6 @@
                         <th class="text-[#ACACAC] font-roboto text-xs">Origen</th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
                         <th class="text-[#ACACAC] font-roboto text-xs"></th>
-                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
                     </tr>
                     @foreach ($docs as $doc)
                         <tr>
@@ -84,7 +75,6 @@
                             <td class="py-5 font-bold font-roboto">{{ $doc['descripcion'] }}</td>
                             <td class="py-5 font-bold font-roboto">{{ $doc['destinatario'] }}</td>
                             <td class="py-5 font-bold font-roboto">{{ $doc['origen'] }}</td>
-                            <td class="py-5 font-bold font-roboto"><img src="/img/logos/pencil.svg"></td>
                             <td class="py-5 font-bold font-roboto"><img src="/img/logos/trash.svg"></td>
                             <td class="py-5 font-bold font-roboto"><img src="/img/logos/descarga.png"></td>
                         </tr>
