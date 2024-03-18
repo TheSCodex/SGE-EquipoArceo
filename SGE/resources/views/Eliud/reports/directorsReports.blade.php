@@ -10,7 +10,7 @@
             <div class="container mx-auto bg-[#F3F5F9] font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
-                        <h1 class="mt-2 text-2xl font-bold">Buenos días Directora!</h1>
+                        <h1 class="mt-2 text-2xl font-bold">Buenos días {{$userData->name}} {{$userData->last_name}}!</h1>
                     </div>
                 </div>
                 <div class="bg-black opacity-25 h-[2px] mb-6 mt-6"></div>
