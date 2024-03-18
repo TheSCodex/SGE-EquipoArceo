@@ -84,10 +84,10 @@ Route::middleware('auth')->group(function () {
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
         
         // Rutas para el formulario de anteproyectos
-        Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto');
-        Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto');
+        Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create');
+        Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store');
         Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
-        Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('editAnteproyecto');
+        Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto');
         
         //Ruta para las observaciones del estudiante
         Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function () {
     //TODO - ASESOR ACADEMICO
     Route::prefix('asesor')->middleware('role:asesorAcademico')->group(function () {
 
-        Route::get('/', [DashboardAdvisorController::class, "index"]);
+        Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         
@@ -134,6 +134,22 @@ Route::middleware('auth')->group(function () {
         Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente');
 
         Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
+
+        Route::get('/lista-asesores', PresidentOfTheAcademy::class)->names('lista-asesores');
+
+        //CRUD ASESOR ACADÉMICO 
+
+        // Todos los asesores
+        Route::get('/lista-asesores', PresidentOfTheAcademy::class)->names('lista-asesores');
+        // un asesor
+        Route::get('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesor');
+        // Crear asesor
+        Route::post('/lista-asesores', PresidentOfTheAcademy::class)->names('asesores.create');
+        // Actualizar asesor
+        Route::put('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesores.update');
+        // Eliminar asesor
+        Route::delete('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesores.destroy');
+
     });
 
     //TODO - DIRECTORA
@@ -143,7 +159,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/director", [DirectorController::class, "index"])->name('inicio-director');
 
         // El apartado de reportes para la directora
-        Route::get('/director/reportes', [ReportsController::class, "index"])->name('reportes-director');
+        Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director');
         
         // El acceso al CRUD/Listado de documentos para la directora
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');
@@ -161,6 +177,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
     });
 
     //TODO - Asistente directora
@@ -176,8 +193,7 @@ Route::middleware('auth')->group(function () {
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-asistente');
         
         // Con esta se accede a la pantalla assistantsReports
-        Route::resource('reportes', ReportsController::class)->names('reportes-asistente');
-        
+        Route::get('/reportes', [ReportsController::class, "assistantIndex"])->name('reportes-asistente');        
         // Con esta se accede al CRUD/Listado de los documentos generados
         Route::resource('documentos', DocumentsController::class)->names('documentos-asistente');
 
@@ -197,7 +213,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
     });
 
     //TODO - Administrador

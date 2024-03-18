@@ -40,21 +40,34 @@
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow ">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left whitespace-nowrap my-auto">Lista de libros</h1>
-                <div class="flex items-center flex-col md:flex-row md:justify-end w-full space-x-2 ">
-                    <div class="flex items-center md:ml-auto lg:mr-4 w-11/12 md:w-auto ">
-                        <input  id='search' class=" border-primaryColor placeholder-primaryColor border-b border rounded-md w-full " type="search" placeholder="Buscar...." style="color: green;">
-                    </div>
-                    <div class=" w-11/12 md:w-auto">
-                        <a href="{{route('libros-asistente.create')}}"
-                        class=" text-center block bg-primaryColor text-lg py-2 px-2 md:px-4 rounded-md text-white mt-2 md:mt-0 w-full">Agregar nuevo libro
-                        </a>
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div>
+                    <div class="hidden md:flex items-center relative" >
+                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
+                <a href="{{route('libros-asistente.create')}}"
+                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                </a>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+                
+                <div>
+                    <div class="flex items-center relative" >
+                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                    </div>
+                </div>
+                <a href="{{route('libros-asistente.create')}}"
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                </a>
+    
             </div>
         </div>
-        <div class="mt-6 mx-auto flex items-center justify-between w-[90%] ">
-            <div class="lg:hidden w-full mb-5 min-h-[500px]">
+
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                     @foreach ($books as $book)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
@@ -88,14 +101,14 @@
                     @endforeach
                 </div>
             </div>
-            <div class="hidden lg:block min-h-80 w-11/12  mx-auto">
-                <table class="text-center w-full">
+            <div class="hidden lg:block w-full">
+                <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Autor</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">ISBN</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Proporcionado por</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Fecha de adición</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Autor</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">ISBN</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Proporcionado por</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Fecha de adición</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
@@ -115,21 +128,27 @@
                             @endif
                         </td>
                         <td class="font-roboto font-bold py-5">{{ substr($book->created_at, 0, 10) }}</td>
-                        <td class="font-roboto font-bold py-5 "><a href="{{route('libros-asistente.show', $book->id)}}" class="text-primaryColor hover:text-darkBlue ease-in duration-100">Ver detalles</a></td>
+                        
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                             <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
+                            <form class="flex justify-center" action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
                                     <img src="/img/logos/trash.svg">
                                 </button>
-                            </form>    
+                            </form>
                         </td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
+                                <img src="/img/ojoGreen.svg" class="w-7">
+                            </a>
+                        </td>
+
                     </tr>
                     @endforeach
                 </table>
