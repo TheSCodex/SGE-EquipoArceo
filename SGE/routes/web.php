@@ -60,10 +60,10 @@ Route::middleware('guest')->group(function () {
     Route::resource('login', LoginController::class);
     
     // Ruta para cambiar la contraseña
-    Route::resource('cambiar-contra', RecoverPasswordController::class);
-    
+    Route::resource('cambiar-contra', ChangePasswordController::class);
+
     // Ruta para recuperar contraseña (la que envía el correo)
-    Route::resource('recuperar-contra', ChangePasswordController::class);
+    Route::resource('recuperar-contra', RecoverPasswordController::class);
 
     // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
     Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);

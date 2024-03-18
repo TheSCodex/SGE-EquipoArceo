@@ -12,8 +12,18 @@
     @php
         $user = auth()->user();
     @endphp
-
+    {{-- Con el siguiente código puedes obtener los permisos que tiene el usuario y con ellos hacer la 
+        lógica en el header para poder presentar accesos directos segun sus permisos  --}}
+    {{-- @php
+        use App\Models\User;
+        use App\Models\Role;
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $userDataRole = Role::find($userData->rol_id);
+    @endphp --}}
+    
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
+        {{$userDataRole}}
         <a href="#" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
