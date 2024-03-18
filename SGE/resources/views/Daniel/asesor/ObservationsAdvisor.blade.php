@@ -1,5 +1,5 @@
 
-@extends('./templates/guestTemplate')
+@extends('templates/authTemplate')
 
 @section('titulo')
     Observaciones

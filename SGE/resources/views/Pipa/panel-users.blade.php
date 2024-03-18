@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('titulo', 'Panel de Usuarios')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -38,34 +38,47 @@
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
                     <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
-                    {{-- <p class="text-sm text-gray-500">Rol: {{ $user->rol_id }}</p> --}}
-                    {{-- <p class="text-sm text-gray-500">Academia: {{ $user->careerAcademy->name }}</p> --}}
-                    <p class="text-sm text-gray-500">Academia:
-                        @isset($user->career_academy_id)
-                        @php
-                            $career = App\Models\Career::find($user->career_academy_id);
-                        @endphp
-                        @if($career)
-                            {{ $career->name }}
-                        @else
-                            Sin especialidad
-                        @endif
-                    @else
-                        Sin especialidad
-                    @endisset</p>
-                    <div class="flex justify-end mt-4">
-                        <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                        <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                    <div class="flex justify-end mt-4 space-x-2">
+                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                            <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
+                                <img src="/img/logos/pencil.svg">
+                            </a>
+                        </td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer px-2" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
+                            <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <img src="/img/logos/trash.svg">
+                            </form>
+                        </td>
+                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
         <div class="hidden lg:block w-full">
+            {{-- sweet alert para mostrar el error al mandar un correo --}}
             @if(session('error'))
-                <div class="text-red text-center mb-6">
-                    {{session('error')}}
-                </div>
+            <script>
+                Swal.fire({
+                    title: 'Oops...',
+                    text: '{{ session("error") }}',
+                    icon: 'error'
+                });
+            </script>
+            @endif
+            {{-- sweet alert para indicar que el usuario se agregó :3 --}}
+            @if(session('success'))
+                <script>
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: '{{ session("success") }}',
+                        icon: 'success'
+                    });
+                </script>
             @endif
             <table class="text-start w-full">
                 <tr class="w-full">
@@ -73,7 +86,6 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
-                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Especialidad</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs ">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
@@ -111,8 +123,8 @@
                                 <img src="/img/logos/trash.svg">
                         </form>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                        <a class="flex justify-center" id="deleteForm{{ $user->id }}">
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </td>

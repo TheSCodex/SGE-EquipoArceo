@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('titulo')
   CRUD CARRERAS
 @endsection

@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 <div class="w-full h-screen flex justify-center items-center bg-white">
     <form action="{{ route('panel-advisors.store') }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-[20rem] md:w-[30rem]">

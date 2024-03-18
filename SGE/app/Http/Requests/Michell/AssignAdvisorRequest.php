@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Pipa;
+namespace App\Http\Requests\Michell;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class AssignAdvisorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
-            'last_name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
-            'email' => 'bail|required',
-            'rol_id' => 'bail|required',
-            'identifier' => 'bail|required',
-            'career_id' => 'bail|required'
+            'academic_advisor_id'=>'bail|required'
         ];
     }
 }
