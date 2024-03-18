@@ -135,5 +135,6 @@
         Copyright © 2024. SM51
     </footer>
     @yield('scripts-event')
+    @yield('scripts-book')
 </body>
 </html>
