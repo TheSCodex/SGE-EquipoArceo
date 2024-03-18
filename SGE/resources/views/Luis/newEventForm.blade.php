@@ -2,8 +2,12 @@
 @section('contenido')
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        @if(session('errorFecha'))
+            <div class=" w-full bg-[#B31312] rounded-xl flex flex-col justify-center align-middle">
+                <h1 class=" text-lg text-white font-montserrat py-3 ml-3">&bull; {{session('errorFecha')}}</h1>
+            </div>
+        @endif
         <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
-                
                 <form method="POST" action="{{route('actividades.store')}}" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
                     <div class="w-full h-fit flex justify-center md:justify-start">
                         <h1 class="text-3xl font-bold">Añadir actividad</h1>
@@ -15,7 +19,7 @@
                                 <p class="text-sm">¿Con quien desea la cita?:</p>
                                 <select type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
                                     @foreach ($internsWithUser as $internWithUser)
-                                        <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['lastname']}}</option>
+                                        <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['last_name']}}</option>
                                     @endforeach
                                 </select>
                                 @error('receiver_id')
@@ -81,7 +85,7 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
-                            <div class=" space-y-2 mb-4 lg:mx-5">
+                            <div class=" space-y-2 mb-4 lg:mx-5 pb-10">
                                 <p class="text-sm space-y-2">Fecha y hora de fin de la actividad:</p>
                                 <input type="datetime-local" id="date_end" name="date_end" value="{{ old('date_end') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad">
                                 @error('date_end')

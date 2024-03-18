@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Luis\BookFormRequest;
+use App\Models\AcademicAdvisor;
 use App\Models\Book;
 use App\Models\Intern;
 use App\Models\User;
@@ -103,7 +104,18 @@ class BooksController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $book = Book::find($id);
+        $interns = Intern::with('user')->where('book_id', $id)->get();
+        $internsIdentifier = [];
+        foreach ($interns as $intern) {
+            $user = User::where('id', $intern['user_id'])->first();
+            $internsIdentifier[] = $user['identifier'];
+            if ($intern['academic_advisor_id'] != null) {
+                $academicAdvisor = AcademicAdvisor::with('user')->where('id', $intern['academic_advisor_id'])->first();
+                $intern['academic_advisor'] = $academicAdvisor;
+            }
+        }
+        return view('Luis.showBook', compact('book', 'internsIdentifier', 'interns'));
     }
 
     /**

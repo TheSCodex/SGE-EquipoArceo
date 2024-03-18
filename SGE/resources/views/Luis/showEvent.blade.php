@@ -1,37 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Evento</title>
+    <title>Editar Evento</title>
     @vite('resources/css/app.css')
 </head>
 <body>
-    
-@extends('templates.academicAdvisorTemplate')
-@section('contenido')
-
-<div class="w-full min-h-screen m-auto flex flex-col">
-    <div class="w-6/12 bg-white rounded-xl shadow-2xl p-6 border-2 border-secondaryColor m-auto">
-        <h1 class="text-2xl font-semibold mb-4 font-montserrat text-primaryColor">Detalles del Evento</h1>
-        @if($event)
-            <div class="mb-4">
-                <p><strong class="text-primaryColor">Fecha de inicio:</strong> {{ $event->date_start }}</p>
-                <p><strong class="text-primaryColor">Fecha de fin:</strong> {{ $event->date_end }}</p>
-                <p><strong class="text-primaryColor">Con:</strong> {{ $event->receiver_id }}</p>
-                <p><strong class="text-primaryColor">Asunto:</strong> {{ $event->title }}</p>
-                <p><strong class="text-primaryColor">Propósito:</strong> {{ $event->eventType }}</p>
-                <p><strong class="text-primaryColor">Descripción:</strong> {{ $event->description }}</p>
-                <p><strong class="text-primaryColor">Lugar:</strong> {{ $event->location }}</p>
-                <p><strong class="text-primaryColor">Estatus:</strong> {{ $event->status }}</p>
+    @extends('templates.academicAdvisorTemplate')
+    @section('contenido')
+    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">        
+                <div class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0">
+                    @csrf
+                    <div class="w-full h-fit flex justify-center md:justify-start">
+                        <h1 class="text-3xl font-bold">Información de la actividad</h1>
+                    </div>
+                    <div class="w-full flex flex-col space-y-1">
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class="space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">¿Con quien desea la cita?:</p>
+                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"  readonly value='{{$intern['user']['name']}} {{$intern['user']['last_name']}}'>
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">Titulo:</p>
+                                <input type="text" id="title" name="title" value="{{ $event->title }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el titulo de la actividad" readonly>
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Tipo de actividad:</p>
+                                <input type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de actividad" value="{{$event->eventType}}" readonly>
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Descripción:</p>
+                                <input id="description" name="description" value="{{ $event->description }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Describe brevemente de que tratara la actividad" readonly>
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
+                                <input type="text" id="location" name="location" value="{{ $event->location }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad" readonly>
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Fecha y hora de inicio de la actividad:</p>
+                                <input type="datetime-local" id="date_start" name="date_start" value="{{ $event->date_start }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad" readonly>
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Fecha y hora de fin de la actividad:</p>
+                                <input type="datetime-local" id="date_end" name="date_end" value="{{ $event->date_end }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad" readonly>
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5 pb-10">
+                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
+                                <input type="text" id="status" name="status" value="{{ $event->status }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad" readonly>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @else
-            <p>No se encontró información del evento.</p>
-        @endif
-    </div>
-</div>
-
-@endsection
-
+        </div>
+    </section>
+    @endsection
 </body>
 </html>

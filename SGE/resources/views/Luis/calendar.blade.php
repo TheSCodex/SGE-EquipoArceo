@@ -9,8 +9,9 @@
 <body>
     @extends('templates.academicAdvisorTemplate')
     @section('contenido')
-    <main class="w-full h-full overflow-auto font-montserrat ">
-        <div class="flex  w-full ">
+    {{-- <main class="w-full h-full overflow-auto font-montserrat"> --}}
+    <main class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 mx-auto">
+        <div class="flex  w-full">
             <!-- left side -->
             <div class=" w-72 bg-primaryColor hidden sm:block h-auto">
                 <div class=" justify-between items-center p-4 ">
@@ -165,8 +166,7 @@
                                         @endphp
                                     @if ($eventInHour)
                                         @if ($hour == $startHour && !$infoShown)
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer ">
-                                                <a href="{{route('actividades.show', $event->id)}}">
+                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }}">
                                                     <div class="px-4">
                                                         <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{$hour >= 12 ? 'PM' : 'AM'}}</p>
 
@@ -177,7 +177,7 @@
                                                 $infoShown = true;
                                             @endphp
                                         @elseif($hour == $endHour)
-                                            <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer">
+                                            <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }} cursor-pointer">
                                                 <a href="{{route('actividades.show', $event->id)}}">
                                                     <div class="px-4">
                                                         {{-- <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{substr($event['date_start'], 11, 5) > 12 ? 'AM' : 'PM'}}</p> --}}
@@ -187,10 +187,10 @@
                                                 </a>
                                             </td>
                                         @else
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  bg-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} cursor-pointer">
+                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }} cursor-pointer">
                                                 <a href="{{route('actividades.show', $event->id)}}">
                                                     <div class="px-4">
-                                                        <p class="font-bold  text-{{ ($event->status === 'Terminada') ? 'primaryColor' : (($event->status === 'Cancelada') ? 'darkBlue' : 'secondaryColor') }} text-center"> - </p>
+                                                        <p class="font-bold  {{ ($event['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-darkBlue' : (($event['status'] == 'Cancelada') ? 'text-[#B31312]' : 'bg-[#968C83]')) }} text-center"> - </p>
                                                     </div>
                                                 </a>
                                             </td>
@@ -217,22 +217,22 @@
                 {{-- <hr class="border-zinc-100 w-full mt-5 md:hidden"> --}}
                 <div class="flex w-11/12 mx-auto flex-col items-center">
                     <h1 class=" text-center font-montserrat font-semibold md:hidden text-xl my-5">Eventos de hoy: {{$eventsPerDay[$day]}}</h1>
-                    <button class="bg-green py-2 px-2 rounded-md text-white mb-5 md:hidden">
+                    <button class="bg-primaryColor py-2 px-2 rounded-md text-white mb-5 md:hidden">
                         <a href="{{route('actividades.create')}}">Agregar nuevo evento</a>
                     </button>
                 </div>
                 <div class="md:hidden w-11/12 grid grid-cols-1 gap-3 mt-5 mx-auto mb-5">
                     @foreach($todayEvents as $todayEvent)
-                    <div class="bg-green rounded-lg mx-auto flex flex-col align-middle justify-center">
+                    <div class="{{ ($todayEvent['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }} rounded-lg mx-auto flex flex-col align-middle justify-center">
                         <p class="font-bold text-white mt-5 text-center">{{$day}}/{{$month}}/{{$year}}</p>
                         <p class="font-bold text-white text-center mb-2">{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
-                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-2 text-darkGreen">
-                            <h1 class="p-3 font-montserrat font-semibold">{{ $todayEvent->title }}</h1>
+                        <div class="bg-white rounded-2xl w-11/12 mx-auto mb-2 {{ ($todayEvent['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-darkBlue' : (($event['status'] == 'Cancelada') ? 'text-[#B31312]' : 'text-[#968C83]')) }}">
+                            <h1 class="px-3 py-2 font-montserrat font-semibold">{{ $todayEvent->title }}</h1>
                             <p class="p-3 font-montserrat font-semibold">Con: {{ $todayEvent['receiver']['user']['name'] }}</p>
-                            <p class="p-3 font-montserrat font-semibold">Propósito: {{ $todayEvent->eventType }}</p>
-                            <p class="p-3 font-montserrat font-semibold">Descripción: {{ $todayEvent->description }}</p>
-                            <p class="p-3 font-montserrat font-semibold">Lugar: {{ $todayEvent->location }}</p>
-                            <p class="p-3 font-montserrat font-semibold">Estatus: {{ $todayEvent->status }}</p>
+                            <p class="px-3 py-2 font-montserrat font-semibold">Propósito: {{ $todayEvent->eventType }}</p>
+                            <p class="px-3 py-2 font-montserrat font-semibold">Descripción: {{ $todayEvent->description }}</p>
+                            <p class="px-3 py-2 font-montserrat font-semibold">Lugar: {{ $todayEvent->location }}</p>
+                            <p class="px-3 py-2 font-montserrat font-semibold">Estatus: {{ $todayEvent->status }}</p>
                         </div>
                     </div>
                     @endforeach
