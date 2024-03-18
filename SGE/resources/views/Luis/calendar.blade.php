@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     {{-- <main class="w-full h-full overflow-auto font-montserrat"> --}}
     <main class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 mx-auto">
@@ -73,7 +73,7 @@
                             </div>
                             <div class="px-4 mt-4 text-white text-sm">
                                 <p class=" font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
-                                <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span>{{ $todayEvent['receiver']['user']['name'] }}</p>
+                                <p class=" ml-6 "><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent->receiver_id }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $todayEvent->title }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Propósito:</span> {{ $todayEvent->eventType }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Descripción:</span> {{ $todayEvent->description }}</p>
@@ -105,7 +105,7 @@
                             <!-- Detalles del evento de mañana -->
                             <div class="px-4 text-white text-sm">
                                 <p class="font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($tomorrowEvent->date_start, 11)}} - {{ substr($tomorrowEvent->date_end, 11)}}</p>
-                                <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span>{{ $tomorrowEvent['receiver']['user']['name'] }}</p>
+                                <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent->receiver_id }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $tomorrowEvent->title }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Proposito:</span> {{ $tomorrowEvent->eventType }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Descripción:</span> {{ $tomorrowEvent->description }}</p>
@@ -169,7 +169,8 @@
                                             <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }}">
                                                     <div class="px-4">
                                                         <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{$hour >= 12 ? 'PM' : 'AM'}}</p>
-
+                                                        {{-- <p class="font-bold text-white text-center">{{substr($event['date_end'], 11, 5)}} {{substr($event['date_end'], 11, 5) > 12 ? 'AM' : 'PM'}}</p> --}}
+                                                        {{-- <p class="font-bold text-white text-center">Cita</p> --}}
                                                     </div>
                                                 </a>
                                             </td>
@@ -206,6 +207,20 @@
                                                 <hr class="border-white my-4 w-5/1 m-4">
                                             </td>
                                     @endif
+                                    {{-- <th class="px-2 lg:px-6 py-3 border text-gray-500 bg-gray-50">
+                                        <h1 class="hidden lg:block">{{ $weekDays[$i] }}</h1>
+                                        <h1 class="lg:hidden">{{ $weekDayscel[$i] }}</h1>
+                                        <p class="text-lg text-black">{{ date('d', strtotime("$sundayDate +$i days")) }}</p>
+                                    </th> --}}
+                                    {{-- <td class="px-2 py-3 md:py-4 border">
+                                        <div class="px-4 mb-2">
+                                            <p class="font-bold text-[#193c45]"><span class="text-sm text-[#054759]"></span></p>
+                                        </div>
+                                        <div class="px-4 mt-4 text-sm">
+                                            <p class="ml-6"></p>
+                                        </div>
+                                        <hr class="border-white my-4 w-5/1 m-4">
+                                    </td> --}}
                                 @endfor
                                 <td class="px-2 py-2 md:py-8 border font-medium text-gray-500 whitespace-nowrap hidden lg:block">
                                     {{ $hour < 10 ? '0'.$hour : $hour }} {{ $hour < 12 ? 'AM' : 'PM' }}

@@ -43,4 +43,9 @@ class Project extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function advisorLikes()
+    {
+        return $this->hasMany(ProjectAdvisorsLikes::class, 'id_projects');
+    }
 }

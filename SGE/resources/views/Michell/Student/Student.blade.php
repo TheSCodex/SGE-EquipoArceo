@@ -9,7 +9,8 @@
 
 <body>
 
-    @extends('./templates/studenTemplate')
+    {{-- @extends('./templates/studenTemplate') --}}
+    @extends('./templates/authTemplate')
 
     @section('contenido')
         <div class="flex h-full gap-8">

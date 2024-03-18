@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">

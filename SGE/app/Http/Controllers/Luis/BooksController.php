@@ -17,7 +17,6 @@ class BooksController extends Controller
      */
     public function index()
     {
-
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
