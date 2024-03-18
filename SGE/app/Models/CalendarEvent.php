@@ -24,7 +24,7 @@ class CalendarEvent extends Model
 
     public function requester()
     {
-        return $this->belongsTo(User::class, 'requester_id');
+        return $this->belongsTo(AcademicAdvisor::class, 'requester_id');
     }
 
     public function receiver()

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Evento</title>
+    <title>Información de la actividad</title>
     @vite('resources/css/app.css')
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates.authTemplate')
     @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
@@ -20,8 +20,13 @@
                     <div class="w-full flex flex-col space-y-1">
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm">¿Con quien desea la cita?:</p>
-                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"  readonly value='{{$intern['user']['name']}} {{$intern['user']['last_name']}}'>
+                                @if ($rol == 'asesorAcademico')
+                                    <p class="text-sm">¿Con quien desea la cita?:</p>
+                                    <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"  readonly value='{{$intern['user']['name']}} {{$intern['user']['last_name']}}'>
+                                @else
+                                    <p class="text-sm">¿Quién solicita la cita?:</p>
+                                    <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"  readonly value='{{$academicAdvisor['user']['name']}} {{$academicAdvisor['user']['last_name']}}'>
+                                @endif
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Titulo:</p>

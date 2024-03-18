@@ -94,6 +94,9 @@ Route::middleware('auth')->group(function () {
 
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
+        //Ruta para ver información de la actividad
+        Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
+
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
 
     });

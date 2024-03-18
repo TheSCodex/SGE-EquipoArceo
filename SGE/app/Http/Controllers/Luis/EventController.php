@@ -22,7 +22,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();      
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
         // Aqui deberia ser UserId
         $allEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->paginate(6);
         
@@ -68,11 +68,24 @@ class EventController extends Controller
         $user = auth()->user();
 
         $rol = Role::where('id', $user->rol_id)->first();
+        $events = [];
+        $isAcademicAdvisor = False;
+        $isIntern = False;
 
-        
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user['id'])->first();
+
+        if($rol->title === 'asesorAcademico'){
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user['id'])->first();   
+            $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
+            $isAcademicAdvisor = True;
+        }
+
+        if($rol->title === 'estudiante'){
+            $intern = Intern::where('user_id', $user['id'])->first();
+            $events = CalendarEvent::with('requester.user')->where('receiver_id', $intern->id)->get();
+            // dd($events);
+            $isIntern = True;
+        }
     
-        $events = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->get();
         
         
         // Cambiar el estatus cuando el evento ya pasó
@@ -92,40 +105,46 @@ class EventController extends Controller
                 }
             }
         }
-        
+    
         // Obtener el evento para hoy
         $todayEvents = $events->where('date_start', '>=', now()->startOfDay())
-                            ->where('date_start', '<', now()->endOfDay());
+                                ->where('date_start', '<', now()->endOfDay());
     
         // Obtener el evento para mañana
         $tomorrowEvents = $events->where('date_start', '>=', now()->addDay()->startOfDay())
-                                ->where('date_start', '<', now()->addDay()->endOfDay());
-
-
-        $date = date('Y-m-d');
-        $year = date('Y', strtotime($date));
-        $month = date('m', strtotime($date));
-        $day = date('d', strtotime($date));
-        $daysMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        $months = ["01" => "Enero","02" => "Febrero", "03" => "Marzo", "04" =>  "Abril", "05" =>  "Mayo", "06" =>  "Junio", "07" =>  "Julio", "08" =>  "Agosto", "09" =>  "Septiembre", "10" => "Octubre", "11" =>  "Noviembre", "12" =>  "Diciembre"];
-        $inicialday = date('N', strtotime("$year-$month-01")); 
-        // quantity of events per day
+                                    ->where('date_start', '<', now()->addDay()->endOfDay());
+    
+        $date = now()->format('Y-m-d');
+        $year = now()->format('Y');
+        $month = now()->format('m');
+        $day = now()->format('d');
+        $daysMonth = now()->daysInMonth;
+        $months = [
+            "01" => "Enero", "02" => "Febrero", "03" => "Marzo", "04" =>  "Abril", 
+            "05" =>  "Mayo", "06" =>  "Junio", "07" =>  "Julio", "08" =>  "Agosto", 
+            "09" =>  "Septiembre", "10" => "Octubre", "11" =>  "Noviembre", "12" =>  "Diciembre"
+        ];
+        $inicialday = now()->startOfMonth()->dayOfWeek;
+    
+        // Cantidad de eventos por día
         $eventsPerDay = [];
         for ($i = 1; $i <= $daysMonth; $i++) {
             $dayOfMonth = str_pad($i, 2, '0', STR_PAD_LEFT);
             $eventsPerDay[$dayOfMonth] = 0;
         }
+    
         foreach ($events as $event) {
-    // Solo contar los eventos pendientes
-        if ($event->status === 'Programada') {
-            $eventDate = $event->date_start;
-            $eventDay = date('d', strtotime($eventDate));
-            $eventsPerDay[$eventDay]++;
+            // Solo contar los eventos pendientes
+            if ($event->status === 'Programada') {
+                $eventDate = $event->date_start;
+                $eventDay = date('d', strtotime($eventDate));
+                $eventsPerDay[$eventDay]++;
+            }
         }
-        }
-        // dd($eventsPerDay);
-        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay'));
+    
+        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
     }
+    
 
 
     /**
@@ -133,8 +152,13 @@ class EventController extends Controller
      */
     public function create()
     {
-        //Todos los asesores
-        return view('Luis.newEventForm');
+        $user = auth()->user();
+
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+
+        $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
+
+        return view('Luis.newEventForm', compact('internsWithUser'));
     }
 
     /**
@@ -147,6 +171,8 @@ class EventController extends Controller
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
 
         $event = new \App\Models\CalendarEvent;
+        $event->requester_id = $academicAdvisor->id;
+        $event->receiver_id = $request->receiver_id;
         $event->title = $request->title;
         $event->eventType = $request->eventType;
         $event->description = $request->description;
@@ -173,16 +199,33 @@ class EventController extends Controller
     public function show($id)
     {
         $user = auth()->user();
+        $rol = Role::where('id', $user->rol_id)->first();
 
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+        if($rol->title === 'asesorAcademico'){
+            $rol = 'asesorAcademico';
 
-        $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
 
-        $event = CalendarEvent::find($id);
+            $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
+    
+            $event = CalendarEvent::find($id);
+    
+            $intern = Intern::with('user')->where('id', $event->receiver_id)->first();
+            
+            return view('Luis.showEvent', compact('event', 'intern', 'rol'));
+        }
+        if($rol->title === 'estudiante'){
+            $rol = 'estudiante';
 
-        $intern = Intern::with('user')->where('id', $event->receiver_id)->first();
+            $intern = Intern::where('user_id', $user->id)->first();
 
-        return view('Luis.showEvent', compact('event', 'intern'));
+            $event = CalendarEvent::find($id);
+
+            $academicAdvisor = AcademicAdvisor::with('user')->where('id', $event->requester_id)->first();
+
+            return view('Luis.showEvent', compact('event', 'academicAdvisor', 'intern', 'rol', 'user'));
+        }
+
     }
 
     /**
@@ -190,17 +233,30 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = CalendarEvent::find($id);
-        return view('Luis.editEventForm', compact('event'));
-    }
+        $user = auth()->user();
 
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+
+        $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
+
+        $event = CalendarEvent::find($id);
+
+
+        // dd($internsWithUser);
+        return view('Luis.editEventForm', compact('internsWithUser', 'event'));
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(NewEventFormRequest $request, string $id)
     {
-        $event = CalendarEvent::find($id);
+        $user = auth()->user();
 
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+        
+        $event = CalendarEvent::find($id);
+        $event->requester_id = $academicAdvisor->id;
+        $event->receiver_id = $request->receiver_id;
         $event->title = $request->title;
         $event->eventType = $request->eventType;
         $event->description = $request->description;
