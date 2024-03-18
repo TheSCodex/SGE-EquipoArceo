@@ -63,7 +63,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'academic_advisor_id');
     }
-
     // para añadir el registro cuando el rol sea de estudiantes
     protected static function boot()
     {
@@ -76,5 +75,12 @@ class User extends Authenticatable
                 ]);
             }
         });
+      
+    }
+
+    public function hasPermission($permission)
+    {
+        $permissions = json_decode($this->role->permissions, true);
+        return isset($permissions[$permission]) && $permissions[$permission];
     }
 }
