@@ -19,7 +19,7 @@ class AcademyFactory extends Factory
         return [
             'name' => $this->faker->word,
             'president_id' => $this->faker->numberBetween(1,3),
-
+            'division_id' => $this->faker->numberBetween(1,4),
         ];
     }
 }

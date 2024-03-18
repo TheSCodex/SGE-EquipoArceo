@@ -42,7 +42,7 @@ class CareersSeeder extends Seeder
         foreach ($careers as $career) {
             DB::table('Careers')->insert([
                 'name' => $career,
-                'division_id' => rand(1, 4),
+                'academy_id' => rand(1, 4),
             ]);
         }
     }

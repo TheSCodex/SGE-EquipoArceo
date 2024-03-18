@@ -32,8 +32,7 @@ class ExcelExportController extends Controller
         $user = User::find($academic_advisor->user_id);
 
         //Carrera
-        $career_academy = CareerAcademy::find($user->career_academy_id);
-        $career = Career::find($career_academy->career_id);
+        $career = Career::find($user->career_id);
     
         // Información de los practicantes para el asesor academico actual
         $interns = Intern::where('academic_advisor_id', $academic_advisor_id)->get();
