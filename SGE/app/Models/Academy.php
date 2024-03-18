@@ -12,11 +12,10 @@ class Academy extends Model
     protected $fillable = [
         'name',
         'president_id',
-        'division_id',
     ];
 
-    public function division()
+    public function user()
     {
-        return $this->belongsTo(Division::class);
+        return $this->belongsTo(User::class);
     }
 }

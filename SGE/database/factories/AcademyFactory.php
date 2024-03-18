@@ -17,8 +17,9 @@ class AcademyFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->word,
             'president_id' => $this->faker->numberBetween(1,3),
-            'name' => $this->faker->word
+
         ];
     }
 }

@@ -24,14 +24,9 @@ class User extends Authenticatable
         'email',
         'password',
         'identifier',
-        'career_id',
+        'phoneNumber',
         'rol_id',
     ];
-
-    public function career()
-    {
-        return $this->belongsTo(Career::class, 'career_id');
-    }    
 
     public function role()
     {
