@@ -95,7 +95,7 @@ class UserController extends Controller
         $careers = Career::all();
         $user = \App\Models\User::find($id);
         $user->update($request->all());
-        // dd($user);
+        session()->flash('success', 'El usuario ' . $user->name . ' ' . $user->last_name . ' se ha editado correctamente.');
         return redirect()->route('panel-users.index');
     }
 

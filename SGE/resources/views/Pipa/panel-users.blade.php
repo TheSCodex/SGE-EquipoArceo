@@ -64,7 +64,7 @@
             @if(session('success'))
                 <script>
                     Swal.fire({
-                        title: 'Usuario agregado',
+                        title: '¡Éxito!',
                         text: '{{ session("success") }}',
                         icon: 'success'
                     });
