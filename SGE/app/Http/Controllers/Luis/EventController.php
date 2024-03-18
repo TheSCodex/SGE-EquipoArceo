@@ -22,7 +22,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();      
         // Aqui deberia ser UserId
         $allEvents = CalendarEvent::with('receiver.user')->where('requester_id', $academicAdvisor->id)->paginate(6);
         

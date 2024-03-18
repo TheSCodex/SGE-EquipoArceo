@@ -29,6 +29,6 @@ class CalendarEvent extends Model
 
     public function receiver()
     {
-        return $this->belongsTo(User::class, 'receiver_id');
+        return $this->belongsTo(Intern::class, 'receiver_id');
     }
 }
