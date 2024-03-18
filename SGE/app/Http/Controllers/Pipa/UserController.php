@@ -80,6 +80,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        // ejemplo de gate para verificar si el usuario tiene el permiso para el crud-usuario
         if (Gate::denies('crud-usuarios')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }

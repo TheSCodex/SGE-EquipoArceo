@@ -66,4 +66,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'academic_advisor_id');
     }
+
+    public function hasPermission($permission)
+    {
+        $permissions = json_decode($this->role->permissions, true);
+        return isset($permissions[$permission]) && $permissions[$permission];
+    }
 }
