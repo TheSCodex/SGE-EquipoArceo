@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Gate;
 class UserController extends Controller
 {
     /**
@@ -80,6 +80,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $roles = Role::all(); 
         $careers = Career::all();
         $user = \App\Models\User::find($id);
