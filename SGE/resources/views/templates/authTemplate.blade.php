@@ -53,7 +53,7 @@
                     <a href="{{ route('inicio-presidente') }}">Inicio</a>
                 </li>
                 <li>
-                    <a href="#">Estudiantes</a>
+                    <a href="{{route('presidente.index')}}">Estudiantes</a>
                 </li>
                 <li>
                     <a href="{{ route('anteproyectos-presidente') }}">Anteproyectos</a>

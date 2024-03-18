@@ -1,4 +1,4 @@
-@extends('templates.presidentOfTheAcademyTemplate')
+@extends('templates.authTemplate')
 
 @section('titulo')
     Lista de estudiantes
