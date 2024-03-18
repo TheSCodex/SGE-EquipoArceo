@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('careers', function (Blueprint $table) {
-            $table->foreign(['division_id'], 'careers_ibfk_1')->references(['id'])->on('divisions')->onUpdate('no action')->onDelete('no action');
-            $table->foreign(['academy_id'], 'careers_ibfk_2')->references(['id'])->on('academies')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['academy_id'], 'careers_ibfk_1')->references(['id'])->on('academies')->onUpdate('no action')->onDelete('no action');
         });
     }
 
@@ -28,7 +27,6 @@ return new class extends Migration
     {
         Schema::table('careers', function (Blueprint $table) {
             $table->dropForeign('careers_ibfk_1');
-            $table->dropForeign('careers_ibfk_2');
         });
     }
 };
