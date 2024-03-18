@@ -135,20 +135,16 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
 
-        Route::get('/lista-asesores', PresidentOfTheAcademy::class)->names('lista-asesores');
-
         //CRUD ASESOR ACADÉMICO 
 
         // Todos los asesores
-        Route::get('/lista-asesores', PresidentOfTheAcademy::class)->names('lista-asesores');
-        // un asesor
-        Route::get('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesor');
+        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'asesores'])->name('lista-asesores');
         // Crear asesor
-        Route::post('/lista-asesores', PresidentOfTheAcademy::class)->names('asesores.create');
+        Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
         // Actualizar asesor
-        Route::put('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesores.update');
+        Route::put('/lista-asesores/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
         // Eliminar asesor
-        Route::delete('/lista-asesores/{id}', PresidentOfTheAcademy::class)->names('asesores.destroy');
+        Route::delete('/lista-asesores/{id}', [PresidentOfTheAcademy::class,'destroy'])->name('asesores.destroy');
 
     });
 
