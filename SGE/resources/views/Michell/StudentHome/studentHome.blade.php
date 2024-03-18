@@ -10,7 +10,7 @@
                 <div class=" bg-primaryColor text-white rounded-md w-[100%] flex flex-col justify-evenly max-md:block max-xl:w-full max-xl:h-full max-md:pb-3">
                     <h3 class="font-bold text-3xl px-5 max-md:text-2xl ">Tu propuesta</h3>
                     <p class="px-4 max-md:mb-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
-                    <a href="estudidante/anteproyecto"
+                    <a href="estudiante/anteproyecto"
                         class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:px-36">Iniciar</a>
                 </div>
             </div>
@@ -63,17 +63,17 @@
                                 <p class="text-xl text-[#555]">Elsa Luz Rios</p>
                                 <p class=" text-[#888] w-3/4 line-clamp-3 max-md:w-full">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
-                            <a href="estudiante/observaciones" class="bg-primaryColor rounded-md text-white text-center max-md:w-full py-1 w-[28%] max-xl:px-14 max-md:py-2">Ampliar observación</a>
+                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white text-center max-md:w-full py-1 w-[28%] max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                         <div class="flex items-center space-x-8 max-md:block max-md:space-x-0 mt-4">
                             <div>
                                 <p class="text-xl text-[#555]">Elsa Luz Rios</p>
                                 <p class=" text-[#888] w-3/4 line-clamp-3 max-md:w-full">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
-                            <a href="estudiante/observaciones" class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] text-center max-xl:px-14 max-md:py-2">Ampliar observación</a>
+                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] text-center max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                     </div>
-                    <a href="estudiante/observaciones"observaciones class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
+                    <a href="estudiante/anteproyecto/observaciones"observaciones class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
                 </div>
             </div>
         </section>
@@ -182,7 +182,7 @@
                         </div>
 
                     </div>
-                    <a href="estudiante/eventos" class="block bg-primaryColor text-white px-14 font-bold text-center text-sm py-1 rounded-md mb-3 max-md:w-[90%] max-md:ml-4">Ver más</a>
+                    <a href="estudiante/calendario" class="block bg-primaryColor text-white px-14 font-bold text-center text-sm py-1 rounded-md mb-3 max-md:w-[90%] max-md:ml-4">Ver más</a>
 
                 </div>
             </div>
