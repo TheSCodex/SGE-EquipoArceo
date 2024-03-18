@@ -114,7 +114,7 @@
                         </form>
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a class="flex justify-center">
+                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </td>
