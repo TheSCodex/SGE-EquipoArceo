@@ -98,6 +98,8 @@ Route::middleware('auth')->group(function () {
         Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
 
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
+        //Ruta para ver información de la actividad
+        Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show');
 
     });
 
@@ -164,6 +166,7 @@ Route::middleware('auth')->group(function () {
 
         //inicio asistente
         Route::get("/", [DirectorAssistantController::class, "index"])->name('inicio-asistente');
+        
         //crud asistente
         Route::get('estudiantes',[StudentListController::class, "index"])->name('estudiantes-asistente');
 

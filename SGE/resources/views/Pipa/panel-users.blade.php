@@ -50,10 +50,25 @@
             </div>
         </div>
         <div class="hidden lg:block w-full">
+            {{-- sweet alert para mostrar el error al mandar un correo --}}
             @if(session('error'))
-                <div class="text-red text-center mb-6">
-                    {{session('error')}}
-                </div>
+            <script>
+                Swal.fire({
+                    title: 'Oops...',
+                    text: '{{ session("error") }}',
+                    icon: 'error'
+                });
+            </script>
+            @endif
+            {{-- sweet alert para indicar que el usuario se agregó :3 --}}
+            @if(session('success'))
+                <script>
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: '{{ session("success") }}',
+                        icon: 'success'
+                    });
+                </script>
             @endif
             <table class="text-start w-full">
                 <tr class="w-full">
