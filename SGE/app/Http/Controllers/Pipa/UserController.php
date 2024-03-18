@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->rol_id = $request->rol_id;
         $user->identifier = $request->identifier;
-        // $user->career_academy_id = $request->career_academy_id;
+        $user->career_id = $request->career_id;
         // password aleatoria
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
@@ -60,9 +60,10 @@ class UserController extends Controller
             return redirect()->route('panel-users.index');
         } else {
             $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
+            session()->flash('success', '¡El usuario se ha agregado exitosamente!');
             $users=User::all();
             return view ('Pipa.panel-users', compact('users'));
-        }
+        }   
     }
 
     /**
