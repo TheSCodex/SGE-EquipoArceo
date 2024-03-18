@@ -6,14 +6,6 @@
             <div class="bg-white rounded-md py-2">
                 <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
             </div>
-<<<<<<< HEAD
-            <div class="font-kanit mt-3 flex space-x-5 h-1/3 max-xl:h-1/4">
-                <div class=" bg-primaryColor text-white rounded-md w-[100%] flex flex-col justify-evenly max-md:block max-xl:w-full max-xl:h-full max-md:pb-3">
-                    <h3 class="font-bold text-3xl px-5 max-md:text-2xl ">Tu propuesta</h3>
-                    <p class="px-4 max-md:mb-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
-                    <a href="estudiante/anteproyecto"
-                        class="text-[#555] bg-white py-2 px-10 font-normal font-roboto rounded-md w-36 ml-3 max-md:px-36">Iniciar</a>
-=======
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
                     <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
@@ -24,7 +16,6 @@
                     >
                         Iniciar
                     </a>
->>>>>>> b50e22083a98439d9eef2ca85fed138632fa580b
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">    
