@@ -23,7 +23,6 @@
     @endphp --}}
     
     <header class="p-1 md:p-5 grid grid-cols-3 gap-10 border-b-[1px] border-secondaryColor">
-        {{-- {{$userDataRole}} --}}
         <a href="#" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
