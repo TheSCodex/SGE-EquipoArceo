@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function () {
     //TODO - ASESOR ACADEMICO
     Route::prefix('asesor')->middleware('role:asesorAcademico')->group(function () {
 
-        Route::get('/', [DashboardAdvisorController::class, "index"]);
+        Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         
