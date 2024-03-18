@@ -143,7 +143,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/director", [DirectorController::class, "index"])->name('inicio-director');
 
         // El apartado de reportes para la directora
-        Route::get('/director/reportes', [ReportsController::class, "index"])->name('reportes-director');
+        Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director');
         
         // El acceso al CRUD/Listado de documentos para la directora
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');
@@ -161,6 +161,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
     });
 
     //TODO - Asistente directora
@@ -176,8 +177,7 @@ Route::middleware('auth')->group(function () {
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-asistente');
         
         // Con esta se accede a la pantalla assistantsReports
-        Route::resource('reportes', ReportsController::class)->names('reportes-asistente');
-        
+        Route::get('/reportes', [ReportsController::class, "assistantIndex"])->name('reportes-asistente');        
         // Con esta se accede al CRUD/Listado de los documentos generados
         Route::resource('documentos', DocumentsController::class)->names('documentos-asistente');
 
@@ -197,7 +197,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
     });
 
     //TODO - Administrador
