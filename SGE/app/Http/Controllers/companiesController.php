@@ -48,7 +48,7 @@ class companiesController extends Controller
     $company->fill($validatedData);
     $company->save();
 
-    return redirect()->route('panel-companies')->with('success', '¡Empresa creada exitosamente!');
+    return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
 }
 
 
@@ -91,7 +91,7 @@ class companiesController extends Controller
         $company->update($validatedData);
     
         // Redirige con un mensaje de éxito
-        return redirect()->route('panel-companies')->with('success', '¡Empresa creada exitosamente!');
+        return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
     }
 
     /**
