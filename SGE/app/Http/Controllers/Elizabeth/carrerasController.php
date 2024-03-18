@@ -10,6 +10,7 @@ use App\Models\Career;
 use App\Models\Division;
 use App\Models\User;
 
+//Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
 
 class carrerasController extends Controller
 {
@@ -17,11 +18,13 @@ class carrerasController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $careers = Career::all();
-        return view('Elizabeth.cruds.carreras',compact('careers'));
-    }
-    
+{
+    $careers = Career::all();
+    $divisions = Division::all();
+
+    return view('Elizabeth.cruds.carreras', compact('careers'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -67,19 +70,13 @@ class carrerasController extends Controller
      */
     public function edit($id)
 {
-    $career = careers_info_view::findOrFail($id);
+    $career = Career::findOrFail($id);
     $divisions = Division::all();
     $academies = Academy::all();
     $users = User::where('rol_id', '!=', 1)->get();
     return view('Elizabeth.cruds.editCareer', compact('career','divisions','academies','users'));
 }
 
-        $careers = Career::all(); 
-        $careers = Career::findOrFail($id);
-        return view('Elizabeth.cruds.editCareer', compact('careers'));
-
-
-    }
 
     /**
      * Update the specified resource in storage.

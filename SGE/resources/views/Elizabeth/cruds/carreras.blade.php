@@ -103,5 +103,92 @@
                 </table>
             </div>
         </div>
+<<<<<<< HEAD
+        <div class="hidden lg:block w-full">
+            <table class="text-center w-full">
+                <tr>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Carrera</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Division</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Academia</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Presidenta</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                </tr>
+                @foreach ($careers as $career)
+                <tr>
+                    <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->division_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->academy_name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $career->president_name}}</td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        {{--
+                            <a href="{{ route('panel-careers.edit', $career->id_career) }}" class="flex justify-center">
+                            <img src="/img/logos/pencil.svg">
+                        </a>
+                        --}}
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id_career}}')">
+                        <form class="flex justify-center" id="deleteForm{{ $career->id}}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <img src="/img/logos/trash.svg">
+                        </form>
+                        
+                    </td>
+                    
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
+</div>
+    
+</section>
+
+<script>
+    function confirmDelete(careerName, careerId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: `Estás a punto de eliminar a ${careerName}. Esta acción no se puede revertir.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + careerId).submit();
+            }
+        });
+    }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
+</script>
+
+
+
+=======
     </main>
+>>>>>>> 3b92094501480732d33f3837606e24a369d504d5
 @endsection
