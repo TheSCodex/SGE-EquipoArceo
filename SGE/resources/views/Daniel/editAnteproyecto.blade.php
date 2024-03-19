@@ -84,7 +84,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero') }}" required
+                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
                             <div style='color:red'>{{ $message }}</div>

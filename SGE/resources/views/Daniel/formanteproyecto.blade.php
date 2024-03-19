@@ -17,7 +17,7 @@
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
                         @csrf
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
-                            value="{{ old('name_student') }}" required
+                            value="{{ old('name_student', $user->name) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
@@ -25,15 +25,16 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
-                        <input type="number" name="matricula" placeholder="Matricula" value="{{ old('matricula') }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                        <input type="number" name="matricula" placeholder="Matricula"
+                            value="{{ old('matricula', $user->identifier) }}" required
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('matricula')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
-                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group') }}" required
+                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
@@ -79,7 +80,7 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Correo Electronico:</h2>
                         <input type="email" name="email_student" placeholder="Introduzca su correo electronico"
-                            value="{{ old('email_student') }}" required
+                            value="{{ old('email_student', $user->email) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('email_student')
                             <div style='color:red'>{{ $message }}</div>
@@ -87,7 +88,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero') }}" required
+                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
                             <div style='color:red'>{{ $message }}</div>

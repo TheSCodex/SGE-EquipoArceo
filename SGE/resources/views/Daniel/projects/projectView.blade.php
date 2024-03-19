@@ -11,19 +11,15 @@ Bienvenido
         <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
             Mi Anteproyecto 
         </h1>
-
         <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
-
             <div
                 class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                 <div
                     class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                     <h3>Nombre del proyecto:     @if(isset($project))   <span class="mx-[1%] font-semibold">{{ $project->name }}</span>    @endif</h3>
                 </div>
-
                 <div class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-bold flex flex-wrap items-center flex-col">
                     <div class="w-full px-[3%] self-start">
-
                         @if(isset($project))
                         <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: <span class="mx-[1%] font-semibold">{{ $company->name ?? 'No disponible'}}</span></p>
                         <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Asesor empresarial: <span class="mx-[1%] font-semibold">{{ $businessAdvisor->name ?? 'No disponible'}}</span></p>
@@ -36,54 +32,44 @@ Bienvenido
                                     {{ $project->description }}
                                 </p>
                             </div>
-
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Planteamiento del problema</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
                                     {{ $project->problem_statement }}
                                 </p>
                             </div>
-
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Justificación</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-center">
                                     {{ $project->project_justificaction }}
                                 </p>
                             </div>
-
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Actividades a realizar</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
                                     {{ $project->activities_to_do }}
                                 </p>
-                                
                             </div>
                             <a href="{{ route('editAnteproyecto.edit', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
-
                         @else
-
                     <div class="flex flex-wrap flex-col flex-grow items-center justify-center sm:min-h-[70vh] mt-[1.5%] gap-[10] "> <!-- Esta linea es salida de los confines del inframundo -->
-
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center ">Aun no tienes un
                             Anteproyecto. Empieza a trabajarlo ahora</p>
                             <a href="{{ route('formanteproyecto.create') }}"
                             class="block bg-[#02AB82] text-white rounded-md px-[2%] py-[1%] m-[2%] font-normal  text-center text-sm">Crea
                             uno ahora</a>
                             </div>
-                        </div>
-                            
+                        </div>                            
                         @endif
                     </div>
                 </div>
-            
             <div
                 class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-center gap-[1vh]">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del proyecto</h3>
                 </div>
-
                 <div
                     class=" w-full h-fit min-h-[12vh] my-[1%] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
@@ -96,8 +82,6 @@ Bienvenido
                         @endif
                     </div>
                 </div>
-
-
                 <div
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
@@ -108,19 +92,16 @@ Bienvenido
                                     <p>Aun no tienes votos</p>
                                 @else
                                     <p>Tienes {{$project->like}} voto(s)</p>
-                                @endif
-                                
+                                @endif          
                             @else
                                 <p>Aun no hay nada que votar</p>
                             @endif
                         </div>
                     </div>
                 </div>
-
                 <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
                     <h3>Observaciones</h3>
                 </div>
-
                 @if(isset($comments) && count($comments) > 0)
                     <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach($comments as $comment)
