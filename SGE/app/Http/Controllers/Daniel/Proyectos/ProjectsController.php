@@ -28,6 +28,9 @@ class ProjectsController extends Controller
             return view('Daniel.Projects.ProjectView');
         }
         $projectId = $intern->project_id;
+        if (!$projectId){
+            return view('Daniel.Projects.ProjectView');
+        }
         $project = Project::where("id", $projectId)->first();
 
 
