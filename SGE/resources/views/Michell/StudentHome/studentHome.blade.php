@@ -4,7 +4,7 @@
     <div class="bg-[#F3F5F9] p-5 lg:gap-5 grid grid-cols-1 lg:grid-cols-3 grow">
         <section class="col-span-2 gap-3 flex flex-1 flex-col">
             <div class="bg-white rounded-md py-2">
-                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
+                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Anteproyecto</h1>
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
@@ -56,8 +56,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 400 hrs</p>
-                        <p class="text-sm text-black opacity-50">Horas completadas</p>
+                        <p class="font-bold text-2xl">24 / 120</p>
+                        <p class="text-sm text-black opacity-50">Dias restantes</p>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@
 
             <div class=" font-roboto bg-white p-5 rounded-md">
 
-                <h3 class="text-lg font-medium font-kanit mb-3">Eventos importantes</h3>
+                <h3 class="text-lg font-medium font-kanit mb-3">Actividades importantes</h3>
                     
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
@@ -214,7 +214,7 @@
 
                 <div class="flex justify-center">
                     <a 
-                        href="estudiante/calendario" 
+                        href="estudiante/actividades" 
                         class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3"
                     >
                         Ver más
