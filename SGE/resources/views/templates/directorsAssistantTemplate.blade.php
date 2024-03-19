@@ -34,7 +34,7 @@
                 <a href="asistente/documentos">Documentos</a>
             </li>
             <li>
-                <a href="{{ route('libros-asistente.index') }}" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
+                <a href="asistente/libros" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
             </li>
         </ul>
     

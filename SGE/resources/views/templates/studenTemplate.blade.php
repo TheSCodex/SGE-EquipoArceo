@@ -19,7 +19,7 @@
                 <a href="estudiante">Inicio</a>
             </li>
             <li>
-                <a href="estudiante/anteproyecto">Proyectos</a>
+                <a href="estudiante/anteproyecto">Anteproyecto</a>
             </li>
             <li>
                 <a href="estudiante/calendario">Calendario</a>
