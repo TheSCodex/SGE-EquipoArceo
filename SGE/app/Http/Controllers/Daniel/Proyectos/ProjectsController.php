@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Daniel\AnteproyectoRequest;
 use App\Models\BusinessAdvisor;
+use App\Models\Career;
 use App\Models\Comment;
 use App\Models\Company;
+use App\Models\Division;
 use App\Models\Intern;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -28,6 +31,9 @@ class ProjectsController extends Controller
             return view('Daniel.Projects.ProjectView');
         }
         $projectId = $intern->project_id;
+        if (!$projectId){
+            return view('Daniel.Projects.ProjectView');
+        }
         $project = Project::where("id", $projectId)->first();
 
 
@@ -35,23 +41,22 @@ class ProjectsController extends Controller
         $businessAdvisor = null;
         $company = null;
     
-        // if ($project->adviser_id) {
-        //     $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
+            if ($project->adviser_id) {
+                $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
     
-        //     if ($businessAdvisor) {
-        //         $company = Company::find($businessAdvisor->companie_id);
-        //         if ($company) {
-        //             //$businessSector = BusinessSector::find($company->business_sector_id);
-        //         }
-        //     }
-        // }
+                if ($businessAdvisor) {
+                    $company = Company::find($businessAdvisor->companie_id);
+                    if ($company) {
+                        $businessSector = BusinessSector::find($company->business_sector_id);
+                }
+            }
+        }
     
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
         return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
-
     }
     public function project()
     {
@@ -62,7 +67,11 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('daniel.formanteproyecto');
+        $divisions = Division::all();
+        $careers = Career::all();
+        $user = auth()->user();
+        $intern = Intern::where('user_id', $user->id)->first();
+        return view('daniel.formanteproyecto', compact('divisions', 'careers', 'user', 'intern'));
     }
 
     /**
@@ -82,6 +91,7 @@ class ProjectsController extends Controller
             'end_date' => $validatedData['Fecha_Final']
         ]);
         $project->save();
+
 
         $company = new Company([
             'name' => $validatedData['name_enterprise'],
@@ -104,7 +114,11 @@ class ProjectsController extends Controller
         ]);
         $intern->save();
 
+
+        // $user->phoneNumber = $validatedData['Numero'];
+        // $user->save();
         $user = auth()->user();
+
 
         $intern->project_id = $project->id;
         $intern->user_id = $user->id;
@@ -112,7 +126,8 @@ class ProjectsController extends Controller
 
         $project->adviser_id = $businessAdvisor->id;
         $project->save();
-        
+
+
 
         $businessAdvisor->companie_id = $company->id;
 
@@ -129,7 +144,7 @@ class ProjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $project = Project::find($id);
         if (!$project) {
@@ -147,7 +162,7 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AnteproyectoRequest $request, string $id)
+    public function update(AnteproyectoRequest $request, $id)
     {
         $project = Project::findOrFail($id);
         $validatedData = $request->validated();
