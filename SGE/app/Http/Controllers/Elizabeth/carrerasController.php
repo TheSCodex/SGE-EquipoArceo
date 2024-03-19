@@ -10,7 +10,7 @@ use App\Models\Career;
 use App\Models\Division;
 use App\Models\User;
 
-//Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
+    // Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
 
 class carrerasController extends Controller
 {
@@ -20,9 +20,12 @@ class carrerasController extends Controller
     public function index()
 {
     $careers = Career::all();
-    $divisions = Division::all();
+    $academies = Academy::whereIn('id', $careers->pluck('academy_id'))->get();
+    $divisions = Division::whereIn('id', $academies->pluck('division_id'))->get();
+    $presidents = User::whereIn('id',$divisions->pluck('director_id'))->get();
 
-    return view('Elizabeth.cruds.carreras', compact('careers'));
+
+    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'));
 }
 
 
