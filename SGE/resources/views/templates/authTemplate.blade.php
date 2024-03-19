@@ -26,6 +26,15 @@
         <a href="/#" class=" text-center flex justify-center">
             <img src="/img/logos/logo-utCancún.png" class="w-28" alt="">
         </a>
+        <!--Boton hamburguesa--->
+        <button id="toggleMenu" class="lg:hidden flex items-center justify-end">
+                    <svg class="w-6 h-6 text-primaryColor" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+    <!-- Menú de navegación -->
+    
+    
         <ul class="hidden md:flex gap-6 justify-center items-center">
             @if($user->rol_id === 1) {{-- ! Rol de estudiante --}}
                 <li>
@@ -96,9 +105,7 @@
                 <li>
                     <a href="#" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
-                <li>
-                    <a href="{{ route('reportes-asistente.index') }}" class="hover:border-b-2 hover:border-primaryColor">Reportes</a>
-                </li>
+               
                 <li>
                     <a href="{{ route('documentos-asistente.index') }}" class="hover:border-b-2 hover:border-primaryColor">Documentos</a>
                 </li>
@@ -125,7 +132,7 @@
                     <a href="{{ route('panel-careers.index') }}" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Carreras y divisiones</a>
                 </li>
             @endif
-
+            </ul>
         </ul>
 
         <ul class="hidden md:flex gap-6 justify-center">
@@ -141,7 +148,18 @@
 
     <main class="min-h-screen h-full">
         @yield('contenido')
+
     </main>
+    <script src="{{ mix('js/app.js') }}"></script>
+<script>
+    // JavaScript para mostrar/ocultar el menú en dispositivos móviles
+    const toggleMenu = document.getElementById('toggleMenu');
+    const navMenu = document.getElementById('navMenu');
+
+    toggleMenu.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+    });
+</script>
     <footer class="border-t border-secondaryColor text-black text-center p-5">
         Copyright © 2024. SM51
     </footer>

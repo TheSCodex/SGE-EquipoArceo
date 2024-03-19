@@ -1,4 +1,4 @@
-@extends('templates/authTemplate')
+@extends('templates/academicAdvisorTemplate')
 
 @section('titulo')
     Bienvenido
@@ -7,90 +7,70 @@
 @section('contenido')
     <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
+            <h1 class="text-2xl font-bold text-green-500 pb-3 mt-2 mb-10 border-b border-slate-700  ">
                 Bienvenido, Asesor Academico!
             </h1>
-            <div class="flex space-x-4 ">
-                <div class="w-[32%] mx-auto">
-                    <div class="rounded-lg h-auto bg-white mb-2 p-1">
+
+            <article class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+                <section class="flex flex-col gap-2">  
+                    <div class="rounded-md h-auto bg-white p-2">
                         <h1 class="text-md font-roboto font-semibold ml-2">
                             Notificaciones
                         </h1>
                     </div>
-                    <div class="rounded-lg h-auto bg-white flex flex-col ">
-                        <div class=" flex items-center px-4 p-1 my-2">
+
+                    <div class="rounded-lg h-auto bg-white flex flex-col gap-2 justify-between p-5 grow">
+                        <div class=" flex items-center px-4 p-1 my-2 justify-center">
                             <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
                                 class="w-8 h-8 mr-2">
                             <p class="text-sm font-roboto">Rodrigo Bojorquez ha hecho modificaciones en su proyecto</p>
                         </div>
-                        <div class=" flex items-center mb-2 px-4 p-1">
+                        <div class=" flex items-center mb-2 px-4 p-1 justify-center">
                             <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
                                 class="w-8 h-8 mr-2">
                             <p class="text-sm font-roboto">Rodrigo Bojorquez ha hecho modificaciones en su proyecto</p>
                         </div>
-                        <div class=" flex items-center mb-2 px-4 p-1">
+                        <div class=" flex items-center mb-2 px-4 p-1 justify-center">
                             <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
                                 class="w-8 h-8 mr-2">
                             <p class="text-sm font-kanit text-black-50 ">Rodrigo Bojorquez ha hecho modificaciones en su
                                 proyecto</p>
                         </div>
-                        <button class="text-white font-roboto bg-primaryColor p-1 h-auto w-[50%] my-2 mx-auto rounded-lg">
+                        <button class="text-white font-roboto bg-primaryColor py-1 px-8 h-auto my-2 mx-auto rounded-lg">
                             Ver mas
                         </button>
                     </div>
-                </div>
-                <div class="w-[32%] mx-auto">
-                    <div class="rounded-lg h-auto bg-white mb-2 p-1 font-bold">
-                        <p class="mb-5 text-center mt-2">Total de proyectos</p>
-                        <div class="flex justify-center w-[80%] h-48 mb-2">
-                            <canvas id="myChart"></canvas>
-                        </div>
+                </section>
+
+                <section class="flex flex-col bg-white rounded-lg p-5">
+                    <p class="text-[#828282] font-semibold text-lg mt-2">Total de proyectos</p>
+                    <hr class="border-2 border-[#ECECEC] my-5" />
+                    <div class="max-h-[200px] flex justify-center p-3">
+                        <canvas id="myChart"></canvas>
                     </div>
-                </div>
-                <script>
-                    var ctx = document.getElementById('myChart').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: ["En revision", "Aprobado"],
-                            datasets: [{
-                                label: 'Horas',
-                                data: [2, 3],
-                                backgroundColor: [
-                                    '#3E5366',
-                                    '#0FA987'
-                                ],
-                                borderColor: [
-                                    '#ffffffff'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            legend: {
-                                position: 'right'
-                            }
-                        }
-                    });
-                </script>
-                <div class="w-[32%] mx-auto">
-                    <div class="rounded-lg h-auto bg-white mb-2 p-1">
+                </section>
+
+                <section class="flex flex-col gap-2">
+                    <div class="rounded-lg h-auto bg-white p-2">
                         <h1 class="text-md font-roboto font-semibold ml-2">
                             Alumnos Asesorados
                         </h1>
                     </div>
-                    <div class="rounded-lg h-auto bg-white p-1 flex flex-col">
-                        <div class=" flex items-center mb-2 px-4 p-1">
-                            <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
-                            <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
+
+                    <div class="flex flex-col justify-between grow gap-3">
+                        <div class="rounded-lg bg-white p-5 flex flex-col gap-3 grow">
+                            <div class=" flex items-center px-4">
+                                <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
+                                <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
+                            </div>
+                            <div class=" flex items-center px-4">
+                                <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
+                                <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
+                            </div>
                         </div>
-                        <div class=" flex items-center mb-2 px-4 p-1">
-                            <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
-                            <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
-                        </div>
-                    </div>
-                    <div class="rounded-lg h-auto bg-white mt-2 p-1">
-                        <div class=" flex items-center mb-2 px-4 p-1">
+
+                        <div class="rounded-lg bg-white p-5 flex items-center gap-5">
                             <img src="{{ asset('img/iconosDaniel/Group 34.svg') }}" alt="Usuario" class="w-10 h-10 mr-2">
                             <div class="flex flex-col">
                                 <p class="text-xl font-roboto font-semibold">2</p>
@@ -98,43 +78,76 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-            </div>
-            <div class="w-[99%] mt-4 mx-auto">
-                <div class="rounded-lg h-auto bg-white mb-2 p-1">
+            </article>
+
+
+            <article class="mt-3 flex flex-col gap-3">
+
+                <div class="rounded-lg h-auto bg-white p-2">
                     <h1 class="text-md font-roboto font-semibold ml-2">
                         Observaciones a proyectos
                     </h1>
                 </div>
-                <div class="rounded-lg h-auto bg-white">
-                    <div class="flex justify-center my-2 mx-auto w-[90%] items-center ">
-                        <div class=" w-[70%] my-2 ml-2 ">
-                            <h3 class="font-medium text-lg font-roboto ">Rodrigo Bojorquez</h3>
+                
+                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full">
+                    <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
+                        <div class=" ">
+                            <h3 class="font-medium text-lg font-roboto mb-2">Rodrigo Bojorquez</h3>
                             <p class="text-sm font-roboto">La estructura de tu propuesta es correcta pero necesito que
                                 expandas tu justificación e incluyas referencias para tus argumentos</p>
                         </div>
-                        <div class=" w-[20%]  my-2 mr-2 ">
-                            <button class=" bg-primaryColor text-white p-1 px-1 rounded-lg">
+                        <div class="mt-5 lg:mt-0">
+                            <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
                                 Ampliar Observaciones
                             </button>
                         </div>
                     </div>
-                    <div class="flex justify-center my-2 mx-auto w-[90%] items-center ">
-                        <div class=" w-[70%] my-2 ml-2 ">
-                            <h3 class="font-medium text-lg font-roboto ">Rodrigo Bojorquez</h3>
+                    <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
+                        <div class="">
+                            <h3 class="font-medium text-lg font-roboto mb-2">Rodrigo Bojorquez</h3>
                             <p class="text-sm font-roboto">La estructura de tu propuesta es correcta pero necesito que
                                 expandas tu justificación e incluyas referencias para tus argumentos</p>
                         </div>
-                        <div class=" w-[20%]  my-2 mr-2 ">
-                            <button class=" bg-primaryColor text-white p-1 px-1 rounded-lg">
+                        <div class="mt-5 lg:mt-0">
+                            <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
                                 Ampliar Observaciones
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
             
         </div>
     </section>
+
+
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["En revision", "Aprobado"],
+                datasets: [{
+                    label: 'Horas',
+                    data: [2, 3],
+                    backgroundColor: [
+                        '#3E5366',
+                        '#0FA987'
+                    ],
+                    borderColor: [
+                        '#ffffffff'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        });
+    </script>
 @endsection
