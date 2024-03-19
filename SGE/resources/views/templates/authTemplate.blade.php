@@ -33,8 +33,6 @@
         </svg>
     </button>
     <!-- Menú de navegación -->
-    
-    
         <ul class="hidden md:flex gap-6 justify-center items-center">
             @if($user->rol_id === 1) {{-- ! Rol de estudiante --}}
                 <li>
@@ -152,7 +150,7 @@
     </main>
     <script src="{{ mix('js/app.js') }}"></script>
 <script>
-    // JavaScript para mostrar/ocultar el menú en dispositivos móviles
+    // para mostrar/ocultar el menú en dispositivos móviles
     const toggleMenu = document.getElementById('toggleMenu');
     const navMenu = document.getElementById('navMenu');
 
