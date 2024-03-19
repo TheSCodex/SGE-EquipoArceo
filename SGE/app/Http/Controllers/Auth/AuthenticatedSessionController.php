@@ -44,19 +44,19 @@ class AuthenticatedSessionController extends Controller
 
         switch (Auth::user()->role->title) {
             case 'estudiante':
-                return RouteServiceProvider::ESTUDIANTE;
+                return redirect(RouteServiceProvider::ESTUDIANTE);
             case 'asesorAcademico':
-                return RouteServiceProvider::ASESORACADEMICO;
+                return redirect(RouteServiceProvider::ASESORACADEMICO);
             case 'presidenteAcademia':
-                return RouteServiceProvider::PRESIDENTEACADEMIA;
+                return redirect(RouteServiceProvider::PRESIDENTEACADEMIA);
             case 'director':
-                return RouteServiceProvider::DIRECTOR;
+                return redirect(RouteServiceProvider::DIRECTOR);
             case 'asistenteDireccion':
-                return RouteServiceProvider::ASISTENTEDIRECCION;
+                return redirect(RouteServiceProvider::ASISTENTEDIRECCION);
             case 'admin':
-                return RouteServiceProvider::ADMIN;
+                return redirect(RouteServiceProvider::ADMIN);
             default:
-                return RouteServiceProvider::HOME;
+                return redirect(RouteServiceProvider::HOME);
         }
     }
 

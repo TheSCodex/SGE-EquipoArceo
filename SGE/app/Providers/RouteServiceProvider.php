@@ -18,13 +18,13 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
-    public const ESTUDIANTE = 'estudiante';
-    public const ASESORACADEMICO = 'asesor';
-    public const PRESIDENTEACADEMIA = 'presidente';
-    public const DIRECTOR = 'director';
-    public const ASISTENTEDIRECCION = 'asistente';
-    public const ADMIN = 'admin';
-    public const CHANGEPASSWORDFIRSTTIME = 'primer-cambio-contra';
+    public const ESTUDIANTE = '/estudiante';
+    public const ASESORACADEMICO = '/asesor';
+    public const PRESIDENTEACADEMIA = '/presidente';
+    public const DIRECTOR = '/director';
+    public const ASISTENTEDIRECCION = '/asistente';
+    public const ADMIN = '/admin';
+    public const CHANGEPASSWORDFIRSTTIME = '/primer-cambio-contra';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

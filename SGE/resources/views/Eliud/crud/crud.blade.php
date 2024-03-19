@@ -2,7 +2,7 @@
 @section('titulo', 'Panel de Usuarios')
 @section('contenido')
     {{-- Test --}}
-   
+
     <style>
         table {
             border-collapse: separate;
@@ -10,6 +10,7 @@
             /* Espacio vertical entre filas */
             width: 100%;
         }
+
         /* Estilo para las celdas de la tabla */
         th,
         td {
@@ -24,13 +25,19 @@
             <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Lista de Documentos</h1>
             <div class="flex flex-row items-center justify-end">
                 <div class="flex-1 md:mr-2">
-                    <form action="{{ route('docs.search') }}" method="POST" class="hidden md:block">
+                    <form method="POST" class="hidden md:block"
+                        @if (Auth::user()->role->title == 'director') action="{{ route('docs.search-director') }}"
+                        @elseif(Auth::user()->role->title == 'asistenteDireccion')
+                        action="{{ route('docs.search-assistant') }}" @endif>
                         @csrf
                         <div class="flex items-center space-x-4">
                             <div class="relative">
-                                <input class="px-4 py-2 border-b rounded-md border-primaryColor placeholder-primaryColor focus:outline-none focus:border-blue-500" type="search" name="search" placeholder="Buscar....">
+                                <input
+                                    class="px-4 py-2 border-b rounded-md border-primaryColor placeholder-primaryColor focus:outline-none focus:border-blue-500"
+                                    type="search" name="search" placeholder="Buscar....">
                             </div>
-                            <button type="submit" class="hidden px-4 py-2 text-lg text-white rounded-md md:block bg-primaryColor md:ml-4">Filtrar</button>
+                            <button type="submit"
+                                class="hidden px-4 py-2 text-lg text-white rounded-md md:block bg-primaryColor md:ml-4">Filtrar</button>
                         </div>
                     </form>
                 </div>
