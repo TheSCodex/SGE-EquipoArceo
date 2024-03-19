@@ -32,8 +32,7 @@ class ExcelExportController extends Controller
         $user = User::find($academic_advisor->user_id);
 
         //Carrera
-        $career_academy = CareerAcademy::find($user->career_academy_id);
-        $career = Career::find($career_academy->career_id);
+        $career = Career::find($academic_advisor->career_id);
     
         // Información de los practicantes para el asesor academico actual
         $interns = Intern::where('academic_advisor_id', $academic_advisor_id)->get();
@@ -68,15 +67,12 @@ class ExcelExportController extends Controller
         $jsonData = json_encode($jsonData);
 
     
-        // Se guarda en un nuevo archivo dentro del mismo directorio
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($newFilePath);
     
-        // Para permitir la descarga se tiene que mover a public temporalmente, eso creo
         $publicPath = public_path('downloads/AEP-P03-F01 Control de estadía_' . time() . '.xlsx');
         File::copy($newFilePath, $publicPath);
     
-        // Se descarga y elimina la copia de public para que no funen el formato y Rafa no se ponga roñoso
         $response = response()->download($publicPath)->deleteFileAfterSend(true);
         unlink($newFilePath);
     

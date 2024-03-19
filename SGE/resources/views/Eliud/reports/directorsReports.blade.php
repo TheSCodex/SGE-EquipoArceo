@@ -5,8 +5,8 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col items-center justify-center flex-grow min-h-full">
-        <div class="sm:px-8 text-left w-full mb-[2vh] sm:mb-0">
+    <section class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
+        <div class="lg:px-8 px-6 text-left w-full mb-[2vh] sm:mb-0">
             <div class="container mx-auto  font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
@@ -77,7 +77,7 @@
 
             <div class="flex h-full gap-12 lg:flex-row sm:flex-col">
 
-                <div class="w-[70vw] h-[55vh] bg-white mt-[2%] rounded-md shadow-md relative">
+                <div class="lg:block hidden w-[70vw] h-[55vh] bg-white mt-[2%] rounded-md shadow-md relative">
                     
                         {{ $academie->links('Eliud.reports.paginate') }}
                     <div class="absolute m-5 ml-16 ">

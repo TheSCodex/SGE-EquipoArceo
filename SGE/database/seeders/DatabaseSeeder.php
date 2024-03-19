@@ -31,14 +31,15 @@ class DatabaseSeeder extends Seeder
         Book::factory(10)->create();
         Company::factory()->count(10)->create();
         BusinessAdvisor::factory()->count(10)->create();
-        $this->call(DivisionSeeder::class);
-        $this->call(CareersSeeder::class);
         $this->call(RolesSeeder::class);
-        $this->call(UserSeeder::class); 
-        $this->call(AcademiesSeeder::class); 
+        $this->call(UserSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(DivisionSeeder::class);
+        $this->call(AcademiesSeeder::class);
+        $this->call(CareersSeeder::class);
+        $this->call(AcademicAdvisorSeeder::class); 
         $this->call(StudentStatusSeeder::class);
         $this->call(InternSeeder::class);
-        $this->call(AcademicAdvisorSeeder::class);
 
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
         $project_division = Project_division::factory()->count(30)->create();

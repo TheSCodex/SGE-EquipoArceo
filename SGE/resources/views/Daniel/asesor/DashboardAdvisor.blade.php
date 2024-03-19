@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
+    <section class="flex flex-col justify-start items-center bg-[#F3F5F9] min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <h1 class="text-2xl font-bold text-green-500 pb-3 mt-2 mb-10 border-b border-slate-700  ">
                 Bienvenido, Asesor Academico!

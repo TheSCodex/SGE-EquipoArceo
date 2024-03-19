@@ -34,7 +34,6 @@ class AuthenticatedSessionController extends Controller
             return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
         }
 
-        // Redirigir según el rol del usuario
         switch (Auth::user()->role->title) {
             case 'estudiante':
                 return redirect(RouteServiceProvider::ESTUDIANTE);

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\AcademicAdvisor;
+use App\Models\User;
+use App\Models\Career;
+use Illuminate\Database\Seeder;
 
 class AcademicAdvisorSeeder extends Seeder
 {
@@ -12,7 +14,21 @@ class AcademicAdvisorSeeder extends Seeder
      */
     public function run()
     {
-        // Insertar las academias con los division_id correspondientes
-        AcademicAdvisor::create(['user_id' => 2, 'max_advisors' => 2, 'quantity_advised' => 2]);   
+        $asesorAcademicoUserIds = User::whereHas('role', function ($query) {
+            $query->where('title', 'asesorAcademico');
+        })->pluck('id');
+
+        $careerIds = Career::pluck('id');
+
+        foreach ($asesorAcademicoUserIds as $userId) {
+            $randomCareerId = $careerIds->random();
+
+            AcademicAdvisor::create([
+                'user_id' => $userId,
+                'career_id' => $randomCareerId,
+                'max_advisors' => 4,
+                'quantity_advised' => 4,
+            ]);
+        }
     }
 }
