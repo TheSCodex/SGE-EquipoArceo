@@ -37,6 +37,7 @@ class CareersSeeder extends Seeder
             'Ingeniería en Redes Inteligentes y Ciberseguridad',
             'Licenciatura en Gestión y Desarrollo Turístico',
             'Licenciatura en Terapia Física',
+            'Sin especialidad'
         ];
 
         foreach ($careers as $career) {

@@ -64,19 +64,19 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'academic_advisor_id');
     }
     // para añadir el registro cuando el rol sea de estudiantes
-    protected static function boot()
-    {
-        parent::boot();
-        static::created(function ($user) {
-            // hay que convertir el id del user a int, si hay algun error por esto lo checamos 
-            if ((int)$user->rol_id === 1) {
-                DB::table('interns')->insert([
-                    'user_id' => $user->id,
-                ]);
-            }
-        });
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::created(function ($user) {
+    //         // hay que convertir el id del user a int, si hay algun error por esto lo checamos 
+    //         if ((int)$user->rol_id === 1) {
+    //             DB::table('interns')->insert([
+    //                 'user_id' => $user->id,
+    //             ]);
+    //         }
+    //     });
       
-    }
+    // }
 
     public function hasPermission($permission)
     {
