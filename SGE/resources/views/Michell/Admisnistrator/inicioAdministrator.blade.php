@@ -1,4 +1,4 @@
-@extends('templates/authTemplate')
+@extends('templates.administratorTemplate')
 
 @section('contenido')
     <div class="bg-[#F3F5F9] grid grid-cols-1 lg:grid-cols-3 lg:gap-5 px-5 py-7">

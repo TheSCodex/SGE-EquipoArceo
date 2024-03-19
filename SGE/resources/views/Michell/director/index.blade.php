@@ -1,11 +1,10 @@
-@extends('templates/authTemplate')
+@extends('templates.directorTemplate')
 
 @section('titulo')
     Inicio
 @endsection
 
 @section('contenido')
-
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Director</p>
@@ -177,8 +176,6 @@
                     </div>
                 </div>
             </div>
-    
-  
+        </section>
     </article>
-    
 @endsection
