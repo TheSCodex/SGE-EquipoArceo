@@ -134,6 +134,18 @@ Route::middleware('auth')->group(function () {
         Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente');
 
         Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente');
+
+        //CRUD ASESOR ACADÉMICO 
+
+        // Todos los asesores
+        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'asesores'])->name('lista-asesores');
+        // Crear asesor
+        Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        // Actualizar asesor
+        Route::put('/lista-asesores/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
+        // Eliminar asesor
+        Route::delete('/lista-asesores/{id}', [PresidentOfTheAcademy::class,'destroy'])->name('asesores.destroy');
+
     });
 
     //TODO - DIRECTORA
@@ -161,7 +173,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
     });
 
     //TODO - Asistente directora
@@ -197,7 +209,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
     });
 
     //TODO - Administrador

@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Pipa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pipa\UserRequest;
 use App\Models\Career;
+use App\Models\Intern;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Gate;
 class UserController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = \App\Models\User::all();
+        $users = User::paginate(10);
         return view('Pipa.panel-users', compact('users'));
     }
 
@@ -49,7 +50,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->rol_id = $request->rol_id;
         $user->identifier = $request->identifier;
-        $user->career_id = $request->career_id;
         // password aleatoria
         $randomPassword = Str::random(8);
         $user->password = bcrypt($randomPassword);
@@ -60,8 +60,14 @@ class UserController extends Controller
             return redirect()->route('panel-users.index');
         } else {
             $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $request->email, $request->name, $request->last_name));
+            if ($request->rol_id == 1) {
+                \App\Models\Intern::create([
+                    'user_id' => $user->id,
+                    'career_id' => $request->career_id,
+                ]);
+            }
             session()->flash('success', '¡El usuario se ha agregado exitosamente!');
-            $users=User::all();
+            $users = User::paginate(10);
             return view ('Pipa.panel-users', compact('users'));
         }   
     }
@@ -71,19 +77,28 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user=User::find($id);
-        return view ('Pipa.show-user', compact('user'));
+        $user = User::findOrFail($id);
+        $intern = $user->interns;
+        $career = $intern ? $intern->career : null;
+        return view('Pipa.show-user', compact('user', 'intern', 'career'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
+        // ejemplo de gate para verificar si el usuario tiene el permiso para el crud-usuario
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $roles = Role::all(); 
         $careers = Career::all();
         $user = \App\Models\User::find($id);
-        return view('Pipa.edit-user', compact('user','roles', 'careers'));
+        $intern = $user->interns;
+        $career = $intern ? $intern->career : null;
+        return view('Pipa.edit-user', compact('user','roles', 'intern', 'career', 'careers'));
     }
 
     /**
