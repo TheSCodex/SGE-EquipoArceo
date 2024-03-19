@@ -27,37 +27,43 @@ class ProjectsController extends Controller
     {
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
-        if (!$intern) {
-            return view('Daniel.Projects.ProjectView');
+        // dd($intern);
+    
+        if (!$intern || !$intern->project_id) {
+            return view('Daniel.Projects.ProjectView')->with('message', 'No intern record or project ID found.');
         }
-        $projectId = $intern->project_id;
-        if (!$projectId){
-            return view('Daniel.Projects.ProjectView');
+    
+        $project = Project::find($intern->project_id);
+    
+        if (!$project) {
+            return view('Daniel.Projects.ProjectView')->with('message', 'Project not found.');
         }
-        $project = Project::where("id", $projectId)->first();
-
-
-        $businessSector = null;
+    
         $businessAdvisor = null;
         $company = null;
+        $businessSector = null;
     
-            if ($project->adviser_id) {
-                $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
+        if ($project->adviser_id) {
+            $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
     
-                if ($businessAdvisor) {
-                    $company = Company::find($businessAdvisor->companie_id);
-                    if ($company) {
-                        $businessSector = BusinessSector::find($company->business_sector_id);
+            if ($businessAdvisor) {
+                $company = Company::find($businessAdvisor->company_id);
+    
+                if ($company) {
+                    $businessSector = BusinessSector::find($company->business_sector_id);
                 }
             }
         }
     
-        $comments = Comment::where("project_id", $projectId)->get();
+        $comments = Comment::where("project_id", $intern->project_id)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
         return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
     }
+    
+    
+    
     public function project()
     {
         return view('Daniel.presidenta.project');
@@ -107,22 +113,27 @@ class ProjectsController extends Controller
         ]);
         $businessAdvisor->save();
 
+        $userId = auth()->id();
         // Crear y guardar el internado
-        $intern = new Intern([
-            'performance_area' => $validatedData['position_student'],
-            'Group' => $validatedData['Group']
-        ]);
-        $intern->save();
+        $intern = Intern::where('user_id', $userId)->first();
 
+        if (!$intern) {
+            $intern = new Intern([
+                'user_id' => $userId,
+                'performance_area' => $validatedData['position_student'],
+                'Group' => $validatedData['Group'],
+                'project_id' => $project->id,
+            ]);
+        } else {
+            $intern->performance_area = $validatedData['position_student'];
+            $intern->Group = $validatedData['Group'];
+            $intern->project_id = $project->id;
+        }
+        $intern->save();
 
         // $user->phoneNumber = $validatedData['Numero'];
         // $user->save();
         $user = auth()->user();
-
-
-        $intern->project_id = $project->id;
-        $intern->user_id = $user->id;
-        $intern->save();
 
         $project->adviser_id = $businessAdvisor->id;
         $project->save();

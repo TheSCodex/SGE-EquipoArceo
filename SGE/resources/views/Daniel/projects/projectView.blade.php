@@ -11,6 +11,11 @@ Bienvenido
         <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
             Mi Anteproyecto 
         </h1>
+        @if(isset($message))
+        <div class="w-full bg-red-200 text-red-700 py-2 px-4 mb-4 rounded-md">
+            {{ $message }}
+        </div>
+        @endif
         <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
             <div
                 class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
@@ -50,7 +55,7 @@ Bienvenido
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
-                            <a href="{{ route('editAnteproyecto.edit', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                            {{-- <a href="{{ route('editAnteproyecto.edit', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a> --}}
                         </div>
                         @else
                     <div class="flex flex-wrap flex-col flex-grow items-center justify-center sm:min-h-[70vh] mt-[1.5%] gap-[10] "> <!-- Esta linea es salida de los confines del inframundo -->

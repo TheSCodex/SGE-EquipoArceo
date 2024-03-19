@@ -25,10 +25,8 @@ export default {
                 red: "#FF0000"
             },
             fontFamily: {
-                manjari: ["Manjari", "sans-serif"],
                 roboto: ["Roboto", "sans-serif"],
                 montserrat: ["Montserrat", "sans-serif"],
-                kanit: ["Kanit", "sans-serif"],
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
