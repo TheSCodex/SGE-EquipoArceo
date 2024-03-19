@@ -66,13 +66,13 @@ Route::middleware('guest')->group(function () {
     // Ruta para recuperar contraseña (la que envía el correo)
     Route::resource('recuperar-contra', RecoverPasswordController::class);
 
+    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
+    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
+
 });
 
 // Rutas para Usuarios Autenticados
 Route::middleware('auth')->group(function () {
-
-    // Ruta que se muestra al iniciar sesión por primera vez / cambiar contraseña por primera vez
-    Route::resource('primer-cambio-contra', ChangePasswordFirstTime::class);
 
     //TODO - ESTUDIANTE
     Route::prefix('estudiante')->middleware('role:estudiante')->group(function () {
@@ -173,7 +173,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
     });
 
     //TODO - Asistente directora
@@ -209,7 +209,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
     });
 
     //TODO - Administrador

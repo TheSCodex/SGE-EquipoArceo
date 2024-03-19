@@ -37,12 +37,13 @@ class CareersSeeder extends Seeder
             'Ingeniería en Redes Inteligentes y Ciberseguridad',
             'Licenciatura en Gestión y Desarrollo Turístico',
             'Licenciatura en Terapia Física',
+            'Sin especialidad'
         ];
 
         foreach ($careers as $career) {
             DB::table('Careers')->insert([
                 'name' => $career,
-                'division_id' => rand(1, 4),
+                'academy_id' => rand(1, 4),
             ]);
         }
     }

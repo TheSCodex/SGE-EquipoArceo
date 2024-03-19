@@ -16,7 +16,8 @@ class Intern extends Model
         'book_id',
         'student_status_id',
         'performance_area',
-        'Group'
+        'Group',
+        'career_id'
     ];
 
     public function user()
@@ -43,4 +44,10 @@ class Intern extends Model
     {
         return $this->belongsTo(StudentStatus::class, "student_status_id");
     }
+
+    public function career()
+    {
+        return $this->hasOne(Career::class, 'id', 'career_id');
+    }
+    
 }

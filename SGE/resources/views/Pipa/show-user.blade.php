@@ -42,12 +42,22 @@
                         <p>{{$user->identifier}}</p> 
                     </div>
                 </div>
-                <div class=" space-y-2">
+                @isset($career)
+                <div class="space-y-2">
                     <p class="text-sm">Especialidad</p>
                     <div class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <p>{{$user->career->name}}</p> 
+                        <p>{{$career->name}}</p> 
                     </div>
                 </div>
+                @else
+                    <div class="space-y-2">
+                        <p class="text-sm">Especialidad</p>
+                        <div class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                            <p>Sin especialidad</p> 
+                        </div>
+                    </div>
+                @endisset
+            
             </div>
 
             <a class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen text-center" href="/panel-users">Regresar al panel de usuarios</a>
