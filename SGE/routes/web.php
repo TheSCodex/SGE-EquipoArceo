@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
         //CRUD ASESOR ACADÉMICO 
 
         // Todos los asesores
-        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'asesores'])->name('lista-asesores');
+        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores');
         // Crear asesor
         Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
         // Actualizar asesor
