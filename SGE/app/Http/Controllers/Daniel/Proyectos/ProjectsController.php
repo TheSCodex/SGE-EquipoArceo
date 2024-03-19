@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Daniel\AnteproyectoRequest;
 use App\Models\BusinessAdvisor;
+use App\Models\Career;
 use App\Models\Comment;
 use App\Models\Company;
+use App\Models\Division;
 use App\Models\Intern;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -36,15 +38,15 @@ class ProjectsController extends Controller
         $company = null;
     
             if ($project->adviser_id) {
-                $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
+                 $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
     
-                if ($businessAdvisor) {
-                    $company = Company::find($businessAdvisor->companie_id);
-                    if ($company) {
-                        $businessSector = BusinessSector::find($company->business_sector_id);
-                }
-            }
-        }
+                 if ($businessAdvisor) {
+                     $company = Company::find($businessAdvisor->companie_id);
+                     if ($company) {
+                         $businessSector = BusinessSector::find($company->business_sector_id);
+                 }
+             }
+         }
     
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
@@ -62,7 +64,10 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('daniel.formanteproyecto');
+        $divisions = Division::all();
+        $careers = Career::all();
+        $users = Auth::All();
+        return view('daniel.formanteproyecto', compact('divisions', 'carrers','users' ));
     }
 
     /**
@@ -129,7 +134,7 @@ class ProjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $project = Project::find($id);
         if (!$project) {
@@ -147,7 +152,7 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AnteproyectoRequest $request, string $id)
+    public function update(AnteproyectoRequest $request, $id)
     {
         $project = Project::findOrFail($id);
         $validatedData = $request->validated();

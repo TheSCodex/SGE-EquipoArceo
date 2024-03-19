@@ -58,7 +58,7 @@ Bienvenido
                                 </p>
                                 
                             </div>
-                            <a href="{{ route('editAnteproyecto', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                            <a href="{{ route('editAnteproyecto.edit', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
 
                         @else
@@ -67,7 +67,7 @@ Bienvenido
 
                         <p class=" w-[80%] sm:w-[38%] text-lg sm:text-2xl text-center ">Aun no tienes un
                             Anteproyecto. Empieza a trabajarlo ahora</p>
-                            <a href="{{ route('formanteproyecto') }}"
+                            <a href="{{ route('formanteproyecto.create') }}"
                             class="block bg-[#02AB82] text-white rounded-md px-[2%] py-[1%] m-[2%] font-normal  text-center text-sm">Crea
                             uno ahora</a>
                             </div>

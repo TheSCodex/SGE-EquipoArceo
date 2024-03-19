@@ -74,12 +74,12 @@ class carrerasController extends Controller
     return view('Elizabeth.cruds.editCareer', compact('career','divisions','academies','users'));
 }
 
-        $careers = Career::all(); 
-        $careers = Career::findOrFail($id);
-        return view('Elizabeth.cruds.editCareer', compact('careers'));
+    //     $careers = Career::all(); 
+    //     $careers = Career::findOrFail($id);
+    //     return view('Elizabeth.cruds.editCareer', compact('careers'));
 
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.
