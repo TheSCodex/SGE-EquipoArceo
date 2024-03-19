@@ -173,7 +173,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
     });
 
     //TODO - Asistente directora
@@ -209,7 +209,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
     });
 
     //TODO - Administrador

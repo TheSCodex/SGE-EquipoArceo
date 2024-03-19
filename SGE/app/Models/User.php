@@ -63,18 +63,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'academic_advisor_id');
     }
-
     // para añadir el registro cuando el rol sea de estudiantes
-    protected static function boot()
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::created(function ($user) {
+    //         // hay que convertir el id del user a int, si hay algun error por esto lo checamos 
+    //         if ((int)$user->rol_id === 1) {
+    //             DB::table('interns')->insert([
+    //                 'user_id' => $user->id,
+    //             ]);
+    //         }
+    //     });
+      
+    // }
+
+    public function hasPermission($permission)
     {
-        parent::boot();
-        static::created(function ($user) {
-            // hay que convertir el id del user a int, si hay algun error por esto lo checamos 
-            if ((int)$user->rol_id === 1) {
-                DB::table('interns')->insert([
-                    'user_id' => $user->id,
-                ]);
-            }
-        });
+        $permissions = json_decode($this->role->permissions, true);
+        return isset($permissions[$permission]) && $permissions[$permission];
     }
 }

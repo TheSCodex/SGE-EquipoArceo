@@ -11,7 +11,7 @@ class Career extends Model
 
     protected $fillable = [
         'name',
-        'division_id',
+        'academy_id',
     ];
 
     public function division()
