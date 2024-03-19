@@ -82,6 +82,52 @@
                         <p id="noDataMessage"
                             class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">
                             Sin resultados</p>
+                        @if ($dataStudents->lastPage() > 1)
+                            {{ $dataStudents->links() }}
+                        @endif
+                    </section>
+                    {{-- Seccion responsiva --}}
+                    <section class=" font-montserrat md:hidden">
+                        @foreach ($dataStudents as $data)
+                            <div class="bg-white rounded-lg shadow-lg border p-5 font-bold space-y-2">
+                                <div>
+                                    <h3 class="text-[#555]">Nobre del alumno:</h3>
+                                    <p class=" text-lg">{{ $data->user->name }}</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-[#555]">Nobre del proyecto:</h3>
+                                    <p class=" text-lg">Sistema de estadias</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-[#555]">Asesor academico:</h3>
+                                    @unless ($data->academicAdvisor)
+                                        <span class="text-gray-500 text-lg">Sin asesor asignado</span>
+                                    @else
+                                        {{ $data->academicAdvisor->user->name }}
+                                    @endunless
+                                </div>
+                                <div>
+                                    @unless ($data->academicAdvisor)
+                                        <a href="{{ route('presidente.edit', $data->id) }}"
+                                            class="text-primaryColor flex space-x-1 hover:bg-gray-100 p-1 rounded">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <p class="font-bold">Asignar asesor</p>
+                                        </a>
+                                    @endunless
+                                </div>
+                            </div>
+                        @endforeach
+                        <p id="noDataMessage"
+                            class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">
+                            Sin resultados</p>
+                        @if ($dataStudents->lastPage() > 1)
+                            {{ $dataStudents->links() }}
+                        @endif
                     </section>
                 </section>
             </div>
@@ -156,15 +202,18 @@
 
                 // Función para mostrar solo las filas sin asesor
                 function showNoAdvisorRows() {
+                    let hasNoAdvisorRows = false;
                     rows.forEach(row => {
                         if (row.classList.contains('no-advisor')) {
                             row.style.display = '';
+                            hasNoAdvisorRows = true;
                         } else {
                             row.style.display = 'none';
                         }
                     });
+
                     const visibleRows = document.querySelectorAll('#dataTable tbody tr[style=""]');
-                    if (visibleRows.length === 0) {
+                    if (visibleRows.length === 0 && !hasNoAdvisorRows) {
                         noDataMessage.style.display = 'block';
                     } else {
                         noDataMessage.style.display = 'none';
