@@ -109,6 +109,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
+        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
         
         // ! Ruta de las observaciones del asesor
         //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
@@ -174,7 +175,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
 
         //Ruta de la lista de los anteproyectos
-        Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index']);
+        Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos');
 
         Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');

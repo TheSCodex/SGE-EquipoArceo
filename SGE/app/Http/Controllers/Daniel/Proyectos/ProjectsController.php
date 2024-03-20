@@ -27,6 +27,8 @@ class ProjectsController extends Controller
     {
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
+        $interns = Intern::where("user_id", $userId)->get();
+
         // dd($intern);
     
         if (!$intern || !$intern->project_id) {
@@ -39,19 +41,12 @@ class ProjectsController extends Controller
             return view('Daniel.Projects.ProjectView')->with('message', 'Project not found.');
         }
     
-        $businessAdvisor = null;
-        $company = null;
-        $businessSector = null;
-    
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
-    
+            //dd($project);
             if ($businessAdvisor) {
-                $company = Company::find($businessAdvisor->company_id);
-    
-                if ($company) {
-                    $businessSector = BusinessSector::find($company->business_sector_id);
-                }
+                $company = Company::find($businessAdvisor->companie_id);
+                //dd($company);
             }
         }
     
@@ -59,7 +54,7 @@ class ProjectsController extends Controller
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns'));
     }
     
     
@@ -138,9 +133,8 @@ class ProjectsController extends Controller
         $project->adviser_id = $businessAdvisor->id;
         $project->save();
 
-
-
         $businessAdvisor->companie_id = $company->id;
+        $businessAdvisor->save();
 
         return redirect('estudiante/anteproyecto')->with('success', 'Proyecto creado correctamente');
     }
