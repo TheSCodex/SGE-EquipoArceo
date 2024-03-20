@@ -1,7 +1,7 @@
 @extends('templates/authTemplate')
 @section('contenido')
 <div class="w-full h-screen flex justify-center items-center bg-white">
-    <form action="{{url('panel-empresas.store')}}" method="POST" class="flex flex-col font-montserrat mx-10 space-y-5 lg:w-[40vw] sm:w-[60vw]">
+    <form action="{{ route ('panel-careers.store') }}" method="POST" class="flex flex-col font-montserrat mx-10 space-y-5 lg:w-[40vw] sm:w-[60vw]">
         <div class="w-full h-fit flex justify-center mt-4">
             <h1 class="text-3xl font-bold">Editar Carrera y División</h1>
             @csrf
