@@ -17,8 +17,10 @@
                 </div>
             @endif
             <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
-                <div class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh] overflow-auto">
-                    <div class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
+                <div
+                    class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh] overflow-auto">
+                    <div
+                        class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del proyecto: @if (isset($project))
                                 <span class="mx-[1%] font-semibold">{{ $project->name }}</span>
                             @endif
@@ -37,7 +39,6 @@
                                         class="mx-[1%] font-medium">{{ $businessSector->title ?? 'No disponible' }}</span>
                                 </p>
                         </div>
-                        <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
                         <div
                             class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
                             <!-- Esta linea es salida de los confines del inframundo -->
@@ -48,35 +49,20 @@
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-<<<<<<< HEAD
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Planteamiento del problema</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
-=======
                                 <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Planteamiento del problema</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
->>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->problem_statement }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-<<<<<<< HEAD
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Justificación</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-left">
-=======
                                 <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg ">Justificación</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
->>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->project_justificaction }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-<<<<<<< HEAD
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Actividades a realizar</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
-=======
                                 <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Actividades a realizar</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
->>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>

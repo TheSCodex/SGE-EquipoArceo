@@ -175,7 +175,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
 
         //Ruta de la lista de los anteproyectos
-        Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index']);
+        Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos');
 
         Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
