@@ -89,7 +89,7 @@
                             <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
                         </div>
                     </div>
-                    <div class="rounded-lg h-auto bg-white mt-2 p-1">
+                    <div class="rounded-lg h-auto bg-white mt-1 p-1">
                         <div class=" flex items-center mb-2 px-4 p-1">
                             <img src="{{ asset('img/iconosDaniel/Group 34.svg') }}" alt="Usuario" class="w-10 h-10 mr-2">
                             <div class="flex flex-col">
@@ -98,6 +98,14 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $userId = auth()->id();
+                        $academicAdvisor = DB::table('academic_advisor')->where('user_id', $userId)->first();
+                        $academicAdvisorId = $academicAdvisor->id;
+                    @endphp
+                    <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
+                        <a href="/generar/{{ $academicAdvisorId }}">Generar Control de Estadías</a>
+                    </button>
                 </div>
 
             </div>
@@ -134,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 @endsection
