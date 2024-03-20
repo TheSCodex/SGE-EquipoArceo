@@ -90,30 +90,11 @@
                         Observaciones a proyectos
                     </h1>
                 </div>
-                
-                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full">
-                    <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
-                        <div class=" ">
-                            <h3 class="font-medium text-lg font-roboto mb-2">Rodrigo Bojorquez</h3>
-                            <p class="text-sm font-roboto">La estructura de tu propuesta es correcta pero necesito que
-                                expandas tu justificación e incluyas referencias para tus argumentos</p>
-                        </div>
-                        <div class="mt-5 lg:mt-0">
-                            <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
-                                Ampliar Observaciones
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
-                        <div class="">
-                            <h3 class="font-medium text-lg font-roboto mb-2">Rodrigo Bojorquez</h3>
-                            <p class="text-sm font-roboto">La estructura de tu propuesta es correcta pero necesito que
-                                expandas tu justificación e incluyas referencias para tus argumentos</p>
-                        </div>
-                        <div class="mt-5 lg:mt-0">
-                            <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
-                                Ampliar Observaciones
-                            </button>
+                <div class="w-[32%] mx-auto">
+                    <div class="rounded-lg h-auto bg-white mb-2 p-1 font-bold w-full">
+                        <p class="mb-5 text-center mt-2">Total de proyectos</p>
+                        <div class="flex justify-center w-full h-48 mb-2">
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div>
                 </div>

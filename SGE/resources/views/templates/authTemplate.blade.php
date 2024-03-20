@@ -68,7 +68,7 @@
                     <a href="{{route('presidente.index')}}" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
+                    <a href="{{ route('lista-asesores')}}" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
                 </li>
                 <li>
                     <a href="{{ route('anteproyectos-presidente') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
