@@ -40,7 +40,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
+                    {{--<th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->--}}
                 </tr>
                 @foreach ($companies as $index => $company)
                 <tr>
@@ -48,7 +48,7 @@
                     <td class="font-roboto font-bold py-5">{{ $company['email'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['phone'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td>
+                   {{-- <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td> --}}
 
                     <td class="font-roboto font-bold py-5">
                         <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
@@ -91,7 +91,7 @@
                     <p class="text-sm text-gray-500">Fecha de registro: {{ $company['registration_date'] }}</p>
                     <p class="text-sm text-gray-500">dirección: {{ $company['address'] }}</p>
                     <p class="text-sm text-gray-500">rfc: {{ $company['rfc'] }}</p>
-                    <p class="text-sm text-gray-500">Especialidad: {{ $company['business_sector_id'] }}</p>
+                   {{-- <p class="text-sm text-gray-500">Especialidad: {{ $company['business_sector_id'] }}</p> --}}
 
                     <div class="font-roboto font-bold py-5">
                         <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
