@@ -122,7 +122,14 @@ Route::middleware('auth')->group(function () {
         // Ruta para cancelar la actividad
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
 
+        // Ruta para generar el control de estadías propio
+        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile']);    
+
     });
+
+
+
+
 
     //TODO - PRESIDENTE DE ACADEMIA
     Route::prefix('presidente')->middleware('role:presidenteAcademia')->group(function () {
@@ -210,6 +217,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
+
     });
 
     //TODO - Administrador

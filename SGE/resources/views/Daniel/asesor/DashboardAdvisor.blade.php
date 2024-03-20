@@ -104,7 +104,7 @@
                         $academicAdvisorId = $academicAdvisor->id;
                     @endphp
                     <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
-                        <a href="/generar/{{ $academicAdvisorId }}">Generar Control de Estadías</a>
+                        <a href="asesor/generar/{{ $academicAdvisorId }}">Generar Control de Estadías</a>
                     </button>
                 </div>
 
