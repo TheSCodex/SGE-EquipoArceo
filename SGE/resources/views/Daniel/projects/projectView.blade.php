@@ -37,6 +37,7 @@
                                         class="mx-[1%] font-medium">{{ $businessSector->title ?? 'No disponible' }}</span>
                                 </p>
                         </div>
+                        <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
                         <div
                             class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[10] w-full">
                             <!-- Esta linea es salida de los confines del inframundo -->
@@ -47,20 +48,20 @@
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Planteamiento del problema</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
+                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Planteamiento del problema</p>
+                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
                                     {{ $project->problem_statement }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Justificación</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-center">
+                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Justificación</p>
+                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-left">
                                     {{ $project->project_justificaction }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-center">Actividades a realizar</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-center">
+                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Actividades a realizar</p>
+                                <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
