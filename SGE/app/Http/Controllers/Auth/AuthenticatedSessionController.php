@@ -37,6 +37,12 @@ class AuthenticatedSessionController extends Controller
             return redirect()->back()->withInput()->withErrors(['email' => 'Usuario no encontrado.']);
         }
 
+        // primero se asegura de que la contraseña sea la misma
+        if (!password_verify($userData['password'], $user->password)) {
+            return redirect()->back()->withInput()->withErrors(['password' => 'La contraseña es incorrecta.']);
+        }
+    
+
         if ($user->created_at == $user->updated_at) {
             session(['user' => $user]);
             return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
