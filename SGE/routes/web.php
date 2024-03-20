@@ -122,7 +122,14 @@ Route::middleware('auth')->group(function () {
         // Ruta para cancelar la actividad
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
 
+        // Ruta para generar el control de estadías propio
+        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile']);    
+
     });
+
+
+
+
 
     //TODO - PRESIDENTE DE ACADEMIA
     Route::prefix('presidente')->middleware('role:presidenteAcademia')->group(function () {
@@ -138,7 +145,7 @@ Route::middleware('auth')->group(function () {
         //CRUD ASESOR ACADÉMICO 
 
         // Todos los asesores
-        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'asesores'])->name('lista-asesores');
+        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores');
         // Crear asesor
         Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
         // Actualizar asesor
@@ -161,7 +168,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');
 
         // Las rutas para la generación de archivos de la directora
-        Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
         Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
         Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
         Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
@@ -197,7 +204,7 @@ Route::middleware('auth')->group(function () {
         Route::get('Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.sancion');
         Route::get('Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.digitalizacion');
         Route::get('Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
-        Route::get('exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
 
         // Ruta para el crud de libros
         Route::resource('libros', BooksController::class)->names('libros-asistente');
@@ -210,6 +217,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
+
     });
 
     //TODO - Administrador
