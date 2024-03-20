@@ -56,7 +56,7 @@
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Descripción:</p>
-                                <input id="description" name="description" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="3" placeholder="Describe brevemente de que tratara la actividad">{{ old('description') }}</input>
+                                <input id="description" name="description" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" rows="3" placeholder="Describe brevemente de que tratara la actividad" value="{{ old('description') }}">
                                 @error('description')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}

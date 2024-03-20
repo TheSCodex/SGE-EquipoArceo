@@ -40,7 +40,7 @@ class companiesController extends Controller
         'email' => 'required|string|email|max:255',
         'registration_date' => 'required|date',
         'rfc' => 'required|string|max:255',
-        'business_sector_id' => 'required|exists:business_sector,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
+        'business_sector_id' => 'required|exists:business_sectors,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
     ]);
 
     $company = new Company();
@@ -80,7 +80,7 @@ class companiesController extends Controller
             'email' => 'required|string|email|max:255',
             'registration_date' => 'required|date',
             'rfc' => 'required|string|max:255',
-            'business_sector_id' => 'required|exists:business_sector,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
+            'business_sector_id' => 'required|exists:business_sectors,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
         ]);
     
         // Encuentra la empresa por su ID

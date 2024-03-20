@@ -59,18 +59,18 @@
             <div class="hidden lg:block w-full">
                 <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Editar</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Eliminar</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start">Division</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start">Academia</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start">Presidente</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start ">Editar</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs px-5 text-start ">Eliminar</th>
                     </tr>
                     @foreach ($careers as $career)
                     <tr>
                         <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
 
-                        <td class="font-roboto font-bold py-5">
+                        <td class="font-roboto font-bold py-5 text-start ">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
                             {{ $academy->name }}
                             @else
@@ -78,7 +78,7 @@
                             @endif    
                         </td>
 
-                        <td class="font-roboto font-bold py-5">
+                        <td class="font-roboto font-bold py-5 text-start ">
                             @if ($division = $divisions->where('id', $academy->division_id)->first())
                                 {{ $division->name }}
                             @else
@@ -86,7 +86,7 @@
                             @endif
                         </td>
                         
-                        <td class="font-roboto font-bold py-5">
+                        <td class="font-roboto font-bold py-5 text-center">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
                                 @if ($division = $divisions->where('academy_id', $academy->id)->first())
                                     @if ($president = $presidents->where('id', $division->director_id)->first())
@@ -101,8 +101,8 @@
                                 N/A
                             @endif
                         </td>
-                        <td class="font-roboto font-bold py-5">{{ $career->position }}</td> 
-                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
