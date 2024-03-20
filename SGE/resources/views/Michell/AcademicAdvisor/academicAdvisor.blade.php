@@ -1,4 +1,4 @@
-    @extends('./templates/academicAdvisorTemplate')
+    @extends('templates.authTemplate')
     @section('contenido')
     <section class="my-[2cm] mx-[2cm] max-md:mx-0 max-md:w-full">
         <div class="bg-white rounded-md py-1 flex justify-between items-center mb-10 border-b-2  max-md:w-full">
