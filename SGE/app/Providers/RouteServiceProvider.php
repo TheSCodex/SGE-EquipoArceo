@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public const DIRECTOR = '/director';
     public const ASISTENTEDIRECCION = '/asistente';
     public const ADMIN = '/admin';
-    public const CHANGEPASSWORDFIRSTTIME = 'primer-cambio-contra';
+    public const CHANGEPASSWORDFIRSTTIME = '/primer-cambio-contra';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

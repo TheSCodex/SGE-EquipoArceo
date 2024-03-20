@@ -11,7 +11,7 @@
                 <h1 class="font-roboto text-xl font-semibold my-4 ml-4">Datos del alumno</h1>
             </div>
             <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
-            <form method="POST" action="{{ route('editAnteproyecto', $project->id) }}" class="space-y-4 ml-4">
+            <form method="POST" action="{{ route('UpdateAnteproyecto.update', $project->id) }}" class="space-y-4 ml-4">
                 <div class="Datos Personales flex gap-5">
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
@@ -60,7 +60,7 @@
                         @enderror
                     </div>
                     <div class="w-[48%]">
-                        <h2 class="font-roboto mb-1 font-medium">Proyecto Educativo:</h2>
+                        <h2 class="font-roboto mb-1 font-medium">Programa Educativo:</h2>
                         <select name="proyecto_educativo" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
                             <option value="" disabled selected>Selecciona tu proyecto educativo</option>
                             <option value="division1">Proyecto Educativo 1</option>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero') }}" required
+                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
                             <div style='color:red'>{{ $message }}</div>

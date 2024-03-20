@@ -3,33 +3,33 @@
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
-        <div class="flex items-center flex-row justify-end">
-            <div>
-                <div class="hidden md:flex items-center relative" >
-                    <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div>
+                    <div class="hidden md:flex items-center relative" >
+                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                    </div>
                 </div>
+                <a href="/panel-users/create"
+                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
+                </a>
             </div>
-            <a href="/panel-users/create"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
-            </a>
-        </div>
-        
-        <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
             
-            <div>
-                <div class="flex items-center relative" >
-                    <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+                
+                <div>
+                    <div class="flex items-center relative" >
+                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                    </div>
                 </div>
-            </div>
-            <a href="/panel-users/create"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
-            </a>
+                <a href="/panel-users/create"
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
+                </a>
 
+            </div>
         </div>
-    </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -131,6 +131,7 @@
                 </tr>
                 @endforeach
             </table>
+            {{$users->links()}}
         </div>
     </div>
 </div>

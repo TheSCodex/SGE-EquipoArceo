@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('divisions', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name')->nullable();
+            $table->integer('director_id')->nullable()->index('director_id');
+            $table->integer('directorAsistant_id')->nullable()->index('directorAsistant_id');
             $table->timestamps();
 
         });

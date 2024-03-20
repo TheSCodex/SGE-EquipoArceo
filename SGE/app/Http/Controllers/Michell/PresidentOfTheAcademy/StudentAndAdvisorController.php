@@ -14,11 +14,11 @@ class StudentAndAdvisorController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $dataStudents = Intern::with('user', 'academicAdvisor.user')->get();
-    $showAssignButton = $dataStudents->contains('academicAdvisor', null);
-    return view('Michell.PresidentOfTheAcademy.StudentsList', compact('dataStudents', 'showAssignButton'));
-}
+    {
+        $dataStudents = Intern::with('user', 'academicAdvisor.user')->paginate(10);
+        $showAssignButton = $dataStudents->contains('academicAdvisor', null);
+        return view('Michell.PresidentOfTheAcademy.StudentsList', compact('dataStudents', 'showAssignButton'));
+    }
 
     /**
      * Show the form for creating a new resource.
