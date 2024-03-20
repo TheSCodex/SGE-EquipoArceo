@@ -43,14 +43,14 @@
                         <div class="flex justify-end mt-4">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" >
                             <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                            </a>
+                            {{-- </a>
                             <a onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
                             <form id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
                         </form>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     @endforeach
@@ -63,8 +63,8 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Editar</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Eliminar</th>
+                        {{-- <th class="text-[#ACACAC] font-roboto text-xs text-start ">Editar</th> --}}
+                        {{-- <th class="text-[#ACACAC] font-roboto text-xs text-start ">Eliminar</th> --}}
                     </tr>
                     @foreach ($careers as $career)
                     <tr>
@@ -107,13 +107,13 @@
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
+                        {{-- <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
                             <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                     <img src="/img/logos/trash.svg">
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </table>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     {{-- Bootstrap Icons --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- <style>
         table {
             border-collapse: separate;
@@ -24,18 +25,6 @@
 </head>
 <body>
     @extends('templates/authTemplate')
-        {{-- Test --}}
-        {{-- @php
-        $books = [
-            ['nombre' => 'Clean Code: A Handbook of  Software ', 'autor' => 'Robert C. Martin', 'isbn' => '978-0-13-235088-4', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'The Pragmatic Programmer', 'autor' => 'Andrew Hunt, David Thomas', 'isbn' => '978-0-13-595705-9', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Code Complete: Practical Handbook', 'autor' => 'Steve McConnell', 'isbn' => '978-0-7356-1967-8', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Refactoring: Improving the Design ', 'autor' => 'Maritin Fowler', 'isbn' => '978-0-201-48567-7', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Continuous Delivery: Reliable Software ', 'autor' => 'Jez Humble, David Farley', 'isbn' => '978-0-321-60191-9', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'The Mythical Man-Month', 'autor' => 'Frederick P. Brooks Jr.', 'isbn' => '978-0-201-83595-3', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-           
-        ];
-        @endphp --}}
     @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow ">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
@@ -104,21 +93,21 @@
             <div class="hidden lg:block w-full">
                 <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Autor</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">ISBN</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Proporcionado por</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Fecha de adición</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs ">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs ">Autor</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs ">ISBN</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs ">Proporcionado por</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs ">Fecha de adición</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                     </tr>
                     @foreach ($books as $book)
-                    <tr>
-                        <td class="font-roboto font-bold py-5 w-3/12 text-left ">{{ $book->title }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $book->author }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $book->isbn }}</td>
-                        <td class="font-roboto font-bold py-5">
+                    <tr class="w-full">
+                        <td class="font-roboto font-bold py-5  w-3/12 px-10 ">{{ $book->title }}</td>
+                        <td class="font-roboto font-bold py-5 text-center">{{ $book->author }}</td>
+                        <td class="font-roboto font-bold py-5 text-center">{{ $book->isbn }}</td>
+                        <td class="font-roboto font-bold py-5 text-center">
                             @if (isset($userInfoByBookId[$book->id]))
                                 @foreach ($userInfoByBookId[$book->id] as $user)
                                     <p>{{ $user->identifier }}</p>
@@ -127,26 +116,25 @@
                                 <p>Sin información</p>
                             @endif
                         </td>
-                        <td class="font-roboto font-bold py-5">{{ substr($book->created_at, 0, 10) }}</td>
-                        
+                        <td class="font-roboto font-bold py-5 text-center">{{ substr($book->created_at, 0, 10) }}</td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
+                                <img src="/img/ojoGreen.svg" class="w-7">
+                            </a>
+                        </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                             <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <form class="flex justify-center" action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
+                            <form class="delete-book flex justify-center " action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
                                     <img src="/img/logos/trash.svg">
                                 </button>
                             </form>
-                        </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
-                                <img src="/img/ojoGreen.svg" class="w-7">
-                            </a>
                         </td>
 
                     </tr>

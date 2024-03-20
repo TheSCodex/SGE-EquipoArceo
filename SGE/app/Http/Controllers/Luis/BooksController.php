@@ -80,10 +80,10 @@ class BooksController extends Controller
         }
 
         if (!$allUsersExistAndAreInterns) {
-            return redirect()->route('libros-asistente.create')->with('problems', $problems);
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
         }
         if (count($problems) > 0) {
-            return redirect()->route('libros-asistente.create')->with('problems', $problems);
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
         }
     
         // Aquí guarda el libro y los internos
@@ -158,7 +158,7 @@ class BooksController extends Controller
         }
     
         if (!empty($problems)) {
-            return redirect()->back()->with('problems', $problems);
+            return redirect()->back()->withInput()->with('problems', $problems);
         }
 
         // Desvincular estudiantes anteriores y vincular nuevos estudiantes

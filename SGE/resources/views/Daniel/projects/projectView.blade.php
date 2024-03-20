@@ -18,7 +18,7 @@
             @endif
             <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
                 <div
-                    class="w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh] overflow-auto">
+                    class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del proyecto: @if (isset($project))
@@ -27,7 +27,7 @@
                         </h3>
                     </div>
                     <div
-                        class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-semibold flex flex-wrap items-left flex-col">
+                        class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-semibold items-left">
                         <div class="w-full px-[3%] self-start border-b-2 border-black py-[2vh]">
                             @if (isset($project))
                                 <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: <span

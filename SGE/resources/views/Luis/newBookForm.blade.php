@@ -31,7 +31,7 @@
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Nombre:</p>
-                                <input type="text" id="title" name="title" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el nombre del libro" >
+                                <input type="text" id="title" name="title" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el nombre del libro" value="{{ old('title') }}">
                                 @error('title')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
@@ -40,7 +40,7 @@
                             </div>
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Autor:</p>
-                                <input type="text" id="author" name="author" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el autor del libro" >
+                                <input type="text" id="author" name="author" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el autor del libro" value="{{ old('author') }}">
                                 @error('author')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around mb-10 pb-9">
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around mb-10 pb-9" >
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">ISBN:</p>
@@ -58,7 +58,7 @@
                                         </div>
                                     </div> --}}
                                 </div>
-                                <input type="text" id="isbn" name="isbn" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el ISBN del libro" >
+                                <input type="text" id="isbn" name="isbn" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el ISBN del libro" value="{{ old('isbn') }}" >
                                 @error('isbn')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 </div>
-                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 py-3 w-[20em] md:w-[35em]" rows="1"  placeholder="Introduce cada matricula separada por una coma"></input>
+                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 py-3 w-[20em] md:w-[35em]" placeholder="Introduce cada matricula separada por una coma" value="{{ old('identifier_student') }}"></input>
                                 @error('identifier_student')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
@@ -89,29 +89,4 @@
 </section>
 @endsection
 </body>
-@section('scripts-book')
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-   
-    {{-- <script>
-        document.getElementById('info-icon').addEventListener('click', function() {
-            Swal.fire({
-                title: '¿Cómo agregar las matriculas?',
-                text: 'Ej: 22393171, 22393172, 22393173',
-                icon: 'info',
-                confirmButtonText: 'Cerrar'
-            });
-        });
-    </script>
-        <script>
-            document.getElementById('info-icon2').addEventListener('click', function() {
-                Swal.fire({
-                    title: '¿Qué es el ISBN?',
-                    text: 'ISBN (International Standard Book Number) es un identificador único para libros y otros productos editoriales. Es un número de identificación estándar que se utiliza para identificar un libro de manera única.',
-                    icon: 'info',
-                    confirmButtonText: 'Cerrar'
-                });
-            });
-        </script> --}}
-@endsection
 </html>

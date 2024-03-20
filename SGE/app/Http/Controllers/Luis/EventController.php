@@ -32,14 +32,14 @@ class EventController extends Controller
                     $event->status = 'Terminada';
                     $event->save();
                 }
-                if($event->date_start >= now()){
-                    $event->status = 'Programada';
-                    $event->save();
-                }
-                if($event->date_start <= now() && $event->date_end >= now()){
-                    $event->status = 'En curso';
-                    $event->save();
-                }
+                // if($event->date_start >= now()){
+                //     $event->status = 'Programada';
+                //     $event->save();
+                // }
+                // if($event->date_start <= now() && $event->date_end >= now()){
+                //     $event->status = 'En curso';
+                //     $event->save();
+                // }
             }
         }
 
@@ -95,14 +95,14 @@ class EventController extends Controller
                     $event->status = 'Terminada';
                     $event->save();
                 }
-                if($event->date_start >= now()){
-                    $event->status = 'Programada';
-                    $event->save();
-                }
-                if($event->date_start <= now() && $event->date_end >= now()){
-                    $event->status = 'En curso';
-                    $event->save();
-                }
+                // if($event->date_start >= now()){
+                //     $event->status = 'Programada';
+                //     $event->save();
+                // }
+                // if($event->date_start <= now() && $event->date_end >= now()){
+                //     $event->status = 'En curso';
+                //     $event->save();
+                // }
             }
         }
     
@@ -185,7 +185,7 @@ class EventController extends Controller
         $dateTwo = DateTime::createFromFormat('Y-m-d\TH:i', $request->date_end);
         
         if ($dateOne > $dateTwo) {
-            return redirect()->back()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
+            return redirect()->back()->withInput()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
         }
 
         // dd($event);
@@ -270,7 +270,7 @@ class EventController extends Controller
 
         
         if ($dateOne > $dateTwo) {
-            return redirect()->back()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
+            return redirect()->back()->withInput()->with('errorFecha', 'La fecha de finalización de la actividad no puede ser mayor a la fecha de inicio');
         }
 
         $event->update();
