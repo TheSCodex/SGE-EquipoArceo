@@ -9,8 +9,8 @@
             @method('PUT') {{-- Este método indica que se utilizará el método PUT para actualizar la empresa --}}
         </div>
         <div class="w-full h-fit flex flex-col space-y-2">
-        
-            < class="w-full space-y-2">
+    
+         
                 <p class="text-sm">Nombre de la empresa</p>
                 <input type="text" name="name" value="{{ $company->name }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Nombre">
                 @error('name')
