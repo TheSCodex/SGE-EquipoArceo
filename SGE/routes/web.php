@@ -168,7 +168,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director');
 
         // Las rutas para la generación de archivos de la directora
-        Route::get('/exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
         Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
         Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
         Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
@@ -204,7 +204,7 @@ Route::middleware('auth')->group(function () {
         Route::get('Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.sancion');
         Route::get('Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.digitalizacion');
         Route::get('Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
-        Route::get('exportar/{academic_advisor_id}', [ExcelExportController::class, 'downloadExcelFile']);
+        Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
 
         // Ruta para el crud de libros
         Route::resource('libros', BooksController::class)->names('libros-asistente');
