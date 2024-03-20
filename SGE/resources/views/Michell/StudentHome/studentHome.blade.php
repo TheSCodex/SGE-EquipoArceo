@@ -1,6 +1,5 @@
-@extends('templates.studenTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
-
     <div class="bg-[#F3F5F9] p-5 lg:gap-5 grid grid-cols-1 lg:grid-cols-3 grow">
         <section class="col-span-2 gap-3 flex flex-1 flex-col">
             <div class="bg-white rounded-md py-2">

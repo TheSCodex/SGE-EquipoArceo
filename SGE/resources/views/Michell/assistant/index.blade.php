@@ -1,5 +1,4 @@
-@extends('templates.directorsAssistantTemplate')
-
+@extends('templates/authTemplate')
 @section('titulo')
     Inicio
 @endsection
@@ -178,4 +177,4 @@
             </div>
         </section>
     </article>
-@endsection
+    @endsection
