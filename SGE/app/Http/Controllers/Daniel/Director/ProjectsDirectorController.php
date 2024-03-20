@@ -12,9 +12,8 @@ class ProjectsDirectorController extends Controller
      */
     public function index()
     {
-        return view('daniel.director.projects.');
+        return view('Daniel.directorAcademy.projects');
     }
-
     /**
      * Show the form for creating a new resource.
      */
