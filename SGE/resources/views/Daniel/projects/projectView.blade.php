@@ -26,7 +26,7 @@
                     </div>
                     <div
                         class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-semibold flex flex-wrap items-left flex-col">
-                        <div class="w-full px-[3%] self-start">
+                        <div class="w-full px-[3%] self-start border-b-2 border-black py-[2vh]">
                             @if (isset($project))
                                 <p class=" w-[80%] sm:w-[full] text-lg sm:text-lg">Nombre de la empresa: <span
                                         class="mx-[1%] font-medium">{{ $company->name ?? 'No disponible' }}</span></p>
@@ -39,29 +39,44 @@
                         </div>
                         <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mx-4"></div>
                         <div
-                            class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[10] w-full">
+                            class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
                             <!-- Esta linea es salida de los confines del inframundo -->
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Área de desempeño</p>
-                                <p class=" w-[80%] sm:w-[90%] font-normal text-md  text-left">
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Área de desempeño</p>
+                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
                                     {{ $project->description }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
+<<<<<<< HEAD
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Planteamiento del problema</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
+=======
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Planteamiento del problema</p>
+                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
+>>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->problem_statement }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
+<<<<<<< HEAD
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Justificación</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm text-left">
+=======
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg ">Justificación</p>
+                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
+>>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->project_justificaction }}
                                 </p>
                             </div>
                             <div class="w-full flex flex-wrap justify-center">
+<<<<<<< HEAD
                                 <p class=" w-[80%] sm:w-[80%] text-lg sm:text-lg text-left">Actividades a realizar</p>
                                 <p class=" w-[80%] sm:w-[90%] font-normal text-sm    text-left">
+=======
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Actividades a realizar</p>
+                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
+>>>>>>> 24019a90c4b19112fe04f514d0bb7569db501ce1
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
@@ -82,7 +97,7 @@
                 </div>
             </div>
             <div
-                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-center gap-[1vh]">
+                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del proyecto</h3>
@@ -100,7 +115,7 @@
                     </div>
                 </div>
                 <div
-                    class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
+                    class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center self-start">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class=" flex justify-between flex-wrap flex-row-reverse">
