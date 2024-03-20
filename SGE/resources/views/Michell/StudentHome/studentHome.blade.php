@@ -1,17 +1,16 @@
 @extends('templates/authTemplate')
 @section('contenido')
-
     <div class="bg-[#F3F5F9] p-5 lg:gap-5 grid grid-cols-1 lg:grid-cols-3 grow">
         <section class="col-span-2 gap-3 flex flex-1 flex-col">
             <div class="bg-white rounded-md py-2">
-                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
+                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Anteproyecto</h1>
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
                     <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
                     <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
                     <a 
-                        href="estudidante/anteproyecto"
+                        href="estudiante/anteproyecto"
                         class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm"
                     >
                         Iniciar
@@ -29,7 +28,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Comentarios en la version mas reciente de tu propuesta</p>
+                        <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
                     </div>
                 </div>
 
@@ -43,7 +42,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Votos de aprobacion</p>
+                        <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
 
@@ -64,6 +63,7 @@
             </div>
 
             <div class="bg-white rounded-md font-kanit py-8">
+                <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
                     <div class="flex flex-col gap-5">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -73,13 +73,12 @@
                             </div>
                             <div class="col-span-1 grid place-content-center">
                                 <a 
-                                    href="estudiante/observaciones"
+                                    href="estudiante/anteproyecto/observaciones"
                                     class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm"
                                 >
                                     Ampliar observación
                                 </a>
                             </div>
-                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white text-center max-md:w-full py-1 w-[28%] max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <div class="col-span-2">
@@ -88,23 +87,28 @@
                             </div>
                             <div class="col-span-1 grid place-content-center">
                                 <a 
-                                    href="estudiante/observaciones"
+                                    href="estudiante/anteproyecto/observaciones"
                                     class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm"
                                 >
                                     Ampliar observación
                                 </a>
                             </div>
-                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] text-center max-xl:px-14 max-md:py-2">Ampliar observación</a>
                         </div>
                     </div>
-                    <a href="estudiante/anteproyecto/observaciones"observaciones class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
+
+                    <a 
+                        href="estudiante/anteproyecto/observaciones" 
+                        class="text-end text-[#888] text-sm mt-5 md:mt-0"
+                    >
+                        Ver todo
+                    </a>
                 </div>
             </div>
         </section>
         <section class="flex flex-col flex-1 gap-3 w-full col-span-1">
 
             <div class="bg-white rounded-md py-1 mt-3 lg:mt-0">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor academico</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores academicos</h3>
             </div>
 
             <div class="space-y-2">
@@ -121,7 +125,7 @@
             </div>
 
             <div class="bg-white rounded-md py-1">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor empresarial</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores empresariales</h3>
             </div>
 
             <div class="space-y-2">
@@ -204,13 +208,12 @@
                             </li>
                         </ol>
                     </div>
-                    <a href="estudiante/calendario" class="block bg-primaryColor text-white px-14 font-bold text-center text-sm py-1 rounded-md mb-3 max-md:w-[90%] max-md:ml-4">Ver más</a>
 
                 </div>
 
                 <div class="flex justify-center">
                     <a 
-                        href="estudiante/eventos" 
+                        href="estudiante/actividades" 
                         class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3"
                     >
                         Ver más

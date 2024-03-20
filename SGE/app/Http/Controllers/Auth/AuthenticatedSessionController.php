@@ -32,6 +32,11 @@ class AuthenticatedSessionController extends Controller
         // Buscar el usuario en la base de datos usando el correo electrónico proporcionado
         $user = User::where('email', $userData['email'])->first();
 
+        // si el usuario con ese correo no existe, lo regresa
+        if (!$user) {
+            return redirect()->back()->withInput()->withErrors(['email' => 'Usuario no encontrado.']);
+        }
+
         if ($user->created_at == $user->updated_at) {
             session(['user' => $user]);
             return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);

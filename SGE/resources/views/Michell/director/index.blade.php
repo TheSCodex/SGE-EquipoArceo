@@ -5,7 +5,6 @@
 @endsection
 
 @section('contenido')
-
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Director</p>
@@ -14,7 +13,7 @@
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
                     <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
 
-                    <a href="director/estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
@@ -177,8 +176,6 @@
                     </div>
                 </div>
             </div>
-    
-  
+        </section>
     </article>
-    
-@endsection
+    @endsection
