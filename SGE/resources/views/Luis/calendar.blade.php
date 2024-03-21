@@ -79,7 +79,7 @@
                                     <p class=" ml-6 "><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['receiver']['user']['name'] }}</p>
                 
                                 @endif
-                                <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['requester']['user']['name'] }}</p>
+                                {{-- <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['requester']['user']['name'] }}</p> --}}
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $todayEvent->title }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Propósito:</span> {{ $todayEvent->eventType }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Descripción:</span> {{ $todayEvent->description }}</p>
@@ -89,7 +89,7 @@
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
                     @endif
-                    @if ($tomorrowEvents)
+                    {{-- @if ($tomorrowEvents)
                         @if($day < $daysMonth)
                             @php
                                 $nextDay = $day + 1;
@@ -123,7 +123,7 @@
                             </div>
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
-                    @endif
+                    @endif --}}
                 </div>
             </div>
 

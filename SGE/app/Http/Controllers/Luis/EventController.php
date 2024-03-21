@@ -32,14 +32,14 @@ class EventController extends Controller
                     $event->status = 'Terminada';
                     $event->save();
                 }
-                if($event->date_start >= now()){
-                    $event->status = 'Programada';
-                    $event->save();
-                }
-                if($event->date_start <= now() && $event->date_end >= now()){
-                    $event->status = 'En curso';
-                    $event->save();
-                }
+                // if($event->date_start >= now()){
+                //     $event->status = 'Programada';
+                //     $event->save();
+                // }
+                // if($event->date_start <= now() && $event->date_end >= now()){
+                //     $event->status = 'En curso';
+                //     $event->save();
+                // }
             }
         }
 
@@ -95,14 +95,14 @@ class EventController extends Controller
                     $event->status = 'Terminada';
                     $event->save();
                 }
-                if($event->date_start >= now()){
-                    $event->status = 'Programada';
-                    $event->save();
-                }
-                if($event->date_start <= now() && $event->date_end >= now()){
-                    $event->status = 'En curso';
-                    $event->save();
-                }
+                // if($event->date_start >= now()){
+                //     $event->status = 'Programada';
+                //     $event->save();
+                // }
+                // if($event->date_start <= now() && $event->date_end >= now()){
+                //     $event->status = 'En proceso';
+                //     $event->save();
+                // }
             }
         }
     
@@ -141,7 +141,6 @@ class EventController extends Controller
                 $eventsPerDay[$eventDay]++;
             }
         }
-    
         return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
     }
     
