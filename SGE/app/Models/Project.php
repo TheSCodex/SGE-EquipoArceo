@@ -26,7 +26,7 @@ class Project extends Model
 
     public function adviser()
     {
-        return $this->belongsTo(BusinessAdvisor::class, 'adviser_id');
+        return $this->belongsTo(BusinessAdvisor::class, 'adviser_id', 'id');
     }
 
     public function internshipType()

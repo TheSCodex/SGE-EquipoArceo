@@ -15,7 +15,7 @@ class StudentController extends Controller
 
     public function studentHome()
     {
-        $advisor=Intern::with('user','academicAdvisor.user')->first();
+        $advisor = Intern::with('user', 'academicAdvisor.user', 'businessAdvisor.adviser')->first();
         return view('Michell.StudentHome.studentHome', compact('advisor'));
     }
 
