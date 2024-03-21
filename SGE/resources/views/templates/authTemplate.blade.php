@@ -146,7 +146,7 @@
         </ul>
     </header>
 
-    <main class="min-h-screen h-full">
+    <main class="h-full">
         @yield('contenido')
 
     </main>
