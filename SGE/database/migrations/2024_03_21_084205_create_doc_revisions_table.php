@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('doc_revisions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->integer('revision_number');
             $table->string('revision_id');
             $table->timestamps();
