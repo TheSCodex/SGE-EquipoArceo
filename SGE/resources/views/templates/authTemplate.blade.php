@@ -71,8 +71,9 @@
                     <a href="{{ route('lista-asesores')}}" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
                 </li>
                 <li>
-                    <a href="{{ route('anteproyectos-presidente') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
+                    <a href="{{ route('anteproyectos') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
+                
                 @elseif($user->rol_id === 4) {{-- ! Rol de Directora --}}
                 <li>
                     <a href="{{ route('inicio-director') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
@@ -89,9 +90,7 @@
                 <li>
                     <a href="{{ route('documentos-director.index') }}" class="hover:border-b-2 hover:border-primaryColor">Documentos</a>
                 </li>
-                <li>
-                    <a href="#" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
-                </li>
+               
 
                 @elseif($user->rol_id === 5) {{-- ! Rol de Asistente de directora --}}
                 <li>

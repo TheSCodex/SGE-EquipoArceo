@@ -6,7 +6,7 @@
 @section('contenido')
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Asistente</p>
+            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Asistente de Direccion!</p>
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
