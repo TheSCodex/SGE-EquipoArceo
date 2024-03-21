@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center min-h-full flex-grow font-montserrat">
+    <section class="flex flex-col justify-center items-center px-0 lg:px-10 min-h-full flex-grow font-montserrat">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="md:w-full md:h-[80%] md:flex justify-center md:mt-3">
                 <section class="space-y-6 max-md:mt-5">
