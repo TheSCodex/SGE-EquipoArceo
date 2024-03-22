@@ -30,13 +30,12 @@ class ObservationsController extends Controller
 
             // Buscamos los comentarios normales relacionados con el project_id del intern
             $normalComments = Comment::where('project_id', $projectId)
-    ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
-        $query->select('id')
-            ->from('comments')
-            ->where('academic_advisor_id', $academicAdvisorId);
-    })
-    ->get();
-
+                ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
+                    $query->select('id')
+                        ->from('comments')
+                        ->where('academic_advisor_id', $academicAdvisorId);
+                })
+                ->get();
 
             return view('Daniel.Projects.Observation')->with([
                 'userId' => $userId,
@@ -56,7 +55,42 @@ class ObservationsController extends Controller
 
     public function store(Request $request)
     {
-        // Implementar si es necesario.
+        // Validar el formulario
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        // Obtenemos el ID del usuario autenticado
+        $userId = Auth::id();
+
+        // Buscamos el intern relacionado con el usuario autenticado
+        $intern = Intern::where('user_id', $userId)->first();
+
+        if ($intern) {
+            try {
+                // Obtener el ID del proyecto del intern
+                $projectId = $intern->project_id;
+
+                // Obtener el ID del intern
+                $internId = $intern->id;
+
+                // Guardar el comentario en la base de datos
+                $comment = new Comment();
+                $comment->content = $request->input('content');
+                $comment->fecha_hora = now(); // Fecha y hora actual
+                $comment->status = 1;
+                $comment->project_id = $projectId;
+                $comment->interns_id = $internId;
+                $comment->save();
+
+                return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
+            }
+        } else {
+            // Si no se encuentra un intern relacionado con el usuario autenticado, retorna un error o redirecciona según la lógica de tu aplicación
+            return redirect()->route('/student')->with('error', 'No se encontró intern relacionado con este usuario.');
+        }
     }
 
     public function show($id)
@@ -79,57 +113,3 @@ class ObservationsController extends Controller
         // Implementar si es necesario.
     }
 }
-
-//por si no jala jajaja
-/*
-<?php
-
-namespace App\Http\Controllers\Daniel;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class ObservationsController extends Controller
-{
-   ¿
-    public function index()
-    {
-        return view('Daniel.Observation');
-    }
-
-   
-    public function create()
-    {
-        //
-    }
-
-   
-    public function store(Request $request)
-    {
-        //
-    }
-
-   
-    public function show(string $id)
-    {
-        //
-    }
-
-  
-    public function edit(string $id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
-}
-*/

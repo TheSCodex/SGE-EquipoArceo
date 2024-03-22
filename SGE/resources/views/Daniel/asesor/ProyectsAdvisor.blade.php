@@ -1,150 +1,134 @@
 @extends('templates/authTemplate')
-@section('titulo', 'Proyectos')
+@section('titulo', 'Lista de anteproyectos')
 @section('contenido')
-    {{-- Test --}}
-    @php
-    $users = [
-        ['id'=> '3','Estudiantes Designados' => 'Luis Broca', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Irvin Chan', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-        ['id'=> '4','Estudiantes Designados' => 'Michelle Meza', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '0', 'Asesor Academico' => 'Irvin Chan', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Borrador',],
-        ['id'=> '5','Estudiantes Designados' => 'Pipa peguero', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '2', 'Asesor Academico' => 'Luis Villafaña', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-        ['id'=> '6','Estudiantes Designados' => 'Emmanuel Arceo', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '0', 'Asesor Academico' => 'Luis Villafaña', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Borrador',],
-        ['id'=> '7','Estudiantes Designados' => 'Elizabeth Chuc', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Franklin Aranda', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-        ['id'=> '8','Estudiantes Designados' => 'Daniel Dolores', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Franklin Aranda', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-    ];
-
-    $proyects = [
-        ['id'=> '1', 'Estudiantes Designados' => 'Manuel Pasos', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '1', 'Asesor Academico' => 'Rafael Villegas', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-        ['id'=> '2','Estudiantes Designados' => 'Kevin Bello', 'Nombre del Anteproyecto' => 'Nombre proyecto', 'Votos recibidos' => '2', 'Asesor Academico' => 'Rafael Villegas', 'Fecha de publicacion' => '05/03/2024', 'Estado' => 'Publicado',],
-];
-    @endphp
-    <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            /* Espacio vertical entre filas */
-            width: 100%;
-        }
-        /* Estilo para las celdas de la tabla */
-        th,
-        td {
-            /* Espacio interno de las celdas */
-            padding: 10px;
-        }
-    </style>
-
-
-    <main class="min-h-screen h-full flex flex-col">
-        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de asesorados</h1>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos</h1>
             <div class="flex items-center flex-row justify-end">
-                <div class="flex-1 md:mr-2">
-                    <div class="flex justify-between border border-primaryColor items-center rounded-xl py-2 px-4">
-                        <input id="search" placeholder="Buscador" type="text"
-                            class="placeholder-primaryColor focus:outline-none font-montserrat py-1 px-2 justify-start">
-                        <img class="w-6 h-6 mx-2 justify-end" src="/img/logos/buscar.svg">
+                <div>
+                    <div class="hidden md:flex items-center relative" >
+                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <div class="hidden md:flex md:flex-col  md:items-center md:mx-3">
-                    <button class="bg-green text-base py-1 px-3 mb-1 rounded-md text-white">▲</button>
-                    <button class="bg-green text-base py-1 px-3 rounded-md text-white">▼</button>
-                </div>
             </div>
-            <!-- Elementos que se mostrarán solo en dispositivos móviles -->
-            <div class="flex justify-between md:hidden mt-2 mx-auto">
-                <div class="flex">
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white mr-2">▲</button>
-                    <button class="bg-green text-lg py-2 px-4 rounded-md text-white">▼</button>
+            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+                <div>
+                    <div class="flex items-center relative" >
+                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                    </div>
                 </div>
             </div>
         </div>
-        {{-- Seccion 1 de los asesorados --}}
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-            <div class="lg:hidden w-full mb-5">
-                <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($proyects as $proyect)
-                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                            <h2 class="text-lg font-bold">{{ $proyect['Nombre del Anteproyecto'] }}</h2>
-                            <h2 class="text-lg font-bold">{{ $proyect['Estudiantes Designados'] }}</h2>
-                            <p class="text-sm text-gray-500">Votos: {{ $proyect['Votos recibidos'] }}</p>
-                            <p class="text-sm text-gray-500"> Asesor academico: {{ $proyect['Asesor Academico'] }}</p>
-                            <p class="text-sm text-gray-500">Fecha: {{ $proyect['Fecha de publicacion'] }}</p>
-                            <p class="text-sm text-gray-500">Estado: {{ $proyect['Estado'] }}</p>
-                        </div>
-                    @endforeach
+    <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="lg:hidden w-full mb-5">
+            <div class="grid md:grid-cols-2 gap-4 w-full">
+                @foreach ($projects as $project)
+                <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                    <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                    <p class="text-sm text-gray-500">Votos: {{ $project->likes }}</p>
+                    <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
+                    <div class="flex justify-end mt-4 space-x-2">
+                        <a href="{{ route('anteproyecto.store', $project->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
+                    </div>
                 </div>
+                @endforeach
             </div>
         </div>
-        {{-- <-- Display table on larger screens --> --}}
         <div class="hidden lg:block w-full">
-            <table class="text-center">
-                <tr>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Estudiantes Designados</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nombre del Anteproyecto</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Votos recibidos</th>
+            <table class="text-start w-full">
+                <tr class="w-full">
+                    <th class="text-[#ACACAC] font-roboto text-xs ">N°</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Nombre del proyecto</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Votos </th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Asesor Academico</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Fecha de publicacion</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Estado</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs"></th>
-                    <th class="text-[#ACACAC] font-roboto text-xs"></th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Estado</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                 </tr>
-                @foreach($proyects as $proyect)
-                <tr>
-                        <td class="font-roboto font-bold py-5">{{ $proyect['Estudiantes Designados'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $proyect['Nombre del Anteproyecto'] }}</td>
-                        <td class="font-roboto font-bold py-5">Votos: {{ $proyect['Votos recibidos'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $proyect['Asesor Academico'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $proyect['Fecha de publicacion'] }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $proyect['Estado'] }}</td>
+                @foreach ($projects as $project)
+                <tr class="w-full">
+                    <td class="font-roboto font-bold py-5">{{ $project->id }} </td>
+                    <td class="font-roboto font-bold py-5 text-center"">{{ $project->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-center" ">{{ $project->like }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->adviser->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->start_date  }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->status }}</td>
+
+                    {{-- <td class="font-roboto font-bold py-5">
+                        @isset($user->career_academy_id)
+                            @php
+                                $career = App\Models\Career::find($user->career_academy_id);
+                            @endphp
+                            @if($career)
+                                {{ $career->name }}
+                            @else
+                                Sin especialidad
+                            @endif
+                        @else
+                            Sin especialidad
+                        @endisset
+                    </td> --}}
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a href="{{ route('anteproyecto.store', $project->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </table>
+            {{$projects->links()}} 
         </div>
-        {{-- Seccion 2 Division --}}
-        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de la division</h1>
-           
-        </div>
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-            {{-- cards --}}
-            <div class="lg:hidden w-full mb-5">
-                <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($users as $user)
-                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                            <h2 class="text-lg font-bold">{{ $user['Nombre del Anteproyecto'] }}</h2>
-                            <h2 class="text-lg font-bold">{{ $user['Estudiantes Designados'] }}</h2>
-                            <p class="text-sm text-gray-500">Votos: {{ $user['Votos recibidos'] }}</p>
-                            <p class="text-sm text-gray-500"> Asesor academico: {{ $user['Asesor Academico'] }}</p>
-                            <p class="text-sm text-gray-500">Fecha: {{ $user['Fecha de publicacion'] }}</p>
-                            <p class="text-sm text-gray-500">Estado: {{ $user['Estado'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <!-- Display table on larger screens -->
-            <div class="hidden lg:block w-full">
-                <table class="text-center">
-                    <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Estudiantes Designados</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Nombre del Anteproyecto</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Votos recibidos</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Asesor Academico</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Fecha de publicacion</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Estado</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
-                        <th class="text-[#ACACAC] font-roboto text-xs"></th>
-                    </tr>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td class="font-roboto font-bold py-5">{{ $user['Estudiantes Designados'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Nombre del Anteproyecto'] }}</td>
-                            <td class="font-roboto font-bold py-5">Votos: {{ $user['Votos recibidos'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Asesor Academico'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Fecha de publicacion'] }}</td>
-                            <td class="font-roboto font-bold py-5">{{ $user['Estado'] }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-        </div>
-    </main>
+    </div>
+</div>
+    
+</section>
+
+<script>
+    function confirmDelete(userName, userId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + userId).submit();
+            }
+        });
+    }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
+</script>
+
+
+
 @endsection
