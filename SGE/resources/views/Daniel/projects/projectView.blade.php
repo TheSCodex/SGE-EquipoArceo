@@ -41,7 +41,6 @@
                         </div>
                         <div
                             class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
-                            <!-- Esta linea es salida de los confines del inframundo -->
                             <div class="w-full flex flex-wrap justify-center">
                                 <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Área de desempeño</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
@@ -66,7 +65,7 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
-                            {{-- <a href="{{ route('editAnteproyecto.edit', $project->id) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a> --}}
+                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
                     @else
                         <div
