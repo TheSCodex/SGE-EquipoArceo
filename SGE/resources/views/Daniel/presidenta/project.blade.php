@@ -81,11 +81,11 @@
                 </tr>
                 @endforeach
             </table>
-            {{$projects->links()}} 
+            {{$projects->links()}}
         </div>
     </div>
 </div>
-    
+
 </section>
 
 <script>
@@ -124,7 +124,7 @@
             }
         }
     }
-    
+
         // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
         document.getElementById("search").addEventListener("input", searchTable);
 </script>
