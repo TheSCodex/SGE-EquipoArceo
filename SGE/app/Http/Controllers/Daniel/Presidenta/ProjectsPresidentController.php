@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Daniel\Presidenta;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectsPresidentController extends Controller
@@ -11,8 +12,9 @@ class ProjectsPresidentController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        return view('daniel.presidenta.project');
+    {
+        $projects = Project::with('adviser')->paginate(10);
+        return view('daniel.presidenta.project',compact( 'projects'));
     }
 
     /**

@@ -1,140 +1,134 @@
-    @extends('templates.authTemplate')
-@section('titulo', 'Proyectos')
+@extends('templates/authTemplate')
+@section('titulo', 'Lista de anteproyectos')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Proyectos de la division</h1>
-        <div class="flex items-center flex-row justify-end">
-            <div>
-                <div class="hidden md:flex items-center relative">
-                    <div class="relative">
-                        <input id="buscarProyectos" class="border-primaryColor placeholder-primaryColor border-b border rounded-md pl-4 pr-10 py-2" type="search" placeholder="Buscar...." style="color: green;">
-                        <img class="absolute top-1/2 transform -translate-y-1/2 right-2 w-6 h-6" src="/img/logos/buscar.svg" alt="Buscar">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos</h1>
+            <div class="flex items-center flex-row justify-end">
+                <div>
+                    <div class="hidden md:flex items-center relative" >
+                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+                <div>
+                    <div class="flex items-center relative" >
+                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
-
-            <div>
-                <div class="flex items-center relative" >
-                    <div class="relative">
-                        <input id="buscarProyectos2" class="border-primaryColor placeholder-primaryColor border-b border rounded-md pl-4 pr-10 py-2" type="search" placeholder="Buscar...." style="color: green;">
-                        <img class="absolute top-1/2 transform -translate-y-1/2 right-2 w-6 h-6" src="/img/logos/buscar.svg" alt="Buscar">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
         <div class="lg:hidden w-full mb-5">
-
-            <div class="grid md:grid-cols-2 gap-4 w-full" id="proyectosContainer">
-                @foreach ($proyectos as $proyecto)
+            <div class="grid md:grid-cols-2 gap-4 w-full">
+                @foreach ($projects as $project)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                    <h2 class="text-lg font-bold">Proyecto: </h2>
-                    <p class="text-sm text-gray-500">Estudiantes designados: {{ $proyecto->designated_students }}</p>
-                    <p class="text-sm text-gray-500">Votos recibidos: {{ $proyecto->votes_received }}</p>
-                    <p class="text-sm text-gray-500">Asesor Academico: {{ $proyecto->academic_consultant }}</p>
-                    <p class="text-sm text-gray-500">Fecha de publicacion: {{ $proyecto->publication_date }}</p>
-                    <p class="text-sm text-gray-500">Estado: {{ $proyecto->status }}</p>
+                    <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                    <p class="text-sm text-gray-500">Votos: {{ $project->likes }}</p>
+                    <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
+                    <div class="flex justify-end mt-4 space-x-2">
+                        <a href="{{ route('panel-users.show', $project->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
+                    </div>
                 </div>
                 @endforeach
-                {{ $proyectos->links() }}
             </div>
         </div>
         <div class="hidden lg:block w-full">
-            <table class="text-center w-full" id="proyectosTable">
-                <tr>
-                    <th class="text-[#ACACAC] font-roboto text-xs">N°</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Estudiantes designados</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Votos recibidos</th>
+            <table class="text-start w-full">
+                <tr class="w-full">
+                    <th class="text-[#ACACAC] font-roboto text-xs ">N°</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Nombre del proyecto</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Votos </th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Asesor Academico</th>
-                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Dirección</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs">Fecha de publicacion</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Estado</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Estado</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                 </tr>
-                @foreach ($proyectos as $proyecto)
-                <tr>
-                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $proyecto->id }}</td>
-                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $proyecto->designated_students }}</td>
-                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $proyecto->votes_received }}</td>
-                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $proyecto->academic_consultant }}</td>
-                    {{-- <td class="font-roboto font-bold py-5 text-nowrap">{{ $company->address }}</td> --}}
-                    <td class="font-roboto font-bold py-5 text-nowrap">{{ $proyecto->publication_date }}</td>
-                    <td class="font-roboto font-bold py-5 text-nowrap
-                    @if ($proyecto->status == 'Aprobado') text-green
-                    @elseif ($proyecto->status == 'En revisión') text-yellow-300
-                    @elseif ($proyecto->status == 'Borrador') text-gray-500
-                    @elseif ($proyecto->status == 'Cancelado') text-red
-                    @endif">{{ $proyecto->status }}
-                </td>
-                                </tr>
+                @foreach ($projects as $project)
+                <tr class="w-full">
+                    <td class="font-roboto font-bold py-5">{{ $project->id }} </td>
+                    <td class="font-roboto font-bold py-5 text-center"">{{ $project->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-center" ">{{ $project->like }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->adviser->name }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->start_date  }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->status }}</td>
+
+                    {{-- <td class="font-roboto font-bold py-5">
+                        @isset($user->career_academy_id)
+                            @php
+                                $career = App\Models\Career::find($user->career_academy_id);
+                            @endphp
+                            @if($career)
+                                {{ $career->name }}
+                            @else
+                                Sin especialidad
+                            @endif
+                        @else
+                            Sin especialidad
+                        @endisset
+                    </td> --}}
+                    </td>
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a href="{{ route('panel-users.show', $project->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
+                    </td>
+                </tr>
                 @endforeach
             </table>
-            {{ $proyectos->links() }}
-
+            {{$projects->links()}} 
         </div>
     </div>
 </div>
+    
 </section>
 
-    {{-- buscador 1--}}
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const inputBuscar = document.getElementById('buscarProyectos');
-        const proyectosContainer = document.getElementById('proyectosTable');
-
-        inputBuscar.addEventListener('input', () => {
-            const valorBuscar = inputBuscar.value.trim().toLowerCase();
-            const proyectos = proyectosContainer.querySelectorAll('tr:not(:first-child)');
-
-            proyectos.forEach(proyecto => {
-                const textoProyecto = proyecto.textContent.trim().toLowerCase();
-                if (textoProyecto.includes(valorBuscar)) {
-                    proyecto.style.display = ''; // Mostrar la fila
-                } else {
-                    proyecto.style.display = 'none'; // Ocultar la fila
-                }
-            });
+    function confirmDelete(userName, userId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + userId).submit();
+            }
         });
-    });
+    }
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    
+        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
+        document.getElementById("search").addEventListener("input", searchTable);
 </script>
 
 
-    {{-- buscador 2 --}}
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const inputBuscar = document.getElementById('buscarProyectos2');
-        const proyectosContainer = document.getElementById('proyectosContainer');
-
-        inputBuscar.addEventListener('input', () => {
-            const valorBuscar = inputBuscar.value.toLowerCase();
-            const proyectos = proyectosContainer.querySelectorAll('.bg-white');
-
-            proyectos.forEach(proyecto => {
-                const textoProyecto = proyecto.textContent.toLowerCase();
-                if (textoProyecto.includes(valorBuscar)) {
-                    proyecto.style.display = 'block';
-                } else {
-                    proyecto.style.display = 'none';
-                }
-            });
-        });
-    });
-
-
-</script>
 
 @endsection

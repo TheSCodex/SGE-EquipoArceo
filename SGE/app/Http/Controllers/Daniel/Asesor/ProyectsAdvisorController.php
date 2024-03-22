@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Daniel\asesor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProyectsAdvisorController extends Controller
@@ -12,7 +13,8 @@ class ProyectsAdvisorController extends Controller
      */
     public function index()
     {
-        return view('Daniel.asesor.ProyectsAdvisor');
+        $projects = Project::with('adviser')->paginate(10);
+        return view('Daniel.asesor.ProyectsAdvisor', compact('projects'));
     }
 
     /**
