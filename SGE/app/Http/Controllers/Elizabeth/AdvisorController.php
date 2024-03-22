@@ -37,7 +37,7 @@ class AdvisorController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:business_advisors|max:255',
-        'phone' => 'required|string|max:15|regex:/^[0-9]+$/',
+        'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
         'position'=> 'required|string|max:50',
         // Agrega más reglas de validación según sea necesario
     ]);
@@ -73,7 +73,7 @@ class AdvisorController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:business_advisors,email,'.$id.'|max:255',
-            'phone' => 'required|string|max:15|regex:/^[0-9]+$/',
+            'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
             'position'=> 'required|string|max:50',
             // Agrega más reglas de validación según sea necesario
         ]);
