@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Michell\PresidentOfTheAcademy;
 
 use App\Models\User;
+use App\Models\Intern;
+use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Models\AcademicAdvisor;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
 use App\Models\Career;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 
@@ -23,8 +24,9 @@ class PresidentOfTheAcademy extends Controller
     {
         $advisors = AcademicAdvisor::all();
         $businessConsultants = User::where('rol_id', 7)->get();
-        $votes = Project::sum('like');
-        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes'));
+        $votes=Project::sum('like');
+        $dataStudents = Intern::with('user', 'academicAdvisor.user')->get();
+        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes', 'dataStudents'));
     }
 
     public function AdvisorList()

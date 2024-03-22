@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Michell;
 
 use App\Http\Controllers\Controller;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,7 +15,8 @@ class StudentController extends Controller
 
     public function studentHome()
     {
-        return view('Michell.StudentHome.studentHome');
+        $advisor = Intern::with('user', 'academicAdvisor.user', 'businessAdvisor.adviser')->first();
+        return view('Michell.StudentHome.studentHome', compact('advisor'));
     }
 
     public function studentEvents()
