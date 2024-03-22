@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class penalization extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "penalty_name",
+        "description"
+    ];
 }

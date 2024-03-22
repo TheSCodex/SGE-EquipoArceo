@@ -212,12 +212,12 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <a 
+                    <div 
                         href="estudiante/actividades" 
-                        class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3"
+                        class="bg-transparent select-none text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3"
                     >
-                        Ver más
-                    </a>
+                        
+                    </div>
                 </div>
 
             </div>

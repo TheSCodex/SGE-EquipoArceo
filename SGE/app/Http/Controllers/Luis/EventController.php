@@ -141,7 +141,6 @@ class EventController extends Controller
                 $eventsPerDay[$eventDay]++;
             }
         }
-    
         return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
     }
     
