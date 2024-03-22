@@ -13,7 +13,7 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-full md:px-[7em] md:my-[2em] flex ">
                 <div  class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 min-h-[400px]">
-                    <h1 class="text-2xl font-bold mb-5 mt-20 lg:mt-0 text-center">Información sobre el libro</h1>
+                    <h1 class="text-2xl font-bold mb-5 mt-20 lg:mt-0 text-center lg:text-left">Información sobre el libro</h1>
                     <div class="w-full flex flex-col space-y-1">
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
