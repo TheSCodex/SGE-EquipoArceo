@@ -106,7 +106,7 @@
                             @else
                                 <p>Este proyecto cuenta con {{$project->like}} voto(s)</p>
                             @endif
-                            <form method="POST" action="{{ route('anteproyecto-Asesor.store')}}">
+                            <form method="POST" >
                                 @csrf
                                 <button type="submit" class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
                             </form>
@@ -126,12 +126,34 @@
                             <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                         </div>
                         @endforeach
+                        
                         <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver observaciones</button>
                     </div>
+                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}">
+                        @csrf
+                        <input class="w-full" type="text" name="content" placeholder="Ingrese su comentario" rows="4"/>
+                        @error('content')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
+                    </form>
+                    
+                    
                 @elseif(isset($comments) && count($comments) == 0)
                 <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
                     <p class=' text-center text-black opacity-[60%]'>Este proyecto aun no tiene alguna observacion</p>
+                    
                 </div>
+                <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}">
+                    @csrf
+                    <input class="w-full" name="content" placeholder="Ingrese su comentario" rows="4"/>
+                    @error('content')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
+                    <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
+                </form>
+                
+                
                 @else
                     <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
                         <p class=' text-center text-black opacity-[60%]'>No hay un anteproyecto que comentar</p>

@@ -132,11 +132,29 @@
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%]">Ver
                             observaciones</a>
                     </div>
+                    <form method="POST" action="{{ route('observationsAnteproyecto.store') }}">
+                        @csrf
+                        <input class="w-full" name="content" placeholder="Ingrese su comentario" rows="4"/>
+                        @error('content')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
+                    </form>
+                    
                 @elseif(isset($comments) && count($comments) == 0)
                     <div
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
                         <p class=' text-center text-black opacity-[60%]'>No hay comentarios en tu anteproyecto.</p>
                     </div>
+                    <form method="POST" action="{{ route('observationsAnteproyecto.store') }}">
+                        @csrf
+                        <input class="w-full" name="content" placeholder="Ingrese su comentario" rows="4"/>
+                        @error('content')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
+                    </form>
+                    
                 @else
                     <div
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
