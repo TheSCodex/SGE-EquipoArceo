@@ -87,6 +87,7 @@
                 </tr>
                 @endforeach
             </table>
+            {{$advisors->links()}}
         </div>
     </div>
 </div>
