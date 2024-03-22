@@ -1,34 +1,61 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full h-screen flex justify-center items-center bg-white">
-    <form action="{{ route('panel-careers.store') }}" method="POST" class="flex flex-col font-montserrat mx-10 space-y-5 lg:w-[40vw] sm:w-[60vw]">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="w-full md:px-[7em] md:mt-[2em] h-fit flex bg-white">
+    <form action="{{url('panel-careers')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
+        <div class="w-full h-fit flex justify-center md:justify-start">
+            <h1 class="text-3xl font-bold">Añadir carrera</h1>
             @csrf
-        <div class="w-full h-fit flex justify-center mt-4">
-            <h1 class="text-3xl font-bold">Añadir Carrera y División</h1>
-            
         </div>
-        <div class="w-full h-fit flex flex-col space-y-2">
-            <div class="w-full space-y-2">
-                <p class="text-sm">Carrera</p>
-                <input type="text" name="" value="{{ old('') }}" class="text-sm  w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="Carrera">
-                @error('')
+        <div class="w-full flex flex-col space-y-2 ">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
+                <div class="space-y-2">
+                    <p class="text-sm">Carrera</p>
+                    <input type="text" name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    @error('name')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+                <div class=" space-y-2">
+                    <p class="text-sm">Division</p>
+                    <input type="text" name="last_name" value="{{old('last_name')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Apellidos">
+                    @error('last_name')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </div>
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
+                <div class=" space-y-2">
+                    <p class="text-sm space-y-2">Academia</p>
+                    <input type="text" name="email" value="{{old('email')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Correo">
+                    @error('email')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
-                @enderror
+                    @enderror
                 </div>
-            <div class="w-full space-y-2">
-                <p class="text-sm space-y-2">División</p>
-                <input type="text" name="" value="{{old('')}}" class="text-sm  w-full rounded-md border-lightGray border-2 px-[2%] py-[3%]" placeholder="División">
-                @error('')
-                <p class="text-[#ff0000] text-sm">
-                    {{ $message }}
-                </p>
-                @enderror
+                <div class=" space-y-2">
+                    <p class="text-sm">Presidente</p>
+                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        @foreach($careers as $career)
+                            <option value="{{ $career->id }}">{{ $career->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('careers_id')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
             </div>
 
-        <button type="submit" class="p-[1%] bg-primaryColor lg:w-[40vw] rounded-md text-white">Añadir carrera y división</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>
+
     </form>
 </div>
-</div>
+
 @endsection('contenido')
