@@ -17,7 +17,7 @@ class BajasController extends Controller
         ->join('users', 'interns.user_id', '=', 'users.id')
         ->join('careers', 'interns.career_id', '=', 'careers.id')
         ->join('users as academic', 'interns.academic_advisor_id', '=', 'academic.id')
-        ->select('interns.id', 'users.name', 'careers.name as careers', 'academic.name as advisor_name')
+        ->select('interns.id', 'users.name','users.last_name as lastname' ,'careers.name as careers', 'academic.name as advisor_name')
         ->where('interns.student_status_id', 2)
         ->get();
         return view('Michell.bajas.bajas', ['dataStudents'=> $interns]);
