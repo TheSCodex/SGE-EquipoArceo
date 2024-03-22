@@ -52,7 +52,7 @@
                     <a href="{{ route('inicio-asesor') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
                 </li>
                 <li>
-                    <a href="/asesor/estudiante" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
+                    <a href="#" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
                 </li>
                 <li>
                     <a href="{{ route('anteproyectos-asesor') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
