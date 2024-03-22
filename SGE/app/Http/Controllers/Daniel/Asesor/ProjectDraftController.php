@@ -17,13 +17,14 @@ use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProjectDraftController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(project $id)
     {   
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
@@ -34,7 +35,7 @@ class ProjectDraftController extends Controller
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
         }
         
-        $projectId = $interns->project_id;
+        $projectId = $id->id;
         $project = Project::find($projectId);
 
         $businessSector = null;
@@ -77,24 +78,71 @@ class ProjectDraftController extends Controller
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
-        // return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
-        return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
+
+        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->first(); //Reemplazar tan pronto como haya un modelo
+        
+        if (!$projectLikes) {
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
+        } else {
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'projectLikes'));
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
+    public function storeLike(project $id){
+        $userId = Auth::id();
+        $projectId = $id->id;
+        $project = Project::where('id', $projectId)->first();
+        
+        
+        DB::table('projects_likes')->insert([
+            'id_academic_advisor' => ($userId),
+            'id_projects' => ($projectId),
+        ]);
+        if(!$project->like){
+            Project::where('id', $projectId)->update(['like' => 0]);
+        }
+        Project::where('id', $projectId)->increment('like');
+        return redirect()->back()->with('success', 'Like añadido correctamente.');
+    }
+
+    public function deleteLike(Project $id)
+    {
+        $userId = Auth::id();
+        $projectId = $id->id;
+        
+        // Check if the user has already liked the project
+        $existingLike = DB::table('projects_likes')
+                            ->where('id_academic_advisor', $userId)
+                            ->where('id_projects', $projectId)
+                            ->first();
+        
+        // If the user has already liked the project, delete the like
+        if ($existingLike) {
+            DB::table('projects_likes')
+                ->where('id_academic_advisor', $userId)
+                ->where('id_projects', $projectId)
+                ->delete();
+            
+            // Decrement the like count for the project
+            Project::where('id', $projectId)->decrement('like');
+            
+            return redirect()->back()->with('success', 'Like eliminado correctamente.');
+        } else {
+
+            return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
+        }
+    }
     public function store(Request $request)
     {
         // Validar los datos del formulario
         $request->validate([
             'content' => 'required',
         ]);
-
-        // Obtener el ID del usuario autenticado
         $academicAdvisorId = Auth::id();
-
-        // Obtener el ID del proyecto desde la URL
         $projectId = $request->input('project_id');
 
         // Obtener el ID del intern relacionado con el proyecto
