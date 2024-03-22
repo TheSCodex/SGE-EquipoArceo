@@ -32,7 +32,11 @@ class ProjectFactory extends Factory
             'dislike' => $this->faker->numberBetween(0, 100),
             'start_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'end_date' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'adviser_id' => function () {
+                return \App\Models\BusinessAdvisor::factory()->create()->id;
+            },
 
         ];
     }
 }
+
