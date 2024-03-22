@@ -1,19 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Elizabeth;
+// testeando que todo funcione
 use App\Models\BusinessSector;
-use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class companiesController extends Controller
+    // Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
+
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $companies =  Company::all();
+        $companies =  Company::paginate(10);
         return view('Elizabeth/Companies/companies', compact('companies'));
     }
 
@@ -36,13 +39,12 @@ class companiesController extends Controller
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'address' => 'required|string|max:255',
-        'phone' => 'required|string|max:20',
+        'phone' => 'required|string|max:20|regex:/^[0-9]+$/',
         'email' => 'required|string|email|max:255',
         'registration_date' => 'required|date',
         'rfc' => 'required|string|max:255',
-        'business_sector_id' => 'required|exists:business_sectors,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
+        'business_sector_id' => 'required|exists:business_sectors,id',
     ]);
-
     $company = new Company();
     $company->fill($validatedData);
     $company->save();
@@ -53,7 +55,9 @@ class companiesController extends Controller
 
     public function show(string $id)
     {
-        //
+        $companies=Company::findOrFail($id);
+        return view('/Elizabeth/Companies/companies_show', ['companies'=>$companies]);
+    
     }
 
     /**
@@ -76,7 +80,7 @@ class companiesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|max:20|regex:/^[0-9]+$/',
             'email' => 'required|string|email|max:255',
             'registration_date' => 'required|date',
             'rfc' => 'required|string|max:255',
