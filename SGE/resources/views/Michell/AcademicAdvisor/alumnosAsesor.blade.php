@@ -47,7 +47,6 @@
                         <th class="px-6 py-3 text-left text-xs font-bold text-black-500 uppercase tracking-wider">Nombre de estudiante</th>
                         <th class="px-6 py-3 text-left text-xs font-bold text-black-500 uppercase tracking-wider">Estado</th>
                         <th class="px-6 py-3 text-left text-xs font-bold text-black-500 uppercase tracking-wider">Amonestacion</th>
-                        {{-- Se eliminó la condición $user->rol_id === 3 --}}
                         <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                     </tr>
                 </thead>
@@ -59,7 +58,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $intern->name }} {{ $intern->last_name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $intern->studentStatus->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
-                                {{-- Se eliminó la condición $user->rol_id === 3 --}}
                                 <td>
                                     <div class="flex gap-3 justify-center">
                                         <a href="" class="bg-green text-white px-5 py-1 text-sm rounded-md">
