@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,22 +26,34 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // Obtener los datos de usuario proporcionados en la solicitud
+        $userData = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        // Buscar el usuario en la base de datos usando el correo electrónico proporcionado
+        $user = User::where('email', $userData['email'])->first();
 
-        // Si es primera vez debe cambiar su contraseña
-        if (Auth::user()->created_at == Auth::user()->updated_at) {
-            // dd('son iguales');
-            return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
+        // si el usuario con ese correo no existe, lo regresa
+        if (!$user) {
+            return redirect()->back()->withInput()->withErrors(['email' => 'Usuario no encontrado.']);
         }
 
-        // Obtener el rol del usuario
-        $userRole = Auth::user()->role;
-        // Obtener el id del usuario
-        $userId = Auth::user() -> id;
-        // Redirigir según el rol del usuario
-        switch ($userRole -> title) {
+        // primero se asegura de que la contraseña sea la misma
+        if (!password_verify($userData['password'], $user->password)) {
+            return redirect()->back()->withInput()->withErrors(['password' => 'La contraseña es incorrecta.']);
+        }
+    
+
+        if ($user->created_at == $user->updated_at) {
+            session(['user' => $user]);
+            return redirect(RouteServiceProvider::CHANGEPASSWORDFIRSTTIME);
+        }
+        
+
+        $request->authenticate();
+        $request->session()->regenerate();
+
+
+        switch (Auth::user()->role->title) {
             case 'estudiante':
                 return redirect(RouteServiceProvider::ESTUDIANTE);
             case 'asesorAcademico':

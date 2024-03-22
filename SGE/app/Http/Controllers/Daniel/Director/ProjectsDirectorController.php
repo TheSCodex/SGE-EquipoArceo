@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Daniel\Director;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectsDirectorController extends Controller
@@ -12,9 +13,9 @@ class ProjectsDirectorController extends Controller
      */
     public function index()
     {
-        return view('daniel.director.projects.');
+        $projects = Project::with('adviser')->paginate(10);
+        return view('daniel.presidenta.project')->with('proyectos');
     }
-
     /**
      * Show the form for creating a new resource.
      */

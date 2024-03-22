@@ -15,7 +15,6 @@ class companiesController extends Controller
     {
         $companies =  Company::all();
         return view('Elizabeth/Companies/companies', compact('companies'));
-        
     }
 
     /**
@@ -41,14 +40,14 @@ class companiesController extends Controller
         'email' => 'required|string|email|max:255',
         'registration_date' => 'required|date',
         'rfc' => 'required|string|max:255',
-        'business_sector_id' => 'required|exists:business_sector,id', // Asegúrate de que el business_sector_id exista en la tabla business_sector
+        'business_sector_id' => 'required|exists:business_sectors,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
     ]);
 
     $company = new Company();
     $company->fill($validatedData);
     $company->save();
 
-    return redirect()->route('panel-companies')->with('success', '¡Empresa creada exitosamente!');
+    return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
 }
 
 
@@ -81,7 +80,7 @@ class companiesController extends Controller
             'email' => 'required|string|email|max:255',
             'registration_date' => 'required|date',
             'rfc' => 'required|string|max:255',
-            'business_sector_id' => 'required|exists:business_sector,id', // Asegúrate de que el business_sector_id exista en la tabla business_sector
+            'business_sector_id' => 'required|exists:business_sectors,id', // Asegúrate de que el business_sector_id exista en la tabla business_sectors
         ]);
     
         // Encuentra la empresa por su ID
@@ -91,7 +90,7 @@ class companiesController extends Controller
         $company->update($validatedData);
     
         // Redirige con un mensaje de éxito
-        return redirect()->route('panel-companies')->with('success', '¡Empresa creada exitosamente!');
+        return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
     }
 
     /**

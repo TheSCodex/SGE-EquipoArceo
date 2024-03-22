@@ -6,7 +6,7 @@
     <title>Academic Home</title>
 </head>
 <body>
-@extends('templates.studenTemplate')
+@extends('templates/authTemplate')
 @section('contenido')
 
 <div class="bg-[#F3F5F9] min-h-screen flex flex-col justify-center items-center">
@@ -49,9 +49,9 @@
                         <td class="px-6 py-4 whitespace-nowrap">20 hrs</td>
                         <td>
                             <div class="flex gap-3 justify-center">
-                                <button class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                <a href="{{ route('studentL.edit', ['studentL' => $intern->id]) }}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
                                     Editar
-                                </button>
+                                </a>
 
                                 <form action="{{ route('studentL.destroy', ['studentL' => $intern->id]) }}" method="POST">
                                     @csrf

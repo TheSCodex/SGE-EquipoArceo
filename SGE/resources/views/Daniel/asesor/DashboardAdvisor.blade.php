@@ -1,11 +1,9 @@
-@extends('./templates/academicAdvisorTemplate')
-
+@extends('templates/authTemplate')
 @section('titulo')
     Bienvenido
 @endsection
-
 @section('contenido')
-    <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
+    <section class="flex flex-col justify-start items-center bg-[#F3F5F9] min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
                 Bienvenido, Asesor Academico!
@@ -40,9 +38,9 @@
                     </div>
                 </div>
                 <div class="w-[32%] mx-auto">
-                    <div class="rounded-lg h-auto bg-white mb-2 p-1 font-bold">
+                    <div class="rounded-lg h-auto bg-white mb-2 p-1 font-bold w-full">
                         <p class="mb-5 text-center mt-2">Total de proyectos</p>
-                        <div class="flex justify-center w-[80%] h-48 mb-2">
+                        <div class="flex justify-center w-full h-48 mb-2">
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
@@ -98,6 +96,14 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $userId = auth()->id();
+                        $academicAdvisor = DB::table('academic_advisor')->where('user_id', $userId)->first();
+                        $academicAdvisorId = $academicAdvisor->id;
+                    @endphp
+                    <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
+                        <a href="asesor/generar/{{ $academicAdvisorId }}">Generar Control de Estadías</a>
+                    </button>
                 </div>
 
             </div>
@@ -135,6 +141,7 @@
                 </div>
             </div>
             
+
         </div>
     </section>
 @endsection

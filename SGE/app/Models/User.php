@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\CareerAcademy;
 use App\Models\Role;
 use App\Models\AcademicAdvisor;
 use App\Models\Intern;
 use App\Models\CalendarEvent;
 use App\Models\Comment;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class User extends Authenticatable
@@ -23,14 +24,9 @@ class User extends Authenticatable
         'email',
         'password',
         'identifier',
-        'career_academy_id',
+        'phoneNumber',
         'rol_id',
     ];
-
-    public function careerAcademy()
-    {
-        return $this->belongsTo(CareerAcademy::class, 'career_academy_id');
-    }    
 
     public function role()
     {
@@ -66,5 +62,25 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'academic_advisor_id');
+    }
+    // para añadir el registro cuando el rol sea de estudiantes
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::created(function ($user) {
+    //         // hay que convertir el id del user a int, si hay algun error por esto lo checamos 
+    //         if ((int)$user->rol_id === 1) {
+    //             DB::table('interns')->insert([
+    //                 'user_id' => $user->id,
+    //             ]);
+    //         }
+    //     });
+      
+    // }
+
+    public function hasPermission($permission)
+    {
+        $permissions = json_decode($this->role->permissions, true);
+        return isset($permissions[$permission]) && $permissions[$permission];
     }
 }

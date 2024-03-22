@@ -1,5 +1,5 @@
 
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('titulo', 'Panel de Usuarios')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -57,14 +57,14 @@
             </div>
         </div>
         <div class="hidden lg:block w-full">
-            <table class="text-center w-full">
+            <table class="text-start w-full">
                 <tr>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Número telefonico</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Posición</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Correo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Número telefonico</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Posición</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Editar</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Eliminar</th>
                 </tr>
                 @foreach ($advisors as $advisor)
                 <tr>
@@ -77,7 +77,7 @@
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $advisor->name }} {{ $advisor->position }}', '{{ $advisor->id }}')">
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $advisor->name }}, posición: {{ $advisor->position }}', '{{ $advisor->id }}')">
                         <form class="flex justify-center" id="deleteForm{{ $advisor->id }}" action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

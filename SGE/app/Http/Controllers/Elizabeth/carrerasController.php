@@ -10,17 +10,22 @@ use App\Models\Career;
 use App\Models\Division;
 use App\Models\User;
 
+    // Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
 
 class carrerasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-  public function index()
+    public function index()
 {
-    $careers = careers_info_view::all();
-    
-    return view('Elizabeth.cruds.carreras', compact('careers'));
+    $careers = Career::all();
+    $academies = Academy::whereIn('id', $careers->pluck('academy_id'))->get();
+    $divisions = Division::whereIn('id', $academies->pluck('division_id'))->get();
+    $presidents = User::whereIn('id',$divisions->pluck('director_id'))->get();
+
+
+    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'));
 }
 
 
@@ -45,7 +50,7 @@ class carrerasController extends Controller
 
     $division = Division::where('name', $validatedData['division'])->first();
 
-    $career = new careers_info_view();
+    $career = new Career();
     $career->name = $validatedData['name'];
 
     $career->division_id = $division->id;
@@ -68,7 +73,7 @@ class carrerasController extends Controller
      */
     public function edit($id)
 {
-    $career = careers_info_view::findOrFail($id);
+    $career = Career::findOrFail($id);
     $divisions = Division::all();
     $academies = Academy::all();
     $users = User::where('rol_id', '!=', 1)->get();
@@ -93,11 +98,12 @@ public function update(Request $request, $id)
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-{
-    $career = Career::findOrFail($id);
-    $career->delete();
-    
-    return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
-}
-
+    {
+            {
+            
+                $career = Career::findOrFail($id);
+                $career->delete();
+                return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
+            }        
+    }
 }

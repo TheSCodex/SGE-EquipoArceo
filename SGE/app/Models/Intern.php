@@ -16,7 +16,8 @@ class Intern extends Model
         'book_id',
         'student_status_id',
         'performance_area',
-        'Group'
+        'Group',
+        'career_id'
     ];
 
     public function user()
@@ -26,7 +27,7 @@ class Intern extends Model
 
     public function academicAdvisor()
     {
-        return $this->hasOne(AcademicAdvisor::class, 'academic_advisor_id');
+        return $this->belongsTo(AcademicAdvisor::class, 'academic_advisor_id', 'id');
     }
 
     public function project()
@@ -44,8 +45,9 @@ class Intern extends Model
         return $this->belongsTo(StudentStatus::class, "student_status_id");
     }
 
-    public function event()
+    public function career()
     {
-        return $this->hasMany(CalendarEvent::class);
+        return $this->hasOne(Career::class, 'id', 'career_id');
     }
+    
 }

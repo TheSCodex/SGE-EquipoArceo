@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Intern;
-use App\Models\StudentStatus;
 use App\Models\User;
+use App\Models\AcademicAdvisor;
 use Illuminate\Database\Seeder;
 
 class InternSeeder extends Seeder
@@ -12,26 +12,21 @@ class InternSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        // Get valid student_status_id values from the database
-        $validStatusIds = StudentStatus::pluck('id')->toArray();
+        $estudianteUserIds = User::whereHas('role', function ($query) {
+            $query->where('title', 'estudiante');
+        })->pluck('id');
 
-        // Get existing user IDs
-        $existingUserIds = User::pluck('id')->toArray();
+        $academicAdvisors = AcademicAdvisor::all();
 
-        // Ensure there are at least 10 user IDs available
-        if (count($existingUserIds) < 5) {
-            // Throw an exception or handle the case where there are not enough user IDs
-            // You can modify this based on your application's requirements
-            throw new \Exception('There are not enough existing users to create 10 interns.');
-        }
-
-        // Create 10 interns with random student_status_id and user_id from the validStatusIds and existingUserIds arrays
-        foreach (range(1, 10) as $index) {
-            Intern::factory()->create([
-                'user_id' => $existingUserIds[array_rand($existingUserIds)],
-                'student_status_id' => $validStatusIds[array_rand($validStatusIds)],
+        for ($i = 0; $i < count($estudianteUserIds); $i++) {
+            $advisor = $academicAdvisors[$i % count($academicAdvisors)];
+            Intern::create([
+                'user_id' => $estudianteUserIds[$i],
+                'academic_advisor_id' => $advisor->id,
+                'career_id' => $advisor->career_id,
+                'period' => 'Mayo - Julio',
             ]);
         }
     }

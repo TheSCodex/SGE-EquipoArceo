@@ -46,7 +46,7 @@ class CareerFactory extends Factory
 
         return [
             'name' => $this->faker->unique()->randomElement($careers),
-            'division_id' => $this->faker->numberBetween(1, 5),
+            'academy_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }
