@@ -49,5 +49,10 @@ class Intern extends Model
     {
         return $this->hasOne(Career::class, 'id', 'career_id');
     }
+
+    public function penalization()
+    {
+        return $this->belongsTo(penalization::class);
+    }
     
 }
