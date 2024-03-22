@@ -54,9 +54,9 @@
         </p>
     </div>
     <div style="font-weight:normal;margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
-        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder;">Nombre del (a) Estudiante</span> {{$student->name}} {{$student->last_name}}</p>
-        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder; ">Matricula</span> {{$student->identifier}}</p>
-        <p style="margin-bottom: 2px; margin-top:2px; "> <span style="text-decoration: underline; font-weight:bolder;">Programa Educativo</span> {{$career->name}} </p>
+        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder;">Nombre del (a) Estudiante</span> {{$student?->name}} {{$student?->last_name}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder; ">Matricula</span> {{$student?->identifier}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px; "> <span style="text-decoration: underline; font-weight:bolder;">Programa Educativo</span> {{$career?->name}} </p>
     </div>
 
     <p style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none; font-size:10.5pt">

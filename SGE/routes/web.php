@@ -183,7 +183,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion');
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
-        Route::get('/director/estudiantes/{id}', [StudentListController::class, 'index'])->name('director.estudiantes');
+        
+        Route::get('/director/estudiantes/', [StudentListController::class, 'index'])->name('director.estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
     });
