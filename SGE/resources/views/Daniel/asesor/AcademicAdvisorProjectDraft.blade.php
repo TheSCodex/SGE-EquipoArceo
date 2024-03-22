@@ -198,10 +198,19 @@
                             @else
                                 <p>Este proyecto cuenta con {{$project->like}} voto(s)</p>
                             @endif
-                            <form method="POST" >
+
+                            
+                            @if(isset($projectLikes))
+                            <form method="POST" action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
+                                @csrf
+                                <button type="submit" class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar voto</button>
+                            </form>
+                            @else
+                            <form method="POST" action="{{ route('anteproyecto-Asesor.storeLike', ['id' => $project->id]) }}">
                                 @csrf
                                 <button type="submit" class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>
