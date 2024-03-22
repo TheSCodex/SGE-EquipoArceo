@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Daniel\Proyectos;
 
 
 use App\Models\AcademicAdvisor;
+use App\Models\Academy;
 use App\Models\BusinessSector;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -29,6 +30,7 @@ class ProjectsController extends Controller
         $intern = Intern::where("user_id", $userId)->first();
         $interns = Intern::where("user_id", $userId)->get();
 
+        
         // dd($intern);
     
         if (!$intern || !$intern->project_id) {
@@ -49,12 +51,17 @@ class ProjectsController extends Controller
                 //dd($company);
             }
         }
-    
+        
+        $user = User::where("id", $userId)->first();
+        // dd($user);
+        $career = Career::where("id", $user->career_id)->first();
+        //dd($career);
+        $division = Division::where("id", $career->division_id)->first();
         $comments = Comment::where("project_id", $intern->project_id)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
     }
     
     
