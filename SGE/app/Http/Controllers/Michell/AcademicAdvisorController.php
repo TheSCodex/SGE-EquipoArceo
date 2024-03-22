@@ -24,7 +24,7 @@ class AcademicAdvisorController extends Controller
         $userId = auth()->user()->id;    
         $academicAdvisor = AcademicAdvisor::where('user_id', $userId)->first();    
         if ($academicAdvisor) {
-            $interns = Intern::where('academic_advisor_id', $academicAdvisor->id)->get();            
+            $interns = Intern::where('academic_advisor_id', $academicAdvisor->id)->paginate(10);            
             return view('michell.academicadvisor.alumnosAsesor', compact('interns'));
         }    
         return null;

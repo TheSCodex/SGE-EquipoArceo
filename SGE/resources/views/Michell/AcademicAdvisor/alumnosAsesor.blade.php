@@ -10,9 +10,7 @@
                     <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('student.search')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">no se q va
-            </a>
+           
         </div>
         
         <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
