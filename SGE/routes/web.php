@@ -38,6 +38,7 @@ use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
 
 
+
 use Illuminate\Support\Facades\Auth; // Para el sistema de autenticación
 use App\Models\User; // Si necesitas acceder a la información del usuario
 
@@ -250,10 +251,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('panel-roles', RoleController::class)->names('panel-roles');
 
         // Rutas para CRUD de Empresas
-        Route::resource('/panel-companies', companiesController::class)->names(['index'=>'companies.index']);
-        Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-        Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
-
+        Route::resource('/panel-companies', CompaniesController::class)->names(['index'=>'companies.index']);
+        Route::get('/panel-companies-create', [CompaniesController::class, 'create'])->name('companies_form');
+        Route::get('/panel-companies/{id}/edit', [CompaniesController::class, 'edit'])->name('panel-companies.edit');
 
         // RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
         Route::resource('/panel-advisors', AdvisorController::class)->names('panel-advisors');
