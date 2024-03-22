@@ -16,8 +16,7 @@ class AdvisorController extends Controller
     public function index()
     {
         // Obtener los asesores de la base de datos
-        $advisors = BusinessAdvisor::all();
-    
+        $advisors = BusinessAdvisor::paginate(10);
         // Cargar la vista y pasar los datos
         return view('Elizabeth.crudAsesores', compact('advisors'));
     }
