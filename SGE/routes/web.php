@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function () {
         
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
+        Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
         
         // Rutas para el formulario de anteproyectos
         Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create');
