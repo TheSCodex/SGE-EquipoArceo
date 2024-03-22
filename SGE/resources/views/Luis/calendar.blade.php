@@ -10,7 +10,7 @@
     @extends('templates/authTemplate')
     @section('contenido')
     {{-- <main class="w-full h-full overflow-auto font-montserrat"> --}}
-    <main class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 mx-auto">
+    <main class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 mx-auto ">
         <div class="flex  w-full">
             <!-- left side -->
             <div class=" w-72 bg-primaryColor hidden sm:block h-auto">

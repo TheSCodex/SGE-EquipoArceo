@@ -14,7 +14,7 @@
 <body>
     @extends('templates/authTemplate')
     @section('contenido')
-    <main class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <main class="flex flex-col justify-start items-center  min-h-full flex-grow h-screen h-min-full">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de actividades</h1>
@@ -37,7 +37,7 @@
                     <a href="{{route('actividades.create')}}" class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white">Agregar nueva actividad</a>
                 </div>
             </div>
-            <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5">
+            <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5 ">
                 @foreach ($allEvents as $event)
                     <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl event">
                         <div class="p-4">
