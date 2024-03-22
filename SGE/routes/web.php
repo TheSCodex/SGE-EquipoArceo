@@ -149,9 +149,9 @@ Route::middleware('auth')->group(function () {
         // Todos los asesores
         Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores');
         // Crear asesor
-        Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        Route::post('/crear-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
         // Actualizar asesor
-        Route::put('/lista-asesores/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
+        Route::put('/editar-asesor/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
         // Eliminar asesor
         Route::delete('/lista-asesores/{id}', [PresidentOfTheAcademy::class,'destroy'])->name('asesores.destroy');
 

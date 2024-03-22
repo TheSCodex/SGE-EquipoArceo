@@ -89,7 +89,7 @@
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
                     @endif
-                    @if ($tomorrowEvents)
+                    {{-- @if ($tomorrowEvents)
                         @if($day < $daysMonth)
                             @php
                                 $nextDay = $day + 1;
@@ -123,7 +123,7 @@
                             </div>
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
-                    @endif
+                    @endif --}}
                 </div>
             </div>
 
