@@ -42,9 +42,13 @@
                             <tbody class="text-sm">
                                 @foreach ($dataStudents as $data)
                                     <tr class="data-row border-b border-[#999]">
-                                        <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
+                                        <td class="py-4">{{ $data->name }}</td>
+                                        <td class="py-4">{{ \Illuminate\Support\Str::limit($data->careers, 40, $end='...') }}</td>
+                                        <td class="py-4">{{ $data->advisor_name }}</td>
+
+                                        {{-- <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
                                         <td class="py-4">{{ $data->user->careerAcademy->career->name }}</td>
-                                        <td class="py-4">{{ $data->academicAdvisor->user->name }}</td>
+                                        <td class="py-4">{{ $data->academicAdvisor->user->name }}</td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

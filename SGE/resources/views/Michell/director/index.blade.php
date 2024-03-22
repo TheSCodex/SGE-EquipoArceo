@@ -101,8 +101,7 @@
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bajas de estudiantes</p>
-            
+            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas">Ver más</a></p>
             @foreach ( $interns as $i )
             <div class="bg-white rounded-md py-5 flex flex-col gap-3">
                 <div class="flex gap-3  ml-10 items-center">
