@@ -186,6 +186,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/director/estudiantes', [StudentListController::class, 'index'])->name('director.estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
+
+        //bajas
+        Route::get('bajas', [BajasController::class, "index"])->name('bajas-director');
     });
 
     //TODO - Asistente directora
