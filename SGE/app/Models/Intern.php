@@ -49,5 +49,15 @@ class Intern extends Model
     {
         return $this->hasOne(Career::class, 'id', 'career_id');
     }
-    
+
+    public function penalization()
+    {
+        return $this->belongsTo(penalization::class);
+    }
+    //Para extraer el nombre del asesor empresarial que tiene el proyecto
+    public function businessAdvisor()
+    {
+        return $this->belongsTo(Project::class, 'project_id', 'id')
+            ->with('adviser');
+    }
 }

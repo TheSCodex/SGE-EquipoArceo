@@ -96,9 +96,7 @@
                 <h3 class="text-sm md:text-lg text-center text-[#828282] font-semibold">Indice de aprobación</h3>
                 <hr class="border-2 border-[#ECECEC] my-5">
                 
-                <div class="p-3 flex justify-center">
-                    <img src="{{ asset('img/administratorDashboardChart.png') }}" alt="Total proyectos" class="max-h-[200px]" />
-                </div>
+                <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
             </div>
         </section>
     </div>
@@ -157,6 +155,33 @@
                 }
             }
 
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('total-proyectos').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["En revision", "Aprobado"],
+                datasets: [{
+                    label: 'Horas',
+                    data: [2, 3],
+                    backgroundColor: [
+                        '#3E5366',
+                        '#0FA987'
+                    ],
+                    borderColor: [
+                        '#ffffffff'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right'
+                }
+            }
         });
     </script>
     @endsection

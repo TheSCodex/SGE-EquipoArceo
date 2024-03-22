@@ -13,18 +13,17 @@ class StudentListController extends Controller
     {
         $role = "estudiante";
         $interns = User::whereHas("role", function ($query) use ($role) {
-            $query->where("title", $role);
-        })->get();
-
-        dd($interns);
-
+                $query->where("title", $role);
+            })
+            ->with("interns.studentStatus", "interns.penalization")
+            ->paginate(10);
+    
         return view('Michell.studentList.studentList', compact("interns"));
     }
 
     public function edit(int $id)
     {
         $student = User::find($id);
-        dd($student);
         return view("Michell.studentList.editStudent");
     }
 

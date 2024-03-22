@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\companiesController;
 use App\Http\Controllers\Pipa\RoleController;
 use App\Http\Controllers\Pipa\UserController;
 use App\Http\Controllers\Luis\BooksController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\Michell\StudentController;
 use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\Elizabeth\companiesController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Pipa\ChangePasswordController;
@@ -36,6 +36,7 @@ use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\DirectorAssistantController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
+
 
 
 use Illuminate\Support\Facades\Auth; // Para el sistema de autenticación
@@ -111,6 +112,16 @@ Route::middleware('auth')->group(function () {
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
+
+        //Ruta de los alumnos del asesor
+        Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search');
+
+        Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados');
+        
+        Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon');
+        Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria');
+        Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba');
+        
         // ! Ruta de las observaciones del asesor
         Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
@@ -181,10 +192,11 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos');
-        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
-        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
-        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
-        Route::get('/director/estudiantes', [StudentListController::class, 'index'])->name('director.estudiantes');
+        Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion');
+        Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+        
+        Route::get('/director/estudiantes/', [StudentListController::class, 'index'])->name('director.estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
 
@@ -221,9 +233,9 @@ Route::middleware('auth')->group(function () {
         // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
         Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search');
 
-        Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
-        Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
-        Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+        Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion');
+        Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
+        Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
 
@@ -242,10 +254,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('panel-roles', RoleController::class)->names('panel-roles');
 
         // Rutas para CRUD de Empresas
-        Route::resource('/panel-companies', companiesController::class)->names(['index'=>'companies.index']);
-        Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-        Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
-
+        Route::resource('/panel-companies', CompaniesController::class)->names(['index'=>'companies.index']);
+        Route::get('/panel-companies-create', [CompaniesController::class, 'create'])->name('companies_form');
+        Route::get('/panel-companies/{id}/edit', [CompaniesController::class, 'edit'])->name('panel-companies.edit');
 
         // RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
         Route::resource('/panel-advisors', AdvisorController::class)->names('panel-advisors');
