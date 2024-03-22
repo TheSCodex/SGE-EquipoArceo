@@ -19,12 +19,9 @@ class ReportsController extends Controller
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
         $career = Career::find($interns[0]->career_id);
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData->id)
-        ->orWhere('directorAsistant_id', $userData->id)
-        ->get();
-        $director = User::find($division[0]->director_id);
+        $academie = Academy::find($career->academy_id);
+        $division = Division::find($academie->division_id);
+        $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career' ));
         return $pdf->stream();
@@ -55,12 +52,10 @@ class ReportsController extends Controller
     {
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData->id)
-        ->orWhere('directorAsistant_id', $userData->id)
-        ->get();
-        $director = User::find($division[0]->director_id);
+        $career = Career::find($interns[0]->career_id);
+        $academie = Academy::find($career->academy_id);
+        $division = Division::find($academie->division_id);
+        $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns' ));
         return $pdf->stream();
@@ -79,12 +74,11 @@ class ReportsController extends Controller
     public function printReportCartaMemoria(string $id)
     {
         $student = User::find($id);
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData->id)
-        ->orWhere('directorAsistant_id', $userData->id)
-        ->get();
-        $director = User::find($division[0]->director_id);
+        $interns = Intern::where('user_id', $id)->get();
+        $career = Career::find($interns[0]->career_id);
+        $academie = Academy::find($career->academy_id);
+        $division = Division::find($academie->division_id);
+        $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division' ));
         return $pdf->stream();

@@ -62,9 +62,8 @@
         </p>
     </div>
     <div style="font-weight:bolder; margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
-        <p style="margin-bottom: 2px; margin-top:2px; ">NOMBRE DEL DIRECTOR </p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">DIRECTOR DE LA CARRERA DE </br> DIVISIÓN:
-            <span style="text-decoration: underline">{{$director->name}} {{$director->last_name}}</span>
+        <p style="margin-bottom: 2px; margin-top:2px; text-transform: uppercase;">{{$director->name}} {{$director->last_name}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px; text-transform: uppercase; ">DIRECTOR DE LA CARRERA DE </br> {{$division->name}}
          </p>
         <p style="margin-bottom: 2px; margin-top:2px; ">P R E S E N T E</p>
     </div>

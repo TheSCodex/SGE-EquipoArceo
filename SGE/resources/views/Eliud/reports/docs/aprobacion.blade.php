@@ -50,7 +50,7 @@
 
     <div style="width:100%">
         <p id='Title' style="text-transform: uppercase; font-weight:bolder;text-align:center; font-size:12pt; margin-top:10px; marger: 10px;">
-            DIRECCIÓN DE LA {{($division[0]->name)}}
+            DIRECCIÓN DE LA {{($division->name)}}
         </p>
     </div>
 

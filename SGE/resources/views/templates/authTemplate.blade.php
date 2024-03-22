@@ -78,9 +78,7 @@
                 <li>
                     <a href="{{ route('inicio-director') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
                 </li> 
-                <li>
-                    <a href="{{route('director.estudiantes')}}" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
-                </li>
+                <li></li>
                 <li>
                     <a href="{{ route('anteproyectos') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
