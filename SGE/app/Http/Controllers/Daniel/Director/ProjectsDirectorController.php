@@ -14,7 +14,7 @@ class ProjectsDirectorController extends Controller
     public function index()
     {
         $projects = Project::with('adviser')->paginate(10);
-        return view('daniel.presidenta.project')->with('proyectos');
+        return view('daniel.directorAcademy.projects')->with('projects', $projects);
     }
     /**
      * Show the form for creating a new resource.

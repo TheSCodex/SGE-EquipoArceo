@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\Daniel\Asesor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academy;
 use Illuminate\Http\Request;
-
 use App\Models\AcademicAdvisor;
-use App\Models\BusinessSector;
-use Illuminate\Support\Facades\Auth;
 use App\Models\BusinessAdvisor;
+use App\Models\BusinessSector;
+use App\Models\Career;
+use App\Models\Division;
 use App\Models\Company;
 use App\Models\Intern;
 use App\Models\Project;
+use App\Models\User;
 use App\Models\Comment;
-
-
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProjectDraftController extends Controller
 {
@@ -25,12 +27,15 @@ class ProjectDraftController extends Controller
     {   
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
-        $intern = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
-        if(!$intern){
+        
+        $interns = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
+        
+        if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
         }
-        $projectId = $intern->project_id;
-        $project = Project::where("id", $projectId)->first();
+        
+        $projectId = $interns->project_id;
+        $project = Project::find($projectId);
 
         $businessSector = null;
         $businessAdvisor = null;
@@ -38,29 +43,42 @@ class ProjectDraftController extends Controller
     
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
-    
+            //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
-                if ($company) {
-                    $businessSector = BusinessSector::find($company->business_sector_id);
-                }
+                //dd($company);
             }
         }
     
         $comments = Comment::where("project_id", $projectId)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
+
+        $project = Project::find($interns->project_id);
     
-        return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
+        if (!$project) {
+            return view('Daniel.Projects.ProjectView');
+        }
+    
 
-    }
+        
+        $user = User::where("id", $interns->user_id)->first();
+        
+        // dd($user);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // $comments = Comment::where("project_id", $intern->project_id)->get();
+        // $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
+        // $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+
+        $career = Career::where("id", $interns->career_id)->first();
+        
+        if(!$career || !$career->academy_id){
+            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+        }
+        $academy = Academy::where("id", $career->academy_id)->first();
+        $division = Division::where("id", $academy->division_id)->first();
+        // return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
+        return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
     }
 
     /**
@@ -68,24 +86,32 @@ class ProjectDraftController extends Controller
      */
     public function store(Request $request)
     {
-    
+        // Validar los datos del formulario
         $request->validate([
-            'id_academic_advisor' => 'required',
-            ]);
-    
-        // Create new instance of your model
-        $ProjectAdvisorLikes = new ProjectAdvisorLikes();
-    
-        // Assign values to the model properties
-        $ProjectAdvisorLikes->id_projects = $request->id_projects;
-        $ProjectAdvisorLikes->id_academic_advisor = $request->id_academic_advisor;
-    
-        // Save the model to the database
-        $ProjectAdvisorLikes->save();
-    
-        // Optionally, you can return a response indicating success
-        return response()->json(['message' => 'Items added successfully'], 200);
-        
+            'content' => 'required',
+        ]);
+
+        // Obtener el ID del usuario autenticado
+        $academicAdvisorId = Auth::id();
+
+        // Obtener el ID del proyecto desde la URL
+        $projectId = $request->input('project_id');
+
+        // Obtener el ID del intern relacionado con el proyecto
+        $internId = Intern::where('project_id', $projectId)->value('id');
+
+        // Crear un nuevo comentario
+        $comment = new Comment();
+        $comment->content = $request->input('content');
+        $comment->fecha_hora = Carbon::now(); // Fecha y hora actual
+        $comment->status = 1; // Estado del comentario
+        $comment->academic_advisor_id = $academicAdvisorId;
+        $comment->project_id = $projectId;
+        $comment->interns_id = $internId;
+        $comment->save();
+
+        // Redirigir a la página anterior o a donde desees
+        return redirect()->back()->with('success', 'Comentario añadido correctamente.');
     }
 
     /**
@@ -96,27 +122,5 @@ class ProjectDraftController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    // Métodos adicionales como create, edit, update, destroy, etc.
 }

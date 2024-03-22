@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
 
         // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
         Route::get('/', [StudentController::class, "studentHome"])->name('inicio-estudiante');   
+        
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
         
@@ -110,9 +111,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
-        
         // ! Ruta de las observaciones del asesor
-        //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
+        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades');
@@ -128,7 +128,8 @@ Route::middleware('auth')->group(function () {
 
     });
 
-
+        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
+        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
 
 
 
