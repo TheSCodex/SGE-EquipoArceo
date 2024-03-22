@@ -25,7 +25,13 @@ class PresidentOfTheAcademy extends Controller
         $advisors = AcademicAdvisor::all();
         $businessConsultants = User::where('rol_id', 7)->get();
         $votes=Project::sum('like');
-        $dataStudents = Intern::with('user', 'academicAdvisor.user')->get();
+        // $dataStudents = Intern::with('user', 'academicAdvisor.user')->get();
+        
+        $dataStudents = User::join('interns', 'users.id', '=', 'interns.user_id')
+            ->whereNull('interns.project_id')
+            ->select('users.name')
+            ->get();
+        
         return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes', 'dataStudents'));
     }
 

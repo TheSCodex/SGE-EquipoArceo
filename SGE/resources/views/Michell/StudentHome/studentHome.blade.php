@@ -115,7 +115,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>{{ $advisor->academicAdvisor->user->name }}</p>
+                    <p>{{ $advisor->advisor_name }}</p>
                 </div>
             </div>
 
@@ -132,7 +132,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>{{ $advisor->businessAdvisor->adviser->name }}</p>
+                    <p>{{ $advisor->advisor_name }}</p>
                 </div>
             </div>
 
@@ -142,7 +142,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
-                        <h3 class="text-darkBlue text-sm font-bold mb-2">Hoy 15/02/2024</h3>
+                        <h3 class="text-darkBlue text-sm font-bold mb-2">Hoy 15/05/2024</h3>
                         <ol class="border-l border-dashed border-primaryColor font-roboto">
                             <li>
                                 <div class="flex-start flex items-center pt-3">
@@ -171,7 +171,7 @@
                         </ol>
                     </div>
                     <div class="">
-                        <h3 class="text-darkBlue font-bold text-sm  mb-2">Martes 20/02/2024</h3>
+                        <h3 class="text-darkBlue font-bold text-sm  mb-2">Martes 20/07/2024</h3>
                         <ol class="border-l border-dashed border-primaryColor font-roboto">
                             <li>
                                 <div class="flex-start flex items-center pt-3">
@@ -203,7 +203,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <a href="estudiante/actividades"
+                    <a href="estudiante/calendario"
                         class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3">
                         Ver más
                     </a>

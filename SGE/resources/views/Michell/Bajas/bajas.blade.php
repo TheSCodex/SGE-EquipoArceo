@@ -55,6 +55,7 @@
                         </table>
                         <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">Datos no encontrados</p>
                     </section>
+                    {{$dataStudents->links()}}
                 </section>
             </div>
         </div>
