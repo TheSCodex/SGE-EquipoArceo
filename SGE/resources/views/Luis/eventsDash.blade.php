@@ -106,6 +106,16 @@
         </script>
     @endif
 
+    @if (session('cancel_success'))
+        <script>
+            Swal.fire({
+                title: "Cancelado!",
+                text: "{{ session('cancel_success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+
     @if (session('edit_success'))
         <script>
             Swal.fire({
