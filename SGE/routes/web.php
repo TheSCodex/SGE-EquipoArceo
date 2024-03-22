@@ -111,6 +111,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
+
+        //Ruta de los alumnos del asesor
+        Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados');
         
         // ! Ruta de las observaciones del asesor
         //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
