@@ -18,6 +18,7 @@
                     </p>
                 @enderror
             </div>
+            <div class="w-full space-y-2">
                 <p class="text-sm">Correo Electrónico</p>
                 <input type="email" name="email" value="{{ old('email') }}" class="text-sm w-full rounded-md border-lightGray border px-[2%] py-[1%]" placeholder="Correo">
                 @error('email')

@@ -37,7 +37,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
+                    {{-- <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
@@ -48,7 +48,7 @@
                     <td class="font-roboto font-bold py-5">{{ $company['email'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['phone'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
-                  <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td> 
+                  {{-- <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td>  --}}
 
                     <td class="font-roboto font-bold py-5">
                         <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">

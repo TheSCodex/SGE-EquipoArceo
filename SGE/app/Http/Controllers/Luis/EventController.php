@@ -100,7 +100,7 @@ class EventController extends Controller
                 //     $event->save();
                 // }
                 // if($event->date_start <= now() && $event->date_end >= now()){
-                //     $event->status = 'En proceso';
+                //     $event->status = 'En curso';
                 //     $event->save();
                 // }
             }

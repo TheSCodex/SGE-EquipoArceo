@@ -176,10 +176,10 @@ Route::middleware('auth')->group(function () {
 
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos');
-
         Route::get('/Download/SancionView', [ReportsController::class, 'printReport'])->name('download.sansion');
         Route::get('/Download/MemoriaView', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+        Route::get('/director/estudiantes', [StudentListController::class, 'index'])->name('director.estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
     });
