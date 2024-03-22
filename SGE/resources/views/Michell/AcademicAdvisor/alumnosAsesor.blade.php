@@ -42,8 +42,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                 <td>
                                     <div class="flex gap-3 justify-center">
-                                        <a href="" class="bg-green text-white px-5 py-1 text-sm rounded-md">
-                                            Generar
+                                        <a href="{{route('download.sanon', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Sansion
+                                        </a>
+                                        <a href="{{route('download.meria', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Carta
+                                        </a>
+                                        <a href="{{route('download.aproba', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Aprobacion
                                         </a>
 
                                         {{-- <form action="{{ route('intern.destroy', $intern->id) }}" method="POST">
