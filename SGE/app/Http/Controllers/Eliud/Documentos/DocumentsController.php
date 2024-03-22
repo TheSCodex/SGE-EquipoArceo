@@ -23,6 +23,8 @@ class DocumentsController extends Controller
             ['titulo' => 'Reporte de libros', 'descripcion' => 'Los libros totales al...', 'destinatario' => 'rarceo@utcancun.edu.mx', 'origen' => 'Elsa Rios'],
         ];
     
+        //$docs = Docs::paginate(10);
+
         return view('Eliud.crud.crud', compact('docs'));
     }
 
