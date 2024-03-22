@@ -43,9 +43,6 @@
                 </div>
             </div>
             <!-- Elementos que se mostrarán solo en dispositivos móviles -->
-            <div class="flex justify-between mx-auto mt-2 md:hidden">
-                <a href="" class="px-4 py-2 ml-2 text-lg text-white rounded-md bg-green">Generar Nuevo Documento</a>
-            </div>
         </div>
         <div class="flex items-center justify-between w-11/12 mx-auto mt-6">
             {{-- cards --}}
@@ -58,8 +55,8 @@
                             <p class="text-sm text-gray-500">Destinatario: {{ $doc['destinatario'] }}</p>
                             <p class="text-sm text-gray-500">{{ $doc['origen'] }}</p>
                             <div class="flex justify-end mt-4">
-                                <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                                <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
+                                <img src="/img/logos/trash.svg" alt="Edit" class="cursor-pointer">
+                                <img src="/img/logos/descarga.png" alt="Delete" class="ml-2 cursor-pointer">
                             </div>
                         </div>
                     @endforeach
