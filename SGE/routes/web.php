@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\companiesController;
 use App\Http\Controllers\Pipa\RoleController;
 use App\Http\Controllers\Pipa\UserController;
 use App\Http\Controllers\Luis\BooksController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\Michell\StudentController;
 use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\Elizabeth\companiesController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Pipa\ChangePasswordController;
