@@ -1,4 +1,4 @@
-@extends('templates.administratorTemplate')
+@extends('templates/authTemplate')
 @section('titulo')
   CRUD CARRERAS
 @endsection
@@ -44,7 +44,7 @@
                         <td class=" px-3">{{ $company->registration_date }}</td>
                         <td class="  p-1">{{ $company->address }}</td>
                         <td class=" px-3">{{ $company->rfc }}</td>
-                        <td class=" px-3">{{ $company->businessSector ? $company->businessSector->title : 'Hoteleria' }}</td>
+                        {{-- <td class=" px-3">{{ $company->businessSector ? $company->businessSector->title : 'Hoteleria' }}</td> --}}
                         <td >
                             <div class=" flex flex-row">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1DAF90" fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'email' => 'bail|required',
             'rol_id' => 'bail|required',
             'identifier' => 'bail|required',
-            // 'career_academy_id' => 'bail|required'
+            'career_id' => 'bail|required'
         ];
     }
 }

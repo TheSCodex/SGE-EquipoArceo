@@ -11,11 +11,21 @@ class StudentListController extends Controller
 {
     public function index()
     {
-        $interns = Intern::with("user", "studentStatus")->get();
+        $role = "estudiante";
+        $interns = User::whereHas("role", function ($query) use ($role) {
+            $query->where("title", $role);
+        })->get();
 
-        // dd($interns);
+        dd($interns);
 
         return view('Michell.studentList.studentList', compact("interns"));
+    }
+
+    public function edit(int $id)
+    {
+        $student = User::find($id);
+        dd($student);
+        return view("Michell.studentList.editStudent");
     }
 
     public function destroy(int $id) 

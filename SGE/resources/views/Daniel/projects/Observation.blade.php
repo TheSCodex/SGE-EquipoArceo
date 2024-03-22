@@ -1,12 +1,12 @@
-@extends('./templates/studenTemplate')
+@extends('templates/authTemplate')
 @section('titulo')
     Observaciones
 @endsection
 
 @section('contenido')
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow bg-gray-100">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-<div class="bg-gray-100">
+<div class="">
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
             Observaciones

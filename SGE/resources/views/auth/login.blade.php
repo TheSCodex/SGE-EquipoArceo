@@ -27,7 +27,7 @@
                 <div class="relative">
                     <input type="password" id="user_password" name="password" value="{{ old('password') }}" placeholder="Contraseña" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-800 leading-tight focus:outline-none focus:shadow-outline font-montserrat">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                        <img src="/img/eye.png" id="togglePasswordVisibility" class="w-6 cursor-pointer" alt="">
+                        <img src="/img/invisible.png" id="togglePasswordVisibility" class="w-6 cursor-pointer" alt="">
                     </div>
                 </div>
                 @error('password')
@@ -45,10 +45,14 @@
 <script>
     document.getElementById("togglePasswordVisibility").addEventListener("click", function() {
         var passwordInput = document.getElementById("user_password");
+        var passwordImg = document.getElementById("togglePasswordVisibility");
+
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
+            passwordImg.src = "/img/visible.png";
         } else {
             passwordInput.type = "password";
+            passwordImg.src = "/img/invisible.png";
         }
     });
 </script>

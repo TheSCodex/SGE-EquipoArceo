@@ -1,4 +1,4 @@
-@extends('../templates/guestTemplate')
+@extends('templates/authTemplate')
 @section('titulo')
     Cambiar Contraseña
 @endsection

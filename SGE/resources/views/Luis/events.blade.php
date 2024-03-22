@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    @extends('templates.academicAdvisorTemplate')
+    @extends('templates/authTemplate')
     @section('contenido')
     <main class="bg-white h-screen flex flex-col justify-center items-center">
         <div class="flex justify-between items-center p-5 border-b-2 space-x-16 lg:space-x-96">

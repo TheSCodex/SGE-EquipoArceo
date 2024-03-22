@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Luis\BookFormRequest;
+use App\Models\AcademicAdvisor;
 use App\Models\Book;
 use App\Models\Intern;
 use App\Models\User;
@@ -16,7 +17,6 @@ class BooksController extends Controller
      */
     public function index()
     {
-
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
@@ -47,32 +47,74 @@ class BooksController extends Controller
      */
     public function store(BookFormRequest $request)
     {
-
+        
         $books = new \App\Models\Book;
         $books->title = $request->title;
         $books->author = $request->author;
         $books->isbn = $request->isbn;
-        $books->save();
-
+    
+        $problems = [];
+        $allUsersExistAndAreInterns = true;
+        $interns = [];
+    
         $identifierInterns = $request->identifier_student;
-        $identifiers = explode(', ', $identifierInterns);
+        $identifiers = preg_split('/,\s*/', $request->identifier_student); // Usar expresión regular para dividir la cadena
         foreach ($identifiers as $identifier) {
             $user = User::where('identifier', $identifier)->first();
-            $intern = Intern::where('user_id', $user->id)->first();
-            $lastBook = Book::latest()->first();
+            if ($user == null) {
+                $problems[] = "El usuario con identificador $identifier no existe";
+                $allUsersExistAndAreInterns = false;
+            } else {
+                $intern = Intern::where('user_id', $user->id)->first();
+                // dd($intern);
+                if ($intern->book_id != null) {
+                    $problems[] = "El usuario con identificador $identifier ya está asociado a otro libro";
+                } 
+                if ($intern === null) {
+                    $problems[] = "El usuario con identificador $identifier no es un estudiante";
+                    $allUsersExistAndAreInterns = false;
+                } else {
+                    $interns[] = $intern;
+                }
+            }
+        }
+
+        if (!$allUsersExistAndAreInterns) {
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
+        }
+        if (count($problems) > 0) {
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
+        }
+    
+        // Aquí guarda el libro y los internos
+        $books->save();
+        $lastBook = Book::latest()->first();
+        foreach ($interns as $intern) {
             $intern->book_id = $lastBook->id;
-            // dd($intern);
             $intern->save();
         }
+    
         return redirect('asistente/libros')->with('success', 'El libro se ha agregado correctamente');
     }
+    
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $book = Book::find($id);
+        $interns = Intern::with('user')->where('book_id', $id)->get();
+        $internsIdentifier = [];
+        foreach ($interns as $intern) {
+            $user = User::where('id', $intern['user_id'])->first();
+            $internsIdentifier[] = $user['identifier'];
+            if ($intern['academic_advisor_id'] != null) {
+                $academicAdvisor = AcademicAdvisor::with('user')->where('id', $intern['academic_advisor_id'])->first();
+                $intern['academic_advisor'] = $academicAdvisor;
+            }
+        }
+        return view('Luis.showBook', compact('book', 'internsIdentifier', 'interns'));
     }
 
     /**
@@ -94,37 +136,68 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BookFormRequest $request, string $id):RedirectResponse
+    public function update(BookFormRequest $request, string $id): RedirectResponse
     {
-        $book=Book::find($id);
-        
-        $identifierInterns = $request->identifier_student;
-        $identifiers = explode(', ', $identifierInterns);
-        
-        // Obtener todos los interns asociados con el libro
-        $interns = Intern::where('book_id', $id)->get();
+        $book = Book::find($id);
+    
+        // Validar identificadores de estudiantes
+        $problems = [];
+        $identifiers = preg_split('/,\s*/', $request->identifier_student); // Usar expresión regular para dividir la cadena
+        foreach ($identifiers as $identifier) {
+            $user = User::where('identifier', $identifier)->first();
+            if ($user === null) {
+                $problems[] = "El usuario con identificador $identifier no existe";
+            } else {
+                $intern = Intern::where('user_id', $user->id)->first();
+                if ($intern === null) {
+                    $problems[] = "El usuario con identificador $identifier no es un estudiante";
+                } else if ($intern->book_id != null && $intern->book_id != $id) {
+                    $problems[] = "El usuario con identificador $identifier ya está asociado a otro libro";
+                }
+            }
+        }
+    
+        if (!empty($problems)) {
+            return redirect()->back()->withInput()->with('problems', $problems);
+        }
 
+        // Desvincular estudiantes anteriores y vincular nuevos estudiantes
+        $this->updateInterns($id, $identifiers);
+    
+        // Actualizar el libro
+        $book->update($request->all());
+    
+    
+        return redirect()->route('libros-asistente.index')->with('edit_success', 'El libro ha sido editado correctamente');
+    }
+    
+    
+    private function updateInterns(string $bookId, array $identifiers): void
+    {
+        // Obtener todos los interns asociados con el libro
+        $interns = Intern::where('book_id', $bookId)->get();
+    
         // Recorrer todos los interns
         foreach ($interns as $intern) {
-            $identifierUser = User::where('id', $intern->user_id)->first();
-            if (!in_array($identifierUser['identifierUser'], $identifiers)) {
+            $user = User::find($intern->user_id);
+            $identifierUser = $user->identifier;
+            if (!in_array($identifierUser, $identifiers)) {
+                // Desvincular intern si no está en la lista de identificadores
                 $intern->book_id = null;
                 $intern->save();
             }
         }
-
-        // dd($identifiers);
+        // Vincular nuevos interns
         foreach ($identifiers as $identifier) {
             $user = User::where('identifier', $identifier)->first();
             $intern = Intern::where('user_id', $user->id)->first();
-            $intern->book_id = $id;
-            // dd($intern);
-            $intern->save();
+            if ($intern->book_id === null) {
+                $intern->book_id = $bookId;
+                $intern->save();
+            }
         }
-        
-        $book->update($request->all());
-        return redirect()->route('libros-asistente.index')->with('edit_success', 'El libro ha sido editado correctamente');
     }
+    
 
     /**
      * Remove the specified resource from storage.
