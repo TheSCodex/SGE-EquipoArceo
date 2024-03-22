@@ -62,9 +62,9 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Editar</th> 
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start ">Eliminar</th> 
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                     </tr>
                     @foreach ($careers as $career)
                     <tr>
@@ -117,6 +117,7 @@
                     </tr>
                     @endforeach
                 </table>
+                {{$careers->links()}}
             </div>
         </div>
     </div>
