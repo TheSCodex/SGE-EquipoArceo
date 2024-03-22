@@ -36,8 +36,7 @@ class carrerasController extends Controller
      */
     public function create()
     {
-        $careers = Career::all();
-        return view('Elizabeth.cruds.newCareer',compact('careers'));
+        return view('Elizabeth.cruds.newCareer');
     }
     
 
@@ -52,8 +51,6 @@ class carrerasController extends Controller
     ]);
 
     $division = Division::where('name', $validatedData['division'])->first();
-    
-
 
     $career = new Career();
     $career->name = $validatedData['name'];
