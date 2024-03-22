@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Daniel\Asesor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\AcademicAdvisor;
-use App\Models\BusinessSector;
-use Illuminate\Support\Facades\Auth;
 use App\Models\BusinessAdvisor;
+use App\Models\BusinessSector;
 use App\Models\Company;
 use App\Models\Intern;
 use App\Models\Project;
 use App\Models\Comment;
-
-
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProjectDraftController extends Controller
 {
@@ -26,11 +24,13 @@ class ProjectDraftController extends Controller
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         $intern = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
+        
         if(!$intern){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
         }
+        
         $projectId = $intern->project_id;
-        $project = Project::where("id", $projectId)->first();
+        $project = Project::find($projectId);
 
         $businessSector = null;
         $businessAdvisor = null;
@@ -52,15 +52,6 @@ class ProjectDraftController extends Controller
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
     
         return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'businessSector', 'commenters'));
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -68,24 +59,32 @@ class ProjectDraftController extends Controller
      */
     public function store(Request $request)
     {
-    
+        // Validar los datos del formulario
         $request->validate([
-            'id_academic_advisor' => 'required',
-            ]);
-    
-        // Create new instance of your model
-        $ProjectAdvisorLikes = new ProjectAdvisorLikes();
-    
-        // Assign values to the model properties
-        $ProjectAdvisorLikes->id_projects = $request->id_projects;
-        $ProjectAdvisorLikes->id_academic_advisor = $request->id_academic_advisor;
-    
-        // Save the model to the database
-        $ProjectAdvisorLikes->save();
-    
-        // Optionally, you can return a response indicating success
-        return response()->json(['message' => 'Items added successfully'], 200);
-        
+            'content' => 'required',
+        ]);
+
+        // Obtener el ID del usuario autenticado
+        $academicAdvisorId = Auth::id();
+
+        // Obtener el ID del proyecto desde la URL
+        $projectId = $request->input('project_id');
+
+        // Obtener el ID del intern relacionado con el proyecto
+        $internId = Intern::where('project_id', $projectId)->value('id');
+
+        // Crear un nuevo comentario
+        $comment = new Comment();
+        $comment->content = $request->input('content');
+        $comment->fecha_hora = Carbon::now(); // Fecha y hora actual
+        $comment->status = 1; // Estado del comentario
+        $comment->academic_advisor_id = $academicAdvisorId;
+        $comment->project_id = $projectId;
+        $comment->interns_id = $internId;
+        $comment->save();
+
+        // Redirigir a la página anterior o a donde desees
+        return redirect()->back()->with('success', 'Comentario añadido correctamente.');
     }
 
     /**
@@ -96,27 +95,5 @@ class ProjectDraftController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    // Métodos adicionales como create, edit, update, destroy, etc.
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('status')->nullable();
             $table->integer('academic_advisor_id')->nullable()->index('academic_advisor_id');
             $table->integer('project_id')->nullable()->index('project_id');
+            $table->integer('interns_id')->nullable()->index('interns_id');
+
             $table->integer('parent_comment_id')->nullable();
             $table->timestamps();
 
