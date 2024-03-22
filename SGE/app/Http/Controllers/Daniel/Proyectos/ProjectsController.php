@@ -34,13 +34,13 @@ class ProjectsController extends Controller
         // dd($intern);
     
         if (!$intern || !$intern->project_id) {
-            return view('Daniel.Projects.ProjectView')->with('message', 'No intern record or project ID found.');
+            return view('Daniel.Projects.ProjectView');
         }
     
         $project = Project::find($intern->project_id);
     
         if (!$project) {
-            return view('Daniel.Projects.ProjectView')->with('message', 'Project not found.');
+            return view('Daniel.Projects.ProjectView');
         }
     
         if ($project->adviser_id) {
@@ -54,12 +54,17 @@ class ProjectsController extends Controller
         
         $user = User::where("id", $userId)->first();
         // dd($user);
-        $career = Career::where("id", $user->career_id)->first();
-        //dd($career);
-        $division = Division::where("id", $career->division_id)->first();
+
         $comments = Comment::where("project_id", $intern->project_id)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+
+        $career = Career::where("id", $user->career_id)->first();
+        //dd($career);
+        if(!$career || !$career->division_id){
+            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+        }
+        $division = Division::where("id", $career->division_id)->first();
     
         return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
     }
