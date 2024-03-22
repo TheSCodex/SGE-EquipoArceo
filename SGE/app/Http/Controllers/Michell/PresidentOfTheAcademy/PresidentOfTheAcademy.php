@@ -39,7 +39,7 @@ class PresidentOfTheAcademy extends Controller
      */
     public function create()
     {
-        //
+        return view('Michell.PresidentOfTheAcademy.AdvisorForm');
     }
 
     /**

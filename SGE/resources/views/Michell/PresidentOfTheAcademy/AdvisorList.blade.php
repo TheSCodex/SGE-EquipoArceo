@@ -11,7 +11,7 @@
                 <section class="space-y-6 max-md:mt-5">
                     <div class="md:flex items-center justify-between max-md:space-y-2 border-b pb-3">
                         <h1 id="tableTitle" class="text-xl font-bold">Lista de asesores</h1>
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-evenly w-1/3">
                             {{-- Buscador --}}
                             <div class="flex items-center border border-primaryColor rounded-md px-4">
                                 <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscador"
@@ -22,6 +22,7 @@
                                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                 </svg>
                             </div>
+                            <button class="bg-[#02AB82] p-2 rounded-lg text-white" onclick="location.href='lista-asesores'">Crear asesor</button>
                         </div>
                     </div>
                     <section class="font-bold text-sm md:space-x-6 space-x-2">
