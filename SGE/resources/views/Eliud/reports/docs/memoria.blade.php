@@ -62,14 +62,14 @@
         </p>
     </div>
     <div style="font-weight:bolder; margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
-        <p style="margin-bottom: 2px; margin-top:2px; ">NOMBRE DEL DIRECTOR </p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">DIRECTOR DE LA CARRERA DE </br> DIVISIÓN </p>
+        <p style="margin-bottom: 2px; margin-top:2px; text-transform: uppercase;">{{$director?->name}} {{$director?->last_name}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px; text-transform: uppercase; ">DIRECTOR DE LA CARRERA DE </br> {{$division?->name}}
+         </p>
         <p style="margin-bottom: 2px; margin-top:2px; ">P R E S E N T E</p>
     </div>
-
     <p
         style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none;">
-        Sirva la presente para informarle que el (la) estudiante ______________________________ ha concluido satisfactoriamente la elaboración de su memoria titulada ____________________________________________________
+        Sirva la presente para informarle que el (la) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> ha concluido satisfactoriamente la elaboración de su memoria titulada ____________________________________________________
         que como requisito para la conclusión de su estadía y proceso de titulación establece la normatividad de la
         Universidad Tecnológica de Cancún.
 

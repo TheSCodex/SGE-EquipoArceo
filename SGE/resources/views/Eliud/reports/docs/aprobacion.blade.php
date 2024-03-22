@@ -49,8 +49,8 @@
     </div>
 
     <div style="width:100%">
-        <p style=" font-weight:bolder;text-align:center; font-size:12pt; margin-top:10px; marger: 10px;">
-            DIRECCIÓN DE LA DIVISIÓN ______________________________
+        <p id='Title' style="text-transform: uppercase; font-weight:bolder;text-align:center; font-size:12pt; margin-top:10px; marger: 10px;">
+            DIRECCIÓN DE LA {{($division?->name)}}
         </p>
     </div>
 
@@ -70,10 +70,10 @@
 
 
     <p
-        style="width: 100%; text-align:justify;width:100%; margin-top:20px; margin-top:10px; marger: 10px;line-height: none; ">
-        Se autoriza al (a) estudiante ___________________________ del grupo________ <br style="margin:10px"></br> con
+        style="line-height: 25px ;width: 100%; text-align:justify;width:100%; margin-top:20px; margin-bottom:10px; marger: 10px;line-height: none; ">
+        Se autoriza al (a) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
         número de matrícula:
-        ____________ la digitalización de la MEMORIA en <br style="margin:10px"></br> modalidad:
+        <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
     </p>
 
     <div style="position:absolute; width:100% ; margin: 10px; left:95;">
@@ -179,6 +179,8 @@
     </div>
 
     </div>
+
+    
 </body>
 
 </html>
