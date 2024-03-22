@@ -110,9 +110,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
-        
         // ! Ruta de las observaciones del asesor
-        //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
+        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades');
