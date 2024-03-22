@@ -11,7 +11,7 @@
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Carrera</p>
-                    <input type="text" name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    <input type="text" name="division" value="{{ old('division_id') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
                     @error('name')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
@@ -20,8 +20,11 @@
                 </div>
                 <div class=" space-y-2">
                     <p class="text-sm">Division</p>
-                    <input type="text" name="last_name" value="{{old('last_name')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Apellidos">
-                    @error('last_name')
+                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
+                    </select>
+                    @error('division_id')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
@@ -30,27 +33,29 @@
             </div>
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class=" space-y-2">
-                    <p class="text-sm space-y-2">Academia</p>
-                    <input type="text" name="email" value="{{old('email')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Correo">
-                    @error('email')
-                    <p class="text-[#ff0000] text-sm">
-                        {{ $message }}
-                    </p>
-                    @enderror
-                </div>
-                <div class=" space-y-2">
-                    <p class="text-sm">Presidente</p>
                     <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        @foreach($careers as $career)
-                            <option value="{{ $career->id }}">{{ $career->title }}</option>
-                        @endforeach
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
                     </select>
-                    @error('careers_id')
+                    @error('division_id')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
                     @enderror
                 </div>
+                <div class="space-y-2">
+                    <p class="text-sm">Presidente</p>
+                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
+                    </select>
+                    @error('division_id')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+                
             </div>
 
             <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>

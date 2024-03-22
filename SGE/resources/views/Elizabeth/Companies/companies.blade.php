@@ -1,14 +1,10 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Panel de Compañias')
 @section('contenido')
-<<<<<<< HEAD
 
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
-
-=======
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <main class="flex flex-col justify-center items-center min-h-full flex-grow">
->>>>>>> 2e724b218b07d6c31b330c7c34a09039104a15d7
+
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>

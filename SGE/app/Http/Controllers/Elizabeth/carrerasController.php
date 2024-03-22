@@ -27,7 +27,7 @@ class carrerasController extends Controller
     $presidents = User::whereIn('id',$divisions->pluck('director_id'))->get();
 
 
-    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'));
+    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'))->with('careers', $careers);
 }
 
 
