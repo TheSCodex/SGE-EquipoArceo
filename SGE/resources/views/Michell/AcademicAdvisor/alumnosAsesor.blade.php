@@ -1,9 +1,9 @@
 @extends('templates/authTemplate')
 @section('contenido')
 
-    <div class="bg-white min-h-screen flex flex-col items-center">
+    <div class="bg-white min-h-screen flex flex-col items-center px-0 lg:px-20">
     <section class="w-full p-4 flex items-center mt-7">
-    <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-right">Estudiantes Asesorados</h1>
+    <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-right ">Estudiantes Asesorados</h1>
         <div class="flex items-center flex-row justify-end">
             <div>
                 <div class="hidden md:flex items-center relative" >
