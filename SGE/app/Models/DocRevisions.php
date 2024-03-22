@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class penalization extends Model
+class DocRevisions extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        "penalty_name",
-        "description"
-    ];
+    protected $table = 'doc_revisions';
+    protected $fillable = ['revision_number', 'revision_id'];
 }
