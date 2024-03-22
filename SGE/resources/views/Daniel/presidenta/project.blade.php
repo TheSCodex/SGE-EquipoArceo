@@ -1,4 +1,4 @@
-@extends('templates/authTemplate')
+    @extends('templates.authTemplate')
 @section('titulo', 'Proyectos')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -45,9 +45,9 @@
                     <p class="text-sm text-gray-500">Asesor Academico: {{ $proyecto->academic_consultant }}</p>
                     <p class="text-sm text-gray-500">Fecha de publicacion: {{ $proyecto->publication_date }}</p>
                     <p class="text-sm text-gray-500">Estado: {{ $proyecto->status }}</p>
-
                 </div>
                 @endforeach
+                {{ $proyectos->links() }}
             </div>
         </div>
         <div class="hidden lg:block w-full">
@@ -133,6 +133,8 @@
             });
         });
     });
+
+
 </script>
 
 @endsection
