@@ -6,14 +6,14 @@
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Asesores Empresariales</h1>
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left ml-20">Lista de Asesores Empresariales</h1>
         <div class="flex items-center flex-row justify-end">
             <div>
                 <div class="hidden md:flex items-center relative" >
                     <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('formAsesores')}}"
+            <a href="{{ route('')}}"
                 class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo asesor
             </a>
         </div>
