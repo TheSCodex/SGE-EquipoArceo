@@ -89,9 +89,9 @@
                 <li>
                     <a href="{{ route('documentos-director.index') }}" class="hover:border-b-2 hover:border-primaryColor">Documentos</a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="#" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
-                </li>
+                </li> --}}
 
                 @elseif($user->rol_id === 5) {{-- ! Rol de Asistente de directora --}}
                 <li>

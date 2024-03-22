@@ -2,7 +2,7 @@
 @section('titulo', 'Panel de Compañias')
 @section('contenido')
 
-<main class="flex flex-col justify-center items-center min-h-full flex-grow">
+<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
 
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+    <div class="mt-6 w-9/12 mx-auto flex items-center justify-between">
         <div class=" max-sm:hidden  w-full">
             <table class="text-left  w-full">
                 <tr>
@@ -121,7 +121,7 @@
         <!-- Display table on larger screens -->
 
     </div>
-</main>
+</section>
 
 <!-- Modal -->
 @foreach ($companies as $index => $company)

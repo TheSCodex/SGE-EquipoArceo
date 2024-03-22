@@ -3,7 +3,7 @@
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <main class="min-h-screen h-full flex flex-col">
 
@@ -83,15 +83,15 @@
                     <div class="hidden lg:block w-full">
                         <table class="text-center w-full">
                             <tr>
-                                <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                                <th class="text-[#ACACAC] font-roboto text-xs">Permisos</th>
+                                <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
+                                <th class="text-[#ACACAC] font-roboto text-xs text-start">Permisos</th>
                                 <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                                 <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                             </tr>
                             @foreach ($roles as $role)
                             <tr>
-                                <td class="font-roboto font-bold py-5">{{ $role->title }}</td>
-                                <td class="font-roboto font-bold py-5">
+                                <td class="font-roboto font-bold py-5 text-start">{{ $role->title }}</td>
+                                <td class="font-roboto font-bold py-5 text-start">
                                     @php
                                     $decodedPermissions = json_decode($role->permissions, true);
                                     @endphp

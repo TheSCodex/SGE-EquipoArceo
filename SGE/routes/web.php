@@ -148,9 +148,13 @@ Route::middleware('auth')->group(function () {
         // Todos los asesores
         Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores');
         // Crear asesor
-        Route::post('/lista-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        Route::get('/crear-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        // guardar asesor
+        Route::post('/crear-asesores',[PresidentOfTheAcademy::class,'store'])->name('asesores.create');
+        // editar asesor
+        Route::get('/editar-asesor/{id}',[PresidentOfTheAcademy::class,'edit'])->name('asesores.update');
         // Actualizar asesor
-        Route::put('/lista-asesores/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
+        Route::put('/editar-asesor/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
         // Eliminar asesor
         Route::delete('/lista-asesores/{id}', [PresidentOfTheAcademy::class,'destroy'])->name('asesores.destroy');
 
@@ -182,6 +186,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/director/estudiantes', [StudentListController::class, 'index'])->name('director.estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
+
+        //bajas
+        Route::get('bajas', [BajasController::class, "index"])->name('bajas-director');
     });
 
     //TODO - Asistente directora
