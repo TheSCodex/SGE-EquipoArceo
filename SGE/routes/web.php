@@ -86,8 +86,9 @@ Route::middleware('auth')->group(function () {
         // Rutas para el formulario de anteproyectos
         Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create');
         Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store');
-        Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto');
-        Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto');
+        Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit');
+        Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update');
+        
         
         //Ruta para las observaciones del estudiante
         Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
@@ -110,6 +111,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
+
+        //Ruta de los alumnos del asesor
+        Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search');
+
+        Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados');
         
         // ! Ruta de las observaciones del asesor
         //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
