@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
 use App\Models\Academy;
+use App\Models\Career;
+use App\Models\Division;
+use App\Models\Intern;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -11,10 +14,19 @@ use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion()
+    public function printReportSancion(string $id)
     {
+        $student = User::find($id);
+        $interns = Intern::where('user_id', $id)->get();
+        $career = Career::find($interns[0]->career_id);
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $division = Division::where('director_id', $userData->id)
+        ->orWhere('directorAsistant_id', $userData->id)
+        ->get();
+        $director = User::find($division[0]->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion');
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career' ));
         return $pdf->stream();
     }
 
@@ -30,6 +42,7 @@ class ReportsController extends Controller
 
     public function printCartaAprobacion()
     {
+        
         $path = public_path('img\Eliud\docs\CartAprobacion.pdf');
 
         return response()->make(file_get_contents($path), 200, [
@@ -38,10 +51,18 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaAprobacion()
+    public function printReportCartaAprobacion(string $id)
     {
+        $student = User::find($id);
+        $interns = Intern::where('user_id', $id)->get();
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $division = Division::where('director_id', $userData->id)
+        ->orWhere('directorAsistant_id', $userData->id)
+        ->get();
+        $director = User::find($division[0]->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion');
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns' ));
         return $pdf->stream();
     }
 
@@ -55,10 +76,17 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaMemoria()
+    public function printReportCartaMemoria(string $id)
     {
+        $student = User::find($id);
+        $user = auth()->user();
+        $userData = User::find($user->id);
+        $division = Division::where('director_id', $userData->id)
+        ->orWhere('directorAsistant_id', $userData->id)
+        ->get();
+        $director = User::find($division[0]->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria');
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division' ));
         return $pdf->stream();
     }
 
