@@ -73,12 +73,12 @@
                     <td class="font-roboto font-bold py-5">{{ $advisor->phone }}</td>
                     <td class="font-roboto font-bold py-5">{{ $advisor->position }}</td>
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
-                        <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-center">
+                        <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-start">
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $advisor->name }}, posición: {{ $advisor->position }}', '{{ $advisor->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $advisor->id }}" action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
+                        <form class="flex justify-start" id="deleteForm{{ $advisor->id }}" action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
