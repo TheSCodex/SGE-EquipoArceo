@@ -36,7 +36,10 @@ class carrerasController extends Controller
      */
     public function create()
     {
-        return view('Elizabeth.cruds.newCareer');
+        $academies = Academy::all();
+        $divisions = Division::all();
+        $presidents = User::all();
+        return view('Elizabeth.cruds.newCareer',compact('academies','divisions','presidents'));
     }
     
 

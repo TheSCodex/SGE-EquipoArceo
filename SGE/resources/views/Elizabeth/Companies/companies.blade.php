@@ -3,9 +3,9 @@
 @section('contenido')
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<main class="flex flex-col justify-center items-center min-h-full flex-grow">
+<main class="flex flex-col justify-start items-center  min-h-full flex-grow">
 
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>
             <div class="flex items-center flex-row justify-end">

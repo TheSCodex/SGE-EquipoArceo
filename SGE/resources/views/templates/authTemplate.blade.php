@@ -149,7 +149,8 @@
         @yield('contenido')
 
     </main>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('resources/js/app.js') }}"></script>
+    
 <script>
     // para mostrar/ocultar el menú en dispositivos móviles
     const toggleMenu = document.getElementById('toggleMenu');
