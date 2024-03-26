@@ -198,6 +198,12 @@ class UserController extends Controller
     public function destroy(string $id):RedirectResponse
     {
         $user = \App\Models\User::find($id);
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->exists();
+        if ($academicAdvisor){
+            return redirect()
+                ->back()
+                ->with('error', 'No puedes eliminar este asesor ya que existe en la tabla de asesores.');
+        }
         $user->delete();
         return redirect()->route('panel-users.index');
     }
