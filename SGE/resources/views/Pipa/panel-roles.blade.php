@@ -91,14 +91,14 @@
                             @foreach ($roles as $role)
                             <tr>
                                 <td class="font-roboto font-bold py-5 text-start">{{ $role->title }}</td>
-                                <td class="font-roboto font-bold py-5 text-start">
+                                <td class="font-roboto py-5 text-start">
                                     @php
                                     $decodedPermissions = json_decode($role->permissions, true);
                                     @endphp
                                     @if ($decodedPermissions)
                                     @foreach($decodedPermissions as $permission => $value)
                                     @if($value)
-                                    {{ $permission }}<br>
+                                    • {{ $permission }}<br>
                                     @endif
                                     @endforeach
                                     @else
