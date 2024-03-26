@@ -39,7 +39,8 @@
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
                     <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
                     <div class="flex justify-end mt-4 space-x-2">
-                        <td>                        <a href="{{route('libros-asistente.show', $user->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                        <td>                        
+                            <a href="{{route('panel-users.show', $user->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
                         </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                             <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
