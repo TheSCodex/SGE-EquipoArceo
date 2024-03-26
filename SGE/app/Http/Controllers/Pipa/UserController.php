@@ -13,6 +13,9 @@ use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
+use App\Models\AcademicAdvisor;
+use Illuminate\Support\Facades\Log;
+
 class UserController extends Controller
 {
     /**
@@ -104,14 +107,41 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(UserRequest $request, string $id):RedirectResponse
     public function update(UserRequest $request, string $id):RedirectResponse
     {
-        $roles = Role::all(); 
-        $careers = Career::all();
-        $user = \App\Models\User::find($id);
-        $user->update($request->all());
-        session()->flash('success', 'El usuario ' . $user->name . ' ' . $user->last_name . ' se ha editado correctamente.');
+        $user = User::findOrFail($id);
+
+        // si es asesor académico
+        if ($user->role->title==='asesorAcademico'){
+            // busca que exista en la tabla de asesor academico
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+
+            if($academicAdvisor){
+                // busca que exista en la tabla de internos
+                $intern = Intern::where('academic_advisor_id', $academicAdvisor->id)->first();
+    
+                if ($intern){
+                    return redirect()
+                        ->back()
+                        ->with('error', 'No puedes cambiar el rol de un asesor académico que tiene alumnos asesorados.');
+                } else {
+                    $user->update($request->all());
+                    $academicAdvisor->delete();
+
+                    // si se cambia al rol de estudiante, hace el insert en la tabla de internos como estudiante
+                    if ($request->input('rol_id') === '1'){
+                        $intern = new Intern();
+                        $intern->user_id = $user->id;
+                        $intern->save();
+                    }
+
+                    session()->flash('success', 'El usuario ' . $user->name . ' ' . $user->last_name . ' se ha editado correctamente.');
+                }
+            }
+        } else if ($user->role->title === 'estudiante'){
+            
+        }
+
         return redirect()->route('panel-users.index');
     }
 
