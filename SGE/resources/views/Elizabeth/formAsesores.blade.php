@@ -2,12 +2,13 @@
 @extends('templates/authTemplate')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="w-full md:px-[7em] md:mt-[2em] h-fit flex bg-white">
+<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
     <form action="{{ route('panel-advisors.store') }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full">
-        @csrf
+       
         @method('POST')
         <div class="w-full h-fit flex justify-center md:justify-start">
             <h1 class="text-3xl font-bold">Crear Asesor Empresial</h1>
+             @csrf
         </div>
         <div class="w-full flex flex-col md:flex-row justify-around md:items-start">
             <div class="space-y-2">
@@ -52,4 +53,5 @@
         <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
     </form>
 </div>
-@endsection
+
+@endsection('contenido')

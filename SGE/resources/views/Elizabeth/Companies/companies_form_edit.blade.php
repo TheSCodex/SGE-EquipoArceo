@@ -3,7 +3,7 @@
 <div class="w-full h-screen flex justify-center items-center bg-white">
 
     <form action="{{ route('panel-companies.update', $company->id) }}" method="POST" class="flex flex-col font-montserrat mx-30 space-y-5 lg:w-[80vw] sm:w-[90vw]">
-        <div class="w-full h-fit flex justify-center mt-4">
+        <div class="w-full h-fit flex justify-center md:justify-start">
             <h3 class="text-3xl font-bold">Editar Empresa</h3>
             @csrf
             @method('PUT') {{-- Este método indica que se utilizará el método PUT para actualizar la empresa --}}
