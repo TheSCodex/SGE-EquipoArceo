@@ -118,6 +118,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon');
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba');
+        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('download.control');    
         
         // ! Ruta de las observaciones del asesor
         //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
@@ -130,10 +131,6 @@ Route::middleware('auth')->group(function () {
 
         // Ruta para cancelar la actividad
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
-
-        // Ruta para generar el control de estadías propio
-        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile']);    
-
     });
 
 
@@ -180,17 +177,21 @@ Route::middleware('auth')->group(function () {
         Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
         Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion');
         Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion');
-        Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
+        Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion');
+        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.directora');     
 
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos');
         Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion');
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
+
         
         Route::get('/director/estudiantes/', [StudentListController::class, 'index'])->name('director.estudiantes');
 
+        // Rutas para el listado de documentos
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
+        Route::delete('documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-director');
     });
 
     //TODO - Asistente directora
@@ -215,6 +216,7 @@ Route::middleware('auth')->group(function () {
         Route::get('Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.digitalizacion');
         Route::get('Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion'); 
         Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile']);
+        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.asistente');     
 
         // Ruta para el crud de libros
         Route::resource('libros', BooksController::class)->names('libros-asistente');
@@ -226,7 +228,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion');
 
+        // Rutas para el listado de documentos
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant');
+        Route::delete('documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-assistant');
 
     });
 
