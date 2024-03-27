@@ -94,7 +94,6 @@ Route::middleware('auth')->group(function () {
         //Ruta para las observaciones del estudiante
         Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
         Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
-
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
         //Ruta para ver información de la actividad
@@ -127,6 +126,8 @@ Route::middleware('auth')->group(function () {
         Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike');
+        Route::get('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
+
         Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike');
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades');
