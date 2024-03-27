@@ -55,11 +55,13 @@ class UserSeeder extends Seeder
             'leer-anteproyectos-asignados' => true,
             'leer-anteproyecto-detalles' => true,
             'leer-anteproyectos-publicados' => true,
+            'leer-calendario' => true,
             'crear-observacion' => true,
             'resolver-eliminar-observacion' => true,
             'votar-anteproyecto' => true,
             'crear-actividad-calendario' => true,
             'gestionar-bajas' => true,
+            'generar-reportes-documentos' => true,
         ];        
 
         $rolAsesorAcademico->update([
@@ -142,6 +144,7 @@ class UserSeeder extends Seeder
             'crear-libro' => true,
             'editar-libro' => true,
             'eliminar-libro' => true,
+            'leer-estudiantes' => true,
         ];
         
 

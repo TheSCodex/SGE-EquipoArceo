@@ -31,6 +31,6 @@ class CheckRoleOrPermission
             return $next($request);
         }
 
-        abort(403, 'No tienes permiso para acceder a esta ruta.');
+        abort(403, 'No tienes permisos para acceder a esta ruta.');
     }
 }

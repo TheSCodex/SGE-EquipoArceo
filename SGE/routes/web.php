@@ -76,10 +76,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     //TODO - ESTUDIANTE
-    Route::prefix('estudiante')->group(function () {
+    // Route::prefix('estudiante')->group(function () {
 
         // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
-        Route::get('/', [StudentController::class, "studentHome"])->name('inicio-estudiante')->middleware('role:estudiante');   
+        Route::get('/estudiante', [StudentController::class, "studentHome"])->name('inicio-estudiante')->middleware('role:estudiante');   
         
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto')->middleware('role:estudiante');
@@ -103,27 +103,28 @@ Route::middleware('auth')->group(function () {
         //Ruta para ver información de la actividad
         Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show')->middleware('roleorcan:estudiante,leer-calendario');
 
-    });
+    // });
 
     //TODO - ASESOR ACADEMICO
-    Route::prefix('asesor')->group(function () {
+    // Route::prefix('asesor')->group(function () {
 
-        Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor')->middleware('role:asesorAcademico');
+        Route::get('/asesor', [DashboardAdvisorController::class, "index"])->name('inicio-asesor')->middleware('role:asesorAcademico');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor')->middleware('roleorcan:asesorAcademico,leer-anteproyectos-asignados');
-        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
+        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyectos-detalle')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
 
         //Ruta de los alumnos del asesor
         Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
 
         Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
         
-        Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
-        Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
-        Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
+        // tuve que comentar estas pq se comparten con las del director más abajo
+        // Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+        // Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+        // Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
         
-        // ! Ruta de las observaciones del asesor
-        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
+        // // ! Ruta de las observaciones del asesor
+        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyecto');
 
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
@@ -140,7 +141,7 @@ Route::middleware('auth')->group(function () {
         // Ruta para generar el control de estadías propio
         Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->middleware('role:asesorAcademico');    
 
-    });
+    // });
 
         // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
         Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
@@ -148,15 +149,15 @@ Route::middleware('auth')->group(function () {
 
 
     //TODO - PRESIDENTE DE ACADEMIA
-    Route::prefix('presidente')->group(function () {
+    // Route::prefix('presidente')->group(function () {
 
         //inicio de presidente 
-        Route::get('/', [PresidentOfTheAcademy::class, "index"])->name('inicio-presidente')->middleware('role:presidenteAcademia');
+        Route::get('/presidente', [PresidentOfTheAcademy::class, "index"])->name('inicio-presidente')->middleware('role:presidenteAcademia');
 
         //Ruta de la lista de los anteproyectos
-        Route::get('anteproyectos', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
+        Route::get('anteproyectos-division', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
 
-        Route::resource('/estudiantes', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
+        Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
 
         //CRUD ASESOR ACADÉMICO 
 
@@ -173,15 +174,16 @@ Route::middleware('auth')->group(function () {
         // Eliminar asesor
         Route::delete('/lista-asesores/{id}', [PresidentOfTheAcademy::class,'destroy'])->name('asesores.destroy')->middleware('roleorcan:presidenteAcademia,eliminar-asesores-academicos');
 
-    });
+    // });
 
     //TODO - DIRECTORA
 
         //inicio director
         Route::get("/director", [DirectorController::class, "index"])->name('inicio-director')->middleware('role:director');
 
-        // El apartado de reportes para la directora
-        Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director')->middleware('roleorcan:director,leer-reportes');
+        // El apartado de reportes para la directora 
+        // comentado pq comparte ruta con el de asistente
+        // Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director')->middleware('roleorcan:director,leer-reportes');
         
         // El acceso al CRUD/Listado de documentos para la directora
         Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director')->middleware('roleorcan:director,gestionar-documentos');
@@ -198,28 +200,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:director,generar-reportes-documentos');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
         
-        Route::get('/director/estudiantes/', [StudentListController::class, 'index'])->name('director.estudiantes')->middleware('roleorcan:director,');
+        Route::get('estudiantes', [StudentListController::class, 'index'])->name('estudiantes')->middleware('roleorcan:director,leer-estudiantes');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director')->middleware('roleorcan:director,gestionar-documentos');
+        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search')->middleware('roleorcan:director,gestionar-documentos');
 
         //bajas
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-director')->middleware('roleorcan:director,leer-bajas');
 
 
     //TODO - Asistente directora
-    Route::prefix('asistente')->group(function () {
+    // Route::prefix('asistente')->group(function () {
 
         //inicio asistente
-        Route::get("/", [DirectorAssistantController::class, "index"])->name('inicio-asistente')->middleware('role:asistenteDireccion');
+        Route::get("/asistente", [DirectorAssistantController::class, "index"])->name('inicio-asistente')->middleware('role:asistenteDireccion');
         
-        //crud asistente
-        Route::get('estudiantes',[StudentListController::class, "index"])->name('estudiantes-asistente')->middleware('role:asistenteDireccion');
+        //crud asistente // comparte con estudiante
+        // Route::get('estudiantes',[StudentListController::class, "index"])->name('estudiantes-asistente')->middleware('role:asistenteDireccion');
 
         //bajas 
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-asistente')->middleware('roleorcan:asistenteDireccion,leer-bajas');
         
         // Con esta se accede a la pantalla assistantsReports
-        Route::get('/reportes', [ReportsController::class, "assistantIndex"])->name('reportes-asistente')->middleware('roleorcan:asistenteDireccion,leer-reportes');        
+        Route::get('/reportes', [ReportsController::class, "assistantIndex"])->name('reportes-asistente')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');        
         // Con esta se accede al CRUD/Listado de los documentos generados
         Route::resource('documentos', DocumentsController::class)->names('documentos-asistente')->middleware('roleorcan:asistenteDireccion,gestionar-documentos');
 
@@ -239,9 +241,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
 
-        Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-assistant')->middleware('roleorcan:asistenteDireccion,gestionar-documentos');
+        // Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search')->middleware('roleorcan:asistenteDireccion,gestionar-documentos');
 
-    });
+    // });
 
     
     //TODO - Administrador
