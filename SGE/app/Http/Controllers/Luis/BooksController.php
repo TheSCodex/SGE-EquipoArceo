@@ -7,6 +7,7 @@ use App\Models\AcademicAdvisor;
 use App\Models\Book;
 use App\Models\Intern;
 use App\Models\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class BooksController extends Controller
      */
     public function index()
     {
+
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
@@ -142,8 +144,13 @@ class BooksController extends Controller
     
         // Validar identificadores de estudiantes
         $problems = [];
-        $identifiers = preg_split('/,\s*/', $request->identifier_student); // Usar expresión regular para dividir la cadena
+        $identifiers = preg_split('/\s*,\s*/', $request->identifier_student);
+        $identifiers = array_filter($identifiers, 'strlen'); // Filtrar identificadores vacíos
+        $identifiers = array_unique($identifiers); // Eliminar identificadores duplicados
+        // dd($identifiers);
         foreach ($identifiers as $identifier) {
+            // Ignorar identificadores vacíos
+
             $user = User::where('identifier', $identifier)->first();
             if ($user === null) {
                 $problems[] = "El usuario con identificador $identifier no existe";
@@ -155,6 +162,7 @@ class BooksController extends Controller
                     $problems[] = "El usuario con identificador $identifier ya está asociado a otro libro";
                 }
             }
+
         }
     
         if (!empty($problems)) {
