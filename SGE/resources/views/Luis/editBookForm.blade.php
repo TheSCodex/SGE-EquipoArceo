@@ -9,7 +9,7 @@
 <body>
     @extends('templates/authTemplate')
     @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <section class="flex flex-col justify-center items-center  min-h-full flex-grow mb-6">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-full md:px-[7em]  md:my-[2em] flex ">
                 <form action="{{ route('libros-asistente.update', $book->id) }}" method="POST" class="flex flex-col  font-montserrat space-y-5 w-full mt-4 md:mt-0">
@@ -65,12 +65,13 @@
                                         </div>
                                     </div>
                                 </div>                        
-                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma">@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</input>
+                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma" value="{{ implode(', ', $internsIdentifier) }}">
                                 @error('identifier_student')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
                                     </p>
                                 @enderror
+                                
                             </div>
                         </div>
                     </div>
