@@ -11,8 +11,8 @@
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Carrera</p>
-                    <input type="text" name="career" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
-                    @error('name')
+                    <input type="text" name="career" value="{{ old('career') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    @error('career  ')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
@@ -25,7 +25,7 @@
                             <option value="{{ $division->id }}">{{ $division->name }}</option>
                         @endforeach
                     </select>
-                    @error('name')
+                    @error('division_id')
                         <p >
                             {{ $message }}
                         </p>
@@ -56,7 +56,7 @@
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
-                    @error('name')
+                    @error('user_id')
                         <p>
                             {{ $message }}
                         </p>
@@ -65,9 +65,11 @@
                 
             </div>
 
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>
+            <button type="submit"  onclick="confirmAgregar()" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>
 
     </form>
 </div>
+
+
 
 @endsection('contenido')

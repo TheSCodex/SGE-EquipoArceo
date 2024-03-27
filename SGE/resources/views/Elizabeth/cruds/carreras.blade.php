@@ -86,14 +86,10 @@
                             @endif
                         </td>
                         
-                        <td class="font-roboto font-bold py-5 text-center">
+                        <td class="font-roboto font-bold py-5 text-start">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
-                                @if ($division = $divisions->where('academy_id', $academy->id)->first())
-                                    @if ($president = $presidents->where('id', $division->director_id)->first())
-                                        {{ $president->name }}
-                                    @else
-                                        N/A
-                                    @endif
+                                @if ($president = $presidents->where('id', $academy->president_id)->first())
+                                    {{ $president->name }}
                                 @else
                                     N/A
                                 @endif
@@ -125,6 +121,8 @@
     </section>
 
     <script>
+
+     
         function confirmDelete(careerName, careerId) {
             Swal.fire({
                 title: '¿Estás seguro?',
