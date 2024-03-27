@@ -115,7 +115,7 @@ Route::middleware('auth')->group(function () {
         //Ruta de los alumnos del asesor
         Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados');
         
-        Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon');
+        Route::post('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon');
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba');
         

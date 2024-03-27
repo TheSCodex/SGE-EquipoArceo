@@ -7,6 +7,7 @@ use App\Models\Academy;
 use App\Models\Career;
 use App\Models\Division;
 use App\Models\Intern;
+use App\Models\Project;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -14,16 +15,20 @@ use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion(string $id)
+    public function printReportSancion( Request $request, string $id)
     {
+        $motivo = $request->input('motivo');
+        $tipo = $request->input('tipo');
+
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
+        $project = Project::find($interns[0]->project_id);
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career' ));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns' ));
         return $pdf->stream();
     }
 
@@ -52,12 +57,13 @@ class ReportsController extends Controller
     {
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
+        $project = Project::find($interns[0]->project_id);
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns' ));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project' ));
         return $pdf->stream();
     }
 
@@ -75,12 +81,13 @@ class ReportsController extends Controller
     {
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
+        $project = Project::find($interns[0]->project_id);
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division' ));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project' ));
         return $pdf->stream();
     }
 
