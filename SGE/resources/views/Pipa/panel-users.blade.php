@@ -31,7 +31,7 @@
                 </a>
             </div>
         </div>
-        <div id="no-users-message" class="hidden text-red text-center mt-4">No se encontraron usuarios</div>
+
 
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
 
@@ -59,7 +59,7 @@
                             </form>
                         </td>
 
-
+                        
                         {{-- <script>
                             // Obtiene todas las celdas con la clase 'delete-form' y añade un manejador de eventos clic
                             document.querySelectorAll('.delete-form').forEach(form => {
@@ -115,6 +115,7 @@
                     });
                 </script>
             @endif
+            
             <table class="text-start w-full">
                 <tr class="w-full">
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre completo</th>
@@ -168,6 +169,8 @@
             </table>
         </div>
     </div>
+    <div id="no-users-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron usuarios.</div>
+
 </div>
 <div class="my-5 mx-auto">
     {{$users->links()}}
