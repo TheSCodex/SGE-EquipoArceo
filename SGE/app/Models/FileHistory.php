@@ -15,7 +15,8 @@ class FileHistory extends Model
         'advisor_email',
         'advisor_name',
         'advisor_lastName',
-        'user_id'
+        'user_id',
+        'academic_advisor_id'
     ];
 
 }

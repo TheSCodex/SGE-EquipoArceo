@@ -46,6 +46,29 @@
             @if (isset($message))
                 <p>{{ $message }}</p>
             @else
+                @php
+                    if (!function_exists('getDownloadRoute')) {
+                        function getDownloadRoute($title)
+                        {
+                            $userRole = Auth::user()->role->title;
+
+                            switch ($title) {
+                                case 'Control de Estadías':
+                                    return $userRole == 'director'
+                                        ? 're-download.control.director'
+                                        : 're-download.control.asistente';
+                                case 'Carta de Amonestación':
+                                    return $userRole == 'director' ? '' : '';
+                                case 'Carta de Aprobación':
+                                    return $userRole == 'director' ? '' : '';
+                                case 'Carta de Digitalización':
+                                    return $userRole == 'director' ? '' : '';
+                                default:
+                                    return 'default.download';
+                            }
+                        }
+                    }
+                @endphp
                 <div class="flex items-center justify-between w-11/12 mx-auto mt-6">
                     {{-- cards --}}
                     <div class="w-full mb-5 lg:hidden">
@@ -68,7 +91,9 @@
                                                 <img src="/img/logos/trash.svg">
                                             </button>
                                         </form>
-                                        <img src="/img/logos/descarga.png" alt="Delete" class="ml-2 cursor-pointer">
+                                        <a href="{{ route(getDownloadRoute($doc['title']), $doc->academic_advisor_id) }}">
+                                            <img src="/img/logos/descarga.png" alt="Download" class="ml-2 cursor-pointer">
+                                        </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -104,7 +129,11 @@
                                             </button>
                                         </form>
                                     </td>
-                                    <td class="py-5 font-bold font-roboto"><img src="/img/logos/descarga.png"></td>
+                                    <td class="py-5 font-bold font-roboto">
+                                        <a href="{{ route(getDownloadRoute($doc['title']), $doc->academic_advisor_id) }}">
+                                            <img src="/img/logos/descarga.png" alt="Download" class="ml-2 cursor-pointer">
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
