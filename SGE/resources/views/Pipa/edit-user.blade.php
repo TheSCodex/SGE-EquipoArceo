@@ -8,6 +8,15 @@
         <div class="w-full h-fit flex justify-center md:justify-start">
             <h1 class="text-3xl font-bold">Editar usuario</h1>
         </div>
+        @if(session('error'))
+        <script>
+            Swal.fire({
+                title: '¡Error!',
+                text: '{{ session("error") }}',
+                icon: 'error'
+            });
+        </script>
+        @endif
         <div class="w-full flex flex-col space-y-2 ">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
