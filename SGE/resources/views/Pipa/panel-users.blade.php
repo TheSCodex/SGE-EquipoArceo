@@ -27,10 +27,12 @@
                 <a href="/panel-users/create"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
                 </a>
-
             </div>
         </div>
+        <div id="no-users-message" class="hidden text-red text-center mt-4">No se encontraron usuarios</div>
+
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
                 @foreach ($users as $user)
@@ -169,6 +171,44 @@
     {{$users->links()}}
 </div>
 </section>
+
+<script>
+    // Esta función realiza la búsqueda en la tabla cuando se modifica el contenido del campo de búsqueda
+    function searchTable() {
+        var searchText = document.getElementById("search").value.toLowerCase();
+        var rows = document.querySelectorAll("table tr");
+        var noUsersMessage = document.getElementById("no-users-message");
+        var usersFound = false; // Variable para verificar si se encontraron usuarios
+
+        for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+            var found = false;
+            for (var j = 0; j < row.cells.length; j++) {
+                var cell = row.cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                    found = true;
+                    usersFound = true; // Se encontró al menos un usuario
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+
+        // Mostrar el mensaje de no se encontraron usuarios si no se encontraron usuarios
+        if (!usersFound) {
+            noUsersMessage.classList.remove('hidden');
+        } else {
+            noUsersMessage.classList.add('hidden');
+        }
+    }
+
+    // Llama a la función searchTable() cuando se modifica el contenido del campo de búsqueda
+    document.getElementById("search").addEventListener("input", searchTable);
+</script>
 
 <script>
     // Esta función confirma la eliminación de un usuario
