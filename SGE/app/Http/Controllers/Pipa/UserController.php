@@ -23,6 +23,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $users = User::paginate(10);
         return view('Pipa.panel-users', compact('users'));
     }
@@ -32,6 +35,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $roles = Role::all(); 
         $careers = Career::all();
         return view('Pipa.add-user', compact('roles', 'careers'));
@@ -89,6 +95,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = User::findOrFail($id);
         $intern = $user->interns;
         $academicAdvisor = $user->academicAdvisor;
@@ -197,6 +206,9 @@ class UserController extends Controller
      */
     public function destroy(string $id):RedirectResponse
     {
+        if (Gate::denies('crud-usuarios')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = \App\Models\User::find($id);
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->exists();
         if ($academicAdvisor){
