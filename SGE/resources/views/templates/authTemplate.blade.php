@@ -71,7 +71,7 @@
                     <a href="{{ route('lista-asesores')}}" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
                 </li>
                 <li>
-                    <a href="{{ route('anteproyectos') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
+                    <a href="/presidente/anteproyectos" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
                 
                 @elseif($user->rol_id === 4) {{-- ! Rol de Directora --}}
@@ -149,7 +149,8 @@
         @yield('contenido')
 
     </main>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('resources/js/app.js') }}"></script>
+    
 <script>
     // para mostrar/ocultar el menú en dispositivos móviles
     const toggleMenu = document.getElementById('toggleMenu');

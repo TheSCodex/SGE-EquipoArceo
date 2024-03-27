@@ -2,9 +2,10 @@
 @section('titulo', 'Panel de Compañias')
 @section('contenido')
 
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<main class="flex flex-col justify-start items-center  min-h-full flex-grow">
 
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>
             <div class="flex items-center flex-row justify-end">
@@ -38,9 +39,9 @@
                     <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
                     {{-- <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th> --}}
+                    <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
                 </tr>
                 @foreach ($companies as $index => $company)
                 <tr>
@@ -49,7 +50,11 @@
                     <td class="font-roboto font-bold py-5">{{ $company['phone'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
                   {{-- <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td>  --}}
-
+                  <td class="font-roboto font-bold py-5">
+                    <a href="{{ route('panel-companies.show', $company->id )}}" class="flex justify-center">
+                        <img src="/img/ojoGreen.svg" class="w-7">
+                    </a>
+                </td>
                     <td class="font-roboto font-bold py-5">
                         <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
                             @csrf
@@ -62,18 +67,10 @@
                         <form id="deleteForm" action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirmDelete();">
+                            <button type="button" onclick="confirmDelete({{ $company['id'] }})">
                                 <img src="/img/logos/trash.svg" alt="Eliminar">
                             </button>
                         </form>
-                    </td>
-                    <td class="font-roboto font-bold py-5">
-                        <button onclick="openModal('{{ $index }}')" class="text-primaryColor underline cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#02AB82" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                            <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                          </svg></button>
                     </td>
                 </tr>
                 @endforeach
@@ -142,8 +139,10 @@
             </div>
         </div>
     </div>
+    
 </div>
 @endforeach
+{{ $companies->links() }}
 
 <script>
     function openModal(index) {
@@ -154,8 +153,22 @@
         document.getElementById("companyModal" + index).classList.add("hidden");
     }
 
-    function confirmDelete() {
-        return confirm("¿Estás seguro de que deseas borrar este elemento?");
+    function confirmDelete(companyId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma la eliminación, envía el formulario
+                document.getElementById('deleteForm').action = '/panel-companies/' + companyId;
+                document.getElementById('deleteForm').submit();
+            }
+        });
     }
 
     function searchTable() {

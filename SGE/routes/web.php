@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\companiesController;
 use App\Http\Controllers\Pipa\RoleController;
 use App\Http\Controllers\Pipa\UserController;
 use App\Http\Controllers\Luis\BooksController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\Michell\StudentController;
 use App\Http\Controllers\Michell\DirectorController;
 use App\Http\Controllers\Elizabeth\AdvisorController;
 use App\Http\Controllers\Elizabeth\carrerasController;
+use App\Http\Controllers\Elizabeth\companiesController;
 use App\Http\Controllers\Pipa\ChangePasswordFirstTime;
 use App\Http\Controllers\Michell\StudentListController;
 use App\Http\Controllers\Pipa\ChangePasswordController;
@@ -36,6 +36,7 @@ use App\Http\Controllers\Michell\Administrator\AdministratorController;
 use App\Http\Controllers\Michell\DirectorAssistantController;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Http\Controllers\Michell\PresidentOfTheAcademy\StudentAndAdvisorController;
+
 
 
 use Illuminate\Support\Facades\Auth; // Para el sistema de autenticación
@@ -79,7 +80,7 @@ Route::middleware('auth')->group(function () {
 
         // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
         Route::get('/', [StudentController::class, "studentHome"])->name('inicio-estudiante');   
-
+        
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
         
@@ -113,6 +114,8 @@ Route::middleware('auth')->group(function () {
         Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
 
         //Ruta de los alumnos del asesor
+        Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search');
+
         Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados');
         
         Route::post('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon');
@@ -121,8 +124,11 @@ Route::middleware('auth')->group(function () {
         Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('download.control');    
         
         // ! Ruta de las observaciones del asesor
-        //Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
+        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
 
+        Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
+        Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike');
+        Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike');
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades');
 
@@ -133,7 +139,8 @@ Route::middleware('auth')->group(function () {
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel');
     });
 
-
+        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
+        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
 
 
 
@@ -153,7 +160,11 @@ Route::middleware('auth')->group(function () {
         // Todos los asesores
         Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores');
         // Crear asesor
-        Route::post('/crear-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        Route::get('/crear-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create');
+        // guardar asesor
+        Route::post('/crear-asesores',[PresidentOfTheAcademy::class,'store'])->name('asesores.create');
+        // editar asesor
+        Route::get('/editar-asesor/{id}',[PresidentOfTheAcademy::class,'edit'])->name('asesores.update');
         // Actualizar asesor
         Route::put('/editar-asesor/{id}',[PresidentOfTheAcademy::class,'update'])->name('asesores.update');
         // Eliminar asesor
@@ -192,6 +203,9 @@ Route::middleware('auth')->group(function () {
         // Rutas para el listado de documentos
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search-director');
         Route::delete('documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-director');
+
+        //bajas
+        Route::get('bajas', [BajasController::class, "index"])->name('bajas-director');
     });
 
     //TODO - Asistente directora
@@ -247,10 +261,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('panel-roles', RoleController::class)->names('panel-roles');
 
         // Rutas para CRUD de Empresas
-        Route::resource('/panel-companies', companiesController::class)->names(['index'=>'companies.index']);
-        Route::get('/panel-companies-create', [companiesController::class, 'create'])->name('companies_form');
-        Route::get('/panel-companies/{id}/edit', [companiesController::class, 'edit'])->name('panel-companies.edit');
-
+        Route::resource('/panel-companies', CompaniesController::class)->names(['index'=>'companies.index']);
+        Route::get('/panel-companies-create', [CompaniesController::class, 'create'])->name('companies_form');
+        Route::get('/panel-companies/{id}/edit', [CompaniesController::class, 'edit'])->name('panel-companies.edit');
 
         // RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
         Route::resource('/panel-advisors', AdvisorController::class)->names('panel-advisors');
