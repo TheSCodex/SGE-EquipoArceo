@@ -47,13 +47,43 @@
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer px-2" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                            <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <form class="flex justify-start delete-form" data-user-name="{{ $user->name }} {{ $user->last_name }}" data-user-id="{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                    <img src="/img/logos/trash.svg">
+                                <img src="/img/logos/trash.svg">
                             </form>
                         </td>
+
+
+                        {{-- <script>
+                            // Obtiene todas las celdas con la clase 'delete-form' y añade un manejador de eventos clic
+                            document.querySelectorAll('.delete-form').forEach(form => {
+                                form.addEventListener('click', function(event) {
+                                    event.preventDefault(); // Evita que el formulario se envíe automáticamente
+                        
+                                    var userName = this.dataset.userName;
+                                    var userId = this.dataset.userId;
+                        
+                                    // Muestra el SweetAlert para confirmar la eliminación
+                                    Swal.fire({
+                                        title: '¿Estás seguro?',
+                                        text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'Sí, eliminarlo'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Envía el formulario si se confirma la eliminación
+                                            document.getElementById('deleteForm' + userId).submit();
+                                        }
+                                    });
+                                });
+                            });
+                        </script> --}}
+                        
 
                     </div>
                 </div>
@@ -128,8 +158,7 @@
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
                         </form>
-                    </td>
-                    
+                    </td>                    
                 </tr>
                 @endforeach
             </table>
@@ -142,6 +171,7 @@
 </section>
 
 <script>
+    // Esta función confirma la eliminación de un usuario
     function confirmDelete(userName, userId) {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -153,10 +183,13 @@
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
+                // Envía el formulario de eliminación si se confirma
                 document.getElementById('deleteForm' + userId).submit();
             }
         });
     }
+
+    // Esta función realiza la búsqueda en la tabla cuando se modifica el contenido del campo de búsqueda
     function searchTable() {
         var searchText = document.getElementById("search").value.toLowerCase();
         var rows = document.querySelectorAll("table tr");
@@ -177,10 +210,37 @@
             }
         }
     }
-    
-        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-        document.getElementById("search").addEventListener("input", searchTable);
+
+    // Llama a la función searchTable() cuando se modifica el contenido del campo de búsqueda
+    document.getElementById("search").addEventListener("input", searchTable);
+
+    // Obtiene todos los formularios de eliminación y agrega un manejador de eventos clic para mostrar el SweetAlert
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+            var userName = this.dataset.userName;
+            var userId = this.dataset.userId;
+
+            // Muestra el SweetAlert para confirmar la eliminación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario si se confirma la eliminación
+                    document.getElementById('deleteForm' + userId).submit();
+                }
+            });
+        });
+    });
 </script>
+
 
 
 
