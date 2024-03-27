@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
         
         //Ruta de la vista del anteproyecto del estudiante
         Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto');
-        
+
         // Rutas para el formulario de anteproyectos
         Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create');
         Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store');
@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
         
         //Ruta para las observaciones del estudiante
         Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto');
+        Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
 
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar');
@@ -124,7 +125,6 @@ Route::middleware('auth')->group(function () {
         
         // ! Ruta de las observaciones del asesor
         Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
-
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike');
         Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike');
