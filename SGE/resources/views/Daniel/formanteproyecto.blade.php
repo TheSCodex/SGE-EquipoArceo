@@ -18,7 +18,7 @@
                         @csrf
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
                             value="{{ old('name_student', $user->name) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" ><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -34,8 +34,8 @@
                     </div>
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
-                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}"
+                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -88,7 +88,8 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero', $user->phoneNumber) }}" required
+                        <input type="number" name="Numero" placeholder="998XXXXXXX"
+                            value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
                             <div style='color:red'>{{ $message }}</div>
@@ -96,8 +97,9 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Inicio:</h2>
-                        <input type="date" name="Fecha_Inicio" placeholder="SM51" value="{{ old('Fecha_Inicio') }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                        <input type="date" name="Fecha_Inicio" placeholder="SM51"
+                            value="{{ old('Fecha_Inicio', date('Y-m-d')) }}" required
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Fecha_Inicio')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
