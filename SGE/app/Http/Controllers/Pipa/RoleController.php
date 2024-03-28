@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Http\Requests\Pipa\RoleRequest;
+use Illuminate\Support\Facades\Gate;
 
 
 class RoleController extends Controller
@@ -15,6 +16,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $roles = Role::all();
         return view('Pipa.panel-roles', compact('roles'));
     }
@@ -24,6 +28,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         return view('Pipa.add-role');
     }
 
@@ -56,6 +63,9 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $role = Role::findOrFail($id);
         return view('Pipa.edit-role', compact('role'));
     }
@@ -79,6 +89,9 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $role = Role::findOrFail($id);
         $role->delete();
         return redirect('panel-roles')->with('success', 'Rol eliminado exitosamente');
