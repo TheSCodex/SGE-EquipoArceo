@@ -26,7 +26,7 @@
                     @endif
                     <h1 class="text-3xl font-bold text-center lg:text-left  lg:px-5">Editar libro</h1>
                     <div class="w-full flex flex-col space-y-1">
-                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around mb-4">
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Nombre:</p>
                                 <input type="text" id="title" name="title" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el nombre del libro" value="{{ $book->title }}">
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
-                            <div class="space-y-2 mb-4 mx-[-60px]">
+                            <div class="space-y-2 mb-4">
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Matrículas:</p>
                                     <div>

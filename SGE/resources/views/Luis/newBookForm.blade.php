@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-start lg:flex-row flex-col items-center md:items-start mb-10 pb-9" >
-                                <div class="space-y-2 mb-4 mx-[-60px]">
+                                <div class="mb-4">
                                     <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Matrículas:</p>
                                     <div>
