@@ -32,7 +32,6 @@
             </div>
         </div>
 
-        <div id="no-users-message" class="hidden text-red text-center mt-4">No se encontraron usuarios</div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
 
         <div class="lg:hidden w-full mb-5">
