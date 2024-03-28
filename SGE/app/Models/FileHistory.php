@@ -16,7 +16,18 @@ class FileHistory extends Model
         'advisor_name',
         'advisor_lastName',
         'user_id',
-        'academic_advisor_id'
+        'academic_advisor_id',
+        'student',
+        'student_identifier',
+        'student_group',
+        'student_service_hours',
+        'division',
+        'director',
+        'career',
+        'project',
+        'motivo',
+        'tipo',
+        'interns'
     ];
 
 }
