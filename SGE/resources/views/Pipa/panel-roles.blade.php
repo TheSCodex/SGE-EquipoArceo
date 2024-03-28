@@ -76,7 +76,7 @@
                             </tr>
                             @endforeach
 
-
+                        
 
                         </div>
                     </div>
@@ -91,14 +91,14 @@
                             @foreach ($roles as $role)
                             <tr>
                                 <td class="font-roboto font-bold py-5 text-start">{{ $role->title }}</td>
-                                <td class="font-roboto font-bold py-5 text-start">
+                                <td class="font-roboto py-5 text-start">
                                     @php
                                     $decodedPermissions = json_decode($role->permissions, true);
                                     @endphp
                                     @if ($decodedPermissions)
                                     @foreach($decodedPermissions as $permission => $value)
                                     @if($value)
-                                    {{ $permission }}<br>
+                                    • {{ $permission }}<br>
                                     @endif
                                     @endforeach
                                     @else
@@ -163,5 +163,24 @@
     }
 </script>
 
+@if(session('error'))
+<script>
+    Swal.fire({
+        title: 'Oops...',
+        text: '{{ session("error") }}',
+        icon: 'error'
+    });
+</script>
+@endif
+{{-- sweet alert para indicar que el usuario se agregó :3 --}}
+@if(session('success'))
+    <script>
+        Swal.fire({
+            title: '¡Éxito!',
+            text: '{{ session("success") }}',
+            icon: 'success'
+        });
+    </script>
+@endif
 
 @endsection

@@ -21,16 +21,19 @@
                 
                 <div>
                     <div class="flex items-center relative" >
-                        <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                        <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
+
+
                 <a href="/panel-users/create"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo usuario
                 </a>
-
             </div>
         </div>
+
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
                 @foreach ($users as $user)
@@ -39,21 +42,52 @@
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
                     <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
                     <div class="flex justify-end mt-4 space-x-2">
+                        <td>                        
+                            <a href="{{route('panel-users.show', $user->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                        </td>
                         <td class="font-roboto font-bold py-5 cursor-pointer ">
                             <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer px-2" onclick="confirmDelete('{{ $user->name }} {{ $user->last_name }}', '{{ $user->id }}')">
-                            <form class="flex justify-center" id="deleteForm{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <form class="flex justify-start delete-form" data-user-name="{{ $user->name }} {{ $user->last_name }}" data-user-id="{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                    <img src="/img/logos/trash.svg">
+                                <img src="/img/logos/trash.svg">
                             </form>
                         </td>
-                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
-                            <img src="/img/ojoGreen.svg" class="w-7">
-                        </a>
+
+                        
+                        {{-- <script>
+                            // Obtiene todas las celdas con la clase 'delete-form' y añade un manejador de eventos clic
+                            document.querySelectorAll('.delete-form').forEach(form => {
+                                form.addEventListener('click', function(event) {
+                                    event.preventDefault(); // Evita que el formulario se envíe automáticamente
+                        
+                                    var userName = this.dataset.userName;
+                                    var userId = this.dataset.userId;
+                        
+                                    // Muestra el SweetAlert para confirmar la eliminación
+                                    Swal.fire({
+                                        title: '¿Estás seguro?',
+                                        text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'Sí, eliminarlo'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Envía el formulario si se confirma la eliminación
+                                            document.getElementById('deleteForm' + userId).submit();
+                                        }
+                                    });
+                                });
+                            });
+                        </script> --}}
+                        
+
                     </div>
                 </div>
                 @endforeach
@@ -80,6 +114,7 @@
                     });
                 </script>
             @endif
+            
             <table class="text-start w-full">
                 <tr class="w-full">
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre completo</th>
@@ -127,19 +162,26 @@
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
                         </form>
-                    </td>
-                    
+                    </td>                    
                 </tr>
                 @endforeach
             </table>
-            {{$users->links()}}
         </div>
     </div>
+    <div id="no-users-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron usuarios.</div>
+
 </div>
-    
+<div class="my-5 mx-auto">
+    {{$users->links()}}
+</div>
 </section>
 
 <script>
+   
+</script>
+
+<script>
+    // Esta función confirma la eliminación de un usuario
     function confirmDelete(userName, userId) {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -151,13 +193,19 @@
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
+                // Envía el formulario de eliminación si se confirma
                 document.getElementById('deleteForm' + userId).submit();
             }
         });
     }
-    function searchTable() {
+
+  // Esta función realiza la búsqueda en la tabla cuando se modifica el contenido del campo de búsqueda
+  function searchTable() {
         var searchText = document.getElementById("search").value.toLowerCase();
         var rows = document.querySelectorAll("table tr");
+        var noUsersMessage = document.getElementById("no-users-message");
+        var usersFound = false; // Variable para verificar si se encontraron usuarios
+
         for (var i = 1; i < rows.length; i++) {
             var row = rows[i];
             var found = false;
@@ -165,6 +213,7 @@
                 var cell = row.cells[j];
                 if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
                     found = true;
+                    usersFound = true; // Se encontró al menos un usuario
                     break;
                 }
             }
@@ -174,10 +223,71 @@
                 row.style.display = "none";
             }
         }
+
+        // Mostrar el mensaje de no se encontraron usuarios si no se encontraron usuarios
+        if (!usersFound) {
+            noUsersMessage.classList.remove('hidden');
+        } else {
+            noUsersMessage.classList.add('hidden');
+        }
     }
-    
-        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-        document.getElementById("search").addEventListener("input", searchTable);
+
+    // Llama a la función searchTable() cuando se modifica el contenido del campo de búsqueda
+    document.getElementById("search").addEventListener("input", searchTable);
+
+
+
+
+
+    // Obtiene todos los formularios de eliminación y agrega un manejador de eventos clic para mostrar el SweetAlert
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+            var userName = this.dataset.userName;
+            var userId = this.dataset.userId;
+
+            // Muestra el SweetAlert para confirmar la eliminación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario si se confirma la eliminación
+                    document.getElementById('deleteForm' + userId).submit();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    function searchMobileTable() {
+        var searchText = document.getElementById("searchMovil").value.toLowerCase();
+        var advisors = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
+        
+        advisors.forEach(function(advisor) {
+            var advisorText = advisor.innerText.toLowerCase();
+            var found = advisorText.indexOf(searchText) > -1;
+            advisor.style.display = found ? "" : "none";
+        });
+
+        // Mostrar el mensaje de no se encontraron usuarios si no se encontraron usuarios
+        var noUsersMessage = document.getElementById("no-users-message");
+        var usersFound = [...advisors].some(advisor => advisor.style.display !== "none");
+        if (!usersFound) {
+            noUsersMessage.classList.remove('hidden');
+        } else {
+            noUsersMessage.classList.add('hidden');
+        }
+    }
+
+    document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
 </script>
 
 

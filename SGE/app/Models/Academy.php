@@ -12,6 +12,7 @@ class Academy extends Model
     protected $fillable = [
         'name',
         'president_id',
+        'division_id',
     ];
 
     public function user()
