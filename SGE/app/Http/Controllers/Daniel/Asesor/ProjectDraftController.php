@@ -29,7 +29,7 @@ class ProjectDraftController extends Controller
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
-        $interns = Intern::where("academic_advisor_id", $id->id)->first();
+        $interns = Intern::where("project_id", $id->id)->first();
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
