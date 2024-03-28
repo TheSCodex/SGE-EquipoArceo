@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Career;   
 use App\Models\Division;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
     // Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
 
@@ -19,13 +20,14 @@ class carrerasController extends Controller
      */
     public function index()
 {
-    $careers = Career::all();
+    $careers = Career::paginate(10);
+
     $academies = Academy::whereIn('id', $careers->pluck('academy_id'))->get();
     $divisions = Division::whereIn('id', $academies->pluck('division_id'))->get();
     $presidents = User::whereIn('id',$divisions->pluck('director_id'))->get();
 
 
-    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'));
+    return view('Elizabeth.cruds.carreras', compact('careers', 'academies','divisions','presidents'))->with('careers', $careers);
 }
 
 
@@ -34,7 +36,10 @@ class carrerasController extends Controller
      */
     public function create()
     {
-        return view('Elizabeth.cruds.newCareer');
+        $academies = Academy::all();
+        $divisions = Division::all();
+        $presidents = User::all();
+        return view('Elizabeth.cruds.newCareer',compact('academies','divisions','presidents'));
     }
     
 
@@ -99,11 +104,19 @@ public function update(Request $request, $id)
      */
     public function destroy(string $id)
     {
-            {
+        try {
+            DB::beginTransaction();
+
+            // Ejecutar el procedimiento almacenado para eliminar la carrera y establecer academy_id en NULL
+            DB::statement('CALL delete_career(?)', array($id));
+
+            DB::commit();
             
-                $career = Career::findOrFail($id);
-                $career->delete();
-                return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
-            }        
-    }
+            return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Error al eliminar la carrera: ' . $e->getMessage());
+        }
+
+}
 }

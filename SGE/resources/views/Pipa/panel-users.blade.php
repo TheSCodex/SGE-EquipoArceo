@@ -86,9 +86,9 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                 </tr>
                 @foreach ($users as $user)
                 <tr class="w-full">
@@ -111,6 +111,11 @@
                             Sin especialidad
                         @endisset
                     </td> --}}
+                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
+                            <img src="/img/ojoGreen.svg" class="w-7">
+                        </a>
+                    </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer ">
                         <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
@@ -123,11 +128,7 @@
                                 <img src="/img/logos/trash.svg">
                         </form>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
-                            <img src="/img/ojoGreen.svg" class="w-7">
-                        </a>
-                    </td>
+                    
                 </tr>
                 @endforeach
             </table>

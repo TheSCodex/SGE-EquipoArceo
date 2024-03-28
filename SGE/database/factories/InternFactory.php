@@ -18,7 +18,7 @@ class InternFactory extends Factory
     {
         return [
             "user_id" => $this->faker->numberBetween(2, 10),
-            "student_status_id" => $this->faker->numberBetween(1, 5)
+            "student_status_id" => $this->faker->numberBetween(1, 2)
         ];
     }
 }

@@ -230,29 +230,41 @@
                         
                         <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver observaciones</button>
                     </div>
-                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}">
+                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}" class="w-full font-normal flex mt-[-3vh] h-[fit] ">
                         @csrf
-                        <input class="w-full" type="text" name="content" placeholder="Ingrese su comentario" rows="4"/>
-                        @error('content')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
-                        <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
+
+                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content" placeholder="Ingrese su comentario"/>
+                            @error('content')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
+
+                        <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
+                        </button>
                     </form>
                     
                     
                 @elseif(isset($comments) && count($comments) == 0)
-                <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
-                    <p class=' text-center text-black opacity-[60%]'>Este proyecto aun no tiene alguna observacion</p>
+                <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                    <div class="flex flex-wrap text-center items-center h-[90%]">
+                        <p class=' text-black opacity-[60%] '>Este proyecto aun no tiene alguna observacion</p>
+                    </div>
+
                     
-                </div>
-                <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}">
-                    @csrf
-                    <input class="w-full" name="content" placeholder="Ingrese su comentario" rows="4"/>
-                    @error('content')
-                        <div class="text-red-500">{{ $message }}</div>
-                    @enderror
-                    <button type="submit" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md w-full">Enviar comentario</button>
-                </form>
+                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}" class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                        @csrf
+
+                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content" placeholder="Ingrese su comentario"/>
+                            @error('content')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
+
+                        <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
+                        </button>
+                    </form>
+                
+
                 
                 
                 @else

@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -75,14 +79,31 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      */
+    // public function destroy(Request $request): RedirectResponse
+    // {
+    //     Auth::guard('web')->logout();
+
+    //     $request->session()->invalidate();
+
+    //     $request->session()->regenerateToken();
+
+    //     return redirect('/');
+    // }
+
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+    
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
-        return redirect('/');
+    
+        // Agregar encabezados de respuesta HTTP más estrictos
+        return Redirect::to('/')->withHeaders([
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+            'Expires' => 'Sat, 01 Jan 2000 00:00:00 GMT',
+        ]);
     }
+
+
 }
