@@ -6,7 +6,7 @@
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Carreras y Academias</h1>
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
             <div class="flex items-center flex-row justify-end">
                 <div>
                     <div class="hidden md:flex items-center relative" >
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <a href="{{ route('newCareer')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo asesor
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
 
             </div>
@@ -43,14 +43,14 @@
                         <div class="flex justify-end mt-4">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" >
                             <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
-                            {{-- </a>
+                            </a>
                             <a onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
                             <form id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
                         </form>
-                            </a> --}}
+                            </a> 
                         </div>
                     </div>
                     @endforeach
@@ -59,12 +59,12 @@
             <div class="hidden lg:block w-full">
                 <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                        {{-- <th class="text-[#ACACAC] font-roboto text-xs text-start ">Editar</th> --}}
-                        {{-- <th class="text-[#ACACAC] font-roboto text-xs text-start ">Eliminar</th> --}}
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                     </tr>
                     @foreach ($careers as $career)
                     <tr>
@@ -86,14 +86,10 @@
                             @endif
                         </td>
                         
-                        <td class="font-roboto font-bold py-5 text-center">
+                        <td class="font-roboto font-bold py-5 text-start">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
-                                @if ($division = $divisions->where('academy_id', $academy->id)->first())
-                                    @if ($president = $presidents->where('id', $division->director_id)->first())
-                                        {{ $president->name }}
-                                    @else
-                                        N/A
-                                    @endif
+                                @if ($president = $presidents->where('id', $academy->president_id)->first())
+                                    {{ $president->name }}
                                 @else
                                     N/A
                                 @endif
@@ -107,23 +103,39 @@
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        {{-- <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
+                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
                             <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                     <img src="/img/logos/trash.svg">
                             </form>
-                        </td> --}}
+                        </td> 
                     </tr>
                     @endforeach
                 </table>
+                {{$careers->links()}}
             </div>
         </div>
     </div>
         
     </section>
+    @if(session('success'))
+    <script>
+        
+        function confirmAgregar(){
+            Swal.fire({
+                title: 'Se agrego correctamente',
+                text: `Agregaste una nueva carrera.`,
+                icon: 'success',
+            })
+        }
+        
+    </script>
+    @endif
 
     <script>
+
+     
         function confirmDelete(careerName, careerId) {
             Swal.fire({
                 title: '¿Estás seguro?',

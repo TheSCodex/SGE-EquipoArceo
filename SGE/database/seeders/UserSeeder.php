@@ -24,6 +24,20 @@ class UserSeeder extends Seeder
         $estudiante->role()->associate($rolEstudiante);
         $estudiante->save();
 
+        // permisos predeterminados del estudiante
+
+        $permisosEstudiante = [
+            'crear-anteproyecto' => true,
+            'editar-anteproyecto' => true,
+            'leer-observaciones' => true,
+            'comentar-observaciones' => true,
+            'leer-calendario' => true,
+        ];
+
+        $rolEstudiante->update([
+            'permissions' => $permisosEstudiante,
+        ]);
+
         // Crear un usuario asesor academico
         $asesorAcademico = User::factory()->create([
             'name' => 'Asesor Academico',
@@ -33,6 +47,24 @@ class UserSeeder extends Seeder
         $rolAsesorAcademico = Role::where('title', 'asesorAcademico')->first();
         $asesorAcademico->role()->associate($rolAsesorAcademico);
         $asesorAcademico->save();
+
+        // permisos de asesor académico
+
+        $permisosAsesor = [
+            'leer-estudiantes-asignados' => true,
+            'leer-anteproyectos-asignados' => true,
+            'leer-anteproyecto-detalles' => true,
+            'leer-anteproyectos-publicados' => true,
+            'crear-observacion' => true,
+            'resolver-eliminar-observacion' => true,
+            'votar-anteproyecto' => true,
+            'crear-actividad-calendario' => true,
+            'gestionar-bajas' => true,
+        ];        
+
+        $rolAsesorAcademico->update([
+            'permissions' => $permisosAsesor,
+        ]);
 
         // Crear un usuario presidente de la academia
         $presidenteAcademia = User::factory()->create([
@@ -44,6 +76,24 @@ class UserSeeder extends Seeder
         $presidenteAcademia->role()->associate($rolPresidenteAcademia);
         $presidenteAcademia->save();
 
+        // permisos presidente de academia
+
+        $permisosPresidente = [
+            'leer-anteproyectos-division' => true,
+            'leer-anteproyecto-especifico' => true,
+            'leer-asesores-academicos' => true,
+            'crear-asesores-academicos' => true,
+            'editar-asesores-academicos' => true,
+            'eliminar-asesores-academicos' => true,
+            'leer-estudiantes' => true,
+            'asignar-asesor-estudiante' => true,
+        ];
+        
+
+        $rolPresidenteAcademia->update([
+            'permissions' => $permisosPresidente,
+        ]);
+
         // Crear un usuario directora
         $directora = User::factory()->create([
             'name' => 'Directora',
@@ -53,6 +103,23 @@ class UserSeeder extends Seeder
         $rolDirectora = Role::where('title', 'director')->first();
         $directora->role()->associate($rolDirectora);
         $directora->save();
+
+        // permisos de directora
+
+        $permisosDirectora = [
+            'leer-reportes' => true,
+            'leer-anteproyectos-division' => true,
+            'leer-estudiantes' => true,
+            'generar-reportes-documentos' => true,
+            'gestionar-documentos' => true,
+            'leer-bajas' => true,
+            'editar-formatos' => true,
+        ];
+        
+
+        $rolDirectora->update([
+            'permissions' => $permisosDirectora,
+        ]);
 
         // Crear un usuario asistente de direccion
         $asistenteDireccion = User::factory()->create([
@@ -64,6 +131,24 @@ class UserSeeder extends Seeder
         $asistenteDireccion->role()->associate($rolAsistenteDireccion);
         $asistenteDireccion->save();
 
+        // permisos de asistente de direccion
+
+        $permisosAsistente = [
+            'leer-bajas' => true,
+            'leer-reportes' => true,
+            'generar-reportes-documentos' => true,
+            'gestionar-documentos' => true,
+            'leer-lista-libros' => true,
+            'crear-libro' => true,
+            'editar-libro' => true,
+            'eliminar-libro' => true,
+        ];
+        
+
+        $rolAsistenteDireccion->update([
+            'permissions' => $permisosAsistente,
+        ]);
+
         // Crear un usuario admin
         $admin = User::factory()->create([
             'name' => 'Admin',
@@ -73,5 +158,17 @@ class UserSeeder extends Seeder
         $rolAdmin = Role::where('title', 'admin')->first();
         $admin->role()->associate($rolAdmin);
         $admin->save();
+
+        $permisosAdmin = [
+            'crud-usuarios' => true,
+            'crud-empresas' => true,
+            'crud-roles-permisos' => true,
+            'crud-asesores' => true,
+            'crud-carreras-divisiones' => true,
+        ];
+
+        $rolAdmin->update([
+            'permissions' => $permisosAdmin,
+        ]);
     }
 }

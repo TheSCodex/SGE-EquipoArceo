@@ -93,21 +93,21 @@
             <div class="hidden lg:block w-full">
                 <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">Autor</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">ISBN</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">Proporcionado por</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">Fecha de adición</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Autor</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Proporcionado por</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Fecha de adición</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Detalles</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Editar</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left">Eliminar</th>
                     </tr>
                     @foreach ($books as $book)
                     <tr class="w-full">
-                        <td class="font-roboto font-bold py-5  w-3/12 px-10 ">{{ $book->title }}</td>
-                        <td class="font-roboto font-bold py-5 text-center">{{ $book->author }}</td>
-                        <td class="font-roboto font-bold py-5 text-center">{{ $book->isbn }}</td>
-                        <td class="font-roboto font-bold py-5 text-center">
+                        <td class="font-roboto font-bold py-5  w-4/12 pr-10 ">{{ $book->title }}</td>
+                        <td class="font-roboto font-bold py-5  text-left ">{{ $book->author }}</td>
+                        <td class="font-roboto font-bold py-5  text-left w-1/12">{{ $book->isbn }}</td>
+                        <td class="font-roboto font-bold py-5  text-left ">
                             @if (isset($userInfoByBookId[$book->id]))
                                 @foreach ($userInfoByBookId[$book->id] as $user)
                                     <p>{{ $user->identifier }}</p>
@@ -116,7 +116,7 @@
                                 <p>Sin información</p>
                             @endif
                         </td>
-                        <td class="font-roboto font-bold py-5 text-center">{{ substr($book->created_at, 0, 10) }}</td>
+                        <td class="font-roboto font-bold py-5  text-left">{{ substr($book->created_at, 0, 10) }}</td>
                         <td class="font-roboto font-bold py-5 cursor-pointer">
                             <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
                                 <img src="/img/ojoGreen.svg" class="w-7">

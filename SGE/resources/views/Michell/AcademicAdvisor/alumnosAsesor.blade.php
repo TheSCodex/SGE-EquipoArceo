@@ -3,7 +3,7 @@
 @section('titulo', 'Estuadiantes Asesorados')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center min-h-full h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Estudiantes Asesorados</h1>
@@ -51,8 +51,14 @@
                                 <td class="px-6 py-4  font-medium text-black whitespace-nowrap">{{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                 <td>
                                     <div class="flex gap-3 justify-center">
-                                        <a href="" class="bg-green text-white px-5 py-1 text-sm rounded-md">
-                                            Generar
+                                        <a href="{{route('download.sanon', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Sansion
+                                        </a>
+                                        <a href="{{route('download.meria', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Carta
+                                        </a>
+                                        <a href="{{route('download.aproba', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                            Aprobacion
                                         </a>
 
                                         {{-- <form action="{{ route('intern.destroy', $intern->id) }}" method="POST">

@@ -65,10 +65,12 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
-                            <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
-                                <input type="text" id="location" name="location" value="{{ old('location') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad">
-                                @error('location')
+                            <div class=" space-y-2 lg:mx-5 mb-4">
+                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
+                                <select type="text" id="status" name="status" value="{{old('status')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad">
+                                    <option value='Programada' selected>Programada</option>
+                                </select>                                
+                                @error('status')
                                 <p class="text-[#ff0000] text-sm">
                                     {{ $message }}
                                 </p>
@@ -85,7 +87,16 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
-                            <div class=" space-y-2 mb-4 lg:mx-5 pb-10">
+                            <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
+                                <input type="text" id="location" name="location" value="{{ old('location') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad">
+                                @error('location')
+                                <p class="text-[#ff0000] text-sm">
+                                    {{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 lg:mx-5 mb-4">
                                 <p class="text-sm space-y-2">Fecha y hora de fin de la actividad:</p>
                                 <input type="datetime-local" id="date_end" name="date_end" value="{{ old('date_end') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad">
                                 @error('date_end')
@@ -93,22 +104,9 @@
                                     {{ $message }}
                                 </p>
                                 @enderror
-                            </div>
-                            <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
-                                <select type="text" id="status" name="status" value="{{old('status')}}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad">
-                                    <option value='Programada' selected>Programada</option>
-                                </select>                                
-                                @error('status')
-                                <p class="text-[#ff0000] text-sm">
-                                    {{ $message }}
-                                </p>
-                                @enderror
-                            </div>
+                            </div>  
                         </div>
-
                     <button type="submit" class="p-2 self-center bg-primaryColor w-[18rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir actividad</button>
-
                     
                 </form>
             </div>
