@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->email ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->email ?? 'No disponible' }}</p>
                                 </div>
                             </div>
 
@@ -120,7 +120,7 @@
                                 
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->phone ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}</p>
                                 </div>
                             
                             </div>
