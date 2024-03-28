@@ -101,7 +101,8 @@ class ProjectsController extends Controller
             'project_justificaction' => $validatedData['Justificacion'],
             'activities_to_do' => $validatedData['activities'],
             'start_date' => $validatedData['Fecha_Inicio'],
-            'end_date' => $validatedData['Fecha_Final']
+            'end_date' => $validatedData['Fecha_Final'],
+            'status' => 'Borrador',
         ]);
         $project->save();
 
@@ -172,8 +173,9 @@ class ProjectsController extends Controller
         $company = Company::findOrFail($businessAdvisor->companie_id);
         $intern = Intern::where('project_id', $project->id)->first();
         $user = auth()->user();
-
-        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user'));
+        $divisions = Division::all();
+        $careers = Career::all();
+        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user', 'divisions', 'careers'));
     }
 
     /**

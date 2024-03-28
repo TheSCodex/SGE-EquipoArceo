@@ -21,7 +21,6 @@ use App\Http\Controllers\Michell\AcademicHomeController;
 use App\Http\Controllers\Pipa\RecoverPasswordController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
-use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Michell\AcademicAdvisorController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\ObservationsController;
@@ -111,7 +110,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardAdvisorController::class, "index"])->name('inicio-asesor');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor');
-        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index']);
+        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.store');
 
         //Ruta de los alumnos del asesor
         Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search');

@@ -27,7 +27,7 @@
                 @foreach ($projects as $project)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $project->name }}</h2>
-                    <p class="text-sm text-gray-500">Votos: {{ $project->likes }}</p>
+                    <p class="text-sm text-gray-500">Votos: {{ $project->like !== null ? $project->like : 0 }}</p>
                     <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
                     <div class="flex justify-end mt-4 space-x-2">
                         <a href="{{ route('anteproyecto-Asesor.store', $project->id )}}" class="flex justify-center">
@@ -53,7 +53,7 @@
                 <tr class="w-full">
                     <td class="font-roboto font-bold py-5">{{ $project->id }} </td>
                     <td class="font-roboto font-bold py-5 text-center"">{{ $project->name }}</td>
-                    <td class="font-roboto font-bold py-5 text-center" ">{{ $project->like }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->like !== null ? $project->like : 0 }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->adviser->name }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->start_date  }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->status }}</td>
@@ -89,21 +89,6 @@
 </section>
 
 <script>
-    function confirmDelete(userName, userId) {
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminarlo'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('deleteForm' + userId).submit();
-            }
-        });
-    }
     function searchTable() {
         var searchText = document.getElementById("search").value.toLowerCase();
         var rows = document.querySelectorAll("table tr");

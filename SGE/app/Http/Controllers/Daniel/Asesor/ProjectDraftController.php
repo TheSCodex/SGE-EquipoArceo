@@ -29,7 +29,7 @@ class ProjectDraftController extends Controller
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
-        $interns = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
+        $interns = Intern::where("academic_advisor_id", $id->id)->first();
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
@@ -79,7 +79,8 @@ class ProjectDraftController extends Controller
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
-        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->first(); //Reemplazar tan pronto como haya un modelo
+        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
+ //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
             return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));

@@ -2,7 +2,7 @@
 @section('titulo', 'Lista de anteproyectos')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos</h1>
@@ -27,10 +27,10 @@
                 @foreach ($projects as $project)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $project->name }}</h2>
-                    <p class="text-sm text-gray-500">Votos: {{ $project->likes }}</p>
+                    <p class="text-sm text-gray-500">Votos: {{ $project->like !== null ? $project->like : 0 }}</p>
                     <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
                     <div class="flex justify-end mt-4 space-x-2">
-                        <a href="{{ route('anteproyecto.store', $project->id )}}" class="flex justify-center">
+                        <a href="{{ route('anteproyecto-Asesor.store', $project->id )}}" class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </div>
@@ -53,7 +53,7 @@
                 <tr class="w-full">
                     <td class="font-roboto font-bold py-5">{{ $project->id }} </td>
                     <td class="font-roboto font-bold py-5 text-center"">{{ $project->name }}</td>
-                    <td class="font-roboto font-bold py-5 text-center" ">{{ $project->like }}</td>
+                    <td class="font-roboto font-bold py-5 text-center">{{ $project->like !== null ? $project->like : 0 }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->adviser->name }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->start_date  }}</td>
                     <td class="font-roboto font-bold py-5 text-center">{{ $project->status }}</td>
@@ -74,7 +74,7 @@
                     </td> --}}
                     </td>
                     <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('anteproyecto.store', $project->id )}}" class="flex justify-center">
+                        <a href="{{ route('anteproyecto-Asesor.store', $project->id )}}" class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </td>
@@ -89,21 +89,6 @@
 </section>
 
 <script>
-    function confirmDelete(userName, userId) {
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminarlo'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('deleteForm' + userId).submit();
-            }
-        });
-    }
     function searchTable() {
         var searchText = document.getElementById("search").value.toLowerCase();
         var rows = document.querySelectorAll("table tr");
@@ -124,11 +109,8 @@
             }
         }
     }
-    
         // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
         document.getElementById("search").addEventListener("input", searchTable);
 </script>
-
-
 
 @endsection

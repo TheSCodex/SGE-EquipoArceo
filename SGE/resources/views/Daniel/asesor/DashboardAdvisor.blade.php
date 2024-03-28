@@ -75,6 +75,7 @@
                             <p class="text-sm font-Kanit font-medium">Comentarios por resolver en proyectos</p>
                         </div>
                     </div>
+                    
                 </div>
             </section>
 
