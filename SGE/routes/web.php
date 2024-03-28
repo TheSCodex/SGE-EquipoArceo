@@ -162,7 +162,7 @@ Route::middleware('auth')->group(function () {
         //CRUD ASESOR ACADÉMICO 
 
         // Todos los asesores
-        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores')->middleware('roleorcan:presidenteAcademia,crear-asesores-academicos');
+        Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores')->middleware('roleorcan:presidenteAcademia,leer-asesores-academicos');
         // Crear asesor
         Route::get('/crear-asesores',[PresidentOfTheAcademy::class,'create'])->name('asesores.create')->middleware('roleorcan:presidenteAcademia,crear-asesores-academicos');
         // guardar asesor
