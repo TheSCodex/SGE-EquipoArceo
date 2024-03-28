@@ -54,6 +54,7 @@ class BooksController extends Controller
         $books->title = $request->title;
         $books->author = $request->author;
         $books->isbn = $request->isbn;
+        $books->price = $request->price;
     
         $problems = [];
         $allUsersExistAndAreInterns = true;

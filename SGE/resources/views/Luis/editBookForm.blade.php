@@ -58,6 +58,19 @@
                             </div>
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <div class="flex flex-row w-full justify-between">
+                                    <p class="text-sm space-y-2">Precio:</p>
+                                </div>                        
+                                <input id="price" name="price" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce el precio del libro" value="{{ $book->price }}">
+                                @error('identifier_student')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
+                            <div class="space-y-2 mb-4 mx-[-60px]">
+                                <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Matrículas:</p>
                                     <div>
                                         <div class=" relative before:content-[attr(data-tip)] before:absolute before:px-3 before:py-2 before:-left-3 before:-top-2 before:w-max before:max-w-xs before:-translate-x-1/2 before:-translate-y-full before:bg-gray-700 before:text-white before:rounded-md before:opacity-0 before:transition-all after:absolute after:-left-1.5 after:-top-2 after:h-0 after:w-0 after:translate-x-1/2 after:border-8 after:border-t-gray-700 after:border-l-transparent after:border-b-transparent after:border-r-transparent after:opacity-0 after:transition-all hover:before:opacity-100 hover:after:opacity-100" data-tip="Ej: 22393171, 22393172, 22393173">
@@ -71,7 +84,6 @@
                                         {{ $message }}
                                     </p>
                                 @enderror
-                                
                             </div>
                         </div>
                     </div>

@@ -209,7 +209,7 @@ class EventController extends Controller
         // Validar que no se puedan agregar actividades antes de la hora y fecha actual
         $current_date = new DateTime();
         if ($date_start < $current_date || $date_end < $current_date) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser antes de la fecha y hora actual.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de la fecha y hora actual.');
         }
                 
         if ($dateOne > $dateTwo) {
@@ -340,7 +340,7 @@ class EventController extends Controller
         // Validar que no se puedan agregar actividades antes de la hora y fecha actual
         $current_date = new DateTime();
         if ($dateOne < $current_date || $dateTwo < $current_date) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser antes de la fecha y hora actual.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de la fecha y hora actual.');
         }
     
         // Validar que no haya actividades en el mismo horario
@@ -369,11 +369,11 @@ class EventController extends Controller
     
         // Validar que las sesiones no sean antes de las 8:00 AM ni después de las 5:00 PM
         if ($dateOne->format('H:i:s') < $limit_time_start->format('H:i:s') || $dateTwo->format('H:i:s') < $limit_time_start->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
         }
     
         if ($dateOne->format('H:i:s') > $limit_time_end->format('H:i:s') || $dateTwo->format('H:i:s') > $limit_time_end->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
         }
     
         // Validar que que las citas no duren más de 4 horas
