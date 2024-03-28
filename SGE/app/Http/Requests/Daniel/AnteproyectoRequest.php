@@ -32,7 +32,7 @@ class AnteproyectoRequest extends FormRequest
             'Fecha_Inicio' => 'bail|required|date',
             'Fecha_Final' => 'bail|required|date',
             'name_enterprise' => 'bail|required|regex:/^[a-zA-Z0-9\s&]+$/',
-            'direction_enterprise' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
+            'direction_enterprise' => 'bail|required|regex:/^[a-zA-Z0-9\s.,]+$/',
             'name_advisor' => 'bail|required|regex:/^[\pL\s&]+$/u',
             'advisor_position' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
             'email_advisor' => 'bail|required|email',

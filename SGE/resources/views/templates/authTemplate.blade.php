@@ -52,7 +52,7 @@
                     <a href="{{ route('inicio-asesor') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
                 </li>
                 <li>
-                    <a href="/asesor/estudiante" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
+                    <a href="{{route('asesorados')}}" class="hover:border-b-2 hover:border-primaryColor">Estudiantes</a>
                 </li>
                 <li>
                     <a href="{{ route('anteproyectos-asesor') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
@@ -71,8 +71,9 @@
                     <a href="{{ route('lista-asesores')}}" class="hover:border-b-2 hover:border-primaryColor">Asesores Académicos</a>
                 </li>
                 <li>
-                    <a href="{{ route('anteproyectos-presidente') }}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
+                    <a href="/presidente/anteproyectos" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
                 </li>
+                
                 @elseif($user->rol_id === 4) {{-- ! Rol de Directora --}}
                 <li>
                     <a href="{{ route('inicio-director') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
@@ -89,9 +90,7 @@
                 <li>
                     <a href="{{ route('documentos-director.index') }}" class="hover:border-b-2 hover:border-primaryColor">Documentos</a>
                 </li>
-                {{-- <li>
-                    <a href="#" class="hover:border-b-2 hover:border-primaryColor">Libros</a>
-                </li> --}}
+               
 
                 @elseif($user->rol_id === 5) {{-- ! Rol de Asistente de directora --}}
                 <li>
@@ -146,11 +145,12 @@
         </ul>
     </header>
 
-    <main class="min-h-screen h-full">
+    <main class="h-full">
         @yield('contenido')
 
     </main>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('resources/js/app.js') }}"></script>
+    
 <script>
     // para mostrar/ocultar el menú en dispositivos móviles
     const toggleMenu = document.getElementById('toggleMenu');

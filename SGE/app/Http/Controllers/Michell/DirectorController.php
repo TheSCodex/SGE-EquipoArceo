@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Michell;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Intern;
 
 class DirectorController extends Controller
 {
@@ -12,7 +13,13 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        return view("Michell.director.index");
+        $interns = Intern::join('users', 'interns.user_id', '=', 'users.id')
+            ->join('student_status', 'interns.student_status_id', '=', 'student_status.id')
+            ->select('interns.id', 'users.name', 'student_status.name AS estatus')
+            ->where('student_status.id', 2)
+            ->paginate(3);
+
+        return view("Michell.director.index",compact('interns'));
     }
 
     /**

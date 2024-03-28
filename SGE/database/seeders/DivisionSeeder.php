@@ -13,9 +13,9 @@ class DivisionSeeder extends Seeder
     public function run()
     {
         // Insertar las divisiones de la UT Cancún
-        Division::create(['name' => 'División de Turismo']);
-        Division::create(['name' => 'División de Ingeniería y Tecnología']);
-        Division::create(['name' => 'División de Gastronomía']);
-        Division::create(['name' => 'División Económico-Administrativa']);
+        Division::create(['name' => 'División de Turismo','director_id' => 1]);
+        Division::create(['name' => 'División de Ingeniería y Tecnología','director_id' => 2]);
+        Division::create(['name' => 'División de Gastronomía','director_id' => 3]);
+        Division::create(['name' => 'División Económico-Administrativa','director_id' => 4]);
     }
 }

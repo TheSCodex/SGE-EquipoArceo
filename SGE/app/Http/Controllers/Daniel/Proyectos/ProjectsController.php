@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Daniel\Proyectos;
 
 
 use App\Models\AcademicAdvisor;
+use App\Models\Academy;
 use App\Models\BusinessSector;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -29,16 +30,17 @@ class ProjectsController extends Controller
         $intern = Intern::where("user_id", $userId)->first();
         $interns = Intern::where("user_id", $userId)->get();
 
+        
         // dd($intern);
     
         if (!$intern || !$intern->project_id) {
-            return view('Daniel.Projects.ProjectView')->with('message', 'No intern record or project ID found.');
+            return view('Daniel.Projects.ProjectView');
         }
     
         $project = Project::find($intern->project_id);
     
         if (!$project) {
-            return view('Daniel.Projects.ProjectView')->with('message', 'Project not found.');
+            return view('Daniel.Projects.ProjectView');
         }
     
         if ($project->adviser_id) {
@@ -49,12 +51,22 @@ class ProjectsController extends Controller
                 //dd($company);
             }
         }
-    
+        
+        $user = User::where("id", $userId)->first();
+        // dd($user);
+
         $comments = Comment::where("project_id", $intern->project_id)->get();
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+
+        $career = Career::where("id", $user->career_id)->first();
+        //dd($career);
+        if(!$career || !$career->division_id){
+            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+        }
+        $division = Division::where("id", $career->division_id)->first();
     
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
     }
     
     
@@ -89,7 +101,8 @@ class ProjectsController extends Controller
             'project_justificaction' => $validatedData['Justificacion'],
             'activities_to_do' => $validatedData['activities'],
             'start_date' => $validatedData['Fecha_Inicio'],
-            'end_date' => $validatedData['Fecha_Final']
+            'end_date' => $validatedData['Fecha_Final'],
+            'status' => 'Borrador',
         ]);
         $project->save();
 
@@ -160,8 +173,9 @@ class ProjectsController extends Controller
         $company = Company::findOrFail($businessAdvisor->companie_id);
         $intern = Intern::where('project_id', $project->id)->first();
         $user = auth()->user();
-
-        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user'));
+        $divisions = Division::all();
+        $careers = Career::all();
+        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user', 'divisions', 'careers'));
     }
 
     /**
