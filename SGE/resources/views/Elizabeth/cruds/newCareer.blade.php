@@ -11,8 +11,8 @@
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Carrera</p>
-                    <input type="text" name="division" value="{{ old('division_id') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
-                    @error('name')
+                    <input type="text" name="career" value="{{ old('career') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    @error('career  ')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
@@ -20,24 +20,30 @@
                 </div>
                 <div class=" space-y-2">
                     <p class="text-sm">Division</p>
-                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <option value="" selected disabled>Selecciona una opción</option>
-                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
+                    <select name="division_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Division">
+                        @foreach($divisions as $division)
+                            <option value="{{ $division->id }}">{{ $division->name }}</option>
+                        @endforeach
                     </select>
                     @error('division_id')
-                        <p class="text-[#ff0000] text-sm">
+                        <p >
                             {{ $message }}
                         </p>
                     @enderror
+    
                 </div>
             </div>
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class=" space-y-2">
-                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <option value="" selected disabled>Selecciona una opción</option>
-                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
+                    <p class="text-sm">Academia</p>
+                    <select name="academy_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <option value="" disabled selected>Selecciona una academia</option>
+                        @foreach($academies as $academy)
+                            <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                        @endforeach
                     </select>
-                    @error('division_id')
+                    
+                    @error('academy_id')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
@@ -45,12 +51,13 @@
                 </div>
                 <div class="space-y-2">
                     <p class="text-sm">Presidente</p>
-                    <select name="career_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <option value="" selected disabled>Selecciona una opción</option>
-                        <!-- Opcionalmente, podrías proporcionar opciones predeterminadas aquí -->
+                    <select name="user_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Academia">
+                        @foreach($presidents as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
                     </select>
-                    @error('division_id')
-                        <p class="text-[#ff0000] text-sm">
+                    @error('user_id')
+                        <p>
                             {{ $message }}
                         </p>
                     @enderror
@@ -62,5 +69,7 @@
 
     </form>
 </div>
+
+
 
 @endsection('contenido')

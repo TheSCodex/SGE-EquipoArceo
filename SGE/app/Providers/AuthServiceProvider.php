@@ -143,6 +143,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('eliminar-libro', function ($user) {
             return $user->hasPermission('eliminar-libro');
         });
+
+        Gate::define('editar-formatos', function ($user) {
+            return $user->hasPermission('editar-formatos');
+        });
         
         Gate::define('crud-usuarios', function ($user) {
             return $user->hasPermission('crud-usuarios');
