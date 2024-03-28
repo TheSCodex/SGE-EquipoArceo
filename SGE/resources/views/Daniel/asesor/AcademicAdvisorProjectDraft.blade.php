@@ -147,7 +147,6 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
-                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
                     @else
                         <div
