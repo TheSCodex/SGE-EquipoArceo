@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Daniel\Director;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Models\Project_division;
 
 class ProjectsDirectorController extends Controller
 {
@@ -13,9 +13,8 @@ class ProjectsDirectorController extends Controller
      */
     public function index()
     {
-        $proyectos = Project_division::paginate(10);
-
-        return view('daniel.presidenta.project')->with('proyectos', $proyectos);
+        $projects = Project::with('adviser')->paginate(10);
+        return view('daniel.directorAcademy.projects')->with('projects', $projects);
     }
     /**
      * Show the form for creating a new resource.

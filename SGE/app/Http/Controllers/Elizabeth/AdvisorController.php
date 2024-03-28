@@ -16,8 +16,7 @@ class AdvisorController extends Controller
     public function index()
     {
         // Obtener los asesores de la base de datos
-        $advisors = BusinessAdvisor::all();
-    
+        $advisors = BusinessAdvisor::paginate(10);
         // Cargar la vista y pasar los datos
         return view('Elizabeth.crudAsesores', compact('advisors'));
     }
@@ -38,7 +37,7 @@ class AdvisorController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:business_advisors|max:255',
-        'phone' => 'required|string|max:15',
+        'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
         'position'=> 'required|string|max:50',
         // Agrega más reglas de validación según sea necesario
     ]);
@@ -74,7 +73,7 @@ class AdvisorController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:business_advisors,email,'.$id.'|max:255',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
             'position'=> 'required|string|max:50',
             // Agrega más reglas de validación según sea necesario
         ]);

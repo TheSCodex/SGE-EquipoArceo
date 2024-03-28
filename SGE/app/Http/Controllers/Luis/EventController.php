@@ -56,7 +56,7 @@ class EventController extends Controller
         $event->status = 'Cancelada';
         $event->save();
 
-        return redirect('asesor/actividades');
+        return redirect('asesor/actividades')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
     }
     
 

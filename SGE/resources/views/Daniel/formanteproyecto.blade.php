@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('titulo')
-    Formulario de anteproyectos
+    Agregar anteproyecto
 @endsection
 
 @section('contenido')
@@ -18,7 +18,7 @@
                         @csrf
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
                             value="{{ old('name_student', $user->name) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" ><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -27,7 +27,7 @@
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
                         <input type="number" name="matricula" placeholder="Matricula"
                             value="{{ old('matricula', $user->identifier) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('matricula')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -127,7 +127,7 @@
                         @enderror
                     </div>
                     <div class="w-[48%]">
-                        <h2 class="font-roboto mb-1 font-medium">Direccion:</h2>
+                        <h2 class="font-roboto mb-1 font-medium">Dirección :</h2>
                         <input type="text" name="direction_enterprise"
                             placeholder="Introduzca la direccion de la empresa" value="{{ old('direction_enterprise') }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
