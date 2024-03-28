@@ -59,7 +59,7 @@ class carrerasController extends Controller
     $career->name = $validatedData['name'];
 
     $career->division_id = $division->id;
-
+//
     $career->save();
 
     return redirect('/panel-careers'); 
