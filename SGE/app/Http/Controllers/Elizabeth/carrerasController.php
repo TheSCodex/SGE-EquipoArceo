@@ -59,7 +59,8 @@ class carrerasController extends Controller
     $career->academy_id = $validatedData['academy_id'];
     $career->save();
 
-    return redirect('/panel-careers'); 
+    return redirect('/panel-careers')->with('success', 'Career added successfully!');
+ 
 }
     
     /**

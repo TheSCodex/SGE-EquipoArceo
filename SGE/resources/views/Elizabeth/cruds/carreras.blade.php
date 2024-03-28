@@ -119,6 +119,19 @@
     </div>
         
     </section>
+    @if(session('success'))
+    <script>
+        
+        function confirmAgregar(){
+            Swal.fire({
+                title: 'Se agrego correctamente',
+                text: `Agregaste una nueva carrera.`,
+                icon: 'success',
+            })
+        }
+        
+    </script>
+    @endif
 
     <script>
 
