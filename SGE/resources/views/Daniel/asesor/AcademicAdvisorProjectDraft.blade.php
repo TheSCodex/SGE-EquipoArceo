@@ -223,14 +223,14 @@
                     <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach($comments as $comment)
                         <div class='flex flex-wrap w-full'>
-                            <p class=' text-black w-full font-normal text-sm'>Asesor</p>
+                            <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
                             <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                         </div>
                         @endforeach
                         
-                        <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md">Ver observaciones</button>
-                    </div>
-                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}" class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                        <button class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</button>
+                    
+                    <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}" class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                         @csrf
 
                             <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content" placeholder="Ingrese su comentario"/>
@@ -242,7 +242,7 @@
                             <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
                         </button>
                     </form>
-                    
+                </div>
                     
                 @elseif(isset($comments) && count($comments) == 0)
                 <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
