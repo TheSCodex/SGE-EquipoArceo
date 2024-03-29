@@ -26,9 +26,9 @@
             <div class="flex flex-row items-center justify-end">
                 <div class="flex-1 md:mr-2">
                     <form method="POST" class="hidden md:block"
-                        @if (Auth::user()->role->title == 'director') action="{{ route('docs.search-director') }}"
+                        @if (Auth::user()->role->title == 'director') action="{{ route('docs.search') }}"
                         @elseif(Auth::user()->role->title == 'asistenteDireccion')
-                        action="{{ route('docs.search-assistant') }}" @endif>
+                        action="{{ route('docs.search') }}" @endif>
                         @csrf
                         <div class="flex items-center space-x-4">
                                 <div class="relative items-center hidden md:flex" >
