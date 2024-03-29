@@ -30,7 +30,7 @@
                     <p class="text-sm text-gray-500">Votos: {{ $project->likes }}</p>
                     <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
                     <div class="flex justify-end mt-4 space-x-2">
-                        <a href="{{ route('anteproyecto.store', $project->id )}}" class="flex justify-center">
+                        <a href="{{ route('anteproyectos.store', $project->id )}}" class="flex justify-center">
                             <img src="/img/ojoGreen.svg" class="w-7">
                         </a>
                     </div>

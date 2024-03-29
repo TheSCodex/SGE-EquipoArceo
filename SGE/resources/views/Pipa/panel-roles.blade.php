@@ -76,7 +76,7 @@
                             </tr>
                             @endforeach
 
-
+                        
 
                         </div>
                     </div>
@@ -163,5 +163,24 @@
     }
 </script>
 
+@if(session('error'))
+<script>
+    Swal.fire({
+        title: 'Oops...',
+        text: '{{ session("error") }}',
+        icon: 'error'
+    });
+</script>
+@endif
+{{-- sweet alert para indicar que el usuario se agregó :3 --}}
+@if(session('success'))
+    <script>
+        Swal.fire({
+            title: '¡Éxito!',
+            text: '{{ session("success") }}',
+            icon: 'success'
+        });
+    </script>
+@endif
 
 @endsection
