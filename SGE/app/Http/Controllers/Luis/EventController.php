@@ -11,6 +11,7 @@ use App\Models\Intern;
 use App\Models\Role;
 use App\Models\User;
 use DateTime;
+use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 
 class EventController extends Controller
@@ -20,6 +21,9 @@ class EventController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
@@ -60,12 +64,15 @@ class EventController extends Controller
      */
 
      public function cancelActivity($id){
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         // dd($id);
         $event = CalendarEvent::find($id);
         $event->status = 'Cancelada';
         $event->save();
 
-        return redirect('asesor/actividades')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
+        return redirect()->route('actividades.index')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
     }
     
 
@@ -74,6 +81,11 @@ class EventController extends Controller
      */
     public function calendar()
     {
+        if(Gate::denies('leer-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
+        $permissionActivity = Gate::allows('crear-actividad-calendario');
+
         $user = auth()->user();
 
         $rol = Role::where('id', $user->rol_id)->first();
@@ -159,7 +171,7 @@ class EventController extends Controller
                 $eventsPerDay[$eventDay]++;
             }
         }
-        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
+        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern', 'permissionActivity'));
     }
     
 
@@ -169,6 +181,9 @@ class EventController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -183,6 +198,9 @@ class EventController extends Controller
      */
     public function store(NewEventFormRequest $request)
     {
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -208,6 +226,7 @@ class EventController extends Controller
 
         // Validar que no se puedan agregar actividades antes de la hora y fecha actual
         $current_date = new DateTime();
+        // dd($current_date);
         if ($date_start < $current_date || $date_end < $current_date) {
             return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de la fecha y hora actual.');
         }
@@ -255,7 +274,7 @@ class EventController extends Controller
 
         // dd($event);
         $event->save();
-        return redirect('asesor/actividades')->with('success', 'La actividad se ha agregado correctamente');
+        return redirect()->route('actividades.index')->with('success', 'La actividad se ha agregado correctamente');
     }
 
     /**
@@ -263,6 +282,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
+        if(Gate::denies('leer-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
         $rol = Role::where('id', $user->rol_id)->first();
 
@@ -270,9 +292,10 @@ class EventController extends Controller
             $rol = 'asesorAcademico';
 
             $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
-
+            
+            
             $internsWithUser = Intern::with('user')->where('academic_advisor_id', $academicAdvisor->id)->get();
-    
+            
             $event = CalendarEvent::find($id);
     
             $intern = Intern::with('user')->where('id', $event->receiver_id)->first();
@@ -298,6 +321,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -315,6 +341,9 @@ class EventController extends Controller
      */
     public function update(NewEventFormRequest $request, string $id)
     {
+        if(Gate::denies('crear-actividad-calendario')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
         
@@ -385,7 +414,7 @@ class EventController extends Controller
     
         // Actualizar el evento
         $event->update();
-        return redirect('asesor/actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
+        return redirect()->route('actividades.index')->with('edit_success', 'La actividad ha sido editada correctamente');
     }
     
 
@@ -398,6 +427,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect('asesor/actividades')->with('delete','ok');
+        return redirect()->route('actividades.index')->with('delete','ok');
     }
 }
