@@ -56,7 +56,7 @@ class EventController extends Controller
         $event->status = 'Cancelada';
         $event->save();
 
-        return redirect('asesor/actividades')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
+        return redirect('actividades')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
     }
     
 
@@ -189,7 +189,7 @@ class EventController extends Controller
 
         // dd($event);
         $event->save();
-        return redirect('asesor/actividades')->with('success', 'La actividad se ha agregado correctamente');
+        return redirect('actividades')->with('success', 'La actividad se ha agregado correctamente');
     }
 
     /**
@@ -273,7 +273,7 @@ class EventController extends Controller
         }
 
         $event->update();
-        return redirect('asesor/actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
+        return redirect('actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
     }
 
     /**
@@ -285,6 +285,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect('asesor/actividades')->with('delete','ok');
+        return redirect('actividades')->with('delete','ok');
     }
 }
