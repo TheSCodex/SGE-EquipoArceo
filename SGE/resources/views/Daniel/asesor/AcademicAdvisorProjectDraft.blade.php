@@ -262,10 +262,6 @@
                             <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
                         </button>
                     </form>
-                
-
-                
-                
                 @else
                     <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
                         <p class=' text-center text-black opacity-[60%]'>No hay un anteproyecto que comentar</p>
