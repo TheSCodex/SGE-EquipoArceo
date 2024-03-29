@@ -2,17 +2,15 @@
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="w-full h-fit flex justify-center md:justify-start px-[8%]">
-    <h1 class="text-3xl font-bold pt-[4%]">Crear carrera y academia</h1>
+    <h1 class="text-3xl font-bold pt-[4%]">Crear  academia</h1>
     
 </div>
 <div class="flex mt-[2%] px-[12%] ">
     <section class="font-bold text-sm md:space-x-6 space-x-2">
         <button id="btnAll"
             class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Nueva Carrera</button>
-        <a href="panel-create-academies">
-            <button id="btnWithAdvisor"
+        <button id="btnWithAdvisor"
             class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Nueva Academia</button>
-        </a>
     
     </section>
   </div>
