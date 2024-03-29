@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Elizabeth;
-
+use App\Models\Academy; 
+use App\Models\Division;
+use App\Models\User; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class AcademiesController extends Controller
 {
@@ -12,7 +16,10 @@ class AcademiesController extends Controller
      */
     public function index()
     {
-        return view('Elizabeth.Academies.crudAcademies');
+        $academies = Academy::paginate(10);
+        $presidents = User::whereIn('id', $academies->pluck('president_id'))->get();
+        $divisions = Division::whereIn('id',$academies->pluck('division_id'))->get();
+        return view('Elizabeth.Academies.crudAcademies', compact('academies', 'presidents','divisions'));
     }
 
     /**
@@ -58,8 +65,18 @@ class AcademiesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        
+        try {
+            DB::beginTransaction();
+            DB::select('CALL proc_delete_academy(?)', [$id]);
+            DB::commit();
+            
+            return redirect()->back()->with('success', '¡Academia eliminada exitosamente!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Error al eliminar la academia: ' . $e->getMessage());
+        }
     }
 }

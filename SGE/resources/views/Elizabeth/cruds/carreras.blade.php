@@ -79,9 +79,7 @@
                 <table class="text-start w-full ">
                     <tr class="border-b border-gray-200 pb-[2%]">
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                     </tr>
@@ -97,25 +95,7 @@
                             @endif    
                         </td>
 
-                        <td class="font-roboto font-bold py-5 text-start ">
-                            @if ($division = $divisions->where('id', $academy->division_id)->first())
-                                {{ $division->name }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
                         
-                        <td class="font-roboto font-bold py-5 text-start">
-                            @if ($academy = $academies->where('id', $career->academy_id)->first())
-                                @if ($president = $presidents->where('id', $academy->president_id)->first())
-                                    {{ $president->name }}
-                                @else
-                                    N/A
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
                         <td class="font-roboto font-bold py-5 cursor-pointer">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">

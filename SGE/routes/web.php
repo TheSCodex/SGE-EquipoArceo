@@ -276,6 +276,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        
         Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
 });
 

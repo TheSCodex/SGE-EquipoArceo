@@ -6,7 +6,7 @@
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Divisiones</h1>
 
         <div class="flex items-center flex-row justify-end">
             <div>
@@ -14,7 +14,7 @@
                     <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('newCareer')}}"
+            <a href="{{ route('newDivision')}}"
                 class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
             </a>
         </div>
@@ -27,7 +27,7 @@
                     <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('newCareer')}}"
+            <a href="{{ route('newDivision')}}"
                 class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
             </a>
 
@@ -36,29 +36,35 @@
     </div>
     <div class="flex mt-[2%] px-[4%]  ">
         <section class="font-bold text-sm md:space-x-6 space-x-2">
-            <button id="btnAll"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
-            <button id="btnWithAdvisor"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
-            <button id="btnWithOutAdvisor"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+            <a href="panel-divisions">
+                <button id="btnAll"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
+                </a>
+                <a href="panel-academies">
+                    <button id="btnWithAdvisor"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
+                </a>
+                <a href="panel-divisions">
+                    <button id="btnWithOutAdvisor"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+                </a>
         </section>
       </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
-                @foreach ($careers as $career)
+                @foreach ($divisions as $division)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                    <h2 class="text-lg font-bold">{{ $career->name }}</h2>
-                    <p class="text-sm text-gray-500">Division: {{ $career->division->name ?? 'N/A'}}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $career->phone }}</p>
-                    <p class="text-sm text-gray-500">Presidente: {{ $career->position }}</p>
+                    <h2 class="text-lg font-bold">{{ $division->name }}</h2>
+                    <p class="text-sm text-gray-500">Division: {{ $division->directors}}</p>
+                    <p class="text-sm text-gray-500">Academia: {{ $division->phone }}</p>
+                    <p class="text-sm text-gray-500">Presidente: {{ $division->position }}</p>
                     <div class="flex justify-end mt-4">
-                        <a href="{{ route('panel-careers.edit', $career->id) }}" >
+                        <a href="{{ route('panel-divisions.edit', $division->id) }}" >
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         </a>
-                        <a onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
-                        <form id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                        <a onclick="confirmDelete('{{ $division->name }} {{ $division->position }}', '{{ $division->id }}')">
+                        <form id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
@@ -72,35 +78,35 @@
         <div class="hidden lg:block w-full ">
             <table class="text-start w-full ">
                 <tr class="border-b border-gray-200 pb-[2%]">
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
+         
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Director</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Asistente del director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                 </tr>
-                @foreach ($careers as $career)
+                @foreach ($divisions as $division)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
+                    <td class="font-roboto font-bold py-5">{{ $division->name }}</td>
 
-                    <td class="font-roboto font-bold py-5 text-start ">
-                        @if ($academy = $academies->where('id', $career->academy_id)->first())
-                        {{ $academy->name }}
+                   <td class="font-roboto font-bold py-5 text-start ">
+                        @if ($principal = $principals->where('id', $division->director_id)->first())
+                            {{ $principal->name }}
                         @else
                             N/A
                         @endif    
                     </td>
 
                     <td class="font-roboto font-bold py-5 text-start ">
-                        @if ($division = $divisions->where('id', $academy->division_id)->first())
-                            {{ $division->name }}
+                        @if ($assistant = $assistants->where('id', $division->directorAsistant_id)->first())
+                            {{ $assistant->name }}
                         @else
                             N/A
                         @endif
                     </td>
                     
-                    <td class="font-roboto font-bold py-5 text-start">
-                        @if ($academy = $academies->where('id', $career->academy_id)->first())
+                    {{-- <td class="font-roboto font-bold py-5 text-start">
+                        @if ($academy = $academies->where('id', $division->academy_id)->first())
                             @if ($president = $presidents->where('id', $academy->president_id)->first())
                                 {{ $president->name }}
                             @else
@@ -109,15 +115,15 @@
                         @else
                             N/A
                         @endif
-                    </td>
-                    {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
+                    </td> --}}
+                    {{-- <td class="font-roboto font-bold py-5">{{ $division->position }}</td>  --}}
                     <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">
+                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}, Presidente: {{ $division->position }}', '{{ $division->id }}')">
+                        <form class="flex justify-center" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
@@ -126,7 +132,7 @@
                 </tr>
                 @endforeach
             </table>
-            {{$careers->links()}}
+           -{{-- {{$divisions->links()}}--}}
         </div>
     </div>
 </div>
@@ -149,10 +155,10 @@
 <script>
 
  
-    function confirmDelete(careerName, careerId) {
+    function confirmDelete(divisionName, divisionId) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${careerName}. Esta acción no se puede revertir.`,
+            text: `Estás a punto de eliminar a ${divisionName}. Esta acción no se puede revertir.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -160,7 +166,7 @@
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + careerId).submit();
+                document.getElementById('deleteForm' + divisionId).submit();
             }
         });
     }
@@ -193,12 +199,12 @@
 <script>
     function searchMobileTable() {
         var searchText = document.getElementById("searchMovil").value.toLowerCase();
-        var careers = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
+        var divisions = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
         
-        careers.forEach(function(career) {
-            var careerText = career.innerText.toLowerCase();
-            var found = careerText.indexOf(searchText) > -1;
-            career.style.display = found ? "" : "none";
+        divisions.forEach(function(division) {
+            var divisionText = division.innerText.toLowerCase();
+            var found = divisionText.indexOf(searchText) > -1;
+            division.style.display = found ? "" : "none";
         });
     }
 

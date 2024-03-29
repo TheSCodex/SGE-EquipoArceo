@@ -1,12 +1,12 @@
 
 @extends('templates/authTemplate')
-@section('titulo', 'Panel de Carreras y Academias')
+@section('titulo', 'Panel de Academias')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Academias</h1>
 
         <div class="flex items-center flex-row justify-end">
             <div>
@@ -36,18 +36,24 @@
     </div>
     <div class="flex mt-[2%] px-[4%]  ">
         <section class="font-bold text-sm md:space-x-6 space-x-2">
+           <a href="panel-careers">
             <button id="btnAll"
                 class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
-            <button id="btnWithAdvisor"
+            </a>
+            <a href="panel-academies">
+                <button id="btnWithAdvisor"
                 class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
-            <button id="btnWithOutAdvisor"
+            </a>
+            <a href="panel-divisions">
+                <button id="btnWithOutAdvisor"
                 class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+            </a>
         </section>
       </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
-        <div class="lg:hidden w-full mb-5">
+       {{-- <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
-                @foreach ($careers as $career)
+                @foreach ($academies as $career)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $career->name }}</h2>
                     <p class="text-sm text-gray-500">Division: {{ $career->division->name ?? 'N/A'}}</p>
@@ -68,24 +74,25 @@
                 </div>
                 @endforeach
             </div>
-        </div>
+        </div> --}}
         <div class="hidden lg:block w-full ">
             <table class="text-start w-full ">
                 <tr class="border-b border-gray-200 pb-[2%]">
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
+                   
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                 </tr>
-                @foreach ($careers as $career)
+                @foreach ($academies as $academy)
                 <tr>
-                    <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
+                    {{-- dd($academy) --}}
+                    <td class="font-roboto font-bold py-5">{{ $academy->name }}</td>
 
                     <td class="font-roboto font-bold py-5 text-start ">
-                        @if ($academy = $academies->where('id', $career->academy_id)->first())
-                        {{ $academy->name }}
+                        @if ($president = $presidents->where('id', $academy->president_id)->first())
+                        {{ $president->name }}
                         @else
                             N/A
                         @endif    
@@ -93,31 +100,21 @@
 
                     <td class="font-roboto font-bold py-5 text-start ">
                         @if ($division = $divisions->where('id', $academy->division_id)->first())
-                            {{ $division->name }}
+                        {{ $division->name }}
                         @else
                             N/A
-                        @endif
+                        @endif    
                     </td>
+
                     
-                    <td class="font-roboto font-bold py-5 text-start">
-                        @if ($academy = $academies->where('id', $career->academy_id)->first())
-                            @if ($president = $presidents->where('id', $academy->president_id)->first())
-                                {{ $president->name }}
-                            @else
-                                N/A
-                            @endif
-                        @else
-                            N/A
-                        @endif
-                    </td>
                     {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
                     <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">
+                        <a href="{{-- route('panel-academies.edit', $academy->id) --}}" class="flex justify-center">
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}, Presidente: {{ $academy->id }}', '{{ $academy->id }}')">
+                        <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{ route('panel-academies.destroy', $academy->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <img src="/img/logos/trash.svg">
@@ -126,7 +123,7 @@
                 </tr>
                 @endforeach
             </table>
-            {{$careers->links()}}
+            {{$academies->links()}}
         </div>
     </div>
 </div>
