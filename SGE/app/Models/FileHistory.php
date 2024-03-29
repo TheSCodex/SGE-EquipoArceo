@@ -25,8 +25,8 @@ class FileHistory extends Model
         'director',
         'career',
         'project',
-        'motivo',
-        'tipo',
+        'reason',
+        'type',
         'interns'
     ];
 

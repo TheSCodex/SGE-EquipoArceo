@@ -73,7 +73,7 @@ class ExcelExportController extends Controller
             'advisor_name' => $user->name,
             'advisor_lastName' => $user->last_name,
             'user_id' => $user->id,
-            'academic_advisor_id' =>$academic_advisor_id,
+            'academic_advisor_id' => (int) $academic_advisor_id,    
         ];
 
         $fileHistory = new FileHistory($jsonData[0]);

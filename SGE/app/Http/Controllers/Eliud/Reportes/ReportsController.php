@@ -17,36 +17,38 @@ use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion(Request $request, string $id)
+    public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null)
     {
         $user = auth()->user();
         $userData = User::find($user->id);
-        $motivo = $request->input('motivo');
-        $tipo = $request->input('tipo');
+        $motivo = $motivo ?? $request->input('motivo');
+        $tipo = $tipo ?? $request->input('tipo');
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
         $project = Project::find($interns[0]->project_id);
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
-    
+
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $jsonData[] = [
 
-            'title' => "Aprobación de Memoria",
+            'title' => "Amonestación",
             'advisor_identifier' => $user->identifier,
             'advisor_email' => $user->email,
             'advisor_name' => $user->name,
-            'advisor_lastName' => $user->last_name, 
-            'user_id' => $user->id,
+            'advisor_lastName' => $user->last_name,
+            'user_id' => $id,
             'academic_advisor_id' => $interns[0]?->academic_advisor_id,
             'student' => $student?->name . ' ' . $student->last_name,
             'student_service_hours' => $interns[0]->service_hour,
             'division' => $division?->name,
-            'director' => $director?->name . ' ' . $director?->last_name ,
+            'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
+            'type' => $tipo,
+            'reason' => $motivo
         ];
         $fileHistory = new FileHistory($jsonData[0]);
         $fileHistory->save();
@@ -87,21 +89,21 @@ class ReportsController extends Controller
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
-        
+
         $jsonData[] = [
 
             'title' => "Aprobación de Memoria",
             'advisor_identifier' => $user->identifier,
             'advisor_email' => $user->email,
             'advisor_name' => $user->name,
-            'advisor_lastName' => $user->last_name, 
-            'user_id' => $user->id,
+            'advisor_lastName' => $user->last_name,
+            'user_id' => $id,
             'academic_advisor_id' => $interns[0]?->academic_advisor_id,
             'student' => $student?->name . ' ' . $student?->last_name,
             'student_identifier' => $student->identifier,
-            'student_group' => $interns[0]?->Group ,
+            'student_group' => $interns[0]?->Group,
             'division' => $division?->name,
-            'director' => $director?->name . ' ' . $director?->last_name ,
+            'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
@@ -143,12 +145,12 @@ class ReportsController extends Controller
             'advisor_identifier' => $user->identifier,
             'advisor_email' => $user->email,
             'advisor_name' => $user->name,
-            'advisor_lastName' => $user->last_name, 
-            'user_id' => $user->id,
+            'advisor_lastName' => $user->last_name,
+            'user_id' => $id,
             'academic_advisor_id' => $interns[0]?->academic_advisor_id,
             'student' => $student?->name . ' ' . $student?->last_name,
             'division' => $division?->name,
-            'director' => $director?->name . ' ' . $director?->last_name ,
+            'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,

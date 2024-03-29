@@ -22,6 +22,7 @@ class DocumentsController extends Controller
             $message = "No se encontraron registros.";
             return view('Eliud.crud.crud', compact('message'));
         } else {
+            $docs = FileHistory::paginate(10);
             return view('Eliud.crud.crud', compact('docs'));
         }
     }
@@ -42,6 +43,7 @@ class DocumentsController extends Controller
             $docs = FileHistory::all();
         }
     
+        $docs = FileHistory::paginate(10);
         return view('Eliud.crud.crud', compact('docs'));
     }
     

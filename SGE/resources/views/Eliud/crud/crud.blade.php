@@ -26,10 +26,7 @@
                 <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Lista de Documentos</h1>
                 <div class="flex flex-row items-center justify-end">
                     <div class="flex-1 md:mr-2">
-                        <form method="POST" class="hidden md:block"
-                            @if (Auth::user()->role->title == 'director') action="{{ route('docs.search-director') }}"
-                        @elseif(Auth::user()->role->title == 'asistenteDireccion')
-                        action="{{ route('docs.search-assistant') }}" @endif>
+                        <form method="POST" class="hidden md:block" action="{{ route('docs.search') }}">
                             @csrf
                             <div class="flex items-center space-x-4">
                                 <div class="relative items-center hidden md:flex">
@@ -44,7 +41,7 @@
                 <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             </div>
             @if (isset($message))
-                <p>{{ $message }}</p>
+                <p class="text-center text-4xl">{{ $message }}</p>
             @else
                 @php
                     if (!function_exists('getDownloadRoute')) {
@@ -57,17 +54,22 @@
                                     return $userRole == 'director'
                                         ? 're-download.control.director'
                                         : 're-download.control.asistente';
-                                case 'Carta de Amonestación':
-                                    return $userRole == 'director' ? '' : '';
-                                case 'Carta de Aprobación':
-                                    return $userRole == 'director' ? '' : '';
-                                case 'Carta de Digitalización':
-                                    return $userRole == 'director' ? '' : '';
-                                default:
-                                    return 'default.download';
+                                case 'Amonestación':
+                                    return $userRole == 'director'
+                                        ? 're-download.sancion.director'
+                                        : 're-download.sancion.asistente';
+                                case 'Aprobación de Memoria':
+                                    return $userRole == 'director'
+                                        ? 're-download.aprobacion.director'
+                                        : 're-download.aprobacion.asistente';
+                                case 'Digitalización de Memoria':
+                                    return $userRole == 'director'
+                                        ? 're-download.memoria.director'
+                                        : 're-download.memoria.asistente';
                             }
                         }
                     }
+                    // dd($docs);
                 @endphp
                 <div class="flex items-center justify-between w-11/12 mx-auto mt-6">
                     {{-- cards --}}
@@ -87,13 +89,18 @@
                                 action="{{ route('docs.destroy-assistant', $doc->id) }}" @endif>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit">
+                                            <button type="submit" class="delete-button">
                                                 <img src="/img/logos/trash.svg">
                                             </button>
                                         </form>
-                                        <a href="{{ route(getDownloadRoute($doc['title']), $doc->academic_advisor_id) }}">
-                                            <img src="/img/logos/descarga.png" alt="Download" class="ml-2 cursor-pointer">
-                                        </a>
+                                        <form method="{{ $doc['title'] == 'Amonestación' ? 'POST' : 'GET' }}"
+                                            action="{{ route(getDownloadRoute($doc['title']), $doc['title'] == 'Amonestación' ? ['id' => $doc->user_id, 'type' => $doc->type, 'reason' => $doc->reason] : ($doc['title'] == 'Control de Estadías' ? $doc->academic_advisor_id : $doc->user_id)) }}">
+                                            @csrf
+                                            <button type="submit">
+                                                <img src="/img/logos/descarga.png" alt="Download"
+                                                    class="ml-2 cursor-pointer">
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach
@@ -124,15 +131,21 @@
                                 action="{{ route('docs.destroy-assistant', $doc->id) }}" @endif>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit">
+                                            <button type="submit" class="delete-button-2">
                                                 <img src="/img/logos/trash.svg">
                                             </button>
                                         </form>
                                     </td>
                                     <td class="py-5 font-bold font-roboto">
-                                        <a href="{{ route(getDownloadRoute($doc['title']), $doc->academic_advisor_id) }}">
-                                            <img src="/img/logos/descarga.png" alt="Download" class="ml-2 cursor-pointer">
-                                        </a>
+                                        <form method="{{ $doc['title'] == 'Amonestación' ? 'POST' : 'GET' }}"
+                                            action="{{ route(getDownloadRoute($doc['title']), $doc['title'] == 'Amonestación' ? ['id' => $doc->user_id, 'type' => $doc->type, 'reason' => $doc->reason] : ($doc['title'] == 'Control de Estadías' ? $doc->academic_advisor_id : $doc->user_id)) }}">
+                                            @csrf
+                                            <button type="submit">
+                                                <img src="/img/logos/descarga.png" alt="Download"
+                                                    class="ml-2 cursor-pointer">
+                                            </button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -140,23 +153,74 @@
                     </div>
                 </div>
             @endif
-
+            <div class="my-5 mx-auto">
+                {{$docs->links()}}
+            </div>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
-                function confirmDelete(userName, userId) {
+                window.onload = function() {
+                    // For 'delete-button'
+                    var deleteButtons = document.querySelectorAll('.delete-button');
+                    deleteButtons.forEach(function(button) {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            Swal.fire({
+                                title: '¿Estás seguro?',
+                                text: "Esto no se puede deshacer",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Eliminar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    e.target.closest("form").submit();
+                                }
+                            })
+                        });
+                    });
+
+                    var deleteButtons2 = document.querySelectorAll('.delete-button-2');
+                    deleteButtons2.forEach(function(button) {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            Swal.fire({
+                                title: '¿Estás seguro?',
+                                text: "Esto no se puede deshacer",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Eliminar',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    e.target.closest("form").submit();
+                                }
+                            })
+                        });
+                    });
+
+                }
+
+                document.querySelectorAll('.delete-button-2').addEventListener('click', function(e) {
+                    e.preventDefault();
                     Swal.fire({
                         title: '¿Estás seguro?',
-                        text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                        text: "Esto no se puede deshacer",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Sí, eliminarlo'
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Eliminar',
+                        cancelButtonText: 'Cancelar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            document.getElementById('deleteForm' + userId).submit();
+                            e.target.closest("form").submit();
                         }
-                    });
-                }
+                    })
+                });
 
                 function searchTable() {
                     var searchText = document.getElementById("search").value.toLowerCase();

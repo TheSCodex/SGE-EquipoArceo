@@ -103,7 +103,7 @@
                                                         </div>
                                                         
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.sanon', $user->id) }}"
+                                                            <form action="{{ route('download.sancion', $user->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 <div class="flex flex-col justify-between mt-2">
@@ -149,7 +149,7 @@
                                                         </div>
 
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.meria', $user->id) }}"
+                                                            <form action="{{ route('download.memoria', $user->id) }}"
                                                                 method="GET">
                                                                 @csrf
 
@@ -181,7 +181,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.aproba', $user->id) }}"
+                                                            <form action="{{ route('download.aprobacion', $user->id) }}"
                                                                 method="GET">
                                                                 @csrf
 
