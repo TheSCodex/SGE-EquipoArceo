@@ -119,10 +119,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
         Route::put("alumno/edit/{id}", [AcademicAdvisorController::class, 'student_withdrawal'])->name('alumno.edit')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
-        // tuve que comentar estas pq se comparten con las del director más abajo
-        // Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sanon')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
-        // Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.meria')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
-        // Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aproba')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+        Route::post('/Generate/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sancion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+        Route::get('/Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+        Route::get('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
         
         // // ! Ruta de las observaciones del asesor
         Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyecto');
@@ -140,7 +139,7 @@ Route::middleware('auth')->group(function () {
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel')->middleware('roleorcan:asesorAcademico,leer-calendario');
 
         // Ruta para generar el control de estadías propio
-        Route::get('generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->middleware('role:asesorAcademico');    
+        Route::get('control/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('download.control')->middleware('role:asesorAcademico');    
 
     // });
 
@@ -161,7 +160,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
 
         //CRUD ASESOR ACADÉMICO 
-
         // Todos los asesores
         Route::get('/lista-asesores', [PresidentOfTheAcademy::class,'AdvisorList'])->name('lista-asesores')->middleware('roleorcan:presidenteAcademia,leer-asesores-academicos');
         // Crear asesor
@@ -193,7 +191,11 @@ Route::middleware('auth')->group(function () {
         Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile'])->middleware('roleorcan:director,generar-reportes-documentos');
         Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
         Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
-        Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos'); 
+        Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
+        Route::get('/d-generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.director');
+        Route::post('/d-Generate/SancionView/{id}/{type?}/{reason?}', [ReportsController::class, 'printReportSancion'])->name('re-download.sancion.director');
+        Route::get('/d-Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('re-download.memoria.director');
+        Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('re-download.aprobacion.director');     
 
         //Ruta de la lista de los anteproyectos
         Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos')->middleware('roleorcan:director,');
@@ -204,6 +206,7 @@ Route::middleware('auth')->group(function () {
         Route::get('estudiantes', [StudentListController::class, 'index'])->name('estudiantes')->middleware('roleorcan:director,leer-estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search')->middleware('roleorcan:director,gestionar-documentos');
+        Route::delete('d-documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-director');
 
         //bajas
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-director')->middleware('roleorcan:director,leer-bajas');
@@ -231,6 +234,10 @@ Route::middleware('auth')->group(function () {
         Route::get('Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.digitalizacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
         Route::get('Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos'); 
         Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile'])->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
+        Route::get('/a-generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.asistente');
+        Route::post('/a-Generate/SancionView/{id}/{type?}/{reason?}', [ReportsController::class, 'printReportSancion'])->name('re-download.sancion.asistente');
+        Route::get('/a-Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('re-download.memoria.asistente');
+        Route::get('/a-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('re-download.aprobacion.asistente');       
 
         // Ruta para el crud de libros
         Route::resource('libros', BooksController::class)->names('libros-asistente')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
@@ -242,7 +249,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
         Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
 
+        // Rutas para el listado de documentos
         // Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search')->middleware('roleorcan:asistenteDireccion,gestionar-documentos');
+        Route::delete('documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-assistant');
 
     // });
 
