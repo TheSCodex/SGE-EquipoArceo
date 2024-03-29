@@ -191,7 +191,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Download/Sancion', [ReportsController::class, 'printSansion'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
         Route::get('/Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
         Route::get('/Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])-> name('cata.aprobacion')->middleware('roleorcan:director,generar-reportes-documentos');
-        Route::get('/d-generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.directora.director');
+        Route::get('/d-generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.director');
         Route::post('/d-Generate/SancionView/{id}/{type?}/{reason?}', [ReportsController::class, 'printReportSancion'])->name('re-download.sancion.director');
         Route::get('/d-Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('re-download.memoria.director');
         Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('re-download.aprobacion.director');     
@@ -205,7 +205,7 @@ Route::middleware('auth')->group(function () {
         Route::get('estudiantes', [StudentListController::class, 'index'])->name('estudiantes')->middleware('roleorcan:director,leer-estudiantes');
 
         Route::post('documentos/busqueda', [DocumentsController::class, 'search'])->name('docs.search')->middleware('roleorcan:director,gestionar-documentos');
-        Route::delete('documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-director');
+        Route::delete('d-documentos/delete/{id}', [DocumentsController::class, 'destroy'])->name('docs.destroy-director');
 
         //bajas
         Route::get('bajas', [BajasController::class, "index"])->name('bajas-director')->middleware('roleorcan:director,leer-bajas');
