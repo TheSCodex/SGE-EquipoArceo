@@ -51,13 +51,13 @@
                                 <td class="px-6 py-4  font-medium text-black whitespace-nowrap">{{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                 <td>
                                     <div class="flex gap-3 justify-center">
-                                        <a href="{{route('download.sanon', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                        <a href="{{route('download.sansion', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
                                             Sansion
                                         </a>
-                                        <a href="{{route('download.meria', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                        <a href="{{route('download.memoria', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
                                             Carta
                                         </a>
-                                        <a href="{{route('download.aproba', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
+                                        <a href="{{route('download.aprobacion', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
                                             Aprobacion
                                         </a>
 

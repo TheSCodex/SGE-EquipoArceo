@@ -11,7 +11,7 @@
             <div class="font-kanit grid grid-cols-2 gap-4 h-96">
                 <div class=" bg-primaryColor text-white  h-full rounded-md flex flex-col justify-center items-center py-10  gap-5">
                     <h3 class="font-bold text-lg md:text-2xl lg:text-3xl text-center">Anteproyectos</h3>
-                    <a href="presidente/anteproyectos"
+                    <a href="{{ route('anteproyectos-presidente')}}"
                         class="text-[#555] bg-white hover:bg-[#eee] py-1 md:py-2 px-5 md:px-10 font-semibold font-roboto rounded-md text-center text-sm md:text-base">
                         Ver todo
                     </a>
@@ -19,7 +19,7 @@
 
                 <div class=" bg-primaryColor text-white rounded-md flex h-full flex-col justify-center items-center py-10 gap-5">
                     <h3 class="font-    bold text-lg md:text-2xl lg:text-3xl text-center">Asesores académicos</h3>
-                    <a href="presidente/lista-asesores"
+                    <a href="{{ route('lista-asesores')}}"
                         class="text-[#555] bg-white hover:bg-[#eee] py-1 md:py-2 px-5 md:px-10 font-semibold font-roboto rounded-md text-center text-sm md:text-base">
                         Ver todo
                     </a>
