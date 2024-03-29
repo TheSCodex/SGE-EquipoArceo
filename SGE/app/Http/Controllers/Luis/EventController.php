@@ -274,11 +274,7 @@ class EventController extends Controller
 
         // dd($event);
         $event->save();
-<<<<<<< HEAD
-        return redirect()->route('actividades.index')->with('success', 'La actividad se ha agregado correctamente');
-=======
         return redirect('actividades')->with('success', 'La actividad se ha agregado correctamente');
->>>>>>> 89cdba0bc0b62456b68e58d8c0e85b6030aada91
     }
 
     /**
@@ -418,11 +414,7 @@ class EventController extends Controller
     
         // Actualizar el evento
         $event->update();
-<<<<<<< HEAD
-        return redirect()->route('actividades.index')->with('edit_success', 'La actividad ha sido editada correctamente');
-=======
         return redirect('actividades')->with('edit_success', 'La actividad ha sido editada correctamente');
->>>>>>> 89cdba0bc0b62456b68e58d8c0e85b6030aada91
     }
     
 
@@ -435,10 +427,6 @@ class EventController extends Controller
 
         $event->delete();
 
-<<<<<<< HEAD
-        return redirect()->route('actividades.index')->with('delete','ok');
-=======
         return redirect('actividades')->with('delete','ok');
->>>>>>> 89cdba0bc0b62456b68e58d8c0e85b6030aada91
     }
 }

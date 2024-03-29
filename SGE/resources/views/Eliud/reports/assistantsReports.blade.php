@@ -25,7 +25,7 @@
                         </p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/asistente/exportar" class="hover:cursor-pointer ">Generar</a>
+                            <a href="/exportar" class="hover:cursor-pointer ">Generar</a>
                         </div>
                         <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                     </div>
@@ -36,7 +36,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/asistente/Download/CartaAprobacion" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaAprobacion" class="hover:cursor-pointer">Generar</a>
                         </div>
                         <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                     </div>
@@ -49,7 +49,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
-                            <a href="/asistente/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
                         </div>
                         <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                     </div>
@@ -107,7 +107,7 @@
                             </div>
                             <button
                                 class="bg-[#02ab82] text-white py-2 w-[243px] h-[35px] mt-5 rounded hover:bg-[rgb(2,151,171)]">
-                                <a href="/asistente/documentos">
+                                <a href="/documentos">
                                     Visitar Listado
                                 </a>
                             </button>
