@@ -137,18 +137,14 @@ class ProjectDraftController extends Controller
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
         }
     }
-    public function store(Request $request)
+    public function store(project $id)
     {
+        $projectId = $id->id;
         // Validar los datos del formulario
         $request->validate([
             'content' => 'required',
         ]);
         $academicAdvisorId = Auth::id();
-        $projectId = $request->input('project_id');
-
-        // Obtener el ID del intern relacionado con el proyecto
-        $internId = Intern::where('project_id', $projectId)->value('id');
-
         // Crear un nuevo comentario
         $comment = new Comment();
         $comment->content = $request->input('content');
@@ -156,7 +152,6 @@ class ProjectDraftController extends Controller
         $comment->status = 1; // Estado del comentario
         $comment->academic_advisor_id = $academicAdvisorId;
         $comment->project_id = $projectId;
-        $comment->interns_id = $internId;
         $comment->save();
 
         // Redirigir a la página anterior o a donde desees
