@@ -59,8 +59,7 @@ class carrerasController extends Controller
     $career->academy_id = $validatedData['academy_id'];
     $career->save();
 
-    return redirect('/panel-careers')->with('success', 'Career added successfully!');
- 
+    return redirect('/panel-careers'); 
 }
     
     /**
@@ -72,6 +71,7 @@ class carrerasController extends Controller
     }
 
     /**
+     * 
      * Show the form for editing the specified resource.
      */
     public function edit($id)
@@ -122,7 +122,7 @@ public function update(Request $request, $id)
             DB::beginTransaction();
 
             // Ejecutar el procedimiento almacenado para eliminar la carrera y establecer academy_id en NULL
-            DB::select('CALL proc_delete_career(?)', [$id]);
+            DB::statement('CALL delete_career(?)', array($id));
 
             DB::commit();
             

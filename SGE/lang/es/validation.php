@@ -248,6 +248,7 @@ return [
         'title'                => 'título',
         'author'               => 'autor',
         'isbn'                 => 'ISBN',
-        'identifier_student'        => 'matricula del estudiante',
+        'identifier_student'   => 'matricula del estudiante',
+        'price'                => 'precio',
     ],
 ];

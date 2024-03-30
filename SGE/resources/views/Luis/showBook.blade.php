@@ -37,6 +37,12 @@
                                 <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma" readonly>@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</textarea>
                             </div>
                         </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
+                            <div class="space-y-2 mb-4 lg:mx-1">
+                                <p class="text-sm">Precio:</p>
+                                <input type="text" id="price" name="price" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el precio del libro" value="{{ $book->price }}" readonly>
+                            </div>
+                        </div>
                     </div>
                     @foreach ($interns as $intern)
                     <div class="w-full flex flex-col space-y-1 ">
