@@ -102,7 +102,7 @@
                 @else
                 <table class="text-start w-full">
                     <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-left">N°</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Autor</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
@@ -116,8 +116,8 @@
                     @php
                     $counter = ($books->currentPage() - 1) * $books->perPage() + $loop->index + 1;
                     @endphp
-                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
-                        <td class="font-roboto font-bold py-5 w-1/12">{{ $counter }}</td>
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                        <td class="font-roboto font-bold py-5 w-1/12 pl-5">{{ $counter }}</td>
                         <td class="font-roboto font-bold py-5  w-3/12 pr-10">{{ $book->title }}</td>
                         <td class="font-roboto font-bold py-5  text-left ">{{ $book->author }}</td>
                         <td class="font-roboto font-bold py-5  text-left w-1/12">{{ $book->isbn }}</td>
