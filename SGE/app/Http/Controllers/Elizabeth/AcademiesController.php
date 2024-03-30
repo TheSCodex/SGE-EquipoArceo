@@ -27,7 +27,9 @@ class AcademiesController extends Controller
      */
     public function create()
     {
-        //
+        $divisions = Division::all();
+        $users = User::all();
+        return view('Elizabeth.Academies.newAcademies', compact('divisions', 'users'));
     }
 
     /**
@@ -35,7 +37,19 @@ class AcademiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'president_id' => 'required|integer',
+            'division_id' => 'required|integer'
+        ]);
+
+        $academy = new Academy;
+        $academy->name = $validatedData['name'];
+        $academy->president_id = $validatedData['president_id'];
+        $academy->division_id = $validatedData['division_id'];
+        $academy->save();
+
+        return redirect('/panel-academies')->with('success', 'Academy added successfully!');
     }
 
     /**
@@ -51,7 +65,10 @@ class AcademiesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $academy = Academy::findOrFail($id);
+        $divisions = Division::all();
+        $users = User::all();
+        return view('Elizabeth.Academies.editAcademies', compact('divisions', 'users','academy'));
     }
 
     /**
@@ -59,7 +76,24 @@ class AcademiesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $academy = Academy::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'president_id' => 'required|integer',
+            'division_id' => 'required|integer'
+        ]);
+
+        $president = User::findOrFail($validatedData['president_id']);
+        $president->update(['rol_id' => 3]);
+
+        $academy->update([
+            'name'=> $validatedData['name'],
+            'division_id'=> $validatedData['division_id'],
+            'president_id'=> $validatedData['president_id'],
+        ]); 
+
+        return redirect('/panel-academies')->with('success', 'Academy updated successfully!');
     }
 
     /**

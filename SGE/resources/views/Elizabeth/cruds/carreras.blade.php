@@ -83,9 +83,10 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                     </tr>
+                    @if(count($careers) > 0)
                     @foreach ($careers as $career)
-                    <tr>
-                        <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                        <td class="font-roboto pl-5 font-bold py-5">{{ $career->name }}</td>
 
                         <td class="font-roboto font-bold py-5 text-start ">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
@@ -98,11 +99,11 @@
                         
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">
+                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-start">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
+                        <td class="font-roboto font-bold py-5  justify-start px-[6%] flex cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
                             <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -111,6 +112,9 @@
                         </td> 
                     </tr>
                     @endforeach
+                    @else
+                    <h1 class="text-xl">No hay datos registrados </h>
+                    @endif
                 </table>
                 {{$careers->links()}}
             </div>

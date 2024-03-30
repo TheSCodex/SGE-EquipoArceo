@@ -46,6 +46,7 @@
     <div style="width:115%; position: relative; right:15; ">
         <img style=" width:100%; height: 110px" src="{{ public_path('img/Eliud/img_01.png') }}" alt="Logo UT" />
     </div>
+
     <div style="text-align: right; margin-top:10px; margin-bottom: 10px;">
         <p style="margin-bottom: 2px; margin-top:2px; "><span style=" font-weight: bold;">Asunto:</span>Sancion por
             incumplimiento.</p>
@@ -77,18 +78,18 @@
                             POR MOTIVOS ACADÉMICOS</th>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 1 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación
                             escrita</td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span>{{$interns[0]->service_hour ? $interns[0]->service_hour : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 3 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Cancelación de
                             Estadía.</td>
                     </tr>
@@ -104,18 +105,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="width:34px  ; border: 0.5px solid black;"></td>
+                        <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 2 ? $tipo == 1 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación
                             escrita</td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span>{{ $interns[0]->service_hour ? $interns[0]->service_hour : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? $tipo == 3 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Cancelación de
                             Estadía.</td>
                     </tr>

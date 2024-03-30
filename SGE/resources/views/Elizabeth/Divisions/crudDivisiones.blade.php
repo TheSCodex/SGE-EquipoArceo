@@ -15,7 +15,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva division
             </a>
         </div>
         
@@ -36,7 +36,7 @@
     </div>
     <div class="flex mt-[2%] px-[4%]  ">
         <section class="font-bold text-sm md:space-x-6 space-x-2">
-            <a href="panel-divisions">
+            <a href="panel-careers">
                 <button id="btnAll"
                     class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
                 </a>
@@ -85,9 +85,10 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                 </tr>
+                @if(count($divisions) > 0)
                 @foreach ($divisions as $division)
-                <tr>
-                    <td class="font-roboto font-bold py-5">{{ $division->name }}</td>
+                <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                    <td class="font-roboto pl-5 font-bold py-5">{{ $division->name }}</td>
 
                    <td class="font-roboto font-bold py-5 text-start ">
                         @if ($principal = $principals->where('id', $division->director_id)->first())
@@ -105,24 +106,13 @@
                         @endif
                     </td>
                     
-                    {{-- <td class="font-roboto font-bold py-5 text-start">
-                        @if ($academy = $academies->where('id', $division->academy_id)->first())
-                            @if ($president = $presidents->where('id', $academy->president_id)->first())
-                                {{ $president->name }}
-                            @else
-                                N/A
-                            @endif
-                        @else
-                            N/A
-                        @endif
-                    </td> --}}
                     {{-- <td class="font-roboto font-bold py-5">{{ $division->position }}</td>  --}}
                     <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex justify-center">
+                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex justify-start">
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}, Presidente: {{ $division->position }}', '{{ $division->id }}')">
+                    <td class="font-roboto flex justify-start font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}, Presidente: {{ $division->position }}', '{{ $division->id }}')">
                         <form class="flex justify-center" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -131,8 +121,11 @@
                     </td> 
                 </tr>
                 @endforeach
+                @else
+                <h1 class="text-xl">No hay datos registrados </h>
+                @endif
             </table>
-           -{{-- {{$divisions->links()}}--}}
+           {{$divisions->links()}}
         </div>
     </div>
 </div>

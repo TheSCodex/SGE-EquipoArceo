@@ -17,24 +17,42 @@
 
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
-                    <p class="text-sm">Carrera</p>
-                    <input type="text" name="career" value="{{ old('career') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
-                    @error('career  ')
+                    <p class="text-sm">Nombre</p>
+                    <input type="text" name="name" value="{{ old('division_id') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    @error('name')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
                     @enderror
                 </div>
                 <div class=" space-y-2">
-                    <p class="text-sm">Academia</p>
-                    <select name="academy_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <option value="" disabled selected>Selecciona una academia</option>
-                        @foreach($academies as $academy)
-                            <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                    <p class="text-sm">Director</p>
+                    <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <option value="" disabled selected>Selecciona un director</option>
+                        @foreach($users as $user) 
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                     
-                    @error('academy_id')
+                    @error('director_id')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+                
+            </div>
+            <div class="flex md:flex-row flex-col items-center md:items-start px-[8%]">
+                <div class="space-y-2">
+                    <p class="text-sm">Asistente del director</p>
+                    <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <option value="" disabled selected>Selecciona un asistente</option>
+                        @foreach($users as $user) 
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                    
+                    @error('directorAsistant_id')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
@@ -43,7 +61,7 @@
             </div>
 
 
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir division</button>
 
     </form>
 </div>

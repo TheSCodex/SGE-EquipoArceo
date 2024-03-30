@@ -6,7 +6,7 @@
     
 </div>
 <div class="flex mt-[2%] px-[12%] ">
-    <h1 class="text-3xl font-bold pt-[4%]">Crear academia</h1>
+    <h1 class="text-3xl font-bold pt-[4%]">Crear carrera</h1>
   </div>
 <div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
 

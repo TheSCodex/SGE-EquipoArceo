@@ -14,8 +14,8 @@
                     <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('newCareer')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+            <a href="{{ route('newAcademies')}}"
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva academia
             </a>
         </div>
         
@@ -27,14 +27,14 @@
                     <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                 </div>
             </div>
-            <a href="{{ route('newCareer')}}"
+            <a href="{{ route('newAcademies')}}"
                 class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
             </a>
 
         </div>
         
     </div>
-    <div class="flex mt-[2%] px-[4%]  ">
+    <div class="flex mt-[2%] px-[4%] ">
         <section class="font-bold text-sm md:space-x-6 space-x-2">
            <a href="panel-careers">
             <button id="btnAll"
@@ -51,7 +51,7 @@
         </section>
       </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
-       {{-- <div class="lg:hidden w-full mb-5">
+        <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
                 @foreach ($academies as $career)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
@@ -61,9 +61,9 @@
                     <p class="text-sm text-gray-500">Presidente: {{ $career->position }}</p>
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('panel-careers.edit', $career->id) }}" >
-                        <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
+                        <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer flex justify-start">
                         </a>
-                        <a onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
+                        <a class="flex justify-start" onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
                         <form id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -74,9 +74,9 @@
                 </div>
                 @endforeach
             </div>
-        </div> --}}
+        </div> 
         <div class="hidden lg:block w-full ">
-            <table class="text-start w-full ">
+            <table class="text-start w-full  ">
                 <tr class="border-b border-gray-200 pb-[2%]">
                    
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
@@ -85,43 +85,47 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                 </tr>
-                @foreach ($academies as $academy)
-                <tr>
-                    {{-- dd($academy) --}}
-                    <td class="font-roboto font-bold py-5">{{ $academy->name }}</td>
+                @if(count($academies) > 0)
+                    @foreach ($academies as $academy)
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                        {{-- dd($academy) --}}
+                        <td class="font-roboto pl-5 font-bold py-5">{{ $academy->name }}</td>
 
-                    <td class="font-roboto font-bold py-5 text-start ">
-                        @if ($president = $presidents->where('id', $academy->president_id)->first())
-                        {{ $president->name }}
-                        @else
-                            N/A
-                        @endif    
-                    </td>
+                        <td class="font-roboto font-bold py-5 text-start ">
+                            @if ($president = $presidents->where('id', $academy->president_id)->first())
+                            {{ $president->name }}
+                            @else
+                                N/A
+                            @endif    
+                        </td>
 
-                    <td class="font-roboto font-bold py-5 text-start ">
-                        @if ($division = $divisions->where('id', $academy->division_id)->first())
-                        {{ $division->name }}
-                        @else
-                            N/A
-                        @endif    
-                    </td>
+                        <td class="font-roboto font-bold py-5 text-start ">
+                            @if ($division = $divisions->where('id', $academy->division_id)->first())
+                            {{ $division->name }}
+                            @else
+                                N/A
+                            @endif    
+                        </td>
 
-                    
-                    {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
-                    <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{-- route('panel-academies.edit', $academy->id) --}}" class="flex justify-center">
-                            <img src="/img/logos/pencil.svg">
-                        </a>
-                    </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}, Presidente: {{ $academy->id }}', '{{ $academy->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{ route('panel-academies.destroy', $academy->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                                <img src="/img/logos/trash.svg">
-                        </form>
-                    </td> 
-                </tr>
-                @endforeach
+                        
+                        {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <a href="{{route('panel-academies.edit', $academy->id) }}" class="flex justify-center">
+                                <img src="/img/logos/pencil.svg">
+                            </a>
+                        </td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}, Presidente: {{ $academy->id }}', '{{ $academy->id }}')">
+                            <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{ route('panel-academies.destroy', $academy->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <img src="/img/logos/trash.svg">
+                            </form>
+                        </td> 
+                    </tr>
+                    @endforeach
+                @else
+                    <h1 class="text-xl">No hay datos registrados </h>
+                @endif
             </table>
             {{$academies->links()}}
         </div>

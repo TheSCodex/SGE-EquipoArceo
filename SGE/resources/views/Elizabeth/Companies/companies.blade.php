@@ -41,17 +41,17 @@
                     {{-- <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th> --}}
                     <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
                     <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                    <th class="text-[#ACACAC] font-roboto  text-xs">Eliminar</th>
                 </tr>
                 @foreach ($companies as $index => $company)
-                <tr>
-                    <td class="font-roboto font-bold py-5">{{ $company['name'] }}</td>
+                <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                    <td class="font-roboto pl-5 font-bold py-5">{{ $company['name'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['email'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['phone'] }}</td>
                     <td class="font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
                   {{-- <td class="font-roboto font-bold py-5">{{ $company->businessSector->title }}</td>  --}}
                   <td class="font-roboto font-bold py-5">
-                    <a href="{{ route('panel-companies.show', $company->id )}}" class="flex justify-center">
+                    <a href="{{ route('panel-companies.show', $company->id )}}" class="flex justify-start">
                         <img src="/img/ojoGreen.svg" class="w-7">
                     </a>
                 </td>
@@ -59,11 +59,11 @@
                         <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
                             @csrf
                             <button type="submit">
-                                <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointer">
+                                <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointer flex justify-start">
                             </button>
                         </form>
                     </td>
-                    <td class="font-roboto font-bold py-5">
+                    <td class="font-roboto font-bold py-5  flex justify-start">
                         <form id="deleteForm" action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')

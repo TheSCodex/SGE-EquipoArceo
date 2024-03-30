@@ -24,7 +24,7 @@
                         </p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/exportar" class="hover:cursor-pointer ">Generar</a>
+                            <a href="/exportar" target="_blank" class="hover:cursor-pointer ">Generar</a>
                             <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
                                 width="19" height="19" viewBox="0 0 19 19" fill="none">
                                 <path
@@ -41,7 +41,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/Download/CartaAprobacion" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaAprobacion" target="_blank" class="hover:cursor-pointer">Generar</a>
                             <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
                                 width="19" height="19" viewBox="0 0 19 19" fill="none">
                                 <path
@@ -60,7 +60,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
-                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaMemoria" target="_blank" class="hover:cursor-pointer">Generar</a>
                             <svg id="toggleInputs" class="hover:cursor-pointer" xmlns="http://www.w3.org/2000/svg"
                                 width="19" height="19" viewBox="0 0 19 19" fill="none">
                                 <path
