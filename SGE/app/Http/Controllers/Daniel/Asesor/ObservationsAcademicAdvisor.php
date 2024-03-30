@@ -44,7 +44,7 @@ class ObservationsAcademicAdvisor extends Controller
 
             return view('Daniel.asesor.ObservationsAdvisor', compact('project', 'tutorComment', 'normalComments'));
         } else {
-            return redirect()->route('/student')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
+            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
         }
     }
 
@@ -70,9 +70,7 @@ class ObservationsAcademicAdvisor extends Controller
         $projectId = $request->input('projectId');
 
         // Verificar si el usuario autenticado es un asesor académico
-        $intern = Intern::where('academic_advisor_id', $userId)
-                        ->where('project_id', $projectId)
-                        ->first();
+        $intern = Intern::where('academic_advisor_id', $userId)->where('project_id', $projectId)->first();
 
         if ($intern) {
             try {
