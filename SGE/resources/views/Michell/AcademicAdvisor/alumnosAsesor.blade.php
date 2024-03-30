@@ -60,6 +60,16 @@
                                         <a href="{{route('download.aprobacion', $intern->id)}}" class="bg-green text-white px-5 py-1 text-sm rounded-md">
                                             Aprobacion
                                         </a>
+                                        <form action="{{ route('alumno.edit', $intern->user_id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                        
+                                            <button type="submit" class="bg-rose-800 text-white px-5 py-1 text-sm rounded-md">
+                                                Dar de baja
+                                            </button>
+                                        </form>
+                                        
+                                        
 
                                         {{-- <form action="{{ route('intern.destroy', $intern->id) }}" method="POST">
                                             @csrf
