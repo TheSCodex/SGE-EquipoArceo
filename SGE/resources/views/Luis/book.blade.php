@@ -10,18 +10,7 @@
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    {{-- <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px; /* Espacio vertical entre filas */
-            width: 100%;
-        }
 
-        /* Estilo para las celdas de la tabla */
-        th, td {
-            padding: 10px; /* Espacio interno de las celdas */
-        }
-    </style> --}}
 </head>
 <body>
     @extends('templates/authTemplate')
@@ -36,9 +25,12 @@
                         <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <a href="{{route('libros-asistente.create')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
-                </a>
+                @if(Auth::user()->can('crear-libro'))
+                    <a href="{{route('libros-asistente.create')}}"
+                        class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                    </a>
+                @endif
+
             </div>
             
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
@@ -48,9 +40,11 @@
                         <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <a href="{{route('libros-asistente.create')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
-                </a>
+                @if(Auth::user()->can('crear-libro'))
+                    <a href="{{route('libros-asistente.create')}}"
+                        class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                    </a>
+                @endif
     
             </div>
         </div>
@@ -78,10 +72,15 @@
                         </p>
                         <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book->created_at, 0, 10) }}</p>
                         <div class="flex justify-end mt-4 space-x-4">
+                            @if(Auth::user()->can('leer-lista-libros'))
                             <a href="{{route('libros-asistente.show', $book->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                            @endif
+                            @if(Auth::user()->can('editar-libro'))
                             <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
+                            @endif
+                            @if(Auth::user()->can('eliminar-libro'))
                             <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
                                 @csrf
                                 @method('DELETE')
@@ -89,6 +88,7 @@
                                     <img src="/img/logos/trash.svg">
                                 </button>
                             </form>    
+                            @endif
                         </div>
                     </div>
                     @endforeach
@@ -108,9 +108,15 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Proporcionado por</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Fecha de adición</th>
+                        @if(Auth::user()->can('leer-lista-libros'))
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Detalles</th>
+                        @endif
+                        @if(Auth::user()->can('editar-libro'))
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Editar</th>
+                        @endif
+                        @if(Auth::user()->can('eliminar-libro'))
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Eliminar</th>
+                        @endif
                     </tr>
                     @foreach ($books as $book)
                     @php
@@ -131,26 +137,31 @@
                             @endif
                         </td>
                         <td class="font-roboto font-bold py-5  text-left">{{ substr($book->created_at, 0, 10) }}</td>
+                        @if(Auth::user()->can('leer-lista-libros'))
                         <td class="font-roboto font-bold py-5 cursor-pointer">
                             <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
                                 <img src="/img/ojoGreen.svg" class="w-7">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer ">
-                            <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
-                                <img src="/img/logos/pencil.svg">
-                            </a>
-                        </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <form class="delete-book flex justify-center " action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">
-                                    <img src="/img/logos/trash.svg">
-                                </button>
-                            </form>
-                        </td>
-
+                        @endif
+                        @if(Auth::user()->can('editar-libro'))
+                            <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
+                                    <img src="/img/logos/pencil.svg">
+                                </a>
+                            </td>
+                        @endif
+                        @if(Auth::user()->can('eliminar-libro'))
+                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                                <form class="delete-book flex justify-center " action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <img src="/img/logos/trash.svg">
+                                    </button>
+                                </form>
+                            </td>
+                        @endif
                     </tr>
                     @endforeach
                 </table>
