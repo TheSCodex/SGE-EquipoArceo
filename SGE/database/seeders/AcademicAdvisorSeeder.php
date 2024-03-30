@@ -21,7 +21,10 @@ class AcademicAdvisorSeeder extends Seeder
         $careerIds = Career::pluck('id');
 
         foreach ($asesorAcademicoUserIds as $userId) {
-            $randomCareerId = $careerIds->random();
+            // $randomCareerId = $careerIds->random();
+            $careerIds = [1, 2, 3, 11, 12, 13, 14, 20];
+            $randomIndex = array_rand($careerIds);
+            $randomCareerId = $careerIds[$randomIndex];
 
             AcademicAdvisor::create([
                 'user_id' => $userId,
