@@ -84,7 +84,7 @@
             @endcan
             @can('leer-observaciones')
                 <li>
-                    <a  href="{{ route('observationsAnteproyectoA') }}" class="hover:border-b-2 hover:border-primaryColor">Observaciones</a>
+                    <a  href="{{ route('observationsAnteproyecto') }}" class="hover:border-b-2 hover:border-primaryColor">Observaciones</a>
                 </li>
             @endcan
             @can('leer-calendario')
