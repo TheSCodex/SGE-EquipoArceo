@@ -93,16 +93,21 @@
             <div class="hidden lg:block w-full">
                 <table class="text-start w-full">
                     <tr>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Nombre</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Permisos</th>
                         <th class="text-[#ACACAC] font-roboto text-xs px-5">Editar</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                     </tr>
                     @foreach ($roles as $role)
-                        <tr>
+                        @php
+                            $counter = ($roles->currentPage() - 1) * $roles->perPage() + $loop->index + 1;
+                        @endphp
+                        <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                            <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
                             <td class="font-roboto font-bold py-5 text-start pl-5">
                                 @if ($role->title == "estudiante")
-                                Estudiante
+                                    Estudiante
                                 @elseif ($role->title == "asesorAcademico")
                                     Asesor Académico
                                 @elseif ($role->title == "presidenteAcademia")
@@ -117,7 +122,7 @@
                                     {{$role->title}}
                                 @endif    
                             </td>
-                            <td class="font-roboto py-5 text-start">
+                            <td class="font-roboto py-5 text-start select-none">
                                 @php
                                     $decodedPermissions = json_decode($role->permissions, true);
                                 @endphp
@@ -170,6 +175,7 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </table>
                 
             </div>
