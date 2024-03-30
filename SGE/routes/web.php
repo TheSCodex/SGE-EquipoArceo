@@ -126,10 +126,10 @@ Route::middleware('auth')->group(function () {
         
         // ! Ruta de las observaciones del asesor
         Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
-
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
-        Route::get('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
+        Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
+
         Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades')->middleware('roleorcan:asesorAcademico,leer-calendario');
