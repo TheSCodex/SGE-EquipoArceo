@@ -40,7 +40,22 @@
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $user->name }} {{ $user->last_name }}</h2>
                     <p class="text-sm text-gray-500">Correo: {{ $user->email }}</p>
-                    <p class="text-sm text-gray-500">Rol: {{ $user->role->title }}</p>
+                    <p class="text-sm text-gray-500">Rol: 
+                    @if ($user->role->title == "estudiante")
+                        Estudiante
+                    @elseif ($user->role->title == "asesorAcademico")
+                        Asesor Académico
+                    @elseif ($user->role->title == "presidenteAcademia")
+                        Presidente de Academia
+                    @elseif ($user->role->title == "director")
+                        Director
+                    @elseif ($user->role->title == "asistenteDireccion")
+                        Asistente Dirección
+                    @elseif ($user->role->title == "admin")
+                        Administrador
+                    @else
+                        {{$user->role->title}}
+                    @endif</p>
                     <div class="flex justify-end mt-4 space-x-2">
                         <td>                        
                             <a href="{{route('panel-users.show', $user->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
@@ -117,7 +132,7 @@
             
             <table class="text-start w-full">
                 <tr class="w-full">
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre completo</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Nombre completo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start w-[30%]">Correo</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Rol</th>
                     <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
@@ -126,10 +141,26 @@
                     <th class="text-[#ACACAC] font-roboto text-xs ">Eliminar</th>
                 </tr>
                 @foreach ($users as $user)
-                <tr class="w-full">
-                    <td class="font-roboto font-bold py-5">{{ $user->name }} {{ $user->last_name }}</td>
+                <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                    <td class="font-roboto font-bold py-5 pl-5">{{ $user->name }} {{ $user->last_name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
-                    <td class="font-roboto font-bold py-5">{{ $user->role->title }}</td>
+                    <td class="font-roboto font-bold py-5">
+                        @if ($user->role->title == "estudiante")
+                            Estudiante
+                        @elseif ($user->role->title == "asesorAcademico")
+                            Asesor Académico
+                        @elseif ($user->role->title == "presidenteAcademia")
+                            Presidente de Academia
+                        @elseif ($user->role->title == "director")
+                            Director
+                        @elseif ($user->role->title == "asistenteDireccion")
+                            Asistente Dirección
+                        @elseif ($user->role->title == "admin")
+                            Administrador
+                        @else
+                            {{$user->role->title}}
+                        @endif
+                    </td>
                     {{-- <td class="font-roboto font-bold py-5">{{ $user->rol_id }}</td> --}}
                     <td class="font-roboto font-bold py-5 text-center">{{ $user->identifier }}</td>
                     {{-- <td class="font-roboto font-bold py-5">
