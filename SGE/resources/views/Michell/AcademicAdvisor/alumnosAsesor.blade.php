@@ -149,7 +149,7 @@
                                                         </div>
 
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.memoria', $user->id) }}"
+                                                            <form action="{{ route('download.aprobacion', $user->id) }}"
                                                                 method="GET">
                                                                 @csrf
 
@@ -181,7 +181,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.aprobacion', $user->id) }}"
+                                                            <form action="{{ route('download.memoria', $user->id) }}"
                                                                 method="GET">
                                                                 @csrf
 

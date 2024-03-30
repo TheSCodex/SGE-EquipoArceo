@@ -50,8 +50,13 @@ class ReportsController extends Controller
             'type' => $tipo,
             'reason' => $motivo
         ];
-        $fileHistory = new FileHistory($jsonData[0]);
-        $fileHistory->save();
+
+        $authUser = auth()->user();
+        if ($authUser->role->title != 'director' && $authUser->role->title != 'asistenteDireccion') {
+            $fileHistory = new FileHistory($jsonData[0]);
+            $fileHistory->save();
+        }
+
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns'));
         return $pdf->stream();
@@ -108,8 +113,12 @@ class ReportsController extends Controller
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
         ];
-        $fileHistory = new FileHistory($jsonData[0]);
-        $fileHistory->save();
+
+        $authUser = auth()->user();
+        if ($authUser->role->title != 'director' && $authUser->role->title != 'asistenteDireccion') {
+            $fileHistory = new FileHistory($jsonData[0]);
+            $fileHistory->save();
+        }
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project'));
@@ -155,8 +164,12 @@ class ReportsController extends Controller
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
         ];
-        $fileHistory = new FileHistory($jsonData[0]);
-        $fileHistory->save();
+
+        $authUser = auth()->user();
+        if ($authUser->role->title != 'director' && $authUser->role->title != 'asistenteDireccion') {
+            $fileHistory = new FileHistory($jsonData[0]);
+            $fileHistory->save();
+        }
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project'));
