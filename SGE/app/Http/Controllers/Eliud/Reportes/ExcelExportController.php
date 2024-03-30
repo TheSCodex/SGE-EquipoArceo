@@ -65,7 +65,7 @@ class ExcelExportController extends Controller
         $response = response()->download($publicPath)->deleteFileAfterSend(true);
         unlink($newFilePath);
 
-        
+
         $jsonData[] = [
             'title' => "Control de Estadías",
             'advisor_identifier' => $user->identifier,
@@ -73,12 +73,14 @@ class ExcelExportController extends Controller
             'advisor_name' => $user->name,
             'advisor_lastName' => $user->last_name,
             'user_id' => $user->id,
-            'academic_advisor_id' => (int) $academic_advisor_id,    
+            'academic_advisor_id' => (int) $academic_advisor_id,
         ];
 
-        $fileHistory = new FileHistory($jsonData[0]);
-        $fileHistory->save();
-
+        $authUser = auth()->user();
+        if ($authUser->role->title != 'director' && $authUser->role->title != 'asistenteDireccion') {
+            $fileHistory = new FileHistory($jsonData[0]);
+            $fileHistory->save();
+        }
         return $response;
     }
 
