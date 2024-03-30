@@ -157,7 +157,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/presidente', [PresidentOfTheAcademy::class, "index"])->name('inicio-presidente')->middleware('role:presidenteAcademia');
 
         //Ruta de la lista de los anteproyectos
-        Route::get('anteproyectos-division', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
+        Route::get('anteproyectos-division', [ProjectsPresidentController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
 
         Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
 
