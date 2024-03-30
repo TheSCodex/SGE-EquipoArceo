@@ -16,7 +16,7 @@
             <div class=" w-72 bg-primaryColor hidden sm:block h-auto">
                 <div class=" justify-between items-center p-4 ">
                     <div>
-                        @if ($isAcademicAdvisor == True)
+                        @if ($permissionActivity == True)
                             <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="{{route('actividades.create')}}" class="px-4 py-2 text-center flex">+</a></button>
                             <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="actividades" class="px-4 py-2 text-center flex">Ver actividades</a></button>
                         @endif
@@ -77,9 +77,11 @@
                                 <p class=" font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                     <p class=" ml-6 "><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['receiver']['user']['name'] }}</p>
-                
+                                     
+                                 @else
+                                     
+                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['requester']['user']['name'] }}</p>
                                 @endif
-                                <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['requester']['user']['name'] }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $todayEvent->title }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Propósito:</span> {{ $todayEvent->eventType }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Descripción:</span> {{ $todayEvent->description }}</p>
@@ -113,8 +115,10 @@
                                 <p class="font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($tomorrowEvent->date_start, 11)}} - {{ substr($tomorrowEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['receiver']['user']['name'] }}</p>
-                                @endif
+                                @else
+
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['requester']['user']['name'] }}</p>
+                                @endif
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $tomorrowEvent->title }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Proposito:</span> {{ $tomorrowEvent->eventType }}</p>
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Descripción:</span> {{ $tomorrowEvent->description }}</p>
@@ -175,7 +179,7 @@
                                         @endphp
                                     @if ($eventInHour)
                                         @if ($hour == $startHour && !$infoShown)
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }}">
+                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }}" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
@@ -199,7 +203,7 @@
                                                 $infoShown = true;
                                             @endphp
                                         @elseif($hour == $endHour)
-                                            <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }} cursor-pointer">
+                                            <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
@@ -221,18 +225,18 @@
 
                                             </td>
                                         @else
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-darkBlue' : (($event['status'] == 'Cancelada') ? 'bg-[#B31312]' : 'bg-[#968C83]')) }} cursor-pointer">
+                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
-                                                            <p class="font-bold  {{ ($event['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-darkBlue' : (($event['status'] == 'Cancelada') ? 'text-[#B31312]' : 'bg-[#968C83]')) }} text-center"> - </p>
+                                                            <p class="font-bold  {{ ($event['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'text-[#eb7575]' : 'bg-[#344D67]')) }} text-center"> - </p>
                                                         </div>
                                                     </a>
                                                         
                                                     @else
                                                         <a href="{{route('estudiante-actividades.show', $event->id)}}">
                                                             <div class="px-4">
-                                                                <p class="font-bold  {{ ($event['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-darkBlue' : (($event['status'] == 'Cancelada') ? 'text-[#B31312]' : 'bg-[#968C83]')) }} text-center"> - </p>
+                                                                <p class="font-bold  {{ ($event['status'] == 'Programada') ? 'text-primaryColor' : (($event['status'] == 'Terminada') ? 'text-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'text-[#eb7575]' : 'bg-[#344D67]')) }} text-center"> - </p>
                                                             </div>
                                                         </a>
                                                 @endif
@@ -305,5 +309,19 @@
         </div>
     </main>
     @endsection
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tdElements = document.querySelectorAll("td[data-href]");
+            tdElements.forEach(function(td) {
+                td.addEventListener("click", function() {
+                    var url = this.getAttribute("data-href");
+                    if (url) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>
