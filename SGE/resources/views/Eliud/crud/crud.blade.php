@@ -57,12 +57,12 @@
                                         : 're-download.sancion.asistente';
                                 case 'Aprobación de Memoria':
                                     return $userRole == 'director'
-                                        ? 're-download.memoria.director'
-                                        : 're-download.memoria.asistente';
-                                case 'Digitalización de Memoria':
-                                    return $userRole == 'director'
                                         ? 're-download.aprobacion.director'
                                         : 're-download.aprobacion.asistente';
+                                case 'Digitalización de Memoria':
+                                    return $userRole == 'director'
+                                        ? 're-download.digitalizacion.director'
+                                        : 're-download.digitalizacion.asistente';
                             }
                         }
                     }

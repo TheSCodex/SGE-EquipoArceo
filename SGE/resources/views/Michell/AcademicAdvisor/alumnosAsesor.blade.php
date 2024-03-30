@@ -181,7 +181,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.memoria', $user->id) }}"
+                                                            <form action="{{ route('download.digitalizacion', $user->id) }}"
                                                                 method="GET">
                                                                 @csrf
 

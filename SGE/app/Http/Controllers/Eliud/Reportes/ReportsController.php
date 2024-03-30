@@ -83,7 +83,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaAprobacion(string $id)
+    public function printReportCartaDigitalizacion(string $id)
     {
         $user = auth()->user();
         $userData = User::find($user->id);
@@ -97,7 +97,7 @@ class ReportsController extends Controller
 
         $jsonData[] = [
 
-            'title' => "Aprobación de Memoria",
+            'title' => "Digitalización de Memoria",
             'advisor_identifier' => $user->identifier,
             'advisor_email' => $user->email,
             'advisor_name' => $user->name,
@@ -135,7 +135,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaMemoria(string $id)
+    public function printReportCartaAprobacion(string $id)
     {
         $user = auth()->user();
         $userData = User::find($user->id);
@@ -149,7 +149,7 @@ class ReportsController extends Controller
 
         $jsonData[] = [
 
-            'title' => "Digitalización de Memoria",
+            'title' => "Aprobación de Memoria",
             'title' => "Aprobación de Memoria",
             'advisor_identifier' => $user->identifier,
             'advisor_email' => $user->email,
