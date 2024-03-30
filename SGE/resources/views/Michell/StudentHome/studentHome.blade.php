@@ -141,7 +141,7 @@
 
             <div class=" font-roboto bg-white p-5 rounded-md">
 
-                <h3 class="text-lg font-medium font-kanit mb-3">Actividades importantes</h3>
+                <h3 class="text-lg font-medium text-center font-kanit mb-3">Actividades importantes</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
@@ -215,7 +215,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="bg-white p-5 font-black flex flex-col justify-center">
-                    <p class="text-center mb-5">No has recibido ninguna penalización hasta el momento, buen trabajo!</p>
+                    <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
                     <div class="flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled"
                             width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
