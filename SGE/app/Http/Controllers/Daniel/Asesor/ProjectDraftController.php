@@ -137,8 +137,7 @@ class ProjectDraftController extends Controller
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
         }
     }
-    public function store(project $id)
-    {
+    public function store(Request $request, Project $id)    {
         $projectId = $id->id;
         // Validar los datos del formulario
         $request->validate([
