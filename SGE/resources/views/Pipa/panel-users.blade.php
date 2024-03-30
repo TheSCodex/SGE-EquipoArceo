@@ -72,42 +72,13 @@
                                 <img src="/img/logos/trash.svg">
                             </form>
                         </td>
-
-                        
-                        {{-- <script>
-                            // Obtiene todas las celdas con la clase 'delete-form' y añade un manejador de eventos clic
-                            document.querySelectorAll('.delete-form').forEach(form => {
-                                form.addEventListener('click', function(event) {
-                                    event.preventDefault(); // Evita que el formulario se envíe automáticamente
-                        
-                                    var userName = this.dataset.userName;
-                                    var userId = this.dataset.userId;
-                        
-                                    // Muestra el SweetAlert para confirmar la eliminación
-                                    Swal.fire({
-                                        title: '¿Estás seguro?',
-                                        text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#d33',
-                                        cancelButtonColor: '#3085d6',
-                                        confirmButtonText: 'Sí, eliminarlo'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            // Envía el formulario si se confirma la eliminación
-                                            document.getElementById('deleteForm' + userId).submit();
-                                        }
-                                    });
-                                });
-                            });
-                        </script> --}}
-                        
-
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
+
+
         <div class="hidden lg:block w-full">
             {{-- sweet alert para mostrar el error al mandar un correo --}}
             @if(session('error'))
