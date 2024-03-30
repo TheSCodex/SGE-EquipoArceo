@@ -149,9 +149,11 @@
                         </table>
                     </div>
                 </div>
-                <div class="my-5 mx-auto">
-                    {{ $docs->links() }}
-                </div>
+                    <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                        <div class="my-5 mx-auto md:w-full">
+                            {{$docs->links()}}
+                        </div>
+                    </div>
             @endif
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
