@@ -1,11 +1,11 @@
 @extends('templates/authTemplate')
-
 @section('titulo')
     Inicio
 @endsection
 
 @section('contenido')
-    <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
+
+<article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Director</p>
 
@@ -13,7 +13,7 @@
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
                     <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
 
-                    <a href="director/estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
@@ -50,7 +50,7 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-2xl font-medium">1</p>
+                        <p class="text-2xl font-medium">{{ $projectMetrics['approvedCount'] }}</p>
                         <p class="text-gray-500 text-xs">Anteproyectos aprobados</p>
                     </div>
                 </div>
@@ -95,15 +95,15 @@
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
-                <canvas id="myChart" class="max-h-[250px]"></canvas>
+                <canvas id="myChart" class="max-h-[200px]"></canvas>
             </div>
         </section>
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas">Ver más</a></p>
+            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas" class="text-sm font-normal">Ver más</a></p>
             @foreach ( $interns as $i )
-            <div class="bg-white rounded-md py-5 flex flex-col gap-3">
+            <div class="bg-white rounded-md py-1.5 flex flex-col gap-3">
                 <div class="flex gap-3  ml-10 items-center">
                     <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
@@ -122,15 +122,8 @@
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
                         <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>  
-                    <p class="text-sm">Tecnologías de la información</p> 
-                </div>
-                <div class="bg-white rounded-md p-3 flex gap-4 items-center">
-                    <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
-                        <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>  
-                    <p class="text-sm">Tecnologías de la información</p>
-                </div>
+                    <p class="text-sm">{{ $userDivision->name }}</p> 
+                </div>   
             </div>
 
 
@@ -139,7 +132,7 @@
             <div class="grid grid-cols-2 gap-2">
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Penalizaciones</p>
-                    <p class="text-5xl font-light">6</p>
+                    <p class="text-5xl font-light">{{ $penalizationsNum }}</p>
                 </div>
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
@@ -152,77 +145,91 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        function obtenerMesesEnIntervalo(intervalo) {
+            const meses = {
+                "Enero": 1, "Febrero": 2, "Marzo": 3, "Abril": 4, "Mayo": 5, "Junio": 6,
+                "Julio": 7, "Agosto": 8, "Septiembre": 9, "Octubre": 10, "Noviembre": 11, "Diciembre": 12
+            };
+
+            const [mesInicial, mesFinal] = intervalo.split(" - ");
+            const mesInicialNumero = meses[mesInicial];
+            const mesFinalNumero = meses[mesFinal];
+            const mesesEnIntervalo = [];
+
+            for (let i = mesInicialNumero; i <= mesFinalNumero; i++) {
+                mesesEnIntervalo.push(Object.keys(meses).find(key => meses[key] === i));
+            }
+
+            return mesesEnIntervalo;
+        }
+
+        let approvedProjects = {{ Js::from($approvedProjectsByMonth) }};
+        let careers = {{ Js::from($careers) }};
+        let mesesEnIntervalo = obtenerMesesEnIntervalo({{ Js::from($period['period']) }});
+
+        const allCareers = [];
+        approvedProjects.forEach(item => {
+            item.careers.forEach(career => {
+                if (!allCareers.includes(career.name)) {
+                    allCareers.push(career.name);
+                }
+            });
+        });
+
+        const datasets = approvedProjects.map(item => {
+            const careerCounts = {};
+            item.careers.forEach(career => {
+                careerCounts[career.name] = career.approvedCount;
+            });
+
+            const dataForMonth = allCareers.map(career => careerCounts[career] || 0);
+            const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.2)`;
+
+            return {
+                label: item.month,
+                data: dataForMonth,
+                backgroundColor: randomColor,
+                borderColor: randomColor,
+                borderWidth: 1
+            };
+        });
+
+
+        console.log(approvedProjects)
+        console.log(mesesEnIntervalo)
+        console.log(careers)
+
+        // Primera grafica
+        let ctxBar = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: ["Mayo", "Junio", "Julio"],
-                datasets: [{
-                        label: 'Tecnologías de la Información',
-                        data: [65, 20, 10],
-                        backgroundColor: '#0FA987',
-                        borderColor: '#ffffffff',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Mantenimiento',
-                        data: [39, 45, 85],
-                        backgroundColor: '#3E5366',
-                        borderColor: '#ffffffff',
-                        borderWidth: 2
-                    }
-                ]
+                labels: allCareers,
+                datasets: datasets
             },
             options: {
                 scales: {
-                    x: {
-                        ticks: {
-                            min: 0,
-                            max: 120,
-                            stepSize: 20
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                },
-                indexAxis: 'x', 
-                elements: {
-                    bar: {
-                        borderWidth: 2, 
-                        borderRadius: 5, 
-                        barThickness: 200 
-                    }
-                },
-                scales: {
                     y: {
-                        beginAtZero: true,
-                        suggestedMax: 120
+                        beginAtZero: true
                     }
                 }
             }
-
         });
-    </script>
 
-    <script>
-        var ctx = document.getElementById('total-proyectos').getContext('2d');
-        var myChart = new Chart(ctx, {
+        // Segunda grafica
+        let approvedCount = {{ Js::from($projectMetrics['approvedCount']) }};
+        let inRevisionCount = {{ Js::from($projectMetrics['inRevisionCount']) }};
+
+        var ctxDoughnut = document.getElementById('total-proyectos').getContext('2d');
+        var myChartDoughnut = new Chart(ctxDoughnut, {
             type: 'doughnut',
             data: {
-                labels: ["En revision", "Aprobado"],
+                labels: ["En revisión", "Aprobado"],
                 datasets: [{
-                    label: 'Horas',
-                    data: [2, 3],
-                    backgroundColor: [
-                        '#3E5366',
-                        '#0FA987'
-                    ],
-                    borderColor: [
-                        '#ffffffff'
-                    ],
+                    label: 'Proyectos',
+                    data: [inRevisionCount, approvedCount],
+                    backgroundColor: ['#3E5366', '#0FA987'],
+                    borderColor: '#ffffffff',
                     borderWidth: 1
                 }]
             },
@@ -233,4 +240,5 @@
             }
         });
     </script>
+
     @endsection

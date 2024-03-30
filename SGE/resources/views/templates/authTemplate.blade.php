@@ -63,9 +63,9 @@
                     <a href="{{ route('inicio-asistente') }}" class="hover:border-b-2 hover:border-primaryColor">Inicio</a>
                 </li>    
 
-                <li>
+                <!-- <li>
                     <a href="#" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
-                </li>
+                </li> -->
 
 
                 @elseif($user->rol_id === 6) {{-- ! Rol de Administrador --}}
