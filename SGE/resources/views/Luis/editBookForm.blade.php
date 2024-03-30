@@ -56,7 +56,7 @@
                                     </p>
                                 @enderror
                             </div>
-                            <div class="space-y-2 mb-4 lg:mx-5">
+                            <div class="space-y-2 mb-4 lg:mx-5 ">
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Precio:</p>
                                 </div>                        
@@ -69,7 +69,16 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
-                            <div class="space-y-2 mb-4">
+                            {{-- <div class="space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">ISBN:</p>
+                                <input type="text" id="isbn" name="isbn" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el ISBN del libro" value="{{ $book->isbn }}">
+                                @error('isbn')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div> --}}
+                            <div class="space-y-2 mb-4 lg:mx-5 ">
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Matrículas:</p>
                                     <div>
