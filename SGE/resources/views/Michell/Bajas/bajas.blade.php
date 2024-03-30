@@ -15,11 +15,11 @@
                             <div class="flex items-center border border-primaryColor rounded-md px-4">
                                 <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscardor"
                                     class="text-sm font-bold placeholder-primaryColor border-none rounded-md focus:ring-0 text-[#888]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primaryColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>
+                                </svg> --}}
                             </div>
                             <button>
                                 <svg class="w-[30px] h-[30px] text-primaryColor" aria-hidden="true"
@@ -35,22 +35,27 @@
                             <thead id="tableHeader" class="text-[#555] text-base">
                                 <tr>
                                     <th scope="col" class="pr-[8rem] pb-4">Nombre de estudiantes</th>
-                                    <th scope="col" class="pr-[15rem] pb-4">Carrera</th>
-                                    <th scope="col" class="pr-[10rem] pb-4">Asesor academico</th>
+                                    <th scope="col" class="pr-[20rem] pb-4 mr-32">Carrera</th>
+                                    <th scope="col" class="pr-[15rem] pb-4">Asesor academico</th>
                                 </tr>
                             </thead>
                             <tbody class="text-sm">
                                 @foreach ($dataStudents as $data)
                                     <tr class="data-row border-b border-[#999]">
-                                        <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
+                                        <td class="py-4">{{ $data->name }}  {{$data->lastname}}</td>
+                                        <td class="py-4">{{ \Illuminate\Support\Str::limit($data->careers, 40, $end='...') }}</td>
+                                        <td class="py-4">{{ $data->advisor_name }}</td>
+
+                                        {{-- <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
                                         <td class="py-4">{{ $data->user->careerAcademy->career->name }}</td>
-                                        <td class="py-4">{{ $data->academicAdvisor->user->name }}</td>
+                                        <td class="py-4">{{ $data->academicAdvisor->user->name }}</td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">Datos no encontrados</p>
                     </section>
+                    {{$dataStudents->links()}}
                 </section>
             </div>
         </div>
