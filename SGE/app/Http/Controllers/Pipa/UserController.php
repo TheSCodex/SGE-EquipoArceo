@@ -14,6 +14,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Gate;
 use App\Models\AcademicAdvisor;
+use App\Models\Division;
+use App\Models\Academy;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -210,12 +212,29 @@ class UserController extends Controller
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
         $user = \App\Models\User::find($id);
+        // si es un asesor que está en la tabla de asesores:
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->exists();
+        $director = Division::where('director_id', $user->id)->exists();
+        $assistant = Division::where('directorAsistant_id', $user->id)->exists();
+        $president = Academy::where('president_id', $user->id)->exists();
         if ($academicAdvisor){
             return redirect()
                 ->back()
-                ->with('error', 'No puedes eliminar este asesor ya que existe en la tabla de asesores.');
+                ->with('error', 'No puedes eliminar a este usuario ya que está asignado como asesor a un alumno.');
+        } elseif ($director){
+            return redirect()
+                ->back()
+                ->with('error', 'No puedes eliminar a este usuario ya que es director de una división.');
+        } elseif ($president){
+            return redirect()
+                ->back()
+                ->with('error', 'No puedes eliminar a este usuario ya que es presidente de una academia.');
+        } elseif ($assistant){
+            return redirect()
+            ->back()
+            ->with('error', 'No puedes eliminar a este usuario ya que es asistente de dirección de una división.');
         }
+
         $user->delete();
         return redirect()->route('panel-users.index');
     }
