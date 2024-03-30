@@ -7,6 +7,7 @@ use App\Models\AcademicAdvisor;
 use App\Models\Book;
 use App\Models\Intern;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,9 @@ class BooksController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('leer-lista-libros')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
@@ -39,6 +43,9 @@ class BooksController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('crear-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         return view('Luis.newBookForm');
     }
 
@@ -47,11 +54,14 @@ class BooksController extends Controller
      */
     public function store(BookFormRequest $request)
     {
-        
+        if(Gate::denies('crear-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $books = new \App\Models\Book;
         $books->title = $request->title;
         $books->author = $request->author;
         $books->isbn = $request->isbn;
+        $books->price = $request->price;
     
         $problems = [];
         $allUsersExistAndAreInterns = true;
@@ -94,7 +104,7 @@ class BooksController extends Controller
             $intern->save();
         }
     
-        return redirect('asistente/libros')->with('success', 'El libro se ha agregado correctamente');
+        return redirect()->route('libros-asistente.index')->with('success', 'El libro se ha agregado correctamente');
     }
     
 
@@ -103,6 +113,9 @@ class BooksController extends Controller
      */
     public function show(string $id)
     {
+        if(Gate::denies('leer-lista-libros')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::find($id);
         $interns = Intern::with('user')->where('book_id', $id)->get();
         $internsIdentifier = [];
@@ -122,6 +135,9 @@ class BooksController extends Controller
      */
     public function edit(string $id)
     {
+        if(Gate::denies('editar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book=Book::find($id);
         $interns = Intern::where('book_id', $id)->get();
         $internsIdentifier = [];
@@ -138,12 +154,20 @@ class BooksController extends Controller
      */
     public function update(BookFormRequest $request, string $id): RedirectResponse
     {
+        if(Gate::denies('editar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::find($id);
     
         // Validar identificadores de estudiantes
         $problems = [];
-        $identifiers = preg_split('/,\s*/', $request->identifier_student); // Usar expresión regular para dividir la cadena
+        $identifiers = preg_split('/\s*,\s*/', $request->identifier_student);
+        $identifiers = array_filter($identifiers, 'strlen'); // Filtrar identificadores vacíos
+        $identifiers = array_unique($identifiers); // Eliminar identificadores duplicados
+        // dd($identifiers);
         foreach ($identifiers as $identifier) {
+            // Ignorar identificadores vacíos
+
             $user = User::where('identifier', $identifier)->first();
             if ($user === null) {
                 $problems[] = "El usuario con identificador $identifier no existe";
@@ -155,6 +179,7 @@ class BooksController extends Controller
                     $problems[] = "El usuario con identificador $identifier ya está asociado a otro libro";
                 }
             }
+
         }
     
         if (!empty($problems)) {
@@ -204,6 +229,9 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('eliminar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::findOrFail($id);
 
         $interns = Intern::where('book_id', $id)->get();

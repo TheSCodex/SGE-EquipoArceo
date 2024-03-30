@@ -19,7 +19,7 @@ class RoleController extends Controller
         if (Gate::denies('crud-roles-permisos')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
-        $roles = Role::all();
+        $roles = Role::paginate(3);
         return view('Pipa.panel-roles', compact('roles'));
     }
 

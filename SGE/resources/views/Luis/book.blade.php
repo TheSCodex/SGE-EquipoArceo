@@ -55,9 +55,13 @@
             </div>
         </div>
 
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between min-h-72">
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
+                        @if ($books->isEmpty())
+                            <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                        @else
+
                     @foreach ($books as $book)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                         <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
@@ -88,9 +92,14 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
+
                 </div>
             </div>
             <div class="hidden lg:block w-full">
+                @if ($books->isEmpty())
+                <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                @else
                 <table class="text-start w-full">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
@@ -140,6 +149,7 @@
                     </tr>
                     @endforeach
                 </table>
+                @endif
             </div>
         </div>
     </div>
