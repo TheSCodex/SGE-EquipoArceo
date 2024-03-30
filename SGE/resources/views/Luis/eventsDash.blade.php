@@ -43,7 +43,7 @@
             <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5 ">
                     
                 @foreach ($allEvents as $event)
-                    <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl event">
+                    <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl transition duration-100 ease-in-out hover:bg-lightGray/20 hover:shadow-2xl event ">
                         <div class="p-4">
                             <a href="{{route('actividades.show', $event->id)}}">
                                 <ul class="border-l border-dashed border-primaryColor font-montserrat cursor-pointer" id="moreInfo">
@@ -91,8 +91,12 @@
                 
             </div>
             @endif
-            <div class="my-5 mx-auto">
-                {{$allEvents->links()}}
+            <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+                <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                    <div class="my-5 mx-auto md:w-full">
+                        {{$allEvents->links()}}
+                    </div>
+                </div>
             </div>
         </div>
     </main>
