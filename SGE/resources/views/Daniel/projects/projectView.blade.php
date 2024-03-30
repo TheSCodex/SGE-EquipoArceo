@@ -21,7 +21,7 @@
                     class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
-                        <h3 class="text-lg">Nombre del proyecto:
+                        <h3 class="text-lg">Nombre del Anteproyecto:
                             @if (isset($project))
                                 <span class="mx-[1%] font-semibold">{{ $project->name }}</span>
                             @endif
@@ -141,7 +141,7 @@
                         <div
                             class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Área de desempeño</p>
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Objetivo</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
                                     {{ $project->description }}
                                 </p>
@@ -185,14 +185,14 @@
                 class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
-                    <h3>Estado del proyecto</h3>
+                    <h3>Estado del Anteproyecto</h3>
                 </div>
                 <div
                     class=" w-full h-fit min-h-[12vh] my-[1%] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
+                            <p class="w-[70%]">Tu Anteproyecto esta guardado como borrador</p>
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
