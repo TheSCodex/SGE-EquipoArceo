@@ -1,5 +1,5 @@
 @extends('templates/authTemplate')
-@section('titulo', 'Panel de Usuarios')
+@section('titulo', 'Histórico de Documentos')
 @section('contenido')
     {{-- Test --}}
 
@@ -26,22 +26,19 @@
                 <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Lista de Documentos</h1>
                 <div class="flex flex-row items-center justify-end">
                     <div class="flex-1 md:mr-2">
-                        <form method="POST" class="hidden md:block" action="{{ route('docs.search') }}">
-                            @csrf
-                            <div class="flex items-center space-x-4">
-                                <div class="relative items-center hidden md:flex">
-                                    <input id='search'
-                                        class="border border-b rounded-md border-primaryColor placeholder-primaryColor "
-                                        type="search" placeholder="Buscar...." style="color: green;">
-                                </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative items-center hidden md:flex">
+                                <input id='search'
+                                    class="border border-b rounded-md border-primaryColor placeholder-primaryColor "
+                                    type="search" placeholder="Buscar...." style="color: green;">
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <!-- Elementos que se mostrarán solo en dispositivos móviles -->
             </div>
             @if (isset($message))
-                <p class="text-center text-4xl">{{ $message }}</p>
+                <p class="mt-12 font-montserrat text-center text-3xl">{{ $message }}</p>
             @else
                 @php
                     if (!function_exists('getDownloadRoute')) {
@@ -64,8 +61,8 @@
                                         : 're-download.aprobacion.asistente';
                                 case 'Digitalización de Memoria':
                                     return $userRole == 'director'
-                                        ? 're-download.memoria.director'
-                                        : 're-download.memoria.asistente';
+                                        ? 're-download.digitalizacion.director'
+                                        : 're-download.digitalizacion.asistente';
                             }
                         }
                     }
@@ -152,10 +149,12 @@
                         </table>
                     </div>
                 </div>
+                    <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                        <div class="my-5 mx-auto md:w-full">
+                            {{$docs->links()}}
+                        </div>
+                    </div>
             @endif
-            <div class="my-5 mx-auto">
-                {{$docs->links()}}
-            </div>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 window.onload = function() {
@@ -221,31 +220,32 @@
                         }
                     })
                 });
-
-                function searchTable() {
-                    var searchText = document.getElementById("search").value.toLowerCase();
-                    var rows = document.querySelectorAll("table tr");
-                    for (var i = 1; i < rows.length; i++) {
-                        var row = rows[i];
-                        var found = false;
-                        for (var j = 0; j < row.cells.length; j++) {
-                            var cell = row.cells[j];
-                            if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (found) {
-                            row.style.display = "";
-                        } else {
-                            row.style.display = "none";
-                        }
-                    }
-                }
-
-                // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-                document.getElementById("search").addEventListener("input", searchTable);
             </script>
         </div>
     </main>
+    <script>
+        function searchTable() {
+            var searchText = document.getElementById("search").value.toLowerCase();
+            console.log("Search text: " + searchText); // Debug line
+            var rows = document.querySelectorAll("table tr");
+            console.log("Number of rows: " + rows.length); // Debug line
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var found = false;
+                for (var j = 0; j < row.cells.length; j++) {
+                    var cell = row.cells[j];
+                    if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+        document.getElementById("search").addEventListener("input", searchTable);
+    </script>
 @endsection

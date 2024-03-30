@@ -176,10 +176,10 @@
                                                                 </button>
                                                             </div>
 
-                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form action="{{ route('download.memoria', $user->id) }}"
-                                                                    method="GET">
-                                                                    @csrf
+                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                            <form action="{{ route('download.aprobacion', $user->id) }}"
+                                                                method="GET">
+                                                                @csrf
 
 
                                                                     <button type="submit"
@@ -191,30 +191,27 @@
                                                 </div>
 
 
-                                                <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
-                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-                                                    class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
-                                                    <div role="document"
-                                                        class="flex justify-center p-10 justify-items-center mt-80">
-                                                        <div class="modal-content  w-[24%]">
-                                                            <div
-                                                                class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
-                                                                    Generar
-                                                                    Carta de Digitalizacion de Memoria
-                                                                </h5>
-                                                                <button type="button"
-                                                                    class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                    id="clo" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form
-                                                                    action="{{ route('download.aprobacion', $user->id) }}"
-                                                                    method="GET">
-                                                                    @csrf
+                                            <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
+                                                <div role="document"
+                                                    class="flex justify-center p-10 justify-items-center mt-80">
+                                                    <div class="modal-content  w-[24%]">
+                                                        <div
+                                                            class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
+                                                            <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
+                                                                Carta de Digitalizacion de Memoria
+                                                            </h5>
+                                                            <button type="button"
+                                                                class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
+                                                                id="clo" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                            <form action="{{ route('download.digitalizacion', $user->id) }}"
+                                                                method="GET">
+                                                                @csrf
 
 
                                                                     <button type="submit"
