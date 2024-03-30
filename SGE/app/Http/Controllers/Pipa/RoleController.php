@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Http\Requests\Pipa\RoleRequest;
 use Illuminate\Support\Facades\Gate;
-
+use App\Models\User;
 
 class RoleController extends Controller
 {
@@ -93,6 +93,12 @@ class RoleController extends Controller
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
         $role = Role::findOrFail($id);
+        $assigned = User::where('rol_id', $role->id)->exists();
+        if ($assigned){
+            return redirect()
+            ->back()
+            ->with('error', 'No puedes eliminar este rol ya que está asignado a uno o más usuarios.');
+        }
         $role->delete();
         return redirect('panel-roles')->with('success', 'Rol eliminado exitosamente');
     }

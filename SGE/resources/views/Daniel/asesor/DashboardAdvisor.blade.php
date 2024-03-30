@@ -101,9 +101,11 @@
                         $academicAdvisor = DB::table('academic_advisor')->where('user_id', $userId)->first();
                         $academicAdvisorId = $academicAdvisor->id;
                     @endphp
-                    <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
-                        <a href="asesor/generar/{{ $academicAdvisorId }}">Generar Control de Estadías</a>
-                    </button>
+                    <form method="GET" action="{{route('download.control', $academicAdvisorId)}}">
+                        <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
+                            <p>Generar Control de Estadías</p>  
+                        </button>
+                    </form>
                 </div>
 
             </div>
@@ -140,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
     </section>
