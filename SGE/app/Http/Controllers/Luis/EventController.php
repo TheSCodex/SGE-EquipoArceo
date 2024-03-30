@@ -166,9 +166,12 @@ class EventController extends Controller
         foreach ($events as $event) {
             // Solo contar los eventos pendientes
             if ($event->status === 'Programada') {
-                $eventDate = $event->date_start;
-                $eventDay = date('d', strtotime($eventDate));
-                $eventsPerDay[$eventDay]++;
+                $eventDate = new DateTime($event->date_start);
+                //Validar que el mes sea el mismo que el mes actual
+                if($eventDate->format('m') === $month){
+                    $eventDay = $eventDate->format('d');
+                    $eventsPerDay[$eventDay]++;
+                }
             }
         }
         return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern', 'permissionActivity'));
@@ -255,11 +258,11 @@ class EventController extends Controller
 
         // Comparar las fechas con la hora límite (5:00 PM)
         if ($date_start->format('H:i:s') > $limit_time_end->format('H:i:s') || $date_end->format('H:i:s') > $limit_time_end->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
         }
         // Comparar las fechas con la hora límite (8:00 AM)
         if ($date_start->format('H:i:s') < $limit_time_start->format('H:i:s') || $date_end->format('H:i:s') < $limit_time_start->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
         }
 
         
@@ -270,6 +273,11 @@ class EventController extends Controller
             return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
         }
 
+        // Validar que no se puedan agregar actividades los sabados y domingos
+        $day = $date_start->format('l');
+        if ($day === 'Saturday' || $day === 'Sunday') {
+            return redirect()->back()->withInput()->with('errorHorario', 'No se pueden agregar actividades los sabados y domingos');
+        }
 
 
         // dd($event);
