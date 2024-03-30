@@ -97,7 +97,7 @@ class DirectorController extends Controller
 
         // dd($approvedProjectsByMonth);
 
-        return view("Michell.assistant.index", compact(
+        return view("Michell.director.index", compact(
             "interns",
             "careers",
             "userDivision",

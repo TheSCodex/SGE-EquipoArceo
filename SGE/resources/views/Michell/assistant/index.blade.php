@@ -13,14 +13,14 @@
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
                     <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
 
-                    <a href="director/estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
                 <div class="bg-[#02AB82] rounded-md grid place-content-center px-2 py-5 gap-3 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Anteproyectos</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Documentos</p>
 
-                    <a href="director/anteproyectos" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="documentos" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
