@@ -122,7 +122,6 @@ public function update(Request $request, $id)
         try {
             DB::beginTransaction();
 
-            // Ejecutar el procedimiento almacenado para eliminar la carrera y establecer academy_id en NULL
             DB::select('CALL proc_delete_career(?)', [$id]);
 
             DB::commit();
