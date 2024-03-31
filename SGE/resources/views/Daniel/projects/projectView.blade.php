@@ -21,7 +21,7 @@
                     class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
-                        <h3 class="text-lg">Nombre del proyecto: 
+                        <h3 class="text-lg">Nombre del Anteproyecto:
                             @if (isset($project))
                                 <span class="mx-[1%] font-semibold">{{ $project->name }}</span>
                             @endif
@@ -31,74 +31,82 @@
                     <div class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-semibold items-left">
                         <div class="w-full flex flex-wrap px-[3%] self-start py-[2vh]">
                             @if (isset($project))
-                            <h2 class="w-full text-xl font-bold mt-[1vh] mb-[vh]">Datos del alumno  </h2>
-                            <div class=w-[50%]>
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre completo: <p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $user->name ?? 'No disponible' }}</p>
-                                </div>
-
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Division ácademica: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $division->name ?? 'No disponible' }}</p>
-                                
-                                </div>
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $user->email ?? 'No disponible' }}</p>
-                                </div>
-                            </div>
-
-                            <div class=w-[50%]>
-
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Programa educativo: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $career->name ?? 'No disponible' }}</p>
-                                </div>
-
-                                <div class="flex w-full">
-                                    <div class="flex w-[50%]">
-                                        <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Matricula:</p>
-                                        <p class="mx-[1%] font-normal w-[40%]">{{ $user->identifier ?? 'No disponible' }}</p>
+                                <h2 class="w-full text-xl font-bold mt-[1vh] mb-[vh]">Datos del alumno </h2>
+                                <div class=w-[50%]>
+                                    <div class="flex">
+                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre completo:
+                                        <p>
+                                        <p class="mx-[1%] font-normal w-[50%]">{{ $user->name ?? 'No disponible' }}</p>
                                     </div>
-                                    
-                                    <div class="flex w-[50%]">
-                                        <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Grupo:</p>
-                                        <p class="mx-[1%] font-normal w-[40%]">{{ $interns[0]->Group ?? 'No disponible' }}</p>
+
+                                    <div class="flex">
+                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Division ácademica: </p>
+                                        <p class="mx-[1%] font-normal w-[50%]">{{ $division->name ?? 'No disponible' }}</p>
+
+                                    </div>
+                                    <div class="flex">
+                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
+                                        <p class="mx-[1%] font-normal w-[50%]">{{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
-                                
-                                <div class="flex w-full">
-                                    <div class="flex w-[50%]">
-                                        <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha inicio:</p>
-                                        <p class="mx-[1%] font-normal w-[40%]">{{ $project->start_date ?? 'No disponible' }}</p>
+
+                                <div class=w-[50%]>
+
+                                    <div class="flex">
+                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Programa educativo: </p>
+                                        <p class="mx-[1%] font-normal w-[50%]">{{ $career->name ?? 'No disponible' }}</p>
                                     </div>
-                                    
-                                    <div class="flex w-[50%]">
-                                        <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha final:</p>
-                                        <p class="mx-[1%] font-normal w-[40%]">{{ $project->end_date ?? 'No disponible' }}</p>
+
+                                    <div class="flex w-full">
+                                        <div class="flex w-[50%]">
+                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Matricula:</p>
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $user->identifier ?? 'No disponible' }}</p>
+                                        </div>
+
+                                        <div class="flex w-[50%]">
+                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Grupo:</p>
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $interns[0]->Group ?? 'No disponible' }}</p>
+                                        </div>
                                     </div>
+
+                                    <div class="flex w-full">
+                                        <div class="flex w-[50%]">
+                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha inicio:</p>
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $project->start_date ?? 'No disponible' }}</p>
+                                        </div>
+
+                                        <div class="flex w-[50%]">
+                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha final:</p>
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $project->end_date ?? 'No disponible' }}</p>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            
-                            </div>
                         </div>
 
                         <div class="w-full flex flex-wrap px-[3%] self-start border-b-2 border-black py-[2vh]">
-                        <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
+                            <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
                             <div class=w-[50%]>
                                 <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre de la empresa: <p>
+                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre de la empresa:
+                                    <p>
                                     <p class="mx-[1%] font-normal w-[50%]">{{ $company->name ?? 'No disponible' }}</p>
                                 </div>
 
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->name ?? 'No disponible' }}</p>
-                                
+                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                    </p>
+
                                 </div>
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->email ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -110,19 +118,22 @@
 
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->position ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">
+                                        {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
-                                
+
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $interns[0]->performance_area ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">
+                                        {{ $interns[0]->performance_area ?? 'No disponible' }}</p>
                                 </div>
-                                
+
                                 <div class="flex">
                                     <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->phone ?? 'No disponible' }}</p>
+                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
+                                    </p>
                                 </div>
-                            
+
                             </div>
                         </div>
 
@@ -130,7 +141,7 @@
                         <div
                             class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
                             <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Área de desempeño</p>
+                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Objetivo</p>
                                 <p class=" w-[80%] sm:w-[100%] font-normal text-md">
                                     {{ $project->description }}
                                 </p>
@@ -153,7 +164,8 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
-                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}" class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
+                                class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
                         </div>
                     @else
                         <div
@@ -173,14 +185,14 @@
                 class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
-                    <h3>Estado del proyecto</h3>
+                    <h3>Estado del Anteproyecto</h3>
                 </div>
                 <div
                     class=" w-full h-fit min-h-[12vh] my-[1%] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <p class="w-[70%]">Tu proyecto esta guardado como borrador</p>
+                            <p class="w-[70%]">Tu Anteproyecto esta guardado como borrador</p>
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
@@ -219,48 +231,54 @@
                         <a href="{{ route('observationsAnteproyecto') }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%] self-end">Ver
                             observaciones</a>
-                    
-                    <form method="POST" action="{{ route('observationsAnteproyecto.store') }}" class="w-full font-normal flex  h-[fit] self-end mb-2">
-                        @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content" placeholder="Ingrese su comentario"/>
+                        <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
+                            class="w-full font-normal flex  h-[fit] self-end mb-2">
+                            @csrf
+
+                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" />
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                        <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
-                            <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
-                        </button>
-                    </form>
-                </div>
+                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                                <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
+                                    alt="Votos icon" />
+                            </button>
+                        </form>
+                    </div>
                 @elseif(isset($comments) && count($comments) == 0)
-                <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
-                    <div class="flex flex-wrap text-center items-center h-[90%]">
-                        <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
-                    </div>
+                    <div
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        <div class="flex flex-wrap text-center items-center h-[90%]">
+                            <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
+                        </div>
 
-                    
-                    <form method="POST" action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}" class="w-full font-normal flex mt-[-3vh] h-[fit] ">
-                        @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content" placeholder="Ingrese su comentario"/>
+                        <form method="POST"
+                            action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
+                            class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                            @csrf
+
+                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" />
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                        <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
-                            <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full" alt="Votos icon" />
-                        </button>
-                    </form>
-                
-
-                
-                
-                @else
-                    <div class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
-                        <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a trabajarlo
-                            ahora</p>
-                    </div>
+                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                                <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
+                                    alt="Votos icon" />
+                            </button>
+                        </form>
+                    @else
+                        <div
+                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                            <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a
+                                trabajarlo
+                                ahora</p>
+                        </div>
                 @endif
             </div>
         </div>

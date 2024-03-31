@@ -15,6 +15,7 @@ class AcademicAdvisor extends Model
         'user_id',
         'max_advisors',
         'quantity_advised',
+        'career_id'
     ];
 
     public function user()
@@ -31,6 +32,11 @@ class AcademicAdvisor extends Model
     {
         return $this->hasMany(CalendarEvent::class);
     }
-    
+
+    public function career()
+    {
+        return $this->hasOne(Career::class, 'id', 'career_id');
+    }
+
 }
 

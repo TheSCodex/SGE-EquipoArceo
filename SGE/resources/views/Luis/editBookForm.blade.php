@@ -9,7 +9,7 @@
 <body>
     @extends('templates/authTemplate')
     @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <section class="flex flex-col justify-center items-center  min-h-full flex-grow mb-6">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-full md:px-[7em]  md:my-[2em] flex ">
                 <form action="{{ route('libros-asistente.update', $book->id) }}" method="POST" class="flex flex-col  font-montserrat space-y-5 w-full mt-4 md:mt-0">
@@ -26,7 +26,7 @@
                     @endif
                     <h1 class="text-3xl font-bold text-center lg:text-left  lg:px-5">Editar libro</h1>
                     <div class="w-full flex flex-col space-y-1">
-                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around mb-4">
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">Nombre:</p>
                                 <input type="text" id="title" name="title" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el nombre del libro" value="{{ $book->title }}">
@@ -56,7 +56,29 @@
                                     </p>
                                 @enderror
                             </div>
-                            <div class="space-y-2 mb-4 lg:mx-5">
+                            <div class="space-y-2 mb-4 lg:mx-5 ">
+                                <div class="flex flex-row w-full justify-between">
+                                    <p class="text-sm space-y-2">Precio:</p>
+                                </div>                        
+                                <input id="price" name="price" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce el precio del libro" value="{{ $book->price }}">
+                                @error('identifier_student')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
+                            {{-- <div class="space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">ISBN:</p>
+                                <input type="text" id="isbn" name="isbn" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el ISBN del libro" value="{{ $book->isbn }}">
+                                @error('isbn')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div> --}}
+                            <div class="space-y-2 mb-4 lg:mx-5 ">
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Matrículas:</p>
                                     <div>
@@ -65,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>                        
-                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma">@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</input>
+                                <input id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma" value="{{ implode(', ', $internsIdentifier) }}">
                                 @error('identifier_student')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}

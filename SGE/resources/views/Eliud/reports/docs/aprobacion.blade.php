@@ -76,6 +76,13 @@
         <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
     </p>
 
+    <div style="position: relative;height:1px">
+        <div style="position: absolute; width: 250px; height:200px; top:50px; right:-5px">
+            <p > {{ $project?->name}}</p>
+        </div>
+    
+    </div>
+
     <div style="position:absolute; width:100% ; margin: 10px; left:95;">
         <table style="width: 75%; border-collapse: collapse; border: 0.5px solid black;">
             <tr>
@@ -95,6 +102,7 @@
                 </td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border-right: 0.5px solid black;">
+                    
                 </td>
             </tr>
             <tr>

@@ -42,7 +42,23 @@
                     <p class="text-sm">Rol</p>
                     <select name="rol_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         @foreach($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->title }}</option>
+                            <option value="{{ $role->id }}">
+                                @if ($role->title == "estudiante")
+                                Estudiante
+                                @elseif ($role->title == "asesorAcademico")
+                                    Asesor Académico
+                                @elseif ($role->title == "presidenteAcademia")
+                                    Presidente de Academia
+                                @elseif ($role->title == "director")
+                                    Director
+                                @elseif ($role->title == "asistenteDireccion")
+                                    Asistente Dirección
+                                @elseif ($role->title == "admin")
+                                    Administrador
+                                @else
+                                    {{$role->title}}
+                                @endif
+                            </option>
                         @endforeach
                     </select>
                     @error('rol_id')
