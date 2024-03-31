@@ -285,10 +285,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('/panel-careers', carrerasController::class)->names('panel-careers')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        // Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        // Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        //Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        //Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademie')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
 });
 
 

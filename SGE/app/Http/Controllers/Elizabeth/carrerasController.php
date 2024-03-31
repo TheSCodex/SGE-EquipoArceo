@@ -59,8 +59,7 @@ class carrerasController extends Controller
     $career->academy_id = $validatedData['academy_id'];
     $career->save();
 
-    return redirect('/panel-careers')->with('success', 'Career added successfully!');
-
+    return redirect('/panel-careers'); 
 }
     
     /**
@@ -89,23 +88,12 @@ class carrerasController extends Controller
      */
 public function update(Request $request, $id)
 {
-    
 
     $career = Career::findOrFail($id);
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'academy_id' => 'required|integer',
-        'division_id' => 'required|integer',
-        'user_id' => 'required|integer',
     ]);
-    $user = User::findOrFail($validatedData['user_id']);
-    $academy = Academy::findOrFail($validatedData['academy_id']);
-    $user->update(['rol_id' => 3]);
-    $academy->update([
-        'division_id'=> $validatedData['division_id'],
-        'president_id'=> $validatedData['user_id'],
-        
-    ]); 
     
     $career->update([
         'name'=>$validatedData['name'],
@@ -119,18 +107,16 @@ public function update(Request $request, $id)
      */
     public function destroy(string $id)
     {
+        
         try {
             DB::beginTransaction();
-
-            // Ejecutar el procedimiento almacenado para eliminar la carrera y establecer academy_id en NULL
             DB::select('CALL proc_delete_career(?)', [$id]);
-
             DB::commit();
             
-            return redirect()->back()->with('success', '¡Carrera eliminada exitosamente!');
+            return redirect()->back()->with('success', '¡Division eliminada exitosamente!');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Error al eliminar la carrera: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error al eliminar la division: ' . $e->getMessage());
         }
 
 }
