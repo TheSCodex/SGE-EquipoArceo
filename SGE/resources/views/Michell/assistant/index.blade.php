@@ -4,22 +4,23 @@
 @endsection
 
 @section('contenido')
-    <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
+
+<article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Asistente de Direccion!</p>
+            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Asistente de director</p>
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
                     <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
 
-                    <a href="asistente/estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="estudiantes" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
                 <div class="bg-[#02AB82] rounded-md grid place-content-center px-2 py-5 gap-3 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Anteproyectos</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Documentos</p>
 
-                    <a href="asistente/anteproyectos" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="documentos" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
@@ -49,7 +50,7 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-2xl font-medium">1</p>
+                        <p class="text-2xl font-medium">{{ $projectMetrics['approvedCount'] }}</p>
                         <p class="text-gray-500 text-xs">Anteproyectos aprobados</p>
                     </div>
                 </div>
@@ -94,47 +95,24 @@
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
-                <img src="{{ asset('img/graficaDirectorIndex.png') }}" alt="Gráfica">
+                <canvas id="myChart" class="max-h-[200px]"></canvas>
             </div>
         </section>
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md">Bajas de estudiantes</p>
-
-            <div class="bg-white rounded-md py-5 flex flex-col gap-3">
-                <div class="flex gap-3 justify-center items-center">
+            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas" class="text-sm font-normal">Ver más</a></p>
+            @foreach ( $interns as $i )
+            <div class="bg-white rounded-md py-1.5 flex flex-col gap-3">
+                <div class="flex gap-3  ml-10 items-center">
                     <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
                         <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p class="font-medium text-sm">Rodrigo Bojorquez Chi</p>
-                </div>
-
-                <div class="flex gap-3 justify-center items-center">
-                    <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
-                        <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <p class="font-medium text-sm">Rodrigo Bojorquez Chi</p>
-                </div>
-
-                <div class="flex gap-3 justify-center items-center">
-                    <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
-                        <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <p class="font-medium text-sm">Rodrigo Bojorquez Chi</p>
-                </div>
-
-                <div class="flex gap-3 justify-center items-center">
-                    <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
-                        <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <p class="font-medium text-sm">Rodrigo Bojorquez Chi</p>
+                    <p class="font-medium text-sm">{{ $i->name }}</p>
                 </div>
             </div>
+            @endforeach 
 
             <p class="bg-white font-semibold px-2 py-2 rounded-md">Divisiones</p>
 
@@ -144,15 +122,8 @@
                         <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
                         <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>  
-                    <p class="text-sm">Tecnologías de la información</p> 
-                </div>
-                <div class="bg-white rounded-md p-3 flex gap-4 items-center">
-                    <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16.6907" cy="15.8763" r="15.8763" fill="#02AB82"/>
-                        <path d="M20.5713 11.8188C20.5713 12.7545 20.1996 13.6519 19.538 14.3136C18.8763 14.9752 17.979 15.3469 17.0433 15.3469C16.1076 15.3469 15.2102 14.9752 14.5485 14.3136C13.8869 13.6519 13.5152 12.7545 13.5152 11.8188C13.5152 10.8831 13.8869 9.98576 14.5485 9.32412C15.2102 8.66248 16.1076 8.29077 17.0433 8.29077C17.979 8.29077 18.8763 8.66248 19.538 9.32412C20.1996 9.98576 20.5713 10.8831 20.5713 11.8188ZM17.0433 17.9929C15.4058 17.9929 13.8354 18.6434 12.6775 19.8013C11.5196 20.9592 10.8691 22.5296 10.8691 24.1671H23.2174C23.2174 22.5296 22.5669 20.9592 21.409 19.8013C20.2511 18.6434 18.6807 17.9929 17.0433 17.9929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>  
-                    <p class="text-sm">Tecnologías de la información</p>
-                </div>
+                    <p class="text-sm">{{ $userDivision->name }}</p> 
+                </div>   
             </div>
 
 
@@ -161,20 +132,113 @@
             <div class="grid grid-cols-2 gap-2">
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Penalizaciones</p>
-                    <p class="text-5xl font-light">6</p>
+                    <p class="text-5xl font-light">{{ $penalizationsNum }}</p>
                 </div>
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Total de proyectos</p>
-                    <div class="">
-                        <svg width="150" height="150" viewBox="0 0 143 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M96.7607 20.9314C84.0435 13.5659 68.9159 11.5681 54.7073 15.3737C40.4994 19.1791 28.3741 28.4754 20.9957 41.2149C13.6173 53.9544 11.5877 69.0978 15.3573 83.3154C19.1269 97.5335 28.3877 109.661 41.105 117.026" stroke="#3E5366" stroke-width="10"/>
-                            <path d="M59.1205 69.2647C58.8305 69.2647 58.5055 69.2447 58.1455 69.2047C57.7955 69.1747 57.4455 69.1247 57.0955 69.0547C56.7555 68.9847 56.4555 68.8947 56.1955 68.7847V66.7747C56.4355 66.8747 56.7055 66.9647 57.0055 67.0447C57.3155 67.1147 57.6205 67.1697 57.9205 67.2097C58.2305 67.2497 58.5055 67.2697 58.7455 67.2697C59.3655 67.2697 59.8205 67.1747 60.1105 66.9847C60.4105 66.7947 60.5605 66.4697 60.5605 66.0097C60.5605 65.5997 60.4555 65.3047 60.2455 65.1247C60.0455 64.9347 59.6555 64.8397 59.0755 64.8397H56.1505V63.6247L56.4055 59.4547H62.4055L62.2255 61.3147H58.4755L58.3705 63.0697H59.6305C60.8005 63.0697 61.6555 63.3297 62.1955 63.8497C62.7455 64.3597 63.0205 65.1097 63.0205 66.0997C63.0205 67.0597 62.6955 67.8297 62.0455 68.4097C61.4055 68.9797 60.4305 69.2647 59.1205 69.2647ZM68.4578 69.3847C67.3778 69.3847 66.5078 69.1897 65.8478 68.7997C65.1878 68.4097 64.7078 67.8397 64.4078 67.0897C64.1178 66.3297 63.9728 65.4147 63.9728 64.3447C63.9728 63.2747 64.1178 62.3647 64.4078 61.6147C64.7078 60.8647 65.1878 60.2947 65.8478 59.9047C66.5078 59.5047 67.3778 59.3047 68.4578 59.3047C69.5478 59.3047 70.4178 59.5047 71.0678 59.9047C71.7278 60.2947 72.2078 60.8647 72.5078 61.6147C72.8078 62.3647 72.9578 63.2747 72.9578 64.3447C72.9578 65.4147 72.8078 66.3297 72.5078 67.0897C72.2078 67.8397 71.7278 68.4097 71.0678 68.7997C70.4178 69.1897 69.5478 69.3847 68.4578 69.3847ZM68.4578 67.3147C69.2178 67.3147 69.7428 67.0647 70.0328 66.5647C70.3328 66.0547 70.4828 65.3147 70.4828 64.3447C70.4828 63.3747 70.3328 62.6397 70.0328 62.1397C69.7428 61.6297 69.2178 61.3747 68.4578 61.3747C67.6978 61.3747 67.1678 61.6297 66.8678 62.1397C66.5778 62.6397 66.4328 63.3747 66.4328 64.3447C66.4328 65.3147 66.5778 66.0547 66.8678 66.5647C67.1678 67.0647 67.6978 67.3147 68.4578 67.3147ZM76.1098 63.8797C75.3798 63.8797 74.8248 63.6747 74.4448 63.2647C74.0748 62.8547 73.8898 62.3297 73.8898 61.6897C73.8898 60.9497 74.0748 60.3697 74.4448 59.9497C74.8248 59.5197 75.3798 59.3047 76.1098 59.3047C76.8498 59.3047 77.4048 59.5197 77.7748 59.9497C78.1548 60.3697 78.3448 60.9497 78.3448 61.6897C78.3448 62.3297 78.1548 62.8547 77.7748 63.2647C77.4048 63.6747 76.8498 63.8797 76.1098 63.8797ZM75.4198 69.1147L80.4748 59.4547H82.7698L77.6998 69.1147H75.4198ZM76.1098 62.5597C76.4298 62.5597 76.6548 62.4797 76.7848 62.3197C76.9248 62.1497 76.9948 61.9247 76.9948 61.6447C76.9948 60.9647 76.6998 60.6247 76.1098 60.6247C75.5298 60.6247 75.2398 60.9647 75.2398 61.6447C75.2398 61.9247 75.3048 62.1497 75.4348 62.3197C75.5748 62.4797 75.7998 62.5597 76.1098 62.5597ZM82.0798 69.2647C81.3498 69.2647 80.7948 69.0647 80.4148 68.6647C80.0448 68.2547 79.8598 67.7297 79.8598 67.0897C79.8598 66.3497 80.0448 65.7697 80.4148 65.3497C80.7948 64.9197 81.3498 64.7047 82.0798 64.7047C82.8198 64.7047 83.3748 64.9197 83.7448 65.3497C84.1248 65.7697 84.3148 66.3497 84.3148 67.0897C84.3148 67.7297 84.1248 68.2547 83.7448 68.6647C83.3748 69.0647 82.8198 69.2647 82.0798 69.2647ZM82.0798 67.9597C82.3998 67.9597 82.6248 67.8797 82.7548 67.7197C82.8948 67.5497 82.9648 67.3247 82.9648 67.0447C82.9648 66.3647 82.6698 66.0247 82.0798 66.0247C81.4998 66.0247 81.2098 66.3647 81.2098 67.0447C81.2098 67.3247 81.2748 67.5497 81.4048 67.7197C81.5448 67.8797 81.7698 67.9597 82.0798 67.9597Z" fill="black" fill-opacity="0.6"/>
-                            <path d="M44.9449 118.766C57.6096 126.213 72.7138 128.324 86.9348 124.634C101.156 120.944 113.329 111.757 120.776 99.092C128.222 86.4273 130.333 71.3231 126.644 57.1021C122.954 42.8811 113.766 30.7082 101.102 23.2613" stroke="#0FA987" stroke-width="10"/>
-                        </svg>
-                    </div>
+                    <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
                 </div>
             </div>
         </section>
     </article>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function obtenerMesesEnIntervalo(intervalo) {
+            const meses = {
+                "Enero": 1, "Febrero": 2, "Marzo": 3, "Abril": 4, "Mayo": 5, "Junio": 6,
+                "Julio": 7, "Agosto": 8, "Septiembre": 9, "Octubre": 10, "Noviembre": 11, "Diciembre": 12
+            };
+
+            const [mesInicial, mesFinal] = intervalo.split(" - ");
+            const mesInicialNumero = meses[mesInicial];
+            const mesFinalNumero = meses[mesFinal];
+            const mesesEnIntervalo = [];
+
+            for (let i = mesInicialNumero; i <= mesFinalNumero; i++) {
+                mesesEnIntervalo.push(Object.keys(meses).find(key => meses[key] === i));
+            }
+
+            return mesesEnIntervalo;
+        }
+
+        let approvedProjects = {{ Js::from($approvedProjectsByMonth) }};
+        let careers = {{ Js::from($careers) }};
+        let mesesEnIntervalo = obtenerMesesEnIntervalo({{ Js::from($period['period']) }});
+
+        const allCareers = [];
+        approvedProjects.forEach(item => {
+            item.careers.forEach(career => {
+                if (!allCareers.includes(career.name)) {
+                    allCareers.push(career.name);
+                }
+            });
+        });
+
+        const datasets = approvedProjects.map(item => {
+            const careerCounts = {};
+            item.careers.forEach(career => {
+                careerCounts[career.name] = career.approvedCount;
+            });
+
+            const dataForMonth = allCareers.map(career => careerCounts[career] || 0);
+            const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.2)`;
+
+            return {
+                label: item.month,
+                data: dataForMonth,
+                backgroundColor: randomColor,
+                borderColor: randomColor,
+                borderWidth: 1
+            };
+        });
+
+
+        console.log(approvedProjects)
+        console.log(mesesEnIntervalo)
+        console.log(careers)
+
+        // Primera grafica
+        let ctxBar = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: allCareers,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Segunda grafica
+        let approvedCount = {{ Js::from($projectMetrics['approvedCount']) }};
+        let inRevisionCount = {{ Js::from($projectMetrics['inRevisionCount']) }};
+
+        var ctxDoughnut = document.getElementById('total-proyectos').getContext('2d');
+        var myChartDoughnut = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ["En revisión", "Aprobado"],
+                datasets: [{
+                    label: 'Proyectos',
+                    data: [inRevisionCount, approvedCount],
+                    backgroundColor: ['#3E5366', '#0FA987'],
+                    borderColor: '#ffffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        });
+    </script>
+
     @endsection

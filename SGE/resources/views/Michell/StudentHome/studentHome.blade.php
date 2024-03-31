@@ -11,7 +11,7 @@
                     <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos,
                         facilitando la planificación, organización y seguimiento de conferencias seminarios, talleres y
                         actividades similares en entornos educativos...</p>
-                    <a href="estudiante/anteproyecto"
+                    <a href="anteproyecto"
                         class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
                         Iniciar
                     </a>
@@ -73,7 +73,7 @@
                                     que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
                             <div class="col-span-1 grid place-content-center">
-                                <a href="estudiante/anteproyecto/observaciones"
+                                <a href="anteproyecto/observaciones"
                                     class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
                                     Ampliar observación
                                 </a>
@@ -86,7 +86,7 @@
                                     que expandas tu justificación e incluyas referencias para tus argumentos</p>
                             </div>
                             <div class="col-span-1 grid place-content-center">
-                                <a href="estudiante/anteproyecto/observaciones"
+                                <a href="anteproyecto/observaciones"
                                     class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
                                     Ampliar observación
                                 </a>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <a href="estudiante/anteproyecto/observaciones" class="text-end text-[#888] text-sm mt-5 md:mt-0">
+                    <a href="anteproyecto/observaciones" class="text-end text-[#888] text-sm mt-5 md:mt-0">
                         Ver todo
                     </a>
                 </div>
@@ -132,13 +132,16 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>{{ $advisor->advisor_name }}</p>
+                    @foreach ($empresarial as $item)
+                        <p>{{ $item->asesor_empresarial }}</p>
+                    @endforeach
+
                 </div>
             </div>
 
             <div class=" font-roboto bg-white p-5 rounded-md">
 
-                <h3 class="text-lg font-medium font-kanit mb-3">Actividades importantes</h3>
+                <h3 class="text-lg font-medium text-center font-kanit mb-3">Actividades importantes</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
@@ -203,7 +206,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <a href="estudiante/calendario"
+                    <a href="calendario"
                         class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3">
                         Ver más
                     </a>
@@ -212,7 +215,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="bg-white p-5 font-black flex flex-col justify-center">
-                    <p class="text-center mb-5">No has recibido ninguna penalización hasta el momento, buen trabajo!</p>
+                    <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
                     <div class="flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled"
                             width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
