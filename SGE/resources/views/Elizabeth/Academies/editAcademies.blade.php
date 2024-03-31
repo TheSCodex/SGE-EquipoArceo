@@ -2,7 +2,7 @@
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="w-full h-fit flex justify-center md:justify-start px-[8%]">
-    <h1 class="text-3xl font-bold pt-[4%]">Crear  academia</h1>
+    <h1 class="text-3xl font-bold pt-[4%]">Editar academia</h1>
     
 </div>
 
@@ -65,7 +65,7 @@
             
             </div>
 
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir carrera</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar Academia</button>
 
     </form>
 </div>

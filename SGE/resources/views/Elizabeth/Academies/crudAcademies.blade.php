@@ -123,6 +123,7 @@
                                 <img src="/img/logos/trash.svg">
                             </form>
                         </td> 
+                        
                     </tr>
                     @endforeach
                 @else

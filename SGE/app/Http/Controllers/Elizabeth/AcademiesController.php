@@ -112,5 +112,6 @@ class AcademiesController extends Controller
             DB::rollback();
             return redirect()->back()->with('error', 'Error al eliminar la academia: ' . $e->getMessage());
         }
+        
     }
 }
