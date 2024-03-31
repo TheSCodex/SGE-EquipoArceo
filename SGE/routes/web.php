@@ -23,7 +23,6 @@ use App\Http\Controllers\Michell\AcademicHomeController;
 use App\Http\Controllers\Pipa\RecoverPasswordController;
 use App\Http\Controllers\Eliud\Reportes\ReportsController;
 use App\Http\Controllers\Daniel\DashboardAdvisorController;
-use App\Http\Controllers\Daniel\FormAnteproyectoController;
 use App\Http\Controllers\Michell\AcademicAdvisorController;
 use App\Http\Controllers\Daniel\Proyectos\ProjectsController;
 use App\Http\Controllers\Daniel\ObservationsController;
@@ -94,6 +93,8 @@ Route::middleware('auth')->group(function () {
         
         //Ruta para las observaciones del estudiante
         Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
+        Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
+
 
         // Vista del calendario del estudiante
         Route::get('calendario', [EventController::class, 'calendar'])->name('events.calendar')->middleware('roleorcan:estudiante,leer-calendario');
@@ -115,7 +116,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/asesor', [DashboardAdvisorController::class, "index"])->name('inicio-asesor')->middleware('role:asesorAcademico');
 
         Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor')->middleware('roleorcan:asesorAcademico,leer-anteproyectos-asignados');
-        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyectos-detalle')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
+        Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
 
         //Ruta de los alumnos del asesor
         Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
@@ -126,11 +127,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
         Route::get('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('download.digitalizacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
         
-        // // ! Ruta de las observaciones del asesor
-        Route::get("anteproyecto/observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyecto');
-
+        // ! Ruta de las observaciones del asesor
+        Route::get("observaciones", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
+        Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
+
         Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades')->middleware('roleorcan:asesorAcademico,leer-calendario');
@@ -155,7 +157,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/presidente', [PresidentOfTheAcademy::class, "index"])->name('inicio-presidente')->middleware('role:presidenteAcademia');
 
         //Ruta de la lista de los anteproyectos
-        Route::get('anteproyectos-division', [AcademicAdvisorController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
+        Route::get('anteproyectos-division', [ProjectsPresidentController::class, 'index'])->name('anteproyectos-presidente')->middleware('roleorcan:presidenteAcademia,leer-anteproyectos-division');
 
         Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
 
