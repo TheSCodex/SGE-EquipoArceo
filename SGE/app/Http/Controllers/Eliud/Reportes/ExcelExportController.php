@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
+use App\Models\BusinessAdvisor;
 use App\Models\Career;
 use App\Models\CareerAcademy;
 use App\Models\FileHistory;
 use App\Models\Intern;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -48,9 +50,13 @@ class ExcelExportController extends Controller
 
         foreach ($interns as $intern) {
             $student = User::find($intern->user_id);
+            $business_advisor = BusinessAdvisor::find($intern->business_advisor_id);
+            $project = Project::find($intern->project_id);
 
             $sheet->setCellValue('C' . $row, $student->identifier);
             $sheet->setCellValue('D' . $row, $student->name);
+            $sheet->setCellValue('AE' .$row, $business_advisor->name . $business_advisor->email);
+            $sheet->setCellValue('AF' .$row, $project->name);
             $sheet->setCellValue('Z3', $intern->period);
 
             $row++;
