@@ -89,7 +89,7 @@
                                                     @method('PUT')
 
                                                     <button type="submit"
-                                                        class="bg-rose-800 text-white px-5 py-1 text-sm rounded-md">
+                                                        class="bg-rose-800 delete-button text-white px-4 py-1 font-bold rounded-md hover:bg-[#421818]">
                                                         Dar de baja
                                                     </button>
                                                 </form>
@@ -333,4 +333,31 @@
 
             document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
         </script>
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+         <script>
+             document.addEventListener('DOMContentLoaded', function() {
+                 // Obtener todos los botones de eliminar y agregar un listener para mostrar la alerta
+                 const deleteButtons = document.querySelectorAll('.delete-button');
+                 deleteButtons.forEach(button => {
+                     button.addEventListener('click', function(event) {
+                         event.preventDefault();
+                         const form = this.closest('form');
+                         Swal.fire({
+                             title: '¿Estás seguro?',
+                             text: 'Esta acción no se puede deshacer',
+                             icon: 'warning',
+                             showCancelButton: true,
+                             confirmButtonColor: '#3085d6',
+                             cancelButtonColor: '#d33',
+                             confirmButtonText: 'Sí, dar de baja'
+                         }).then((result) => {
+                             if (result.isConfirmed) {
+                                 form.submit();
+                             }
+                         });
+                     });
+                 });
+             });
+         </script>
     @endsection
