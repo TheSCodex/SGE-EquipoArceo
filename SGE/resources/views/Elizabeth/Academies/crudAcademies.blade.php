@@ -53,18 +53,18 @@
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
-                @foreach ($academies as $career)
+                @foreach ($academies as $academy)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                    <h2 class="text-lg font-bold">{{ $career->name }}</h2>
-                    <p class="text-sm text-gray-500">Division: {{ $career->division->name ?? 'N/A'}}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $career->phone }}</p>
-                    <p class="text-sm text-gray-500">Presidente: {{ $career->position }}</p>
+                    <h2 class="text-lg font-bold">{{ $academy->name }}</h2>
+                    <p class="text-sm text-gray-500">Division: {{ $academy->division->name ?? 'N/A'}}</p>
+                    <p class="text-sm text-gray-500">Academia: {{ $academy->phone }}</p>
+                    <p class="text-sm text-gray-500">Presidente: {{ $academy->position }}</p>
                     <div class="flex justify-end mt-4">
-                        <a href="{{ route('panel-careers.edit', $career->id) }}" >
+                        <a href="{{ route('panel-academies.edit', $academy->id) }}" >
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer flex justify-start">
                         </a>
-                        <a class="flex justify-start" onclick="confirmDelete('{{ $career->name }} {{ $career->position }}', '{{ $career->id }}')">
-                        <form id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                        <a class="flex justify-start" onclick="confirmDelete('{{ $academy->name }} {{ $academy->position }}', '{{ $academy->id }}')">
+                        <form id="deleteForm{{ $academy->id }}" action="{{ route('panel-academies.destroy', $academy->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
