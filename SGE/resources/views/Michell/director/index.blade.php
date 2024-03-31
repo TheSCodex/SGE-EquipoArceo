@@ -131,7 +131,7 @@
 
             <div class="grid grid-cols-2 gap-2">
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
-                    <p class="text-md text-lg text-center font-medium">Penalizaciones</p>
+                    <p class="text-md text-lg text-center font-medium">Amonestaciones</p>
                     <p class="text-5xl font-light">{{ $penalizationsNum }}</p>
                 </div>
 

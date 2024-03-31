@@ -40,7 +40,7 @@
                     <section class="hidden md:block md:h-full">
                         <table id="dataTable" class="divide-y divide-[#999] w-full">
                             <thead id="tableHeader" class="text-[#555] text-base">
-                                <tr>
+                            <tr>
                                     <th scope="col" class="pr-[13rem] pb-4">Nombre de estudiantes</th>
                                     <th scope="col" class="pr-[13rem] pb-4">Nombre del proyecto</th>
                                     <th scope="col" class="pb-4 pr-[5rem]">Asesor académico</th>
@@ -48,8 +48,9 @@
                             </thead>
                             <tbody class="text-sm">
                                 @foreach ($dataStudents as $data)
-                                    <tr
-                                        class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+                                                      <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+
+                                        <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
                                         <td class="py-4">{{ $data->user->name }}</td>
                                         <td class="py-4">Sistema de Estadias</td>
                                         <td class="py-4">
