@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('titulo')
-    Formulario de anteproyectos
+    Editar anteproyecto
 @endsection
 
 @section('contenido')
@@ -18,7 +18,7 @@
                         @csrf
                         @method('PUT')
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
-                            value="{{ old('name_student', $user->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_student', $user->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -26,7 +26,7 @@
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
                         <input type="number" name="matricula" placeholder="Matricula" value="{{ old('matricula', $user->identifier) }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('matricula')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -34,7 +34,7 @@
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
                         <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -50,9 +50,9 @@
                         <h2 class="font-roboto mb-1 font-medium">División Académica:</h2>
                         <select name="division_academica" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
                             <option value="" disabled selected>Selecciona una división académica</option>
-                            <option value="division1">División 1</option>
-                            <option value="division2">División 2</option>
-                            <option value="division3">División 3</option>
+                            @foreach ($divisions as $division)
+                                <option value="{{ $division->id }}">{{ $division->name }}</option>
+                            @endforeach
                         </select>
                         <br>
                         @error('division_academica')
@@ -62,10 +62,10 @@
                     <div class="w-[48%]">
                         <h2 class="font-roboto mb-1 font-medium">Programa Educativo:</h2>
                         <select name="proyecto_educativo" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
-                            <option value="" disabled selected>Selecciona tu proyecto educativo</option>
-                            <option value="division1">Proyecto Educativo 1</option>
-                            <option value="division2">Proyecto Educativo 2</option>
-                            <option value="division3">Proyecto Educativo 3</option>
+                            <option value="" disabled selected>Selecciona tu programa educativo</option>
+                            @foreach ($careers as $career)
+                                <option value="{{ $career->id }}">{{ $career->name }}</option>
+                            @endforeach
                         </select>
                         <br>
                         @error('proyecto_educativo')
@@ -186,7 +186,7 @@
                     <div class="w-[97%]">
                         <h2 class="font-roboto mb-1 font-medium">Nombre del anteproyecto:</h2>
                         <input type="text" name="name_proyect" placeholder="Introduzca el nombre del anteproyecto"
-                            value="{{ old('name_proyect', $project->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_proyect', $project->name) }}" required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('name_proyect')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror

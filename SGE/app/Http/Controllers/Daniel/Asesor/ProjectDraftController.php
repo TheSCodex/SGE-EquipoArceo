@@ -29,7 +29,7 @@ class ProjectDraftController extends Controller
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
-        $interns = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
+        $interns = Intern::where("project_id", $id->id)->first();
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
@@ -79,7 +79,8 @@ class ProjectDraftController extends Controller
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
-        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->first(); //Reemplazar tan pronto como haya un modelo
+        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
+ //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
             return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
@@ -136,18 +137,13 @@ class ProjectDraftController extends Controller
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
         }
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request, Project $id)    {
+        $projectId = $id->id;
         // Validar los datos del formulario
         $request->validate([
             'content' => 'required',
         ]);
         $academicAdvisorId = Auth::id();
-        $projectId = $request->input('project_id');
-
-        // Obtener el ID del intern relacionado con el proyecto
-        $internId = Intern::where('project_id', $projectId)->value('id');
-
         // Crear un nuevo comentario
         $comment = new Comment();
         $comment->content = $request->input('content');
@@ -155,7 +151,6 @@ class ProjectDraftController extends Controller
         $comment->status = 1; // Estado del comentario
         $comment->academic_advisor_id = $academicAdvisorId;
         $comment->project_id = $projectId;
-        $comment->interns_id = $internId;
         $comment->save();
 
         // Redirigir a la página anterior o a donde desees

@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('titulo')
-    Formulario de anteproyectos
+    Agregar anteproyecto
 @endsection
 
 @section('contenido')
@@ -27,15 +27,15 @@
                         <h2 class="font-roboto mb-1 font-medium">Matricula:</h2>
                         <input type="number" name="matricula" placeholder="Matricula"
                             value="{{ old('matricula', $user->identifier) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('matricula')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
-                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                        <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}"
+                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -88,7 +88,8 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX" value="{{ old('Numero', $user->phoneNumber) }}" required
+                        <input type="number" name="Numero" placeholder="998XXXXXXX"
+                            value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
                             <div style='color:red'>{{ $message }}</div>
@@ -96,8 +97,9 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Fecha Inicio:</h2>
-                        <input type="date" name="Fecha_Inicio" placeholder="SM51" value="{{ old('Fecha_Inicio') }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                        <input type="date" name="Fecha_Inicio" placeholder="SM51"
+                            value="{{ old('Fecha_Inicio', date('Y-m-d')) }}" required
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Fecha_Inicio')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -127,7 +129,7 @@
                         @enderror
                     </div>
                     <div class="w-[48%]">
-                        <h2 class="font-roboto mb-1 font-medium">Direccion:</h2>
+                        <h2 class="font-roboto mb-1 font-medium">Dirección :</h2>
                         <input type="text" name="direction_enterprise"
                             placeholder="Introduzca la direccion de la empresa" value="{{ old('direction_enterprise') }}"
                             required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
