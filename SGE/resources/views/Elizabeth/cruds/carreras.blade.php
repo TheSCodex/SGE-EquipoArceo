@@ -103,7 +103,7 @@
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5  justify-start px-[6%] flex cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
+                        <td class="font-roboto font-bold py-5  justify-start px-[6%] flex cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
                             <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

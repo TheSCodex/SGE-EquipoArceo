@@ -64,7 +64,7 @@
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                         </a>
                         <a onclick="confirmDelete('{{ $division->name }} {{ $division->position }}', '{{ $division->id }}')">
-                        <form id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
+                        <form id="d{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
@@ -112,11 +112,11 @@
                             <img src="/img/logos/pencil.svg">
                         </a>
                     </td>
-                    <td class="font-roboto flex justify-start font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}, Presidente: {{ $division->position }}', '{{ $division->id }}')">
+                    <td class="font-roboto flex justify-start font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
                         <form class="flex justify-center" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                                <img src="/img/logos/trash.svg">
+                            <img src="/img/logos/trash.svg">
                         </form>
                     </td> 
                 </tr>
@@ -125,7 +125,7 @@
                 <h1 class="text-xl">No hay datos registrados </h>
                 @endif
             </table>
-           {{$divisions->links()}}
+            {{$divisions->links()}}
         </div>
     </div>
 </div>
@@ -159,7 +159,7 @@
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm' + divisionId).submit();
+                document.getElementById('deleteForm'+divisionId).submit();
             }
         });
     }

@@ -107,6 +107,7 @@ public function update(Request $request, $id)
      */
     public function destroy(string $id)
     {
+        
         try {
             DB::beginTransaction();
             DB::select('CALL proc_delete_career(?)', [$id]);

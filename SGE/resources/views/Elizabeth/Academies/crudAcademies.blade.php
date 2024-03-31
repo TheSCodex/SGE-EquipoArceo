@@ -110,15 +110,17 @@
                         
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{route('panel-academies.edit', $academy->id) }}" class="flex justify-center">
+                            <a href="{{route('panel-academies.edit', $academy->id) }}" class="flex justify-start">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}, Presidente: {{ $academy->id }}', '{{ $academy->id }}')">
-                            <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{ route('panel-academies.destroy', $academy->id) }}" method="POST">
+
+                        <td class="font-roboto font-bold flex justify-start py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}','{{ $academy->id }}')">
+                            <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{  route('panel-academies.destroy', $academy->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                    <img src="/img/logos/trash.svg">
+                                
+                                <img src="/img/logos/trash.svg">
                             </form>
                         </td> 
                     </tr>
