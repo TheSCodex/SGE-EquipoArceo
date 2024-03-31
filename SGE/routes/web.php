@@ -100,6 +100,9 @@ Route::middleware('auth')->group(function () {
         //Ruta para ver información de la actividad
         Route::get('actividad/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show')->middleware('roleorcan:estudiante,leer-calendario');
 
+        // Ruta para reprogramar la actividad
+        Route::post('actividades/reprogramar/{id}', [EventController::class, 'ReprogramActivity'])->name('actividades.reprogramar')->middleware('roleorcan:asesorAcademico,leer-calendario');
+
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
         //Ruta para ver información de la actividad
         // Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show')->middleware('roleorcan:estudiante,leer-calendario');
