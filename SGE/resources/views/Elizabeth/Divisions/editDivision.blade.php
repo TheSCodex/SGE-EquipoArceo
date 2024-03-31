@@ -31,7 +31,7 @@
                     <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un director</option>
                         @foreach($users as $user) 
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }} " @if($user->id == $division->director_id) selected @endif>{{ $user->name }}</option>
                         @endforeach
                     </select>
                     
@@ -49,7 +49,7 @@
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un asistente</option>
                         @foreach($users as $user) 
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}" @if($user->id == $division->directorAsistant_id) selected @endif>{{ $user->name }}</option>
                         @endforeach
                     </select>
                     

@@ -32,7 +32,7 @@
                     <select name="president_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un presidente</option>
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" @if($user->id == $academy->president_id) selected @endif>{{ $user->name }}</option>
                         @endforeach
                     </select>
                     @error('president_id')
@@ -50,7 +50,7 @@
                     <select name="division_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona una academia</option>
                         @foreach($divisions as $division)
-                            <option value="{{ $division->id }}">{{ $division->name }}</option>
+                            <option value="{{ $division->id }}" @if($division->id == $academy->division_id) selected @endif>{{ $division->name }}</option>
                         @endforeach
                     </select>
                     
