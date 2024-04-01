@@ -34,6 +34,7 @@
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
         <div class="lg:hidden w-full mb-5">
             <div class="grid md:grid-cols-2 gap-4 w-full">
+                @if(count($advisors) > 0)
                 @foreach ($advisors as $advisor)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $advisor->name }}</h2>
@@ -54,6 +55,9 @@
                     </div>
                 </div>
                 @endforeach
+                @else
+                    <h1 class="text-xl">No hay datos registrados </h>
+                @endif
             </div>
         </div>
         <div class="hidden lg:block w-full">
@@ -66,6 +70,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Editar</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Eliminar</th>
                 </tr>
+                @if(count($advisors) > 0)
                 @foreach ($advisors as $advisor)
                 <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                     <td class="font-roboto pl-5 font-bold py-5">{{ $advisor->name }}</td>
@@ -86,6 +91,9 @@
                     </td>
                 </tr>
                 @endforeach
+                @else
+                    <h1 class="text-xl">No hay datos registrados </h>
+                @endif
             </table>
             {{$advisors->links()}}
         </div>
