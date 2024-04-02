@@ -35,14 +35,14 @@
             
         </div>
         <div class="flex mt-[2%] px-[4%]  ">
-            <section class="font-bold text-sm md:space-x-6 space-x-2">
+            <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
                <a href="panel-careers">
                 <button id="btnAll"
                     class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
                 </a>
                 <a href="panel-academies">
                     <button id="btnWithAdvisor"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
+                    class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
                 </a>
                 <a href="panel-divisions">
                     <button id="btnWithOutAdvisor"
