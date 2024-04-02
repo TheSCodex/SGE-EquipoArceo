@@ -12,7 +12,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Book;
 use App\Models\BusinessAdvisor;
 use Database\Seeders\CareersSeeder;
-
+use Database\Seeders\DocRevisionsSeeders;
 
 
 
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademicAdvisorSeeder::class); 
         $this->call(StudentStatusSeeder::class);
         $this->call(InternSeeder::class);
-
+        $this->call(DocRevisionsSeeders::class);
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
         $project_division = Project_division::factory()->count(30)->create();
 

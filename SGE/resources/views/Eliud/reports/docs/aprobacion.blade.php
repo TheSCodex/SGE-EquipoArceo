@@ -178,10 +178,9 @@
 
     <div style="margin-top: 60px; width:100%; padding:50px; position: absolute; right:-75">
         <table style="width: 85%; border-collapse: collapse; border: 0.5px solid black; font-size: 12px;">
-            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: 31 de julio
-                de 2023</td>
-            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. 5</td>
-            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">AEP-P03-F06</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: {{$docRevision->updated_at->format('j \d\e F \d\e\l Y')}}</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. {{ $docRevision->revision_number }}</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">{{ $docRevision->revision_id }}</td>
 
         </table>
     </div>
