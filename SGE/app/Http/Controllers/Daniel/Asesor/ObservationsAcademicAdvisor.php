@@ -49,14 +49,6 @@ class ObservationsAcademicAdvisor extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // Implementar si es necesario.
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -93,34 +85,21 @@ class ObservationsAcademicAdvisor extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        // Implementar si es necesario.
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        // Implementar si es necesario.
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        // Implementar si es necesario.
-    }
+        try {
+            // Buscar el comentario por su ID
+            $comment = Comment::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        // Implementar si es necesario.
+            // Actualizar el estado del comentario a 3 (resuelto y enviado a revisión)
+            $comment->status = 3;
+            $comment->save();
+
+            return redirect()->back()->with('success', 'El comentario ha sido marcado como resuelto y enviado a revisión.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Ocurrió un error al marcar el comentario como resuelto y enviar a revisión: ' . $e->getMessage());
+        }
     }
 }
