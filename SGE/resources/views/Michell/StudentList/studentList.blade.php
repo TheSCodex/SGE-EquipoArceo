@@ -57,7 +57,7 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @if ($interns)
                     @foreach ( $interns as $intern )
-                        <tr>
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
                             <td class="px-6 py-4 whitespace-nowrap">{{ $intern->identifier }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $intern->name }} {{ $intern->last_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $intern->interns->studentStatus->name }}</td>
