@@ -199,7 +199,7 @@
 
                             @if ($project->status != 'Aprobado' && $project->status != 'En revision')
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
+                                    action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a revisión</button>

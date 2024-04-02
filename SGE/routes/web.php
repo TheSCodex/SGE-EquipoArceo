@@ -132,7 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
         Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
         Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
-
+        Route::post('CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev');
         Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
         // Ruta para el crud de actividades
         Route::resource('actividades', EventController::class)->names('actividades')->middleware('roleorcan:asesorAcademico,leer-calendario');

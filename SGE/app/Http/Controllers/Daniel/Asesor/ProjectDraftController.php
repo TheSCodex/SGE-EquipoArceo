@@ -95,7 +95,6 @@ class ProjectDraftController extends Controller
      */
 
     public function onRev(project $id){
-        dd($id);
         Project::where('id', $id->id)->update(['status' => 'En revision']);
         return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
     }
