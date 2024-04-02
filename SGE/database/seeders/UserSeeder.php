@@ -61,7 +61,6 @@ class UserSeeder extends Seeder
             'votar-anteproyecto' => true,
             'crear-actividad-calendario' => true,
             'gestionar-bajas' => true,
-            'generar-reportes-documentos' => true,
         ];        
 
         $rolAsesorAcademico->update([

@@ -20,26 +20,11 @@
                     @enderror
                 </div>
                 <div class=" space-y-2">
-                    <p class="text-sm">Division</p>
-                    <select name="division_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Division">
-                        @foreach($divisions as $division)
-                            <option value="{{ $division->id }}">{{ $division->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('name')
-                        <p >
-                            {{ $message }}
-                        </p>
-                    @enderror
-    
-                </div>
-            </div>
-            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
-                <div class=" space-y-2">
                     <p class="text-sm space-y-2">Academia</p>
                     <select name="academy_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Academia">
+                        <option value="" disabled selected>Selecciona un asistente</option>
                         @foreach($academies as $academy)
-                            <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                            <option value="{{ $academy->id }}"  @if($academy->id == $career->academy_id) selected @endif>{{ $academy->name }}</option>
                         @endforeach
                     </select>
                     @error('name')
@@ -48,22 +33,7 @@
                         </p>
                     @enderror
                 </div>
-                <div class=" space-y-2">
-                    <p class="text-sm">Presidente</p>
-                    <select name="user_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Presidente" >
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-                @error('user_id')
-                    <p>
-                        {{ $message }}
-                    </p>
-                @enderror
-
-                </div>
             </div>
-
             <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar carrera</button>
 
     </form>

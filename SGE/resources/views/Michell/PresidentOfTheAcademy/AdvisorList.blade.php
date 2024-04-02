@@ -13,16 +13,14 @@
                         <h1 id="tableTitle" class="text-xl font-bold">Lista de asesores</h1>
                         <div class="flex items-center justify-evenly w-1/3 max-sm:w-full">
                             {{-- Buscador --}}
-                            <div class="flex items-center border border-primaryColor rounded-md px-4">
-                                <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscador"
-                                    class="text-sm font-bold placeholder-primaryColor border-none rounded-md focus:ring-0 text-[#888]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primaryColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>
+                            <div class="hidden md:flex items-center relative">
+                                <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscar..."
+                                    class="border-primaryColor placeholder-primaryColor border-b border rounded-md">
+                               
                             </div>
-                            <button class="bg-[#02AB82] p-2 rounded-lg max-lg:w-44 text-white"
+                            <button 
+                            {{-- class="bg-[#02AB82] p-2 rounded-lg max-lg:w-44 text-white" --}}
+                            class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4"
                                 onclick="location.href='crear-asesores'">Crear asesor</button>
                         </div>
                     </div>
@@ -37,7 +35,7 @@
                             Estudiantes</button>
                     </section>
                     {{-- Seccion de la tabla --}}
-                    <section class="hidden md:block">
+                    <section class="hidden md:block h-[38.1rem]">
                         <table id="advisorsTable" class="divide-y divide-[#999] w-full">
                             <thead id="tableHeader" class="text-[#555] text-base">
                                 <tr>
@@ -58,31 +56,13 @@
                                             <button id="editBtn" type="button"
                                                 onclick="location.href='editar-asesor/{{ $data->id }}'"
                                                 data-toggle="modal" data-target="#editStudentModal{{ $data->id }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-pencil" width="44"
-                                                    height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#02AB82"
-                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                                    <path d="M13.5 6.5l4 4" />
-                                                </svg>
+                                               <img src="/img/logos/pencil.svg" alt="">
                                             </button>
                                             <form action="{{ route('asesores.destroy', $data->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="delete-button" id="delete-button-{{ $data->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-trash" width="44"
-                                                        height="44" viewBox="0 0 24 24" stroke-width="1.5"
-                                                        stroke="#02AB82" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M4 7l16 0" />
-                                                        <path d="M10 11l0 6" />
-                                                        <path d="M14 11l0 6" />
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                    </svg>
+                                                    <img src="/img/logos/trash.svg">
                                                 </button>
                                             </form>
                                         </td>
@@ -93,7 +73,7 @@
                         {{ $advisors->links() }}
 
                         <p id="noDataMessage"
-                            class="mt-4 text-red-500 hidden text-center text-lightGray font-bold text-2xl">
+                            class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl">
                             Sin resultados</p>
                     </section>
                     {{-- Seccion responsiva --}}
@@ -124,30 +104,14 @@
                                     <button id="editBtn" type="button"
                                         onclick="location.href='editar-asesor/{{ $data->id }}'" data-toggle="modal"
                                         data-target="#editStudentModal{{ $data->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon icon-tabler icon-tabler-pencil" width="44" height="44"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="#02AB82" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                            <path d="M13.5 6.5l4 4" />
-                                        </svg>
+                                        <img class="w-[2rem]" src="/img/logos/pencil.svg" alt="">
+
                                     </button>
                                     <form action="{{ route('asesores.destroy', $data->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="delete-button" id="delete-button-{{ $data->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="44" height="44"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="#02AB82" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                            </svg>
+                                        <button type="submit">
+                                            <img class="w-[2rem]" src="/img/logos/trash.svg">
                                         </button>
                                     </form>
                                 </div>

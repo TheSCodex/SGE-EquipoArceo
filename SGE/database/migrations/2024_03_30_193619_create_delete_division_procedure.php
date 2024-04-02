@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class CreateDeleteCareerProcedure extends Migration
+class CreateDeleteDivisionProcedure extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,19 @@ class CreateDeleteCareerProcedure extends Migration
     {
         DB::unprepared("
 
-        DROP PROCEDURE IF EXISTS proc_delete_career;
+        DROP PROCEDURE IF EXISTS proc_delete_division;
 
-        CREATE PROCEDURE proc_delete_career(IN _id INT)
+        CREATE PROCEDURE proc_delete_division(IN _id INT)
         BEGIN
             DECLARE done INT DEFAULT FALSE;
             START TRANSACTION;
             
-            UPDATE academic_advisor SET career_id = NULL WHERE career_id = _id;
-            UPDATE interns SET career_id = NULL WHERE career_id = _id;
-            DELETE FROM careers WHERE id = _id;
+            UPDATE academies SET division_id = NULL WHERE division_id = _id;
+            DELETE FROM divisions WHERE id = _id;
             
             COMMIT;
             SELECT 'Operations completed successfully' AS Result;
-        END; 
+        END;
         
         ");
     }
@@ -40,7 +39,7 @@ class CreateDeleteCareerProcedure extends Migration
     public function down()
     {
         DB::unprepared("
-            DROP PROCEDURE IF EXISTS proc_delete_career;
+            DROP PROCEDURE IF EXISTS proc_delete_division;
         ");
     }
 }

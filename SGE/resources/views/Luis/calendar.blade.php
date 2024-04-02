@@ -16,9 +16,9 @@
             <div class=" w-72 bg-primaryColor hidden sm:block h-auto">
                 <div class=" justify-between items-center p-4 ">
                     <div>
-                        @if ($permissionActivity == True)
-                            <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="{{route('actividades.create')}}" class="px-4 py-2 text-center flex">+</a></button>
-                            <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="actividades" class="px-4 py-2 text-center flex">Ver actividades</a></button>
+                        @if ($isAcademicAdvisor == True)
+                        <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="{{route('actividades.create')}}" class="px-4 py-2 text-center flex">+</a></button>
+                        <button class=" bg-darkBlue text-white rounded mb-4 font-bold"><a href="actividades" class="px-4 py-2 text-center flex">Ver actividades</a></button>                        
                         @endif
                     </div>
                     <div class="flex ">
@@ -116,7 +116,6 @@
                                 @if ($isAcademicAdvisor == True)
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['receiver']['user']['name'] }}</p>
                                 @else
-
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['requester']['user']['name'] }}</p>
                                 @endif
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Asunto:</span> {{ $tomorrowEvent->title }}</p>
@@ -127,6 +126,9 @@
                             </div>
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
+                    @endif
+                    @if (count($todayEvents) == 0 || count($tomorrowEvents) == 0)
+                        <p class="font-bold text-white text-xl text-center mt-5">¡No hay eventos pendientes!</p>
                     @endif
                 </div>
             </div>

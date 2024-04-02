@@ -78,12 +78,21 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="flex justify-center align-middle">
-                                    <form action="{{ route('actividades.cancel', $event->id) }}" class="cancel-event" method="POST">
-                                        @csrf
-                                        <button class="bg-primaryColor px-3 py-2 rounded-xl font-semibold font-montserrat text-white">Cancelar</button>
-                                    </form>
-                                </div>
+                                @if ($event->status == 'Programada')
+                                    <div class="flex justify-center align-middle">
+                                        <form action="{{ route('actividades.cancel', $event->id) }}" class="cancel-event" method="POST">
+                                            @csrf
+                                            <button class="bg-primaryColor px-3 py-2 rounded-xl font-semibold font-montserrat text-white">Cancelar</button>
+                                        </form>
+                                    </div>                                        
+                                    @else
+                                    <div class="flex justify-center align-middle">
+                                        <form action="{{ route('actividades.reprogramar', $event->id) }}" class="reprogramar-event" method="POST">
+                                            @csrf
+                                            <button class="bg-primaryColor px-3 py-2 rounded-xl font-semibold font-montserrat text-white">Reprogramar</button>
+                                        </form>
+                                    </div>    
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -124,6 +133,16 @@
                 icon: "success"
             });
         </script>
+    @endif
+
+    @if (session('reprogram_success'))
+    <script>
+        Swal.fire({
+            title: "Reprogramado!",
+            text: "{{ session('reprogram_success') }}",
+            icon: "success"
+        });
+    </script>
     @endif
 
     @if (session('edit_success'))

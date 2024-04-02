@@ -101,6 +101,9 @@ Route::middleware('auth')->group(function () {
         //Ruta para ver información de la actividad
         Route::get('actividad/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show')->middleware('roleorcan:estudiante,leer-calendario');
 
+        // Ruta para reprogramar la actividad
+        Route::post('actividades/reprogramar/{id}', [EventController::class, 'ReprogramActivity'])->name('actividades.reprogramar')->middleware('roleorcan:asesorAcademico,leer-calendario');
+
         // Actualmente no lo tengo pero lo ocupare en proximas actualizaciones
         //Ruta para ver información de la actividad
         // Route::get('actividades/{id}', [EventController::class, 'show'])->name('estudiante-actividades.show')->middleware('roleorcan:estudiante,leer-calendario');
@@ -140,14 +143,11 @@ Route::middleware('auth')->group(function () {
         // Ruta para cancelar la actividad
         Route::post('actividades/cancelar/{id}', [EventController::class, 'cancelActivity'])->name('actividades.cancel')->middleware('roleorcan:asesorAcademico,leer-calendario');
 
+        // Ruta para reprogramar la actividad
+        Route::post('actividades/reprogramar/{id}', [EventController::class, 'ReprogramActivity'])->name('actividades.reprogramar')->middleware('roleorcan:asesorAcademico,leer-calendario');
+
         // Ruta para generar el control de estadías propio
         Route::get('control/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('download.control')->middleware('role:asesorAcademico');    
-
-    // });
-
-        // Ruta para el filtrado (Esta podria quitarse aun no estoy seguro)
-        Route::post('actividades/search', [EventController::class, 'search'])->name('actividades.search');
-
 
 
     //TODO - PRESIDENTE DE ACADEMIA
@@ -285,10 +285,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('/panel-careers', carrerasController::class)->names('panel-careers')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::get('/panel-careers-create', [carrerasController::class,'create'])->name('newCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
         Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        // Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        // Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        //Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
-        //Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademie')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
+        Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
 });
 
 
