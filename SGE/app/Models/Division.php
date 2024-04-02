@@ -13,8 +13,8 @@ class Division extends Model
         'name',
     ];
 
-    public function careers()
+    public function academies()
     {
-        return $this->hasMany(Career::class);
+        return $this->hasMany(Academy::class);
     }
 }
