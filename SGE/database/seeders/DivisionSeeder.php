@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Division;
+use App\Models\User;
 
 class DivisionSeeder extends Seeder
 {
@@ -12,10 +13,20 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-        // Insertar las divisiones de la UT Cancún
-        Division::create(['name' => 'División de Turismo','director_id' => 1]);
-        Division::create(['name' => 'División de Ingeniería y Tecnología','director_id' => 2]);
-        Division::create(['name' => 'División de Gastronomía','director_id' => 3]);
-        Division::create(['name' => 'División Económico-Administrativa','director_id' => 4]);
+        $directors = User::whereHas('role', function ($query) {
+            $query->where('title', 'director');
+        })->where('id', '<>', 4)->get();
+    
+        $directorAssistants = User::whereHas('role', function ($query) {
+            $query->where('title', 'directorAssistant');
+        })->where('id', '<>', 5)->get();
+    
+        Division::create(['name' => 'División de Turismo', 'director_id' => $directors[0]->id ?? null, 'directorAsistant_id' => $directorAssistants[0]->id ?? null]);
+        Division::create(['name' => 'División de Ingeniería y Tecnología', 'director_id' => $directors[1]->id ?? null, 'directorAsistant_id' => $directorAssistants[1]->id ?? null]);
+        Division::create(['name' => 'División de Gastronomía', 'director_id' => $directors[2]->id ?? null, 'directorAsistant_id' => $directorAssistants[2]->id ?? null]);
+        Division::create(['name' => 'División Económico-Administrativa', 'director_id' => $directors[3]->id ?? null, 'directorAsistant_id' => $directorAssistants[3]->id ?? null]);
     }
+    
+    
+    
 }
