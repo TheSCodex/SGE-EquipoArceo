@@ -57,11 +57,13 @@
         <div class="space-y-2">
             <div class="form-group">
                 <p class="text-sm">Compañias</p>
-                <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
+                <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] id="companie_id" name="companie_id">
+                    <option value="">Selecciona una empresa</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach
                 </select>
+                
             </div>
         </div>
     </div>

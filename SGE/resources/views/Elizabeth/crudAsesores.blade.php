@@ -40,7 +40,6 @@
                                 <h2 class="text-lg font-bold">{{ $advisor->name }}</h2>
                                 <p class="text-sm text-gray-500">Correo: {{ $advisor->email }}</p>
                                 <p class="text-sm text-gray-500">Número telefonico: {{ $advisor->phone }}</p>
-                           
                                 <p class="text-sm text-gray-500">Empresa: {{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</p>
                                 <div class="flex justify-end mt-4">
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" >

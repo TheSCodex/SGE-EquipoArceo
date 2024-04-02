@@ -55,10 +55,13 @@
                 <div class="form-group">
                     <p class="text-sm">Compañias</p>
                     <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
+                        <option value="">Selecciona una empresa</option>
                         @foreach($companies as $company)
-                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                            <option value="{{ $company->id }}" {{ $company->id == old('companie_id', $advisor->companie_id) ? 'selected' : '' }}>{{ $company->name }}</option>
                         @endforeach
                     </select>
+                    
+                    
                     @error('companie_id')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
