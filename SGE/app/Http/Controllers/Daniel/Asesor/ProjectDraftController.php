@@ -161,7 +161,12 @@ class ProjectDraftController extends Controller
         $request->validate([
             'content' => 'required',
         ]);
-        $academicAdvisorId = Auth::id();
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        // Buscar el registro en la tabla academic_advisor donde user_id sea igual al ID del usuario logueado
+        $academicAdvisorId = AcademicAdvisor::where('user_id', $userId)->value('id');
+        
         // Crear un nuevo comentario
         $comment = new Comment();
         $comment->content = $request->input('content');

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicAdvisor;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdvisorController extends Controller
 {
@@ -12,7 +15,18 @@ class DashboardAdvisorController extends Controller
      */
     public function index()
     {
-        return view('daniel.asesor.DashboardAdvisor');
+        $userId = Auth::id();
+
+        // Buscar el registro en la tabla academic_advisor donde user_id sea igual al ID del usuario logueado
+        $academicAdvisor = AcademicAdvisor::where('user_id', $userId)->value('id');
+
+        // Obtener todos los comentarios relacionados con el AcademicAdvisor
+        $comments = Comment::where('academic_advisor_id', $academicAdvisor)
+        ->orderBy('fecha_hora', 'desc')
+        ->take(3)
+        ->get();
+        // Pasar los comentarios a la vista
+        return view('daniel.asesor.DashboardAdvisor', compact('comments'));
     }
 
     /**
