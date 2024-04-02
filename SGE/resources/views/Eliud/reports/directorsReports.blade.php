@@ -7,8 +7,8 @@
 @section('contenido')
     <section class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
         <div class="lg:px-8 px-6 text-left w-full mb-[2vh] sm:mb-0">
-            
-            
+
+
             <div class="container mx-auto font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
@@ -94,7 +94,7 @@
                             </svg>
                         </div>
                         <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
-                    </div>  
+                    </div>
 
                 </div>
 
@@ -113,7 +113,7 @@
                         <canvas id="myChart" width="1000" height="300"></canvas>
                     </div>
                 </div>
-                <div class="bg-white w-[25%] rounded-lg shadow-md h-[55vh] mt-[2%]">
+                <div class="bg-white lg:w-[25%] w-full rounded-lg shadow-md h-[55vh] mt-[2%]">
                     <div class="duration-300" id="updateInputs" style="display:none;">
                         <div class="border-b-2 border-gray-2 00">
                             <h1 class="pt-4 pl-4 mb-4 font-bold opacity-30 font-montserrat">Reporte</h1>
@@ -121,85 +121,76 @@
                         <p class="p-4 font-bold">Haz seleccionado actualizar reporte con el título <span
                                 id='titleDoc'></span> </p>
                         <div class="flex flex-col items-center justify-center p-4 mt-4">
-                            <form style="display:none"
-                                action="{{ route('docRevision.update', $id = '1') }}"
-                                method="POST" id='form1'>
+                            <form style="display:none" action="{{ route('docRevision.update', $id = '1') }}" method="POST"
+                                id='form1'>
                                 @csrf
                                 @method('PUT')
                                 <input name="revision_number" value="{{ old('revision_number') }}" required type="number"
                                     placeholder="Numero de Documento..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
                                 <input name="revision_id" value="{{ old('revision_id') }}" required type="text"
                                     placeholder="Id de Revision..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
-                                <button
-                                   required type="submit" class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
+                                <button required type="submit"
+                                    class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
                             </form>
-                            <form style="display:none"
-                                action="{{ route('docRevision.update', $id = '2') }}"
+                            <form style="display:none" action="{{ route('docRevision.update', $id = '2') }}"
                                 method="POST" id='form2'>
                                 @csrf
                                 @method('PUT')
-                                <input name="revision_number" value="{{ old('revision_number') }}" required type="number"
-                                    placeholder="Numero de Documento..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
+                                <input name="revision_number" value="{{ old('revision_number') }}" required
+                                    type="number" placeholder="Numero de Documento..."
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
                                 <input name="revision_id" value="{{ old('revision_id') }}" required type="text"
                                     placeholder="Id de Revision..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
-                                <button
-                                   required type="submit" class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
+                                <button required type="submit"
+                                    class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
                             </form>
-                            <form style="display:none"
-                                action="{{ route('docRevision.update', $id = '3') }}"
+                            <form style="display:none" action="{{ route('docRevision.update', $id = '3') }}"
                                 method="POST" id='form3'>
                                 @csrf
                                 @method('PUT')
-                                <input name="revision_number" value="{{ old('revision_number') }}" required type="number"
-                                    placeholder="Numero de Documento..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
+                                <input name="revision_number" value="{{ old('revision_number') }}" required
+                                    type="number" placeholder="Numero de Documento..."
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
                                 <input name="revision_id" value="{{ old('revision_id') }}" required type="text"
                                     placeholder="Id de Revision..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
-                                <button
-                                   required type="submit" class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
+                                <button required type="submit"
+                                    class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
                             </form>
-                            <form style="display:none"
-                                action="{{ route('docRevision.update', $id = '4') }}"
+                            <form style="display:none" action="{{ route('docRevision.update', $id = '4') }}"
                                 method="POST" id='form4'>
                                 @csrf
                                 @method('PUT')
-                                <input name="revision_number" value="{{ old('revision_number') }}" required type="number"
-                                    placeholder="Numero de Documento..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
+                                <input name="revision_number" value="{{ old('revision_number') }}" required
+                                    type="number" placeholder="Numero de Documento..."
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
                                 <input name="revision_id" value="{{ old('revision_id') }}" required type="text"
                                     placeholder="Id de Revision..."
-                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2"/>
-                                <button
-                                   required type="submit" class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
+                                    class="rounded-md px-3 py-2 mb-2 w-full h-[32px] bg-gray-100 mt-2" />
+                                <button required type="submit"
+                                    class="bg-[#02ab82] text-white w-[120px] h-[35px] rounded hover:bg-blue-600 mt-16">Actualizar</button>
                             </form>
                         </div>
                     </div>
                     <div id="reportSummary" style="display:block;" class="h-full">
                         <h3 class="pt-6 pl-6 mb-4 text-xl font-bold opacity-30">Documentos</h3>
-                        <div class="bg-black opacity-25 h-[1px]"></div> <!-- Linea separador -->
-                        <div class="flex flex-col items-center p-6 space-y-4">
-                            <div class="mb-2 text-xs font-semibold">
-                                Elsa Luz Rios generó la carta de aprobación para el estudiante:
-                                <p>Maldonado Kevin Alexis</p>
-                                <span class="mt-2 text-xs font-light text-gray-500">El 22 de Julio de 2024</span>
-                            </div>
-                            <div class="mb-2 text-xs font-semibold">
-                                Elsa Luz Rios generó la carta de aprobación para el estudiante:
-                                <p>Maldonado Kevin Alexis</p>
-                                <span class="mt-2 text-xs font-light text-gray-500">El 22 de Julio de 2024</span>
-                            </div>
-                            <div class="mb-2 text-xs font-semibold">
-                                Elsa Luz Rios generó la carta de aprobación para el estudiante:
-                                <p>Maldonado Kevin Alexis</p>
-                                <span class="mt-2 text-xs font-light text-gray-500">El 22 de Julio de 2024</span>
-                            </div>
+                        <div class="bg-black opacity-25 h-[1px]"></div>
+                        <div class="grig grid-cols-1 items-center p-6 space-y-4">
+                            @foreach ($files as $index => $file)
+                                @if ($index < 4)
+                                    <div class="mb-2 text-xs font-semibold">
+                                        <p>{{ $file->advisor_name }} generó: {{ $file->title }}</p>
+                                        <p>{{ $file->advisor_email }}</p>
+                                        <span
+                                            class="mt-2 text-xs font-light text-gray-500">{{ $file->advisor_identifier }}</span>
+                                    </div>
+                                @endif
+                            @endforeach
                             <button
-                                class="bg-[#02ab82] text-white py-2 w-[243px] h-[35px] mt-5 rounded hover:bg-[rgb(2,151,171)]">
+                                class="bg-[#02ab82] text-white py-2 ml-6 w-[243px] h-[35px] mt-5 rounded">
                                 <a href="/director/documentos">
                                     Visitar Listado
                                 </a>
@@ -207,7 +198,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+        </div>
+        </div>
         </div>
         </div>
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">

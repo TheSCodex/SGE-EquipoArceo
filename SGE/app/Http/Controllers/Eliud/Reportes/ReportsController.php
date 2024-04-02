@@ -197,10 +197,11 @@ class ReportsController extends Controller
 
     public function directorIndex()
     {
+        $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);
         $academie = Academy::paginate(1);
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
+        return view('Eliud.reports.directorsReports', compact('academie', 'userData', 'files'));
     }
 
     public function assistantIndex()
