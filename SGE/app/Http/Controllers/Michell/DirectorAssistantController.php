@@ -45,9 +45,7 @@ class DirectorAssistantController extends Controller
         // dd($academies);
 
         // Obtener carreras de las academias
-        $careers = Career::whereIn('academy_id', $academies->pluck('id'))
-        ->where('name', 'like', '%TSU%')
-        ->get();
+        $careers = Career::whereIn('academy_id', $academies->pluck('id'))->get();
         $careersId = [];
         foreach ($careers as $career) {
             $careersId[] = $career["id"];
@@ -60,6 +58,7 @@ class DirectorAssistantController extends Controller
 
         // Obtener periodo actual
         $period = Intern::whereIn("interns.career_id", $careersId)->latest()->select("period")->first();
+        //dd($careersId);
 
         // Contar proyectos aprobados, en revisión y totales
         $projectMetrics = [
