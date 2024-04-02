@@ -123,7 +123,7 @@
                     @can('generar-reportes-documentos')
                     @if(auth()->user()->role->title == 'director')
                         <li>
-                            <a href="{{ route('reportes-director') }}" class="hover:border-b-2 hover:border-primaryColor">Reportes</a>
+                            <a href="{{ route('reportes-director') }}" class="hover:border-b-2 hover:border-primaryColor">Formatos</a>
                         </li>
                     @endif
                 @endcan

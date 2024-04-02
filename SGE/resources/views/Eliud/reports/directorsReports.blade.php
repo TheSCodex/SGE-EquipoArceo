@@ -6,7 +6,7 @@
 
 @section('contenido')
     <section class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
-        
+
         <div class="lg:px-8 px-6 text-left w-full mb-[2vh] sm:mb-0">
 
 
@@ -104,16 +104,15 @@
             <div class="flex h-full gap-12 lg:flex-row sm:flex-col">
 
                 <div class="lg:block hidden w-[70vw] h-[55vh] bg-white mt-[2%] rounded-md shadow-md relative">
-
-                    {{ $academie->links('Eliud.reports.paginate') }}
                     <div class="absolute m-5 ml-16 ">
-                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $academie[0]?  ->name }}</h2>
+                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $division->name }}</h2>
                         <p class="text-[#828282] text-xs">Por academia</p>
                     </div>
                     <div class="mt-20 ml-10 mr-10 h-96">
                         <canvas id="myChart" width="1000" height="300"></canvas>
                     </div>
                 </div>
+
                 <div class="bg-white lg:w-[25%] w-full rounded-lg shadow-md h-[55vh] mt-[2%]">
                     <div class="duration-300" id="updateInputs" style="display:none;">
                         <div class="border-b-2 border-gray-2 00">
@@ -190,8 +189,7 @@
                                     </div>
                                 @endif
                             @endforeach
-                            <button
-                                class="bg-[#02ab82] text-white py-2 ml-6 w-[243px] h-[35px] mt-5 rounded">
+                            <button class="bg-[#02ab82] text-white py-2 ml-6 w-[243px] h-[35px] mt-5 rounded">
                                 <a href="/director/documentos">
                                     Visitar Listado
                                 </a>
@@ -210,26 +208,45 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        var academiesData = @json($academiesData);
+    </script>
+    <script>
         var ctx = document.getElementById('myChart').getContext('2d');
+        console.log('academiesData:', academiesData); // Log the entire academiesData
+
+        var labels = []
+        var data = [];
+        var colors = [];
+
+        var datasets = [];
+        var labels = [];
+        academiesData.forEach(function(academy, index) {
+            var academyName = academy.name;
+            var academyColor = getColor(index);
+            var totalProjectsCount = 0;
+
+            academy.careers.forEach(function(career) {
+                totalProjectsCount += career.projects.filter(function(project) {
+                    return project.status === 'aprobado';
+                }).length;
+            });
+
+            if (totalProjectsCount > 0) {
+                labels.push(academyName);
+                datasets.push({
+                    label: academyName,
+                    data: [totalProjectsCount],
+                    backgroundColor: academyColor,
+                    borderWidth: 1
+                });
+            }
+        });
+
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Mayo", "Junio", "Julio"],
-                datasets: [{
-                        label: 'Tecnologías de la Información',
-                        data: [65, 20, 10],
-                        backgroundColor: '#0FA987',
-                        borderColor: '#ffffffff',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Mantenimiento',
-                        data: [39, 45, 85],
-                        backgroundColor: '#3E5366',
-                        borderColor: '#ffffffff',
-                        borderWidth: 2
-                    }
-                ]
+                labels: labels,
+                datasets: datasets
             },
             options: {
                 scales: {
@@ -261,9 +278,14 @@
                     }
                 }
             }
-
         });
+
+        function getColor(index) {
+            var colors = ['#0FA987', '#FF5733', '#FFC300', '#581845', '#5DADE2']; // add more colors as needed
+            return colors[index % colors.length];
+        }
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

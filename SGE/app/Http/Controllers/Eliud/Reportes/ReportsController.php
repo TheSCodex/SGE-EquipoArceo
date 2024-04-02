@@ -32,7 +32,7 @@ class ReportsController extends Controller
 
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
-        
+
         $docRevision = DocRevisions::find(4);
 
         $jsonData[] = [
@@ -185,44 +185,47 @@ class ReportsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
-        $career = Academy::where('division_id', $division?->id)->first();
-        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData', 'docRevision'));
-    }
-
     public function directorIndex()
     {
         $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);
         $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
-        $career = Academy::where('division_id', $division?->id)->first();
-        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
-        $interns = Intern::where('career_id', $academie?-> id);
-
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData', 'files', 'interns'));
-    }
-
-    public function assistantIndex()
-    {
-
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
-        $career = Academy::where('division_id', $division?->id)->first();
-        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
+        $academies = Academy::where('division_id', $division?->id)->get();
         
-        $academies = Career::where('academy_id', $career?-> id)->first();
-        $interns = Intern::where('career_id', $academies?-> id);
-        // $proyectos = Project::where();
-        return view('Eliud.reports.assistantsReports', compact('academie', 'userData', 'interns'));
+        $academiesData = [];
+        foreach ($academies as $academy) {
+            $academyData = [
+                'name' => $academy->name,
+                'careers' => []
+            ];
+            
+            $careers = Career::where('academy_id', $academy->id)->get();
+            
+            foreach ($careers as $career) {
+                $interns = Intern::where('career_id', $career->id)->get();
+                $careerData = [
+                    'name' => $career->name,
+                    'projects' => []
+                ];
+                
+                foreach ($interns as $intern) {
+                    $project = Project::find($intern->project_id);
+                    if ($project && $project->status == 'aprobado') {
+                        $careerData['projects'][] = $project;
+                    }
+                }
+                
+                $academyData['careers'][] = $careerData;
+            }
+            
+            $academiesData[] = $academyData;
+        }
+    
+        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division'));
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
