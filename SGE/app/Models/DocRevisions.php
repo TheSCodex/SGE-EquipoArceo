@@ -12,6 +12,8 @@ class DocRevisions extends Model
     protected $table = 'doc_revisions';
     protected $fillable = [
         'revision_number', 
-        'revision_id'
+        'revision_id',
+        'created_at',
+        'updated_at'
     ];
 }
