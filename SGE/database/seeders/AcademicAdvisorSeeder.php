@@ -22,7 +22,7 @@ class AcademicAdvisorSeeder extends Seeder
 
         foreach ($asesorAcademicoUserIds as $userId) {
             // $randomCareerId = $careerIds->random();
-            $careerIds = [1, 2, 3, 11, 12, 13, 14, 20];
+            $careerIds = [1, 2, 3, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
             $randomIndex = array_rand($careerIds);
             $randomCareerId = $careerIds[$randomIndex];
 

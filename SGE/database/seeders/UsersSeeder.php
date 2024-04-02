@@ -19,6 +19,7 @@ class UsersSeeder extends Seeder
         $rolAsesorAcademico = Role::where('title', 'asesorAcademico')->first();
         $rolPresidenteAcademia = Role::where('title', 'presidenteAcademia')->first();
         $rolDirector = Role::where('title', 'director')->first();
+        $rolDirectorAssistant = Role::where('title', 'asistenteDireccion')->first();
 
         // Crear 10 usuarios estudiante
         for ($i = 0; $i < 16; $i++) {
@@ -69,20 +70,14 @@ class UsersSeeder extends Seeder
 
         // Nombres específicos para directores
         $directores_nombres = [
-            'Director 1',
-            'Director 2',
-            'Director 3',
-            'Director 4',
-            'Director 5',
-            'Director 6',
-            'Director 7',
-            'Director 8',
-            'Director 9',
-            'Director 10',
+            'Rocío Arceo',
+            'Mayra Fuentes',
+            'Marlene Juárez',
+            'Luis Villafañana',
         ];
 
-        // Crear 10 usuarios director
-        for ($i = 0; $i < 10; $i++) {
+        // Crear 4 usuarios director
+        for ($i = 0; $i < 4; $i++) {
             $user = User::factory()->create([
                 'name' => $directores_nombres[$i], // Asignar nombres específicos
                 'email' => strtolower($directores_nombres[$i]) . '@utcancun.edu.mx',
@@ -93,6 +88,23 @@ class UsersSeeder extends Seeder
         }
 
 
+        $directorAssistants_names = [
+            'Norma Hernández',
+            'David Hernández',
+            'Sara Hernández',
+            'Juan Hernández',
+        ];
+        
+        for ($i = 0; $i < 4; $i++) {
+            $user = User::factory()->create([
+                'name' => $directorAssistants_names[$i],
+                'email' => strtolower(str_replace(' ', '', $directorAssistants_names[$i])) . '@utcancun.edu.mx',
+                'password' => bcrypt('12345678'),
+            ]);
+            $user->role()->associate($rolDirectorAssistant);
+            $user->save();
+        }
+    
     
 }
 
