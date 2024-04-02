@@ -10,7 +10,8 @@
             <h1 class="text-3xl font-bold">Crear Asesor Empresial</h1>
              @csrf
         </div>
-        <div class="w-full flex flex-col md:flex-row justify-around md:items-start">
+        <div class="w-full flex flex-col space-y-2 ">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
             <div class="space-y-2">
                 <p class="text-sm">Nombre</p>
                 <input type="text" name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
@@ -29,8 +30,9 @@
                     </p>
                 @enderror
             </div>
-        </div>
-        <div class="w-full flex flex-col md:flex-row justify-around md:items-start">
+        </div> 
+        <div class="w-full flex flex-col space-y-2 ">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
             <div class="space-y-2">
                 <p class="text-sm">Número telefónico</p>
                 <input type="text" name="phone" value="{{ old('phone') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Teléfono">

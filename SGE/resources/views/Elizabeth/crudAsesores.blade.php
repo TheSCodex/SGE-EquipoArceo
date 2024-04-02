@@ -1,12 +1,12 @@
-
 @extends('templates/authTemplate')
-@section('titulo', 'Panel de Usuarios')
+@section('titulo', 'Panel de Asesores Empresariales')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Asesores Empresariales</h1>
+        <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores</h1>
+
         <div class="flex items-center flex-row justify-end">
             <div>
                 <div class="hidden md:flex items-center relative" >
@@ -14,9 +14,10 @@
                 </div>
             </div>
             <a href="{{ route('formAsesores')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo asesor
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor
             </a>
         </div>
+        
         
         <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
             
@@ -26,9 +27,8 @@
                 </div>
             </div>
             <a href="{{ route('formAsesores')}}"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo asesor
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo Asesor
             </a>
-
         </div>
     </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -54,10 +54,12 @@
                         </a>
                     </div>
                 </div>
+                
                 @endforeach
                 @else
                     <h1 class="text-xl">No hay datos registrados </h>
                 @endif
+                {{$advisors->links()}}
             </div>
         </div>
         <div class="hidden lg:block w-full">
