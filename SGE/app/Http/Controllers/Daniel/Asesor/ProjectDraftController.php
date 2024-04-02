@@ -107,6 +107,18 @@ class ProjectDraftController extends Controller
             Project::where('id', $projectId)->update(['like' => 0]);
         }
         Project::where('id', $projectId)->increment('like');
+
+        $projectAfter = Project::where('id', $projectId)->first(); //Es para asegurarse que el numero de likes sea el correcto, elimina el riesgo de que algo haya salido mal
+        $inReview = Comment::where('project_id', $projectId)->where('status', 'Pendiente')->get();
+        $likeCount = $projectAfter->like;
+
+        if($likeCount >= 3 && isset($inReview)){
+            Project::where('id', $projectId)->update([
+                'status' => 'Aprobado',
+                'approval date' => DB::raw('now()')
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Like añadido correctamente.');
     }
 
