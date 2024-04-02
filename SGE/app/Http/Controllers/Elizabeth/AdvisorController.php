@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BusinessAdvisor;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Company;
 
 
 class AdvisorController extends Controller
@@ -26,7 +27,8 @@ class AdvisorController extends Controller
      */
     public function create()
     {
-        return view('Elizabeth.formAsesores');
+        $companies = Company::all();
+        return view('Elizabeth.formAsesores', compact('companies'));
     }
 
     /**
@@ -39,6 +41,8 @@ class AdvisorController extends Controller
         'email' => 'required|email|unique:business_advisors|max:255',
         'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
         'position'=> 'required|string|max:50',
+        'companie_id' => 'required|exists:companies,id',
+
         // Agrega más reglas de validación según sea necesario
     ]);
 
@@ -62,8 +66,9 @@ class AdvisorController extends Controller
      */
     public function edit($id)
 {
+    $companies = Company::all();
     $advisor = BusinessAdvisor::findOrFail($id);
-    return view('Elizabeth.editAsesor', compact('advisor'));
+    return view('Elizabeth.editAsesor', compact('advisor', 'companies'));
 }
     
     public function update(Request $request, $id)
@@ -75,6 +80,8 @@ class AdvisorController extends Controller
             'email' => 'required|email|unique:business_advisors,email,'.$id.'|max:255',
             'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
             'position'=> 'required|string|max:50',
+            'companie_id' => 'required|exists:companies,id',
+
             // Agrega más reglas de validación según sea necesario
         ]);
     
