@@ -11,7 +11,7 @@
 <p>{{ $advisor->quantity_advised }}</p> --}}
 
 
-    <section class="w-full h-full mt-16 mb-36">
+    <section class="w-full h-full mt-20 mb-96">
         <h1 class="text-center text-2xl font-bold">Editar asesor academico</h1>
         <div class="w-full flex justify-center items-center justify-items-center">
             <form action="{{ route('asesores.update', $advisor->id) }}" method="POST" class="w-1/4 max-md:w-1/2 max-lg:w-1/2 max-sm:w-full max-sm:mr-3 max-sm:ml-3">
@@ -30,14 +30,6 @@
                     <input type="number" id="max_advisors" class="rounded-lg border-1 w-full border-[#00AB84]" name="max_advisors"
                         value="{{ old('max_advisors',$advisor->max_advisors) }}" required>
                     @error('max_advisors')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class=" mt-2">
-                    <label for="quantity_advised" class="block">Asesorados:</label>
-                    <input type="number" class="rounded-lg border-1 w-full border-[#00AB84]" name="quantity_advised" id="quantity_advised"
-                        value="{{ old('quantity_advised',$advisor->quantity_advised )}}" required>
-                    @error('quantity_advised')
                         <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
                     @enderror
                 </div>
