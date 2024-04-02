@@ -6,8 +6,9 @@
 
 @section('contenido')
     <section class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
+       
         <div class="lg:px-8 px-6 text-left w-full mb-[2vh] sm:mb-0">
-            <div class="container mx-auto  font-roboto">
+            <div class="container mx-auto font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
                         <h1 class="mt-2 text-2xl font-bold">Buenos días {{ $userData->name }} {{ $userData->last_name }}!
@@ -64,7 +65,7 @@
 
                     {{ $academie->links('Eliud.reports.paginate') }}
                     <div class="absolute m-5 ml-16 ">
-                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $academie[0]->name }}</h2>
+                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $academie[0]?->name }}</h2>
                         <p class="text-[#828282] text-xs">Por academia</p>
                     </div>
                     <div class="mt-20 ml-10 mr-10 h-96">

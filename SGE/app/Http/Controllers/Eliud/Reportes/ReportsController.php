@@ -190,8 +190,9 @@ class ReportsController extends Controller
 
         $user = auth()->user();
         $userData = User::find($user->id);
-        
-        $academie = Academy::paginate(1);
+        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
+        $career = Academy::where('division_id', $division?->id)->first();
+        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
         return view('Eliud.reports.directorsReports', compact('academie', 'userData', 'docRevision'));
     }
 
@@ -199,8 +200,12 @@ class ReportsController extends Controller
     {
         $user = auth()->user();
         $userData = User::find($user->id);
-        $academie = Academy::paginate(1);
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
+        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
+        $career = Academy::where('division_id', $division?->id)->first();
+        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
+        $interns = Intern::where('career_id', $academie?-> id);
+
+        return view('Eliud.reports.directorsReports', compact('academie', 'userData', 'interns'));
     }
 
     public function assistantIndex()
@@ -208,8 +213,14 @@ class ReportsController extends Controller
 
         $user = auth()->user();
         $userData = User::find($user->id);
-        $academie = Academy::paginate(1);
-        return view('Eliud.reports.assistantsReports', compact('academie', 'userData'));
+        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
+        $career = Academy::where('division_id', $division?->id)->first();
+        $academie = Career::where('academy_id', $career?-> id)->paginate(1);
+        
+        $academies = Career::where('academy_id', $career?-> id)->first();
+        $interns = Intern::where('career_id', $academies?-> id);
+        // $proyectos = Project::where();
+        return view('Eliud.reports.assistantsReports', compact('academie', 'userData', 'interns'));
     }
 
     /**
