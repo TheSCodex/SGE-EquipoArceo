@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <div class="flex flex-col justify-start items-center h-screen">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="md:w-full md:h-[80%] md:flex justify-center md:mt-6">
                 <section class="">
@@ -21,13 +21,13 @@
                                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                 </svg> --}}
                             </div>
-                            <button>
+                            {{-- <button>
                                 <svg class="w-[30px] h-[30px] text-primaryColor" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="1" d="m8 10 4-6 4 6H8Zm8 4-4 6-4-6h8Z" />
                                 </svg>
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <section class=" font-roboto mt-10">
@@ -58,46 +58,48 @@
                     {{$dataStudents->links()}}
                 </section>
             </div>
-        </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const searchInput = document.getElementById('bajaSearch');
-                const rows = document.querySelectorAll('.data-row');
-                const noDataMessage = document.getElementById('noDataMessage');
-                const tableTitle = document.getElementById('tableTitle');
-                const tableHeader = document.getElementById('tableHeader');
+        </div> 
+        
+    </div>
 
-                searchInput.addEventListener('keyup', function() {
-                    const searchText = this.value.trim().toLowerCase();
-                    let foundData = false;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('bajaSearch');
+            const rows = document.querySelectorAll('.data-row');
+            const noDataMessage = document.getElementById('noDataMessage');
+            const tableTitle = document.getElementById('tableTitle');
+            const tableHeader = document.getElementById('tableHeader');
 
-                    rows.forEach(row => {
-                        let found = false;
-                        row.querySelectorAll('td').forEach(cell => {
-                            const cellText = cell.innerText.trim().toLowerCase();
-                            if (cellText.includes(searchText)) {
-                                found = true;
-                                foundData = true;
-                            }
-                        });
+            searchInput.addEventListener('keyup', function() {
+                const searchText = this.value.trim().toLowerCase();
+                let foundData = false;
 
-                        if (found) {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
+                rows.forEach(row => {
+                    let found = false;
+                    row.querySelectorAll('td').forEach(cell => {
+                        const cellText = cell.innerText.trim().toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            found = true;
+                            foundData = true;
                         }
                     });
 
-                    if (!foundData) {
-                        noDataMessage.style.display = 'block';
-                        tableHeader.style.color = 'white';
+                    if (found) {
+                        row.style.display = '';
                     } else {
-                        noDataMessage.style.display = 'none';
-                        tableTitle.style.color = '';
-                        tableHeader.style.color = '';
+                        row.style.display = 'none';
                     }
                 });
+
+                if (!foundData) {
+                    noDataMessage.style.display = 'block';
+                    tableHeader.style.color = 'white';
+                } else {
+                    noDataMessage.style.display = 'none';
+                    tableTitle.style.color = '';
+                    tableHeader.style.color = '';
+                }
             });
-        </script>
-    </section>
+        });
+    </script>
 @endsection
