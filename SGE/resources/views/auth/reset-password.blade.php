@@ -20,7 +20,7 @@
               <input type="email" id="email" name="email" value="{{ old('email', $request->email) }}" placeholder="Email" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus autocomplete="username">
           </div>
           @error('email')
-              <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+              <p class="text-sm text-red mt-2">{{ $message }}</p>
           @enderror
       </div>
       
@@ -35,7 +35,7 @@
                 </div>
             </div>
             @error('password')
-                <p class="text-sm text-red-600">{{ $message }}</p>
+                <p class="text-sm text-red">{{ $message }}</p>
             @enderror
         </div>
 
@@ -49,7 +49,7 @@
                 </div>
             </div>
             @error('password_confirmation')
-                <p class="text-sm text-red-600">{{ $message }}</p>
+                <p class="text-sm text-red">{{ $message }}</p>
             @enderror
         </div>
 
