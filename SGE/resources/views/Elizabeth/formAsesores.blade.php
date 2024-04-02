@@ -52,6 +52,19 @@
                 @enderror
             </div>
         </div>
+    </div>
+    <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
+        <div class="space-y-2">
+            <div class="form-group">
+                <p class="text-sm">Compañias</p>
+                <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
+                    @foreach($companies as $company)
+                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
         <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
     </form>
 </div>
