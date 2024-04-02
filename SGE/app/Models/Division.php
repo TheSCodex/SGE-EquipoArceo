@@ -11,6 +11,8 @@ class Division extends Model
 
     protected $fillable = [
         'name',
+        'director_id',
+        'directorAsistant_id'
     ];
 
     public function academies()

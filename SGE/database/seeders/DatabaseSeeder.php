@@ -40,6 +40,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademicAdvisorSeeder::class); 
         $this->call(StudentStatusSeeder::class);
         $this->call(InternSeeder::class);
+        $this->call(ProjectSeeder::class);
+        $this->call(PenalizationSeeder::class);
 
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
         $project_division = Project_division::factory()->count(30)->create();

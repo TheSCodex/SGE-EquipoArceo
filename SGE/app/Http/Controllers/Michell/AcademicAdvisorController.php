@@ -29,5 +29,16 @@ class AcademicAdvisorController extends Controller
         }    
         return null;
     }
+    public function student_withdrawal($internsId){
+        $intern = Intern::where('user_id', $internsId)->first();
+        $newStatus = 2;
+        if($intern){
+
+            $intern->update(['student_status_id' => $newStatus]);
+            return redirect()->back()->with('success', 'El estado del estudiante ha sido actualizado.');
+        }
+    
+        return redirect()->back()->with('error', 'Estudiante no encontrado.');
+    }
     
 }

@@ -49,7 +49,7 @@ class StudentAndAdvisorController extends Controller
      */
     public function edit(string $id)
     {
-        $student = Intern::find($id);
+        $student = Intern::with('academicAdvisor.user')->find($id);
         $advisors = AcademicAdvisor::with('user')->get();
         return view('Michell.PresidentOfTheAcademy.assignAdvisor', compact('student', 'advisors'));
     }
@@ -65,12 +65,6 @@ class StudentAndAdvisorController extends Controller
 
         return redirect()->route('presidente.index')->with('success', 'Asesor asignado correctamente.');
     }
-
-    // public function changeAdivsor(string $id){
-    //     $student = Intern::find($id);
-    //     $advisors = AcademicAdvisor::with('user')->get();
-    //     return view('Michell.PresidentOfTheAcademy.assignAdvisor', compact('student', 'advisors'));
-    // }
 
     /**
      * Remove the specified resource from storage.

@@ -21,9 +21,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('crear-actividad-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();        
@@ -45,14 +45,7 @@ class EventController extends Controller
                     $event->status = 'Programada';
                     $event->save();
                 }
-                // if($event->date_start >= now()){
-                //     $event->status = 'Programada';
-                //     $event->save();
-                // }
-                // if($event->date_start <= now() && $event->date_end >= now()){
-                //     $event->status = 'En curso';
-                //     $event->save();
-                // }
+
             }
         }
 
@@ -61,12 +54,12 @@ class EventController extends Controller
     
     /**
      * Change status activity
-     */
+    */
 
-     public function cancelActivity($id){
-        if(Gate::denies('crear-actividad-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+    public function cancelActivity($id){
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         // dd($id);
         $event = CalendarEvent::find($id);
         $event->status = 'Cancelada';
@@ -74,17 +67,28 @@ class EventController extends Controller
 
         return redirect()->route('actividades.index')->with('cancel_success', 'La actividad ha sido cancelada correctamente');;
     }
+
+    public function ReprogramActivity($id){
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
+        // dd($id);
+        $event = CalendarEvent::find($id);
+        $event->status = 'Programada';
+        $event->save();
+
+        return redirect()->route('actividades.index')->with('reprogram_success', 'La actividad ha sido reprogramada correctamente');
+    }
     
 
     /**
      * Display a calendar view.
-     */
+    */
     public function calendar()
     {
-        if(Gate::denies('leer-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
-        $permissionActivity = Gate::allows('crear-actividad-calendario');
+        // if(Gate::denies('leer-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
 
         $user = auth()->user();
 
@@ -166,12 +170,15 @@ class EventController extends Controller
         foreach ($events as $event) {
             // Solo contar los eventos pendientes
             if ($event->status === 'Programada') {
-                $eventDate = $event->date_start;
-                $eventDay = date('d', strtotime($eventDate));
-                $eventsPerDay[$eventDay]++;
+                $eventDate = new DateTime($event->date_start);
+                //Validar que el mes sea el mismo que el mes actual
+                if($eventDate->format('m') === $month){
+                    $eventDay = $eventDate->format('d');
+                    $eventsPerDay[$eventDay]++;
+                }
             }
         }
-        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern', 'permissionActivity'));
+        return view('Luis.calendar', compact('events', 'todayEvents', 'tomorrowEvents', 'date', 'year', 'month', 'day', 'daysMonth', 'months', 'inicialday', 'eventsPerDay', 'isAcademicAdvisor', 'isIntern'));
     }
     
 
@@ -181,9 +188,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('crear-actividad-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -198,9 +205,9 @@ class EventController extends Controller
      */
     public function store(NewEventFormRequest $request)
     {
-        if(Gate::denies('crear-actividad-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -255,21 +262,28 @@ class EventController extends Controller
 
         // Comparar las fechas con la hora límite (5:00 PM)
         if ($date_start->format('H:i:s') > $limit_time_end->format('H:i:s') || $date_end->format('H:i:s') > $limit_time_end->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
         }
         // Comparar las fechas con la hora límite (8:00 AM)
         if ($date_start->format('H:i:s') < $limit_time_start->format('H:i:s') || $date_end->format('H:i:s') < $limit_time_start->format('H:i:s')) {
-            return redirect()->back()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
         }
 
         
-        // Validar que que las citas no duren mas de 4 horas
-        $diff = $dateTwo->diff($dateOne);
+        // Validar que que las citas no duren más de 4 horas y esten en el mismo dia
+        $diff = $date_end->diff($date_start);
         $hours = $diff->h;
-        if($hours > 4){
+        $days = $diff->d;
+
+        if($hours > 4 || $days > 0){
             return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
         }
 
+        // Validar que no se puedan agregar actividades los sabados y domingos
+        $day = $date_start->format('l');
+        if ($day === 'Saturday' || $day === 'Sunday') {
+            return redirect()->back()->withInput()->with('errorHorario', 'No se pueden agregar actividades los sabados y domingos');
+        }
 
 
         // dd($event);
@@ -282,9 +296,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        if(Gate::denies('leer-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+        // if(Gate::denies('leer-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         $user = auth()->user();
         $rol = Role::where('id', $user->rol_id)->first();
 
@@ -321,9 +335,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        if(Gate::denies('crear-actividad-calendario')){
-            abort(403,'No tienes permiso para acceder a esta sección.');
-        }
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
         $user = auth()->user();
 
         $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
@@ -373,24 +387,21 @@ class EventController extends Controller
         }
     
         // Validar que no haya actividades en el mismo horario
-        $events = CalendarEvent::where('date_start', '>=', $request->date_start)
+        $activities = CalendarEvent::where('date_start', '>=', $request->date_start)
                                 ->where('date_start', '<', $request->date_end)
                                 ->where('requester_id', $academicAdvisor->id)
                                 ->get();
     
 
-        foreach ($events as $event) {
-            if($event->id != $id){
-                $event_start = new DateTime($event->date_start);
-                $event_end = new DateTime($event->date_end);
+        foreach ($activities as $activity) {
+            if($activity->id != $id){
+                $event_start = new DateTime($activity->date_start);
+                $event_end = new DateTime($activity->date_end);
                 if ($dateOne >= $event_start && $dateTwo <= $event_end) {
                     return redirect()->back()->withInput()->with('errorHorario', 'Ya existe una actividad programada en este horario');
                 }
             }
         }
-        // if (count($events) > 0 ) {
-        //     return redirect()->back()->withInput()->with('errorHorario', 'Ya existe una actividad programada en este horario');
-        // }
     
         // Obtener la hora límite inicial (8:00 AM) y la hora límite (5:00 PM)
         $limit_time_start = new DateTime('08:00:00');
@@ -404,12 +415,23 @@ class EventController extends Controller
         if ($dateOne->format('H:i:s') > $limit_time_end->format('H:i:s') || $dateTwo->format('H:i:s') > $limit_time_end->format('H:i:s')) {
             return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
         }
+
     
-        // Validar que que las citas no duren más de 4 horas
-        $diff = $dateTwo->diff($dateOne);
+        // Validar que que las citas no duren más de 4 horas y esten en el mismo dia
+        $date_start = new DateTime($request->date_start);
+        $date_end = new DateTime($request->date_end);
+        $diff = $date_end->diff($date_start);
         $hours = $diff->h;
-        if($hours > 4){
+        $days = $diff->d;
+
+        if($hours > 4 || $days > 0){
             return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
+        }
+
+        // Validar que no se puedan agregar actividades los sabados y domingos
+        $day = $date_start->format('l');
+        if ($day === 'Saturday' || $day === 'Sunday') {
+            return redirect()->back()->withInput()->with('errorHorario', 'No se pueden agregar actividades los sabados y domingos');
         }
     
         // Actualizar el evento
@@ -423,6 +445,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+        // if(Gate::denies('crear-actividad-calendario')){
+        //     abort(403,'No tienes permiso para acceder a esta sección.');
+        // }
+
         $event=CalendarEvent::find($id);
 
         $event->delete();

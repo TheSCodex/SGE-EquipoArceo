@@ -101,7 +101,8 @@ class ProjectsController extends Controller
             'project_justificaction' => $validatedData['Justificacion'],
             'activities_to_do' => $validatedData['activities'],
             'start_date' => $validatedData['Fecha_Inicio'],
-            'end_date' => $validatedData['Fecha_Final']
+            'end_date' => $validatedData['Fecha_Final'],
+            'status' => 'Borrador',
         ]);
         $project->save();
 
@@ -148,7 +149,7 @@ class ProjectsController extends Controller
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
 
-        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto creado correctamente');
+        return redirect('/anteproyecto')->with('success', 'Proyecto creado correctamente');
     }
 
     /**
@@ -165,15 +166,16 @@ class ProjectsController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            return redirect()->route('estudiante/anteproyecto')->with('error', 'Proyecto no encontrado.');
+            return redirect()->route('/anteproyecto')->with('error', 'Proyecto no encontrado.');
         }
 
         $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
         $company = Company::findOrFail($businessAdvisor->companie_id);
         $intern = Intern::where('project_id', $project->id)->first();
         $user = auth()->user();
-
-        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user'));
+        $divisions = Division::all();
+        $careers = Career::all();
+        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user', 'divisions', 'careers'));
     }
 
     /**
@@ -209,7 +211,6 @@ class ProjectsController extends Controller
                 'position' => $validatedData['advisor_position'],
             ]);
 
-            // También puedes actualizar la compañía si existe
             if ($project->BusinessAdvisor->companie) {
                 $project->BusinessAdvisor->companie->update([
                     'name' => $validatedData['name_enterprise'],
@@ -223,7 +224,7 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
-        return redirect('estudiante/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
+        return redirect('/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
     }
 
     /**

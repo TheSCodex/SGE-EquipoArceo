@@ -67,8 +67,8 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Eliminar</th>
                 </tr>
                 @foreach ($advisors as $advisor)
-                <tr>
-                    <td class="font-roboto font-bold py-5">{{ $advisor->name }}</td>
+                <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                    <td class="font-roboto pl-5 font-bold py-5">{{ $advisor->name }}</td>
                     <td class="font-roboto font-bold py-5">{{ $advisor->email }}</td>
                     <td class="font-roboto font-bold py-5">{{ $advisor->phone }}</td>
                     <td class="font-roboto font-bold py-5">{{ $advisor->position }}</td>
