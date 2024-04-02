@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Career;
 use App\Models\CareerAcademy;
+use App\Models\FileHistory;
 use App\Models\Intern;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,17 +46,8 @@ class ExcelExportController extends Controller
         // Los campos que se poblan por filas (la información de los asesorados se va para abajo a partir de la fila 10)
         $row = 10;
 
-        $jsonData = [];
-
-
         foreach ($interns as $intern) {
             $student = User::find($intern->user_id);
-
-            $jsonData[] = [
-                'student_id' => $student->identifier,
-                'student_name' => $student->name,
-                'period' => $intern->period,
-            ];
 
             $sheet->setCellValue('C' . $row, $student->identifier);
             $sheet->setCellValue('D' . $row, $student->name);
@@ -63,9 +55,6 @@ class ExcelExportController extends Controller
 
             $row++;
         }
-
-        $jsonData = json_encode($jsonData);
-
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($newFilePath);
@@ -76,6 +65,22 @@ class ExcelExportController extends Controller
         $response = response()->download($publicPath)->deleteFileAfterSend(true);
         unlink($newFilePath);
 
+
+        $jsonData[] = [
+            'title' => "Control de Estadías",
+            'advisor_identifier' => $user->identifier,
+            'advisor_email' => $user->email,
+            'advisor_name' => $user->name,
+            'advisor_lastName' => $user->last_name,
+            'user_id' => $user->id,
+            'academic_advisor_id' => (int) $academic_advisor_id,
+        ];
+
+        $authUser = auth()->user();
+        if ($authUser->role->title != 'director' && $authUser->role->title != 'asistenteDireccion') {
+            $fileHistory = new FileHistory($jsonData[0]);
+            $fileHistory->save();
+        }
         return $response;
     }
 

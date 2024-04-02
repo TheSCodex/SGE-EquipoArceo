@@ -2,18 +2,24 @@
 @section('contenido')
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        @if(session('errorFecha'))
-            <div class=" w-full bg-[#B31312] rounded-xl flex flex-col justify-center align-middle">
-                <h1 class=" text-lg text-white font-montserrat py-3 ml-3">&bull; {{session('errorFecha')}}</h1>
-            </div>
-        @endif
+
         <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">
                 <form method="POST" action="{{route('actividades.store')}}" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
                     <div class="w-full h-fit flex justify-center md:justify-start">
-                        <h1 class="text-3xl font-bold">Añadir actividad</h1>
-                        @csrf
+                        @if(session('errorFecha'))
+                            <div class=" w-full bg-[#eb7575] rounded-xl flex flex-col justify-center align-middle h-16">
+                                <h1 class=" text-lg text-white font-montserrat ml-2">&bull; {{session('errorFecha')}}</h1>
+                            </div>
+                        @endif
+                        @if(session('errorHorario'))
+                            <div class="w-full bg-[#eb7575] rounded-xl flex flex-col justify-center align-middle h-16">
+                                <h1 class="text-lg text-white font-montserrat ml-2">&bull; {{session('errorHorario')}}</h1>
+                            </div>
+                        @endif
+                        @csrf   
                     </div>
-                    <div class="w-full flex flex-col space-y-1">
+            <div class="w-full flex flex-col space-y-1">
+                        <h1 class="text-3xl font-bold mb-5">Añadir actividad</h1>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">¿Con quien desea la cita?:</p>
