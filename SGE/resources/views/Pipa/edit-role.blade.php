@@ -109,7 +109,6 @@
         
                         </div>
                     <div class="flex flex-col space-y-2"> <!-- Segunda columna -->
-                               
                             <div class="flex items-center space-x-2">
                                 <input type="checkbox" name="permissions[crear-asesores-academicos]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ isset($role->permissions['crear-asesores-academicos']) && $role->permissions['crear-asesores-academicos'] ? 'checked' : '' }}>
                                 <label for="crear-asesores-academicos" class="text-sm">Crear asesores académicos</label>

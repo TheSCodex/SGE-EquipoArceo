@@ -8,6 +8,15 @@
         <div class="w-full h-fit flex justify-center md:justify-start">
             <h1 class="text-3xl font-bold">Editar usuario</h1>
         </div>
+        @if(session('error'))
+        <script>
+            Swal.fire({
+                title: '¡Error!',
+                text: '{{ session("error") }}',
+                icon: 'error'
+            });
+        </script>
+        @endif
         <div class="w-full flex flex-col space-y-2 ">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
@@ -43,7 +52,23 @@
                     <p class="text-sm">Rol</p>
                     <select name="rol_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         @foreach($roles as $role)
-                            <option value="{{ $role->id }}" {{ $user->rol_id == $role->id ? 'selected' : '' }}>{{ $role->title }}</option>
+                            <option value="{{ $role->id }}" {{ $user->rol_id == $role->id ? 'selected' : '' }}>
+                                @if ($role->title == "estudiante")
+                                Estudiante
+                                @elseif ($role->title == "asesorAcademico")
+                                    Asesor Académico
+                                @elseif ($role->title == "presidenteAcademia")
+                                    Presidente de Academia
+                                @elseif ($role->title == "director")
+                                    Director
+                                @elseif ($role->title == "asistenteDireccion")
+                                    Asistente Dirección
+                                @elseif ($role->title == "admin")
+                                    Administrador
+                                @else
+                                    {{$role->title}}
+                                @endif
+                            </option>
                         @endforeach
                     </select>
                     @error('rol_id')

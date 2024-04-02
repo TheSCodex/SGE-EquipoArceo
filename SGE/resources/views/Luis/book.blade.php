@@ -55,9 +55,13 @@
             </div>
         </div>
 
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="mt-6 w-11/12 mx-auto flex items-start justify-between min-h-72 ">
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
+                        @if ($books->isEmpty())
+                            <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                        @else
+
                     @foreach ($books as $book)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                         <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
@@ -88,11 +92,17 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
+
                 </div>
             </div>
-            <div class="hidden lg:block w-full">
+            <div class="hidden lg:block w-full ">
+                @if ($books->isEmpty())
+                <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                @else
                 <table class="text-start w-full">
                     <tr>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-left pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Autor</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
@@ -103,8 +113,12 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-left">Eliminar</th>
                     </tr>
                     @foreach ($books as $book)
-                    <tr class="w-full">
-                        <td class="font-roboto font-bold py-5  w-4/12 pr-10 ">{{ $book->title }}</td>
+                    @php
+                    $counter = ($books->currentPage() - 1) * $books->perPage() + $loop->index + 1;
+                    @endphp
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                        <td class="font-roboto font-bold py-5 w-1/12 pl-5">{{ $counter }}</td>
+                        <td class="font-roboto font-bold py-5  w-3/12 pr-10">{{ $book->title }}</td>
                         <td class="font-roboto font-bold py-5  text-left ">{{ $book->author }}</td>
                         <td class="font-roboto font-bold py-5  text-left w-1/12">{{ $book->isbn }}</td>
                         <td class="font-roboto font-bold py-5  text-left ">
@@ -140,11 +154,16 @@
                     </tr>
                     @endforeach
                 </table>
+                @endif
             </div>
         </div>
     </div>
-    <div class="my-5 mx-auto">
-        {{$books->links()}}
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            <div class="my-5 mx-auto md:w-full">
+                {{$books->links()}}
+            </div>
+        </div>
     </div>
     </section>
     <script>

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Http\Requests\Pipa\RoleRequest;
-
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
 class RoleController extends Controller
 {
@@ -15,7 +16,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
+        $roles = Role::paginate(3);
         return view('Pipa.panel-roles', compact('roles'));
     }
 
@@ -24,6 +28,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         return view('Pipa.add-role');
     }
 
@@ -56,6 +63,9 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $role = Role::findOrFail($id);
         return view('Pipa.edit-role', compact('role'));
     }
@@ -79,7 +89,16 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        if (Gate::denies('crud-roles-permisos')) {
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $role = Role::findOrFail($id);
+        $assigned = User::where('rol_id', $role->id)->exists();
+        if ($assigned){
+            return redirect()
+            ->back()
+            ->with('error', 'No puedes eliminar este rol ya que está asignado a uno o más usuarios.');
+        }
         $role->delete();
         return redirect('panel-roles')->with('success', 'Rol eliminado exitosamente');
     }
