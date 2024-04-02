@@ -18,7 +18,7 @@ class DivisionSeeder extends Seeder
         })->where('id', '<>', 4)->get();
     
         $directorAssistants = User::whereHas('role', function ($query) {
-            $query->where('title', 'directorAssistant');
+            $query->where('title', 'asistenteDireccion');
         })->where('id', '<>', 5)->get();
     
         Division::create(['name' => 'División de Turismo', 'director_id' => $directors[0]->id ?? null, 'directorAsistant_id' => $directorAssistants[0]->id ?? null]);
