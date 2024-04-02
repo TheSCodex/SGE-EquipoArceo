@@ -2,9 +2,16 @@
 @section('titulo', 'Panel de Compañias')
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <style>
+        .table-cell {
+            max-width: 200px; /* Ajusta este valor según tus necesidades */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Esto agregará puntos suspensivos (...) al final del texto si se corta */
+            white-space: nowrap; /* Esto evitará que el texto se envuelva y se muestre en una sola línea */
+        }
+    </style>
     <main class="flex flex-col justify-center items-center min-h-full flex-grow">
-        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="sm:p-8 text-left w-[90%]  mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>
                 <div class="flex items-center flex-row justify-end">
@@ -40,48 +47,43 @@
             </div>
 
             <div class="mt-6    mx-auto flex items-center  justify-center">
-                <div class=" max-lg:hidden  w-full">
+                <div class=" pl-12  max-lg:hidden  w-full">
                     @if ($companies->isEmpty())
                         <p class=" ">Na hay datos registrados.</p>
                         <table class=" w-full">
                             <tr>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Celular</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">RFC</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Editar</th>
-                                <th class="  text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Nombre</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Correo Electrónico</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Celular</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">RFC</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Area de especialización</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Detalles</th> <!-- Nuevo -->
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Editar</th>
+                                <th class="  text-[#ACACAC]  font-roboto text-xs">Eliminar</th>
                             </tr>
                         </table>
                     @else
-                        <div class=" flex pl-12 justify-center items-center">
-                            <table class="text-left   w-full">
+                        <div class=" flex   justify-center items-center">
+                            <table class="w-full">
                                 <tr>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Nombre</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Celular</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">RFC</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Editar</th>
-                                    <th class="  text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Nombre</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Correo Electrónico</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
                                 </tr>
                                 @foreach ($companies as $index => $company)
-                                    <tr>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">{{ $company['name'] }}
-                                        </td>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">{{ $company['email'] }}
-                                        </td>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">{{ $company['phone'] }}
-                                        </td>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">{{ $company['rfc'] }}</td>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">
-                                            {{ $company->businessSector->title }}</td>
-                                        <td class=" text-start  pl-5  font-roboto font-bold py-5">
-                                            <a href="{{ route('panel-companies.show', $company->id) }}"
-                                                class="flex justify-center">
+                                    <tr class="transition duration-100 ease-in-out hover:bg-lightGray/20">
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate ">{{ $company['name'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['email'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['phone'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['rfc'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company->businessSector->title }}</td>
+                                        <td class="font-roboto font-bold py-5">
+                                            <a href="{{ route('panel-companies.show', $company->id) }}" class="flex justify-center">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
@@ -94,9 +96,7 @@
                                             </form>
                                         </td>
                                         <td class="font-roboto font-bold py-5">
-                                            <form id="deleteForm"
-                                                action="{{ route('panel-companies.destroy', $company['id']) }}"
-                                                method="POST">
+                                            <form id="deleteForm" action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" onclick="confirmDelete({{ $company['id'] }})">
@@ -107,6 +107,7 @@
                                     </tr>
                                 @endforeach
                             </table>
+
                         </div>
 
 
@@ -167,30 +168,7 @@
             </div>
     </main>
 
-    <!-- Modal -->
-    @foreach ($companies as $index => $company)
-        <div id="companyModal{{ $index }}" class="fixed z-10 inset-0 overflow-y-auto hidden">
-            <div class="flex items-center justify-center min-h-screen px-4">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-                <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                    <!-- Contenido del modal -->
-                    <section class="p-4">
-                        <h2 class="text-lg font-bold mb-2">Detalles de la Empresa</h2>
-                        <p><strong>Fecha de Registro:</strong> {{ $company['registration_date'] }}</p>
-                        <p><strong>Dirección:</strong> {{ $company['address'] }}</p>
-                    </section>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button onclick="closeModal('{{ $index }}')" type="button"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primaryColor text-base font-medium text-white hover:bg-primaryColorFocus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primaryColorFocus sm:ml-3 sm:w-auto sm:text-sm">
-                            Cerrar
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    @endforeach
-    </div>
 
     {{ $companies->links() }}
 
