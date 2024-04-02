@@ -41,7 +41,7 @@ class ProjectDraftController extends Controller
         $businessSector = null;
         $businessAdvisor = null;
         $company = null;
-    
+
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
             //dd($project);
@@ -56,6 +56,7 @@ class ProjectDraftController extends Controller
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
 
         $project = Project::find($interns->project_id);
+        
     
         if (!$project) {
             return view('Daniel.Projects.ProjectView');
@@ -92,6 +93,12 @@ class ProjectDraftController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function onRev(project $id){
+        dd($id);
+        Project::where('id', $id->id)->update(['status' => 'En revision']);
+        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+    }
 
     public function storeLike(project $id){
         $userId = Auth::id();
