@@ -55,9 +55,9 @@
         </p>
     </div>
     <div style="font-weight:normal;margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
-        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder;">Nombre del (a) Estudiante</span> {{$student?->name}} {{$student?->last_name}}</p>
-        <p style="margin-bottom: 2px; margin-top:2px; "><span style="text-decoration: underline; font-weight:bolder; ">Matricula</span> {{$student?->identifier}}</p>
-        <p style="margin-bottom: 2px; margin-top:2px; "> <span style="text-decoration: underline; font-weight:bolder;">Programa Educativo</span> {{$career?->name}} </p>
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder;">Nombre del (a) Estudiante</span>--}} {{$student?->name}} {{$student?->last_name}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder; ">Matricula</span> --}} {{$student?->identifier}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder;">Programa Educativo</span>--}} {{$career?->name}} </p>
     </div>
 
     <p style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none; font-size:10.5pt">
@@ -161,10 +161,9 @@
 
         <div style="margin-top: 20px; padding-right: 40px; padding-left:50px">
             <table style="width: 100%; border-collapse: collapse; border: 0.5px solid black; font-size: 12px;">
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: 31 de julio
-                    de 2023</td>
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. 5</td>
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">AEP-P03-F06</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: {{$docRevision->updated_at->format('j \d\e F \d\e\l Y')}}</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. {{ $docRevision->revision_number }}</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">{{ $docRevision->revision_id }}</td>
 
             </table>
         </div>

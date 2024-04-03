@@ -43,7 +43,6 @@ class DirectorController extends Controller
 
         // Obtener carreras de las academias
         $careers = Career::whereIn('academy_id', $academies->pluck('id'))
-        ->where('name', 'like', '%TSU%')
         ->get();
         $careersId = [];
         foreach ($careers as $career) {
