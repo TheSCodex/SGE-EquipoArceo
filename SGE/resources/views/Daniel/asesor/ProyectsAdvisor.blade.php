@@ -66,7 +66,7 @@
                                     {{ $project->like !== null ? $project->like : 0 }}</td>
                                 <td class="font-roboto font-bold py-5 pl-5">{{ $project->adviser->name }}</td>
                                 <td class="font-roboto font-bold py-5 pl-5">{{ $project->start_date }}</td>
-                                <td class="font-roboto font-bold py-5 pl-5">{{ $project->status }}</td>
+                                <td class="font-roboto font-bold py-5 pl-5">{{ ucfirst($project->status) }}</td>
 
                                 </td>
                                 <td class="font-roboto font-bold py-5 cursor-pointer">
