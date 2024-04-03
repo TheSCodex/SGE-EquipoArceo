@@ -240,11 +240,18 @@
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
-                                @if ($comment->academic_advisor_id == 1)
-                                    <p class='text-black w-full font-semibold text-sm'>Asesor Academico</p>
-                                @else
-                                    <p class='text-black w-full font-semibold text-sm'>Estudiante</p>
-                                @endif
+                                
+                                <p class=' text-black w-full font-semibold text-sm'>
+                                    @if($comment->academic_advisor_id !== null)
+                                        Asesor
+                                    @elseif($comment->president_id !== null)
+                                        Presidente de academia
+                                    @elseif($comment->director_id !== null)
+                                        Director de division
+                                    @else
+                                        Estudiante
+                                    @endif
+                                </p>
                                 <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
@@ -252,6 +259,7 @@
                         <a href="{{ route('observationsAnteproyectoP') }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
+                            
                         <form method="POST" action="{{ route('anteproyecto-Director.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
@@ -279,13 +287,11 @@
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] ">
                             @csrf
-
                             <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
                                 placeholder="Ingrese su comentario" />
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
-
                             <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
