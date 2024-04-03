@@ -37,6 +37,10 @@ class StudentController extends Controller
             ->select('users.name', 'comments.content')
             ->get();
 
+        $studentProject = Intern::join("projects", "interns.project_id", "=", "projects.id")
+            ->where("interns.id", "=", $student)
+            ->first();
+
 
         // dd($comments);
         // Obtener el nombre del asesor académico
