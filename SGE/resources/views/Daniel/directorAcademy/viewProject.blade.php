@@ -193,11 +193,6 @@
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
                                 <p class="">Este proyecto aun no esta en revision</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a  revisión</button>
-                                </form>
                             @endif
                         </div>
                     </div>
@@ -218,7 +213,7 @@
 
                             @if (isset($projectLikes))
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-Director.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
@@ -226,7 +221,7 @@
                                 </form>
                             @else
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-Asesor.storeLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-Director.storeLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
