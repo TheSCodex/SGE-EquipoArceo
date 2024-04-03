@@ -64,7 +64,7 @@
             <div class="bg-white rounded-md font-kanit py-8">
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
-                    <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-5 max-h-48 overflow-y-auto">
                         <div class="flex flex-col">
                             @if ($comments->isEmpty())
                                 <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
