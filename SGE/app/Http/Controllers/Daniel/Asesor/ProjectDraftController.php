@@ -94,7 +94,7 @@ class ProjectDraftController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function onRev(project $id){
+    public function onRev(request $id){
         Project::where('id', $id->id)->update(['status' => 'En revision']);
         return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
     }
