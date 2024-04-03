@@ -74,6 +74,9 @@ class ObservationsController extends Controller
                 // Obtener el ID del intern
                 $internId = $intern->id;
 
+                // Obtener el parent_comment_id si está presente en la solicitud
+                $parentCommentId = $request->input('parent_comment_id');
+
                 // Guardar el comentario en la base de datos
                 $comment = new Comment();
                 $comment->content = $request->input('content');
@@ -81,6 +84,9 @@ class ObservationsController extends Controller
                 $comment->status = 1;
                 $comment->project_id = $projectId;
                 $comment->interns_id = $internId;
+                if ($parentCommentId) {
+                    $comment->parent_comment_id = $parentCommentId; // Establecer el parent_comment_id
+                }
                 $comment->save();
 
                 return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
