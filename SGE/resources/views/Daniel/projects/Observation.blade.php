@@ -44,12 +44,12 @@
                         <h4 class="text-lg font-medium text-white">
                             Respuesta
                         </h4>
-                        <p class="text-base text-white">
-                            Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)
-                        </p>
+                        <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">
+                           
+                        
                     </div>
                     <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
-                        Marcar como resuelto y enviar a revisión
+                        Guardar comentario 
                     </button>
                 </div>
             </div>
@@ -64,7 +64,11 @@
                             <div class="flex items-center">
                                 <div class="ml-4">
                                     <h4 class="text-base font-medium text-gray-900">
-                                        Asesor Académico
+                                        @if($comment->academic_advisor_id)
+                                            Asesor Académico
+                                        @else
+                                            Estudiante: {{ $comment->intern->user->name }}
+                                        @endif
                                     </h4>
                                     <p class="text-sm text-gray-500">
                                         {{ is_string($comment->fecha_hora) ? $comment->fecha_hora : $comment->fecha_hora->format('d/m/Y \a \l\a\s H:i') }}
@@ -82,12 +86,12 @@
                             <h4 class="text-lg font-medium text-white">
                                 Respuesta
                             </h4>
-                            <p class="text-base text-white">
-                                Comentario...
-                            </p>
-                        </div>
+                            <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $comment->id }}"/>                  
                         
-                    </div>
+                        </div>
+                        <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
+                            Guardar comentario 
+                        </button>
                 </div>
                 @endforeach
             </div>
