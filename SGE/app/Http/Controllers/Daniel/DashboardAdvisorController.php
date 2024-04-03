@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Daniel;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Comment;
+use App\Models\Intern;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,17 +19,34 @@ class DashboardAdvisorController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
-        // Buscar el registro en la tabla academic_advisor donde user_id sea igual al ID del usuario logueado
+        //Obtener el id del asesor
         $academicAdvisor = AcademicAdvisor::where('user_id', $userId)->value('id');
+        // Obtener comentarios del asesor
+        $comments = Comment::with('project')
+            ->where('academic_advisor_id', $academicAdvisor)
+            ->orderBy('fecha_hora', 'desc')
+            ->take(3)
+            ->get();
 
-        // Obtener todos los comentarios relacionados con el AcademicAdvisor
-        $comments = Comment::where('academic_advisor_id', $academicAdvisor)
-        ->orderBy('fecha_hora', 'desc')
-        ->take(3)
-        ->get();
-        // Pasar los comentarios a la vista
-        return view('daniel.asesor.DashboardAdvisor', compact('comments'));
+        // Contar la cantidad de proyectos en revisión
+        $revisionProjects = Project::where('status', 'En revisión')->count();
+        // Contar la cantidad de proyectos aprobados
+        $approvedProjects = Project::where('status', 'Aprobado')->count();
+
+        $totalComments = Comment::where('academic_advisor_id', $academicAdvisor)->count();
+
+        //Trae los datos de los asesorados
+        $internUserIds = Intern::where('academic_advisor_id', $academicAdvisor)->pluck('user_id');
+        $Intern = User::whereIn('id', $internUserIds)->get();
+
+        return view('daniel.asesor.DashboardAdvisor', [
+            'revisionProjects' => $revisionProjects,
+            'approvedProjects' => $approvedProjects,
+            'comments' => $comments,
+            'Intern' => $Intern,
+            'totalComments' => $totalComments,
+
+        ]);
     }
 
     /**

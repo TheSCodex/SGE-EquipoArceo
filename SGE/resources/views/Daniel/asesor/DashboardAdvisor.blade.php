@@ -58,24 +58,33 @@
 
                 <div class="flex flex-col justify-between grow gap-3">
                     <div class="rounded-lg bg-white p-5 flex flex-col gap-3 grow">
-                        <div class=" flex items-center px-4">
-                            <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
-                            <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
-                        </div>
-                        <div class=" flex items-center px-4">
-                            <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
-                            <p class="text-sm font-roboto font-semibold">Rodrigo Bojorquez Chi</p>
-                        </div>
+                        @if ($Intern->isEmpty())
+                            <p class="text-sm font-roboto">No hay alumnos asignados.</p>
+                        @else
+                            @foreach ($Intern as $intern)
+                                <div class="flex items-center px-4">
+                                    <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario" class="w-8 h-8 mr-2">
+                                    <p class="text-sm font-roboto font-semibold">{{ $intern->name }} {{ $intern->last_name }}</p>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
 
                     <div class="rounded-lg bg-white p-5 flex items-center gap-5">
                         <img src="{{ asset('img/iconosDaniel/Group 34.svg') }}" alt="Usuario" class="w-10 h-10 mr-2">
                         <div class="flex flex-col">
-                            <p class="text-xl font-roboto font-semibold">2</p>
+                            <p class="text-xl font-roboto font-semibold">{{ $totalComments }}</p>
                             <p class="text-sm font-Kanit font-medium">Comentarios por resolver en proyectos</p>
                         </div>
                     </div>
-                    
+                    @php
+                        $userId = auth()->id();
+                        $academicAdvisor = DB::table('academic_advisor')->where('user_id', $userId)->first();
+                        $academicAdvisorId = $academicAdvisor->id;
+                    @endphp
+                    <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
+                        <a href="{{ route('download.control', ['id' => $academicAdvisorId]) }}">Generar Control de Estadías</a>
+                    </button>
                 </div>
             </section>
 
@@ -97,12 +106,13 @@
                     @foreach ($comments as $comment)
                         <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
                             <div class=" ">
-                                <h3 class="font-medium text-lg font-roboto mb-2">Rodrigo Bojorquez</h3>
+                                <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}</h3>
                                 <p class="text-sm font-roboto">{{ $comment->content }}</p>
                             </div>
                             <div class="mt-5 lg:mt-0">
                                 <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
-                                    Ampliar Observaciones
+                                    
+                                    <a href="{{ route('anteproyecto-Asesor.store', $comment->project_id) }}">Ampliar Observaciones</a>
                                 </button>
                             </div>
                         </div>
@@ -124,7 +134,7 @@
             labels: ["En revision", "Aprobado"],
             datasets: [{
                 label: 'Horas',
-                data: [2, 3],
+                data: [{{ $revisionProjects }}, {{ $approvedProjects }}],
                 backgroundColor: [
                     '#3E5366',
                     '#0FA987'
