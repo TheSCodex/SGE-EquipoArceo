@@ -11,8 +11,7 @@
                     <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos,
                         facilitando la planificación, organización y seguimiento de conferencias seminarios, talleres y
                         actividades similares en entornos educativos...</p>
-                    <a href="anteproyecto"
-                        class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                    <a href="anteproyecto" class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
                         Iniciar
                     </a>
                 </div>
@@ -74,20 +73,17 @@
                                     @foreach ($comments as $comment)
                                         <p class="text-xl text-[#555]">{{ $comment->name }}</p>
                                         <p class="text-[#888] line-clamp-3">{{ $comment->content }}</p>
-                                        @endforeach
-                                    </div>
-                                    <div class="col-span-1 grid place-content-center">
-                                        <a href="anteproyecto/observaciones"
-                                        class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
-                                        Ampliar observación
-                                    </a>
-                                </div>
-                                @endif
+                                    @endforeach
+                            </div>
+                            <div class="col-span-1 grid place-content-center">
+                                <a href="anteproyecto/observaciones"
+                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
+                                    Ampliar observación
+                                </a>
+                            </div>
+                            @endif
                         </div>
-                        
                     </div>
-
-                  
                 </div>
             </div>
         </section>
@@ -136,7 +132,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
-                    
+
                         </ol>
                     </div>
                     <div class="">
