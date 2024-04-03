@@ -58,7 +58,8 @@ class AdvisorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $advisor=BusinessAdvisor::findOrFail($id);
+        return view('Elizabeth.showAsesor', compact('advisor'));
     }
 
     /**
