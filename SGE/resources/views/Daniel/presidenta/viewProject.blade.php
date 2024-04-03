@@ -277,7 +277,7 @@
                         </div>
 
 
-                        <form method="POST" action="{{ route('anteproyecto-presidente.store', ['id' => $project->id]) }}"
+                        <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] ">
                             @csrf
 
