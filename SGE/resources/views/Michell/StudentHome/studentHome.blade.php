@@ -7,14 +7,28 @@
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
-                    <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
-                    <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos,
-                        facilitando la planificación, organización y seguimiento de conferencias seminarios, talleres y
-                        actividades similares en entornos educativos...</p>
-                    <a href="anteproyecto"
-                        class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
-                        Iniciar
-                    </a>
+                    @if ($studentProject)
+                        <h3 class="font-bold text-lg md:text-xl">{{ $studentProject->name }}</h3>
+                        <div class="my-2">
+                            <p >Estatus: <span class="uppercase font-bold text-sm">{{ $studentProject->status }}</span></p>
+                            <p class="mb-4 break-words line-clamp-3">Descripción: <span class="font-normal">{{ $studentProject->description }}</span></p>
+                            <a href="anteproyecto"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                                Detalles
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-center font-bold text-lg md:text-xl mb-5">Todavía no has creado una propuesta</p>
+
+                        <div class="flex justify-center">
+                            <a 
+                                href="anteproyecto/nuevo"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm"
+                            >
+                                Crear propuesta
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">
@@ -94,16 +108,14 @@
                         </div>
                     </div>
 
-                    <a href="anteproyecto/observaciones" class="text-end text-[#888] text-sm mt-5 md:mt-0">
-                        Ver todo
-                    </a>
+                  
                 </div>
             </div>
         </section>
         <section class="flex flex-col flex-1 gap-3 w-full col-span-1">
 
             <div class="bg-white rounded-md py-1 mt-3 lg:mt-0">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores academicos</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor academico</h3>
             </div>
 
             <div class="space-y-2">
@@ -120,7 +132,7 @@
             </div>
 
             <div class="bg-white rounded-md py-1">
-                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesores empresariales</h3>
+                <h3 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Asesor empresarial</h3>
             </div>
 
             <div class="space-y-2">
@@ -139,67 +151,16 @@
                 </div>
             </div>
 
-            <div class=" font-roboto bg-white p-5 rounded-md">
+            <div class=" font-roboto bg-white p-5 rounded-l">
 
                 <h3 class="text-lg font-medium text-center font-kanit mb-3">Actividades importantes</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
-                        <h3 class="text-darkBlue text-sm font-bold mb-2">Hoy 15/05/2024</h3>
-                        <ol class="border-l border-dashed border-primaryColor font-roboto">
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Revision de memoria</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        8:40 a 9:30
-                                    </time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        10:50 a 11:40
-                                    </time>
-                                </div>
-                            </li>
+                    
                         </ol>
                     </div>
                     <div class="">
-                        <h3 class="text-darkBlue font-bold text-sm  mb-2">Martes 20/07/2024</h3>
-                        <ol class="border-l border-dashed border-primaryColor font-roboto">
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Revision de memoria</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        8:40 a 9:30
-                                    </time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        10:50 a 11:40
-                                    </time>
-                                </div>
-                            </li>
                         </ol>
                     </div>
 
@@ -213,8 +174,8 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="bg-white p-5 font-black flex flex-col justify-center">
+            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] ">
+                <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
                     <div class="flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled"
@@ -230,7 +191,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full">
+                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px">
                     <p class="mb-5 text-center">Progreso</p>
                     <div class="flex justify-center max-h-[150px]">
                         <canvas id="myChart"></canvas>
