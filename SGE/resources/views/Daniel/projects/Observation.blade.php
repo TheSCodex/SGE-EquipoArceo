@@ -42,7 +42,7 @@
                 <div class="sm:w-full md:w-1/3 bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
                     <div>
                         <h4 class="text-lg font-medium text-white">
-                            Resolver
+                            Respuesta
                         </h4>
                         <p class="text-base text-white">
                             Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)
@@ -80,15 +80,13 @@
                     <div class="w-full bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
                         <div>
                             <h4 class="text-lg font-medium text-white">
-                                Resolver
+                                Respuesta
                             </h4>
                             <p class="text-base text-white">
                                 Comentario...
                             </p>
                         </div>
-                        <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
-                            Resolver
-                        </button>
+                        
                     </div>
                 </div>
                 @endforeach
