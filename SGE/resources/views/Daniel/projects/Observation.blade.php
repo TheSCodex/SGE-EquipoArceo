@@ -44,8 +44,7 @@
                         <h4 class="text-lg font-medium text-white">
                             Respuesta
                         </h4>
-                        <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">
-                           
+                        <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">                           
                         
                     </div>
                     <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">

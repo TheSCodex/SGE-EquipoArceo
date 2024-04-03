@@ -128,8 +128,7 @@ Route::middleware('auth')->group(function () {
 
     // ! Ruta de las observaciones del asesor
     Route::get("observaciones/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
-    Route::put('observaciones/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update');
-    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
+    Route::put('observaciones/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update');    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
     Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
     Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
     Route::match(['get', 'post'], 'CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev');

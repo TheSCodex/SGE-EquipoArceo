@@ -29,8 +29,6 @@ class ProjectsController extends Controller
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
         $interns = Intern::where("user_id", $userId)->get();
-
-
         // dd($intern);
 
         if (!$intern || !$intern->project_id) {

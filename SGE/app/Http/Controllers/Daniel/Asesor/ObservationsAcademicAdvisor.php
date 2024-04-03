@@ -44,7 +44,7 @@ class ObservationsAcademicAdvisor extends Controller
 
             return view('Daniel.asesor.ObservationsAdvisor', compact('project', 'tutorComment', 'normalComments'));
         } else {
-            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
+            return redirect()->route('inicio-asesor')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
         }
     }
 
