@@ -39,13 +39,16 @@ class DashboardAdvisorController extends Controller
         $internUserIds = Intern::where('academic_advisor_id', $academicAdvisor)->pluck('user_id');
         $Intern = User::whereIn('id', $internUserIds)->get();
 
+        // Obtener las notificaciones del usuario actual
+        $notificaciones = Auth::user()->unreadNotifications;
+
         return view('daniel.asesor.DashboardAdvisor', [
             'revisionProjects' => $revisionProjects,
             'approvedProjects' => $approvedProjects,
             'comments' => $comments,
             'Intern' => $Intern,
             'totalComments' => $totalComments,
-
+            'notificaciones' => $notificaciones, 
         ]);
     }
 
