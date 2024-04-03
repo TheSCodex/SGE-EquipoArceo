@@ -65,7 +65,6 @@ class StudentController extends Controller
         ->whereNotNull("interns_id")
         ->count();
 
-
         //Obtener los dias faltantes
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
@@ -82,22 +81,6 @@ class StudentController extends Controller
         $TotalDeDias = $start_date->diffInDays($end_date);
         // dd($TotalDeDias);
         $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
-
-        return view('Michell.StudentHome.studentHome', [
-            'advisor' => $advisor,
-            'empresarial' => $empresarial,
-            'studentProject' => $studentProject,
-            'diaActual' => $diaActual,
-            'TotalDeDias' => $TotalDeDias
-        ]);
-
-
-
-        //comentarios
-
-        $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
-            ->whereNotNull("interns_id")
-            ->count();
 
         // dd($empresarial);
         return view('Michell.StudentHome.studentHome', [
