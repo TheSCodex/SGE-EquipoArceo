@@ -60,6 +60,11 @@ class StudentController extends Controller
             ->whereNotNull('interns.project_id')
             ->get();
 
+        //comentarios
+        $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
+        ->whereNotNull("interns_id")
+        ->count();
+
 
         //Obtener los dias faltantes
         $userId = Auth::id();
@@ -87,24 +92,20 @@ class StudentController extends Controller
 
 
 
-
+        //comentarios
         $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
             ->whereNotNull("interns_id")
             ->count();
 
-     // dd($empresarial);
-return view('Michell.StudentHome.studentHome', [
+        // dd($empresarial);
+        return view('Michell.StudentHome.studentHome', [
     
             'advisor' => $advisor,
-    
             'empresarial' => $empresarial,
-    
             'comments' => $comments,
-    
             "studentProject" => $studentProject,
-    'diaActual' => $diaActual,
-    'totalDeDias' => $totalDeDias
-,
+            'diaActual' => $diaActual,
+            'TotalDeDias' => $TotalDeDias,
             "studentsCommentsCount" => $studentsCommentsCount,
         ]);
 
