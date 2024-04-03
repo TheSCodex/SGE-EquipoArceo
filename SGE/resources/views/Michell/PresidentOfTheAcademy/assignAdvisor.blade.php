@@ -12,7 +12,7 @@
                     method="POST">
                     @csrf
                     @method('PUT')
-                    <h1 class="text-3xl font-bold">Asignar asesor academico</h1>
+                    <h1 class="text-3xl font-bold">Asignar asesor académico</h1>
                     <div class="text-sm w-full space-y-2">
                         <label for="" class="">Nombre del alumno</label>
                         <div class=" border rounded-md border-lightGray p-3">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col text-sm w-full justify-end space-y-2">
-                        <label for="" class="">Asesor academico</label>
+                        <label for="" class="">Asesor académico</label>
                         <select name="academic_advisor_id" id="academic_advisor_id" class="rounded-md border-lightGray">
                             <option value="">-- Selecciona un asesor --</option>
                             @foreach ($advisors as $advisor)

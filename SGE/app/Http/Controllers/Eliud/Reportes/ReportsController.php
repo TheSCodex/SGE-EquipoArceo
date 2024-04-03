@@ -7,6 +7,7 @@ use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\Career;
 use App\Models\Division;
+use App\Models\DocRevisions;
 use App\Models\FileHistory;
 use App\Models\Intern;
 use App\Models\Project;
@@ -31,6 +32,9 @@ class ReportsController extends Controller
 
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
+
+        $docRevision = DocRevisions::find(4);
+
         $jsonData[] = [
 
             'title' => "Amonestación",
@@ -58,7 +62,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision'));
         return $pdf->stream();
     }
 
@@ -94,6 +98,7 @@ class ReportsController extends Controller
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
+        $docRevision = DocRevisions::find(3);
 
         $jsonData[] = [
 
@@ -121,7 +126,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision'));
         return $pdf->stream();
     }
 
@@ -146,6 +151,7 @@ class ReportsController extends Controller
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
+        $docRevision = DocRevisions::find(2);
 
         $jsonData[] = [
 
@@ -172,38 +178,54 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project'));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision'));
         return $pdf->stream();
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $academie = Academy::paginate(1);
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
-    }
-
     public function directorIndex()
     {
-
+        $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);
-        $academie = Academy::paginate(1);
-        return view('Eliud.reports.directorsReports', compact('academie', 'userData'));
+        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
+        $academies = Academy::where('division_id', $division?->id)->get();
+        
+        $academiesData = [];
+        foreach ($academies as $academy) {
+            $academyData = [
+                'name' => $academy->name,
+                'careers' => []
+            ];
+            
+            $careers = Career::where('academy_id', $academy->id)->get();
+            
+            foreach ($careers as $career) {
+                $interns = Intern::where('career_id', $career->id)->get();
+                $careerData = [
+                    'name' => $career->name,
+                    'projects' => []
+                ];
+                
+                foreach ($interns as $intern) {
+                    $project = Project::find($intern->project_id);
+                    if ($project && $project->status == 'aprobado') {
+                        $careerData['projects'][] = $project;
+                    }
+                }
+                
+                $academyData['careers'][] = $careerData;
+            }
+            
+            $academiesData[] = $academyData;
+        }
+    
+        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division'));
     }
-
-    public function assistantIndex()
-    {
-
-        $user = auth()->user();
-        $userData = User::find($user->id);
-        $academie = Academy::paginate(1);
-        return view('Eliud.reports.assistantsReports', compact('academie', 'userData'));
-    }
+    
+    
 
     /**
      * Show the form for creating a new resource.

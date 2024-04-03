@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full h-screen flex justify-center items-center bg-white">
+<div class="w-full py-2 sm:h-screen flex justify-center items-center bg-white">
 
     <form action="{{ route('panel-companies.update', $company->id) }}" method="POST" class="flex flex-col font-montserrat mx-30 space-y-5 lg:w-[80vw] sm:w-[90vw]">
         <div class="w-full h-fit flex justify-center md:justify-start">
@@ -8,7 +8,7 @@
             @csrf
             @method('PUT') {{-- Este método indica que se utilizará el método PUT para actualizar la empresa --}}
         </div>
-        <div class="w-full gap-4 grid grid-cols-2 space-y-2">
+        <div class="w-full gap-4 sm:grid grid-cols-2 space-y-2">
             <div class=" space-y-2">
                 <p class="text-sm">Nombre de la empresa</p>
                 <input type="text" name="name" value="{{ $company->name }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3   w-full" placeholder="Nombre">

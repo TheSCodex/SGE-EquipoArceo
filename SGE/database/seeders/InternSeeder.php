@@ -36,7 +36,8 @@ class InternSeeder extends Seeder
                 'career_id' => $advisor->career_id,
                 'book_id' => $book->id,
                 'period' => 'Mayo - Julio',
-                "student_status_id" => $status_id
+                "student_status_id" => $status_id,
+                "Group" => 'SM51'
             ]);
         }
     }

@@ -41,10 +41,10 @@
                             </thead>
                             <tbody class="text-sm">
                                 @foreach ($dataStudents as $data)
-                                    <tr class="data-row border-b border-[#999]">
-                                        <td class="py-4">{{ $data->name }}  {{$data->lastname}}</td>
-                                        <td class="py-4">{{ \Illuminate\Support\Str::limit($data->careers, 40, $end='...') }}</td>
-                                        <td class="py-4">{{ $data->advisor_name }}</td>
+                                <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                                        <td class="py-4 font-roboto font-bold">{{ $data->name }}  {{$data->lastname}}</td>
+                                        <td class="py-4 font-roboto font-bold">{{ \Illuminate\Support\Str::limit($data->careers, 40, $end='...') }}</td>
+                                        <td class="py-4 font-roboto font-bold">{{ $data->advisor_name }}</td>
 
                                         {{-- <td class="py-4">{{ $data->user->name }} {{ $data->user->last_name }}</td>
                                         <td class="py-4">{{ $data->user->careerAcademy->career->name }}</td>
