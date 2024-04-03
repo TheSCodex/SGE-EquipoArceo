@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+        <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores</h1>
 
             <div class="flex items-center flex-row justify-end">
