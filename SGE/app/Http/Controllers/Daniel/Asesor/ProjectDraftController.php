@@ -41,7 +41,7 @@ class ProjectDraftController extends Controller
         $businessSector = null;
         $businessAdvisor = null;
         $company = null;
-    
+
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
             //dd($project);
@@ -56,6 +56,7 @@ class ProjectDraftController extends Controller
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
 
         $project = Project::find($interns->project_id);
+        
     
         if (!$project) {
             return view('Daniel.Projects.ProjectView');
@@ -93,6 +94,11 @@ class ProjectDraftController extends Controller
      * Store a newly created resource in storage.
      */
 
+    public function onRev(project $id){
+        Project::where('id', $id->id)->update(['status' => 'En revision']);
+        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+    }
+
     public function storeLike(project $id){
         $userId = Auth::id();
         $projectId = $id->id;
@@ -107,6 +113,18 @@ class ProjectDraftController extends Controller
             Project::where('id', $projectId)->update(['like' => 0]);
         }
         Project::where('id', $projectId)->increment('like');
+
+        $projectAfter = Project::where('id', $projectId)->first(); //Es para asegurarse que el numero de likes sea el correcto, elimina el riesgo de que algo haya salido mal
+        $inReview = Comment::where('project_id', $projectId)->where('status', 'Pendiente')->get();
+        $likeCount = $projectAfter->like;
+
+        if($likeCount >= 3 && isset($inReview)){
+            Project::where('id', $projectId)->update([
+                'status' => 'Aprobado',
+                'approval date' => DB::raw('now()')
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Like añadido correctamente.');
     }
 
@@ -143,7 +161,12 @@ class ProjectDraftController extends Controller
         $request->validate([
             'content' => 'required',
         ]);
-        $academicAdvisorId = Auth::id();
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        // Buscar el registro en la tabla academic_advisor donde user_id sea igual al ID del usuario logueado
+        $academicAdvisorId = AcademicAdvisor::where('user_id', $userId)->value('id');
+        
         // Crear un nuevo comentario
         $comment = new Comment();
         $comment->content = $request->input('content');
