@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\AcademicAdvisor;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Project;
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -59,12 +60,48 @@ class StudentController extends Controller
             ->whereNotNull('interns.project_id')
             ->get();
 
-        // dd($empresarial);
-        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial, 'comments' => $comments, "studentProject" => $studentProject]);
-    }
 
-    public function studentEvents()
-    {
-        return view('Michell.StudentEvents.studentEvents');
-    }
+        //Obtener los dias faltantes
+        $userId = Auth::id();
+        $intern = Intern::where("user_id", $userId)->first();
+        if (!$intern || !$intern->project_id) {
+            $mensaje = "Aún no se ha agregado un proyecto.";
+            return view('Michell.StudentHome.studentHome', compact('mensaje'));
+        }
+        $project = Project::find($intern->project_id);
+        $start_date = Carbon::parse($project->start_date);
+        $end_date = Carbon::parse($project->end_date);
+        $current_date = Carbon::now();
+
+        $diasTranscurridos = $current_date->diffInDays($start_date);
+        $TotalDeDias = $start_date->diffInDays($end_date);
+        $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
+
+        return view('Michell.StudentHome.studentHome', [
+            'advisor' => $advisor,
+            'empresarial' => $empresarial,
+            'studentProject' => $studentProject,
+            'diaActual' => $diaActual,
+            'TotalDeDias' => $TotalDeDias
+        ]);
+
+
+
+
+     // dd($empresarial);
+return view('Michell.StudentHome.studentHome', [
+    'advisor' => $advisor,
+    'empresarial' => $empresarial,
+    'comments' => $comments,
+    "studentProject" => $studentProject,
+    'diaActual' => $diaActual,
+    'totalDeDias' => $totalDeDias
+]);
+
+}
+
+public function studentEvents()
+{
+    return view('Michell.StudentEvents.studentEvents');
+}
 }
