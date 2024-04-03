@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\BusinessAdvisor;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
 
 
 class AdvisorController extends Controller
@@ -97,10 +98,17 @@ class AdvisorController extends Controller
      */
     public function destroy($id)
     {
-        $advisor = BusinessAdvisor::findOrFail($id);
-        $advisor->delete();
-    
-        return redirect()->route('panel-advisors.index')->with('success', 'Asesor eliminado exitosamente');
+        try {
+            DB::beginTransaction();
+            DB::select('CALL delete_business_advisor(?)', [$id]);
+            DB::commit();
+            
+            return redirect()->back()->with('success', '¡Division eliminada exitosamente!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Error al eliminar la division: ' . $e->getMessage());
+        }
     }
+    }
+
     
-}
