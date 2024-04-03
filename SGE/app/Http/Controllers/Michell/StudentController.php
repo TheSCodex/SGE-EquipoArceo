@@ -25,6 +25,14 @@ class StudentController extends Controller
             $student = 1;
         }
         // dd($student);
+        
+        // $studentProject = Intern::join("projects", "interns.project_id", "=", "projects.id")
+        // ->where("interns.id", "=", $student)
+        // ->first();
+        $studentProject = null;
+        
+        // dd($studentProject);
+
         // Obtener el nombre del asesor académico
         $advisor = DB::table('users')
             ->join('interns', 'users.id', '=', 'interns.academic_advisor_id')
@@ -42,7 +50,7 @@ class StudentController extends Controller
             ->get();
 
             // dd($empresarial);
-        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial]);
+        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial, "studentProject" => $studentProject]);
     }
 
     public function studentEvents()
