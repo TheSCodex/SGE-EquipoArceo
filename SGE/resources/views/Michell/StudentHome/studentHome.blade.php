@@ -41,7 +41,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl"></p>
+                        <p class="font-bold text-2xl">{{ $studentsCommentsCount }}</p>
                         <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
                     </div>
                 </div>
