@@ -13,7 +13,7 @@
                         <h1 id="tableTitle" class="text-xl font-bold">Lista de bajas</h1>
                         <div class="flex items-center">
                             <div class="flex items-center border border-primaryColor rounded-md px-4">
-                                <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscardor"
+                                <input type="text" id="bajaSearch" name="bajaSearch" placeholder="Buscador"
                                     class="text-sm font-bold placeholder-primaryColor border-none rounded-md focus:ring-0 text-[#888]">
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primaryColor">
