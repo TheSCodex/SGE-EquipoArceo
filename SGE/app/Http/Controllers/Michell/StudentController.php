@@ -80,6 +80,7 @@ class StudentController extends Controller
 
         $diasTranscurridos = $current_date->diffInDays($start_date);
         $TotalDeDias = $start_date->diffInDays($end_date);
+        // dd($TotalDeDias);
         $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
 
         return view('Michell.StudentHome.studentHome', [
@@ -93,6 +94,7 @@ class StudentController extends Controller
 
 
         //comentarios
+
         $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
             ->whereNotNull("interns_id")
             ->count();
@@ -108,11 +110,10 @@ class StudentController extends Controller
             'TotalDeDias' => $TotalDeDias,
             "studentsCommentsCount" => $studentsCommentsCount,
         ]);
+    }
 
-}
-
-public function studentEvents()
-{
-    return view('Michell.StudentEvents.studentEvents');
-}
+    public function studentEvents()
+    {
+        return view('Michell.StudentEvents.studentEvents');
+    }
 }
