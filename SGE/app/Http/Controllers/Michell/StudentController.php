@@ -59,8 +59,18 @@ class StudentController extends Controller
             ->whereNotNull('interns.project_id')
             ->get();
 
+        $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
+            ->whereNotNull("interns_id")
+            ->count();
+
         // dd($empresarial);
-        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial, 'comments' => $comments, "studentProject" => $studentProject]);
+        return view('Michell.StudentHome.studentHome', [
+            'advisor' => $advisor, 
+            'empresarial' => $empresarial, 
+            'comments' => $comments, 
+            "studentProject" => $studentProject,
+            "studentsCommentsCount" => $studentsCommentsCount,
+        ]);
     }
 
     public function studentEvents()
