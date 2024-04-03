@@ -5,7 +5,6 @@
 @endsection
 
 @section('contenido')
-
     <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
@@ -188,24 +187,18 @@
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
-                            @if ($project->status == 'Aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
-                            @elseif($project->status == 'En revision')
+                            @if (strtolower($project->status) == 'aprobado')
+                            <p class="">El proyecto ha sido aprobado</p>
+                            @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
                                 <p class="">Este proyecto aun no esta en revision</p>
-                            @endif
-
-
-                            @if ($project->status != 'Aprobado' && $project->status != 'En revision')
-                                <form method="POST"
-                                    action="{{ route('OnRev', ['id' => $project->id]) }}">
+                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a revisión</button>
-                                    </form>
+                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a  revisión</button>
+                                </form>
                             @endif
-
                         </div>
                     </div>
                 </div>
@@ -225,7 +218,7 @@
 
                             @if (isset($projectLikes))
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-Asesor.onRev', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
