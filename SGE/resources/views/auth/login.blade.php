@@ -19,7 +19,7 @@
                 <label for="user_email" class="block text-lg font-semibold text-gray-800 mb-2">Correo electrónico</label>
                 <input type="email" id="user_email" name="email" value="{{ old('email') }}" placeholder="user@gmail.com" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-800 leading-tight focus:outline-none focus:shadow-outline font-montserrat">
                 @error('email')
-                    <p class="text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-sm text-red">{{ $message }}</p>
                 @enderror
             </div>
             <div class="mb-6">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 @error('password')
-                    <p class="text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-sm text-red">{{ $message }}</p>
                 @enderror
                 <a class="mt-3 inline-block align-baseline font-semibold text-lg hover:text-primaryColor" href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
             </div>

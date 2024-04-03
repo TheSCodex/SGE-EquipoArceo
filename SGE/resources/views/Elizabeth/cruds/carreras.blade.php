@@ -5,8 +5,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+            <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
+
             <div class="flex items-center flex-row justify-end">
                 <div>
                     <div class="hidden md:flex items-center relative" >
@@ -17,6 +18,7 @@
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
             </div>
+            
             
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                 
@@ -30,8 +32,25 @@
                 </a>
 
             </div>
+            
         </div>
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="flex mt-[2%] px-[4%]  ">
+            <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
+               <a href="panel-careers">
+                <button id="btnAll"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
+                </a>
+                <a href="panel-academies">
+                    <button id="btnWithAdvisor"
+                    class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
+                </a>
+                <a href="panel-divisions">
+                    <button id="btnWithOutAdvisor"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+                </a>
+            </section>
+          </div>
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                     @foreach ($careers as $career)
@@ -56,19 +75,18 @@
                     @endforeach
                 </div>
             </div>
-            <div class="hidden lg:block w-full">
-                <table class="text-start w-full">
-                    <tr>
+            <div class="hidden lg:block w-full ">
+                <table class="text-start w-full ">
+                    <tr class="border-b border-gray-200 pb-[2%]">
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%]">Presidente</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                     </tr>
+                    @if(count($careers) > 0)
                     @foreach ($careers as $career)
-                    <tr>
-                        <td class="font-roboto font-bold py-5">{{ $career->name }}</td>
+                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
+                        <td class="font-roboto pl-5 font-bold py-5">{{ $career->name }}</td>
 
                         <td class="font-roboto font-bold py-5 text-start ">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
@@ -78,32 +96,14 @@
                             @endif    
                         </td>
 
-                        <td class="font-roboto font-bold py-5 text-start ">
-                            @if ($division = $divisions->where('id', $academy->division_id)->first())
-                                {{ $division->name }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
                         
-                        <td class="font-roboto font-bold py-5 text-start">
-                            @if ($academy = $academies->where('id', $career->academy_id)->first())
-                                @if ($president = $presidents->where('id', $academy->president_id)->first())
-                                    {{ $president->name }}
-                                @else
-                                    N/A
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
                         <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-center">
+                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-start">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $career->name }}, Presidente: {{ $career->position }}', '{{ $career->id }}')">
+                        <td class="font-roboto font-bold py-5  justify-start px-[6%] flex cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
                             <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -112,6 +112,9 @@
                         </td> 
                     </tr>
                     @endforeach
+                    @else
+                    <h1 class="text-xl">No hay datos registrados </h>
+                    @endif
                 </table>
                 {{$careers->links()}}
             </div>

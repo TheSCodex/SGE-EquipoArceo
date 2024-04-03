@@ -13,7 +13,9 @@ class CreateDeleteCareerProcedure extends Migration
     public function up()
     {
         DB::unprepared("
-        
+
+        DROP PROCEDURE IF EXISTS proc_delete_career;
+
         CREATE PROCEDURE proc_delete_career(IN _id INT)
         BEGIN
             DECLARE done INT DEFAULT FALSE;

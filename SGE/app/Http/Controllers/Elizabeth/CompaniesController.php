@@ -39,7 +39,7 @@ class CompaniesController extends Controller
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'address' => 'required|string|max:255',
-        'phone' => 'required|string|max:20|regex:/^[0-9]+$/',
+        'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
         'email' => 'required|string|email|max:255',
         'registration_date' => 'required|date',
         'rfc' => 'required|string|max:255',

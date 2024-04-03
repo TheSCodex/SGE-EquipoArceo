@@ -19,7 +19,7 @@ Recover Password
         <label for="email" class="block text-lg font-semibold text-gray-700 mb-2">Correo Electrónico</label>
         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="user@gmail.com" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus>
         @error('email')
-            <p class="text-red-600 text-sm">
+            <p class="text-red text-sm">
               {{ $message }}
             </p>
         @enderror

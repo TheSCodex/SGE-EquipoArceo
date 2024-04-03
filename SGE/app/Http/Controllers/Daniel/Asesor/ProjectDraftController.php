@@ -29,7 +29,7 @@ class ProjectDraftController extends Controller
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
-        $interns = Intern::where("academic_advisor_id", $AcadAdvi->id)->first();
+        $interns = Intern::where("project_id", $id->id)->first();
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
@@ -41,7 +41,7 @@ class ProjectDraftController extends Controller
         $businessSector = null;
         $businessAdvisor = null;
         $company = null;
-    
+
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
             //dd($project);
@@ -56,6 +56,7 @@ class ProjectDraftController extends Controller
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
 
         $project = Project::find($interns->project_id);
+        
     
         if (!$project) {
             return view('Daniel.Projects.ProjectView');
@@ -79,7 +80,8 @@ class ProjectDraftController extends Controller
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
-        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->first(); //Reemplazar tan pronto como haya un modelo
+        $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
+ //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
             return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
@@ -91,6 +93,11 @@ class ProjectDraftController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function onRev(request $id){
+        Project::where('id', $id->id)->update(['status' => 'En revision']);
+        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+    }
 
     public function storeLike(project $id){
         $userId = Auth::id();
@@ -106,6 +113,18 @@ class ProjectDraftController extends Controller
             Project::where('id', $projectId)->update(['like' => 0]);
         }
         Project::where('id', $projectId)->increment('like');
+
+        $projectAfter = Project::where('id', $projectId)->first(); //Es para asegurarse que el numero de likes sea el correcto, elimina el riesgo de que algo haya salido mal
+        $inReview = Comment::where('project_id', $projectId)->where('status', 'Pendiente')->get();
+        $likeCount = $projectAfter->like;
+
+        if($likeCount >= 3 && isset($inReview)){
+            Project::where('id', $projectId)->update([
+                'status' => 'Aprobado',
+                'approval date' => DB::raw('now()')
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Like añadido correctamente.');
     }
 
@@ -136,18 +155,18 @@ class ProjectDraftController extends Controller
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
         }
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request, Project $id)    {
+        $projectId = $id->id;
         // Validar los datos del formulario
         $request->validate([
             'content' => 'required',
         ]);
-        $academicAdvisorId = Auth::id();
-        $projectId = $request->input('project_id');
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
 
-        // Obtener el ID del intern relacionado con el proyecto
-        $internId = Intern::where('project_id', $projectId)->value('id');
-
+        // Buscar el registro en la tabla academic_advisor donde user_id sea igual al ID del usuario logueado
+        $academicAdvisorId = AcademicAdvisor::where('user_id', $userId)->value('id');
+        
         // Crear un nuevo comentario
         $comment = new Comment();
         $comment->content = $request->input('content');
@@ -155,7 +174,6 @@ class ProjectDraftController extends Controller
         $comment->status = 1; // Estado del comentario
         $comment->academic_advisor_id = $academicAdvisorId;
         $comment->project_id = $projectId;
-        $comment->interns_id = $internId;
         $comment->save();
 
         // Redirigir a la página anterior o a donde desees
