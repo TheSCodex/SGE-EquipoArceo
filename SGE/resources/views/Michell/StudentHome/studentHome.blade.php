@@ -7,14 +7,28 @@
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
-                    <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
-                    <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos,
-                        facilitando la planificación, organización y seguimiento de conferencias seminarios, talleres y
-                        actividades similares en entornos educativos...</p>
-                    <a href="anteproyecto"
-                        class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
-                        Iniciar
-                    </a>
+                    @if ($studentProject)
+                        <h3 class="font-bold text-lg md:text-xl">{{ $studentProject->name }}</h3>
+                        <div class="my-2">
+                            <p >Estatus: <span class="uppercase font-bold text-sm">{{ $studentProject->status }}</span></p>
+                            <p class="mb-4 break-words line-clamp-3">Descripción: <span class="font-normal">{{ $studentProject->description }}</span></p>
+                            <a href="anteproyecto"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                                Detalles
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-center font-bold text-lg md:text-xl mb-5">Todavía no has creado una propuesta</p>
+
+                        <div class="flex justify-center">
+                            <a 
+                                href="anteproyecto/nuevo"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm"
+                            >
+                                Crear propuesta
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">
