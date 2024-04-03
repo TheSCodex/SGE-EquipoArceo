@@ -31,8 +31,9 @@ class ProjectsDirectorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function View(project $id)
+    public function View(request $id)
     {
+        //dd($id);
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         

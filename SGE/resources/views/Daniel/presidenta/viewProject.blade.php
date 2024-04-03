@@ -218,7 +218,7 @@
 
                             @if (isset($projectLikes))
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-presidente.deleteLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
@@ -226,7 +226,7 @@
                                 </form>
                             @else
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-presidente.storeLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.storeLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
@@ -250,10 +250,10 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectop') }}"
+                        <a href="{{ route('observationsAnteproyectoP') }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
-                        <form method="POST" action="{{ route('anteproyecto-presidente.store', ['id' => $project->id]) }}"
+                        <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 

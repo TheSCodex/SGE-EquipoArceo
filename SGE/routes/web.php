@@ -157,11 +157,12 @@ Route::middleware('auth')->group(function () {
 
     //Ruta de la lista de los anteproyectos
     Route::get('anteproyectos-division', [ProjectsPresidentController::class, 'index'])->name('anteproyectos-presidente');
-    //Route::get("observaciones", [ProjectsPresidentController::class, "index"])->name('observationsAnteproyectoP');
+    Route::get("observaciones", [ProjectsPresidentController::class, "index"])->name('observationsAnteproyectoP');
     Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'store'])->name('anteproyecto-President.store');
     Route::post('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'store'])->name('anteproyecto-President.store');
     Route::post('anteproyecto/{id}/presidentLike', [ProjectsPresidentController::class, 'storeLike'])->name('anteproyecto-President.storeLike');
     Route::post('anteproyecto/{id}/presidentDeleteLike', [ProjectsPresidentController::class, 'deleteLike'])->name('anteproyecto-President.deleteLike');
+    Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'view'])->name('anteproyecto-President.view');
 
 
     Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
@@ -207,6 +208,9 @@ Route::middleware('auth')->group(function () {
 
     //Ruta de la lista de los anteproyectos
     Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos')->middleware('roleorcan:director,');
+    Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
+    Route::post('director/anteproyecto/{id}/storeLike', [ProjectsDirectorController::class, 'storeLike'])->name('anteproyecto-Director.storeLike')->middleware('roleorcan:director,');
+    Route::post('director/anteproyecto/{id}/deleteLike', [ProjectsDirectorController::class, 'deleteLike'])->name('anteproyecto-Director.deleteLike')->middleware('roleorcan:director,');
     //Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sancion-f')->middleware('roleorcan:director,generar-reportes-documentos');
     //Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaAprobacionMemoria'])->name('download.aprobacion-f')->middleware('roleorcan:director,generar-reportes-documentos');
     //Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacionMemoria'])->name('download.digitalizacion-f')->middleware('roleorcan:director,generar-reportes-documentos');
