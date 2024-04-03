@@ -42,6 +42,7 @@
                                 <p class="text-sm text-gray-500">Número telefonico: {{ $advisor->phone }}</p>
                                 <p class="text-sm text-gray-500">Empresa: {{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</p>
                                 <div class="flex justify-end mt-4">
+                                    
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" >
                                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                                     </a>
@@ -51,6 +52,9 @@
                                             @method('DELETE')
                                             <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
                                         </form>
+                                    </a>
+                                    <a href="{{ route('panel-advisors.show', $advisor->id) }}">
+                                        <img src="/img/ojoGreen.svg" alt="show" class="cursor-pointer ml-2 w-7">
                                     </a>
                                 </div>
                             </div>
