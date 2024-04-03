@@ -245,12 +245,22 @@
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
-                                <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
+                                <p class=' text-black w-full font-semibold text-sm'>
+                                    @if($comment->academic_advisor_id !== null)
+                                        Asesor
+                                    @elseif($comment->president_id !== null)
+                                        Presidente de academia
+                                    @elseif($comment->director_id !== null)
+                                        Director de division
+                                    @else
+                                        Estudiante
+                                    @endif
+                                </p>
                                 <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectoA') }}"
+                        <a href="{{-- route('observationsAnteproyectoA') --}}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"

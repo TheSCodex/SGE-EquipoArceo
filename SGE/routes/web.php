@@ -211,7 +211,7 @@ Route::middleware('auth')->group(function () {
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/storeLike', [ProjectsDirectorController::class, 'storeLike'])->name('anteproyecto-Director.storeLike')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/deleteLike', [ProjectsDirectorController::class, 'deleteLike'])->name('anteproyecto-Director.deleteLike')->middleware('roleorcan:director,');
-    Route::get('director/anteproyecto/comment/{id}', [ProjectsDirectorController::class, 'store'])->name('anteproyecto-Director.store');
+    Route::post('director/anteproyecto/{id}/store', [ProjectsDirectorController::class, 'store'])->name('anteproyecto-Director.store');
     //Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sancion-f')->middleware('roleorcan:director,generar-reportes-documentos');
     //Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaAprobacionMemoria'])->name('download.aprobacion-f')->middleware('roleorcan:director,generar-reportes-documentos');
     //Route::get('/Download/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacionMemoria'])->name('download.digitalizacion-f')->middleware('roleorcan:director,generar-reportes-documentos');
