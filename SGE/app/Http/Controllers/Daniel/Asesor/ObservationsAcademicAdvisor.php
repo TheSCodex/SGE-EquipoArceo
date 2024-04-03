@@ -35,16 +35,15 @@ class ObservationsAcademicAdvisor extends Controller
 
             // Obtener los comentarios normales relacionados con el proyecto
             $normalComments = Comment::where('project_id', $intern->project_id)
-                                    ->whereNotIn('id', function ($query) use ($intern) {
-                                        $query->select('id')
-                                            ->from('comments')
-                                            ->where('academic_advisor_id', $intern->academic_advisor_id);
-                                    })
-                                    ->get();
-
+            ->where(function ($query) use ($intern) {
+                $query->whereNull('interns_id')
+                    ->orWhere('interns_id', '!=', null);
+            })
+            ->get();
+        
             return view('Daniel.asesor.ObservationsAdvisor', compact('project', 'tutorComment', 'normalComments'));
         } else {
-            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
+            return redirect()->route('/asesor')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
         }
     }
 
@@ -80,7 +79,7 @@ class ObservationsAcademicAdvisor extends Controller
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }
         } else {
-            return redirect()->route('/student')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
+            return redirect()->route('/asesor')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
         }
     }
 

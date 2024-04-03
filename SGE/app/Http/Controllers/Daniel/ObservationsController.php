@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Daniel;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Intern;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +30,19 @@ class ObservationsController extends Controller
                                     ->first();
 
             // Buscamos los comentarios normales relacionados con el project_id del intern
-            $normalComments = Comment::where('project_id', $projectId)
-                ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
-                    $query->select('id')
-                        ->from('comments')
-                        ->where('academic_advisor_id', $academicAdvisorId);
-                })
-                ->get();
+            $normalComments = Comment::where('project_id', $projectId)->get();
+
+            // Obtenemos el nombre del usuario logeado
+            $loggedUserName = Auth::user()->name;
+
+            // Iteramos sobre los comentarios normales y asignamos el nombre del usuario logeado si está asociado
+            foreach ($normalComments as $comment) {
+                if ($comment->interns_id) {
+                    $comment->loggedUserName = $loggedUserName;
+                } else {
+                    $comment->loggedUserName = "Asesor";
+                }
+            }
 
             return view('Daniel.Projects.Observation')->with([
                 'userId' => $userId,
