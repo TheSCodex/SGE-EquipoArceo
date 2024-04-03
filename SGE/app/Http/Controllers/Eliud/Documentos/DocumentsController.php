@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eliud\Documentos;
 
 use App\Http\Controllers\Controller;
+use App\Models\DocRevisions;
 use App\Models\FileHistory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,6 +48,24 @@ class DocumentsController extends Controller
         return view('Eliud.crud.crud', compact('docs'));
     }
     
+    public function UpdateDocRevision(Request $request, $id)  
+    {
+        $request->validate([
+            'revision_number' => 'required',
+            'revision_id' => 'required',
+        ]);
+        
+        $doc = DocRevisions::find($id);
+        if (!$doc) {
+            return redirect()->back()->with('error', 'Document not found.');
+        }
+    
+        $doc->update($request->all());
+        $doc->save();
+
+        return redirect()->route('reportes-asistente') // Reemplaza 'nombre_ruta' con el nombre de la ruta a la que quieres redirigir
+            ->with('success', 'Document updated successfully.');
+    }
     
 
     /**

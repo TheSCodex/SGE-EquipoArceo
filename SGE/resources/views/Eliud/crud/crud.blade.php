@@ -106,7 +106,8 @@
                     <!-- Display table on larger screens -->
                     <div class="hidden w-full lg:block">
                         <table class="text-center">
-                            <tr>
+                            <tr clas>
+                                <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
                                 <th class="text-[#ACACAC] font-roboto text-xs">Título</th>
                                 <th class="text-[#ACACAC] font-roboto text-xs">Identificador</th>
                                 <th class="text-[#ACACAC] font-roboto text-xs">Correo</th>
@@ -115,7 +116,12 @@
                                 <th class="text-[#ACACAC] font-roboto text-xs"></th>
                             </tr>
                             @foreach ($docs as $doc)
-                                <tr>
+                                @php
+                                    $counter = ($docs->currentPage() - 1) * $docs->perPage() + $loop->index + 1;
+                                @endphp
+                                <tr
+                                    class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                                    <td class="font-roboto font-bold py-5 cursor-pointer">{{ $counter }}</td>
                                     <td class="py-5 font-bold font-roboto">{{ $doc['title'] }}</td>
                                     <td class="py-5 font-bold font-roboto">{{ $doc['advisor_identifier'] }}</td>
                                     <td class="py-5 font-bold font-roboto">{{ $doc['advisor_email'] }}</td>
@@ -149,11 +155,11 @@
                         </table>
                     </div>
                 </div>
-                    <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-                        <div class="my-5 mx-auto md:w-full">
-                            {{$docs->links()}}
-                        </div>
+                <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                    <div class="my-5 mx-auto md:w-full">
+                        {{ $docs->links() }}
                     </div>
+                </div>
             @endif
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
