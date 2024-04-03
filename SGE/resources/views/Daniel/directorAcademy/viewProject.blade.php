@@ -188,7 +188,7 @@
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if (strtolower($project->status) == 'aprobado')
-                            <p class="">El proyecto ha sido aprobado</p>
+                                <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
@@ -240,7 +240,11 @@
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
-                                <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
+                                @if ($comment->academic_advisor_id == 1)
+                                    <p class='text-black w-full font-semibold text-sm'>Asesor Academico</p>
+                                @else
+                                    <p class='text-black w-full font-semibold text-sm'>Estudiante</p>
+                                @endif
                                 <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
