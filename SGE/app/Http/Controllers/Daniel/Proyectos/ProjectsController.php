@@ -30,19 +30,19 @@ class ProjectsController extends Controller
         $intern = Intern::where("user_id", $userId)->first();
         $interns = Intern::where("user_id", $userId)->get();
 
-        
+
         // dd($intern);
-    
+
         if (!$intern || !$intern->project_id) {
             return view('Daniel.Projects.ProjectView');
         }
-    
+
         $project = Project::find($intern->project_id);
-    
+
         if (!$project) {
             return view('Daniel.Projects.ProjectView');
         }
-    
+
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
             //dd($project);
@@ -51,7 +51,7 @@ class ProjectsController extends Controller
                 //dd($company);
             }
         }
-        
+
         $user = User::where("id", $userId)->first();
         // dd($user);
 
@@ -61,16 +61,16 @@ class ProjectsController extends Controller
 
         $career = Career::where("id", $user->career_id)->first();
         //dd($career);
-        if(!$career || !$career->division_id){
-            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+        if (!$career || !$career->division_id) {
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
         }
         $division = Division::where("id", $career->division_id)->first();
-    
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns','user', 'career','division'));
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
     }
-    
-    
-    
+
+
+
     public function project()
     {
         return view('Daniel.presidenta.project');
