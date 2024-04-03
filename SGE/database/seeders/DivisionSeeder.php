@@ -15,7 +15,7 @@ class DivisionSeeder extends Seeder
     {
         $directors = User::whereHas('role', function ($query) {
             $query->where('title', 'director');
-        })->where('id', '<>', 4)->get();
+        })->get();
     
         $directorAssistants = User::whereHas('role', function ($query) {
             $query->where('title', 'asistenteDireccion');

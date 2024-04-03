@@ -73,14 +73,14 @@ class UsersSeeder extends Seeder
             'Rocío Arceo',
             'Mayra Fuentes',
             'Marlene Juárez',
-            'Luis Villafañana',
+            'Luis Villafaña',
         ];
 
         // Crear 4 usuarios director
         for ($i = 0; $i < 4; $i++) {
             $user = User::factory()->create([
                 'name' => $directores_nombres[$i], // Asignar nombres específicos
-                'email' => strtolower($directores_nombres[$i]) . '@utcancun.edu.mx',
+                'email' => strtolower(str_replace(' ', '', $directores_nombres[$i])) . '@utcancun.edu.mx',
                 'password' => bcrypt('12345678'),
             ]);
             $user->role()->associate($rolDirector);
