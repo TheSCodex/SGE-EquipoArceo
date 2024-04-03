@@ -82,30 +82,23 @@
                     <div class="flex flex-col gap-5">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <div class="col-span-2">
-                                <p class="text-xl text-[#555]">Elsa Luz Rios</p>
-                                <p class=" text-[#888] line-clamp-3">La estructura de tu propuesta es correcta pero necesito
-                                    que expandas tu justificación e incluyas referencias para tus argumentos</p>
-                            </div>
-                            <div class="col-span-1 grid place-content-center">
-                                <a href="anteproyecto/observaciones"
-                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
-                                    Ampliar observación
-                                </a>
-                            </div>
+                                @if ($comments->isEmpty())
+                                    <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
+                                @else
+                                    @foreach ($comments as $comment)
+                                        <p class="text-xl text-[#555]">{{ $comment->name }}</p>
+                                        <p class="text-[#888] line-clamp-3">{{ $comment->content }}</p>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-span-1 grid place-content-center">
+                                        <a href="anteproyecto/observaciones"
+                                        class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
+                                        Ampliar observación
+                                    </a>
+                                </div>
+                                @endif
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <div class="col-span-2">
-                                <p class="text-xl text-[#555]">Elsa Luz Rios</p>
-                                <p class=" text-[#888] line-clamp-3">La estructura de tu propuesta es correcta pero necesito
-                                    que expandas tu justificación e incluyas referencias para tus argumentos</p>
-                            </div>
-                            <div class="col-span-1 grid place-content-center">
-                                <a href="anteproyecto/observaciones"
-                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
-                                    Ampliar observación
-                                </a>
-                            </div>
-                        </div>
+                        
                     </div>
 
                   

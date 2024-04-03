@@ -7,6 +7,8 @@ use App\Models\Intern;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Models\AcademicAdvisor;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,15 +26,19 @@ class StudentController extends Controller
         if ($student === null) {
             $student = 1;
         }
+        $intern = Intern::where("user_id", $student)->first();
+        $interns = Intern::where("user_id", $student)->get();
+        // dd($interns);
         // dd($student);
-        
-        // $studentProject = Intern::join("projects", "interns.project_id", "=", "projects.id")
-        // ->where("interns.id", "=", $student)
-        // ->first();
-        $studentProject = null;
-        
-        // dd($studentProject);
+        //Obtener comentarios
 
+        $comments = Comment::join('users', 'comments.academic_advisor_id', '=', 'users.id')
+            ->where('comments.interns_id', $student)
+            ->select('users.name', 'comments.content')
+            ->get();
+
+
+        // dd($comments);
         // Obtener el nombre del asesor académico
         $advisor = DB::table('users')
             ->join('interns', 'users.id', '=', 'interns.academic_advisor_id')
@@ -49,8 +55,8 @@ class StudentController extends Controller
             ->whereNotNull('interns.project_id')
             ->get();
 
-            // dd($empresarial);
-        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial, "studentProject" => $studentProject]);
+        // dd($empresarial);
+        return view('Michell.StudentHome.studentHome', ['advisor' => $advisor, 'empresarial' => $empresarial, 'comments' => $comments, "studentProject" => $studentProject]);
     }
 
     public function studentEvents()
