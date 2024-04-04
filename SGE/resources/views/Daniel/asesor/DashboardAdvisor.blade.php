@@ -55,7 +55,10 @@
                             @if ($Intern->isEmpty())
                                 <p class="text-sm font-roboto">No hay alumnos asignados.</p>
                             @else
-                                @foreach ($Intern as $intern)
+                                @php
+                                    $randomInterns = $Intern->shuffle()->take(3);
+                                @endphp
+                                @foreach ($randomInterns  as $intern)
                                     <div class="flex items-center px-4">
                                         <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario"
                                             class="w-8 h-8 mr-2">
@@ -98,7 +101,7 @@
 
                 <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full min-h-[200px] items-center justify-center">
                     @if ($comments->isEmpty())
-                    <p class="text-center">No hay comentarios para mostrar.</p>
+                        <p class="text-center">No hay comentarios para mostrar.</p>
                     @else
                         @foreach ($comments as $comment)
                             <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center  w-full">
@@ -109,7 +112,7 @@
                                 <div class="mt-5 lg:mt-0">
                                     <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
 
-                                        <a href="{{ route('anteproyecto-Asesor.store', $comment->project_id) }}">Ampliar
+                                        <a href="{{ route('observationsAnteproyectoA', $comment->project_id) }}">Ampliar
                                             Observaciones</a>
                                     </button>
                                 </div>
