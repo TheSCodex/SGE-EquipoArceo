@@ -1,5 +1,5 @@
 @extends('templates/authTemplate')
-@section('titulo', 'Estuadiantes Asesorados')
+@section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
@@ -140,7 +140,8 @@
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="tipo">Elija el tipo de
                                                                             Sanción</label>
-                                                                        <select name="tipo" id="tipo">
+                                                                        <select name="tipo" id="tipo"
+                                                                            onchange="toggleServiceHours(this)">
                                                                             <option value="1">Amonestación escrita
                                                                             </option>
                                                                             <option value="2">Amonestación con horas de
@@ -148,10 +149,13 @@
                                                                             <option value="3">Cancelación de Estadía
                                                                             </option>
                                                                         </select>
-                                                                    </div>
-                                                                    <div class="flex flex-col justify-between mt-2">
-                                                                        <label for="serviceHours">Horas de Servicio</label>
-                                                                        <input type="number" name="serviceHours" id="serviceHours" />
+                                                                        <div id="serviceHoursContainer"
+                                                                            class="flex flex-col justify-between mt-2 w-full">
+                                                                            <label for="serviceHours">Horas de
+                                                                                Servicio</label>
+                                                                            <input class="w-full" type="number"
+                                                                                name="serviceHours" id="serviceHours" />
+                                                                        </div>
                                                                     </div>
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
@@ -170,7 +174,8 @@
                                                         <div class="modal-content  w-[24%]">
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    Generar
                                                                     Carta de Aprobacion de Memoria
                                                                 </h5>
                                                                 <button type="button"
@@ -224,22 +229,22 @@
 
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="motivo">Elija el tipo de
-                                                                            Sanción</label>
+                                                                            Estadía</label>
                                                                         <select name="motivo" id="motivo">
                                                                             <option value="1">
-                                                                                Excelencia académica 
+                                                                                Excelencia académica
                                                                             </option>
                                                                             <option value="2">
-                                                                                Experiencia Laboral 
-                                                                                </option>
+                                                                                Experiencia Laboral
+                                                                            </option>
                                                                             <option value="3">
-                                                                                Movilidad internacional 
+                                                                                Movilidad internacional
                                                                             </option>
                                                                             <option value="4">
-                                                                                Proyecto de investigación 
+                                                                                Proyecto de investigación
                                                                             </option>
                                                                             <option value="5">
-                                                                                Certificación Profesional 
+                                                                                Certificación Profesional
                                                                             </option>
                                                                         </select>
                                                                     </div>
@@ -270,7 +275,17 @@
                     {{ $interns->links() }}
                 </div>
             </section>
-
+            <script>
+                function toggleServiceHours(select) {
+                    var serviceHoursContainer = document.getElementById('serviceHoursContainer');
+                    serviceHoursContainer.style.display = select.value == '2' ? 'block' : 'none';
+                }
+            </script>
+            <script>
+                window.onload = function() {
+                    toggleServiceHours(document.getElementById('tipo'));
+                };
+            </script>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     const editBtns = document.querySelectorAll('#editBtn');
