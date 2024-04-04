@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\App;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null)
+    public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null)
     {
         $user = auth()->user();
         $userData = User::find($user->id);
         $motivo = $motivo ?? $request->input('motivo');
         $tipo = $tipo ?? $request->input('tipo');
+        $serviceHours = $serviceHours ?? $request->input('serviceHours');
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
         $project = Project::find($interns[0]->project_id);
@@ -52,7 +53,8 @@ class ReportsController extends Controller
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
             'type' => $tipo,
-            'reason' => $motivo
+            'reason' => $motivo,
+            'serviceHours' => $serviceHours,
         ];
 
         $authUser = auth()->user();
@@ -62,7 +64,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
         return $pdf->stream();
     }
 
@@ -87,9 +89,10 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function printReportCartaDigitalizacion(string $id)
+    public function printReportCartaDigitalizacion(Request $request, string $id, string $motivo = null)
     {
         $user = auth()->user();
+        $motivo = $motivo ?? $request->input('motivo');
         $userData = User::find($user->id);
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
@@ -116,6 +119,7 @@ class ReportsController extends Controller
             'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
             'project' => $project?->name,
+            'reason' => $motivo,
             'interns' => $interns[0]?->id,
         ];
 
