@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <hr class="border-white my-4 w-5/4 m-4">
-                <div class="flex flex-col overflow-y-hidden hover:overflow-y-auto w-full h-[600px]">
+                <div class="flex flex-col overflow-y-hidden hover:overflow-y-auto w-full h-[700px]">
                     @if (count($todayEvents) == 0 )
                     <p class="font-bold text-white text-xl text-center ">¡No hay eventos pendientes para hoy!</p>
                     <hr class="border-white my-4 w-5/4 m-4">
@@ -113,7 +113,7 @@
                             <div class="px-4 mb-2">
                                 <p class="font-bold text-[#193c45]">Hoy <span class="text-sm text-[#054759]"> {{$day}}/{{$month}}/{{$year}}</span></p>
                             </div>
-                            <div class="px-4 mt-4 text-white text-sm">
+                            <div class="px-4 mt-4 text-white text-sm break-words">
                                 <p class=" font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                     <p class=" ml-6 "><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['receiver']['user']['name'] }}</p>
@@ -151,7 +151,7 @@
                                 <p class="font-bold text-[#193c45]">Mañana <span class="text-sm text-[#054759]">{{$nextDay }}/{{$month}}/{{$year}}</span></p>
                             </div>
                             <!-- Detalles del evento de mañana -->
-                            <div class="px-4 text-white text-sm">
+                            <div class="px-4 text-white text-sm  break-words">
                                 <p class="font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($tomorrowEvent->date_start, 11)}} - {{ substr($tomorrowEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['receiver']['user']['name'] }}</p>
@@ -240,7 +240,7 @@
                                                             </div>
                                                         </a>
                                                 @endif
-                                                <div class="contentTip">
+                                                <div class="contentTip break-words">
                                                     <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
@@ -272,7 +272,7 @@
                                                     </a>
 
                                                 @endif
-                                                <div class="contentTip">
+                                                <div class="contentTip break-words">
                                                     <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
@@ -296,7 +296,7 @@
                                                             </div>
                                                         </a>
                                                 @endif
-                                                <div class="contentTip">
+                                                <div class="contentTip break-words">
                                                     <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
                                                     <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
