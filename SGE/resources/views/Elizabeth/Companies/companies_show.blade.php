@@ -46,7 +46,7 @@
                 </div>
               
             </div>
-            <a class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md  text-white hover:bg-darkgreen text-center" href="/panel-users">Regresar al panel de empresas</a>
+            <a class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md  text-white hover:bg-darkgreen text-center" href="/panel-companies">Regresar al panel de empresas</a>
 
 
     </form>

@@ -182,22 +182,23 @@
         }
 
         function confirmDelete(companyId) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¡No podrás revertir esto!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminarlo!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Si el usuario confirma la eliminación, envía el formulario
-                    document.getElementById('deleteForm').action = '/panel-companies/' + companyId;
-                    document.getElementById('deleteForm').submit();
-                }
-            });
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma la eliminación, envía el formulario
+            document.getElementById('deleteForm').action = '/panel-companies/' + companyId;
+            document.getElementById('deleteForm').submit();
         }
+    });
+}
+
 
         function searchTable() {
             var searchText = document.getElementById("search").value.toLowerCase();
