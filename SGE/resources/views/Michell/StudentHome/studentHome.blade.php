@@ -41,7 +41,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl">{{ $studentsCommentsCount }}</p>
                         <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl"></p>
                         <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
@@ -69,8 +69,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 120</p>
-                        <p class="text-sm text-black opacity-50">Dias restantes</p>
+                    @if(isset($mensaje))
+                   <p>{{ $mensaje }}</p>
+                   @else
+                  <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
+                   @endif
                     </div>
                 </div>
 
