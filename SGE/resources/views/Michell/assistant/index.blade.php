@@ -162,19 +162,17 @@
             <div class="bg-white rounded-md py-7 px-10">
                 <div class="flex justify-between">
                     <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
-                    <svg width="25" height="22" viewBox="0 0 25 22" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="12.8856" cy="10.8065" rx="12.0282" ry="10.3881" fill="#BDBDBD" />
-                        <rect x="10.8809" y="8.49805" width="4.00938" height="9.23382" rx="2.00469" fill="white" />
-                        <rect x="10.8809" y="3.88135" width="4.00938" height="3.46268" rx="1.73134" fill="white" />
-                    </svg>
                 </div>
 
                 <p class="text-[#828282]">Carreras de la division</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
-                <canvas id="myChart" class="max-h-[200px]"></canvas>
+                @if ($period == null)
+                    <p class="text-center text-[#828282] text-sm font-bold py-5">Aún no hay estudiantes en la división</p>
+                @else
+                    <canvas id="myChart" class="max-h-[200px]"></canvas>      
+                @endif
             </div>
         </section>
 
@@ -223,7 +221,12 @@
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Total de proyectos</p>
-                    <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
+
+                    @if ($projectMetrics["totalProjects"] == 0)
+                        <p class="text-center text-sm text-[#828282] font-bold py-14">Aún no hay proyectos en la división</p>
+                    @else
+                        <canvas id="total-proyectos" class="max-h-[200px]"></canvas> 
+                    @endif
                 </div>
             </div>
         </section>
@@ -261,7 +264,8 @@
 
         let approvedProjects = {{ Js::from($approvedProjectsByMonth) }};
         let careers = {{ Js::from($careers) }};
-        let mesesEnIntervalo = obtenerMesesEnIntervalo({{ Js::from($period['period']) }});
+        let serverPeriod = {{ Js::from($period) }};
+        let mesesEnIntervalo = obtenerMesesEnIntervalo(serverPeriod);
 
         const allCareers = [];
         approvedProjects.forEach(item => {

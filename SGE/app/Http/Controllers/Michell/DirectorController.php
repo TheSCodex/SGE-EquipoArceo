@@ -47,10 +47,12 @@ class DirectorController extends Controller
         //Obtener los dias faltantes
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
-        if (!$intern || !$intern->project_id) {
-            $mensaje = "Aún no se ha agregado un proyecto.";
-            return view('Michell.director.index', compact('mensaje'));
-        }
+
+        dd($intern);
+        // if (!$intern || !$intern->project_id) {
+        //     $mensaje = "Aún no se ha agregado un proyecto.";
+        //     return view('Michell.director.index', compact('mensaje'));
+        // }
         $project = Project::find($intern->project_id);
         $start_date = Carbon::parse($project->start_date);
         $end_date = Carbon::parse($project->end_date);
@@ -77,6 +79,13 @@ class DirectorController extends Controller
         // Obtener periodo actual
         $period = Intern::whereIn("interns.career_id", $careersId)->latest()->select("period")->first();
 
+        if (isset($period["period"])) {
+            $period = $period["period"];
+        }
+        else {
+            $period = 0;
+        }
+
         // Contar proyectos aprobados, en revisión y totales
         $projectMetrics = [
             'approvedCount' => Intern::whereIn('career_id', $careers->pluck('id'))
@@ -91,6 +100,8 @@ class DirectorController extends Controller
                 ->join('projects', 'interns.project_id', '=', 'projects.id')
                 ->count(),
         ];
+
+        // dd($projectMetrics);
 
         $approvedProjectsByMonth = Intern::whereIn('career_id', $careers->pluck('id'))
         ->join('projects', 'interns.project_id', '=', 'projects.id')
