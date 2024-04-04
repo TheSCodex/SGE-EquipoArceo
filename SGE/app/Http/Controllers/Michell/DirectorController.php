@@ -9,6 +9,9 @@ use App\Models\Division;
 use App\Models\Academy;
 use App\Models\Career;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
+use Carbon\Carbon;
 
 class DirectorController extends Controller
 {
@@ -40,6 +43,23 @@ class DirectorController extends Controller
         $academies = Academy::where("division_id", $userDivision->id)->get();
 
         // dd($academies);
+
+        //Obtener los dias faltantes
+        $userId = Auth::id();
+        $intern = Intern::where("user_id", $userId)->first();
+        if (!$intern || !$intern->project_id) {
+            $mensaje = "Aún no se ha agregado un proyecto.";
+            return view('Michell.director.index', compact('mensaje'));
+        }
+        $project = Project::find($intern->project_id);
+        $start_date = Carbon::parse($project->start_date);
+        $end_date = Carbon::parse($project->end_date);
+        $current_date = Carbon::now();
+
+        $diasTranscurridos = $current_date->diffInDays($start_date);
+        $TotalDeDias = $start_date->diffInDays($end_date);
+        // dd($TotalDeDias);
+        $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
 
         // Obtener carreras de las academias
         $careers = Career::whereIn('academy_id', $academies->pluck('id'))
@@ -102,6 +122,9 @@ class DirectorController extends Controller
             "userDivision",
             "penalizationsNum",
             "projectMetrics",
+            "studentProject",
+            'diaActual',
+            'TotalDeDias',
             "period",
             "approvedProjectsByMonth"
         ));

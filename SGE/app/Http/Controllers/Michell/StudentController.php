@@ -107,6 +107,7 @@ class StudentController extends Controller
             "studentProject" => $studentProject,
             'diaActual' => $diaActual,
             'TotalDeDias' => $TotalDeDias,
+            
             "studentsCommentsCount" => $studentsCommentsCount,
             'votes' => $votes,
             'penalty' => $penalizations,

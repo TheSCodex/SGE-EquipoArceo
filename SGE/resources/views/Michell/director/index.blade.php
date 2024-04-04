@@ -74,7 +74,11 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/120</p>
+                        @if(isset($mensaje))
+                   <p>{{ $mensaje }}</p>
+                   @else
+                  <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
+                   @endif
                         <p class="text-gray-500 text-xs">Días restantes</p>
                     </div>
                 </div>
