@@ -221,7 +221,7 @@
                 </div>
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
@@ -243,11 +243,11 @@
                             observaciones</a>
 
                         <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-2">
+                            class="w-full font-normal flex  h-[fit] self-end mb-2 items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -260,7 +260,7 @@
                     </div>
                 @elseif(isset($comments) && count($comments) == 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
                         </div>
@@ -268,11 +268,11 @@
 
                         <form method="POST"
                             action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                            class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -284,7 +284,7 @@
                         </form>
                     @else
                         <div
-                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex justify-center items-center text-xl overflow-y-auto">
                             <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a
                                 trabajarlo
                                 ahora</p>
