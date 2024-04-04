@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Daniel;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Intern;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +30,19 @@ class ObservationsController extends Controller
                                     ->first();
 
             // Buscamos los comentarios normales relacionados con el project_id del intern
-            $normalComments = Comment::where('project_id', $projectId)
-                ->whereNotIn('id', function ($query) use ($academicAdvisorId) {
-                    $query->select('id')
-                        ->from('comments')
-                        ->where('academic_advisor_id', $academicAdvisorId);
-                })
-                ->get();
+            $normalComments = Comment::where('project_id', $projectId)->get();
+
+            // Obtenemos el nombre del usuario logeado
+            $loggedUserName = Auth::user()->name;
+
+            // Iteramos sobre los comentarios normales y asignamos el nombre del usuario logeado si está asociado
+            foreach ($normalComments as $comment) {
+                if ($comment->interns_id) {
+                    $comment->loggedUserName = $loggedUserName;
+                } else {
+                    $comment->loggedUserName = "Asesor";
+                }
+            }
 
             return view('Daniel.Projects.Observation')->with([
                 'userId' => $userId,
@@ -44,8 +51,7 @@ class ObservationsController extends Controller
             ]);
         } else {
             // Si no se encuentra un intern relacionado con el usuario autenticado, retorna un error o redirecciona según la lógica de tu aplicación
-            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');
-        }
+            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');        }
     }
 
     public function create()
@@ -74,6 +80,9 @@ class ObservationsController extends Controller
                 // Obtener el ID del intern
                 $internId = $intern->id;
 
+                // Obtener el parent_comment_id si está presente en la solicitud
+                $parentCommentId = $request->input('parent_comment_id');
+
                 // Guardar el comentario en la base de datos
                 $comment = new Comment();
                 $comment->content = $request->input('content');
@@ -81,6 +90,9 @@ class ObservationsController extends Controller
                 $comment->status = 1;
                 $comment->project_id = $projectId;
                 $comment->interns_id = $internId;
+                if ($parentCommentId) {
+                    $comment->parent_comment_id = $parentCommentId; // Establecer el parent_comment_id
+                }
                 $comment->save();
 
                 return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
