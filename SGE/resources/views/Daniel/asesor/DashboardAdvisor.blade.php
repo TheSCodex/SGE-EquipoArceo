@@ -21,14 +21,16 @@
                     <div class="rounded-lg h-auto bg-white flex flex-col gap-2 justify-center p-5 grow">
                         @forelse($notificaciones as $notificacion)
                             <div class="flex items-center px-4 p-1 my-2 justify-between">
-                                <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion" class="w-8 h-8 mr-2">
+                                <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
+                                    class="w-8 h-8 mr-2">
                                 <p class="text-sm font-roboto">{{ $notificacion->data['message'] }}</p>
                             </div>
                         @empty
-                            <div class="flex items-center px-4 p-1 my-2 justify-center flex-col"> 
-                                <img src="{{ asset('img/iconosDaniel/exclamation.svg') }}" alt="Notificacion" class="w-12 h-12 mb-1"> 
+                            <div class="flex items-center px-4 p-1 my-2 justify-center flex-col">
+                                <img src="{{ asset('img/iconosDaniel/exclamation.svg') }}" alt="Notificacion"
+                                    class="w-12 h-12 mb-1">
                                 <p class="text-md font-semibold font-roboto">No hay Notificaciones</p>
-                            </div>                            
+                            </div>
                         @endforelse
                     </div>
                 </section>
@@ -94,12 +96,12 @@
                     </h1>
                 </div>
 
-                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full">
+                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full min-h-[200px] items-center justify-center">
                     @if ($comments->isEmpty())
-                        <p>No hay comentarios para mostrar.</p>
+                    <p class="text-center">No hay comentarios para mostrar.</p>
                     @else
                         @foreach ($comments as $comment)
-                            <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
+                            <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center  w-full">
                                 <div class=" ">
                                     <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}</h3>
                                     <p class="text-sm font-roboto">{{ $comment->content }}</p>

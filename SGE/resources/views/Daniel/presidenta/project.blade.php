@@ -33,7 +33,7 @@
                                 <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
                                 <div class="flex justify-end mt-4 space-x-2">
                                     <td>
-                                        <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}"
+                                        <a href="{{ route('anteproyecto-President.store', $project->id) }}"
                                             class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold"">
                                             Ver detalles</a>
                                     </td>
@@ -66,11 +66,11 @@
                                     {{ $project->like !== null ? $project->like : 0 }}</td>
                                 <td class="font-roboto font-bold py-5 pl-5">{{ $project->adviser->name }}</td>
                                 <td class="font-roboto font-bold py-5 pl-5">{{ $project->start_date }}</td>
-                                <td class="font-roboto font-bold py-5 pl-5">{{ $project->status }}</td>
+                                <td class="font-roboto font-bold py-5 pl-5">{{ ucfirst($project->status) }}</td>
 
                                 </td>
                                 <td class="font-roboto font-bold py-5 cursor-pointer">
-                                    <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}"
+                                    <a href="{{ route('anteproyecto-President.store', $project->id) }}"
                                         class="flex justify-center">
                                         <img src="/img/ojoGreen.svg" class="w-7">
                                     </a>
