@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+        <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores</h1>
 
             <div class="flex items-center flex-row justify-end">
@@ -42,6 +42,7 @@
                                 <p class="text-sm text-gray-500">Número telefonico: {{ $advisor->phone }}</p>
                                 <p class="text-sm text-gray-500">Empresa: {{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</p>
                                 <div class="flex justify-end mt-4">
+                                    
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" >
                                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
                                     </a>
@@ -51,6 +52,9 @@
                                             @method('DELETE')
                                             <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
                                         </form>
+                                    </a>
+                                    <a href="{{ route('panel-advisors.show', $advisor->id) }}">
+                                        <img src="/img/ojoGreen.svg" alt="show" class="cursor-pointer ml-2 w-7">
                                     </a>
                                 </div>
                             </div>
@@ -67,8 +71,8 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Correo</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Número telefonico</th>
-
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Empresa</th>
+                        <th class="  text-[#ACACAC] font-roboto text-xs">Detalles</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Editar</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Eliminar</th>
                     </tr>
@@ -80,6 +84,13 @@
                                 <td class="font-roboto font-bold py-5">{{ $advisor->phone }}</td>
 
                                 <td class="font-roboto font-bold py-5">{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</td>
+                                
+                                <td class=" text-start  pl-5  font-roboto font-bold py-5">
+                                    <a href="{{ route('panel-advisors.show', $advisor->id) }}"
+                                                class="flex justify-center">
+                                                <img src="/img/ojoGreen.svg" class="w-7">
+                                            </a>
+                                        </td>
 
                                 <td class="font-roboto font-bold py-5 cursor-pointer ">
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-start">
