@@ -24,4 +24,9 @@ class Academy extends Model
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function careers()
+    {
+        return $this->hasMany(Career::class);
+    }
 }

@@ -5,14 +5,14 @@
 @endsection
 
 @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
             <div class="w-full md:h-full md:px-[7em] md:my-[2em] flex justify-center items-center">
                 <form action="{{ route('presidente.update', $student->id) }}" class=" font-montserrat space-y-5" novalidate
                     method="POST">
                     @csrf
                     @method('PUT')
-                    <h1 class="text-3xl font-bold">Asignar asesor academico</h1>
+                    <h1 class="text-3xl font-bold">Asignar asesor académico</h1>
                     <div class="text-sm w-full space-y-2">
                         <label for="" class="">Nombre del alumno</label>
                         <div class=" border rounded-md border-lightGray p-3">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col text-sm w-full justify-end space-y-2">
-                        <label for="" class="">Asesor academico</label>
+                        <label for="" class="">Asesor académico</label>
                         <select name="academic_advisor_id" id="academic_advisor_id" class="rounded-md border-lightGray">
                             <option value="">-- Selecciona un asesor --</option>
                             @foreach ($advisors as $advisor)

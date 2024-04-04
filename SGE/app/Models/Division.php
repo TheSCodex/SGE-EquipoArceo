@@ -15,8 +15,8 @@ class Division extends Model
         'directorAsistant_id'
     ];
 
-    public function careers()
+    public function academies()
     {
-        return $this->hasMany(Career::class);
+        return $this->hasMany(Academy::class);
     }
 }

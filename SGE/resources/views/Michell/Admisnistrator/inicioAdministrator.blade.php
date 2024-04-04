@@ -28,11 +28,7 @@
             <div class="bg-white rounded-md py-7 px-10">
                 <div class="flex justify-between">
                     <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
-                    <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="12.8856" cy="10.8065" rx="12.0282" ry="10.3881" fill="#BDBDBD"/>
-                    <rect x="10.8809" y="8.49805" width="4.00938" height="9.23382" rx="2.00469" fill="white"/>
-                    <rect x="10.8809" y="3.88135" width="4.00938" height="3.46268" rx="1.73134" fill="white"/>
-                    </svg>
+                   
                 </div>
 
                 <p class="text-[#828282]">Carreras de la division</p>

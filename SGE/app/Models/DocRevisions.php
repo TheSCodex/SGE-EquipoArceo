@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class DocRevisions extends Model
 {
     use HasFactory;
+
     protected $table = 'doc_revisions';
-    protected $fillable = ['revision_number', 'revision_id'];
+    protected $fillable = [
+        'revision_number', 
+        'revision_id',
+        'created_at',
+        'updated_at'
+    ];
 }
