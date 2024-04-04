@@ -24,9 +24,9 @@ class StudentController extends Controller
     {
         $user  = auth()->user();
         $student = $user->id;
-        if ($student === null) {
-            $student = 1;
-        }
+        // if ($student === null) {
+        //     $student = 1;
+        // }
         $intern = Intern::where("user_id", $student)->first();
         $interns = Intern::where("user_id", $student)->get();
         // dd($interns);
@@ -59,6 +59,8 @@ class StudentController extends Controller
             ->where('users.id', $student)
             ->whereNotNull('interns.project_id')
             ->get();
+        // dd($empresarial);
+
 
         //comentarios
         $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
@@ -82,7 +84,21 @@ class StudentController extends Controller
         // dd($TotalDeDias);
         $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
 
-        // dd($empresarial);
+        // Obtener votos
+        $votes = Intern::where('user_id', $student)
+        ->join('projects', 'interns.project_id', '=', 'projects.id')
+        ->select('projects.like')
+        ->first();
+        // dd($votes);
+
+        // Obtener penalizaciones
+        $penalizations = Intern::where('user_id', $student)
+        ->join('penalizations', 'interns.penalty_id', '=','penalizations.id')
+        ->select('penalizations.penalty_name','penalizations.description')
+        ->first();
+        // dd($penalizations);
+
+
         return view('Michell.StudentHome.studentHome', [
     
             'advisor' => $advisor,
@@ -92,6 +108,8 @@ class StudentController extends Controller
             'diaActual' => $diaActual,
             'TotalDeDias' => $TotalDeDias,
             "studentsCommentsCount" => $studentsCommentsCount,
+            'votes' => $votes,
+            'penalty' => $penalizations,
         ]);
     }
 

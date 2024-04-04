@@ -256,7 +256,7 @@ class EventController extends Controller
 
 
         // Obtener la hora límite inicial (8:00 AM)
-        $limit_time_start = new DateTime('08:00:00');
+        $limit_time_start = new DateTime('07:00:00');
         // Obtener la hora límite (5:00 PM)
         $limit_time_end = new DateTime('17:00:00');
 
@@ -266,17 +266,23 @@ class EventController extends Controller
         }
         // Comparar las fechas con la hora límite (8:00 AM)
         if ($date_start->format('H:i:s') < $limit_time_start->format('H:i:s') || $date_end->format('H:i:s') < $limit_time_start->format('H:i:s')) {
-            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 7:00 AM.');
         }
 
         
         // Validar que que las citas no duren más de 4 horas y esten en el mismo dia
-        $diff = $date_end->diff($date_start);
-        $hours = $diff->h;
-        $days = $diff->d;
+        // $diff = $date_end->diff($date_start);
+        // $hours = $diff->h;
+        // $days = $diff->d;
 
-        if($hours > 4 || $days > 0){
-            return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
+        // if($hours > 4 || $days > 0){
+        //     return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
+        // }
+        // Validar que las citas sean en el mismo dia
+        $diff = $date_end->diff($date_start);
+        $days = $diff->d;
+        if ($days > 0) {
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones deben ser en el mismo día.');
         }
 
         // Validar que no se puedan agregar actividades los sabados y domingos
