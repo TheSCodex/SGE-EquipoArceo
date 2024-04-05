@@ -85,7 +85,7 @@
                     <tr>
                         <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span>{{ $service_hour ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span>{{ $serviceHours ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
@@ -112,7 +112,7 @@
                     <tr>
                         <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span> {{ $service_hour ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span> {{ $serviceHours ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
