@@ -16,6 +16,7 @@ class Intern extends Model
         'book_id',
         'student_status_id',
         'performance_area',
+        'service_hour',
         'Group',
         'career_id'
     ];

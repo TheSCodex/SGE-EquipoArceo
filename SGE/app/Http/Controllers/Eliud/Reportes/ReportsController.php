@@ -15,6 +15,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Mockery\Undefined;
 
 class ReportsController extends Controller
 {
@@ -26,9 +27,9 @@ class ReportsController extends Controller
         $tipo = $tipo ?? $request->input('tipo');
         $serviceHours = $serviceHours ?? $request->input('serviceHours');
         $student = User::find($id);
-        $interns = Intern::where('user_id', $id)->get();
-        $project = Project::find($interns[0]->project_id);
-        $career = Career::find($interns[0]->career_id);
+        $interns = Intern::where('user_id', $id)->first();
+        $project = Project::find($interns->project_id);
+        $career = Career::find($interns->career_id);
         $academie = Academy::find($career->academy_id);
 
         $division = Division::find($academie->division_id);
@@ -36,16 +37,10 @@ class ReportsController extends Controller
 
         $docRevision = DocRevisions::find(4);
 
-        if ($interns) {
-            $actualiza = [
-                'penalty_id' => $motivo == 1 ? $tipo : $tipo + 3,
-                'service_hour' => $serviceHours
-            ];
+        $interns->update(['penalty_id' => $motivo == 1 ? $tipo : $tipo + 3, 'service_hour' => $serviceHours]);
 
-            $interns->each(function ($intern) use ($actualiza) {
-                $intern->update($actualiza);
-            });
-        }
+        $interns->save();
+
 
         $jsonData[] = [
 
@@ -55,14 +50,14 @@ class ReportsController extends Controller
             'advisor_name' => $user->name,
             'advisor_lastName' => $user->last_name,
             'user_id' => $id,
-            'academic_advisor_id' => $interns[0]?->academic_advisor_id,
+            'academic_advisor_id' => $interns?->academic_advisor_id,
             'student' => $student?->name . ' ' . $student->last_name,
-            'student_service_hours' => $interns[0]->service_hour,
+            'student_service_hours' => $interns->service_hour,
             'division' => $division?->name,
             'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
             'project' => $project?->name,
-            'interns' => $interns[0]?->id,
+            'interns' => $interns?->id,
             'type' => $tipo,
             'reason' => $motivo,
             'serviceHours' => $serviceHours,
