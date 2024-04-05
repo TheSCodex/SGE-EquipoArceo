@@ -127,6 +127,8 @@
                                                                     action="{{ route('download.sancion', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
+                                                                    @method('PUT')
+                                                                    
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="motivo">Elija el tipo de Sanción por
                                                                             motivo</label>
@@ -151,7 +153,8 @@
                                                                     </div>
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="serviceHours">Horas de Servicio</label>
-                                                                        <input type="number" name="serviceHours" id="serviceHours" />
+                                                                        <input type="number" name="serviceHours"
+                                                                            id="serviceHours" />
                                                                     </div>
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
@@ -170,7 +173,8 @@
                                                         <div class="modal-content  w-[24%]">
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    Generar
                                                                     Carta de Aprobacion de Memoria
                                                                 </h5>
                                                                 <button type="button"
@@ -227,19 +231,19 @@
                                                                             Sanción</label>
                                                                         <select name="motivo" id="motivo">
                                                                             <option value="1">
-                                                                                Excelencia académica 
+                                                                                Excelencia académica
                                                                             </option>
                                                                             <option value="2">
-                                                                                Experiencia Laboral 
-                                                                                </option>
+                                                                                Experiencia Laboral
+                                                                            </option>
                                                                             <option value="3">
-                                                                                Movilidad internacional 
+                                                                                Movilidad internacional
                                                                             </option>
                                                                             <option value="4">
-                                                                                Proyecto de investigación 
+                                                                                Proyecto de investigación
                                                                             </option>
                                                                             <option value="5">
-                                                                                Certificación Profesional 
+                                                                                Certificación Profesional
                                                                             </option>
                                                                         </select>
                                                                     </div>

@@ -36,6 +36,17 @@ class ReportsController extends Controller
 
         $docRevision = DocRevisions::find(4);
 
+        if ($interns) {
+            $actualiza = [
+                'penalty_id' => $motivo == 1 ? $tipo : $tipo + 3,
+                'service_hour' => $serviceHours
+            ];
+
+            $interns->each(function ($intern) use ($actualiza) {
+                $intern->update($actualiza);
+            });
+        }
+
         $jsonData[] = [
 
             'title' => "Amonestación",
@@ -194,42 +205,42 @@ class ReportsController extends Controller
         $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);
-        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first(); 
+        $division = Division::where('director_id', $userData?->id)->orWhere('directorAsistant_id', $userData?->id)->first();
         $academies = Academy::where('division_id', $division?->id)->get();
-        
+
         $academiesData = [];
         foreach ($academies as $academy) {
             $academyData = [
                 'name' => $academy->name,
                 'careers' => []
             ];
-            
+
             $careers = Career::where('academy_id', $academy->id)->get();
-            
+
             foreach ($careers as $career) {
                 $interns = Intern::where('career_id', $career->id)->get();
                 $careerData = [
                     'name' => $career->name,
                     'projects' => []
                 ];
-                
+
                 foreach ($interns as $intern) {
                     $project = Project::find($intern->project_id);
                     if ($project && $project->status == 'aprobado') {
                         $careerData['projects'][] = $project;
                     }
                 }
-                
+
                 $academyData['careers'][] = $careerData;
             }
-            
+
             $academiesData[] = $academyData;
         }
-    
+
         return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division'));
     }
-    
-    
+
+
 
     /**
      * Show the form for creating a new resource.
