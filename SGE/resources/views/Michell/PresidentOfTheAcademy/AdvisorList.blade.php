@@ -35,7 +35,8 @@
                             Estudiantes</button>
                     </section>
                     {{-- Seccion de la tabla --}}
-                    <section class="hidden md:block h-[38.1rem]">
+                    <section class="hidden md:block h-screen">
+                        <div class="h-[calc(100%-4rem)] overflow-y-hidden">
                         <table id="advisorsTable" class="divide-y divide-[#999] w-full">
                             <thead id="tableHeader" class="text-[#555] text-base">
                                 <tr>
@@ -70,12 +71,13 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $advisors->links() }}
-
                         <p id="noDataMessage"
                             class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl">
                             Sin resultados</p>
                     </section>
+                    </div>
+                    {{ $advisors->links() }}
+
                     {{-- Seccion responsiva --}}
                     <section class="font-montserrat md:hidden">
                         @foreach ($advisors as $data)
@@ -264,4 +266,5 @@
 
 
     </section>
+        </div>
 @endsection

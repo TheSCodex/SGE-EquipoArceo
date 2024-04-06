@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectSeeder::class);
         $this->call(PenalizationSeeder::class);
         $this->call(DocRevisionsSeeders::class);
+        $this->call(CommentSeeder::class);
         $this->call(penaltySeeder::class);
         
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
