@@ -61,7 +61,7 @@
                                     <option value="Planificación de anteproyecto" @if($event->eventType == 'Planificación de anteproyecto') selected @endif>Planificación de anteproyecto</option>
                                     <option value="Asesoría de memorias" @if($event->eventType == 'Asesoría de memorias') selected @endif>Asesoría de memorias</option>
                                     <option value="Liberación de documento" @if($event->eventType == 'Liberación de documento') selected @endif>Liberación de documento</option>
-                                    <option value="Sanción" @if($event->eventType == 'Sanción') selected @endif>Sanción</option>
+                                    <option value="Sanción de servicio social" @if($event->eventType == 'Sanción de servicio social') selected @endif>Sanción de servicio social</option>
                                 </select>
                                 
                                 @error('eventType')

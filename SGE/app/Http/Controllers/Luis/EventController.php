@@ -264,7 +264,7 @@ class EventController extends Controller
         if ($date_start->format('H:i:s') > $limit_time_end->format('H:i:s') || $date_end->format('H:i:s') > $limit_time_end->format('H:i:s')) {
             return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser después de las 5:00 PM.');
         }
-        // Comparar las fechas con la hora límite (8:00 AM)
+        // Comparar las fechas con la hora límite (7:00 AM)
         if ($date_start->format('H:i:s') < $limit_time_start->format('H:i:s') || $date_end->format('H:i:s') < $limit_time_start->format('H:i:s')) {
             return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 7:00 AM.');
         }
@@ -410,12 +410,12 @@ class EventController extends Controller
         }
     
         // Obtener la hora límite inicial (8:00 AM) y la hora límite (5:00 PM)
-        $limit_time_start = new DateTime('08:00:00');
+        $limit_time_start = new DateTime('07:00:00');
         $limit_time_end = new DateTime('17:00:00');
     
         // Validar que las sesiones no sean antes de las 8:00 AM ni después de las 5:00 PM
         if ($dateOne->format('H:i:s') < $limit_time_start->format('H:i:s') || $dateTwo->format('H:i:s') < $limit_time_start->format('H:i:s')) {
-            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 8:00 AM.');
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones no pueden ser antes de las 7:00 AM.');
         }
     
         if ($dateOne->format('H:i:s') > $limit_time_end->format('H:i:s') || $dateTwo->format('H:i:s') > $limit_time_end->format('H:i:s')) {
@@ -423,16 +423,15 @@ class EventController extends Controller
         }
 
     
-        // Validar que que las citas no duren más de 4 horas y esten en el mismo dia
         $date_start = new DateTime($request->date_start);
         $date_end = new DateTime($request->date_end);
+        // Validar que las citas sean en el mismo dia
         $diff = $date_end->diff($date_start);
-        $hours = $diff->h;
         $days = $diff->d;
-
-        if($hours > 4 || $days > 0){
-            return redirect()->back()->withInput()->with('errorHorario', 'La actividad no puede durar más de 4 horas');
+        if ($days > 0) {
+            return redirect()->back()->withInput()->with('errorHorario', 'Las sesiones deben ser en el mismo día.');
         }
+
 
         // Validar que no se puedan agregar actividades los sabados y domingos
         $day = $date_start->format('l');
