@@ -162,7 +162,7 @@
             </table>
         </div>
     </div>
-    <div id="no-users-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron usuarios.</div>
+    <div id="no-users-message" class="hidden mt-20 text-red-500 h-screen text-center text-lightGray font-bold text-2xl">Sin resultados.</div>
 
 </div>
 <div class="my-5 mx-auto">

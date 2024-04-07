@@ -155,8 +155,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="no-docs-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
-                    registros.</div>
+                <div id="no-docs-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">Sin registros.</div>
                 <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
                     <div class="my-5 mx-auto md:w-full">
                         {{ $docs->links() }}
