@@ -1,28 +1,28 @@
 @extends('templates/authTemplate')
-@section('titulo', 'Estuadiantes Asesorados')
+@section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <section class="flex flex-col justify-start items-center min-h-full h-screen flex-grow">
+    <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Estudiantes Asesorados</h1>
-                <div class="flex items-center flex-row justify-end">
+            <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
+                <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
+                <div class="flex flex-row items-center justify-end">
                     <div>
-                        <div class="hidden md:flex items-center relative">
+                        <div class="relative items-center hidden md:flex">
                             <input id='search'
-                                class="border-primaryColor placeholder-primaryColor border-b border rounded-md "
+                                class="border border-b rounded-md border-primaryColor placeholder-primaryColor "
                                 type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
 
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+                <div class="flex flex-col justify-between mx-auto mt-2 sm:flex-row md:hidden">
 
                     <div>
-                        <div class="flex items-center relative">
+                        <div class="relative flex items-center">
                             <input id='searchMovil'
-                                class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 "
+                                class="w-full mb-2 border border-b rounded-md border-primaryColor placeholder-primaryColor sm:mb-0 "
                                 type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
@@ -124,9 +124,12 @@
                                                             </div>
 
                                                             <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form action="{{ route('download.sancion', $user->id) }}"
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.sancion', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
+                                                                    @method('PUT')
+                                                                    
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="motivo">Elija el tipo de Sanción por
                                                                             motivo</label>
@@ -140,7 +143,8 @@
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="tipo">Elija el tipo de
                                                                             Sanción</label>
-                                                                        <select name="tipo" id="tipo">
+                                                                        <select name="tipo" id="tipo"
+                                                                            onchange="toggleServiceHours(this)">
                                                                             <option value="1">Amonestación escrita
                                                                             </option>
                                                                             <option value="2">Amonestación con horas de
@@ -148,6 +152,13 @@
                                                                             <option value="3">Cancelación de Estadía
                                                                             </option>
                                                                         </select>
+                                                                        <div id="serviceHoursContainer"
+                                                                            class="flex flex-col justify-between w-full mt-2">
+                                                                            <label for="serviceHours">Horas de
+                                                                                Servicio</label>
+                                                                            <input class="w-full" type="number"
+                                                                                name="serviceHours" id="serviceHours" />
+                                                                        </div>
                                                                     </div>
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
@@ -166,7 +177,8 @@
                                                         <div class="modal-content  w-[24%]">
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    Generar
                                                                     Carta de Aprobacion de Memoria
                                                                 </h5>
                                                                 <button type="button"
@@ -177,10 +189,11 @@
                                                                 </button>
                                                             </div>
 
-                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.aprobacion', $user->id) }}"
-                                                                method="GET">
-                                                                @csrf
+                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.aprobacion', $user->id) }}"
+                                                                    method="GET">
+                                                                    @csrf
 
 
                                                                     <button type="submit"
@@ -192,28 +205,52 @@
                                                 </div>
 
 
-                                            <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-                                                class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
-                                                <div role="document"
-                                                    class="flex justify-center p-10 justify-items-center mt-80">
-                                                    <div class="modal-content  w-[24%]">
-                                                        <div
-                                                            class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                            <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
-                                                                Carta de Digitalizacion de Memoria
-                                                            </h5>
-                                                            <button type="button"
-                                                                class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                id="clo" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form action="{{ route('download.digitalizacion', $user->id) }}"
-                                                                method="GET">
-                                                                @csrf
+                                                <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                    class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
+                                                    <div role="document"
+                                                        class="flex justify-center p-10 justify-items-center mt-80">
+                                                        <div class="modal-content  w-[24%]">
+                                                            <div
+                                                                class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    Generar
+                                                                    Carta de Digitalizacion de Memoria
+                                                                </h5>
+                                                                <button type="button"
+                                                                    class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
+                                                                    id="clo" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.digitalizacion', $user->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
 
+                                                                    <div class="flex flex-col justify-between mt-2">
+                                                                        <label for="motivo">Elija el tipo de
+                                                                            Estadía</label>
+                                                                        <select name="motivo" id="motivo">
+                                                                            <option value="1">
+                                                                                Excelencia académica
+                                                                            </option>
+                                                                            <option value="2">
+                                                                                Experiencia Laboral
+                                                                            </option>
+                                                                            <option value="3">
+                                                                                Movilidad internacional
+                                                                            </option>
+                                                                            <option value="4">
+                                                                                Proyecto de investigación
+                                                                            </option>
+                                                                            <option value="5">
+                                                                                Certificación Profesional
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
 
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
@@ -241,7 +278,17 @@
                     {{ $interns->links() }}
                 </div>
             </section>
-
+            <script>
+                function toggleServiceHours(select) {
+                    var serviceHoursContainer = document.getElementById('serviceHoursContainer');
+                    serviceHoursContainer.style.display = select.value == '2' ? 'block' : 'none';
+                }
+            </script>
+            <script>
+                window.onload = function() {
+                    toggleServiceHours(document.getElementById('tipo'));
+                };
+            </script>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     const editBtns = document.querySelectorAll('#editBtn');
@@ -334,31 +381,31 @@
 
             document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
         </script>
-         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-         <script>
-             document.addEventListener('DOMContentLoaded', function() {
-                 // Obtener todos los botones de eliminar y agregar un listener para mostrar la alerta
-                 const deleteButtons = document.querySelectorAll('.delete-button');
-                 deleteButtons.forEach(button => {
-                     button.addEventListener('click', function(event) {
-                         event.preventDefault();
-                         const form = this.closest('form');
-                         Swal.fire({
-                             title: '¿Estás seguro?',
-                             text: 'Esta acción no se puede deshacer',
-                             icon: 'warning',
-                             showCancelButton: true,
-                             confirmButtonColor: '#3085d6',
-                             cancelButtonColor: '#d33',
-                             confirmButtonText: 'Sí, dar de baja'
-                         }).then((result) => {
-                             if (result.isConfirmed) {
-                                 form.submit();
-                             }
-                         });
-                     });
-                 });
-             });
-         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtener todos los botones de eliminar y agregar un listener para mostrar la alerta
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const form = this.closest('form');
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: 'Esta acción no se puede deshacer',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, dar de baja'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
     @endsection

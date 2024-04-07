@@ -51,7 +51,7 @@
                                     <option value="Planificación de anteproyecto">Planificación de anteproyecto</option>
                                     <option value="Asesoría de memorias">Asesoría de memorias</option>
                                     <option value="Liberación de documento">Liberación de documento</option>
-                                    <option value="Sanción">Sanción</option>
+                                    <option value="Sanción de servicio social">Sanción de servicio social</option>
                                 </select>
                                 @error('eventType')
                                 <p class="text-[#ff0000] text-sm">
