@@ -7,7 +7,7 @@
 @section('contenido')
 
     <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
-        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
                 Mi Anteproyecto
             </h1>
@@ -16,9 +16,9 @@
                     {{ $message }}
                 </div>
             @endif
-            <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
+            <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow">
                 <div
-                    class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
+                    class=" max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del Anteproyecto:
@@ -182,7 +182,7 @@
                 </div>
             </div>
             <div
-                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
+                class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del Anteproyecto</h3>
