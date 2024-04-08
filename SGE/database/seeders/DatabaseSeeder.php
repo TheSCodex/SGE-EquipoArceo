@@ -13,7 +13,7 @@ use App\Models\Book;
 use App\Models\BusinessAdvisor;
 use Database\Seeders\CareersSeeder;
 use Database\Seeders\DocRevisionsSeeders;
-
+use Database\Seeders\penaltySeeder;
 
 
 
@@ -44,6 +44,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PenalizationSeeder::class);
         $this->call(DocRevisionsSeeders::class);
         $this->call(CommentSeeder::class);
+        $this->call(penaltySeeder::class);
+        
         // ! ISRAEL: Yo lo agregue la neta no se si exita pero estuve buscando y no encontre ninguna tabla con los campos que necesito
         $project_division = Project_division::factory()->count(30)->create();
 

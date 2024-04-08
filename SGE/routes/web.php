@@ -122,9 +122,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/alumnos', [AcademicAdvisorController::class, 'asesoradosIndex'])->name('asesorados')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
     Route::put("alumno/edit/{id}", [AcademicAdvisorController::class, 'student_withdrawal'])->name('alumno.edit')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
-    Route::post('/Generate/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sancion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+    Route::put('/Generate/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sancion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
     Route::get('/Generate/MemoriaView/{id}', [ReportsController::class, 'printReportCartaAprobacion'])->name('download.aprobacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
-    Route::get('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('download.digitalizacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
+    Route::post('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('download.digitalizacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
 
     // ! Ruta de las observaciones del asesor
     Route::get("observaciones/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');

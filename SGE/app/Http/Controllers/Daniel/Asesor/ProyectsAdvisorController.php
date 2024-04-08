@@ -14,7 +14,10 @@ class ProyectsAdvisorController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('adviser')->paginate(10);
+        $projects = Project::with('adviser')
+            ->whereIn('status', ['en revision', 'aprobado', 'En revision', 'Aprobado'])
+            ->paginate(10);
+
         return view('Daniel.asesor.ProyectsAdvisor', compact('projects'));
     }
 

@@ -177,7 +177,7 @@
 
 
             <div
-                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
+                class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del proyecto</h3>
@@ -237,7 +237,7 @@
 
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
                                 
@@ -261,11 +261,11 @@
                             observaciones</a>
                             
                         <form method="POST" action="{{ route('anteproyecto-Director.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
+                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -278,17 +278,17 @@
                     </div>
                 @elseif(isset($comments) && count($comments) == 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>Este proyecto aun no tiene alguna observacion</p>
                         </div>
 
 
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                            class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>    
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -299,7 +299,7 @@
                         </form>
                     @else
                         <div
-                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex justify-center items-center text-xl overflow-y-auto">
                             <p class=' text-center text-black opacity-[60%]'>No hay un anteproyecto que comentar</p>
                         </div>
                 @endif

@@ -27,7 +27,8 @@ class FileHistory extends Model
         'project',
         'reason',
         'type',
-        'interns'
+        'interns',
+        'serviceHours'
     ];
 
 }
