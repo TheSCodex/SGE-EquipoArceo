@@ -95,7 +95,7 @@ class CompaniesController extends Controller
         $company->update($validatedData);
     
         // Redirige con un mensaje de éxito
-        return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
+        return redirect()->route('companies.index')->with('success', '¡Empresa editada exitosamente!');
     }
 
     /**
