@@ -4,13 +4,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .table-cell {
-            max-width: 200px; /* Ajusta este valor según tus necesidades */
+            max-width: 200px;
+            /* Ajusta este valor según tus necesidades */
             overflow: hidden;
-            text-overflow: ellipsis; /* Esto agregará puntos suspensivos (...) al final del texto si se corta */
-            white-space: nowrap; /* Esto evitará que el texto se envuelva y se muestre en una sola línea */
+            text-overflow: ellipsis;
+            /* Esto agregará puntos suspensivos (...) al final del texto si se corta */
+            white-space: nowrap;
+            /* Esto evitará que el texto se envuelva y se muestre en una sola línea */
         }
     </style>
-    <main class="flex flex-col justify-center items-center min-h-full flex-grow">
+    <main class="flex flex-col  max-sm:px-2  justify-start items-center min-h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%]  mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Empresas</h1>
@@ -49,7 +52,6 @@
             <div class="mt-6    mx-auto flex items-center  justify-center">
                 <div class=" pl-12  max-lg:hidden  w-full">
                     @if ($companies->isEmpty())
-                        <p class=" ">Na hay datos registrados.</p>
                         <table class=" w-full">
                             <tr>
                                 <th class="  text-[#ACACAC]  font-roboto text-xs">Nombre</th>
@@ -62,6 +64,9 @@
                                 <th class="  text-[#ACACAC]  font-roboto text-xs">Eliminar</th>
                             </tr>
                         </table>
+
+                        <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Na hay datos
+                            registrados.</p>
                     @else
                         <div class=" flex   justify-center items-center">
                             <table class="w-full">
@@ -77,13 +82,19 @@
                                 </tr>
                                 @foreach ($companies as $index => $company)
                                     <tr class="transition duration-100 ease-in-out hover:bg-lightGray/20">
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate ">{{ $company['name'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['email'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['phone'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['rfc'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company->businessSector->title }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate ">
+                                            {{ $company['name'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                            {{ $company['email'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                            {{ $company['phone'] }}</td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['rfc'] }}
+                                        </td>
+                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                            {{ $company->businessSector->title }}</td>
                                         <td class="font-roboto font-bold py-5">
-                                            <a href="{{ route('panel-companies.show', $company->id) }}" class="flex justify-center">
+                                            <a href="{{ route('panel-companies.show', $company->id) }}"
+                                                class="flex justify-center">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
@@ -96,7 +107,9 @@
                                             </form>
                                         </td>
                                         <td class="font-roboto font-bold py-5">
-                                            <form id="deleteForm" action="{{ route('panel-companies.destroy', $company['id']) }}" method="POST">
+                                            <form id="deleteForm"
+                                                action="{{ route('panel-companies.destroy', $company['id']) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" onclick="confirmDelete({{ $company['id'] }})">
@@ -115,7 +128,8 @@
 
                 </div>
                 @if ($companies->isEmpty())
-                    <p class=" py-12  text-center sm:hidden">Na hay datos registrados.</p>
+                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Na hay datos
+                    registrados.</p>
                 @else
                     <div class=" lg:hidden w-full mb-5">
                         <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -124,13 +138,22 @@
                                     <h2 class="text-lg font-bold">{{ $company['name'] }}</h2>
                                     <h2 class="text-lg font-bold">{{ $company['email'] }}</h2>
                                     <p class="text-sm text-gray-500">celular: {{ $company['phone'] }}</p>
-                                    <p class="text-sm text-gray-500">Fecha de registro: {{ $company['registration_date'] }}
+                                    {{-- <p class="text-sm text-gray-500">Fecha de registro: {{ $company['registration_date'] }}
                                     </p>
-                                    <p class="text-sm text-gray-500">dirección: {{ $company['address'] }}</p>
+                                    <p class="text-sm text-gray-500">dirección: {{ $company['address'] }}</p> --}}
                                     <p class="text-sm text-gray-500">rfc: {{ $company['rfc'] }}</p>
                                     <p class="text-sm text-gray-500">Especialidad: {{ $company['business_sector_id'] }}</p>
 
                                     <div class="flex gap-3 justify-end">
+                                        <button class="font-roboto font-bold  ">
+                                            <a href="{{ route('panel-companies.show', $company->id) }}"
+                                                class="flex justify-center">
+                                                <p
+                                                    class="bg-primaryColor py-2 px-5 hover:bg-darkBlue ease-in duration-100  text-white rounded-xl font-semibold">
+                                                    Ver detalles</p>
+                                            </a>
+                                        </button>
+
                                         <div class="font-roboto font-bold py-5">
                                             <form action="{{ route('panel-companies.edit', $company->id) }}"
                                                 method="GET">
@@ -151,12 +174,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <div class="font-roboto font-bold py-5">
-                                            <a href="{{ route('panel-companies.show', $company->id) }}"
-                                                class="flex justify-center">
-                                                <img src="/img/ojoGreen.svg" class="w-7">
-                                            </a>
-                                        </div>
+
                                     </div>
                                 </div>
                             @endforeach
@@ -166,11 +184,12 @@
                 <!-- Display table on larger screens -->
 
             </div>
+    {{ $companies->links() }}
+
     </main>
 
 
 
-    {{ $companies->links() }}
 
     <script>
         function openModal(index) {
@@ -182,22 +201,22 @@
         }
 
         function confirmDelete(companyId) {
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¡No podrás revertir esto!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, eliminarlo!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Si el usuario confirma la eliminación, envía el formulario
-            document.getElementById('deleteForm').action = '/panel-companies/' + companyId;
-            document.getElementById('deleteForm').submit();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma la eliminación, envía el formulario
+                    document.getElementById('deleteForm').action = '/panel-companies/' + companyId;
+                    document.getElementById('deleteForm').submit();
+                }
+            });
         }
-    });
-}
 
 
         function searchTable() {
