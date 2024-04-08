@@ -1,12 +1,12 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full  flex flex-col sm:h-screen space-y-5 items-center  bg-white">
+<div class="w-full  flex flex-col sm:h-screen space-y-5 items-center  pb-10  bg-white">
     <div class="w-full h-fit flex     max-sm:justify-center mt-8">
         <h3 class="text-3xl text-left md:ml-32 max-sm:text-center font-bold">Añadir Empresa</h3>
     </div> 
     <form action="{{ route('panel-companies.store') }}" method="POST" class="font-montserrat mx-30 space-y-5 lg:w-[80vw] sm:w-[90vw]">
         @csrf
-        <div class="w-full  gap-4 sm:grid grid-cols-2 space-y-2">
+        <div class="w-full  gap-4 sm:grid grid-cols-2 ">
         
             <div class="">
                 <p class="text-sm">Nombre de la empresa</p>
