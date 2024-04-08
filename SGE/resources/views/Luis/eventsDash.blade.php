@@ -38,7 +38,7 @@
                 </div>
             </div>
             @if ($allEvents->isEmpty())
-            <h1 class="text-xl font-bold text-center mx-auto mt-20">No hay actividades disponibles</h1>
+            <h1 class="text-xl font-bold text-center mx-auto mt-20 text-lightGray">Sin resultados</h1>
             @else
             <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5 ">
                     

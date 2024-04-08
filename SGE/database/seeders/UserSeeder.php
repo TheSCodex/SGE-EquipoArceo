@@ -103,6 +103,10 @@ class UserSeeder extends Seeder
             'crud-roles-permisos' => false,
             'crud-asesores' => false,
             'crud-carreras-divisiones' => false,
+            'leer-lista-libros' => true,
+            'crear-libro' => true,
+            'editar-libro' => true,
+            'eliminar-libro' => true,
         ];        
 
         $rolAsesorAcademico->update([
