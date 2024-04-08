@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <a class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md  text-white hover:bg-darkgreen text-center" href="/panel-advisors">Regresar al panel de Asesores</a>
+            <a  class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen text-center" href="/panel-advisors">Regresar al panel de Asesores</a>
 
 
     </form>
