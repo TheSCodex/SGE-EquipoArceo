@@ -41,7 +41,9 @@
                         @enderror
                     </div>
                     <div class="w-[20%] justifify-end items-end p-4">
-                        <button class="bg-primaryColor mt-3 text-white text-md font-roboto rounded-lg h-auto p-3">
+                        <button type="button"
+                            class="bg-primaryColor mt-3 text-white text-md font-roboto rounded-lg h-auto p-3"
+                            id="openModalButton">
                             Colaborar
                         </button>
                     </div>
@@ -257,7 +259,41 @@
                     </a>
                 </div>
             </form>
-
         </div>
     </section>
+    <div id="myModal" class=" modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-semibold">Invitar a colaborar</h3>
+                </div>
+                <div>
+                    <input type="text" id="searchInput" placeholder="Buscar usuario" class="w-full border-gray-300 rounded-md p-2">
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
+                        id="closeModalButton">Cerrar</button>
+                    <button type="button" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
+                        invitación</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            const openModalButton = document.getElementById('openModalButton');
+            const modal = document.getElementById('myModal');
+            const closeModalButton = document.getElementById('closeModalButton');
+
+            function openModal() {
+                modal.classList.remove('hidden');
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+            }
+
+            openModalButton.addEventListener('click', openModal);
+
+            closeModalButton.addEventListener('click', closeModal);
+        </script>
+    </div>
 @endsection
