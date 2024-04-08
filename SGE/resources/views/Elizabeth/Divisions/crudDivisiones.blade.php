@@ -28,7 +28,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva division
             </a>
 
         </div>
