@@ -69,9 +69,9 @@ class ProjectsController extends Controller
 
 
 
-    public function project()
+    public function Colaborar()
     {
-        return view('Daniel.presidenta.project');
+        $interns = Intern::all();
     }
     /**
      * Show the form for creating a new resource.
