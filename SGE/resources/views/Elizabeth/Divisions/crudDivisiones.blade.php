@@ -3,7 +3,7 @@
 @section('titulo', 'Panel de Carreras y Academias')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Divisiones</h1>
@@ -56,9 +56,16 @@
                 @foreach ($divisions as $division)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $division->name }}</h2>
-                    <p class="text-sm text-gray-500">Division: {{ $division->directors}}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $division->phone }}</p>
-                    <p class="text-sm text-gray-500">Presidente: {{ $division->position }}</p>
+                    <p class="text-sm text-gray-500">Director::  @if ($principal = $principals->where('id', $division->director_id)->first())
+                        {{ $principal->name }}
+                    @else
+                        N/A
+                    @endif  </p>
+                    <p class="text-sm text-gray-500">Asistente del director:  @if ($assistant = $assistants->where('id', $division->directorAsistant_id)->first())
+                        {{ $assistant->name }}
+                    @else
+                        N/A
+                    @endif</p>
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('panel-divisions.edit', $division->id) }}" >
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
@@ -106,14 +113,13 @@
                         @endif
                     </td>
                     
-                    {{-- <td class="font-roboto font-bold py-5">{{ $division->position }}</td>  --}}
-                    <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex justify-start">
-                            <img src="/img/logos/pencil.svg">
+                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex pl-2">
+                            <img src="/img/logos/pencil.svg" >
                         </a>
                     </td>
-                    <td class="font-roboto flex justify-start font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
+                    <td class="font-roboto font-bold py-5 cursor-pointer " onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
+                        <form class="flex justify-start px-4" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg">
