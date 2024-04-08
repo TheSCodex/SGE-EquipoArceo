@@ -38,7 +38,7 @@
             <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
                <a href="panel-careers">
                 <button id="btnAll"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee]   rounded px-5 py-1 shadow-lg">Carreras</button>
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor text-white bg-primaryColor   rounded px-5 py-1 shadow-lg">Carreras</button>
                 </a>
                 <a href="panel-academies">
                     <button id="btnWithAdvisor"

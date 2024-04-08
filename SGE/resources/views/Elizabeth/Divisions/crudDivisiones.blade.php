@@ -46,7 +46,7 @@
                 </a>
                 <a href="panel-divisions">
                     <button id="btnWithOutAdvisor"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-primaryColor text-white rounded px-5 py-1 shadow-lg">Divisiones</button>
                 </a>
         </section>
       </div>
