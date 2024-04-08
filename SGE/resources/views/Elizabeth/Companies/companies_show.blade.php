@@ -1,9 +1,9 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Detalles de usuario')
 @section('contenido')
-<div class="w-full py-2 md:px-[7em] md:mt-[2em] sm:h-screen flex bg-white">
+<div class="w-full py-2 md:px-[7em] md:mt-[2em] sm:h-screen   justify-center flex bg-white">
     <div class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
-        <div class="w-full h-fit flex justify-center md:justify-start">
+        <div class="w-full h-fit flex  md:justify-start">
             <h1 class="text-xl md:text-3xl text-center max-w-96 truncate font-bold">Detalles de {{$companies->name}}</h1>
         </div>
         <div class="w-full flex flex-col space-y-2 ">

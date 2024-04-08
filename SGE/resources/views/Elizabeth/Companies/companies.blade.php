@@ -13,6 +13,16 @@
             /* Esto evitará que el texto se envuelva y se muestre en una sola línea */
         }
     </style>
+    
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: "{{ session('success') }}",
+        });
+    </script>
+@endif
     <main class="flex flex-col  max-sm:px-2  justify-start items-center min-h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%]  mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
@@ -75,9 +85,9 @@
                                     <th class="text-[#ACACAC] font-roboto text-xs">Celular</th>
                                     <th class="text-[#ACACAC] font-roboto text-xs">RFC</th>
                                     <th class="text-[#ACACAC] font-roboto text-xs">Area de especialización</th>
-                                    <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th> <!-- Nuevo -->
-                                    <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                                    <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-center">Detalles</th> <!-- Nuevo -->
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-center">Editar</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-center">Eliminar</th>
                                 </tr>
                                 @foreach ($companies as $index => $company)
                                     <tr class="transition duration-100 ease-in-out hover:bg-lightGray/20">
@@ -92,34 +102,40 @@
                                         <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
                                             {{ $company->businessSector->title }}</td>
 
-                                        <td class="font-roboto font-bold  pt-6 py-5">
-                                            <a href="{{ route('panel-companies.show', $company->id) }}"
-                                                class="flex ml-4 items-center">
-                                                <img src="/img/ojoGreen.svg" class="w-7">
-                                            </a>
+                                        <td class="font-roboto font-bold pt-6 py-5 text-center">
+                                            <form action="">
+
+                                                <a href="{{ route('panel-companies.show', $company->id) }}"
+                                                    class="flex justify-center items-center">
+                                                    <img src="/img/ojoGreen.svg" class="w-7">
+                                                </a>
+                                            </form>
+
                                         </td>
 
-                                        <td class="font-roboto flex ml-3 items-center font-bold py-5  ">
-                                            <form class=" pt-2 " action="{{ route('panel-companies.edit', $company->id) }}"
+                                        <td class="font-roboto flex items-center justify-center font-bold py-5 text-center">
+                                            <form class="pt-2 flex justify-center items-center" action="{{ route('panel-companies.edit', $company->id) }}"
                                                 method="GET">
                                                 @csrf
                                                 <button type="submit">
-                                                    <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointe ">
+                                                    <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointer">
                                                 </button>
                                             </form>
                                         </td>
-                                        <td class="font-roboto font-bold py-5">
-                                            <form id="deleteForm" class="flex items-center  ml-1"
+
+                                        <td class="font-roboto font-bold py-5 text-center">
+                                            <form id="deleteForm" class="flex justify-center items-center"
                                                 action="{{ route('panel-companies.destroy', $company['id']) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="flex items-center "
+                                                <button type="button" class="flex items-center"
                                                     onclick="confirmDelete({{ $company['id'] }})">
                                                     <img src="/img/logos/trash.svg" alt="Eliminar">
                                                 </button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </table>
