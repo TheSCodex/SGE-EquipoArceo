@@ -65,8 +65,7 @@
                             </tr>
                         </table>
 
-                        <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Na hay datos
-                            registrados.</p>
+                        <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">sin resultados</p>
                     @else
                         <div class=" flex   justify-center items-center">
                             <table class="w-full">
@@ -92,27 +91,31 @@
                                         </td>
                                         <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
                                             {{ $company->businessSector->title }}</td>
-                                        <td class="font-roboto font-bold py-5">
+
+                                        <td class="font-roboto font-bold  pt-6 py-5">
                                             <a href="{{ route('panel-companies.show', $company->id) }}"
-                                                class="flex justify-center">
+                                                class="flex ml-4 items-center">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
-                                        <td class="font-roboto font-bold py-5">
-                                            <form action="{{ route('panel-companies.edit', $company->id) }}" method="GET">
+
+                                        <td class="font-roboto flex ml-3 items-center font-bold py-5  ">
+                                            <form class=" pt-2 " action="{{ route('panel-companies.edit', $company->id) }}"
+                                                method="GET">
                                                 @csrf
                                                 <button type="submit">
-                                                    <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointer">
+                                                    <img src="/img/logos/pencil.svg" alt="Editar" class="cursor-pointe ">
                                                 </button>
                                             </form>
                                         </td>
                                         <td class="font-roboto font-bold py-5">
-                                            <form id="deleteForm"
+                                            <form id="deleteForm" class="flex items-center  ml-1"
                                                 action="{{ route('panel-companies.destroy', $company['id']) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="confirmDelete({{ $company['id'] }})">
+                                                <button type="button" class="flex items-center "
+                                                    onclick="confirmDelete({{ $company['id'] }})">
                                                     <img src="/img/logos/trash.svg" alt="Eliminar">
                                                 </button>
                                             </form>
@@ -128,8 +131,7 @@
 
                 </div>
                 @if ($companies->isEmpty())
-                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Na hay datos
-                    registrados.</p>
+                    <p class="mt-4 text-red-500 text-center lg:hidden  text-lightGray font-bold text-2xl">sin resultados</p>
                 @else
                     <div class=" lg:hidden w-full mb-5">
                         <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -184,7 +186,7 @@
                 <!-- Display table on larger screens -->
 
             </div>
-    {{ $companies->links() }}
+            {{ $companies->links() }}
 
     </main>
 
