@@ -5,7 +5,7 @@
 <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores</h1>
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores Empresariales</h1>
 
             <div class="flex items-center flex-row justify-end">
                 <div>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <a href="{{ route('formAsesores')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor
+                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
                 </a>
             </div>
 
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <a href="{{ route('formAsesores')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo Asesor
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo Asesor Empresarial
                 </a>
             </div>
         </div>
@@ -41,23 +41,25 @@
                                 <p class="text-sm text-gray-500">Correo: {{ $advisor->email }}</p>
                                 <p class="text-sm text-gray-500">Número telefonico: {{ $advisor->phone }}</p>
                                 <p class="text-sm text-gray-500">Empresa: {{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</p>
-                                <div class="flex justify-end mt-4">
-                                    
-                                    <a href="{{ route('panel-advisors.edit', $advisor->id) }}" >
-                                        <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
+                            <div class="flex justify-end mt-4 space-x-2">
+                                <td>                    
+                                    <a href="{{ route('panel-advisors.show', $advisor->id) }}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                                </td>
+                                <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                    <a href="{{ route('panel-advisors.edit', $advisor->id) }}"class="flex justify-center">
+                                        <img src="/img/logos/pencil.svg">
                                     </a>
-                                    <a onclick="confirmDelete('{{ $advisor->name }} {{ $advisor->position }}', '{{ $advisor->id }}')">
-                                        <form id="deleteForm{{ $advisor->id }}" action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <img src="/img/logos/trash.svg" alt="Delete" class="ml-2 cursor-pointer">
-                                        </form>
-                                    </a>
-                                    <a href="{{ route('panel-advisors.show', $advisor->id) }}">
-                                        <img src="/img/ojoGreen.svg" alt="show" class="cursor-pointer ml-2 w-7">
-                                    </a>
-                                </div>
+                                </td>
+                                <td class="font-roboto font-bold py-5 cursor-pointer">
+                                    <form class="flex justify-start delete-form" id="deleteForm{{ $advisor->id }}" action="{{ route('panel-advisors.destroy', $advisor->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <img src="/img/logos/trash.svg" onclick="confirmDelete('{{ $advisor->name }}, posición: {{ $advisor->position }}', '{{ $advisor->id }}')">
+                                    </form>
+                                </td>
                             </div>
+                        </div>
+
                         @endforeach
                     @else
                         <h1 class="text-xl">No hay datos registrados </h>
@@ -87,13 +89,13 @@
                                 
                                 <td class=" text-start  pl-5  font-roboto font-bold py-5">
                                     <a href="{{ route('panel-advisors.show', $advisor->id) }}"
-                                                class="flex justify-center">
+                                                class="flex justify-start">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
 
                                 <td class="font-roboto font-bold py-5 cursor-pointer ">
-                                    <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-start">
+                                    <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-center">
                                         <img src="/img/logos/pencil.svg">
                                     </a>
                                 </td>
@@ -107,9 +109,11 @@
                             </tr>
                         @endforeach
                     @else
-                        <h1 class="text-xl">No hay datos registrados </h>
-                    @endif
                 </table>
+                    <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
+                        Sin resultados</p>
+                    @endif
+                
                 {{$advisors->links()}}
             </div>
         </div>
