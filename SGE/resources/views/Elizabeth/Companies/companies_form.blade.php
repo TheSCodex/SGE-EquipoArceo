@@ -65,8 +65,9 @@
             <div class="form-group">
                 <label for="business_sector_id">Sector Empresarial</label>
                 <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" id="business_sector_id" name="business_sector_id">
+                    <option value="" selected disabled>Seleccionar giro empresarial</option>
                     @foreach($businessSector as $sector)
-                        <option value="{{ $sector->id }}">{{ $sector->title }}</option>
+                        <option value="{{ $sector->id }}" @if(old('business_sector_id') == $sector->id) selected @endif>{{ $sector->title }}</option>
                     @endforeach
                 </select>
             </div>
