@@ -59,7 +59,7 @@
         @endif
 
         {{-- Cuadros normales --}}
-        <div class="sm:flex flex-wrap pb-10 max-h-[60vh] overflow-auto">
+        <div class="sm:flex flex-wrap pb-10 max-h-[80vh] overflow-auto">
             @foreach($normalComments as $comment)
             <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-64 flex p-5 mb-5">
                 <div class="border-t border-gray-200 rounded-l-lg bg-white border w-full h-64 p-4">
