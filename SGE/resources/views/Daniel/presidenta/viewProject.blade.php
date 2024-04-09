@@ -177,7 +177,7 @@
 
 
             <div
-                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
+                class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del proyecto</h3>
@@ -188,7 +188,7 @@
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if (strtolower($project->status) == 'aprobado')
-                            <p class="">El proyecto ha sido aprobado</p>
+                                <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
@@ -196,7 +196,8 @@
                                 <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a  revisión</button>
+                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
+                                        a revisión</button>
                                 </form>
                             @endif
                         </div>
@@ -218,7 +219,7 @@
 
                             @if (isset($projectLikes))
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-presidente.deleteLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
@@ -226,7 +227,7 @@
                                 </form>
                             @else
                                 <form method="POST"
-                                    action="{{ route('anteproyecto-presidente.storeLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.storeLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
@@ -242,10 +243,20 @@
 
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
-                                <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
+                                <p class=' text-black w-full font-semibold text-sm'>
+                                    @if($comment->academic_advisor_id !== null)
+                                        Asesor
+                                    @elseif($comment->president_id !== null)
+                                        Presidente de academia
+                                    @elseif($comment->director_id !== null)
+                                        Director de division
+                                    @else
+                                        Estudiante
+                                    @endif
+                                </p>
                                 <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
@@ -256,8 +267,8 @@
                             class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -270,18 +281,18 @@
                     </div>
                 @elseif(isset($comments) && count($comments) == 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>Este proyecto aun no tiene alguna observacion</p>
                         </div>
 
 
-                        <form method="POST" action="{{ route('anteproyecto-presidente.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                        <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
+                            class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -293,7 +304,7 @@
                         </form>
                     @else
                         <div
-                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex justify-center items-center text-xl overflow-y-auto">
                             <p class=' text-center text-black opacity-[60%]'>No hay un anteproyecto que comentar</p>
                         </div>
                 @endif

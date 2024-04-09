@@ -31,8 +31,9 @@ class ProjectsDirectorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function View(project $id)
+    public function View(request $id)
     {
+        //dd($id);
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
@@ -58,10 +59,7 @@ class ProjectsDirectorController extends Controller
             }
         }
     
-        $comments = Comment::where("project_id", $projectId)->get();
-        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
-
+        $comments = Comment::where("project_id", $projectId)->get(); 
         $project = Project::find($interns->project_id);
     
         if (!$project) {
@@ -90,9 +88,9 @@ class ProjectsDirectorController extends Controller
  //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
-            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
+            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division'));
         } else {
-            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'projectLikes'));
+            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'projectLikes'));
         }
     }
 
@@ -143,14 +141,15 @@ class ProjectsDirectorController extends Controller
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
         }
     }
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+
         // Validar los datos del formulario
         $request->validate([
             'content' => 'required',
         ]);
-        $academicAdvisorId = Auth::id();
-        $projectId = $request->input('project_id');
+        $director = Auth::id();
+        $projectId = $id;
 
         // Obtener el ID del intern relacionado con el proyecto
         $internId = Intern::where('project_id', $projectId)->value('id');
@@ -160,7 +159,7 @@ class ProjectsDirectorController extends Controller
         $comment->content = $request->input('content');
         $comment->fecha_hora = Carbon::now(); // Fecha y hora actual
         $comment->status = 1; // Estado del comentario
-        $comment->academic_advisor_id = $academicAdvisorId;
+        $comment->director_id = $director;
         $comment->project_id = $projectId;
         $comment->interns_id = $internId;
         $comment->save();

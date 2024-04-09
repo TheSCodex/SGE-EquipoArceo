@@ -17,8 +17,8 @@
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
                         @csrf
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
-                            value="{{ old('name_student', $user->name) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_student', $user->name . ' ' . $user->last_name) }}" required
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -35,7 +35,7 @@
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
                         <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -51,10 +51,15 @@
                         <h2 class="font-roboto mb-1 font-medium">División Académica:</h2>
                         <select name="division_academica" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
-                            <option value="" disabled selected>Selecciona una división académica</option>
-                            @foreach ($divisions as $division)
-                                <option value="{{ $division->id }}">{{ $division->name }}</option>
+                            <option value="" disabled>Selecciona una división académica</option>
+                            @foreach ($defaultDivision as $divisionId => $divisionName)
+                                <option value="{{ $divisionId }}" selected>{{ $divisionName }}</option>
                             @endforeach
+                            <optgroup label="Otras divisiones">
+                                @foreach ($divisions as $division)
+                                    <option value="{{ $division->id }}">{{ $division->name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                         <br>
                         @error('division_academica')
@@ -65,10 +70,15 @@
                         <h2 class="font-roboto mb-1 font-medium">Programa Educativo:</h2>
                         <select name="proyecto_educativo" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
-                            <option value="" disabled selected>Selecciona tu programa educativo</option>
-                            @foreach ($careers as $career)
-                                <option value="{{ $career->id }}">{{ $career->name }}</option>
+                            <option value="" disabled>Selecciona tu programa educativo</option>
+                            @foreach ($defaultCareer as $careerId => $careerName)
+                                <option value="{{ $careerId }}" selected>{{ $careerName }}</option>
                             @endforeach
+                            <optgroup label="Otras carreras">
+                                @foreach ($careersDivision as $career)
+                                    <option value="{{ $career->id }}">{{ $career->name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                         <br>
                         @error('proyecto_educativo')
@@ -88,7 +98,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX"
+                        <input type="tel" name="Numero" placeholder="998XXXXXXX"
                             value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
@@ -171,7 +181,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Phone_advisor" placeholder="998XXXXXXX"
+                        <input type="tel" name="Phone_advisor" placeholder="998XXXXXXX"
                             value="{{ old('Phone_advisor') }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Phone_advisor')

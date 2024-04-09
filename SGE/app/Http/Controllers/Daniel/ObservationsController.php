@@ -51,8 +51,7 @@ class ObservationsController extends Controller
             ]);
         } else {
             // Si no se encuentra un intern relacionado con el usuario autenticado, retorna un error o redirecciona según la lógica de tu aplicación
-            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');
-        }
+            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');        }
     }
 
     public function create()
