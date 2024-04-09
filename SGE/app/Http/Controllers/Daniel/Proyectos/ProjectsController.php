@@ -48,6 +48,7 @@ class ProjectsController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
+                $area = BusinessSector::find($company->business_sector_id);
                 //dd($company);
             }
         }
@@ -59,14 +60,15 @@ class ProjectsController extends Controller
         $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
         $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
 
-        $career = Career::where("id", $user->career_id)->first();
-        //dd($career);
-        if (!$career || !$career->division_id) {
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
+        $career = Career::where("id", $intern->career_id)->first();
+        if (!$career || !$career->academy_id) {
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user','area'));
         }
-        $division = Division::where("id", $career->division_id)->first();
-
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
+        
+        $academy = Academy::where("id", $career->academy_id)->first();
+        $division = Division::where("id", $academy->division_id)->first();
+        
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division','area'));
     }
 
 
