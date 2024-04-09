@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full py-2 sm:h-screen flex justify-center items-center bg-white">
+<div class="w-full py-2 sm:h-screen flex justify-center items-center max-sm:px-10 bg-white">
 
     <form action="{{ route('panel-companies.update', $company->id) }}" method="POST" class="flex flex-col font-montserrat mx-30 space-y-5 lg:w-[80vw] sm:w-[90vw]">
         <div class="w-full h-fit flex justify-center md:justify-start">
@@ -29,7 +29,7 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Celular </p>
-                <input type="text" name="phone"  value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
+                <input type="number" name="phone"  value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
                 @error('phone')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
