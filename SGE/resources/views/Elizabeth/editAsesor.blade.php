@@ -50,7 +50,7 @@
                 @enderror
             </div>
         </div>
-      
+    
         <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
             <div class="space-y-2">
                 <div class="form-group">
@@ -71,7 +71,9 @@
                 </div>
             </div>
         </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar Asesor</button>
+        <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-full   text-white">Actualizar Asesor</button>
+        <a  href="/panel-advisors" class="p-2  self-center block text-center  bg-slate-300 border-2 rounded-md px-4 w-[18em] md:w-full text-white">Cancelar</a>
+    
         </div>
     </form>
 </div>

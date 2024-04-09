@@ -70,7 +70,10 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
+
+        <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-full   text-white">Crear Asesor</button>
+        <a  href="/panel-advisors" class="p-2  self-center block text-center  bg-slate-300 border-2 rounded-md px-4 w-[18em] md:w-full text-white">Cancelar</a>
+    
     </form>
 </div>
 
