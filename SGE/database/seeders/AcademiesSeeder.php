@@ -17,8 +17,8 @@ class AcademiesSeeder extends Seeder
         Academy::create(['name' => 'Desarrollo de productos alternativos', 'president_id' => 1, 'division_id' => 1]);
         Academy::create(['name' => 'Gestion y desarrollo turistico', 'president_id' => 1, 'division_id' => 1]);
         Academy::create(['name' => 'Tecnologias de la informacion', 'president_id' => 2, 'division_id' => 2]);
-        Academy::create(['name' => 'Mantinemiento industrial', 'president_id' => 2, 'division_id' => 2]);
-        Academy::create(['name' => 'División de Gastronomía', 'president_id' => 3, 'division_id' => 3]);
+        Academy::create(['name' => 'Mantenemiento industrial', 'president_id' => 2, 'division_id' => 2]);
+        Academy::create(['name' => 'División de Gastronomía', 'president_id' => 3, 'division_id' => 5]);
         Academy::create(['name' => 'Capital humano', 'president_id' => 4, 'division_id' => 4]);
         Academy::create(['name' => 'Desarrollo de negocios', 'president_id' => 4, 'division_id' => 4]);
         Academy::create(['name' => 'Contaduria', 'president_id' => 4, 'division_id' => 4]);

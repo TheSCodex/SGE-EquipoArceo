@@ -67,7 +67,7 @@ class AcademiesController extends Controller
     {
         $academy = Academy::findOrFail($id);
         $divisions = Division::all();
-        $users = User::all();
+        $users = User::where('rol_id', 3)->get();
         return view('Elizabeth.Academies.editAcademies', compact('divisions', 'users','academy'));
     }
 

@@ -6,7 +6,7 @@
     
 </div>
 <div class="flex mt-[2%] px-[12%] ">
-    <h1 class="text-3xl font-bold pt-[4%]">Editar division</h1>
+    <h1 class="text-3xl font-bold pt-[4%]">Editar división</h1>
   </div>
 <div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
 
@@ -30,7 +30,7 @@
                     <p class="text-sm">Director</p>
                     <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un director</option>
-                        @foreach($users as $user) 
+                        @foreach($directors as $user) 
                             <option value="{{ $user->id }} " @if($user->id == $division->director_id) selected @endif>{{ $user->name }}</option>
                         @endforeach
                     </select>
@@ -48,7 +48,7 @@
                     <p class="text-sm">Asistente del director</p>
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un asistente</option>
-                        @foreach($users as $user) 
+                        @foreach($assistants as $user) 
                             <option value="{{ $user->id }}" @if($user->id == $division->directorAsistant_id) selected @endif>{{ $user->name }}</option>
                         @endforeach
                     </select>
@@ -74,10 +74,16 @@
             
 
 
-            <div class="mx-auto">
-                <button type="submit" class="p-2 mt-10 px-20  self-center bg-primaryColor  sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar division</button>
+            <div class="mx-auto mt-10">
+                <button type="submit" class="p-2 bg-primaryColor w-[77vw]   rounded-md text-white">Editar división</button>
+            </div>                
+            
+            </form>
+                <div class="mx-auto">
+                    <a href="/panel-divisions" type="submit" class="p-2 bg-lightGray text-center w-[77vw] mx-auto rounded-md text-white" >Cancelar</a>
+           
+                </div>
             </div>
-    </form>
 </div>
 
 

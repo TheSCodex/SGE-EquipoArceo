@@ -73,16 +73,13 @@ class UsersSeeder extends Seeder
         // Nombres específicos para directores
         $directores_nombres = [
             'Rocío Arceo',
-            'Mayra Fuentes',
-            'Marlene Juárez',
-            'Luis Villafaña',
-            'Manuel Rivero',
+            'Manuel Enrique Rivero Rivero',
             'Hector Luis Soto',
             'Mariana Recio Lopez'
         ];
 
         // Crear 4 usuarios director
-        for ($i = 0; $i < 7; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $user = User::factory()->create([
                 'name' => $directores_nombres[$i], // Asignar nombres específicos
                 'email' => strtolower(str_replace(' ', '', $directores_nombres[$i])) . '@utcancun.edu.mx',
@@ -95,14 +92,12 @@ class UsersSeeder extends Seeder
 
         $directorAssistants_names = [
             'Norma Hernández',
-            'David Hernández',
-            'Sara Hernández',
-            'Juan Hernández',
             'Mtro. Jorge Reyes',
-            'Jennyfer Zamacona'
+            'Jennyfer Zamacona',
+            'Juana Patricia Contrareas Tabares'
         ];
         
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $user = User::factory()->create([
                 'name' => $directorAssistants_names[$i],
                 'email' => strtolower(str_replace(' ', '', $directorAssistants_names[$i])) . '@utcancun.edu.mx',

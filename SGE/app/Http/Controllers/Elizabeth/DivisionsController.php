@@ -69,8 +69,9 @@ class DivisionsController extends Controller
     public function edit(string $id)
     {
         $division = Division::findOrFail($id);
-        $users = User::all();
-        return view('Elizabeth.Divisions.editDivision',compact('users','division'));
+        $directors = User::where('rol_id', 4)->get();
+        $assistants = User::where('rol_id', 5)->get();
+        return view('Elizabeth.Divisions.editDivision',compact('directors','assistants', 'division'));
     }
 
     /**

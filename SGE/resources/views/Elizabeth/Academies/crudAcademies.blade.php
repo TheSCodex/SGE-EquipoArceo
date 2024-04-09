@@ -61,7 +61,7 @@
                         @else
                             N/A
                         @endif </p>
-                    <p class="text-sm text-gray-500">Division: {{ $academy->division->name ?? 'N/A'}}</p>
+                    <p class="text-sm text-gray-500">División: {{ $academy->division->name ?? 'N/A'}}</p>
                    
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('panel-academies.edit', $academy->id) }}" >
@@ -85,7 +85,7 @@
                    
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">División</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start  pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pl-[1%] pr-[4%] ">Eliminar</th>
                 </tr>

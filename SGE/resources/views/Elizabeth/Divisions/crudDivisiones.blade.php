@@ -15,7 +15,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva division
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva división
             </a>
         </div>
         
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva division
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva división
             </a>
 
         </div>
@@ -86,7 +86,7 @@
             <table class="text-start w-full ">
                 <tr class="border-b border-gray-200 pb-[2%]">
          
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">División</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Asistente del director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
@@ -142,7 +142,7 @@
     function confirmAgregar(){
         Swal.fire({
             title: '¡Exito!',
-            text: `¡Division agregada exitosamente!`,
+            text: `¡División agregada exitosamente!`,
             icon: 'success',
         })
     }
@@ -154,7 +154,7 @@
     function confirmEdit(){
         Swal.fire({
             title: '¡Exito!',
-            text: `¡Division editada exitosamente!`,
+            text: `¡División editada exitosamente!`,
             icon: 'success',
         })
     }
@@ -166,7 +166,7 @@
     function confirmDelete(){
         Swal.fire({
             title: '¡Exito!',
-            text: `¡Division eliminada exitosamente!`,
+            text: `¡División eliminada exitosamente!`,
             icon: 'success',
         })
     }

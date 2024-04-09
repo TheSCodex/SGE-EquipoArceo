@@ -6,7 +6,7 @@
     
 </div>
 <div class="flex mt-[2%] px-[12%] ">
-    <h1 class="text-3xl font-bold pt-[4%]">Crear division</h1>
+    <h1 class="text-3xl font-bold pt-[4%]">Crear división</h1>
   </div>
 <div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
 
@@ -74,11 +74,17 @@
                 </div>
             </div>
 
-            <div class="mx-auto">
-                <button type="submit" class="p-2 mt-10 px-20  self-center bg-primaryColor  sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir division</button>
-            </div>
-
+ 
+    <div class="mx-auto mt-10">
+             <button type="submit" class="p-2 bg-primaryColor w-[77vw]   rounded-md text-white">Añadir división</button>
+    </div>                
+         
     </form>
+    <div class="mx-auto">
+        <a href="/panel-divisions" type="submit" class="p-2 bg-lightGray text-center w-[77vw] mx-auto rounded-md text-white" >Cancelar</a>
+        
+    </div>
+    
 </div>
 
 
