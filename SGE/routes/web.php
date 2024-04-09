@@ -249,6 +249,7 @@ Route::middleware('auth')->group(function () {
     Route::get('Download/CartaMemoria', [ReportsController::class, 'printCartaMemoria'])->name('cata.digitalizacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
     Route::get('Download/CartaAprobacion', [ReportsController::class, 'printCartaAprobacion'])->name('cata.aprobacion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
     Route::get('exportar', [ExcelExportController::class, 'generateExcelFormatFile'])->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
+    Route::get('donaciones', [ExcelExportController::class, 'downloadLibrosFile'])->middleware('roleorcan:asistenteDireccion, generar-reportes-documentos')->name('control-libros');
     Route::post('egresados', [ExcelExportController::class, 'downloadEgresadosFile'])->middleware('roleorcan:asistenteDireccion, generar-reportes-documentos')->name('control-egresados');
     Route::get('/a-generar/{id}', [ExcelExportController::class, 'downloadExcelFile'])->name('re-download.control.asistente');
     Route::post('/a-Generate/SancionView/{id}/{type?}/{reason?}', [ReportsController::class, 'printReportSancion'])->name('re-download.sancion.asistente');

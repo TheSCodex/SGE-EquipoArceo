@@ -3,7 +3,7 @@
 @section('titulo', 'Panel de Carreras y Academias')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Divisiones</h1>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva division
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva división
             </a>
         </div>
         
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <a href="{{ route('newDivision')}}"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva división
             </a>
 
         </div>
@@ -46,7 +46,7 @@
                 </a>
                 <a href="panel-divisions">
                     <button id="btnWithOutAdvisor"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-primaryColor text-white rounded px-5 py-1 shadow-lg">Divisiones</button>
                 </a>
         </section>
       </div>
@@ -56,9 +56,16 @@
                 @foreach ($divisions as $division)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $division->name }}</h2>
-                    <p class="text-sm text-gray-500">Division: {{ $division->directors}}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $division->phone }}</p>
-                    <p class="text-sm text-gray-500">Presidente: {{ $division->position }}</p>
+                    <p class="text-sm text-gray-500">Director::  @if ($principal = $principals->where('id', $division->director_id)->first())
+                        {{ $principal->name }}
+                    @else
+                        N/A
+                    @endif  </p>
+                    <p class="text-sm text-gray-500">Asistente del director:  @if ($assistant = $assistants->where('id', $division->directorAsistant_id)->first())
+                        {{ $assistant->name }}
+                    @else
+                        N/A
+                    @endif</p>
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('panel-divisions.edit', $division->id) }}" >
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
@@ -79,13 +86,12 @@
             <table class="text-start w-full ">
                 <tr class="border-b border-gray-200 pb-[2%]">
          
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">División</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Asistente del director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start  justify-center flex pr-[12%] ">Eliminar</th> 
                 </tr>
-                @if(count($divisions) > 0)
                 @foreach ($divisions as $division)
                 <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                     <td class="font-roboto pl-5 font-bold py-5">{{ $division->name }}</td>
@@ -106,14 +112,13 @@
                         @endif
                     </td>
                     
-                    {{-- <td class="font-roboto font-bold py-5">{{ $division->position }}</td>  --}}
-                    <td class="font-roboto font-bold py-5 cursor-pointer">
-                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex justify-start">
-                            <img src="/img/logos/pencil.svg">
+                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex pl-2">
+                            <img src="/img/logos/pencil.svg" >
                         </a>
                     </td>
-                    <td class="font-roboto flex justify-start font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
-                        <form class="flex justify-center" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
+                    <td class="font-roboto font-bold py-5 cursor-pointer "onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
+                        <form class="flex justify-center pr-[6%]" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg">
@@ -121,30 +126,53 @@
                     </td> 
                 </tr>
                 @endforeach
-                @else
-                <h1 class="text-xl">No hay datos registrados </h>
-                @endif
+             
             </table>
+            @if($divisions->isEmpty())
+            <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+            @endif
             {{$divisions->links()}}
         </div>
     </div>
 </div>
     
 </section>
-@if(session('success'))
+@if(session()->has('successAdd'))
 <script>
-    
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva carrera.`,
+            title: '¡Exito!',
+            text: `¡División agregada exitosamente!`,
             icon: 'success',
         })
     }
-    
+    confirmAgregar();
 </script>
 @endif
-
+@if(session()->has('successEdit'))
+<script>
+    function confirmEdit(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡División editada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmEdit();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmDelete(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡División eliminada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
 <script>
 
  

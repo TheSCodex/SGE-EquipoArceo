@@ -8,27 +8,21 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('academies', function (Blueprint $table) {
+        Schema::create('study_grades', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('name')->nullable();
-            $table->integer('president_id');
-            $table->integer('division_id')->nullable();
+            $table->string('degree');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('academies');
+        Schema::dropIfExists('study_grades');
     }
 };

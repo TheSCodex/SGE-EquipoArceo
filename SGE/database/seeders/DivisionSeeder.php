@@ -25,6 +25,8 @@ class DivisionSeeder extends Seeder
         Division::create(['name' => 'División de Ingeniería y Tecnología', 'director_id' => $directors[1]->id ?? null, 'directorAsistant_id' => $directorAssistants[1]->id ?? null]);
         Division::create(['name' => 'División de Gastronomía', 'director_id' => $directors[2]->id ?? null, 'directorAsistant_id' => $directorAssistants[2]->id ?? null]);
         Division::create(['name' => 'División Económico-Administrativa', 'director_id' => $directors[3]->id ?? null, 'directorAsistant_id' => $directorAssistants[3]->id ?? null]);
+        Division::create(['name' => 'División de Gastronomia', 'director_id' => $directors[4]->id ?? null, 'directorAsistant_id' => $directorAssistants[4]->id ?? null]);
+
     }
     
     

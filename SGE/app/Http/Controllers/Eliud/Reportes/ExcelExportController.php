@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eliud\Reportes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Eliud\EgresadosRequest;
 use App\Models\AcademicAdvisor;
+use App\Models\Academy;
 use App\Models\Book;
 use App\Models\BusinessAdvisor;
 use App\Models\CalendarEvent;
@@ -153,6 +154,68 @@ class ExcelExportController extends Controller
         return $response;
     }
 
+    public function downloadLibrosFile()
+    {
+        $filePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS.xlsx');
+
+        $newFilePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS_' . time() . '.xlsx');
+        File::copy($filePath, $newFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($newFilePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Get the logged user's division
+        $authUser = auth()->user();
+        $division = Division::where('directorAsistant_id', $authUser->id)->first();
+
+        // Get all the interns in the same division
+        $interns = Intern::whereHas('career.academy', function ($query) use ($division) {
+            $query->where('division_id', $division->id);
+        })->get();
+
+        // Populate the spreadsheet
+        $row = 5;
+        $counter = 1;
+        foreach ($interns as $intern) {
+            $student = User::find($intern->user_id);
+            $book = Book::find($intern->book_id); // Fetch the book related to the intern
+            $career = Career::find($intern->career_id);
+            $academy = Academy::find($career->academy_id);
+            $division = Division::find($academy->division_id);
+
+            $sheet->setCellValue('C' . $row, $counter);
+            $sheet->setCellValue('D' . $row, $student->name . ' ' .  $student->last_name);
+            $sheet->setCellValue('E' . $row, $student->identifier);
+            $sheet->setCellValue('F' . $row, "\t" . $book->created_at->format('Y-m-d'));
+            $sheet->setCellValue('G' . $row, $book->price);
+            $sheet->setCellValue('H' . $row, $book->title);
+            $sheet->setCellValue('I' . $row, $book->author);
+            $sheet->setCellValue('J' . $row, $division->name);
+            $sheet->setCellValue('K' . $row, $career->name);
+            $sheet->setCellValue('B1', 'RELACIÓN DE DONACIONES DE LIBROS - GENERACIÓN ' . $intern->generation);
+            $sheet->setCellValue('B2', $division->name);
+
+            $sheet->getStyle('J' . $row)
+                ->getAlignment()
+                ->setWrapText(true);
+            $sheet->getRowDimension($row)->setRowHeight(-1);
+
+            $row++;
+            $counter++;
+        }
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save($newFilePath);
+
+        $publicPath = public_path('downloads/DONACIONES DE LIBROS_' . time() . '.xlsx');
+        File::copy($newFilePath, $publicPath);
+
+        $response = response()->download($publicPath)->deleteFileAfterSend(true);
+        unlink($newFilePath);
+
+        return $response;
+    }
+
     public function downloadEgresadosFile(EgresadosRequest $request)
     {
 
@@ -182,19 +245,31 @@ class ExcelExportController extends Controller
         $foja = $validatedData['startFoja'];
 
         // Populate the spreadsheet
-        $row = 4;
+        $row = 5;
         $counter = 1;
         foreach ($interns as $intern) {
             $student = User::find($intern->user_id);
             $book = Book::find($intern->book_id); // Fetch the book related to the intern
+            $career = Career::find($intern->career_id);
+            $academy = Academy::find($career->academy_id);
+            $division = Division::find($academy->division_id);
 
-            $sheet->setCellValue('B' . $row, $counter);
-            $sheet->setCellValue('C' . $row, $student->name);
-            $sheet->setCellValue('D' . $row, $student->identifier);
-            $sheet->setCellValue('E' . $row, $book->created_at);
-            $sheet->setCellValue('F' . $row, $book->price);
-            $sheet->setCellValue('G' . $row, $book->title);
-            $sheet->setCellValue('H' . $row, $book->author);
+            $sheet->setCellValue('C' . $row, $counter);
+            $sheet->setCellValue('D' . $row, $student->name . ' ' .  $student->last_name);
+            $sheet->setCellValue('E' . $row, $student->identifier);
+            $sheet->setCellValue('F' . $row, "\t" . $book->created_at->format('Y-m-d'));
+            $sheet->setCellValue('G' . $row, $book->price);
+            $sheet->setCellValue('H' . $row, $book->title);
+            $sheet->setCellValue('I' . $row, $book->author);
+            $sheet->setCellValue('J' . $row, $division->name);
+            $sheet->setCellValue('K' . $row, $career->name);
+
+            $sheet->getStyle('J' . $row)
+                ->getAlignment()
+                ->setWrapText(true);
+            $sheet->getRowDimension($row)->setRowHeight(-1);
+
+
 
             $sheet->setCellValue('I' . $row, $folio);
             $sheet->setCellValue('J' . $row, $foja);
