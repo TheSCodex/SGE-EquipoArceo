@@ -71,8 +71,8 @@
         </div>
     </div>
     <div class="w-full flex flex-col space-y-5">
-        <button type="submit" class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
-        <a href="/panel-advisors" class="text-center text-[#888] hover:text-[#444] bg-gray-200 hover:bg-gray-300 font-bold p-2 self-center w-[18em] md:w-[30em] rounded-md">Cancelar</a>
+        <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Crear Asesor</button>
+        <a  href="/panel-advisors" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>
     </div>
     </form>
 </div>
