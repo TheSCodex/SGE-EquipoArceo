@@ -17,8 +17,8 @@
                     </a>
                 </div>
 
-                <div class=" bg-primaryColor text-white rounded-md flex h-full flex-col justify-center items-center py-7 gap-5">
-                    <h3 class="font-semibold text-lg md:text-2xl lg:text-3xl text-center">Asesores académicos</h3>
+                <div class=" bg-primaryColor text-white rounded-md flex h-full flex-col justify-center items-center py-10 gap-5">
+                    <h3 class="font-bold text-lg md:text-2xl lg:text-3xl text-center">Asesores académicos</h3>
                     <a href="{{ route('lista-asesores')}}"
                         class="text-[#555] bg-white hover:bg-[#eee] py-1 md:py-2 px-5 md:px-10 font-semibold font-roboto rounded-md text-center text-sm md:text-base">
                         Ver todo
@@ -59,7 +59,7 @@
         <section class="col-span-1 flex flex-col flex-1 gap-3 mt-5 lg:mt-0">
             <div>
                 <div class="bg-white rounded-md py-1">
-                    <h3 class="text-lg font-medium font-kanit ml-6">Alumnos sin proyectos</h3>
+                    <h3 class="text-lg font-medium font-kanit ml-6">Alumnos sin anteproyectos</h3>
                 </div>
             </div>
 
