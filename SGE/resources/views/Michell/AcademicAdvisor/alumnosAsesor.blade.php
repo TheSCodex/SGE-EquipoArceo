@@ -6,6 +6,7 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
                 <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
+
                 <div class="flex flex-row items-center justify-end">
                     <div>
                         <div class="relative items-center hidden md:flex">
@@ -16,7 +17,6 @@
                     </div>
 
                 </div>
-
                 <div class="flex flex-col justify-between mx-auto mt-2 sm:flex-row md:hidden">
 
                     <div>
@@ -32,6 +32,10 @@
             </div>
 
             <section class="w-full px-2 lg:px-16">
+                @foreach ($errors->all() as $error)
+                    <p class="text-center text-red">{{ $error }}
+                    </p>
+                @endforeach
                 <div class="mx-8 my-5">
                     <table class="w-full min-w-[600px] divide-y divide-gray-200">
                         <thead>
@@ -123,12 +127,11 @@
                                                             </div>
 
                                                             <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form target="_blank"
-                                                                    action="{{ route('download.sancion', $user->id) }}"
+                                                                <form target="_blank" action="{{ route('download.sancion', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    
+
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="motivo">Elija el tipo de Sanción por
                                                                             motivo</label>
@@ -151,6 +154,7 @@
                                                                             <option value="3">Cancelación de Estadía
                                                                             </option>
                                                                         </select>
+
                                                                         <div id="serviceHoursContainer"
                                                                             class="flex flex-col justify-between w-full mt-2">
                                                                             <label for="serviceHours">Horas de
@@ -159,6 +163,11 @@
                                                                                 name="serviceHours" id="serviceHours" />
                                                                         </div>
                                                                     </div>
+
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <p class="p-2 text-red">{{ $error }}
+                                                                        </p>
+                                                                    @endforeach
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
                                                                 </form>
