@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
     //Ruta para las observaciones del estudiante
     Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
     Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
-    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
+    //Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
 
 
     // Vista del calendario del estudiante
