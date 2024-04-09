@@ -39,7 +39,10 @@
                         <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
-                <button type="submit" class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Agregar</button>
+                <div class="flex justify-between mt-2">
+                    <button type="submit" class="bg-[#00AB84]  my-3 rounded-lg py-2 px-4 text-white">Agregar</button>
+                    <a href="lista-asesores" class="bg-[#c5c5c5] text-gray-700 py-1 px-4 rounded-lg my-3 flex items-center text-center">Cancelar</a>
+                </div>
             </form>
         </div>
     </section>
