@@ -33,7 +33,7 @@
                     </div>
                     
                     <div class=" space-y-2">
-                        <p class="text-sm">Empresa</p>
+                        <p class="text-sm">Compañia</p>
                         <div class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                             <p>{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</p> 
                         </div>

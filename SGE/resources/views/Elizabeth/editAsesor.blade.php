@@ -50,8 +50,8 @@
                 @enderror
             </div>
         </div>
-        <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
-            <div class="space-y-2">
+      
+            <div class="space-y-2 px-6">
                 <div class="form-group">
                     <p class="text-sm">Compañias</p>
                     <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">

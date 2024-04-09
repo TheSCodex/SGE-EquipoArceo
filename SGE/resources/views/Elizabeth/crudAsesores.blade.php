@@ -123,7 +123,50 @@
 
 </section>
 
+@if(session()->has('successAdd'))
 <script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial agregado exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial editado exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial eliminad0 exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+
+
+
+
+
+<script>
+
+    
     function confirmDelete(advisorName, advisorId) {
         Swal.fire({
             title: '¿Estás seguro?',
