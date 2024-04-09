@@ -28,14 +28,15 @@
                         @endforeach
                     </select>
                     @error('name')
-                        <p>
+                        <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar carrera</button>
-
+            <div class="mx-auto">
+                <button type="submit" class="p-2 mt-10 px-20  self-center bg-primaryColor  sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar carrera</button>
+            </div>
     </form>
 </div>
 

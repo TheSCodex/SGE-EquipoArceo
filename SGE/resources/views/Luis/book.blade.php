@@ -53,7 +53,7 @@
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                         @if ($books->isEmpty())
-                            <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                            <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
                         @else
 
                     @foreach ($books as $book)
@@ -98,7 +98,7 @@
             </div>
             <div class="hidden lg:block w-full ">
                 @if ($books->isEmpty())
-                <h1 class="text-xl font-bold text-center">No hay libros disponibles</h1>
+                <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
                 @else
                 <table class="text-start w-full">
                     <tr>

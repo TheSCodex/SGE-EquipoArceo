@@ -17,11 +17,9 @@
              
                 <div class=" space-y-2">
                     <p class="text-sm">Academia</p>
-                    <input name="name" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"
+                    <input name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]"
                     placeholder="Academia"/>
-                      
-                  
-                    
+                       
                     @error('name')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
@@ -33,7 +31,10 @@
                     <select name="president_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un presidente</option>
                         @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" 
+                            @if(old('president_id') == $user->id) selected @endif>
+                            {{ $user->name }}
+                        </option>
                         @endforeach
                     </select>
                     @error('president_id')
@@ -44,14 +45,17 @@
                 </div>
                 
             </div>
-            <div class="flex md:flex-row flex-col items-center md:items-start px-[8%]">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
            
                 <div class=" space-y-2">
                     <p class="text-sm">Division</p>
                     <select name="division_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona una academia</option>
                         @foreach($divisions as $division)
-                            <option value="{{ $division->id }}">{{ $division->name }}</option>
+                        <option value="{{ $division->id }}" 
+                            @if(old('division_id') == $division->id) selected @endif>
+                            {{ $division->name }}
+                        </option>
                         @endforeach
                     </select>
                     
@@ -61,13 +65,22 @@
                         </p>
                     @enderror
                 </div>
+                <div class=" space-y-2">
+                    <p class="text-sm md:py-2"></p>
+                    <p  class="text-sm rounded-md border-white px-4 py-3 w-[20em] md:w-[35em]">
+                        
+                    </p>
+                    
+                  
+                </div>
                 
             </div>
             
             </div>
 
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir academia</button>
-
+            <div class="mx-auto">
+                <button type="submit" class="p-2 mt-10 px-20  self-center bg-primaryColor  sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir academia</button>
+            </div>
     </form>
 </div>
 

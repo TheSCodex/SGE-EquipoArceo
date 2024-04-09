@@ -49,7 +49,7 @@ class AcademiesController extends Controller
         $academy->division_id = $validatedData['division_id'];
         $academy->save();
 
-        return redirect('/panel-academies')->with('success', 'Academy added successfully!');
+        return redirect('/panel-academies')->with('successAdd', 'Academia agregada exitosamente!');
     }
 
     /**
@@ -93,7 +93,7 @@ class AcademiesController extends Controller
             'president_id'=> $validatedData['president_id'],
         ]); 
 
-        return redirect('/panel-academies')->with('success', 'Academy updated successfully!');
+        return redirect('/panel-academies')->with('successEdit', 'Academia actualizada exitosamente!');
     }
 
     /**
@@ -101,15 +101,15 @@ class AcademiesController extends Controller
      */
     public function destroy(string $id)
     {
-        
         try {
             DB::beginTransaction();
             DB::select('CALL proc_delete_academy(?)', [$id]);
             DB::commit();
             
-            return redirect()->back()->with('success', '¡Academia eliminada exitosamente!');
+            return redirect()->back()->with('successDelete', '¡Academia eliminada exitosamente!');
         } catch (\Exception $e) {
             DB::rollback();
+            
             return redirect()->back()->with('error', 'Error al eliminar la academia: ' . $e->getMessage());
         }
         

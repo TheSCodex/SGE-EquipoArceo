@@ -92,7 +92,6 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
                 </tr>
-                @if(count($divisions) > 0)
                 @foreach ($divisions as $division)
                 <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                     <td class="font-roboto pl-5 font-bold py-5">{{ $division->name }}</td>
@@ -127,30 +126,53 @@
                     </td> 
                 </tr>
                 @endforeach
-                @else
-                <h1 class="text-xl">No hay datos registrados </h>
-                @endif
+             
             </table>
+            @if($divisions->isEmpty())
+            <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+            @endif
             {{$divisions->links()}}
         </div>
     </div>
 </div>
     
 </section>
-@if(session('success'))
+@if(session()->has('successAdd'))
 <script>
-    
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva carrera.`,
+            title: '¡Exito!',
+            text: `¡Division agregada exitosamente!`,
             icon: 'success',
         })
     }
-    
+    confirmAgregar();
 </script>
 @endif
-
+@if(session()->has('successEdit'))
+<script>
+    function confirmEdit(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Division editada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmEdit();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmDelete(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Division eliminada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
 <script>
 
  

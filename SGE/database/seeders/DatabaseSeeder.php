@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         BusinessSector::factory()->count(10)->create();
         Book::factory(10)->create();
         Company::factory()->count(10)->create();
-        BusinessAdvisor::factory()->count(10)->create();
+        $this->call(BusinessAdvisorSeeder::class);
         $this->call(RolesSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(UsersSeeder::class);

@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <a href="{{ route('formAsesores')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo Asesor Empresarial
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo Asesor Empresarial
                 </a>
             </div>
         </div>
@@ -62,7 +62,8 @@
 
                         @endforeach
                     @else
-                        <h1 class="text-xl">No hay datos registrados </h>
+                    <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
+                        Sin resultados</p>
                     @endif
                     {{$advisors->links()}}
                 </div>
@@ -113,6 +114,7 @@
                     <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
                         Sin resultados</p>
                     @endif
+                </table>
                 
                 {{$advisors->links()}}
             </div>
@@ -121,7 +123,50 @@
 
 </section>
 
+@if(session()->has('successAdd'))
 <script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial agregado exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial editado exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Asesor Empresarial eliminad0 exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+
+
+
+
+
+<script>
+
+    
     function confirmDelete(advisorName, advisorId) {
         Swal.fire({
             title: '¿Estás seguro?',

@@ -74,6 +74,9 @@ class UsersSeeder extends Seeder
             'Mayra Fuentes',
             'Marlene Juárez',
             'Luis Villafaña',
+            'Manuel Rivero',
+            'Hector Soto',
+            'Mariana Recio'
         ];
 
         // Crear 4 usuarios director
