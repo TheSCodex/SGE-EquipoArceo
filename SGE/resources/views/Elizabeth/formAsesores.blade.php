@@ -70,7 +70,10 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
+    <div class="w-full flex flex-col space-y-5">
+        <button type="submit" class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Crear Asesor</button>
+        <a href="/panel-advisors" class="text-center text-[#888] hover:text-[#444] bg-gray-200 hover:bg-gray-300 font-bold p-2 self-center w-[18em] md:w-[30em] rounded-md">Cancelar</a>
+    </div>
     </form>
 </div>
 
