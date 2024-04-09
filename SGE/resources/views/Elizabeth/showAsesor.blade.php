@@ -41,8 +41,8 @@
                 </div>
             </div>
             <a  class="p-2 self-center bg-primaryColor w-[18em] md:w-[30em] rounded-md text-white hover:bg-darkgreen text-center" href="/panel-advisors">Regresar al panel de Asesores</a>
-
-
+        </div>
+        </div>
     </form>
 </div>
 @endsection('contenido')
