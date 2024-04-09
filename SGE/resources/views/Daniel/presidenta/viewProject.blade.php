@@ -257,11 +257,10 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectoP') }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
-                            observaciones</a>
+                        <a href="{{ route('observationsAnteproyectoPresi', ['id' => $project->id]) }}"
+                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
+                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"

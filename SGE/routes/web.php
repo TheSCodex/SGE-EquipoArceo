@@ -93,8 +93,8 @@ Route::middleware('auth')->group(function () {
 
     //Ruta para las observaciones del estudiante
     Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
-    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
-    //Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
+    Route::post("observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
+    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
 
 
     // Vista del calendario del estudiante
@@ -129,8 +129,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('download.digitalizacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
 
     // ! Ruta de las observaciones del asesor
-    Route::get("observaciones/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
-    Route::put('observaciones/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update');    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
+    Route::get("observaciones/asesor/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
+    Route::put('observaciones/asesor/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update');
+    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
     Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
     Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
     Route::match(['get', 'post'], 'CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev');
@@ -166,7 +167,8 @@ Route::middleware('auth')->group(function () {
     Route::post('anteproyecto/{id}/presidentDeleteLike', [ProjectsPresidentController::class, 'deleteLike'])->name('anteproyecto-President.deleteLike');
     Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'view'])->name('anteproyecto-President.view');
 
-
+    Route::get("observaciones/presidente/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoPresi');
+    Route::put('observaciones/presidente/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updatePresidente');
     Route::resource('/estudiantes-division', StudentAndAdvisorController::class)->names('presidente')->middleware('roleorcan:presidenteAcademia,leer-estudiantes');
 
     //CRUD ASESOR ACADÉMICO 
@@ -208,6 +210,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('re-download.digitalizacion.director');
     Route::put('/docRevision/{id}', [DocumentsController::class, 'UpdateDocRevision'])->name('docRevision.update');
 
+    Route::get("observaciones/directora/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
+    Route::put('observaciones/directora/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
     //Ruta de la lista de los anteproyectos
     Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos')->middleware('roleorcan:director,');
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
