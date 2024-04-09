@@ -25,9 +25,9 @@
                     </a>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-2">
 
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
+                <div class="bg-white flex gap-5 justify-center items-center px-2 py-5 rounded-md">
                     <!-- ICON -->
                     <div class="flex items-center justify-center">
                         <svg width="60" height="60" viewBox="0 0 78 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,8 +55,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
-                    <!-- ICON -->
+                <!-- <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
                     <div class="flex items-center justify-center">
                         <svg width="60" height="60" viewBox="0 0 77 76" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <ellipse cx="38.5" cy="38" rx="38.5" ry="38" fill="#02AB82"/>
@@ -72,16 +71,8 @@
                         </svg>
                     </div>
 
-                    <!-- INFO -->
-                    <div class="col-span-2 flex flex-col justify-center">
-                        @if(isset($mensaje))
-                   <p>{{ $mensaje }}</p>
-                   @else
-                  <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
-                   @endif
-                        <p class="text-gray-500 text-xs">Días restantes</p>
-                    </div>
-                </div>
+
+                </div> -->
 
             </div>
 
@@ -104,7 +95,7 @@
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas" class="text-sm font-normal">Ver más</a></p>
+            <p class="font-semibold px-3 bg-white py-2 rounded-md flex justify-between items-center">Bajas de estudiantes <a href="bajas" class="text-xs text-[#02AB82] font-bold">Ver más</a></p>
             @foreach ( $interns as $i )
             <div class="bg-white rounded-md py-1.5 flex flex-col gap-3">
                 <div class="flex gap-3  ml-10 items-center">
@@ -172,7 +163,8 @@
 
         let approvedProjects = {{ Js::from($approvedProjectsByMonth) }};
         let careers = {{ Js::from($careers) }};
-        let mesesEnIntervalo = obtenerMesesEnIntervalo({{ Js::from($period['period']) }});
+        let serverPeriod = {{ Js::from($period) }};
+        let mesesEnIntervalo = obtenerMesesEnIntervalo(serverPeriod);
 
         const allCareers = [];
         approvedProjects.forEach(item => {

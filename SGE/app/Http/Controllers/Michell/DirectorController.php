@@ -48,20 +48,25 @@ class DirectorController extends Controller
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
 
-        dd($intern);
+        // dd($intern);
         // if (!$intern || !$intern->project_id) {
         //     $mensaje = "Aún no se ha agregado un proyecto.";
         //     return view('Michell.director.index', compact('mensaje'));
         // }
-        $project = Project::find($intern->project_id);
-        $start_date = Carbon::parse($project->start_date);
-        $end_date = Carbon::parse($project->end_date);
-        $current_date = Carbon::now();
+        // if ($intern) {
+        //     $project = Project::find($intern->project_id);
+        // }
+        // else {
+        //     $project = null;
+        // }
+        // $start_date = Carbon::parse($project->start_date);
+        // $end_date = Carbon::parse($project->end_date);
+        // $current_date = Carbon::now();
 
-        $diasTranscurridos = $current_date->diffInDays($start_date);
-        $TotalDeDias = $start_date->diffInDays($end_date);
-        // dd($TotalDeDias);
-        $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
+        // $diasTranscurridos = $current_date->diffInDays($start_date);
+        // $TotalDeDias = $start_date->diffInDays($end_date);
+        // // dd($TotalDeDias);
+        // $diaActual = $diasTranscurridos + 1;
 
         // Obtener carreras de las academias
         $careers = Career::whereIn('academy_id', $academies->pluck('id'))
@@ -133,9 +138,6 @@ class DirectorController extends Controller
             "userDivision",
             "penalizationsNum",
             "projectMetrics",
-            "studentProject",
-            'diaActual',
-            'TotalDeDias',
             "period",
             "approvedProjectsByMonth"
         ));
