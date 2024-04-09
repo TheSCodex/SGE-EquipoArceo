@@ -1,7 +1,7 @@
 @extends('templates/authTemplate')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="w-full md:px-[7em] md:mt-[2em] h-fit flex bg-white">
+<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
     <form action="{{ url('panel-users/' . $user->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
         @csrf
         @method('PUT')
@@ -102,7 +102,7 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
+            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
 
     </form>
 </div>
