@@ -179,7 +179,7 @@
     function confirmDelete(userName, userId) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            text: `Estás a punto de eliminar a ${userName}. Se eliminará toda la información relacionada al usuario, incluyendo comentarios.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -245,7 +245,7 @@
             // Muestra el SweetAlert para confirmar la eliminación
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                text: `Estás a punto de eliminar a ${userName}. Se eliminará toda la información relacionada al usuario, incluyendo comentarios.`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
