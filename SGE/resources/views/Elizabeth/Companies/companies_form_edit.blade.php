@@ -29,7 +29,7 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Celular </p>
-                <input type="number" name="phone" value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
+                <input type="text" name="phone"  value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
                 @error('phone')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
@@ -68,14 +68,16 @@
                 <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" id="business_sector_id" name="business_sector_id">
                     <option value="" selected disabled>Seleccionar giro empresarial</option>
                     @foreach($businessSector as $sector)
-                        <option value="{{ $sector->id }}" @if(old('business_sector_id') == $sector->id) selected @endif>{{ $sector->title }}</option>
+                        <option value="{{ $sector->id }}" @if(old('business_sector_id') == $sector->id) selected @endif >{{ $sector->title }}</option>
                     @endforeach
                 </select>
                 
             </div>
         </div>
         <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Actualizar empresa</button>
+        <a  href="/panel-companies" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>       
     </form>
+
     
 </div>
 @endsection('contenido')

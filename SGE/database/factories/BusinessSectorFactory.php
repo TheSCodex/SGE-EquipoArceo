@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Companie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,24 @@ class BusinessSectorFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'title' => $this->faker->word,
+        $sectors = [
+            'Tecnología de la Información',
+            'Salud',
+            'Educación',
+            'Finanzas',
+            'Manufactura',
+            'Comercio minorista',
+            'Servicios profesionales',
         ];
+
+        $randomIndex = array_rand($sectors);
+
+        return [
+            'title' => $sectors[$randomIndex],
+        ];
+    }
+    public function companies()
+    {
+        return $this->hasMany(Companie::class);
     }
 }
