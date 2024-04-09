@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <a href="{{ route('formAsesores')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo Asesor Empresarial
+                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo Asesor Empresarial
                 </a>
             </div>
         </div>
@@ -62,7 +62,8 @@
 
                         @endforeach
                     @else
-                        <h1 class="text-xl">No hay datos registrados </h>
+                    <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
+                        Sin resultados</p>
                     @endif
                     {{$advisors->links()}}
                 </div>
@@ -113,6 +114,7 @@
                     <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
                         Sin resultados</p>
                     @endif
+                </table>
                 
                 {{$advisors->links()}}
             </div>
