@@ -70,10 +70,10 @@
             </div>
         </div>
     </div>
-    <div class="w-full flex flex-col space-y-5">
-        <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Crear Asesor</button>
-        <a  href="/panel-advisors" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>
-    </div>
+
+        <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-full   text-white">Crear Asesor</button>
+        <a  href="/panel-advisors" class="p-2  self-center block text-center  bg-slate-300 border-2 rounded-md px-4 w-[18em] md:w-full text-white">Cancelar</a>
+    
     </form>
 </div>
 
