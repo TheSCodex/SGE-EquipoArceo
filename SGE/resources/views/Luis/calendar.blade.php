@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
     @vite('resources/css/app.css')
+    <style>
+        .divEvent {
+            position: relative; /* Asegura que el tooltip se posicione correctamente respecto a este elemento */
+        }
+        .divEvent .contentTip {
+            position: absolute;
+            top: -25px;
+            left: -120px; /* Alinea el tooltip horizontalmente */
+            transform: translateX(-50%); /* Centra el tooltip horizontalmente */
+            width: 200px;
+            background: #374151;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.5s;
+            z-index: 999; /* Asegura que el tooltip se muestre sobre otros elementos */
+        }
+        .divEvent .contentTip::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #374151;
+            bottom: 50%;
+            left: 180px; /* Coloca el pseudo-elemento a la derecha del tooltip */
+            transform: translateY(50%) rotate(45deg); /* Alinea el pseudo-elemento */
+            z-index: -1;
+        }
+        .divEvent:hover .contentTip{
+            visibility: visible;
+            opacity: 1;
+
+        }
+    </style>
 </head>
 <body>
     @extends('templates/authTemplate')
@@ -67,13 +103,17 @@
                     </div>
                 </div>
                 <hr class="border-white my-4 w-5/4 m-4">
-                <div class="flex flex-col overflow-y-hidden hover:overflow-y-auto w-full h-[600px]">
+                <div class="flex flex-col overflow-y-hidden hover:overflow-y-auto w-full h-[700px]">
+                    @if (count($todayEvents) == 0 )
+                    <p class="font-bold text-white text-xl text-center ">¡No hay eventos pendientes para hoy!</p>
+                    <hr class="border-white my-4 w-5/4 m-4">
+                    @endif
                     @if ($todayEvents)
                         @foreach($todayEvents as $todayEvent)
                             <div class="px-4 mb-2">
                                 <p class="font-bold text-[#193c45]">Hoy <span class="text-sm text-[#054759]"> {{$day}}/{{$month}}/{{$year}}</span></p>
                             </div>
-                            <div class="px-4 mt-4 text-white text-sm">
+                            <div class="px-4 mt-4 text-white text-sm break-words">
                                 <p class=" font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($todayEvent->date_start, 11)}} - {{ substr($todayEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                     <p class=" ml-6 "><span class="font-semibold text-darkBlue">Con:</span> {{ $todayEvent['receiver']['user']['name'] }}</p>
@@ -111,7 +151,7 @@
                                 <p class="font-bold text-[#193c45]">Mañana <span class="text-sm text-[#054759]">{{$nextDay }}/{{$month}}/{{$year}}</span></p>
                             </div>
                             <!-- Detalles del evento de mañana -->
-                            <div class="px-4 text-white text-sm">
+                            <div class="px-4 text-white text-sm  break-words">
                                 <p class="font-semibold italic"><span class="inline-block w-4 h-4 rounded-full bg-white mr-2"></span>{{ substr($tomorrowEvent->date_start, 11)}} - {{ substr($tomorrowEvent->date_end, 11)}}</p>
                                 @if ($isAcademicAdvisor == True)
                                 <p class=" ml-6 font-semibold"><span class="font-semibold text-darkBlue">Con:</span> {{ $tomorrowEvent['receiver']['user']['name'] }}</p>
@@ -127,8 +167,9 @@
                             <hr class="border-white my-4 w-5/4 m-4">
                         @endforeach
                     @endif
-                    @if (count($todayEvents) == 0 || count($tomorrowEvents) == 0)
-                        <p class="font-bold text-white text-xl text-center mt-5">¡No hay eventos pendientes!</p>
+                    @if (count($tomorrowEvents) == 0)
+                    <p class="font-bold text-white text-xl text-center">¡No hay eventos pendientes para mañana!</p>
+                    <hr class="border-white my-4 w-5/4 m-4">
                     @endif
                 </div>
             </div>
@@ -181,7 +222,7 @@
                                         @endphp
                                     @if ($eventInHour)
                                         @if ($hour == $startHour && !$infoShown)
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }}" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
+                                            <td class="divEvent px-2 py-3 md:py-4 text-center border-l-2 border-t-2 border-r-2 border-[#332941] cursor-pointer {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }}" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
@@ -190,7 +231,7 @@
                                                             {{-- <p class="font-bold text-white text-center">Cita</p> --}}
                                                         </div>
                                                     </a>
-                                                    @else
+                                                @else
                                                         <a href="{{route('estudiante-actividades.show', $event->id)}}">
                                                             <div class="px-4">
                                                                 <p class="font-bold text-white text-center">{{substr($event['date_start'], 11, 5)}} {{$hour >= 12 ? 'PM' : 'AM'}}</p>
@@ -199,13 +240,20 @@
                                                             </div>
                                                         </a>
                                                 @endif
+                                                <div class="contentTip break-words">
+                                                    <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Lugar: </span>{{$eventInHour->location}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Estatus: </span>{{$eventInHour->status}}</p>
+                                                </div>
 
                                             </td>
                                             @php
                                                 $infoShown = true;
                                             @endphp
                                         @elseif($hour == $endHour)
-                                            <td class="px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
+                                            <td class="divEvent px-2 py-3 md:py-4 border-l-2 border-b-2 border-r-2 border-[#332941] text-center  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
@@ -224,10 +272,16 @@
                                                     </a>
 
                                                 @endif
-
+                                                <div class="contentTip break-words">
+                                                    <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Lugar: </span>{{$eventInHour->location}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Estatus: </span>{{$eventInHour->status}}</p>
+                                                </div>                                         
                                             </td>
                                         @else
-                                            <td class="px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
+                                            <td class="divEvent px-2 py-3 md:py-4 text-center border-l-2 border-r-2 border-[#332941]  {{ ($event['status'] == 'Programada') ? 'bg-primaryColor' : (($event['status'] == 'Terminada') ? 'bg-[#B2B2B2]' : (($event['status'] == 'Cancelada') ? 'bg-[#eb7575]' : 'bg-[#344D67]')) }} cursor-pointer" data-href="{{ $isAcademicAdvisor ? route('actividades.show', $event->id) : route('estudiante-actividades.show', $event->id) }}">
                                                 @if ($isAcademicAdvisor == True)
                                                     <a href="{{route('actividades.show', $event->id)}}">
                                                         <div class="px-4">
@@ -242,7 +296,13 @@
                                                             </div>
                                                         </a>
                                                 @endif
-
+                                                <div class="contentTip break-words">
+                                                    <p class="text-white"><span class="font-semibold italic">Titulo: </span>{{$eventInHour->title}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Tipo: </span>{{$eventInHour->eventType}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Descripción: </span>{{$eventInHour->description}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Lugar: </span>{{$eventInHour->location}}</p>
+                                                    <p class="text-white"><span class="font-semibold italic">Estatus: </span>{{$eventInHour->status}}</p>
+                                                </div>
                                             </td>
                                         @endif
                                     @else

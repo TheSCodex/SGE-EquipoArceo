@@ -7,13 +7,28 @@
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
-                    <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
-                    <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos,
-                        facilitando la planificación, organización y seguimiento de conferencias seminarios, talleres y
-                        actividades similares en entornos educativos...</p>
-                    <a href="anteproyecto" class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
-                        Iniciar
-                    </a>
+                    @if ($studentProject)
+                        <h3 class="font-bold text-lg md:text-xl">{{ $studentProject->name }}</h3>
+                        <div class="my-2">
+                            <p >Estatus: <span class="uppercase font-bold text-sm">{{ $studentProject->status }}</span></p>
+                            <p class="mb-4 break-words line-clamp-3">Descripción: <span class="font-normal">{{ $studentProject->description }}</span></p>
+                            <a href="anteproyecto"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                                Detalles
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-center font-bold text-lg md:text-xl mb-5">Todavía no has creado una propuesta</p>
+
+                        <div class="flex justify-center">
+                            <a 
+                                href="anteproyecto/nuevo"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm"
+                            >
+                                Crear propuesta
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">
@@ -26,8 +41,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
+                        <p class="font-bold text-2xl">{{ $studentsCommentsCount }}</p>
+                        <p class="text-sm text-black opacity-50">Comentarios</p>
                     </div>
                 </div>
 
@@ -40,7 +55,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
+                        <p class="font-bold text-2xl">{{$votes->like}}</p>
                         <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
@@ -54,8 +69,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 120</p>
-                        <p class="text-sm text-black opacity-50">Dias restantes</p>
+                    @if(isset($mensaje))
+                   <p>{{ $mensaje }}</p>
+                   @else
+                  <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
+                   @endif
                     </div>
                 </div>
 
@@ -151,6 +169,7 @@
             </div>
             <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] ">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
+                    @if ($penalty === null) 
                     <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
                     <div class="flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled"
@@ -158,13 +177,17 @@
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path
-                                d="M13 3a3 3 0 0 1 2.995 2.824l.005 .176v4h2a3 3 0 0 1 2.98 2.65l.015 .174l.005 .176l-.02 .196l-1.006 5.032c-.381 1.626 -1.502 2.796 -2.81 2.78l-.164 -.008h-8a1 1 0 0 1 -.993 -.883l-.007 -.117l.001 -9.536a1 1 0 0 1 .5 -.865a2.998 2.998 0 0 0 1.492 -2.397l.007 -.202v-1a3 3 0 0 1 3 -3z"
+                            d="M13 3a3 3 0 0 1 2.995 2.824l.005 .176v4h2a3 3 0 0 1 2.98 2.65l.015 .174l.005 .176l-.02 .196l-1.006 5.032c-.381 1.626 -1.502 2.796 -2.81 2.78l-.164 -.008h-8a1 1 0 0 1 -.993 -.883l-.007 -.117l.001 -9.536a1 1 0 0 1 .5 -.865a2.998 2.998 0 0 0 1.492 -2.397l.007 -.202v-1a3 3 0 0 1 3 -3z"
                                 stroke-width="0" fill="currentColor" />
                             <path
-                                d="M5 10a1 1 0 0 1 .993 .883l.007 .117v9a1 1 0 0 1 -.883 .993l-.117 .007h-1a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-7a2 2 0 0 1 1.85 -1.995l.15 -.005h1z"
-                                stroke-width="0" fill="currentColor" />
+                            d="M5 10a1 1 0 0 1 .993 .883l.007 .117v9a1 1 0 0 1 -.883 .993l-.117 .007h-1a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-7a2 2 0 0 1 1.85 -1.995l.15 -.005h1z"
+                            stroke-width="0" fill="currentColor" />
                         </svg>
                     </div>
+                    @else
+                    <h2>{{$penalty->penalty_name}}</h2>
+                    <p class="text-lg font-normal">{{$penalty->description}}</p>
+                    @endif
                 </div>
                 <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px">
                     <p class="mb-5 text-center">Progreso</p>

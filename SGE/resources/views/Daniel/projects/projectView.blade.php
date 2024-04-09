@@ -7,7 +7,7 @@
 @section('contenido')
 
     <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
-        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
             <h1 class="text-2xl font-bold text-green-500 mb-[4%] sm:mb-[3%] border-b py-[1%] px-[1%] border-slate-700  ">
                 Mi Anteproyecto
             </h1>
@@ -16,9 +16,9 @@
                     {{ $message }}
                 </div>
             @endif
-            <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
+            <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow">
                 <div
-                    class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
+                    class=" max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del Anteproyecto:
@@ -182,7 +182,7 @@
                 </div>
             </div>
             <div
-                class="sm:w-[31%] h-[82%] sm:h-full flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
+                class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 gap-[1vh] self-start">
                 <div
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del Anteproyecto</h3>
@@ -221,10 +221,20 @@
                 </div>
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
-                                <p class=' text-black w-full font-semibold text-sm'>Asesor</p>
+                                <p class=' text-black w-full font-semibold text-sm'>
+                                    @if($comment->academic_advisor_id !== null)
+                                        Asesor
+                                    @elseif($comment->president_id !== null)
+                                        Presidente de academia
+                                    @elseif($comment->director_id !== null)
+                                        Director de division
+                                    @else
+                                        Tú
+                                    @endif
+                                </p>
                                 <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}</p>
                             </div>
                         @endforeach
@@ -233,11 +243,11 @@
                             observaciones</a>
 
                         <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-2">
+                            class="w-full font-normal flex  h-[fit] self-end mb-2 items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -250,7 +260,7 @@
                     </div>
                 @elseif(isset($comments) && count($comments) == 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
                         </div>
@@ -258,11 +268,11 @@
 
                         <form method="POST"
                             action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex mt-[-3vh] h-[fit] ">
+                            class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
 
-                            <input class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" />
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
+                                placeholder="Ingrese su comentario" ></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -274,7 +284,7 @@
                         </form>
                     @else
                         <div
-                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[41.5vh]  flex justify-center items-center text-xl overflow-y-auto">
+                            class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex justify-center items-center text-xl overflow-y-auto">
                             <p class=' text-center text-black opacity-[60%]'>Aun no tienes un anteproyecto Empieza a
                                 trabajarlo
                                 ahora</p>

@@ -34,6 +34,7 @@ class ExcelExportController extends Controller
         File::copy($filePath, $newFilePath);
 
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($newFilePath);
+
         $sheet = $spreadsheet->getActiveSheet();
 
         // Información del asesor academico
@@ -69,6 +70,10 @@ class ExcelExportController extends Controller
 
             $sheet->setCellValue('C' . $row, $student->identifier);
             $sheet->setCellValue('D' . $row, $student->name);
+            $spreadsheet->getActiveSheet()
+                ->getStyle('AE' . $row)
+                ->getAlignment()
+                ->setTextRotation(0);
             $sheet->setCellValue('AE' . $row, $business_advisor?->name . $business_advisor?->email);
             $sheet->setCellValue('AF' . $row, $project?->name);
             $sheet->setCellValue('Z3', $intern->period);
@@ -182,7 +187,7 @@ class ExcelExportController extends Controller
         foreach ($interns as $intern) {
             $student = User::find($intern->user_id);
             $book = Book::find($intern->book_id); // Fetch the book related to the intern
-            
+
             $sheet->setCellValue('B' . $row, $counter);
             $sheet->setCellValue('C' . $row, $student->name);
             $sheet->setCellValue('D' . $row, $student->identifier);

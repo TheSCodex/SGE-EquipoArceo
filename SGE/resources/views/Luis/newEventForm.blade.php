@@ -48,11 +48,10 @@
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Tipo de actividad:</p>
                                 <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de actividad">
-                                    <option value="Planificación de practica">Planificación de proyecto</option>
-                                    <option value="Revisión de memoria">Revisión de memoria</option>
-                                    <option value="Asesoria">Asesoria</option>
+                                    <option value="Planificación de anteproyecto">Planificación de anteproyecto</option>
+                                    <option value="Asesoría de memorias">Asesoría de memorias</option>
                                     <option value="Liberación de documento">Liberación de documento</option>
-                                    <option value="Sanción">Sanción</option>
+                                    <option value="Sanción de servicio social">Sanción de servicio social</option>
                                 </select>
                                 @error('eventType')
                                 <p class="text-[#ff0000] text-sm">

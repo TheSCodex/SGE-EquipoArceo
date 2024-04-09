@@ -74,7 +74,11 @@
 
                     <!-- INFO -->
                     <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/120</p>
+                        @if(isset($mensaje))
+                   <p>{{ $mensaje }}</p>
+                   @else
+                  <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
+                   @endif
                         <p class="text-gray-500 text-xs">Días restantes</p>
                     </div>
                 </div>
@@ -83,15 +87,18 @@
 
             <div class="bg-white rounded-md py-7 px-10">
                 <div class="flex justify-between">
-                    <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
-                   
+                    <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>      
                 </div>
 
                 <p class="text-[#828282]">Carreras de la division</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
-                <canvas id="myChart" class="max-h-[200px]"></canvas>
+                @if ($period == null)
+                    <p class="text-center text-[#828282] text-sm font-bold py-5">Aún no hay estudiantes en la división</p>
+                @else
+                    <canvas id="myChart" class="max-h-[200px]"></canvas>      
+                @endif
             </div>
         </section>
 
@@ -133,7 +140,11 @@
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Total de proyectos</p>
-                    <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
+                    @if ($projectMetrics["totalProjects"] == 0)
+                        <p class="text-center text-sm text-[#828282] font-bold py-14">Aún no hay proyectos en la división</p>
+                    @else
+                        <canvas id="total-proyectos" class="max-h-[200px]"></canvas> 
+                    @endif
                 </div>
             </div>
         </section>
