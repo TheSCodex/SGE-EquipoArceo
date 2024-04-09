@@ -100,7 +100,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="tel" name="Numero" placeholder="998XXXXXXX"
+                        <input type="tel" name="Numero" placeholder="Teléfono"
                             value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
@@ -183,7 +183,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="tel" name="Phone_advisor" placeholder="998XXXXXXX"
+                        <input type="tel" name="Phone_advisor" placeholder="Teléfono"
                             value="{{ old('Phone_advisor') }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Phone_advisor')
@@ -253,7 +253,7 @@
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
                     </button>
-                    <a href="{{ url('estudiante/anteproyecto') }}"
+                    <a href="{{ url('anteproyecto') }}"
                         class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
                         Cerrar
                     </a>
@@ -261,39 +261,98 @@
             </form>
         </div>
     </section>
-    <div id="myModal" class=" modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
+    <div id="myModal" class="modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
                 <div class="text-center mb-4">
                     <h3 class="text-xl font-semibold">Invitar a colaborar</h3>
                 </div>
                 <div>
-                    <input type="text" id="searchInput" placeholder="Buscar usuario" class="w-full border-gray-300 rounded-md p-2">
+                    <input type="text" id="searchInput" placeholder="Buscar usuario"
+                        class="w-full border-gray-300 rounded-md p-2">
+
+                    <!-- Aquí se mostrarán los resultados de la búsqueda -->
+                    <div id="searchResults">
+                        @foreach ($interns as $intern)
+                            @if ($intern->project_id === null)
+                                <div
+                                    class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
+                                    <div class="flex items-center">
+                                        <input type="checkbox"
+                                            class="internCheckbox mr-4 h-6 w-6 rounded-full border-2 border-primaryColor focus:outline-none"
+                                            data-id="{{ $intern->user->id }}">
+                                        <div>
+                                            <p class="name text-lg font-semibold text-gray-800">{{ $intern->user->name }}
+                                            </p>
+                                            <p class="identifier text-sm text-gray-600">{{ $intern->user->identifier }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
                 <div class="mt-6 flex justify-end">
                     <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
-                        id="closeModalButton">Cerrar</button>
-                    <button type="button" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
+                        id="closeModalButton">Cerrar
+                    </button>
+                    <form action="{{ route('invitar.colaboradores') }}" method="POST" id="invitationForm">
+                    @csrf
+                    <input type="hidden" name="selectedIds" id="selectedIds">
+                    <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
                         invitación</button>
+                </form>
                 </div>
             </div>
         </div>
-        <script>
-            const openModalButton = document.getElementById('openModalButton');
-            const modal = document.getElementById('myModal');
-            const closeModalButton = document.getElementById('closeModalButton');
+    </div>
+    <script>
+        //Javascript para el modal
+        const openModalButton = document.getElementById('openModalButton');
+        const modal = document.getElementById('myModal');
+        const closeModalButton = document.getElementById('closeModalButton');
 
-            function openModal() {
-                modal.classList.remove('hidden');
-            }
+        function openModal() {
+            modal.classList.remove('hidden');
+        }
 
-            function closeModal() {
-                modal.classList.add('hidden');
-            }
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+        openModalButton.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
 
-            openModalButton.addEventListener('click', openModal);
+        sendInvitationsButton.addEventListener('click', function() {
+            var selectedIds = [];
+            var checkboxes = document.querySelectorAll('.internCheckbox:checked');
+            checkboxes.forEach(function(checkbox) {
+                var internId = checkbox.getAttribute('data-id');
+                selectedIds.push(internId);
+            });
 
-            closeModalButton.addEventListener('click', closeModal);
-        </script>
+            // Ahora `selectedIds` contiene los IDs de los usuarios seleccionados
+            console.log(selectedIds);
+        });
+
+        //Javascript para el buscador
+        function searchInterns() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            var interns = document.querySelectorAll('#searchResults > div');
+
+            interns.forEach(function(intern) {
+                var name = intern.querySelector('.name').innerText.toLowerCase();
+                var identifier = intern.querySelector('.identifier').innerText.toLowerCase();
+                if (name.includes(searchTerm) || identifier.includes(searchTerm)) {
+                    intern.style.display = 'block';
+                } else {
+                    intern.style.display = 'none';
+                }
+            });
+        }
+        document.getElementById('searchInput').addEventListener('keyup', searchInterns);
+    </script>
+
     </div>
 @endsection

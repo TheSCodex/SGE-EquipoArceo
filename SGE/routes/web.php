@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store')->middleware('roleorcan:estudiante,crear-anteproyecto');
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
+    Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores');
 
 
     //Ruta para las observaciones del estudiante

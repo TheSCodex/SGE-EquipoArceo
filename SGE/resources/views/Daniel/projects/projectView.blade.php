@@ -165,7 +165,7 @@
                                 </p>
                             </div>
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
-                                class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                                class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
                         </div>
                     @else
                         <div
