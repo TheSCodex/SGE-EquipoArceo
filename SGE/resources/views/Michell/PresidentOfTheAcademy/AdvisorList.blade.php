@@ -57,7 +57,7 @@
                                 <tbody class="text-sm">
                                     @foreach ($advisors as $data)
                                         <tr
-                                            class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+                                            class="data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
                                             <td class="py-4">{{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
                                             @if ($data->quantity > 0)
