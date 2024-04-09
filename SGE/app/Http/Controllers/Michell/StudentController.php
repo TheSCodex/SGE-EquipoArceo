@@ -28,28 +28,17 @@ class StudentController extends Controller
         //     $student = 1;
         // }
         $intern = Intern::where("user_id", $student)->first();
-        $interns = Intern::where("user_id", $student)->get();
-        // dd($interns);
-        // dd($student);
-        //Obtener comentarios
 
-        $comments = Comment::join('users', 'comments.academic_advisor_id', '=', 'users.id')
-            ->where('comments.interns_id', $student)
-            ->select('users.name', 'comments.content')
-            ->get();
+        // dd($intern);
 
         $studentProject = Intern::join("projects", "interns.project_id", "=", "projects.id")
             ->where("interns.id", "=", $student)
             ->first();
 
+   
+        $advisor = $intern->load("academicAdvisor.user");
 
-        // dd($comments);
-        // Obtener el nombre del asesor académico
-        $advisor = DB::table('users')
-            ->join('interns', 'users.id', '=', 'interns.academic_advisor_id')
-            ->where('interns.user_id', $student)
-            ->select('users.name as advisor_name')
-            ->first();
+        // dd($advisor);
 
         // Obtener el nombre del asesor empresarial
         $empresarial = DB::table('interns')
@@ -62,27 +51,44 @@ class StudentController extends Controller
         // dd($empresarial);
 
 
+        $studentsCommentsCount = null;
+        $comments = [];
         //comentarios
-        $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
-        ->whereNotNull("interns_id")
-        ->count();
+        if ($studentProject) {
+            $studentsCommentsCount = Comment::where("project_id", "=", $studentProject->id)
+            ->whereNotNull("interns_id")
+            ->count();
+
+            $comments = Comment::where("project_id", "=", $studentProject->id)
+            ->whereNotNull("interns_id")
+            ->get();
+        $comments = $comments->take(3);
+        }
+
 
         //Obtener los dias faltantes
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
-        if (!$intern || !$intern->project_id) {
-            $mensaje = "Aún no se ha agregado un proyecto.";
-            return view('Michell.StudentHome.studentHome', compact('mensaje'));
-        }
-        $project = Project::find($intern->project_id);
-        $start_date = Carbon::parse($project->start_date);
-        $end_date = Carbon::parse($project->end_date);
-        $current_date = Carbon::now();
 
-        $diasTranscurridos = $current_date->diffInDays($start_date);
-        $TotalDeDias = $start_date->diffInDays($end_date);
-        // dd($TotalDeDias);
-        $diaActual = $diasTranscurridos + 1; // Para mostrar el día actual
+        $TotalDeDias = null;
+        $diaActual = null;
+        $mensaje = null;
+
+        $project = Project::find($intern->project_id);
+        if ($project) {
+            $start_date = Carbon::parse($project->start_date);
+            $end_date = Carbon::parse($project->end_date);
+            $current_date = Carbon::now();
+    
+            $diasTranscurridos = $current_date->diffInDays($start_date);
+            $TotalDeDias = $start_date->diffInDays($end_date);
+            // dd($TotalDeDias);
+            $diaActual = $diasTranscurridos + 1;
+        }
+        else {
+            $mensaje = "Aún no se ha agregado un proyecto";
+        }
+
 
         // Obtener votos
         $votes = Intern::where('user_id', $student)
@@ -111,6 +117,7 @@ class StudentController extends Controller
             "studentsCommentsCount" => $studentsCommentsCount,
             'votes' => $votes,
             'penalty' => $penalizations,
+            "mensaje" => $mensaje
         ]);
     }
 

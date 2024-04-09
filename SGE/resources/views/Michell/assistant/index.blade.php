@@ -26,35 +26,24 @@
                     </a>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
-
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-2">
+                <div class="bg-white flex gap-5 justify-center items-center px-2 py-5 rounded-md">
                     <!-- ICON -->
                     <div class="flex items-center justify-center">
-                        <svg width="60" height="60" viewBox="0 0 78 76" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <ellipse cx="38.632" cy="38.0331" rx="38.5148" ry="37.6507" fill="#02AB82" />
+                        <svg width="60" height="60" viewBox="0 0 78 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="38.632" cy="38.0331" rx="38.5148" ry="37.6507" fill="#02AB82"/>
                             <g clip-path="url(#clip0_18_2)">
-                                <path d="M40.7988 26.1348H54.1373" stroke="white" stroke-width="2.75" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M40.7988 32.6543H49.1354" stroke="white" stroke-width="2.75" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M40.7988 42.4341H54.1373" stroke="white" stroke-width="2.75" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M40.7988 48.9536H49.1354" stroke="white" stroke-width="2.75" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M24.126 26.1348C24.126 25.7025 24.3016 25.2879 24.6143 24.9823C24.927 24.6766 25.3511 24.5049 25.7933 24.5049H32.4625C32.9047 24.5049 33.3288 24.6766 33.6415 24.9823C33.9542 25.2879 34.1298 25.7025 34.1298 26.1348V32.6544C34.1298 33.0867 33.9542 33.5012 33.6415 33.8069C33.3288 34.1126 32.9047 34.2843 32.4625 34.2843H25.7933C25.3511 34.2843 24.927 34.1126 24.6143 33.8069C24.3016 33.5012 24.126 33.0867 24.126 32.6544V26.1348Z"
-                                    stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M24.126 42.4341C24.126 42.0018 24.3016 41.5873 24.6143 41.2816C24.927 40.9759 25.3511 40.8042 25.7933 40.8042H32.4625C32.9047 40.8042 33.3288 40.9759 33.6415 41.2816C33.9542 41.5873 34.1298 42.0018 34.1298 42.4341V48.9537C34.1298 49.386 33.9542 49.8006 33.6415 50.1062C33.3288 50.4119 32.9047 50.5836 32.4625 50.5836H25.7933C25.3511 50.5836 24.927 50.4119 24.6143 50.1062C24.3016 49.8006 24.126 49.386 24.126 48.9537V42.4341Z"
-                                    stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M40.7988 26.1348H54.1373" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M40.7988 32.6543H49.1354" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M40.7988 42.4341H54.1373" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M40.7988 48.9536H49.1354" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M24.126 26.1348C24.126 25.7025 24.3016 25.2879 24.6143 24.9823C24.927 24.6766 25.3511 24.5049 25.7933 24.5049H32.4625C32.9047 24.5049 33.3288 24.6766 33.6415 24.9823C33.9542 25.2879 34.1298 25.7025 34.1298 26.1348V32.6544C34.1298 33.0867 33.9542 33.5012 33.6415 33.8069C33.3288 34.1126 32.9047 34.2843 32.4625 34.2843H25.7933C25.3511 34.2843 24.927 34.1126 24.6143 33.8069C24.3016 33.5012 24.126 33.0867 24.126 32.6544V26.1348Z" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M24.126 42.4341C24.126 42.0018 24.3016 41.5873 24.6143 41.2816C24.927 40.9759 25.3511 40.8042 25.7933 40.8042H32.4625C32.9047 40.8042 33.3288 40.9759 33.6415 41.2816C33.9542 41.5873 34.1298 42.0018 34.1298 42.4341V48.9537C34.1298 49.386 33.9542 49.8006 33.6415 50.1062C33.3288 50.4119 32.9047 50.5836 32.4625 50.5836H25.7933C25.3511 50.5836 24.927 50.4119 24.6143 50.1062C24.3016 49.8006 24.126 49.386 24.126 48.9537V42.4341Z" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
                             </g>
                             <defs>
-                                <clipPath id="clip0_18_2">
-                                    <rect width="40.0154" height="39.1176" fill="white"
-                                        transform="translate(19.124 17.9854)" />
-                                </clipPath>
+                            <clipPath id="clip0_18_2">
+                            <rect width="40.0154" height="39.1176" fill="white" transform="translate(19.124 17.9854)"/>
+                            </clipPath>
                             </defs>
                         </svg>
                     </div>
@@ -66,35 +55,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
-                    <!-- ICON -->
-                    <div class="flex items-center justify-center">
-                        <svg width="60" height="60" viewBox="0 0 77 76" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <ellipse cx="38.5" cy="38" rx="38.5" ry="38" fill="#02AB82" />
-                            <g clip-path="url(#clip0_18_2)">
-                                <path
-                                    d="M20.25 36.5C20.25 38.8145 20.735 41.1064 21.6773 43.2448C22.6195 45.3832 24.0006 47.3261 25.7417 48.9628C27.4828 50.5994 29.5498 51.8976 31.8247 52.7834C34.0995 53.6691 36.5377 54.125 39 54.125C41.4623 54.125 43.9005 53.6691 46.1753 52.7834C48.4502 51.8976 50.5172 50.5994 52.2582 48.9628C53.9993 47.3261 55.3805 45.3832 56.3227 43.2448C57.265 41.1064 57.75 38.8145 57.75 36.5C57.75 31.8256 55.7746 27.3426 52.2582 24.0372C48.7419 20.7319 43.9728 18.875 39 18.875C34.0272 18.875 29.2581 20.7319 25.7417 24.0372C22.2254 27.3426 20.25 31.8256 20.25 36.5Z"
-                                    stroke="white" stroke-width="4.16667" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M39 26.7085V36.5002L45.25 42.3752" stroke="white" stroke-width="4.16667"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_18_2">
-                                    <rect width="50" height="47" fill="white" transform="translate(14 13)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </div>
-
-                    <!-- INFO -->
-                    <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/120</p>
-                        <p class="text-gray-500 text-xs">Días restantes</p>
-                    </div>
-                </div>
-
-                <div class="bg-white flex px-2 py-5 rounded-md">
+                <div class="bg-white flex px-2 py-5 rounded-md justify-center">
                     <!-- ICON -->
                     <div class="flex ml-6 mr-4 items-center justify-center">
                         <div class="bg-[#02AB82] w-[60px] h-[60px] rounded-full flex items-center justify-center">
@@ -152,7 +113,7 @@
                     </div>
 
                     <!-- INFO -->
-                    <div class="flex col-span-2 flex-col justify-center">
+                    <div class="flex col-span-2 flex-col justify-center items-center">
                         <button id="downloadIcon">Generar Control de Egresados</button>
                     </div>
                 </div>
@@ -178,8 +139,8 @@
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a
-                    href="bajas" class="text-sm font-normal">Ver más</a></p>
+            <p class="font-semibold px-3 bg-white py-2 rounded-md flex justify-between items-center">Bajas de estudiantes <a href="bajas" class="text-xs text-[#02AB82] font-bold">Ver más</a></p>
+
             @foreach ($interns as $i)
                 <div class="bg-white rounded-md py-1.5 flex flex-col gap-3">
                     <div class="flex gap-3  ml-10 items-center">
