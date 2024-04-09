@@ -28,7 +28,7 @@
                         </p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/exportar" class="hover:cursor-pointer ">Generar</a>
+                            <a href="/exportar" class="hover:cursor-pointer " target="_blank" >Generar</a>
                             <svg id='Formato Control de Estadías' class="toggleInputs hover:cursor-pointer"
                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                                 fill="none">
@@ -46,7 +46,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/Download/CartaAprobacion" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaAprobacion" class="hover:cursor-pointer" target="_blank" >Generar</a>
                             <svg id="Formato Carta de Aprobación" class="toggleInputs hover:cursor-pointer"
                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                                 fill="none">
@@ -66,7 +66,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
-                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer" target="_blank" >Generar</a>
                             <svg id="Formato Carta de Digitalización" class="toggleInputs hover:cursor-pointer"
                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                                 fill="none">
@@ -85,7 +85,7 @@
                             conclusión de sus estadías.</p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full m-0 rounded-b-lg">
-                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer">Generar</a>
+                            <a href="/Download/CartaMemoria" class="hover:cursor-pointer" target="_blank" >Generar</a>
                             <svg id="Formato Carta de Penalización" class="toggleInputs hover:cursor-pointer"
                                 xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                                 fill="none">
@@ -178,7 +178,7 @@
                     <div id="reportSummary" style="display:block;" class="h-full">
                         <h3 class="pt-6 pl-6 mb-4 text-xl font-bold opacity-30">Documentos</h3>
                         <div class="bg-black opacity-25 h-[1px]"></div>
-                        <div class="grig grid-cols-1 items-center p-6 space-y-4">
+                        <div class="items-center grid-cols-1 p-6 space-y-4 grig">
                             @foreach ($files as $index => $file)
                                 @if ($index < 4)
                                     <div class="mb-2 text-xs font-semibold">

@@ -69,9 +69,12 @@ class ProjectsController extends Controller
 
 
 
-    public function project()
+    public function Colaborar(Request $request)
     {
-        return view('Daniel.presidenta.project');
+        $user = auth()->user();
+        $intern = $user->intern;
+        $ProjectId = $intern->project_id;
+        
     }
     /**
      * Show the form for creating a new resource.
@@ -82,19 +85,22 @@ class ProjectsController extends Controller
         $intern = Intern::where('user_id', $user->id)->first();
         $divisionId = $intern->career->academy->division_id;
         $division = Division::find($divisionId);
-    
+
+        $interns = Intern::whereHas('career.academy.division', function ($query) use ($divisionId) {
+            $query->where('id', $divisionId);
+        })->where('user_id', '!=', $user->id)->get();
+
         $careersDivision = $division->academies->flatMap(function ($academy) {
             return $academy->careers;
         });
-        
+
         $divisions = Division::all();
-    
         // Construye un array asociativo para la opción predeterminada
         $defaultDivision = [$division->id => $division->name];
         // Construye un array asociativo para la opción predeterminada
         $defaultCareer = [$intern->career->id => $intern->career->name];
-    
-        return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision'));
+
+        return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision', 'interns'));
     }
 
     /**
@@ -191,12 +197,12 @@ class ProjectsController extends Controller
         $careersDivision = $division->academies->flatMap(function ($academy) {
             return $academy->careers;
         });
-        
+
         $divisions = Division::all();
         $defaultDivision = [$division->id => $division->name];
         $defaultCareer = [$intern->career->id => $intern->career->name];
 
-        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user', 'divisions', 'careersDivision', 'defaultDivision', 'defaultCareer' ));
+        return view('daniel.editAnteproyecto', compact('project', 'businessAdvisor', 'company', 'intern', 'user', 'divisions', 'careersDivision', 'defaultDivision', 'defaultCareer'));
     }
 
     /**

@@ -155,6 +155,7 @@
                         </table>
                     </div>
                 </div>
+                <div id="no-docs-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">Sin registros.</div>
                 <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
                     <div class="my-5 mx-auto md:w-full">
                         {{ $docs->links() }}
@@ -232,9 +233,10 @@
     <script>
         function searchTable() {
             var searchText = document.getElementById("search").value.toLowerCase();
-            console.log("Search text: " + searchText); // Debug line
             var rows = document.querySelectorAll("table tr");
-            console.log("Number of rows: " + rows.length); // Debug line
+            var noDocsMessage = document.getElementById("no-docs-message");
+            var docsFound = false;
+
             for (var i = 1; i < rows.length; i++) {
                 var row = rows[i];
                 var found = false;
@@ -250,6 +252,12 @@
                 } else {
                     row.style.display = "none";
                 }
+            }
+
+            if (!docsFound) {
+                noDocsMessage.classList.remove('hidden');
+            } else {
+                noDocsMessage.classList.add('hidden');
             }
         }
         document.getElementById("search").addEventListener("input", searchTable);

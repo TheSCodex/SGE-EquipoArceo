@@ -86,7 +86,7 @@
     <div style="position:absolute; width:100% ; margin: 10px; left:95;">
         <table style="width: 75%; border-collapse: collapse; border: 0.5px solid black;">
             <tr>
-                <td style="width:34px  ; border: 0.5px solid black;"></td>
+                <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 1 ? 'X' : '' }}</td>
                 <td
                     style="padding-left:8px;font-weight: normal; text-align:justify; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Tradicional</td>
@@ -106,7 +106,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Experiencia Laboral
@@ -116,7 +116,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 3 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Movilidad internacional
@@ -126,7 +126,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 4 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Proyecto de investigación
@@ -136,7 +136,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 5 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Certificación Profesional
