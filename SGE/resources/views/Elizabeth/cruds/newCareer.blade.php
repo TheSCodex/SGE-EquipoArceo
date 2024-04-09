@@ -28,9 +28,9 @@
                 <div class=" space-y-2">
                     <p class="text-sm">Academia</p>
                     <select name="academy_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <option value="" disabled selected>Selecciona una academia</option>
+                        <option value="" disabled @if(old('academy_id') == null) selected @endif>Selecciona una academia</option>
                         @foreach($academies as $academy)
-                            <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                        <option value="{{ $academy->id }}" @if(old('academy_id') == $academy->id) selected @endif>{{ $academy->name }}</option>
                         @endforeach
                     </select>
                     

@@ -28,7 +28,7 @@
                         @endforeach
                     </select>
                     @error('name')
-                        <p>
+                        <p class="text-[#ff0000] text-sm">
                             {{ $message }}
                         </p>
                     @enderror

@@ -141,8 +141,8 @@
 <script>
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva division.`,
+            title: '¡Exito!',
+            text: `¡Division agregada exitosamente!`,
             icon: 'success',
         })
     }
@@ -153,8 +153,8 @@
 <script>
     function confirmEdit(){
         Swal.fire({
-            title: 'Se edito correctamente',
-            text: `Editaste una nueva division.`,
+            title: '¡Exito!',
+            text: `¡Division editada exitosamente!`,
             icon: 'success',
         })
     }
@@ -165,8 +165,8 @@
 <script>
     function confirmDelete(){
         Swal.fire({
-            title: 'Se elimino correctamente',
-            text: `Eliminaste una  division.`,
+            title: '¡Exito!',
+            text: `¡Division eliminada exitosamente!`,
             icon: 'success',
         })
     }

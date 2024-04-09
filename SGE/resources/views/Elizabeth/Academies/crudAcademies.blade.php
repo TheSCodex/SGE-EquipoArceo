@@ -143,8 +143,8 @@
 <script>
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva academia.`,
+            title: '¡Exito!',
+            text: `¡Academia agregada exitosamente!`,
             icon: 'success',
         })
     }
@@ -155,8 +155,8 @@
 <script>
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se edito correctamente',
-            text: `Editaste una nueva Academia.`,
+            title: '¡Exito!',
+            text: `¡Academia editada exitosamente!`,
             icon: 'success',
         })
     }
@@ -167,8 +167,8 @@
 <script>
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva carrera.`,
+            title: '¡Exito!',
+            text: `¡Academia eliminada exitosamente!`,
             icon: 'success',
         })
     }

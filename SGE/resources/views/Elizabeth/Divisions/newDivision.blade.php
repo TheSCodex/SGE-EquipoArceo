@@ -18,7 +18,7 @@
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Nombre</p>
-                    <input type="text" name="name" value="{{ old('division_id') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    <input type="text" name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
                     @error('name')
                         <p class="text-[#ff0000] text-sm">
                             {{ $message }}
@@ -30,7 +30,10 @@
                     <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un director</option>
                         @foreach($users as $user) 
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" 
+                            @if(old('director_id') == $user->id) selected @endif>
+                            {{ $user->name }}
+                        </option>
                         @endforeach
                     </select>
                     
@@ -48,7 +51,10 @@
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un asistente</option>
                         @foreach($users as $user) 
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" 
+                            @if(old('directorAsistant_id') == $user->id) selected @endif>
+                            {{ $user->name }}
+                        </option>
                         @endforeach
                     </select>
                     
