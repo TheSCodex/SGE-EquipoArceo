@@ -9,8 +9,8 @@
             </div>
 
             <div class="font-kanit grid grid-cols-2 gap-4 h-96">
-                <div class=" bg-primaryColor text-white  h-full rounded-md flex flex-col justify-center items-center py-10  gap-5">
-                    <h3 class="font-bold text-lg md:text-2xl lg:text-3xl text-center">Anteproyectos</h3>
+                <div class=" bg-primaryColor text-white  h-full rounded-md flex flex-col justify-center items-center py-7  gap-5">
+                    <h3 class="font-semibold text-lg md:text-2xl lg:text-3xl text-center">Anteproyectos</h3>
                     <a href="{{ route('anteproyectos-presidente')}}"
                         class="text-[#555] bg-white hover:bg-[#eee] py-1 md:py-2 px-5 md:px-10 font-semibold font-roboto rounded-md text-center text-sm md:text-base">
                         Ver todo
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white font-kanit flex rounded-md items-center gap-6 px-5 py-7">
+                <div class="bg-white font-kanit flex rounded-md items-center gap-6 px-5 py-5">
                     <div class=" bg-primaryColor rounded-full p-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto" fill="none" viewBox="0 0 24 24"
                             stroke="white" stroke-width="2">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white font-kanit flex rounded-md h-56 items-center gap-6 px-5 py-7">
+                <div class="bg-white font-kanit flex rounded-md h-56 items-center gap-6 px-5 py-5">
                     <div class=" bg-primaryColor rounded-full p-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto" fill="none" viewBox="0 0 24 24"
                             stroke="white" stroke-width="2">
@@ -67,7 +67,7 @@
                 {{-- cambien el numero si quieres mostrar mas --}}
                 @foreach ($dataStudents->take(10) as $data)
                     {{-- @unless ($data->academicAdvisor) --}}
-                        <a href="" class="flex gap-4 items-center">
+                        <div class="flex gap-3 items-center">
                             <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="17.5" cy="17.5" r="17.5" fill="#02AB82" />
@@ -76,7 +76,7 @@
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             <p class="font-semibold">{{ $data->name }}</p>
-                        </a>
+                        </div>
                     {{-- @endunless --}}
                 @endforeach
             </div>

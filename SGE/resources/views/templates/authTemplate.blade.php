@@ -37,7 +37,7 @@
                 </svg>
             </button>
 
-            <nav id="dropdownMenu" class="hidden lg:flex absolute right-5 mt-3 rounded-md border-primaryColor shadow border px-5 py-3 bg-white lg:shadow-none lg:static lg:border-none lg:mt-0 lg:justify-center lg:px-0 lg:py-0 lg:items-center">
+            <nav id="dropdownMenu" class="hidden lg:flex absolute right-5 z-50 mt-3 rounded-md border-primaryColor shadow border px-5 py-3 bg-white lg:shadow-none lg:static lg:border-none lg:mt-0 lg:justify-center lg:px-0 lg:py-0 lg:items-center">
                 <ul class="flex flex-col lg:flex-row gap-2 lg:gap-6">
                     {{-- inicios de los roles --}}
 

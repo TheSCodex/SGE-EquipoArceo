@@ -55,7 +55,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">{{$votes->like}}</p>
+                        @if ($votes)
+                            <p class="font-bold text-2xl">{{$votes->like}}</p>
+                        @else
+                            <p class="font-bold text-2xl">0</p>
+                        @endif
                         <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
@@ -82,27 +86,28 @@
             <div class="bg-white rounded-md font-kanit py-8">
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
-                    <div class="flex flex-col gap-5 max-h-48 overflow-y-auto">
-                        <div class="flex flex-col">
-                            @if ($comments->isEmpty())
-                                <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
-                            @else
+                    <div class="flex flex-col">
+                        @if ($comments->isEmpty())
+                            <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
+                        @else
+                            <div class="flex flex-col gap-3 mb-5">
                                 @foreach ($comments as $comment)
-                                    <div class="flex items-center justify-between">
-                                        <div class="mb-3 w-4/5">
-                                            <p class="text-xl text-[#555]">{{ $comment->name }}</p>
-                                            <p class="text-[#888] line-clamp-1">{{ $comment->content }}</p>
-                                        </div>
-                                        <div class="">
-                                            <a href="anteproyecto/observaciones"
-                                                class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
-                                                Ampliar observación
-                                            </a>
-                                        </div>
+                                    <div class="">
+                                        @php
+                                            $formatedDate = \Carbon\Carbon::parse($comment->fecha_hora);
+                                        @endphp
+                                        <p class="text-[#888] font-semibold text-sm">{{ $formatedDate->diffForHumans() }}</p>
+                                        <p class="text-[#888] line-clamp-3">{{ $comment->content }}</p>
                                     </div>
                                 @endforeach
-                            @endif
-                        </div>
+                            </div>
+                            <div class="col-span-1 grid place-content-center">
+                                <a href="anteproyecto/observaciones"
+                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
+                                    Ampliar observación
+                                </a>
+                            </div>
+                        @endif
                     </div>
 
                   
@@ -124,7 +129,11 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>{{ $advisor->advisor_name }}</p>
+                    @if ($advisor)
+                        <p>{{ $advisor->academicAdvisor->user->name }}</p>
+                    @else
+                        <p>Sin asesor académico</p>    
+                    @endif
                 </div>
             </div>
 
@@ -171,7 +180,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] ">
+            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] grow">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     @if ($penalty === null) 
                     <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
@@ -193,7 +202,7 @@
                     <p class="text-lg font-normal">{{$penalty->description}}</p>
                     @endif
                 </div>
-                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px">
+                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px flex items-center justify-center flex-col">
                     <p class="mb-5 text-center">Progreso</p>
                     <div class="flex justify-center max-h-[150px]">
                         <canvas id="myChart"></canvas>

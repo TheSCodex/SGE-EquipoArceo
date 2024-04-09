@@ -31,7 +31,7 @@
                    
                 </div>
 
-                <p class="text-[#828282]">Carreras de la division</p>
+                <p class="text-[#828282]">Por academias</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
@@ -99,24 +99,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        let academies = {{ Js::from($academies) }}
+        let academyNames = academies.map(academy => academy.name);
+        let approvedProjectsCount = academies.map(academy => academy.approved_projects_count);
+        let revisionProjectsCount = academies.map(academy => academy.revision_projects_count)
+
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Mayo", "Junio", "Julio"],
+                labels: academyNames,
                 datasets: [{
-                        label: 'Tecnologías de la Información',
-                        data: [65, 20, 10],
+                        label: 'Proyetos aprobados',
+                        data: approvedProjectsCount,
                         backgroundColor: '#0FA987',
                         borderColor: '#ffffffff',
                         borderWidth: 1
                     },
                     {
-                        label: 'Mantenimiento',
-                        data: [39, 45, 85],
+                        label: 'Proyetos revisión',
+                        data: revisionProjectsCount,
                         backgroundColor: '#3E5366',
                         borderColor: '#ffffffff',
-                        borderWidth: 2
+                        borderWidth: 1
                     }
                 ]
             },
@@ -125,8 +131,6 @@
                     x: {
                         ticks: {
                             min: 0,
-                            max: 120,
-                            stepSize: 20
                         }
                     }
                 },
@@ -140,13 +144,12 @@
                     bar: {
                         borderWidth: 2, 
                         borderRadius: 5, 
-                        barThickness: 200 
+                        barThickness: 100 
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        suggestedMax: 120
                     }
                 }
             }

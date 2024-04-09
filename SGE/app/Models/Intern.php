@@ -33,7 +33,7 @@ class Intern extends Model
 
     public function project()
     {
-        return $this->hasOne(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function book()
