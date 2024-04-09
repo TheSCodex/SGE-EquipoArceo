@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full h-screen flex justify-center items-center bg-white">
+<div class="w-full h-screen flex justify-center items-center bg-white p-4">
     <div class="overflow-y-auto max-h-screen"> <!-- Agregado -->
     <form action="{{ route('panel-roles.update', $role->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full md:w-[40rem]">
         @csrf
