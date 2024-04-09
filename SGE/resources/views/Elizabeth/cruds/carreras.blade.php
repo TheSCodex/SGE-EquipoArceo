@@ -89,7 +89,6 @@
                         <th class="text-[#ACACAC] font-roboto text-xs text-start  pr-[2%] ">Editar</th> 
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-[1%] pr-[4%] ">Eliminar</th> 
                     </tr>
-                    @if(count($careers) > 0)
                     @foreach ($careers as $career)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                         <td class="font-roboto pl-5 font-bold py-5">{{ $career->name }}</td>
@@ -118,33 +117,55 @@
                         </td> 
                     </tr>
                     @endforeach
-                    @else
-                    <h1 class="text-xl">No hay datos registrados </h>
-                    @endif
+                 
                 </table>
+                @if($careers->isEmpty())
+                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+                @endif
                 {{$careers->links()}}
             </div>
         </div>
     </div>
     
         
-    </section>
-    @if(session('success'))
-    <script>
-        
-        function confirmAgregar(){
-            Swal.fire({
-                title: 'Se agrego correctamente',
-                text: `Agregaste una nueva carrera.`,
-                icon: 'success',
-            })
-        }
-        
-    </>
-    @endif
-    
-
-    <script>
+</section>
+@if(session()->has('successAdd'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: 'Se agrego correctamente',
+            text: `Agregaste una nueva carrera.`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmEdit(){
+        Swal.fire({
+            title: 'Se edito correctamente',
+            text: `Editaste una nueva Academia.`,
+            icon: 'success',
+        })
+    }
+    confirmEdit();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmDelete(){
+        Swal.fire({
+            title: 'Se elimino correctamente',
+            text: `Eliminaste una  carrera.`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+<script>
 
      
         function confirmDelete(careerName, careerId) {

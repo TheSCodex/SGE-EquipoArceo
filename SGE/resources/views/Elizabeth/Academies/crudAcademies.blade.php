@@ -129,17 +129,42 @@
                         
                     </tr>
                     @endforeach
-
             </table>
+            @if($academies->isEmpty())
+                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+            @endif
             {{$academies->links()}}
         </div>
     </div>
 </div>
     
 </section>
-@if(session('success'))
+@if(session()->has('successAdd'))
 <script>
-    
+    function confirmAgregar(){
+        Swal.fire({
+            title: 'Se agrego correctamente',
+            text: `Agregaste una nueva academia.`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: 'Se edito correctamente',
+            text: `Editaste una nueva Academia.`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
     function confirmAgregar(){
         Swal.fire({
             title: 'Se agrego correctamente',
@@ -147,7 +172,7 @@
             icon: 'success',
         })
     }
-    
+    confirmAgregar();
 </script>
 @endif
 

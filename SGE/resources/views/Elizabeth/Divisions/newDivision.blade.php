@@ -42,7 +42,7 @@
                 </div>
                 
             </div>
-            <div class="flex md:flex-row flex-col items-center md:items-start px-[8%]">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Asistente del director</p>
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
@@ -58,10 +58,19 @@
                         </p>
                     @enderror
                 </div>
+                <div class=" space-y-2">
+                    <p class="text-sm md:py-2"></p>
+                    <p  class="text-sm rounded-md border-white px-4 py-3 w-[20em] md:w-[35em]">
+                        
+                    </p>
+                    
+                  
+                </div>
             </div>
 
-
-            <button type="submit" class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir division</button>
+            <div class="mx-auto">
+                <button type="submit" class="p-2 mt-10 px-20  self-center bg-primaryColor  sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir division</button>
+            </div>
 
     </form>
 </div>
