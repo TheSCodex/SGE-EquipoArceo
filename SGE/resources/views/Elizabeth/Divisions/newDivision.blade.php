@@ -29,7 +29,7 @@
                     <p class="text-sm">Director</p>
                     <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un director</option>
-                        @foreach($users as $user) 
+                        @foreach($directors as $user) 
                         <option value="{{ $user->id }}" 
                             @if(old('director_id') == $user->id) selected @endif>
                             {{ $user->name }}
@@ -50,7 +50,7 @@
                     <p class="text-sm">Asistente del director</p>
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                         <option value="" disabled selected>Selecciona un asistente</option>
-                        @foreach($users as $user) 
+                        @foreach($assistants as $user) 
                         <option value="{{ $user->id }}" 
                             @if(old('directorAsistant_id') == $user->id) selected @endif>
                             {{ $user->name }}

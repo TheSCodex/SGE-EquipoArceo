@@ -27,8 +27,11 @@ class DivisionsController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('Elizabeth.Divisions.newDivision',compact('users'));
+  
+        $directors = User::where('rol_id', 4)->get();
+        $assistants = User::where('rol_id', 5)->get();
+
+        return view('Elizabeth.Divisions.newDivision',compact('directors','assistants'));
     }
 
     /**

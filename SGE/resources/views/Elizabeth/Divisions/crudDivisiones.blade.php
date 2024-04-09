@@ -90,7 +90,7 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Asistente del director</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start  justify-center flex pr-[12%] ">Eliminar</th> 
                 </tr>
                 @foreach ($divisions as $division)
                 <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
@@ -117,8 +117,8 @@
                             <img src="/img/logos/pencil.svg" >
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer " onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
-                        <form class="flex justify-start px-4" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
+                    <td class="font-roboto font-bold py-5 cursor-pointer "onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
+                        <form class="flex justify-center pr-[6%]" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <img src="/img/logos/trash.svg">

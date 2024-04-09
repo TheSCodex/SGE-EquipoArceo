@@ -86,8 +86,8 @@
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start  pr-[2%] ">Editar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start pl-[1%] pr-[4%] ">Eliminar</th>
                 </tr>
                     @foreach ($academies as $academy)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
@@ -119,7 +119,7 @@
                         </td>
 
                         <td class="font-roboto font-bold py-3 cursor-pointer " onclick="confirmDelete('{{ $academy->name }}','{{ $academy->id }}')">
-                            <form class="flex justify-start px-4" id="deleteForm{{ $academy->id }}" action="{{  route('panel-academies.destroy', $academy->id) }}" method="POST">
+                            <form class="flex justify-center pl-3" id="deleteForm{{ $academy->id }}" action="{{  route('panel-academies.destroy', $academy->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 

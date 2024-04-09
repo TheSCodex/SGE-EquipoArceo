@@ -45,16 +45,18 @@ class UsersSeeder extends Seeder
                     
                     // Nombres específicos para presidentes académicos
         $presidentes_nombres = [
-            'Giovanny Director',
-            'Elizabeth Director',
-            'Michelle',
-            'Luis Director',
-            'Tadeo Director',
-            'Octavio Director',
-            'Juan Director',
-            'Francisco Director',
+            'Marco Antonio Mondragon',
+            'Gabriela Solis Curiel',
+            'Veronica Bolaños Lopez',
+            'Gilberto David Cetina Mijangos',
+            'Diana Gonzalez Alvarez',
+            'Angelina Gatica',
+            'Angel Calvario',
+            'Myrna Lopez',
             'Elenor Director',
-            'Carrillo Director'
+            'Carrillo Director',
+            'Dra.Marisela Alvarez Ibarra',
+            'Mtra.Ana Isabel Romero Flores'
         ];
 
         // Crear 10 usuarios presidente académico
@@ -75,12 +77,12 @@ class UsersSeeder extends Seeder
             'Marlene Juárez',
             'Luis Villafaña',
             'Manuel Rivero',
-            'Hector Soto',
-            'Mariana Recio'
+            'Hector Luis Soto',
+            'Mariana Recio Lopez'
         ];
 
         // Crear 4 usuarios director
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             $user = User::factory()->create([
                 'name' => $directores_nombres[$i], // Asignar nombres específicos
                 'email' => strtolower(str_replace(' ', '', $directores_nombres[$i])) . '@utcancun.edu.mx',
@@ -96,9 +98,11 @@ class UsersSeeder extends Seeder
             'David Hernández',
             'Sara Hernández',
             'Juan Hernández',
+            'Mtro. Jorge Reyes',
+            'Jennyfer Zamacona'
         ];
         
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $user = User::factory()->create([
                 'name' => $directorAssistants_names[$i],
                 'email' => strtolower(str_replace(' ', '', $directorAssistants_names[$i])) . '@utcancun.edu.mx',

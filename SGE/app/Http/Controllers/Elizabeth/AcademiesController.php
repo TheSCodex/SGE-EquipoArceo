@@ -28,7 +28,7 @@ class AcademiesController extends Controller
     public function create()
     {
         $divisions = Division::all();
-        $users = User::all();
+        $users = User::where('rol_id', 3)->get();
         return view('Elizabeth.Academies.newAcademies', compact('divisions', 'users'));
     }
 
