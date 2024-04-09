@@ -239,6 +239,7 @@
             event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
             var userName = this.dataset.userName;
+            // console.log(this.dataset)
             var userId = this.dataset.userId;
 
             // Muestra el SweetAlert para confirmar la eliminación
