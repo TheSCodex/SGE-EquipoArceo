@@ -17,7 +17,7 @@
                         @endforeach
                     </select>
                     @error('user_id')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700 text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class=" mt-2">
@@ -28,7 +28,7 @@
                         @endforeach
                     </select>
                     @error('career_id')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class=" mt-2">
@@ -36,7 +36,7 @@
                     <input type="number" id="max_advisors" class="rounded-lg border-1 w-full border-[#00AB84]" name="max_advisors"
                         value="" required>
                     @error('max_advisors')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <button type="submit" class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Agregar</button>
