@@ -47,12 +47,12 @@
                     <section class="hidden md:block h-screen">
                         <div class="h-[calc(100%-4rem)] overflow-y-hidden">
                             <table id="advisorsTable" class="divide-y divide-[#999] w-full">
-                                <thead id="tableHeader" class="text-[#555] text-base">
+                                <thead id="tableHeader" class="text-[#555] text-sm">
                                     <tr>
                                         <th scope="col" class="pr-[13rem] pb-4">Nombre</th>
                                         <th scope="col" class="pr-[13rem] pb-4">Carrera</th>
-                                        <th scope="col" class="pr-[13rem] pb-4">Estudiantes asesorados</th>
-                                        <th scope="col" class="pr-[13rem] pb-4">Máximo de asesorados</th>
+                                        <th scope="col" class="pr-[10rem] pb-4">Estudiantes asesorados</th>
+                                        <th scope="col" class="pr-[5rem] pb-4">Máximo de asesorados</th>
                                 </thead>
                                 <tbody class="text-sm">
                                     @foreach ($advisors as $data)
