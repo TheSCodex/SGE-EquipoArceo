@@ -49,7 +49,7 @@ class AdvisorController extends Controller
 
     BusinessAdvisor::create($request->all());
 
-    return redirect()->route('panel-advisors.index')->with('success', 'Asesor añadido exitosamente');
+    return redirect()->route('panel-advisors.index')->with('successAdd', 'Asesor añadido exitosamente');
 }
 
 
@@ -89,7 +89,7 @@ class AdvisorController extends Controller
     
         $advisor->update($request->all());
     
-        return redirect()->route('panel-advisors.index')->with('success', 'Asesor actualizado exitosamente');
+        return redirect()->route('panel-advisors.index')->with('successEdit', 'Asesor actualizado exitosamente');
     }
     
 
@@ -103,7 +103,7 @@ class AdvisorController extends Controller
             DB::select('CALL delete_business_advisor(?)', [$id]);
             DB::commit();
             
-            return redirect()->back()->with('success', '¡Division eliminada exitosamente!');
+            return redirect()->back()->with('successDelete', '¡Division eliminada exitosamente!');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Error al eliminar la division: ' . $e->getMessage());

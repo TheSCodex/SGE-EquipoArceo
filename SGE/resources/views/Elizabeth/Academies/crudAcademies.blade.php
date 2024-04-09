@@ -3,7 +3,7 @@
 @section('titulo', 'Panel de Academias')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
         <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Academias</h1>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <a href="{{ route('newAcademies')}}"
-                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
+                class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva academia
             </a>
 
         </div>
@@ -42,7 +42,7 @@
             </a>
             <a href="panel-academies">
                 <button id="btnWithAdvisor"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
+                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-primaryColor text-white rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
             </a>
             <a href="panel-divisions">
                 <button id="btnWithOutAdvisor"
@@ -56,9 +56,13 @@
                 @foreach ($academies as $academy)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $academy->name }}</h2>
-                    <p class="text-sm text-gray-500">Division: {{ $academy->division->name ?? 'N/A'}}</p>
-                    <p class="text-sm text-gray-500">Academia: {{ $academy->phone }}</p>
-                    <p class="text-sm text-gray-500">Presidente: {{ $academy->position }}</p>
+                    <p class="text-sm text-gray-500">Presidente:  @if ($president = $presidents->where('id', $academy->president_id)->first())
+                        {{ $president->name }}
+                        @else
+                            N/A
+                        @endif </p>
+                    <p class="text-sm text-gray-500">División: {{ $academy->division->name ?? 'N/A'}}</p>
+                   
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('panel-academies.edit', $academy->id) }}" >
                         <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer flex justify-start">
@@ -81,11 +85,10 @@
                    
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
                     <th class="text-[#ACACAC] font-roboto text-xs text-start">Presidente</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start">Division</th>
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
-                    <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start">División</th>
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start  pr-[2%] ">Editar</th> 
+                    <th class="text-[#ACACAC] font-roboto text-xs text-start pl-[1%] pr-[4%] ">Eliminar</th>
                 </tr>
-                @if(count($academies) > 0)
                     @foreach ($academies as $academy)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                         {{-- dd($academy) --}}
@@ -109,14 +112,14 @@
 
                         
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{route('panel-academies.edit', $academy->id) }}" class="flex justify-start">
+                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                            <a href="{{route('panel-academies.edit', $academy->id) }}" class="flex pl-2">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
 
-                        <td class="font-roboto font-bold flex justify-start py-5 cursor-pointer" onclick="confirmDelete('{{ $academy->name }}','{{ $academy->id }}')">
-                            <form class="flex justify-center" id="deleteForm{{ $academy->id }}" action="{{  route('panel-academies.destroy', $academy->id) }}" method="POST">
+                        <td class="font-roboto font-bold py-3 cursor-pointer " onclick="confirmDelete('{{ $academy->name }}','{{ $academy->id }}')">
+                            <form class="flex justify-center pl-3" id="deleteForm{{ $academy->id }}" action="{{  route('panel-academies.destroy', $academy->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 
@@ -126,27 +129,50 @@
                         
                     </tr>
                     @endforeach
-                @else
-                    <h1 class="text-xl">No hay datos registrados </h>
-                @endif
             </table>
+            @if($academies->isEmpty())
+                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+            @endif
             {{$academies->links()}}
         </div>
     </div>
 </div>
     
 </section>
-@if(session('success'))
+@if(session()->has('successAdd'))
 <script>
-    
     function confirmAgregar(){
         Swal.fire({
-            title: 'Se agrego correctamente',
-            text: `Agregaste una nueva carrera.`,
+            title: '¡Exito!',
+            text: `¡Academia agregada exitosamente!`,
             icon: 'success',
         })
     }
-    
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Academia editada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Academia eliminada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
 </script>
 @endif
 
