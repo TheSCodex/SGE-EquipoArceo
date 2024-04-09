@@ -14,7 +14,7 @@
 <body>
     @extends('templates/authTemplate')
     @section('contenido')
-    <main class="flex flex-col justify-start items-center flex-grow min-h-[500px] h-screen">
+    <main class="flex flex-col justify-start items-center flex-grow min-h-[500px] ">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de actividades</h1>
@@ -43,20 +43,20 @@
             <div class="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-5 ">
                     
                 @foreach ($allEvents as $event)
-                    <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl transition duration-100 ease-in-out hover:bg-lightGray/20 hover:shadow-2xl event ">
-                        <div class="p-4">
+                <div class="mx-auto mb-5 bg-white rounded-xl drop-shadow-2xl transition duration-100 ease-in-out hover:bg-lightGray/20 hover:shadow-2xl event overflow-hidden w-72">
+                    <div class="p-4">
                             <a href="{{route('actividades.show', $event->id)}}">
                                 <ul class="border-l border-dashed border-primaryColor font-montserrat cursor-pointer" id="moreInfo">
                                     <li>
                                         <div class="flex-start flex items-center pt-3">
                                             <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor"></div>
-                                            <h4 class="text-lg font-semibold event-title">{{$event['title']}}</h4>
+                                            <h4 class="text-lg font-semibold event-title truncate">{{$event['title']}}</h4>
                                         </div>
                                         <div class="ml-4">
                                             <h3 class="text-[#888] text-sm event-date">Fecha: {{ substr($event['date_start'], 0, 10) }}</h3>
                                             <h1 class="text-[#888] text-sm event-type">Propósito: {{$event['eventType']}}</h1>
                                             <h1 class="text-[#888] text-sm event-user">Con: {{$event['receiver']['user']['name']}} {{$event['receiver']['user']['last_name']}}</h1>
-                                            <h1 class="text-[#888] text-sm event-place">Lugar: {{$event['location']}}</h1>
+                                            <h1 class="text-[#888] text-sm event-place truncate">Lugar: {{$event['location']}}</h1>
                                             <h1 class="text-[#888] text-sm event-status">Estatus: {{$event['status']}}</h1>
                                             <h1 class="text-[#888] text-sm">Hora: {{ substr($event['date_start'], 11)}} - {{ substr($event['date_end'], 11)}}</time>
                                         </div>

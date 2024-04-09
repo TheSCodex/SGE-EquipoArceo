@@ -21,14 +21,16 @@
                     <div class="rounded-lg h-auto bg-white flex flex-col gap-2 justify-center p-5 grow">
                         @forelse($notificaciones as $notificacion)
                             <div class="flex items-center px-4 p-1 my-2 justify-between">
-                                <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion" class="w-8 h-8 mr-2">
+                                <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
+                                    class="w-8 h-8 mr-2">
                                 <p class="text-sm font-roboto">{{ $notificacion->data['message'] }}</p>
                             </div>
                         @empty
-                            <div class="flex items-center px-4 p-1 my-2 justify-center flex-col"> 
-                                <img src="{{ asset('img/iconosDaniel/exclamation.svg') }}" alt="Notificacion" class="w-12 h-12 mb-1"> 
+                            <div class="flex items-center px-4 p-1 my-2 justify-center flex-col">
+                                <img src="{{ asset('img/iconosDaniel/exclamation.svg') }}" alt="Notificacion"
+                                    class="w-12 h-12 mb-1">
                                 <p class="text-md font-semibold font-roboto">No hay Notificaciones</p>
-                            </div>                            
+                            </div>
                         @endforelse
                     </div>
                 </section>
@@ -53,7 +55,10 @@
                             @if ($Intern->isEmpty())
                                 <p class="text-sm font-roboto">No hay alumnos asignados.</p>
                             @else
-                                @foreach ($Intern as $intern)
+                                @php
+                                    $randomInterns = $Intern->shuffle()->take(3);
+                                @endphp
+                                @foreach ($randomInterns  as $intern)
                                     <div class="flex items-center px-4">
                                         <img src="{{ asset('img/iconosDaniel/Group 2279.svg') }}" alt="Usuario"
                                             class="w-8 h-8 mr-2">
@@ -94,12 +99,12 @@
                     </h1>
                 </div>
 
-                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full">
+                <div class="rounded-lg py-5 px-12 bg-white flex flex-col w-full min-h-[200px] items-center justify-center">
                     @if ($comments->isEmpty())
-                        <p>No hay comentarios para mostrar.</p>
+                        <p class="text-center">No hay comentarios para mostrar.</p>
                     @else
                         @foreach ($comments as $comment)
-                            <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center w-full">
+                            <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center  w-full">
                                 <div class=" ">
                                     <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}</h3>
                                     <p class="text-sm font-roboto">{{ $comment->content }}</p>
@@ -107,7 +112,7 @@
                                 <div class="mt-5 lg:mt-0">
                                     <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
 
-                                        <a href="{{ route('anteproyecto-Asesor.store', $comment->project_id) }}">Ampliar
+                                        <a href="{{ route('observationsAnteproyectoA', $comment->project_id) }}">Ampliar
                                             Observaciones</a>
                                     </button>
                                 </div>
