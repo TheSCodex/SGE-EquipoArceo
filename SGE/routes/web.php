@@ -88,12 +88,13 @@ Route::middleware('auth')->group(function () {
     Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store')->middleware('roleorcan:estudiante,crear-anteproyecto');
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
+    Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores');
 
 
     //Ruta para las observaciones del estudiante
     Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
     Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
-    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
+    //Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
 
 
     // Vista del calendario del estudiante

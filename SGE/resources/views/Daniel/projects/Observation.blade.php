@@ -40,7 +40,7 @@
                 </div>
                 
                 <div class="sm:w-full md:w-1/3 bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
-                    <form method="post" action="{{ route('comentarios.guardar') }}">
+                    <form method="post" action="{{ route('observationsAnteproyecto.store') }}">
                         @csrf
                         <div>
                             <h4 class="text-lg font-medium text-white">
@@ -85,7 +85,7 @@
                             </div>
                             
                             <div class="w-full bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
-                                <form method="post" action="{{ route('comentarios.guardar') }}">
+                                <form method="post" action="{{ route('observationsAnteproyecto.store') }}">
                                     @csrf
                                     <div>
                                         <h4 class="text-lg font-medium text-white">
