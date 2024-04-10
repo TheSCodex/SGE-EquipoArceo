@@ -42,7 +42,7 @@
                     </div>
                     <div>
                         <p class="font-bold text-2xl">{{ $studentsCommentsCount }}</p>
-                        <p class="text-sm text-black opacity-50">Comentarios de alumnos</p>
+                        <p class="text-sm text-black opacity-50">Comentarios</p>
                     </div>
                 </div>
 
@@ -55,7 +55,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">{{$votes->like}}</p>
+                        @if ($votes)
+                            <p class="font-bold text-2xl">{{$votes->like}}</p>
+                        @else
+                            <p class="font-bold text-2xl">0</p>
+                        @endif
                         <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
@@ -82,16 +86,20 @@
             <div class="bg-white rounded-md font-kanit py-8">
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
-                    <div class="flex flex-col gap-5">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <div class="col-span-2">
-                                @if ($comments->isEmpty())
-                                    <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
-                                @else
-                                    @foreach ($comments as $comment)
-                                        <p class="text-xl text-[#555]">{{ $comment->name }}</p>
+                    <div class="flex flex-col">
+                        @if ($comments->isEmpty())
+                            <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
+                        @else
+                            <div class="flex flex-col gap-3 mb-5">
+                                @foreach ($comments as $comment)
+                                    <div class="">
+                                        @php
+                                            $formatedDate = \Carbon\Carbon::parse($comment->fecha_hora);
+                                        @endphp
+                                        <p class="text-[#888] font-semibold text-sm">{{ $formatedDate->diffForHumans() }}</p>
                                         <p class="text-[#888] line-clamp-3">{{ $comment->content }}</p>
-                                    @endforeach
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-span-1 grid place-content-center">
                                 <a href="anteproyecto/observaciones"
@@ -99,9 +107,10 @@
                                     Ampliar observación
                                 </a>
                             </div>
-                            @endif
-                        </div>
+                        @endif
                     </div>
+
+                  
                 </div>
             </div>
         </section>
@@ -120,7 +129,11 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>{{ $advisor->advisor_name }}</p>
+                    @if ($advisor)
+                        <p>{{ $advisor->academicAdvisor->user->name }}</p>
+                    @else
+                        <p>Sin asesor académico</p>    
+                    @endif
                 </div>
             </div>
 
@@ -150,7 +163,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
-                    
+
                         </ol>
                     </div>
                     <div class="">
@@ -167,7 +180,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] ">
+            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] grow">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     @if ($penalty === null) 
                     <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!</p>
@@ -189,7 +202,7 @@
                     <p class="text-lg font-normal">{{$penalty->description}}</p>
                     @endif
                 </div>
-                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px">
+                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px flex items-center justify-center flex-col">
                     <p class="mb-5 text-center">Progreso</p>
                     <div class="flex justify-center max-h-[150px]">
                         <canvas id="myChart"></canvas>

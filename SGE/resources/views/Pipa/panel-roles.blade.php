@@ -77,8 +77,9 @@
                                     <img src="/img/logos/pencil.svg">
                                 </a>
                             </td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
-                                <form class="flex justify-center" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST">
+                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                                {{-- Responsive --}}
+                                <form class="flex justify-center delete-form" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST"  onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
                                     @csrf
                                     @method('DELETE')
                                     <img src="/img/logos/trash.svg">
@@ -166,12 +167,14 @@
                                     <img src="/img/logos/pencil.svg">
                                 </a>
                             </td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer" onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
-                                <form class="flex justify-center" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST">
+                            <td class="font-roboto font-bold py-5 cursor-pointer"  onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
+                                <form class="flex justify-center" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST" onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
                                     @csrf
                                     @method('DELETE')
-                                    <img src="/img/logos/trash.svg">
+                                    <img src="/img/logos/trash.svg" >
                                 </form>
+
+                                
                             </td>
                         </tr>
                     @endforeach
@@ -199,21 +202,21 @@
         permissionsList.classList.toggle('hidden');
     }
 
-    function confirmDelete(userName, userId) {
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminarlo'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('deleteForm' + userId).submit();
-            }
-        });
-    }
+    // function confirmDelete(userName, userId) {
+    //     Swal.fire({
+    //         title: '¿Estás seguro?',
+    //         text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#d33',
+    //         cancelButtonColor: '#3085d6',
+    //         confirmButtonText: 'Sí, eliminarlo'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             document.getElementById('deleteForm' + userId).submit();
+    //         }
+    //     });
+    // }
 
     @if(session('error'))
         Swal.fire({
@@ -291,31 +294,31 @@
 
 
 
-    // Obtiene todos los formularios de eliminación y agrega un manejador de eventos clic para mostrar el SweetAlert
-    document.querySelectorAll('.delete-form').forEach(form => {
-        form.addEventListener('click', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+    // // Obtiene todos los formularios de eliminación y agrega un manejador de eventos clic para mostrar el SweetAlert
+    // document.querySelectorAll('.delete-form').forEach(form => {
+    //     form.addEventListener('click', function(event) {
+    //         event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
-            var userName = this.dataset.userName;
-            var userId = this.dataset.userId;
+    //         var userName = this.dataset.userName;
+    //         var userId = this.dataset.userId;
 
-            // Muestra el SweetAlert para confirmar la eliminación
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminarlo'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Envía el formulario si se confirma la eliminación
-                    document.getElementById('deleteForm' + userId).submit();
-                }
-            });
-        });
-    });
+    //         // Muestra el SweetAlert para confirmar la eliminación
+    //         Swal.fire({
+    //             title: '¿Estás seguro?',
+    //             text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+    //             icon: 'warning',
+    //             showCancelButton: true,
+    //             confirmButtonColor: '#d33',
+    //             cancelButtonColor: '#3085d6',
+    //             confirmButtonText: 'Sí, eliminarlo'
+    //         }).then((result) => {
+    //             if (result.isConfirmed) {
+    //                 // Envía el formulario si se confirma la eliminación
+    //                 document.getElementById('deleteForm' + userId).submit();
+    //             }
+    //         });
+    //     });
+    // });
 </script>
 
 <script>

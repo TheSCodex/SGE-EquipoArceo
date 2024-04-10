@@ -59,7 +59,7 @@ class carrerasController extends Controller
     $career->academy_id = $validatedData['academy_id'];
     $career->save();
 
-    return redirect('/panel-careers'); 
+    return redirect('/panel-careers')->with('successAdd', 'Carrera agregada exitosamente!');
 }
     
     /**
@@ -100,7 +100,9 @@ public function update(Request $request, $id)
         'academy_id'=>$validatedData['academy_id']
     ]);
     
-    return redirect('/panel-careers')->with('success', 'Career updated successfully!');
+    return redirect('/panel-careers')->with('successEdit', 'Career actualizada exitosamente!');
+ 
+
 }
     /**
      * Remove the specified resource from storage.
@@ -113,10 +115,11 @@ public function update(Request $request, $id)
             DB::select('CALL proc_delete_career(?)', [$id]);
             DB::commit();
             
-            return redirect()->back()->with('success', '¡Division eliminada exitosamente!');
+            return redirect()->back()->with('successDelete', '¡Carrera eliminada exitosamente!');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Error al eliminar la division: ' . $e->getMessage());
+            
+            return redirect()->back()->with('error', 'Error al eliminar la carrera: ' . $e->getMessage());
         }
 
 }

@@ -9,6 +9,9 @@ use App\Models\Division;
 use App\Models\Academy;
 use App\Models\Career;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
+use Carbon\Carbon;
 
 class DirectorController extends Controller
 {
@@ -41,6 +44,30 @@ class DirectorController extends Controller
 
         // dd($academies);
 
+        //Obtener los dias faltantes
+        $userId = Auth::id();
+        $intern = Intern::where("user_id", $userId)->first();
+
+        // dd($intern);
+        // if (!$intern || !$intern->project_id) {
+        //     $mensaje = "Aún no se ha agregado un proyecto.";
+        //     return view('Michell.director.index', compact('mensaje'));
+        // }
+        // if ($intern) {
+        //     $project = Project::find($intern->project_id);
+        // }
+        // else {
+        //     $project = null;
+        // }
+        // $start_date = Carbon::parse($project->start_date);
+        // $end_date = Carbon::parse($project->end_date);
+        // $current_date = Carbon::now();
+
+        // $diasTranscurridos = $current_date->diffInDays($start_date);
+        // $TotalDeDias = $start_date->diffInDays($end_date);
+        // // dd($TotalDeDias);
+        // $diaActual = $diasTranscurridos + 1;
+
         // Obtener carreras de las academias
         $careers = Career::whereIn('academy_id', $academies->pluck('id'))
         ->get();
@@ -57,6 +84,13 @@ class DirectorController extends Controller
         // Obtener periodo actual
         $period = Intern::whereIn("interns.career_id", $careersId)->latest()->select("period")->first();
 
+        if (isset($period["period"])) {
+            $period = $period["period"];
+        }
+        else {
+            $period = 0;
+        }
+
         // Contar proyectos aprobados, en revisión y totales
         $projectMetrics = [
             'approvedCount' => Intern::whereIn('career_id', $careers->pluck('id'))
@@ -71,6 +105,8 @@ class DirectorController extends Controller
                 ->join('projects', 'interns.project_id', '=', 'projects.id')
                 ->count(),
         ];
+
+        // dd($projectMetrics);
 
         $approvedProjectsByMonth = Intern::whereIn('career_id', $careers->pluck('id'))
         ->join('projects', 'interns.project_id', '=', 'projects.id')
