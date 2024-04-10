@@ -30,8 +30,9 @@ class DivisionsController extends Controller
   
         $directors = User::where('rol_id', 4)->get();
         $assistants = User::where('rol_id', 5)->get();
-
-        return view('Elizabeth.Divisions.newDivision',compact('directors','assistants'));
+       
+        $initials = Division::where('initials')->get();
+        return view('Elizabeth.Divisions.newDivision',compact('directors','assistants','initials'));
     }
 
     /**
@@ -43,13 +44,16 @@ class DivisionsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'director_id' => 'required|integer',
-            'directorAsistant_id' => 'required|integer'
+            'directorAsistant_id' => 'required|integer',
+            'initials' => 'required|string|max:20'
         ]);
-
+        
         $division = new Division;
         $division->name = $validatedData['name'];
         $division->director_id = $validatedData['director_id'];
         $division->directorAsistant_id = $validatedData['directorAsistant_id'];
+        $division->initials = $validatedData['initials'];
+
         $division->save();
 
         return redirect('/panel-divisions')->with('successAdd', 'Division agregada exitosamente!');
@@ -71,7 +75,8 @@ class DivisionsController extends Controller
         $division = Division::findOrFail($id);
         $directors = User::where('rol_id', 4)->get();
         $assistants = User::where('rol_id', 5)->get();
-        return view('Elizabeth.Divisions.editDivision',compact('directors','assistants', 'division'));
+        $initials = Division::where('initials')->get();
+        return view('Elizabeth.Divisions.editDivision',compact('directors','assistants', 'division','initials'));
     }
 
     /**
@@ -79,26 +84,23 @@ class DivisionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $division = Division::findOrFail($id);
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'director_id' => 'required|integer',
-            'directorAsistant_id' => 'required|integer'
+            'directorAsistant_id' => 'required|integer',
+            'initials' => 'required|string|max:20'
+         
         ]);
-
-        $director = User::findOrFail($validatedData['director_id']);
-        $director->update(['rol_id' => 4]);
-
-        $directorAsistant = User::findOrFail($validatedData['directorAsistant_id']);
-        $directorAsistant->update(['rol_id' => 4]);
-
+        
         $division->update([
             'name'=>$validatedData['name'],
             'director_id'=>$validatedData['director_id'],
-            'directorAsistant_id'=>$validatedData['directorAsistant_id']
+            'directorAsistant_id'=>$validatedData['directorAsistant_id'],
+            'initials' => $validatedData['initials']
         ]);
-
         return redirect('/panel-divisions')->with('successEdit', 'Division actualizada exitosamente!');
     }
 
