@@ -40,18 +40,18 @@
                     <table class="w-full min-w-[600px] divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Matrícula</th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Nombre
                                     de estudiante</th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Estado
                                 </th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Amonestacion</th>
                                 <th
-                                    class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                     Acciones</th>
                             </tr>
                         </thead>
@@ -61,14 +61,13 @@
                                     @php
                                         $user = \App\Models\User::find($intern->user_id);
                                     @endphp
-                                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $user->identifier }}</td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $user->name }} {{ $user->last_name }}
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $user->identifier }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }} {{ $user->last_name }}
                                         </td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $intern->studentStatus->name ?? 'N/A' }}
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $intern->studentStatus->name ?? 'N/A' }}
                                         </td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                         <td>
                                             <div class="flex justify-center gap-3">

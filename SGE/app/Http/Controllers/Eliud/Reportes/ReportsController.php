@@ -78,6 +78,7 @@ class ReportsController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
+        session()->flash('form_success', true);
         return $pdf->stream();
 
         return redirect()->back()->withErrors('Las horas de servicio no pueden ser mayores a 525.')->withInput();

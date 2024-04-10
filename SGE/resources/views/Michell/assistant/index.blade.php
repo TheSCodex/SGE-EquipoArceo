@@ -7,6 +7,10 @@
     <article class="grid grid-cols-1 lg:grid-cols-3 gap-3 h-full pt-4 bg-[#f3f5f9] min-h-full p-6">
         <section class="lg:col-span-2 flex flex-col gap-3 flex-1">
             <p class="font-semibold px-2 bg-white py-2 rounded-md">Bienvenido, Asistente de director</p>
+            @foreach ($errors->all() as $error)
+                <p class="text-center text-red">{{ $error }}
+                </p>
+            @endforeach
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
@@ -111,7 +115,7 @@
 
                     <!-- INFO -->
                     <div class="flex col-span-2 flex-col justify-center">
-                        <form method="GET" action="{{route('control-libros')}}">
+                        <form method="GET" action="{{ route('control-libros') }}">
                             <button type="submit">Donaciones de Libros</button>
                         </form>
                     </div>
