@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StudyGradeSeeder::class);
         $this->call(InternSeeder::class);
         $this->call(ProjectSeeder::class);
-        $this->call(PenalizationSeeder::class);
+        //$this->call(PenalizationSeeder::class);
         $this->call(DocRevisionsSeeders::class);
         $this->call(CommentSeeder::class);
         $this->call(penaltySeeder::class);
