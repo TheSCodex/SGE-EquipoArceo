@@ -136,7 +136,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo'));
         return $pdf->stream();
     }
 

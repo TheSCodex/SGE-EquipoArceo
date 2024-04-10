@@ -96,7 +96,7 @@
 
                 <div class="bg-white flex px-2 py-5 rounded-md">
                     <!-- ICON -->
-                    <div class="flex ml-6 mr-4 items-center justify-center">
+                    <div class="flex ml-2 mr-4 items-center justify-center">
                         <div class="bg-[#02AB82] w-[60px] h-[60px] rounded-full flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download"
                                 width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff"
@@ -118,7 +118,7 @@
                 </div>
                 <div class="bg-white flex px-2 py-5 rounded-md">
                     <!-- ICON -->
-                    <div class="flex ml-6 mr-4 items-center justify-center">
+                    <div class="flex ml-2 mr-4 items-center justify-center">
                         <div class="bg-[#02AB82] w-[60px] h-[60px] rounded-full flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download"
                                 width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff"
@@ -135,7 +135,7 @@
                         aria-hidden="true"
                         class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50 font-montserrat">
                         <div role="document" class="flex justify-center p-10 justify-items-center mt-72">
-                            <div class="modal-content w-[24%]">
+                            <div class="modal-content lg:w-[24%]">
                                 <div
                                     class="px-4 pt-6 flex items-center justify-between font-semibold bg-white rounded-tl-md rounded-tr-md">
                                     <h5 class="" id="modalLabel">Ingresa el Folio y Foja inicial</h5>
@@ -175,7 +175,7 @@
 
                     <!-- INFO -->
                     <div class="flex col-span-2 flex-col justify-center">
-                        <button id="downloadIcon">Donaciones de Libros</button>
+                        <button id="downloadIcon">Control de Egresados</button>
                     </div>
                 </div>
 
