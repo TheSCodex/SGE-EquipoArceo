@@ -249,6 +249,7 @@
                 }
                 if (found) {
                     row.style.display = "";
+                    docsFound = true;
                 } else {
                     row.style.display = "none";
                 }
