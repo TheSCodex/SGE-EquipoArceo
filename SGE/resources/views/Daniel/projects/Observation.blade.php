@@ -44,7 +44,7 @@
                         @csrf
                         <div>
                             <h4 class="text-lg font-medium text-white">
-                                Resolver
+                                Responder
                             </h4>
                             <textarea placeholder="Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-96" name="content"></textarea>
                             <input type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">                        
@@ -89,7 +89,7 @@
                                     @csrf
                                     <div>
                                         <h4 class="text-lg font-medium text-white">
-                                            Resolver
+                                            Responder
                                         </h4>
                                         <textarea placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-96"" name="content"></textarea>
                                         <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}">                  

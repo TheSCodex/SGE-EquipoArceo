@@ -37,7 +37,8 @@
                                     </div>
                                     <div class="flex flex-wrap ">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
@@ -95,7 +96,8 @@
                                 </div>
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
@@ -243,7 +245,7 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -258,18 +260,19 @@
                         @endforeach
 
                         <a href="{{ route('observationsAnteproyectoPresi', ['id' => $project->id]) }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</a>
+                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
+                            observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh]">
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>
@@ -288,7 +291,7 @@
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror

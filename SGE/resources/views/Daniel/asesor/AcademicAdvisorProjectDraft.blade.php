@@ -260,16 +260,15 @@
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
-
-                            <button type="submit" class="w-[4vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>
