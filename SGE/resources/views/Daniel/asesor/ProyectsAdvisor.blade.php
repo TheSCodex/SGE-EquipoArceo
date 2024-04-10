@@ -4,11 +4,13 @@
     <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos de la division</h1>
+                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos de la
+                    división</h1>
                 <div class="flex items-center flex-row justify-end">
                     <div>
                         <div class="hidden md:flex items-center relative">
-                            <input id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md "
+                            <input id='search'
+                                class="border-primaryColor placeholder-primaryColor border-b border rounded-md "
                                 type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
@@ -16,7 +18,9 @@
                 <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                     <div>
                         <div class="flex items-center relative">
-                            <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                            <input id='searchMovil'
+                                class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 "
+                                type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
                 </div>
@@ -80,7 +84,8 @@
                     </table>
                 </div>
             </div>
-            <div id="no-projects-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron projectos.</div>
+            <div id="no-projects-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
+                projectos.</div>
         </div>
         <div class="my-5 mx-auto">
             {{ $projects->links() }}
@@ -124,28 +129,28 @@
         document.getElementById("search").addEventListener("input", searchTable);
     </script>
 
-<script>
-    function searchMobileTable() {
-        var searchText = document.getElementById("searchMovil").value.toLowerCase();
-        var advisors = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
-        
-        advisors.forEach(function(advisor) {
-            var advisorText = advisor.innerText.toLowerCase();
-            var found = advisorText.indexOf(searchText) > -1;
-            advisor.style.display = found ? "" : "none";
-        });
+    <script>
+        function searchMobileTable() {
+            var searchText = document.getElementById("searchMovil").value.toLowerCase();
+            var advisors = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
 
-        // Mostrar el mensaje de no se encontraron usuarios si no se encontraron usuarios
-        var noUsersMessage = document.getElementById("no-projects-message");
-        var usersFound = [...advisors].some(advisor => advisor.style.display !== "none");
-        if (!usersFound) {
-            noUsersMessage.classList.remove('hidden');
-        } else {
-            noUsersMessage.classList.add('hidden');
+            advisors.forEach(function(advisor) {
+                var advisorText = advisor.innerText.toLowerCase();
+                var found = advisorText.indexOf(searchText) > -1;
+                advisor.style.display = found ? "" : "none";
+            });
+
+            // Mostrar el mensaje de no se encontraron usuarios si no se encontraron usuarios
+            var noUsersMessage = document.getElementById("no-projects-message");
+            var usersFound = [...advisors].some(advisor => advisor.style.display !== "none");
+            if (!usersFound) {
+                noUsersMessage.classList.remove('hidden');
+            } else {
+                noUsersMessage.classList.add('hidden');
+            }
         }
-    }
 
-    document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
-</script>
+        document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
+    </script>
 
 @endsection

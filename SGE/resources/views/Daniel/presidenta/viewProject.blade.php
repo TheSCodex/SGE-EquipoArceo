@@ -12,7 +12,7 @@
 
             <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
                 <div
-                    class="max-h-[615px] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
+                    class="max-h-[88vh] flex-start overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del proyecto:
@@ -25,41 +25,38 @@
                     <div class="w-full min-h-[92.5%] bg-white px-[2%] py-[.5%] rounded-sm font-semibold items-left">
                         <div class="w-full flex flex-wrap px-[3%] self-start py-[2vh]">
                             @if (isset($project))
-                                <h2 class="w-full text-xl font-bold mt-[1vh] mb-[vh]">Datos del alumno </h2>
-                                <div class=w-[50%]>
-                                    <div class="flex">
-                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre completo:
-                                        <p>
-                                        <p class="mx-[1%] font-normal w-[50%]">{{ $user->name ?? 'No disponible' }}</p>
+                                <h2 class="w-full text-xl font-bold mt-[1vh]">Datos del alumno </h2>
+                                <div class='w-[100%] lg:w-[50%]'>
+                                    <div class="flex flex-wrap ">
+                                        <p class="w-[50%]  text-lg sm:text-lg">Nombre completo:</p>
+                                        <p class="w-[50%] font-normal">{{ $user->name ?? 'No disponible' }}</p>
                                     </div>
-
-                                    <div class="flex">
-                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Division ácademica: </p>
-                                        <p class="mx-[1%] font-normal w-[50%]">{{ $division->name ?? 'No disponible' }}</p>
-
+                                    <div class="flex flex-wrap">
+                                        <p class="w-[50%] text-lg sm:text-lg">Division ácademica: </p>
+                                        <p class="w-[50%] font-normal">{{ $division->name ?? 'No disponible' }}</p>
                                     </div>
-                                    <div class="flex">
-                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                        <p class="mx-[1%] font-normal w-[50%]">{{ $user->email ?? 'No disponible' }}</p>
+                                    <div class="flex flex-wrap ">
+                                        <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
-                                <div class=w-[50%]>
-
-                                    <div class="flex">
-                                        <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Programa educativo: </p>
-                                        <p class="mx-[1%] font-normal w-[50%]">{{ $career->name ?? 'No disponible' }}</p>
+                                <div class='w-[100%] lg:w-[50%]'>
+                                    <div class="flex flex-wrap">
+                                        <p class="w-[50%] text-lg sm:text-lg">Programa educativo: </p>
+                                        <p class="w-[50%] font-normal">{{ $career->name ?? 'No disponible' }}</p>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex w-[50%]">
-                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Matricula:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                        <div class="flex flex-wrap w-[50%]">
+                                            <p class="w-[50%] text-lg sm:text-lg overflow-hidden">Matricula:</p>
+                                            <p class="font-normal w-[50%] overflow-hidden px-[1%]">
                                                 {{ $user->identifier ?? 'No disponible' }}</p>
                                         </div>
 
                                         <div class="flex w-[50%]">
-                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Grupo:</p>
+                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
                                             <p class="mx-[1%] font-normal w-[40%]">{{ $interns->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
@@ -84,47 +81,48 @@
 
                         <div class="w-full flex flex-wrap px-[3%] self-start border-b-2 border-black py-[2vh]">
                             <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
-                            <div class=w-[50%]>
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Nombre de la empresa:
+                            <div class='w-[100%] lg:w-[50%]'>
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Nombre de la empresa:
                                     <p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->name ?? 'No disponible' }}</p>
+                                    <p class="w-[50%] font-normal">{{ $company->name ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                <div class="flex flex-wrap">
+                                    <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
+                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
                                     </p>
 
                                 </div>
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
 
-                            <div class=w-[50%]>
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Direccion: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $company->address ?? 'No disponible' }}</p>
+                            <div class='w-[100%] lg:w-[50%]'>
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Direccion: </p>
+                                    <p class="w-[50%] font-normal">{{ $company->address ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="mx-[1%] font-normal w-[50%]">
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
+                                    <p class="w-[50%] font-normal">
                                         {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">
-                                        {{ $interns->performance_area ?? 'No disponible' }}</p>
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
+                                    <p class="font-normal w-[50%]">
+                                        {{ $area->title ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex">
-                                    <p class=" w-[80%] sm:w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
-                                    <p class="mx-[1%] font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
+                                <div class="flex flex-wrap">
+                                    <p class="w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
+                                    <p class="font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
                                     </p>
                                 </div>
 
@@ -247,7 +245,7 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -261,20 +259,20 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectoP') }}"
+                        <a href="{{ route('observationsAnteproyectoPresi', ['id' => $project->id]) }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-President.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>
@@ -293,7 +291,7 @@
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
