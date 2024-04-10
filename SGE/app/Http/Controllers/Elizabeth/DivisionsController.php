@@ -27,8 +27,11 @@ class DivisionsController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('Elizabeth.Divisions.newDivision',compact('users'));
+  
+        $directors = User::where('rol_id', 4)->get();
+        $assistants = User::where('rol_id', 5)->get();
+
+        return view('Elizabeth.Divisions.newDivision',compact('directors','assistants'));
     }
 
     /**
@@ -49,7 +52,7 @@ class DivisionsController extends Controller
         $division->directorAsistant_id = $validatedData['directorAsistant_id'];
         $division->save();
 
-        return redirect('/panel-divisions')->with('success', 'Division added successfully!');
+        return redirect('/panel-divisions')->with('successAdd', 'Division agregada exitosamente!');
     }
 
     /**
@@ -66,8 +69,9 @@ class DivisionsController extends Controller
     public function edit(string $id)
     {
         $division = Division::findOrFail($id);
-        $users = User::all();
-        return view('Elizabeth.Divisions.editDivision',compact('users','division'));
+        $directors = User::where('rol_id', 4)->get();
+        $assistants = User::where('rol_id', 5)->get();
+        return view('Elizabeth.Divisions.editDivision',compact('directors','assistants', 'division'));
     }
 
     /**
@@ -95,7 +99,7 @@ class DivisionsController extends Controller
             'directorAsistant_id'=>$validatedData['directorAsistant_id']
         ]);
 
-        return redirect('/panel-divisions')->with('success', 'Division updated successfully!');
+        return redirect('/panel-divisions')->with('successEdit', 'Division actualizada exitosamente!');
     }
 
     /**
@@ -109,9 +113,10 @@ class DivisionsController extends Controller
             DB::select('CALL proc_delete_division(?)', [$id]);
             DB::commit();
             
-            return redirect()->back()->with('success', '¡Division eliminada exitosamente!');
+            return redirect()->back()->with('successDelete', '¡Divison eliminada exitosamente!');
         } catch (\Exception $e) {
             DB::rollback();
+            
             return redirect()->back()->with('error', 'Error al eliminar la division: ' . $e->getMessage());
         }
     }

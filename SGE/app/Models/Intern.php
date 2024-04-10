@@ -33,7 +33,7 @@ class Intern extends Model
 
     public function project()
     {
-        return $this->hasOne(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function book()
@@ -60,5 +60,10 @@ class Intern extends Model
     {
         return $this->belongsTo(Project::class, 'project_id', 'id')
             ->with('adviser');
+    }
+
+    public function studyGrade()
+    {
+        return $this->belongsTo(StudyGrade::class);
     }
 }

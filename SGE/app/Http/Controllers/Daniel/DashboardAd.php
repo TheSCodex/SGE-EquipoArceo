@@ -1,24 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Daniel\asesor;
+namespace App\Http\Controllers\Daniel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
 use Illuminate\Http\Request;
 
-
-class ProyectsAdvisorController extends Controller
+class DashboardAd extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $projects = Project::with('adviser')
-            ->whereIn('status', ['en revision', 'aprobado', 'En revision', 'Aprobado'])
-            ->paginate(10);
-
-        return view('Daniel.asesor.ProyectsAdvisor', compact('projects'));
+        return view('daniel.asesor.dasboardAd');
     }
 
     /**

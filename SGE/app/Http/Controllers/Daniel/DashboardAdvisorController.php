@@ -24,6 +24,7 @@ class DashboardAdvisorController extends Controller
         // Obtener comentarios del asesor
         $comments = Comment::with('project')
             ->where('academic_advisor_id', $academicAdvisor)
+            ->where('status', 1)
             ->orderBy('fecha_hora', 'desc')
             ->take(3)
             ->get();

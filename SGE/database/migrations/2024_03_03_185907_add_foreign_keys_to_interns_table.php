@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign(['penalty_id'], 'interns_ibfk_6')->references(['id'])->on('penalizations')->onUpdate('no action')->onDelete('no action');
             $table->foreign(['student_status_id'], 'interns_ibfk_7')->references(['id'])->on('student_status')->onUpdate('no action')->onDelete('no action');
             $table->foreign(['career_id'], 'interns_ibfk_8')->references(['id'])->on('careers')->onUpdate('no action')->onDelete('no action');
-
+            $table->foreign(['study_grade_id'], 'interns_ibfk_9')->references(['id'])->on('study_grades')->onUpdate('no action')->onDelete('no action');
         });
     }
 
@@ -42,6 +42,7 @@ return new class extends Migration
             $table->dropForeign('interns_ibfk_6');
             $table->dropForeign('interns_ibfk_7');
             $table->dropForeign('interns_ibfk_8');
+            $table->dropForeign('interns_ibfk_9');
         });
     }
 };

@@ -5,8 +5,8 @@
 @endsection
 
 @section('contenido')
-<section class="flex flex-col justify-start items-center min-h-full h-screen flex-grow bg-gray-100">
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0">
+<section class="flex flex-col justify-start items-center min-h-full h-screen flex-grow bg-gray-100 z-{-20}">
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 relative">
         <div class="">
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -40,22 +40,25 @@
                 </div>
                 
                 <div class="sm:w-full md:w-1/3 bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
-                    <div>
-                        <h4 class="text-lg font-medium text-white">
-                            Respuesta
-                        </h4>
-                        <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">         
-                        
-                    </div>
-                    <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
-                        Guardar comentario 
-                    </button>
+                    <form method="post" action="{{ route('observationsAnteproyecto.store') }}">
+                        @csrf
+                        <div>
+                            <h4 class="text-lg font-medium text-white">
+                                Responder
+                            </h4>
+                            <textarea placeholder="Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-96" name="content"></textarea>
+                            <input type="hidden" name="parent_comment_id" value="{{ $tutorComment->id }}">                        
+                        </div>
+                        <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
+                            Guardar comentario 
+                        </button>
+                    </form>
                 </div>
             </div>
             @endif
 
             {{-- Cuadros normales --}}
-            <div class="sm:flex flex-wrap pb-10 max-h-[60vh] overflow-auto">
+            <div class="sm:flex flex-wrap pb-10 max-h-[40vh] overflow-auto">
                 @php $counter = 0; @endphp
                 @foreach($normalComments as $comment)
                     @if($counter % 2 == 0)
@@ -82,16 +85,19 @@
                             </div>
                             
                             <div class="w-full bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
-                                <div>
-                                    <h4 class="text-lg font-medium text-white">
-                                        Resolver
-                                    </h4>
-                                    <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="text-base text-white" type="hidden" name="parent_comment_id" value="{{ $comment->id }}"/>                  
-                                
-                                </div>
-                                <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
-                                    Guardar comentario 
-                                </button>
+                                <form method="post" action="{{ route('observationsAnteproyecto.store') }}">
+                                    @csrf
+                                    <div>
+                                        <h4 class="text-lg font-medium text-white">
+                                            Responder
+                                        </h4>
+                                        <textarea placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-96"" name="content"></textarea>
+                                        <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}">                  
+                                    </div>
+                                    <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
+                                        Guardar comentario 
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @if($counter % 2 == 1 || $loop->last)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessAdvisor;
+use App\Models\BusinessSector;
 use App\Models\Career;
 use App\Models\Comment;
 use App\Models\Company;
@@ -17,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class ProjectsPresidentController extends Controller
 {
@@ -52,6 +54,8 @@ class ProjectsPresidentController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
+                $area = BusinessSector::find($company->business_sector_id);
+
                 //dd($company);
             }
         }
@@ -88,9 +92,9 @@ class ProjectsPresidentController extends Controller
  //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
         } else {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'projectLikes'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area', 'projectLikes'));
         }
     }
 
