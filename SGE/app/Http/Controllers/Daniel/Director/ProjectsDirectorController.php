@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessAdvisor;
+use App\Models\BusinessSector;
 use App\Models\Career;
 use App\Models\Comment;
 use App\Models\Company;
@@ -55,6 +56,7 @@ class ProjectsDirectorController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
+                $area = BusinessSector::find($company->business_sector_id);
                 //dd($company);
             }
         }
@@ -88,9 +90,9 @@ class ProjectsDirectorController extends Controller
  //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
-            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division'));
+            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'area', 'division'));
         } else {
-            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'projectLikes'));
+            return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'area', 'division', 'projectLikes'));
         }
     }
 

@@ -297,12 +297,9 @@
                     <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
                         id="closeModalButton">Cerrar
                     </button>
-                    <form action="{{ route('invitar.colaboradores') }}" method="POST" id="invitationForm">
-                    @csrf
                     <input type="hidden" name="selectedIds" id="selectedIds">
                     <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
                         invitación</button>
-                </form>
                 </div>
             </div>
         </div>
