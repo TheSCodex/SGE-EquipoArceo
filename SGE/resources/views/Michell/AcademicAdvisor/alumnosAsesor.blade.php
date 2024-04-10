@@ -6,6 +6,7 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
                 <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
+
                 <div class="flex flex-row items-center justify-end">
                     <div>
                         <div class="relative items-center hidden md:flex">
@@ -16,7 +17,6 @@
                     </div>
 
                 </div>
-
                 <div class="flex flex-col justify-between mx-auto mt-2 sm:flex-row md:hidden">
 
                     <div>
@@ -32,22 +32,26 @@
             </div>
 
             <section class="w-full px-2 lg:px-16">
+                @foreach ($errors->all() as $error)
+                    <p class="text-center text-red">{{ $error }}
+                    </p>
+                @endforeach
                 <div class="mx-8 my-5">
                     <table class="w-full min-w-[600px] divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Matrícula</th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Nombre
                                     de estudiante</th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Estado
                                 </th>
-                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-gray-500">
+                                <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Amonestacion</th>
                                 <th
-                                    class="px-6 py-3 text-xs font-bold tracking-wider text-center text-gray-500 uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                     Acciones</th>
                             </tr>
                         </thead>
@@ -57,14 +61,13 @@
                                     @php
                                         $user = \App\Models\User::find($intern->user_id);
                                     @endphp
-                                    <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $user->identifier }}</td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $user->name }} {{ $user->last_name }}
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $user->identifier }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }} {{ $user->last_name }}
                                         </td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">{{ $intern->studentStatus->name ?? 'N/A' }}
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $intern->studentStatus->name ?? 'N/A' }}
                                         </td>
-                                        <td class="px-6 py-4 font-roboto font-bold text-black whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                         <td>
                                             <div class="flex justify-center gap-3">
@@ -124,12 +127,11 @@
                                                             </div>
 
                                                             <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form target="_blank"
-                                                                    action="{{ route('download.sancion', $user->id) }}"
+                                                                <form target="_blank" action="{{ route('download.sancion', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    
+
                                                                     <div class="flex flex-col justify-between mt-2">
                                                                         <label for="motivo">Elija el tipo de Sanción por
                                                                             motivo</label>
@@ -152,6 +154,7 @@
                                                                             <option value="3">Cancelación de Estadía
                                                                             </option>
                                                                         </select>
+
                                                                         <div id="serviceHoursContainer"
                                                                             class="flex flex-col justify-between w-full mt-2">
                                                                             <label for="serviceHours">Horas de
@@ -160,6 +163,11 @@
                                                                                 name="serviceHours" id="serviceHours" />
                                                                         </div>
                                                                     </div>
+
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <p class="p-2 text-red">{{ $error }}
+                                                                        </p>
+                                                                    @endforeach
                                                                     <button type="submit"
                                                                         class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
                                                                 </form>

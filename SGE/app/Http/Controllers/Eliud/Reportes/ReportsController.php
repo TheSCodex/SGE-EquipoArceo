@@ -21,6 +21,13 @@ class ReportsController extends Controller
 {
     public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null)
     {
+        if ($request->input('tipo') == '2') {
+
+            $request->validate([
+                'serviceHours' => 'required|numeric|    max:525',
+            ]);
+        }
+
         $user = auth()->user();
         $userData = User::find($user->id);
         $motivo = $motivo ?? $request->input('motivo');
@@ -37,7 +44,7 @@ class ReportsController extends Controller
 
         $docRevision = DocRevisions::find(4);
 
-        $interns->update(['penalty_id' => $motivo == 1 ? $tipo : $tipo + 3, 'service_hour' => $serviceHours]);
+        // $interns->update(['penalty_id' => $motivo == 1 ? $tipo : $tipo + 3, 'service_hour' => $serviceHours]);
 
         $interns->save();
 
@@ -71,7 +78,10 @@ class ReportsController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
+        session()->flash('form_success', true);
         return $pdf->stream();
+
+        return redirect()->back()->withErrors('Las horas de servicio no pueden ser mayores a 525.')->withInput();
     }
 
     public function printSansion()
@@ -136,7 +146,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo'));
         return $pdf->stream();
     }
 
