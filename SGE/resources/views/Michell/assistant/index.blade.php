@@ -70,6 +70,28 @@
                         </div>
                     </div>
 
+                    <!-- INFO -->
+                    <div class="flex col-span-2 flex-col justify-center">
+                        <form method="GET" action="{{route('control-libros')}}">
+                            <button type="submit">Donaciones de Libros</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="bg-white flex px-2 py-5 rounded-md">
+                    <!-- ICON -->
+                    <div class="flex ml-6 mr-4 items-center justify-center">
+                        <div class="bg-[#02AB82] w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download"
+                                width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                <path d="M7 11l5 5l5 -5" />
+                                <path d="M12 4l0 12" />
+                            </svg>
+                        </div>
+                    </div>
+
                     <div id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                         aria-hidden="true"
                         class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50 font-montserrat">
@@ -117,6 +139,7 @@
                         <button id="downloadIcon">Generar Control de Egresados</button>
                     </div>
                 </div>
+
 
             </div>
 

@@ -61,4 +61,9 @@ class Intern extends Model
         return $this->belongsTo(Project::class, 'project_id', 'id')
             ->with('adviser');
     }
+
+    public function studyGrade()
+    {
+        return $this->belongsTo(StudyGrade::class);
+    }
 }
