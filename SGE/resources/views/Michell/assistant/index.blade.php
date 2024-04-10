@@ -30,7 +30,7 @@
                     </a>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-1 gap-2">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
                 <div class="bg-white flex gap-5 justify-center items-center px-2 py-5 rounded-md">
                     <!-- ICON -->
                     <div class="flex items-center justify-center">
@@ -81,7 +81,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="bg-white flex px-2 py-5 rounded-md">
+                <div class="bg-white flex px-2 py-5 rounded-md justify-center">
                     <!-- ICON -->
                     <div class="flex ml-2 mr-4 items-center justify-center">
                         <div class="bg-[#02AB82] w-[60px] h-[60px] rounded-full flex items-center justify-center">
