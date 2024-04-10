@@ -94,13 +94,13 @@
             style="position:absolute;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
             <p style="text-align: center;">ASESOR EMPRESARIAL</p>
             <p style="text-align: center;font-weight:100 ; margin-top: 40px">________________________________</p>
-            <p style="text-align: center;font-size:12pt; ">Nombre y firma
+            <p style="text-align: center;font-size:12pt; ">{{$business_advisors?->name}}
             </p>
         </div>
         <div style="position:absolute; right :-20px; margin: 10px;">
             <p style="text-align: center;">ASESOR ACADÉMICO</p>
             <p style="text-align: center; font-weight:100 ;margin-top: 40px">________________________________</p>
-            <p style="text-align: center; font-size:12pt;"> Nombre y firma</p>
+            <p style="text-align: center; font-size:12pt;">{{$user?->name}} {{$user?->last_name}}</p>
         </div>
     </div>
 
