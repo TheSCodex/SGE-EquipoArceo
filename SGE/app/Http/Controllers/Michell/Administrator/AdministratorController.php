@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Michell\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Academy;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -12,7 +14,31 @@ class AdministratorController extends Controller
      */
     public function index()
     {
-        return view('Michell.Admisnistrator.inicioAdministrator');
+        $idUser = auth()->user()->id;
+        $academies = Academy::with(['careers.interns.project' => function ($query) {
+            $query->whereIn('status', ['aprobado', 'en revision']);
+        }])->get()->map(function ($academy) {
+            $projectCounts = $academy->careers->flatMap(function ($career) {
+                return $career->interns->filter(function ($intern) {
+                    $status = optional($intern->project)->status;
+                    return $status === 'aprobado' || $status === 'en revision';
+                });
+            });
+        
+            $approvedProjectsCount = $projectCounts->where('project.status', 'aprobado')->count();
+            $revisionProjectsCount = $projectCounts->where('project.status', 'en revision')->count();
+        
+            $academy->approved_projects_count = $approvedProjectsCount;
+            $academy->revision_projects_count = $revisionProjectsCount;
+        
+            return $academy;
+        });
+
+        // dd($academies);
+
+        return view('Michell.Admisnistrator.inicioAdministrator', compact(
+            "academies"
+        ));
     }
 
     /**
