@@ -192,7 +192,13 @@
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <p class="w-[70%]">Tu Anteproyecto esta guardado como borrador</p>
+                            @if (strtolower($project->status) == 'aprobado')
+                                <p class="">Tu Anteproyecto ha sido aprobado</p>
+                            @elseif (strtolower($project->status) == 'en revision')
+                                <p class="">Tu Anteproyecto se encuentra en revision</p>
+                            @else
+                                <p class="">Tu Anteproyecto esta guardado como borrador</p>
+                            @endif
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>

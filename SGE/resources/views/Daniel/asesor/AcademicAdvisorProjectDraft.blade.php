@@ -169,8 +169,6 @@
                 </div>
             </div>
 
-
-
             <div
                 class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
                 <div
