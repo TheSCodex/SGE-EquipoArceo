@@ -162,16 +162,16 @@
     <div
         style="position: relative; height:100px; width: 100%; display: flex; justify-content: center; margin-top:40px; marger: 10px;">
         <div
-            style="position:absolute;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            style="position:absolute; width: 250px ;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
             <p style="text-align: center; font-weight: 700;">ASESOR ACADÉMICO</p>
             <p style="text-align: center;font-weight:100 ; margin-top: 40px">____________________________________</p>
-            <p style="text-align: center;font-size:12pt; ">Nombre y firma
+            <p style="text-align: center;font-size:12pt; ">{{$user->name}} {{$user->last_name}}
             </p>
         </div>
-        <div style="position:absolute; right :-20px; margin: 10px;">
+        <div style="position:absolute;  width: 250px ; right :-20px; margin: 10px;">
             <p style="text-align: center; font-weight: 700;">COMISIÓN ACADÉMICA</p>
             <p style="text-align: center; font-weight:100 ;margin-top: 40px">____________________________________</p>
-            <p style="text-align: center; font-size:12pt;">Nombre, cargo, firma y sello de </br>
+            <p style="text-align: center; font-size:12pt;">{{ $director?->name . ' ' . $director?->last_name}} director(a) {{($division?->name)}} </br>
                 Dirección</p>
         </div>
     </div>
