@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Daniel\asesor;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicAdvisor;
+use App\Models\Academy;
+use App\Models\Career;
+use App\Models\Intern;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProyectsAdvisorController extends Controller
 {
@@ -14,11 +19,32 @@ class ProyectsAdvisorController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('adviser')
-            ->whereIn('status', ['en revision', 'aprobado', 'En revision', 'Aprobado'])
-            ->paginate(10);
+        $userId = Auth::id();
+        $academicAdvisor = User::find($userId)->academicAdvisor;
+        $projectsAdvisor = Intern::where('academic_advisor_id', $academicAdvisor->id)
+            ->with('project.adviser') // Cargar relaciones
+            ->get()
+            ->map(function ($intern) {
+                return $intern->project;
+            })
+            ->filter();
 
-        return view('Daniel.asesor.ProyectsAdvisor', compact('projects'));
+        $AdvisorCareer = User::find($userId)->academicAdvisor->career->id;
+        $academyId  = Career::find($AdvisorCareer)->academy_id;
+        $divisionId = Academy::find($academyId)->division->id;
+
+        // Obtener todos los proyectos asociados a la misma división que el asesor académico
+        $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
+            $query->whereHas('career', function ($query) use ($divisionId) {
+                $query->whereHas('academy', function ($query) use ($divisionId) {
+                    $query->where('division_id', $divisionId);
+                });
+            });
+        })
+        ->with(['adviser', 'interns.user'])
+        ->paginate(10);
+
+        return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
     }
 
     /**

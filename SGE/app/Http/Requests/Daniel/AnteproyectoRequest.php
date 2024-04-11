@@ -23,7 +23,7 @@ class AnteproyectoRequest extends FormRequest
     {
         return [
             'name_student' => 'bail|required|regex:/^[\pL\s&.,-]+$/u',
-            'matricula' => 'bail|required|digits:8',
+            'matricula' => 'bail|required|min:6',
             'Group' => 'bail|required|regex:/^[a-zA-Z0-9\s-]+$/',
             'Numero' => 'bail|required|min:8',
             'division_academica' => 'bail|required|regex:/^[a-zA-Z0-9\s-]+$/',
