@@ -1,42 +1,49 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Lista de anteproyectos')
 @section('contenido')
+    @if (!$projectsAdvisor == null)
     <section class="flex flex-col justify-start items-center  min-h-full flex-grow">
+    @else
+    <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
+    @endif
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de Asesorados</h1>
-            </div>
-            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-                <div class="w-full mb-5">
-                    <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-                        @foreach ($projects as $project)
-                            <a href="{{ route('director-anteproyectos.view', $project->id) }}" class="focus:outline-none">
-                                <div
-                                    class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
+            @if (!$projectsAdvisor == null)
+                <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+                    <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de Asesorados
+                    </h1>
+                </div>
+                <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                    <div class="w-full mb-5">
+                        <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+                            @foreach ($projectsAdvisor as $project)
+                                <a href="{{ route('director-anteproyectos.view', $project->id) }}" class="focus:outline-none">
                                     <div
-                                        class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ $project->name }}</h2>
-                                        <p class="text-sm text-center  font-bold text-primaryColor">
-                                            {{ $project->like !== null ? $project->like : 0 }} Votos
-                                        </p>
-                                    </div>
-
-                                    <p class="text-sm my-2 text-gray-500">
-                                        {{ strlen($project->description) > 100 ? substr($project->description, 0, 100) . '...' : $project->description }}
-                                    </p>
-                                    <div class="flex mt-4 space-x-2">
-                                        @foreach ($project->interns as $intern)
-                                            <p class="text-sm text-gray-500">{{ $intern->user->name }}
-                                                {{ $intern->user->last_name }}
+                                        class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
+                                        <div
+                                            class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
+                                            <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                                            <p class="text-sm text-center  font-bold text-primaryColor">
+                                                {{ $project->like !== null ? $project->like : 0 }} Votos
                                             </p>
-                                        @endforeach
+                                        </div>
+
+                                        <p class="text-sm my-2 text-gray-500">
+                                            {{ strlen($project->description) > 100 ? substr($project->description, 0, 100) . '...' : $project->description }}
+                                        </p>
+                                        <div class="flex mt-4 space-x-2">
+                                            @foreach ($project->interns as $intern)
+                                                <p class="text-sm text-gray-500">{{ $intern->user->name }}
+                                                    {{ $intern->user->last_name }}
+                                                </p>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        @endforeach
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de anteproyectos de la
                     división</h1>
@@ -66,7 +73,8 @@
                         @foreach ($projects as $project)
                             <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                                 <h2 class="text-lg font-bold">{{ $project->name }}</h2>
-                                <p class="text-sm text-gray-500">Votos: {{ $project->like !== null ? $project->like : 0 }}
+                                <p class="text-sm text-gray-500">Votos:
+                                    {{ $project->like !== null ? $project->like : 0 }}
                                 </p>
                                 <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
                                 <div class="flex justify-end mt-4 space-x-2">
@@ -84,7 +92,8 @@
                     <table class="text-start w-full">
                         <tr class="w-full">
                             <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
-                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5 w-[25%]">Nombre del proyecto</th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5 w-[25%]">Nombre del proyecto
+                            </th>
                             <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Votos </th>
                             <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Asesor Academico</th>
                             <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Fecha de publicacion</th>

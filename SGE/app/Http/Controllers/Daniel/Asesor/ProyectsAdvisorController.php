@@ -18,18 +18,14 @@ class ProyectsAdvisorController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
-        // Buscamos al asesor académico asociado al usuario iniciado sesión
         $academicAdvisorId = User::find($userId)->academicAdvisor->id;
-
-        // Si encontramos al asesor académico, buscamos todos los proyectos asociados a él
         $projectsAdvisor = Intern::where('academic_advisor_id', $academicAdvisorId)
             ->with('project.adviser') // Cargar relaciones
             ->get()
             ->map(function ($intern) {
                 return $intern->project;
             })
-            ->filter(); // Filtrar elementos null
+            ->filter(); 
         
         $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
         return view('Daniel.asesor.ProyectsAdvisor')->with(['projects'=> $projects, 'projectsAdvisor'=> $projectsAdvisor]);
