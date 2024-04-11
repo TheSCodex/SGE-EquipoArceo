@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Intern;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,11 +18,21 @@ class ProyectsAdvisorController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $academicAdvisorId = AcademicAdvisor::where('user_id', $userId)->value('id');
-        $interns = Intern::where('academic_advisor_id', $academicAdvisorId)->with('user')->get();
 
+        // Buscamos al asesor académico asociado al usuario iniciado sesión
+        $academicAdvisorId = User::find($userId)->academicAdvisor->id;
+
+        // Si encontramos al asesor académico, buscamos todos los proyectos asociados a él
+        $projectsAdvisor = Intern::where('academic_advisor_id', $academicAdvisorId)
+            ->with('project.adviser') // Cargar relaciones
+            ->get()
+            ->map(function ($intern) {
+                return $intern->project;
+            })
+            ->filter(); // Filtrar elementos null
+        
         $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
-        return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'interns' => $interns]);
+        return view('Daniel.asesor.ProyectsAdvisor')->with(['projects'=> $projects, 'projectsAdvisor'=> $projectsAdvisor]);
     }
 
     /**

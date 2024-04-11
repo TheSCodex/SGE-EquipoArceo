@@ -9,7 +9,7 @@
             <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
                 <div class="w-full mb-5">
                     <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-                        @foreach ($projects as $project)
+                        @foreach ($projectsAdvisor as $project)
                             <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}" class="focus:outline-none">
                                 <div
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
