@@ -182,7 +182,7 @@
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
+                        <div class="w-[70%] flex justify-between flex-wrap flex-row">
                             @if (strtolower($project->status) == 'aprobado')
                                 <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
@@ -207,9 +207,9 @@
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if ($project->like == 0)
-                                <p>Este proyecto aun no cuenta con votos</p>
+                                <p class="w-full">Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p class="w-full">Este proyecto cuenta con {{ $project->like }} voto(s)</p>
                             @endif
 
 

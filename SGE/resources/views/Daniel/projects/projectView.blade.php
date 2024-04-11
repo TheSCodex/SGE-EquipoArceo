@@ -203,12 +203,12 @@
                         <div class=" flex justify-between flex-wrap flex-row-reverse">
                             @if (isset($project))
                                 @if ($project->like == 0)
-                                    <p>Aun no tienes votos</p>
+                                    <p class="w-full">Aun no tienes votos</p>
                                 @else
-                                    <p>Tienes {{ $project->like }} voto(s)</p>
+                                    <p class="w-full">Tienes {{ $project->like }} voto(s)</p>
                                 @endif
                             @else
-                                <p>Aun no hay nada que votar</p>
+                                <p class="w-full">Aun no hay nada que votar</p>
                             @endif
                         </div>
                     </div>
