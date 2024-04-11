@@ -67,7 +67,7 @@ class ProjectsPresidentController extends Controller
         $project = Project::find($interns->project_id);
     
         if (!$project) {
-            return view('Daniel.Projects.ProjectView');
+            return view('Daniel.presidenta.viewProject');
         }
     
 

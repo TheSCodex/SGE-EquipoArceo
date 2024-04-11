@@ -60,7 +60,7 @@ class ProjectDraftController extends Controller
         
     
         if (!$project) {
-            return view('Daniel.Projects.ProjectView');
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft');
         }
     
 
@@ -76,7 +76,7 @@ class ProjectDraftController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
         
         if(!$career || !$career->academy_id){
-            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
