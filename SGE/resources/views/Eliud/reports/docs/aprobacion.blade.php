@@ -65,7 +65,7 @@
             </span>Autorización de digitalización.</p>
 
         <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
-            </span> xxxx</p>
+            </span> {{'UTC/' . $interns[0]?-> initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
     </div>
 
 

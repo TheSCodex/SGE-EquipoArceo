@@ -10,6 +10,7 @@ use App\Models\Division;
 use App\Models\DocRevisions;
 use App\Models\FileHistory;
 use App\Models\Intern;
+use App\Models\lastDocCreated;
 use App\Models\Project;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -153,6 +154,23 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(3);
+        $lastDocCreated = lastDocCreated::find(1);
+
+        $getNumber = null;
+
+        if (! $interns[0]->foolscapNumber) {
+
+            $getNumber = $lastDocCreated->number;
+            $interns[0]->foolscapNumber = $lastDocCreated->number;
+            $interns[0]->save();
+
+            $lastDocCreated->update([
+                'number' => $lastDocCreated->number + 1
+            ]);
+
+            $lastDocCreated->save();
+        }
+
 
         $jsonData[] = [
 
@@ -172,6 +190,8 @@ class ReportsController extends Controller
             'project' => $project?->name,
             'reason' => $motivo,
             'interns' => $interns[0]?->id,
+            'docNumberCreated' => $getNumber ? $getNumber : $interns[0]->foolscapNumber,
+
         ];
 
         $authUser = auth()->user();
@@ -181,7 +201,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo', 'getNumber'));
         return $pdf->stream();
     }
 

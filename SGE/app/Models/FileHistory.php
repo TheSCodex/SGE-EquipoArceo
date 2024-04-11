@@ -29,7 +29,8 @@ class FileHistory extends Model
         'type',
         'interns',
         'serviceHours',
-        'business_advisors'
+        'business_advisors',
+        'docNumberCreated'
     ];
 
 }
