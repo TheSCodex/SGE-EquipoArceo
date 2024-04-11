@@ -3,7 +3,7 @@
     @section('titulo', 'Panel de Carreras y Academias')
     @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+    <section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
@@ -38,7 +38,7 @@
             <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
                <a href="panel-careers">
                 <button id="btnAll"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor text-white bg-primaryColor   rounded px-5 py-1 shadow-lg">Carreras</button>
                 </a>
                 <a href="panel-academies">
                     <button id="btnWithAdvisor"
@@ -56,9 +56,13 @@
                     @foreach ($careers as $career)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                         <h2 class="text-lg font-bold">{{ $career->name }}</h2>
-                        <p class="text-sm text-gray-500">Division: {{ $career->division->name ?? 'N/A'}}</p>
-                        <p class="text-sm text-gray-500">Academia: {{ $career->phone }}</p>
-                        <p class="text-sm text-gray-500">Presidente: {{ $career->position }}</p>
+                        <p>Academia:
+                            @if ($academy = $academies->where('id', $career->academy_id)->first())
+                        {{ $academy->name }}
+                        @else
+                            N/A
+                        @endif
+                        </p>
                         <div class="flex justify-end mt-4">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" >
                             <img src="/img/logos/pencil.svg" alt="Edit" class="cursor-pointer">
@@ -75,15 +79,16 @@
                     @endforeach
                 </div>
             </div>
+
+            
             <div class="hidden lg:block w-full ">
                 <table class="text-start w-full ">
                     <tr class="border-b border-gray-200 pb-[2%]">
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start">Academia</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[2%] ">Editar</th> 
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pr-[4%] ">Eliminar</th> 
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start  pr-[2%] ">Editar</th> 
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-[1%] pr-[4%] ">Eliminar</th> 
                     </tr>
-                    @if(count($careers) > 0)
                     @foreach ($careers as $career)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                         <td class="font-roboto pl-5 font-bold py-5">{{ $career->name }}</td>
@@ -98,13 +103,13 @@
 
                         
                         {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex justify-start">
+                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                            <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex pl-2">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5  justify-start px-[6%] flex cursor-pointer" onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
-                            <form class="flex justify-center" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
+                        <td class="font-roboto font-bold py-5 cursor-pointer " onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
+                            <form class="flex justify-center pl-4" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                     <img src="/img/logos/trash.svg">
@@ -112,31 +117,55 @@
                         </td> 
                     </tr>
                     @endforeach
-                    @else
-                    <h1 class="text-xl">No hay datos registrados </h>
-                    @endif
+                 
                 </table>
+                @if($careers->isEmpty())
+                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+                @endif
                 {{$careers->links()}}
             </div>
         </div>
     </div>
+    
         
-    </section>
-    @if(session('success'))
-    <script>
-        
-        function confirmAgregar(){
-            Swal.fire({
-                title: 'Se agrego correctamente',
-                text: `Agregaste una nueva carrera.`,
-                icon: 'success',
-            })
-        }
-        
-    </script>
-    @endif
-
-    <script>
+</section>
+@if(session()->has('successAdd'))
+<script>
+    function confirmAgregar(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Carrera agregada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+@if(session()->has('successEdit'))
+<script>
+    function confirmEdit(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Carrera editada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmEdit();
+</script>
+@endif
+@if(session()->has('successDelete'))
+<script>
+    function confirmDelete(){
+        Swal.fire({
+            title: '¡Exito!',
+            text: `¡Carrera eliminada exitosamente!`,
+            icon: 'success',
+        })
+    }
+    confirmAgregar();
+</script>
+@endif
+<script>
 
      
         function confirmDelete(careerName, careerId) {
@@ -178,6 +207,9 @@
             // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
             document.getElementById("search").addEventListener("input", searchTable);
     </script>
+    
+        
+
 
 
     <script>

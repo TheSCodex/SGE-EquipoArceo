@@ -1,14 +1,14 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full h-screen flex justify-center items-center bg-white">
+<div class="w-full h-screen flex justify-center items-center bg-white p-4">
     <div class="overflow-y-auto max-h-screen"> <!-- Agregado -->
         <form action="{{ url('panel-roles') }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full md:w-[40rem]">
-            <div class="w-full h-fit flex justify-start">
+            <div class="w-full h-fit flex justify-start ">
                 <h1 class="text-3xl font-bold">Añadir nuevo rol</h1>
                 @csrf
             </div>
             <div class="w-full h-fit flex flex-col space-y-2">
-                <div class="w-full space-y-2">
+                <div class="w-full space-y-2 mb-4">
                     <p class="text-sm">Nombre del rol</p>
                     <input type="text" name="rol_name" value="{{ old('rol_name') }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Nombre del rol">
                     @error('rol_name')

@@ -60,7 +60,7 @@
             
             </div>
 
-            <a class="p-2 self-center bg-primaryColor sm:w-[20rem] md:w-[30rem] rounded-md text-white hover:bg-darkgreen text-center" href="/panel-users">Regresar al panel de usuarios</a>
+            <a class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen text-center" href="/panel-users">Regresar al panel de usuarios</a>
 
 
     </form>
