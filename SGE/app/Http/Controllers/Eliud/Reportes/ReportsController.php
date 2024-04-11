@@ -155,14 +155,21 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(3);
-        $lastDocCreated = lastDocCreated::find(1);
+        $lastDocCreated = lastDocCreated::where('division_id', $division->id)->first();
+
+        if ( $lastDocCreated == null) {
+            DB::table('last_doc_createds')->insert([
+                'division_id' => ($division->id),
+                'number' => 1,
+            ]);
+        }
 
         $getNumber = null;
 
-        if (! $interns[0]->foolscapNumber) {
+        if ( $interns[0]->foolscapNumber == null) {
 
-            $getNumber = $lastDocCreated->number;
-            $interns[0]->foolscapNumber = $lastDocCreated->number;
+            $getNumber = $lastDocCreated->number ? $lastDocCreated->number : 1 ;
+            $interns[0]->foolscapNumber = $lastDocCreated?->number;
             $interns[0]->save();
 
             $lastDocCreated->update([
