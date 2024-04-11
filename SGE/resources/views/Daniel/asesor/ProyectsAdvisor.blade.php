@@ -2,7 +2,7 @@
 @section('titulo', 'Lista de anteproyectos')
 @section('contenido')
     @if (!$projectsAdvisor == null)
-        <section class="flex flex-col justify-start items-center  min-h-full flex-grow">
+        <section class="flex flex-col justify-start items-center  min-h-screen h-full flex-grow">
         @else
             <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
     @endif

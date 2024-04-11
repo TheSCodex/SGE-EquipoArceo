@@ -25,10 +25,25 @@ class ProjectsDirectorController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $projectsAdvisor = null;
-        $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
-        return view('daniel.directorAcademy.projects')->with(['projects'=> $projects, 'projectsAdvisor'=> $projectsAdvisor]);
+        $userId = Auth::id();
+
+        $division = Division::where('director_id', $userId)->first();
+        $divisionId = $division->id;
+        dd($divisionId);
+
+        $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
+            $query->whereHas('career', function ($query) use ($divisionId) {
+                $query->whereHas('academy', function ($query) use ($divisionId) {
+                    $query->where('division_id', $divisionId);
+                });
+            });
+        })
+            ->with(['adviser', 'interns.user'])
+            ->paginate(10);
+        
+        return view('daniel.directorAcademy.projects')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
     }
     /**
      * Show the form for creating a new resource.
