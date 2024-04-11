@@ -75,7 +75,7 @@
                                                         class="{{ $colorClass }}">{{ $data->quantity_advised }}</span>
                                                     Estudiantes</td>
                                             @else
-                                                <td class="py-4"><span class="text-primaryColor">0</span> Estudiantes</td>
+                                                <td class="py-4"><span class="text-primaryColor ">0</span> Estudiantes</td>
                                             @endif
                                             <td class="py-4"><span
                                                     class="text-primaryColor">{{ $data->max_advisors }}</span> Estudiantes
