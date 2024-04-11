@@ -215,7 +215,7 @@
 
                             @if (isset($projectLikes))
                                 <form method="POST" id="delVoteForm"
-                                    action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="button" onclick="delVote()"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
@@ -223,7 +223,7 @@
                                 </form>
                             @else
                                 <form method="POST" id="voteForm"
-                                    action="{{ route('anteproyecto-Asesor.storeLike', ['id' => $project->id]) }}">
+                                    action="{{ route('anteproyecto-President.storeLike', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="button" onclick="confirmVote()"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
