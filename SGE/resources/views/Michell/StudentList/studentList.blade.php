@@ -24,16 +24,17 @@
     @endphp --}}
 
 <div class="bg-white min-h-screen flex flex-col items-center">
-<section class="w-full p-4 flex items-center mt-7">
+<section class="w-full p-6 flex items-center mt-9">
 <h1 class="text-2xl font-bold font-kanit ml-20">Estudiantes asesorados</h1>
+
     {{-- buscador --}}
-    <div class="w-[50%] flex justify-evenly ml-auto">
-        <input id="searchInput" placeholder="Buscador" type="search" name="d" class="w-[50%] placeholder:text-green placeholder:px-3 rounded-md mb-4 border-2 border-green focus:outline-none px-3">
-        <svg width="28" height="38" viewBox="0 0 14 22" class="mt-3"  fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="w-[40%] flex justify-evenly ml-auto">
+    <input id="searchInput" placeholder="Buscador" type="search" name="d" class="w-[30%] placeholder:text-green placeholder:px-3 rounded-md border-2 border-green focus:outline-none px-3 float-right mr-4">
+        <svg width="28" height="18" viewBox="0 0 14 22" class="mt-3"  fill="none" xmlns="http://www.w3.org/2000/svg">
            
             <defs>
                 <clipPath id="clip0_641_2165">
-                    <rect width="14" height="22" fill="white" transform="translate(0.00585938)"/>
+                    <rect width="18" height="26" fill="white" transform="translate(0.00585938)"/>
                 </clipPath>
             </defs>
         </svg>

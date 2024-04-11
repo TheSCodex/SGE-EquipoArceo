@@ -35,7 +35,7 @@
                     </div>
                     <section class="font-bold text-sm md:space-x-6 space-x-2">
                         <button id="btnAll"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Todos</button>
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  pb-4">Todos</button>
                         <button id="btnWithAdvisor"
                             class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Con
                             Estudiantes</button>
