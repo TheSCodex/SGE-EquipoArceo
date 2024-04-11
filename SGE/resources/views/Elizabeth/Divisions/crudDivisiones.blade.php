@@ -56,7 +56,7 @@
                 @foreach ($divisions as $division)
                 <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                     <h2 class="text-lg font-bold">{{ $division->name }}</h2>
-                    <p class="text-sm text-gray-500">Director::  @if ($principal = $principals->where('id', $division->director_id)->first())
+                    <p class="text-sm text-gray-500">Director:  @if ($principal = $principals->where('id', $division->director_id)->first())
                         {{ $principal->name }}
                     @else
                         N/A
