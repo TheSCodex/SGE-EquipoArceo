@@ -63,8 +63,7 @@
 
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
-                                                {{ $interns[0]->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns[0]->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -294,4 +293,9 @@
         </div>
         </div>
     </section>
+
+
+
+
+
 @endsection

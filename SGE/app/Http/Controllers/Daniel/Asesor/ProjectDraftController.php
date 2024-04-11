@@ -126,7 +126,7 @@ class ProjectDraftController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Like añadido correctamente.');
+        return redirect()->back()->with('liked', 'Like añadido correctamente.');
     }
 
     public function deleteLike(Project $id)
@@ -150,7 +150,7 @@ class ProjectDraftController extends Controller
             // Decrement the like count for the project
             Project::where('id', $projectId)->decrement('like');
             
-            return redirect()->back()->with('success', 'Like eliminado correctamente.');
+            return redirect()->back()->with('disliked', 'Like eliminado correctamente.');
         } else {
 
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');

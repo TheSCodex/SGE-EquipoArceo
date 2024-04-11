@@ -43,7 +43,7 @@
                 </div>
                 
             </div>
-            <div class="flex md:flex-row flex-col items-center md:items-start md:px-20">
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Asistente del director</p>
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
