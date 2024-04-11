@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eliud\Reportes;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
+use App\Models\BusinessAdvisor;
 use App\Models\Career;
 use App\Models\Division;
 use App\Models\DocRevisions;
@@ -112,7 +113,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours', 'user'));
         session()->flash('form_success', true);
         return $pdf->stream();
 
@@ -227,6 +228,7 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(2);
+        $business_advisors = BusinessAdvisor::find($interns[0]->business_advisor_id);
 
         $jsonData[] = [
 
@@ -244,6 +246,7 @@ class ReportsController extends Controller
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
+            'business_advisors' => $business_advisors->name, 
         ];
 
         $authUser = auth()->user();
@@ -253,7 +256,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision'));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision', 'business_advisors', 'user'));
         return $pdf->stream();
     }
 
@@ -297,7 +300,7 @@ class ReportsController extends Controller
             $academiesData[] = $academyData;
         }
 
-        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division'));
+        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division', 'user'));
     }
 
 
