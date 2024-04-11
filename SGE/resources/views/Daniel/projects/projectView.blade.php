@@ -63,7 +63,8 @@
 
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns[0]->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $interns[0]->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -163,6 +164,7 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
+                            
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
                                 class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
                         </div>
@@ -186,18 +188,25 @@
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del Anteproyecto</h3>
                 </div>
-                <div
-                    class=" w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
-                    <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
+                <div class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
+                    <div class="w-[80%] flex items-center gap-[10%]">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            @if (strtolower($project->status) == 'aprobado')
-                                <p class="">Tu Anteproyecto ha sido aprobado</p>
-                            @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">Tu Anteproyecto se encuentra en revision</p>
-                            @else
-                                <p class="">Tu Anteproyecto esta guardado como borrador</p>
-                            @endif
+                            <div>
+                                @if (strtolower($project->status) == 'aprobado')
+                                    <p>Tu Anteproyecto ha sido aprobado</p>
+                                @elseif (strtolower($project->status) == 'en revision')
+                                    <p>Tu Anteproyecto se encuentra en revision</p>
+                                @elseif (strtolower($project->status) == 'asesoramiento')
+                                    <p>Tu Anteproyecto se encuentra en Asesoramiento</p>
+                                @else
+                                    <p>Tu Anteproyecto esta guardado como borrador</p>
+                                    <form method="POST" action="{{ route('ForRev', ['id' => $project->id]) }}">
+                                        @csrf
+                                        <button type="submit" class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a revisión</button>
+                                    </form>
+                                @endif
+                            </div>
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>

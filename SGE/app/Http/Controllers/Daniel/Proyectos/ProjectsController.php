@@ -69,7 +69,10 @@ class ProjectsController extends Controller
         return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division','area'));
     }
 
-
+    public function ForRev(request $id){
+        Project::where('id', $id->id)->update(['status' => 'Asesoramiento']);
+        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+    }
 
     public function Colaborar(Request $request)
     {

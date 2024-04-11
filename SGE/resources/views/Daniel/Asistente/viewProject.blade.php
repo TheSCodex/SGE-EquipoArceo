@@ -186,13 +186,13 @@
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
+                        <div class=" flex justify-between flex-wrap flex-row-reverse">
                             @if (strtolower($project->status) == 'aprobado')
                                 <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
-                                <p class="">Este proyecto aun no esta en revision</p>
+                                <p class="">El proyecto se encuentra en asesoramiento</p>
                                 <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"

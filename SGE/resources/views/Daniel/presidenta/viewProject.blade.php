@@ -185,19 +185,21 @@
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
-                            @if (strtolower($project->status) == 'aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
-                            @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">El proyecto se encuentra en revision</p>
-                            @else
-                                <p class="">Este proyecto aun no esta en revision</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
-                                        a revisión</button>
-                                </form>
-                            @endif
+                            <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
+                                @if (strtolower($project->status) == 'aprobado')
+                                    <p class="">El proyecto ha sido aprobado</p>
+                                @elseif (strtolower($project->status) == 'en revision')
+                                    <p class="">El proyecto se encuentra en revision</p>
+                                @else
+                                    <p class="">El proyecto se encuentra en asesoramiento</p>
+                                    <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
+                                            a revisión</button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

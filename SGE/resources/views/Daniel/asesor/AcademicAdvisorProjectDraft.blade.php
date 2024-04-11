@@ -187,7 +187,7 @@
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
-                                <p class="">Este proyecto aun no esta en revision</p>
+                                <p class="">El proyecto se encuentra en asesoramiento</p>
                                 <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
