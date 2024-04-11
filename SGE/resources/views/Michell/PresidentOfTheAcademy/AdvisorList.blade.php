@@ -9,7 +9,7 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="md:w-full md:h-[80%] md:flex justify-center md:mt-3">
                 @if (session()->has('success'))
-                        <div class="usuario"></div>
+                    <div class="usuario"></div>
                 @endif
 
 
@@ -35,7 +35,7 @@
                     </div>
                     <section class="font-bold text-sm md:space-x-6 space-x-2">
                         <button id="btnAll"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Todos</button>
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  pb-4">Todos</button>
                         <button id="btnWithAdvisor"
                             class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Con
                             Estudiantes</button>
@@ -60,9 +60,19 @@
                                             class="data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
                                             <td class="py-4">{{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
-                                            @if ($data->quantity > 0)
+                                            @if ($data->quantity_advised > 0)
+                                                @php
+                                                    $percentage = ($data->quantity_advised / $data->max_advisors) * 100;
+                                                    if ($percentage <= 33) {
+                                                        $colorClass = 'text-primaryColor'; // Verde
+                                                    } elseif ($percentage <= 66) {
+                                                        $colorClass = 'text-orange'; // Naranja
+                                                    } else {
+                                                        $colorClass = 'text-red'; // Rojo
+                                                    }
+                                                @endphp
                                                 <td class="py-4"><span
-                                                        class="text-primaryColor">{{ $data->quantity_advised }}</span>
+                                                        class="{{ $colorClass }}">{{ $data->quantity_advised }}</span>
                                                     Estudiantes</td>
                                             @else
                                                 <td class="py-4"><span class="text-primaryColor">0</span> Estudiantes</td>
