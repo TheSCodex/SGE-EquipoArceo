@@ -135,17 +135,16 @@
         <div
             style="position: relative; height:100px; width: 100%; display: flex; justify-content: center; margin-top:20px; margin-bottom: 10px;">
             <div
-                style="position:absolute;left:0px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+                style="position:absolute;left:0px; width: 250px ; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
                 <p style="text-align: center;font-weight:bolder">A T E N T A M E N T E</p>
                 <p style="text-align: center; margin-top: 70px">________________________________</p>
-                <p style="text-align: center; margin-top:10px">Nombre y firma del Asesor (a)
-                    <br /> Académico (a)
+                <p style="text-align: center; margin-top:10px">{{$user->name}} {{$user->last_name}}
                 </p>
             </div>
-            <div style="position:absolute; right :0px; margin: 10px;">
+            <div style="position:absolute; width: 250px ; right :0px; margin: 10px;">
                 <p style="text-align: center;font-weight:bolder;">ENTERADO</p>
                 <p style="text-align: center; margin-top: 70px">________________________________</p>
-                <p style="text-align: center; margin-top:10px"> Nombre y firma del (a) Estudiante </p>
+                <p style="text-align: center; margin-top:10px"> {{$student->name}} {{$student->last_name}} </p>
             </div>
         </div>
 

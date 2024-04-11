@@ -5,19 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Division extends Model
+class StudyGrade extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'director_id',
-        'directorAsistant_id',
-        'initials'
+        'degree'
     ];
 
-    public function academies()
+    public function interns()
     {
-        return $this->hasMany(Academy::class);
+        return $this->hasOne(Intern::class, 'study_grade_id');
     }
 }

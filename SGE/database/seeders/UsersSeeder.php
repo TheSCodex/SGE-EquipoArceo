@@ -45,16 +45,18 @@ class UsersSeeder extends Seeder
                     
                     // Nombres específicos para presidentes académicos
         $presidentes_nombres = [
-            'Giovanny Director',
-            'Elizabeth Director',
-            'Michelle',
-            'Luis Director',
-            'Tadeo Director',
-            'Octavio Director',
-            'Juan Director',
-            'Francisco Director',
+            'Marco Antonio Mondragon',
+            'Gabriela Solis Curiel',
+            'Veronica Bolaños Lopez',
+            'Gilberto David Cetina Mijangos',
+            'Diana Gonzalez Alvarez',
+            'Angelina Gatica',
+            'Angel Calvario',
+            'Myrna Lopez',
             'Elenor Director',
-            'Carrillo Director'
+            'Carrillo Director',
+            'Dra.Marisela Alvarez Ibarra',
+            'Mtra.Ana Isabel Romero Flores'
         ];
 
         // Crear 10 usuarios presidente académico
@@ -71,9 +73,9 @@ class UsersSeeder extends Seeder
         // Nombres específicos para directores
         $directores_nombres = [
             'Rocío Arceo',
-            'Mayra Fuentes',
-            'Marlene Juárez',
-            'Luis Villafaña',
+            'Manuel Enrique Rivero Rivero',
+            'Hector Luis Soto',
+            'Mariana Recio Lopez'
         ];
 
         // Crear 4 usuarios director
@@ -89,10 +91,10 @@ class UsersSeeder extends Seeder
 
 
         $directorAssistants_names = [
-            'Norma Hernández',
-            'David Hernández',
-            'Sara Hernández',
-            'Juan Hernández',
+            'Norma Angélica Hernández Sandenal',
+            'Mtro. Jorge Reyes',
+            'Jennyfer Zamacona',
+            'Juana Patricia Contrareas Tabares'
         ];
         
         for ($i = 0; $i < 4; $i++) {

@@ -35,7 +35,7 @@
                     </div>
                     <section class="font-bold text-sm md:space-x-6 space-x-2">
                         <button id="btnAll"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Todos</button>
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  pb-4">Todos</button>
                         <button id="btnWithAdvisor"
                             class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Con
                             Estudiantes</button>
@@ -47,17 +47,17 @@
                     <section class="hidden md:block h-screen">
                         <div class="h-[calc(100%-4rem)] overflow-y-hidden">
                             <table id="advisorsTable" class="divide-y divide-[#999] w-full">
-                                <thead id="tableHeader" class="text-[#555] text-base">
+                                <thead id="tableHeader" class="text-[#555] text-sm">
                                     <tr>
                                         <th scope="col" class="pr-[13rem] pb-4">Nombre</th>
                                         <th scope="col" class="pr-[13rem] pb-4">Carrera</th>
-                                        <th scope="col" class="pr-[13rem] pb-4">Estudiantes asesorados</th>
-                                        <th scope="col" class="pr-[13rem] pb-4">Máximo de asesorados</th>
+                                        <th scope="col" class="pr-[10rem] pb-4">Estudiantes asesorados</th>
+                                        <th scope="col" class="pr-[5rem] pb-4">Máximo de asesorados</th>
                                 </thead>
                                 <tbody class="text-sm">
                                     @foreach ($advisors as $data)
                                         <tr
-                                            class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+                                            class="data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
                                             <td class="py-4">{{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
                                             @if ($data->quantity_advised > 0)

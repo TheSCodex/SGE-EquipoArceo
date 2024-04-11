@@ -35,7 +35,7 @@
         @enderror
         
     </div>
-      <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-lg text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline font-montserrat'">
+      <button type="submit" class="bg-primaryColor hover:bg-darkGreen w-full text-lg text-white font-semibold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline font-montserrat'">
         Guardar
       </button>
     </form>
