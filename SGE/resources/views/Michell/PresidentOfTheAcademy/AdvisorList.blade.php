@@ -14,11 +14,6 @@
 
 
                 <section class="space-y-6 max-md:mt-5">
-                    {{-- @if (session('success'))
-                        <script>
-                            swal("¡Éxito!", "{{ session('success') }}", "success");
-                        </script>
-                    @endif --}}
                     <div class="md:flex items-center justify-between max-md:space-y-2 border-b pb-3">
                         <h1 id="tableTitle" class="text-xl font-bold">Lista de asesores</h1>
                         <div class="flex items-center justify-evenly w-1/3 max-sm:w-full">
@@ -33,20 +28,21 @@
                                 onclick="location.href='crear-asesores'">Crear asesor</button>
                         </div>
                     </div>
-                    <section class="font-bold text-sm md:space-x-6 space-x-2">
+                    <section id="filterButtons" class="font-bold text-sm md:space-x-6 space-x-2">
                         <button id="btnAll"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  pb-4">Todos</button>
-                        <button id="btnWithAdvisor"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Con
-                            Estudiantes</button>
-                        <button id="btnWithOutAdvisor"
-                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Sin
-                            Estudiantes</button>
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  filter-btn"
+                            data-filter="all">Todos</button>
+                        <button id="btnWithtSudent"
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg  filter-btn"
+                            data-filter="with_students">Con Estudiantes</button>
+                        <button id="btnWithOutStudent"
+                            class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg  filter-btn"
+                            data-filter="without_students">Sin estudiantes</button>
                     </section>
                     {{-- Seccion de la tabla --}}
                     <section class="hidden md:block h-screen">
                         <div class="h-[calc(100%-4rem)] overflow-y-hidden">
-                            <table id="advisorsTable" class="divide-y divide-[#999] w-full">
+                            <table id="advisorsTable" class="divide-y divide-[#999] w-[95rem]">
                                 <thead id="tableHeader" class="text-[#555] text-sm">
                                     <tr>
                                         <th scope="col" class="pr-[13rem] pb-4">Nombre</th>
@@ -56,11 +52,11 @@
                                 </thead>
                                 <tbody class="text-sm">
                                     @foreach ($advisors as $data)
-                                        <tr
-                                            class="data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+                                        <tr<tr
+                                            class="data-row {{ $data->quantity_advised > 0 ? 'has-advisor' : 'no-advisor' }}">
                                             <td class="py-4">{{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
-                                            @if ($data->quantity_advised > 0)
+                                            @if ($data->quantity_advised >= 0)
                                                 @php
                                                     $percentage = ($data->quantity_advised / $data->max_advisors) * 100;
                                                     if ($percentage <= 33) {
@@ -75,7 +71,8 @@
                                                         class="{{ $colorClass }}">{{ $data->quantity_advised }}</span>
                                                     Estudiantes</td>
                                             @else
-                                                <td class="py-4"><span class="text-primaryColor ">0</span> Estudiantes</td>
+                                                <td class="py-4"><span class="text-primaryColor ">0</span> Estudiantes
+                                                </td>
                                             @endif
                                             <td class="py-4"><span
                                                     class="text-primaryColor">{{ $data->max_advisors }}</span> Estudiantes
@@ -94,21 +91,23 @@
                                                     </button>
                                                 </form>
                                             </td>
-                                        </tr>
+                                            </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             <p id="noDataMessage"
-                                class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl">
+                                class="mt-4 text-red-500 hidden text-center w-[90%] text-lightGray font-bold text-2xl">
                                 Sin resultados</p>
                     </section>
             </div>
-            {{ $advisors->links() }}
+            <div class="max-md:hidden"> 
+                {{ $advisors->links() }}
+            </div>
 
             {{-- Seccion responsiva --}}
             <section class="font-montserrat md:hidden">
                 @foreach ($advisors as $data)
-                    <div class="student-card bg-white rounded-lg shadow-lg border p-5 font-bold space-y-2
+                    <div class="student-card bg-white rounded-lg shadow-lg border mt-4 p-5 font-bold space-y-2
                                 @if ($data->academicAdvisor) has-advisor
                                 @else
                                     no-advisor @endif"
@@ -147,11 +146,66 @@
                         <div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                    <div class="mt-5 lg:hidden"> 
+                        {{ $advisors->links() }}
+                    </div>
             </section>
     </section>
     </div>
     </div>
+
+    {{-- filtrar --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).ready(function() {
+                // Filtrar todos los asesores
+                $('#btnAll').click(function() {
+                    $('tbody tr').show();
+                });
+
+                // Filtrar asesores con estudiantes
+               $('#btnWithtSudent').click(function() {
+    $('tbody tr').hide();
+    $('tbody tr').each(function() {
+        if (parseInt($(this).find('td:eq(2)').text(), 10) > 0) {
+            $(this).show();
+        }
+    });
+});
+
+
+                // Filtrar asesores sin estudiantes
+                $('#btnWithOutStudent').click(function() {
+                    $('tbody tr').hide();
+                    $('tbody tr').each(function() {
+                        if (parseInt($(this).find('td:eq(2)').text(), 10) == 0) {
+                            $(this).show();
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function(){
+    $('#bajaSearch').on('input', function(){
+        var value = $(this).val().toLowerCase();
+        if(value !== ""){
+            $("table tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+            if($("table tr:visible").length === 0){
+            }
+        } else {
+            $("table tr").show();
+        }
+    });
+});
+
+
+        });
+    </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -159,14 +213,6 @@
             const tableRows = document.querySelectorAll('#dataTable tbody tr');
             const studentCards = document.querySelectorAll('.student-card');
             const noDataMessage = document.getElementById('noDataMessage');
-            const allButton = document.getElementById('btnAll');
-            const withAdvisorButton = document.getElementById('btnWithAdvisor');
-            const withoutAdvisorButton = document.getElementById('btnWithOutAdvisor');
-
-            // Eventos para los botones de filtro
-            allButton.addEventListener('click', showAll);
-            withAdvisorButton.addEventListener('click', showWithAdvisor);
-            withoutAdvisorButton.addEventListener('click', showWithoutAdvisor);
 
             // Evento de escucha para la búsqueda
             searchInput.addEventListener('input', function() {
@@ -199,7 +245,7 @@
             }
 
             // Función para mostrar solo las filas con asesor
-            function showWithAdvisor() {
+            function showWithStudent() {
                 tableRows.forEach(row => {
                     if (row.classList.contains('has-advisor')) {
                         row.style.display = '';
