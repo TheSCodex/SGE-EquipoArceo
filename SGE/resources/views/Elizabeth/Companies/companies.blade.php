@@ -160,7 +160,6 @@
                                     </p>
                                     <p class="text-sm text-gray-500">dirección: {{ $company['address'] }}</p> --}}
                                     <p class="text-sm text-gray-500">rfc: {{ $company['rfc'] }}</p>
-                                    <p class="text-sm text-gray-500">Especialidad: {{ $company['business_sector_id'] }}</p>
 
                                     <div class="flex gap-3 justify-end">
                                         <button class="font-roboto font-bold  ">
