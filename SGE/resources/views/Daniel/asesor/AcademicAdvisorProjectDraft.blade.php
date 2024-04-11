@@ -37,7 +37,8 @@
                                     </div>
                                     <div class="flex flex-wrap ">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
@@ -95,7 +96,8 @@
                                 </div>
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
@@ -240,7 +242,7 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -285,7 +287,7 @@
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -306,62 +308,62 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session()->has('liked'))
-<script>
-    function liked(){
-        Swal.fire({
-            title: '!Votado!',
-            text: `¡El voto ha sido agregado!`,
-            icon: 'success',
-        })
-    }
-    liked();
-</script>
-@endif
-@if(session()->has('disliked'))
-<script>
-    function disliked(){
-        Swal.fire({
-            title: 'Voto removido',
-            text: `El voto ha sido removido del proyecto`,
-            icon: 'success',
-        })
-    }
-    disliked();
-</script>
-@endif
-
-<script>
-    function delVote() {
-        Swal.fire({
-            title: '¿Deseas remover el voto del proyecto?',
-            text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: ' #d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, remover voto'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delVoteForm').submit();
+    @if (session()->has('liked'))
+        <script>
+            function liked() {
+                Swal.fire({
+                    title: '!Votado!',
+                    text: `¡El voto ha sido agregado!`,
+                    icon: 'success',
+                })
             }
-        });
-    }
+            liked();
+        </script>
+    @endif
+    @if (session()->has('disliked'))
+        <script>
+            function disliked() {
+                Swal.fire({
+                    title: 'Voto removido',
+                    text: `El voto ha sido removido del proyecto`,
+                    icon: 'success',
+                })
+            }
+            disliked();
+        </script>
+    @endif
+
+    <script>
+        function delVote() {
+            Swal.fire({
+                title: '¿Deseas remover el voto del proyecto?',
+                text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: ' #d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, remover voto'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delVoteForm').submit();
+                }
+            });
+        }
 
         function confirmVote() {
-        Swal.fire({
-            title: '¿Deseas votar el proyecto?',
-            text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, votar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('voteForm').submit();
-            }
-        });
-    }
-</script>
+            Swal.fire({
+                title: '¿Deseas votar el proyecto?',
+                text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, votar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('voteForm').submit();
+                }
+            });
+        }
+    </script>
 @endsection
