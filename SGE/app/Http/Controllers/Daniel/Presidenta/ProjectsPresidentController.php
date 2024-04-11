@@ -27,8 +27,8 @@ class ProjectsPresidentController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('adviser')->paginate(10);
-        return view('daniel.presidenta.project',compact( 'projects'));
+        $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
+        return view('daniel.directorAcademy.projects')->with('projects', $projects);
     }
 
     public function View(project $id)

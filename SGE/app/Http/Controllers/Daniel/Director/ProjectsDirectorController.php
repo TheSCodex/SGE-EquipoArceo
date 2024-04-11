@@ -26,7 +26,7 @@ class ProjectsDirectorController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('adviser')->paginate(10);
+        $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
         return view('daniel.directorAcademy.projects')->with('projects', $projects);
     }
     /**
@@ -37,20 +37,20 @@ class ProjectsDirectorController extends Controller
         //dd($id);
         $userId = Auth::id();
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
-        
+
         $interns = Intern::where("project_id", $id->id)->first();
-        
-        if(!$interns){
+
+        if (!$interns) {
             return view('Daniel.directorAcademy.viewProject');
         }
-        
+
         $projectId = $id->id;
         $project = Project::find($projectId);
 
         $businessSector = null;
         $businessAdvisor = null;
         $company = null;
-    
+
         if ($project->adviser_id) {
             $businessAdvisor = BusinessAdvisor::find($project->adviser_id);
             //dd($project);
@@ -60,18 +60,18 @@ class ProjectsDirectorController extends Controller
                 //dd($company);
             }
         }
-    
-        $comments = Comment::where("project_id", $projectId)->get(); 
+
+        $comments = Comment::where("project_id", $projectId)->get();
         $project = Project::find($interns->project_id);
-    
+
         if (!$project) {
             return view('Daniel.directorAcademy.viewProject');
         }
-    
 
-        
+
+
         $user = User::where("id", $interns->user_id)->first();
-        
+
         // dd($user);
 
         // $comments = Comment::where("project_id", $intern->project_id)->get();
@@ -79,16 +79,16 @@ class ProjectsDirectorController extends Controller
         // $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
 
         $career = Career::where("id", $interns->career_id)->first();
-        
-        if(!$career || !$career->academy_id){
-            return view('Daniel.directorAcademy.viewProject', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+
+        if (!$career || !$career->academy_id) {
+            return view('Daniel.directorAcademy.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
         $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
- //Reemplazar tan pronto como haya un modelo
-        
+        //Reemplazar tan pronto como haya un modelo
+
         if (!$projectLikes) {
             return view('Daniel.directorAcademy.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'area', 'division'));
         } else {
@@ -99,17 +99,18 @@ class ProjectsDirectorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function storeLike(project $id){
+    public function storeLike(project $id)
+    {
         $userId = Auth::id();
         $projectId = $id->id;
         $project = Project::where('id', $projectId)->first();
-        
-        
+
+
         DB::table('projects_likes')->insert([
             'id_academic_advisor' => ($userId),
             'id_projects' => ($projectId),
         ]);
-        if(!$project->like){
+        if (!$project->like) {
             Project::where('id', $projectId)->update(['like' => 0]);
         }
         Project::where('id', $projectId)->increment('like');
@@ -120,23 +121,23 @@ class ProjectsDirectorController extends Controller
     {
         $userId = Auth::id();
         $projectId = $id->id;
-        
+
         // Check if the user has already liked the project
         $existingLike = DB::table('projects_likes')
-                            ->where('id_academic_advisor', $userId)
-                            ->where('id_projects', $projectId)
-                            ->first();
-        
+            ->where('id_academic_advisor', $userId)
+            ->where('id_projects', $projectId)
+            ->first();
+
         // If the user has already liked the project, delete the like
         if ($existingLike) {
             DB::table('projects_likes')
                 ->where('id_academic_advisor', $userId)
                 ->where('id_projects', $projectId)
                 ->delete();
-            
+
             // Decrement the like count for the project
             Project::where('id', $projectId)->decrement('like');
-            
+
             return redirect()->back()->with('disliked', 'Like eliminado correctamente.');
         } else {
 

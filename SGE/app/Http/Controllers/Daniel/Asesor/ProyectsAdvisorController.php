@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Daniel\asesor;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicAdvisor;
+use App\Models\Intern;
 use App\Models\Project;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProyectsAdvisorController extends Controller
 {
@@ -14,11 +16,12 @@ class ProyectsAdvisorController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('adviser')
-            ->whereIn('status', ['en revision', 'aprobado', 'En revision', 'Aprobado'])
-            ->paginate(10);
+        $userId = Auth::id();
+        $academicAdvisorId = AcademicAdvisor::where('user_id', $userId)->value('id');
+        $interns = Intern::where('academic_advisor_id', $academicAdvisorId)->with('user')->get();
 
-        return view('Daniel.asesor.ProyectsAdvisor', compact('projects'));
+        $projects = Project::with(['adviser', 'interns.user'])->paginate(10);
+        return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'interns' => $interns]);
     }
 
     /**
