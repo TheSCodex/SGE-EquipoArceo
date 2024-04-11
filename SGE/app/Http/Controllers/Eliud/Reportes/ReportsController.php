@@ -168,7 +168,7 @@ class ReportsController extends Controller
 
         if ( $interns[0]->foolscapNumber == null) {
 
-            $getNumber = $lastDocCreated->number ? $lastDocCreated->number : 1 ;
+            $getNumber = $lastDocCreated ? $lastDocCreated->number : 1 ;
             $interns[0]->foolscapNumber = $lastDocCreated?->number;
             $interns[0]->save();
 
