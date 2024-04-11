@@ -25,9 +25,9 @@
                     </a>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-2">
 
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
+                <div class="bg-white flex gap-5 justify-center items-center px-2 py-5 rounded-md">
                     <!-- ICON -->
                     <div class="flex items-center justify-center">
                         <svg width="60" height="60" viewBox="0 0 78 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,8 +55,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
-                    <!-- ICON -->
+                <!-- <div class="bg-white grid grid-cols-3 px-2 py-5 rounded-md">
                     <div class="flex items-center justify-center">
                         <svg width="60" height="60" viewBox="0 0 77 76" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <ellipse cx="38.5" cy="38" rx="38.5" ry="38" fill="#02AB82"/>
@@ -72,32 +71,31 @@
                         </svg>
                     </div>
 
-                    <!-- INFO -->
-                    <div class="col-span-2 flex flex-col justify-center">
-                        <p class="text-base font-normal">24/120</p>
-                        <p class="text-gray-500 text-xs">Días restantes</p>
-                    </div>
-                </div>
+
+                </div> -->
 
             </div>
 
             <div class="bg-white rounded-md py-7 px-10">
                 <div class="flex justify-between">
-                    <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
-                   
+                    <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>      
                 </div>
 
                 <p class="text-[#828282]">Carreras de la division</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
-                <canvas id="myChart" class="max-h-[200px]"></canvas>
+                @if ($period == null)
+                    <p class="text-center text-[#828282] text-sm font-bold py-5">Aún no hay estudiantes en la división</p>
+                @else
+                    <canvas id="myChart" class="max-h-[200px]"></canvas>      
+                @endif
             </div>
         </section>
 
 
         <section class="flex flex-col gap-3 flex-1">
-            <p class="font-semibold px-2 bg-white py-2 rounded-md flex justify-between">Bajas de estudiantes <a href="bajas" class="text-sm font-normal">Ver más</a></p>
+            <p class="font-semibold px-3 bg-white py-2 rounded-md flex justify-between items-center">Bajas de estudiantes <a href="bajas" class="text-xs text-[#02AB82] font-bold">Ver más</a></p>
             @foreach ( $interns as $i )
             <div class="bg-white rounded-md py-1.5 flex flex-col gap-3">
                 <div class="flex gap-3  ml-10 items-center">
@@ -133,7 +131,11 @@
 
                 <div class="bg-white rounded-md flex flex-col gap-5 justify-center items-center px-5 py-7">
                     <p class="text-md text-lg text-center font-medium">Total de proyectos</p>
-                    <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
+                    @if ($projectMetrics["totalProjects"] == 0)
+                        <p class="text-center text-sm text-[#828282] font-bold py-14">Aún no hay proyectos en la división</p>
+                    @else
+                        <canvas id="total-proyectos" class="max-h-[200px]"></canvas> 
+                    @endif
                 </div>
             </div>
         </section>
@@ -161,7 +163,8 @@
 
         let approvedProjects = {{ Js::from($approvedProjectsByMonth) }};
         let careers = {{ Js::from($careers) }};
-        let mesesEnIntervalo = obtenerMesesEnIntervalo({{ Js::from($period['period']) }});
+        let serverPeriod = {{ Js::from($period) }};
+        let mesesEnIntervalo = obtenerMesesEnIntervalo(serverPeriod);
 
         const allCareers = [];
         approvedProjects.forEach(item => {

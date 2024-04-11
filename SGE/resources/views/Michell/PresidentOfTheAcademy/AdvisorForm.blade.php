@@ -17,7 +17,7 @@
                         @endforeach
                     </select>
                     @error('user_id')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700 text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class=" mt-2">
@@ -28,7 +28,7 @@
                         @endforeach
                     </select>
                     @error('career_id')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class=" mt-2">
@@ -36,10 +36,13 @@
                     <input type="number" id="max_advisors" class="rounded-lg border-1 w-full border-[#00AB84]" name="max_advisors"
                         value="" required>
                     @error('max_advisors')
-                        <p class="text-rose-700 font-bold text-center">{{ $message }}</p>
+                        <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
-                <button type="submit" class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Agregar</button>
+                <div class="w-full flex flex-col space-y-5">
+                    <button type="submit" class="bg-[#00AB84]  my-3 rounded-lg py-2 px-4 text-white">Agregar</button>
+                    <a href="lista-asesores" class="text-center text-[#888] hover:text-[#444] bg-gray-200 hover:bg-gray-300 font-bold rounded-md py-2">Cancelar</a>
+                </div>
             </form>
         </div>
     </section>

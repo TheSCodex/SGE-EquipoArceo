@@ -81,10 +81,13 @@
                             $academicAdvisor = DB::table('academic_advisor')->where('user_id', $userId)->first();
                             $academicAdvisorId = $academicAdvisor->id;
                         @endphp
-                        <button class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
-                            <a href="{{ route('download.control', ['id' => $academicAdvisorId]) }}">Generar Control de
-                                Estadías</a>
-                        </button>
+
+                        <form action="{{ route('download.control', ['id' => $academicAdvisorId]) }}" method="GET">
+                            <button type="submit" class="bg-primaryColor p-2 text-white rounded-md w-full mt-1">
+                                <p>Generar Control de
+                                    Estadías</p>
+                            </button>
+                        </form>
                     </div>
                 </section>
 

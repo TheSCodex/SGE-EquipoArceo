@@ -76,7 +76,6 @@ class PresidentOfTheAcademy extends Controller
             'user_id' => 'required|numeric|unique:academic_advisor,user_id',
             'career_id' => 'required|numeric',
             'max_advisors' => 'required|numeric|gt:0',
-            'quantity_advised' => 'required|numeric|gt:0',
         ]);
 
         if ($validator->fails()) {
@@ -95,7 +94,6 @@ class PresidentOfTheAcademy extends Controller
         $academicAdvisors->user_id = $request->input('user_id');
         $academicAdvisors->career_id = $request->input('career_id');
         $academicAdvisors->max_advisors = $request->input('max_advisors');
-        $academicAdvisors->quantity_advised = $request->input('quantity_advised');
         $academicAdvisors->save();
 
         if (!$request->ajax()) {
@@ -141,15 +139,14 @@ class PresidentOfTheAcademy extends Controller
 
         $request->validate([
             'max_advisors' => 'required|integer|min:0',
-            'quantity_advised' => 'required|integer|min:0',
         ]);
 
         $advisor = AcademicAdvisor::find($id);
         $advisor->max_advisors = $request->input('max_advisors');
-        $advisor->quantity_advised = $request->input('quantity_advised');
+        // $advisor->quantity_advised = $request->input('quantity_advised');
         $advisor->save();
 
-        return redirect()->route('lista-asesores')->with('success', 'Asesor notificado correctamente');
+        return redirect()->route('lista-asesores')->with('success', 'Asesor actualizado correctamente');
     }
 
 
@@ -158,11 +155,15 @@ class PresidentOfTheAcademy extends Controller
      */
     public function destroy($id)
     {
+        // $user = User::find($id);
         // Desactivar restricciones de clave externa temporalmente
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     
         // Eliminar el registro
         $academic = AcademicAdvisor::find($id);
+        $userId = $academic->user_id;
+        $user = User::find($userId);
+        $user->delete();
         $academic->delete();
     
         // Reactivar restricciones de clave externa
