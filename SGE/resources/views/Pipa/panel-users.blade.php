@@ -162,7 +162,7 @@
             </table>
         </div>
     </div>
-    <div id="no-users-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron usuarios.</div>
+    <div id="no-users-message" class="hidden mt-20 text-red-500 h-screen text-center text-lightGray font-bold text-2xl">Sin resultados.</div>
 
 </div>
 <div class="my-5 mx-auto">
@@ -179,7 +179,7 @@
     function confirmDelete(userName, userId) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+            text: `Estás a punto de eliminar a ${userName}. Se eliminará toda la información relacionada al usuario, incluyendo comentarios.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -239,12 +239,13 @@
             event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
             var userName = this.dataset.userName;
+            // console.log(this.dataset)
             var userId = this.dataset.userId;
 
             // Muestra el SweetAlert para confirmar la eliminación
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: `Estás a punto de eliminar a ${userName}. Esta acción no se puede revertir.`,
+                text: `Estás a punto de eliminar a ${userName}. Se eliminará toda la información relacionada al usuario, incluyendo comentarios.`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

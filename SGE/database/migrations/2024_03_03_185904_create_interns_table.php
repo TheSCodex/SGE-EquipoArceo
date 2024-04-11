@@ -24,8 +24,10 @@ return new class extends Migration
             $table->integer('penalty_id')->nullable()->index('penalty_id');
             $table->integer('student_status_id')->nullable()->index('student_status_id');
             $table->string('period')->nullable();
-            $table->timestamp('service_hour')->nullable();
+            $table->integer('service_hour')->nullable();
             $table->integer('career_id')->nullable()->index('career_id');
+            $table->string('generation')->nullable();
+            $table->integer('study_grade_id')->nullable()->index('study_grade_id');
             $table->timestamps();
 
         });

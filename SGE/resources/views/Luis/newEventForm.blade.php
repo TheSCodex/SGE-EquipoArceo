@@ -24,9 +24,13 @@
                             <div class="space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm">¿Con quien desea la cita?:</p>
                                 <select type="text" id="receiver_id" name="receiver_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce la persona con quien desea la cita">
-                                    @foreach ($internsWithUser as $internWithUser)
-                                        <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['last_name']}}</option>
-                                    @endforeach
+                                    @if(count($internsWithUser) == 0)
+                                        <option value="" disabled selected>No hay internos disponibles</option>
+                                    @else
+                                        @foreach ($internsWithUser as $internWithUser)
+                                            <option value="{{$internWithUser['id']}}">{{$internWithUser['user']['name']}} {{$internWithUser['user']['last_name']}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                                 @error('receiver_id')
                                     <p class="text-[#ff0000] text-sm">
@@ -48,11 +52,10 @@
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Tipo de actividad:</p>
                                 <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de actividad">
-                                    <option value="Planificación de practica">Planificación de proyecto</option>
-                                    <option value="Revisión de memoria">Revisión de memoria</option>
-                                    <option value="Asesoria">Asesoria</option>
+                                    <option value="Planificación de anteproyecto">Planificación de anteproyecto</option>
+                                    <option value="Asesoría de memorias">Asesoría de memorias</option>
                                     <option value="Liberación de documento">Liberación de documento</option>
-                                    <option value="Sanción">Sanción</option>
+                                    <option value="Sanción de servicio social">Sanción de servicio social</option>
                                 </select>
                                 @error('eventType')
                                 <p class="text-[#ff0000] text-sm">

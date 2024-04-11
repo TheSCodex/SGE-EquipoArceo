@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full py-2 sm:h-screen flex justify-center items-center bg-white">
+<div class="w-full py-2 sm:h-screen flex justify-center items-center max-sm:px-10 bg-white">
 
     <form action="{{ route('panel-companies.update', $company->id) }}" method="POST" class="flex flex-col font-montserrat mx-30 space-y-5 lg:w-[80vw] sm:w-[90vw]">
         <div class="w-full h-fit flex justify-center md:justify-start">
@@ -29,7 +29,7 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Celular </p>
-                <input type="number" name="phone" value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
+                <input type="number" name="phone"  value="{{ $company->phone }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" placeholder="Celular">
                 @error('phone')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
@@ -66,14 +66,18 @@
             <div class="form-group">
                 <label for="business_sector_id">Sector Empresarial</label>
                 <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-full" id="business_sector_id" name="business_sector_id">
+                    <option value="" selected disabled>Seleccionar giro empresarial</option>
                     @foreach($businessSector as $sector)
-                        <option value="{{ $sector->id }}" @if($sector->id == $company->business_sector_id) selected @endif>{{ $sector->title }}</option>
+                        <option value="{{ $sector->id }}" @if(old('business_sector_id') == $sector->id) selected @endif >{{ $sector->title }}</option>
                     @endforeach
                 </select>
+                
             </div>
         </div>
         <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Actualizar empresa</button>
+        <a  href="/panel-companies" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>       
     </form>
+
     
 </div>
 @endsection('contenido')

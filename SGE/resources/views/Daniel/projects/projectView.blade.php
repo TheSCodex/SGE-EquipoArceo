@@ -62,7 +62,7 @@
 
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns[0]->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -162,7 +162,7 @@
                                 </p>
                             </div>
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
-                                class="self-end px-[2vw] bg-[#02AB82] text-white rounded-md">Editar</a>
+                                class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
                         </div>
                     @else
                         <div
@@ -291,4 +291,9 @@
         </div>
         </div>
     </section>
+
+
+
+
+
 @endsection

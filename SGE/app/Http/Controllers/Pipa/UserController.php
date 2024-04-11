@@ -17,6 +17,7 @@ use App\Models\AcademicAdvisor;
 use App\Models\Division;
 use App\Models\Academy;
 use Illuminate\Support\Facades\Log;
+use App\Models\Comment;
 
 class UserController extends Controller
 {
@@ -191,6 +192,8 @@ class UserController extends Controller
                 $academicAdvisor = new AcademicAdvisor;
                 $academicAdvisor->user_id = $user->id;
                 $academicAdvisor->career_id = $request->career_id;
+                $academicAdvisor->max_advisors = 0;
+                $academicAdvisor->quantity_advised = 0;
                 $academicAdvisor->save();
                 Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de asesores académicos');
             }

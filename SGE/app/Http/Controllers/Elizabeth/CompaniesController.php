@@ -6,6 +6,7 @@ use App\Models\BusinessSector;
 use App\Models\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
     // Cuando pase de nuevo, puedes ir linea por linea, viendo que opcion impe menos todo y ya decides en base a eso
 
@@ -80,7 +81,7 @@ class CompaniesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'phone' => 'required|string|max:20|regex:/^[0-9]+$/',
+            'phone' => 'required|string|size:10|regex:/^[0-9]+$/',
             'email' => 'required|string|email|max:255',
             'registration_date' => 'required|date',
             'rfc' => 'required|string|max:255',
@@ -94,7 +95,7 @@ class CompaniesController extends Controller
         $company->update($validatedData);
     
         // Redirige con un mensaje de éxito
-        return redirect()->route('companies.index')->with('success', '¡Empresa creada exitosamente!');
+        return redirect()->route('companies.index')->with('success', '¡Empresa editada exitosamente!');
     }
 
     /**
@@ -102,13 +103,22 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        // Encuentra la empresa por su ID
-        $company = Company::findOrFail($id);
-
-        // Elimina la empresa
-        $company->delete();
-
-        // Retorna un mensaje de éxito
-        return redirect()->back()->with('success', '¡Empresa eliminada exitosamente!');
+        try {
+            DB::beginTransaction();
+            // Llama al procedimiento almacenado para eliminar la empresa por su ID
+            DB::select('CALL proc_delete_company(?)', [$id]);
+    
+            // Confirma la transacción si todo ha ido bien
+            DB::commit();
+    
+            // Retorna un mensaje de éxito
+            return redirect()->back()->with('success', '¡Empresa eliminada exitosamente!');
+        } catch (\Exception $e) {
+            // En caso de error, revierte la transacción
+            DB::rollback();
+    
+            // Retorna un mensaje de error
+            return redirect()->back()->with('error', '¡Se produjo un error al eliminar la empresa!');
+        }
     }
 }

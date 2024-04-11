@@ -16,6 +16,7 @@ class Intern extends Model
         'book_id',
         'student_status_id',
         'performance_area',
+        'service_hour',
         'Group',
         'career_id'
     ];
@@ -59,5 +60,10 @@ class Intern extends Model
     {
         return $this->belongsTo(Project::class, 'project_id', 'id')
             ->with('adviser');
+    }
+
+    public function studyGrade()
+    {
+        return $this->belongsTo(StudyGrade::class);
     }
 }

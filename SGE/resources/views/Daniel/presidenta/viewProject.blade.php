@@ -184,7 +184,7 @@
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if (strtolower($project->status) == 'aprobado')
-                            <p class="">El proyecto ha sido aprobado</p>
+                                <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
                             @else
@@ -192,7 +192,8 @@
                                 <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a  revisión</button>
+                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
+                                        a revisión</button>
                                 </form>
                             @endif
                         </div>
@@ -213,18 +214,18 @@
 
 
                             @if (isset($projectLikes))
-                                <form method="POST"
-                                    action="{{ route('anteproyecto-President.deleteLike', ['id' => $project->id]) }}">
+                                <form method="POST" id="delVoteForm"
+                                    action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="delVote()"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
                                         voto</button>
                                 </form>
                             @else
-                                <form method="POST"
-                                    action="{{ route('anteproyecto-President.storeLike', ['id' => $project->id]) }}">
+                                <form method="POST" id="voteForm"
+                                    action="{{ route('anteproyecto-Asesor.storeLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="confirmVote()"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
                                 </form>
                             @endif
@@ -307,4 +308,65 @@
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session()->has('liked'))
+<script>
+    function liked(){
+        Swal.fire({
+            title: '!Votado!',
+            text: `¡El voto ha sido agregado!`,
+            icon: 'success',
+        })
+    }
+    liked();
+</script>
+@endif
+@if(session()->has('disliked'))
+<script>
+    function disliked(){
+        Swal.fire({
+            title: 'Voto removido',
+            text: `El voto ha sido removido del proyecto`,
+            icon: 'success',
+        })
+    }
+    disliked();
+</script>
+@endif
+
+<script>
+    function delVote() {
+        Swal.fire({
+            title: '¿Deseas remover el voto del proyecto?',
+            text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: ' #d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, remover voto'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delVoteForm').submit();
+            }
+        });
+    }
+
+        function confirmVote() {
+        Swal.fire({
+            title: '¿Deseas votar el proyecto?',
+            text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, votar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('voteForm').submit();
+            }
+        });
+    }
+</script>
 @endsection

@@ -17,8 +17,8 @@
                         <h2 class="font-roboto mb-1 font-medium">Nombre completo:</h2>
                         @csrf
                         <input type="text" name="name_student" placeholder="Introduzca su nombre completo"
-                            value="{{ old('name_student', $user->name) }}" required
-                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            value="{{ old('name_student', $user->name . ' ' . $user->last_name) }}" required
+                            class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('name_student')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
@@ -35,13 +35,15 @@
                     <div class="w-[10%]">
                         <h2 class="font-roboto mb-1 font-medium">Grupo:</h2>
                         <input type="text" name="Group" placeholder="SM51" value="{{ old('Group', $intern->Group) }}"
-                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
+                            required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2" readonly><br>
                         @error('Group')
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="w-[20%] justifify-end items-end p-4">
-                        <button class="bg-primaryColor mt-3 text-white text-md font-roboto rounded-lg h-auto p-3">
+                        <button type="button"
+                            class="bg-primaryColor mt-3 text-white text-md font-roboto rounded-lg h-auto p-3"
+                            id="openModalButton">
                             Colaborar
                         </button>
                     </div>
@@ -51,10 +53,15 @@
                         <h2 class="font-roboto mb-1 font-medium">División Académica:</h2>
                         <select name="division_academica" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
-                            <option value="" disabled selected>Selecciona una división académica</option>
-                            @foreach ($divisions as $division)
-                                <option value="{{ $division->id }}">{{ $division->name }}</option>
+                            <option value="" disabled>Selecciona una división académica</option>
+                            @foreach ($defaultDivision as $divisionId => $divisionName)
+                                <option value="{{ $divisionId }}" selected>{{ $divisionName }}</option>
                             @endforeach
+                            <optgroup label="Otras divisiones">
+                                @foreach ($divisions as $division)
+                                    <option value="{{ $division->id }}">{{ $division->name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                         <br>
                         @error('division_academica')
@@ -65,10 +72,15 @@
                         <h2 class="font-roboto mb-1 font-medium">Programa Educativo:</h2>
                         <select name="proyecto_educativo" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">
-                            <option value="" disabled selected>Selecciona tu programa educativo</option>
-                            @foreach ($careers as $career)
-                                <option value="{{ $career->id }}">{{ $career->name }}</option>
+                            <option value="" disabled>Selecciona tu programa educativo</option>
+                            @foreach ($defaultCareer as $careerId => $careerName)
+                                <option value="{{ $careerId }}" selected>{{ $careerName }}</option>
                             @endforeach
+                            <optgroup label="Otras carreras">
+                                @foreach ($careersDivision as $career)
+                                    <option value="{{ $career->id }}">{{ $career->name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                         <br>
                         @error('proyecto_educativo')
@@ -88,7 +100,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Numero" placeholder="998XXXXXXX"
+                        <input type="tel" name="Numero" placeholder="Teléfono"
                             value="{{ old('Numero', $user->phoneNumber) }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Numero')
@@ -171,7 +183,7 @@
                     </div>
                     <div class="w-[15%]">
                         <h2 class="font-roboto mb-1 font-medium">Numero:</h2>
-                        <input type="number" name="Phone_advisor" placeholder="998XXXXXXX"
+                        <input type="tel" name="Phone_advisor" placeholder="Teléfono"
                             value="{{ old('Phone_advisor') }}" required
                             class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                         @error('Phone_advisor')
@@ -241,13 +253,106 @@
                     <button class="bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">
                         Guardar
                     </button>
-                    <a href="{{ url('estudiante/anteproyecto') }}"
+                    <a href="{{ url('anteproyecto') }}"
                         class="bg-[#EEF4FB] text-primaryColor text-md font-roboto rounded-lg h-auto p-3">
                         Cerrar
                     </a>
                 </div>
             </form>
-
         </div>
     </section>
+    <div id="myModal" class="modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-semibold">Invitar a colaborar</h3>
+                </div>
+                <div>
+                    <input type="text" id="searchInput" placeholder="Buscar usuario"
+                        class="w-full border-gray-300 rounded-md p-2">
+
+                    <!-- Aquí se mostrarán los resultados de la búsqueda -->
+                    <div id="searchResults">
+                        @foreach ($interns as $intern)
+                            @if ($intern->project_id === null)
+                                <div
+                                    class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
+                                    <div class="flex items-center">
+                                        <input type="checkbox"
+                                            class="internCheckbox mr-4 h-6 w-6 rounded-full border-2 border-primaryColor focus:outline-none"
+                                            data-id="{{ $intern->user->id }}">
+                                        <div>
+                                            <p class="name text-lg font-semibold text-gray-800">{{ $intern->user->name }}
+                                            </p>
+                                            <p class="identifier text-sm text-gray-600">{{ $intern->user->identifier }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
+                        id="closeModalButton">Cerrar
+                    </button>
+                    <form action="{{ route('invitar.colaboradores') }}" method="POST" id="invitationForm">
+                    @csrf
+                    <input type="hidden" name="selectedIds" id="selectedIds">
+                    <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
+                        invitación</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //Javascript para el modal
+        const openModalButton = document.getElementById('openModalButton');
+        const modal = document.getElementById('myModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+        openModalButton.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
+
+        sendInvitationsButton.addEventListener('click', function() {
+            var selectedIds = [];
+            var checkboxes = document.querySelectorAll('.internCheckbox:checked');
+            checkboxes.forEach(function(checkbox) {
+                var internId = checkbox.getAttribute('data-id');
+                selectedIds.push(internId);
+            });
+
+            // Ahora `selectedIds` contiene los IDs de los usuarios seleccionados
+            console.log(selectedIds);
+        });
+
+        //Javascript para el buscador
+        function searchInterns() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            var interns = document.querySelectorAll('#searchResults > div');
+
+            interns.forEach(function(intern) {
+                var name = intern.querySelector('.name').innerText.toLowerCase();
+                var identifier = intern.querySelector('.identifier').innerText.toLowerCase();
+                if (name.includes(searchTerm) || identifier.includes(searchTerm)) {
+                    intern.style.display = 'block';
+                } else {
+                    intern.style.display = 'none';
+                }
+            });
+        }
+        document.getElementById('searchInput').addEventListener('keyup', searchInterns);
+    </script>
+
+    </div>
 @endsection
