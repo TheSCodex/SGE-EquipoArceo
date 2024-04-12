@@ -42,8 +42,9 @@
                 </section>
                 <section class="space-y-6 max-md:mt-10">
                     {{-- Seccion de la tabla --}}
-                    <section class="hidden md:block md:h-full">
-                        <table id="dataTable" class="divide-y divide-[#999] w-full">
+                    <section class="hidden md:block h-screen">
+                        <div class="h-[calc(100%-4rem)] overflow-y-hidden">
+                        <table id="dataTable" class="divide-y divide-[#999] w-[84rem]">
                             <thead id="tableHeader" class="text-[#555] text-base">
                                 <tr>
                                     <th scope="col" class="pr-[13rem] pb-4">Nombre de estudiantes</th>
@@ -54,9 +55,9 @@
                             <tbody class="text-sm">
                                 @foreach ($dataStudents as $data)
                                     <tr
-                                        class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                                        class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px] font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
 
-                                        <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+                                        {{-- <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif> --}}
                                         <td class="py-4">{{ $data->user->name }}</td>
                                         <td class="py-4">Sistema de Estadias</td>
                                         <td class="py-4">
@@ -100,6 +101,7 @@
                         <p id="noDataMessage"
                             class="mt-20 text-red-500 hidden h-screen text-center text-lightGray font-bold text-2xl">
                             Sin resultados</p>
+                        </div>
                         @if ($dataStudents->lastPage() > 1)
                             <div class="pagination">
                                 {{ $dataStudents->links() }}
@@ -159,21 +161,75 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+
+            $(document).ready(function() {
+                // $('#bajaSearch').on('input', function() {
+                //     var value = $(this).val().toLowerCase();
+                //     if (value !== "") {
+                //         $("table tr").filter(function() {
+                //             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                //         });
+                //         if ($("table tr:visible").length === 0) {}
+                //     } else {
+                //         $("table tr").show();
+                //     }
+                // });
+                // Mostrar todos los estudiantes al cargar la página
+                $(".data-row").show();
+
+                // Al hacer clic en el botón "Todos"
+                $("#btnAll").click(function() {
+                    $(".data-row").show();
+                });
+
+                // Al hacer clic en el botón "Con asesor"
+                $("#btnWithAdvisor").click(function() {
+                    $(".data-row").hide();
+                    $(".has-advisor").show();
+                });
+
+                // Al hacer clic en el botón "Sin asesor"
+                $("#btnWithOutAdvisor").click(function() {
+                    $(".data-row").hide();
+                    $(".no-advisor").show();
+                });
+            });
+
+            const usuarios = document.querySelectorAll('.usuario');
+            usuarios.forEach(usuario => {
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "{{ session()->get('success') }}",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    target: usuario
+                });
+            });
+            const usuarios2 = document.querySelectorAll('.usuario2');
+            usuarios2.forEach(usuario => {
+                Swal.fire({
+                    position: "top-center",
+                    icon: "error",
+                    title: "{{ session()->get('error') }}",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    target: usuario
+                });
+            });
+
+            // --------------------------------------
             const searchInput = document.getElementById('bajaSearch');
             const tableRows = document.querySelectorAll('#dataTable tbody tr');
             const studentCards = document.querySelectorAll('.student-card');
             const noDataMessage = document.getElementById('noDataMessage');
-            const allButton = document.getElementById('btnAll');
-            const withAdvisorButton = document.getElementById('btnWithAdvisor');
-            const withoutAdvisorButton = document.getElementById('btnWithOutAdvisor');
-
-            // Eventos para los botones de filtro
-            allButton.addEventListener('click', showAll);
-            withAdvisorButton.addEventListener('click', showWithAdvisor);
-            withoutAdvisorButton.addEventListener('click', showWithoutAdvisor);
 
             // Evento de escucha para la búsqueda
             searchInput.addEventListener('input', function() {
@@ -216,51 +272,6 @@
                 }
             });
 
-            // Función para mostrar todas las filas
-            function showAll() {
-                tableRows.forEach(row => row.style.display = '');
-                studentCards.forEach(card => card.style.display = '');
-                noDataMessage.style.display = 'none';
-            }
-
-            // Función para mostrar solo las filas con asesor
-            function showWithAdvisor() {
-                tableRows.forEach(row => {
-                    if (row.classList.contains('has-advisor')) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-                studentCards.forEach(card => {
-                    if (card.classList.contains('has-advisor')) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                updateNoDataMessage();
-            }
-
-            // Función para mostrar solo las filas sin asesor
-            function showWithoutAdvisor() {
-                tableRows.forEach(row => {
-                    if (row.classList.contains('no-advisor')) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-                studentCards.forEach(card => {
-                    if (card.classList.contains('no-advisor')) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                updateNoDataMessage();
-            }
-
             // Función para actualizar el mensaje de sin resultados
             function updateNoDataMessage() {
                 const visibleRows = document.querySelectorAll('#dataTable tbody tr[style=""]');
@@ -291,28 +302,7 @@
                     pagination.style.display = 'none';
                 }
             }
-            const usuarios = document.querySelectorAll('.usuario');
-            usuarios.forEach(usuario => {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "{{ session()->get('success') }}",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    target: usuario
-                });
-            });
-            const usuarios2 = document.querySelectorAll('.usuario2');
-            usuarios2.forEach(usuario => {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "error",
-                    title: "{{ session()->get('error') }}",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    target: usuario
-                });
-            });
+
         });
     </script>
 @endsection
