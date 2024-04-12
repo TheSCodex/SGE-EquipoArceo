@@ -28,7 +28,7 @@ class ProyectsAdvisorController extends Controller
                 return $intern->project;
             })
             ->filter(function ($project) {
-                return in_array(strtolower($project->status), ['aprobado', 'en revision', 'asesoramiento']);
+                return $project && in_array(strtolower($project->status), ['aprobado', 'en revision', 'asesoramiento']);
             });
 
         $AdvisorCareer = User::find($userId)->academicAdvisor->career->id;
