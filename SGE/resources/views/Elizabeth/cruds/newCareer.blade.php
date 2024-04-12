@@ -18,12 +18,12 @@
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Carrera</p>
-                    <input type="text" name="career" value="{{ old('career') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
-                    @error('career  ')
-                        <p class="text-[#ff0000] text-sm">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <input type="text" name="name" value="{{ old('name') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
+                    @error('name')
+                    <p class="text-[#ff0000] text-sm">
+                        {{ $message }}
+                    </p>
+                @enderror  
                 </div>
                 <div class=" space-y-2">
                     <p class="text-sm">Academia</p>
@@ -42,15 +42,13 @@
                 </div>
             </div>
 
-           
+    
             <div class="mx-auto mt-10">
-                <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[77vw] bg-primaryColor">Añadir carrera</button>
+                <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[30vw] bg-primaryColor">Añadir carrera</button>
             </div>                
-                 
+            
             </form>
-            <div class="mx-auto">
-                <a href="/panel-careers" type="submit" class="text-sm text-center rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[77vw] bg-lightGray" >Cancelar</a>
-            </div>
+
 
 
 

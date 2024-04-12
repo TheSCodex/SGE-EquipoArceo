@@ -79,13 +79,11 @@
             </div>
 
             <div class="mx-auto mt-10">
-                <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[77vw] bg-primaryColor">Editar academia</button>
-            </div>                
+                <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[30vw] bg-primaryColor">Editar academia</button>
+            </div>
                  
             </form>
-            <div class="mx-auto">
-                <a href="/panel-academies" type="submit" class="text-sm text-center rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[77vw] bg-lightGray" >Cancelar</a>
-            </div>
+  
     </form>
 </div>
 
