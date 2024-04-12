@@ -58,21 +58,31 @@
                     <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
                         <option value="">Selecciona una empresa</option>
                         @foreach($companies as $company)
-                            <option value="{{ $company->id }}" {{ $company->id == old('companie_id', $advisor->companie_id) ? 'selected' : '' }}>{{ $company->name }}</option>
+                            <option value="{{ $company->id }}" {{ old('companie_id') == $company->id ? 'selected' : '' }}>
+                                {{ $company->name }}
+                            </option>
                         @endforeach
-                    </select>
-                    
-                    
+                    </select>  
                     @error('companie_id')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
-                @enderror
+                @enderror   
+                    
+                </div>
+            </div>
+            <div class="space-y-2">
+                <div class="form-group">
+                    <p class="text-sm"></p>
+                    <p class="text-sm rounded-md  px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
+                        
+                    </p>     
+                    
                 </div>
             </div>
         </div>
-        <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-full   text-white">Actualizar Asesor</button>
-        <a  href="/panel-advisors" class="p-2  self-center block text-center  bg-slate-300 border-2 rounded-md px-4 w-[18em] md:w-full text-white">Cancelar</a>
+        
+        <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-[30vw]   text-white">Editar Asesor</button>
     
         </div>
     </form>

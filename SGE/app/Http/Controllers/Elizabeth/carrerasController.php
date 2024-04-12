@@ -49,13 +49,13 @@ class carrerasController extends Controller
     public function store(Request $request)
 {   
     $validatedData = $request->validate([
-        'career' => 'required|string|max:255',
+        'name' => 'required|string|max:255',
         'academy_id' => 'required|integer'
     ]);
     
 
     $career = new Career();
-    $career->name = $validatedData['career'];
+    $career->name = $validatedData['name'];
     $career->academy_id = $validatedData['academy_id'];
     $career->save();
 
