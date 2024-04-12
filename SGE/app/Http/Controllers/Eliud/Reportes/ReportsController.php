@@ -111,7 +111,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours', 'user'));
         session()->flash('form_success', true);
         return $pdf->stream();
 
