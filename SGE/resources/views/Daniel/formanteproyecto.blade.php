@@ -202,12 +202,13 @@
                 </div>
                 {{-- Parte Proyecto --}}
                 <div class="my-4">
-                    <h1 class="font-roboto text-xl font-semibold mt-4">Datos del proyecto</h1>
+                    <h1 class="font-roboto text-xl font-semibold mt-4">Datos del anteproyecto</h1>
                 </div>
                 <div class="Linea separadora bg-[#000000] h-[2px] mb-2 w-[98%] mr-4"></div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Nombre del anteproyecto:</h2>
-                    <input type="text" name="name_proyect" placeholder="Introduzca el nombre del anteproyecto"
+                    {{-- Introduzca el nombre del anteproyecto --}}
+                    <input type="text" name="name_proyect" placeholder="Sistema de Gestión de Biblioteca Virtual"
                         value="{{ old('name_proyect') }}" required
                         class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2"><br>
                     @error('name_proyect')
@@ -215,26 +216,30 @@
                     @enderror
                 </div>
                 <div class="w-[97%]">
+                    {{-- Define el objetivo general del anteproyecto --}}
                     <h2 class="font-roboto mb-1 font-medium">Objetivo General:</h2>
-                    <textarea name="objetivo_general" rows="4" placeholder="Define el objetivo general del anteproyecto" required
-                        class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general') }}</textarea><br>
+                    <textarea name="objetivo_general" rows="4"
+                        placeholder="Desarrollar un sistema de gestión de biblioteca virtual que permita a usuarios acceder, buscar, prestar y devolver libros de manera eficiente y automatizada, optimizando así los procesos de gestión de la biblioteca"
+                        required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general') }}</textarea><br>
                     @error('objetivo_general')
                         <div style='color:red'>{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Planteamiento del problema:</h2>
+                    {{-- Exponen los aspectos, elementos y relaciones del problema de tu proyecto. --}}
                     <textarea name="planteamiento" rows="4"
-                        placeholder="Exponen los aspectos, elementos y relaciones del problema de tu proyecto." required
-                        class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('planteamiento') }}</textarea><br>
+                        placeholder="Actualmente, la biblioteca de la institución carece de un sistema automatizado para la gestión de préstamos y devoluciones de libros. Los procesos se realizan de manera manual, lo que ocasiona demoras, pérdida de información y dificultades en el seguimiento de los libros prestados. Esto afecta la eficiencia del servicio ofrecido a los usuarios y genera una experiencia desfavorable en la utilización de los recursos bibliográficos."
+                        required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('planteamiento') }}</textarea><br>
                     @error('planteamiento')
                         <div style='color:red'>{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Justificación:</h2>
+                    {{-- Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad? --}}
                     <textarea name="Justificacion" rows="4"
-                        placeholder="Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?"
+                        placeholder="La implementación de un sistema de gestión de biblioteca virtual permitirá agilizar los procesos de préstamo y devolución de libros, mejorar la experiencia del usuario al proporcionar un acceso más rápido y eficiente a los recursos bibliográficos, así como facilitar el seguimiento y control de los materiales prestados. Además, contribuirá a la modernización de la biblioteca, posicionando a la institución a la vanguardia en tecnología aplicada a la gestión de información."
                         required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion') }}</textarea>
                     @error('Justificacion')
                         <div style='color:red'>{{ $message }}</div>
@@ -242,9 +247,18 @@
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-4 m font-medium">Actividades a realizar:</h2>
-                    <textarea name="activities" rows="4"
-                        placeholder="Enlista las actividades que vas a llevar a cabo de manera ordenada." required
-                        class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities') }}</textarea><br>
+                    {{-- Enlista las actividades que vas a llevar a cabo de manera ordenada. --}}
+                    <textarea name="activities" rows="8"
+                        placeholder=
+                        "1. Investigación y análisis de requisitos del sistema. 
+                        2. Diseño de la arquitectura del sistema y la interfaz de usuario. 
+                        3. Desarrollo de la base de datos para el almacenamiento de información de libros y usuarios.
+                        4. Implementación de las funcionalidades principales del sistema, incluyendo la búsqueda, préstamo y devolución de libros.
+                        5. Pruebas unitarias y de integración para garantizar el correcto funcionamiento del sistema.
+                        6. Despliegue del sistema en un entorno de producción y capacitación del personal de la biblioteca en su uso.
+                        7. Evaluación del sistema por parte de los usuarios y ajustes según retroalimentación recibida.
+                        8. Documentación completa del sistema para futuras referencias y mantenimiento."
+                        required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities') }}</textarea><br>
                     @error('activities')
                         <div style='color:red'>{{ $message }}</div>
                     @enderror
@@ -271,7 +285,6 @@
                     <input type="text" id="searchInput" placeholder="Buscar usuario"
                         class="w-full border-gray-300 rounded-md p-2">
 
-                    <!-- Aquí se mostrarán los resultados de la búsqueda -->
                     <div id="searchResults">
                         @foreach ($interns as $intern)
                             @if ($intern->project_id === null)
