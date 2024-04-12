@@ -157,34 +157,34 @@ class ReportsController extends Controller
         $docRevision = DocRevisions::find(3);
         $lastDocCreated = lastDocCreated::where('division_id', $division->id)->first();
 
-        if ( $lastDocCreated == null) {
+        if ($lastDocCreated == null) {
             DB::table('last_doc_createds')->insert([
                 'division_id' => ($division->id),
                 'number' => 1,
             ]);
-
+        
             $lastDocCreated = DB::table('last_doc_createds')
-            ->where('division_id', $division->id)
-            ->orderByDesc('id')
-            ->first();
+                ->where('division_id', $division->id)
+                ->orderByDesc('id')
+                ->first();
         }
-
-        $getNumber = null;
-
-        if ( $interns[0]->foolscapNumber == null) {
-
-            $getNumber = $lastDocCreated ? $lastDocCreated->number : 1 ;
-            $interns[0]->foolscapNumber = $lastDocCreated?->number;
+        
+        $getNumber = $lastDocCreated->number;
+        
+        if ($interns[0]->foolscapNumber == null) {
+            $interns[0]->foolscapNumber = $getNumber;
             $interns[0]->save();
-
-            $lastDocCreated->update([
-                'number' => $lastDocCreated->number + 1
-            ]);
-
-            $lastDocCreated->save();
+        
+            DB::table('last_doc_createds')
+                ->where('id', $lastDocCreated->id)
+                ->update(['number' => $getNumber + 1]);
+        
+            $lastDocCreated = DB::table('last_doc_createds')
+                ->where('division_id', $division->id)
+                ->orderByDesc('id')
+                ->first();
         }
-
-
+        
         $jsonData[] = [
 
             'title' => "Digitalización de Memoria",
