@@ -49,5 +49,12 @@ class DocRevisionsSeeders extends Seeder
             'updated_at' => Carbon::now(),
 
         ]);
+
+        DB::table('last_doc_createds')->insert([
+            'number' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+        ]);
     }
 }
