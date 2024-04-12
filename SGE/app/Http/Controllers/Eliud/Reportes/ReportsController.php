@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Eliud\Reportes;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
+use App\Models\BusinessAdvisor;
 use App\Models\Career;
 use App\Models\Division;
 use App\Models\DocRevisions;
 use App\Models\FileHistory;
 use App\Models\Intern;
+use App\Models\lastDocCreated;
 use App\Models\Project;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -111,7 +113,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours', 'user'));
         session()->flash('form_success', true);
         return $pdf->stream();
 
@@ -153,7 +155,36 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(3);
+        $lastDocCreated = lastDocCreated::where('division_id', $division->id)->first();
 
+        if ($lastDocCreated == null) {
+            DB::table('last_doc_createds')->insert([
+                'division_id' => ($division->id),
+                'number' => 1,
+            ]);
+        
+            $lastDocCreated = DB::table('last_doc_createds')
+                ->where('division_id', $division->id)
+                ->orderByDesc('id')
+                ->first();
+        }
+        
+        $getNumber = $lastDocCreated->number;
+        
+        if ($interns[0]->foolscapNumber == null) {
+            $interns[0]->foolscapNumber = $getNumber;
+            $interns[0]->save();
+        
+            DB::table('last_doc_createds')
+                ->where('id', $lastDocCreated->id)
+                ->update(['number' => $getNumber + 1]);
+        
+            $lastDocCreated = DB::table('last_doc_createds')
+                ->where('division_id', $division->id)
+                ->orderByDesc('id')
+                ->first();
+        }
+        
         $jsonData[] = [
 
             'title' => "Digitalización de Memoria",
@@ -172,6 +203,8 @@ class ReportsController extends Controller
             'project' => $project?->name,
             'reason' => $motivo,
             'interns' => $interns[0]?->id,
+            'docNumberCreated' => $getNumber ? $getNumber : $interns[0]->foolscapNumber,
+
         ];
 
         $authUser = auth()->user();
@@ -181,7 +214,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo', 'getNumber'));
         return $pdf->stream();
     }
 
@@ -207,6 +240,7 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(2);
+        $business_advisors = BusinessAdvisor::find($interns[0]->business_advisor_id);
 
         $jsonData[] = [
 
@@ -224,6 +258,7 @@ class ReportsController extends Controller
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
+            'business_advisors' => $business_advisors->name, 
         ];
 
         $authUser = auth()->user();
@@ -233,7 +268,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision'));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision', 'business_advisors', 'user'));
         return $pdf->stream();
     }
 
@@ -277,7 +312,7 @@ class ReportsController extends Controller
             $academiesData[] = $academyData;
         }
 
-        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division'));
+        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division', 'user'));
     }
 
 

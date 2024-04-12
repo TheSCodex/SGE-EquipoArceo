@@ -243,18 +243,21 @@
                                                                             Estadía</label>
                                                                         <select name="motivo" id="motivo">
                                                                             <option value="1">
-                                                                                Excelencia académica
+                                                                                Tradicional
                                                                             </option>
                                                                             <option value="2">
-                                                                                Experiencia Laboral
+                                                                                Excelencia académica
                                                                             </option>
                                                                             <option value="3">
-                                                                                Movilidad internacional
+                                                                                Experiencia Laboral
                                                                             </option>
                                                                             <option value="4">
-                                                                                Proyecto de investigación
+                                                                                Movilidad internacional
                                                                             </option>
                                                                             <option value="5">
+                                                                                Proyecto de investigación
+                                                                            </option>
+                                                                            <option value="6">
                                                                                 Certificación Profesional
                                                                             </option>
                                                                         </select>

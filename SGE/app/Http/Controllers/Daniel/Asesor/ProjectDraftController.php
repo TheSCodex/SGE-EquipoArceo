@@ -60,7 +60,7 @@ class ProjectDraftController extends Controller
         
     
         if (!$project) {
-            return view('Daniel.Projects.ProjectView');
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft');
         }
     
 
@@ -76,7 +76,7 @@ class ProjectDraftController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
         
         if(!$career || !$career->academy_id){
-            return view('Daniel.Projects.ProjectView', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
@@ -96,7 +96,7 @@ class ProjectDraftController extends Controller
      */
 
     public function onRev(request $id){
-        Project::where('id', $id->id)->update(['status' => 'En revision']);
+        Project::where('id', $id->id)->update(['status' => 'en revision']);
         return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
     }
 
@@ -121,12 +121,12 @@ class ProjectDraftController extends Controller
 
         if($likeCount >= 3 && isset($inReview)){
             Project::where('id', $projectId)->update([
-                'status' => 'Aprobado',
+                'status' => 'aprobado',
                 'approval date' => DB::raw('now()')
             ]);
         }
 
-        return redirect()->back()->with('success', 'Like añadido correctamente.');
+        return redirect()->back()->with('liked', 'Like añadido correctamente.');
     }
 
     public function deleteLike(Project $id)
@@ -150,7 +150,7 @@ class ProjectDraftController extends Controller
             // Decrement the like count for the project
             Project::where('id', $projectId)->decrement('like');
             
-            return redirect()->back()->with('success', 'Like eliminado correctamente.');
+            return redirect()->back()->with('disliked', 'Like eliminado correctamente.');
         } else {
 
             return redirect()->back()->with('error', 'El usuario no ha dado like a este proyecto.');
