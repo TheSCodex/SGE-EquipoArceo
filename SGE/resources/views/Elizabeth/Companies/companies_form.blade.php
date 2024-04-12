@@ -85,7 +85,6 @@
                 </div>
                 <button type="submit" class="p-2 mt-2 bg-primaryColor w-full  rounded-md text-white">Añadir empresa</button>
             </form>
-            <a  href="/panel-companies" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>
 
 
         </div>
