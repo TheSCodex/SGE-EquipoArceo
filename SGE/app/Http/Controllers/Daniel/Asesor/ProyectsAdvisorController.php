@@ -22,12 +22,14 @@ class ProyectsAdvisorController extends Controller
         $userId = Auth::id();
         $academicAdvisor = User::find($userId)->academicAdvisor;
         $projectsAdvisor = Intern::where('academic_advisor_id', $academicAdvisor->id)
-            ->with('project.adviser') // Cargar relaciones
+            ->with('project.adviser')
             ->get()
             ->map(function ($intern) {
                 return $intern->project;
             })
-            ->filter();
+            ->filter(function ($project) {
+                return in_array(strtolower($project->status), ['aprobado', 'en revision', 'asesoramiento']);
+            });
 
         $AdvisorCareer = User::find($userId)->academicAdvisor->career->id;
         $academyId  = Career::find($AdvisorCareer)->academy_id;
@@ -41,8 +43,9 @@ class ProyectsAdvisorController extends Controller
                 });
             });
         })
-        ->with(['adviser', 'interns.user'])
-        ->paginate(10);
+            ->whereIn('status', ['aprobado', 'en revision'])
+            ->with(['adviser', 'interns.user'])
+            ->paginate(10);
 
         return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
     }

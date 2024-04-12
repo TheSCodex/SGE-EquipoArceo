@@ -16,7 +16,7 @@
                 <div class="w-full mb-5">
                     <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
                         @foreach ($projectsAdvisor as $project)
-                            <a href="{{ route('director-anteproyectos.view', $project->id) }}" class="focus:outline-none">
+                            <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}" class="focus:outline-none">
                                 <div
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div

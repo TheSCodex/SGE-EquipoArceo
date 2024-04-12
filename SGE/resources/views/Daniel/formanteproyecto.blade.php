@@ -288,7 +288,7 @@
                     <div id="searchResults">
                         @foreach ($interns as $intern)
                             @if ($intern->project_id === null)
-                                <<div
+                                <div
                                     class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
                                     <div class="flex items-center">
                                         <input type="checkbox"
@@ -301,21 +301,21 @@
                                             </p>
                                         </div>
                                     </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                    @endif
-                    @endforeach
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
+                        id="closeModalButton">Cerrar
+                    </button>
+                    <input type="hidden" name="selectedIds" id="selectedIds">
+                    <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
+                        invitación</button>
                 </div>
             </div>
-            <div class="mt-6 flex justify-end">
-                <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
-                    id="closeModalButton">Cerrar
-                </button>
-                <input type="hidden" name="selectedIds" id="selectedIds">
-                <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
-                    invitación</button>
-            </div>
         </div>
-    </div>
     </div>
     <script>
         //Javascript para el modal

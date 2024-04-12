@@ -71,7 +71,7 @@ class ProjectsController extends Controller
 
     public function ForRev(request $id){
         Project::where('id', $id->id)->update(['status' => 'Asesoramiento']);
-        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+        return redirect()->back()->with('success', 'Anteproyecto ahora asesoramiento.');   
     }
 
     public function Colaborar(Request $request)

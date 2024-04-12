@@ -164,7 +164,7 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
-                            
+
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
                                 class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
                         </div>
@@ -188,7 +188,8 @@
                     class="w-full bg-white px-[2%] py-[1.6%] rounded-sm font-semibold sm:font-bold text-sm mb-[.5%] mt-[2%] sm:mt-0 sm:mb-0">
                     <h3>Estado del Anteproyecto</h3>
                 </div>
-                <div class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
+                <div
+                    class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex items-center gap-[10%]">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
@@ -201,9 +202,12 @@
                                     <p>Tu Anteproyecto se encuentra en Asesoramiento</p>
                                 @else
                                     <p>Tu Anteproyecto esta guardado como borrador</p>
-                                    <form method="POST" action="{{ route('ForRev', ['id' => $project->id]) }}">
+                                    <form id="reviewForm" method="POST"
+                                        action="{{ route('ForRev', ['id' => $project->id]) }}">
                                         @csrf
-                                        <button type="submit" class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar a revisión</button>
+                                        <button type="submit"
+                                            class="bg-[#02AB82] justify-end text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
+                                            a Revisión</button>
                                     </form>
                                 @endif
                             </div>
@@ -278,8 +282,6 @@
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
                         </div>
-
-
                         <form method="POST"
                             action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
@@ -305,12 +307,37 @@
                         </div>
                 @endif
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script>
+                document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: 'Tu anteproyecto estará disponible para su revisión por tu asesor.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Continuar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            event.target.submit();
+                        }
+                    });
+                });
+            </script>
+            @if (session()->has('success'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto sera revisado por tu asesor!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
         </div>
+
         </div>
+
     </section>
-
-
-
-
-
 @endsection

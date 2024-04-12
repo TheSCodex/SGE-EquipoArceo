@@ -187,9 +187,9 @@
                                 <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
-                            @else
-                                <p class="">Este proyecto aun no esta en revision</p>
-                            @endif
+                                @elseif (strtolower($project->status) == 'Asesoramiento')
+                                <p class="">El proyecto se encuentra en asesoramiento</p>
+                                @endif
                         </div>
                     </div>
                 </div>

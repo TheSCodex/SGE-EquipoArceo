@@ -181,14 +181,14 @@
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row">
+                        <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if (strtolower($project->status) == 'aprobado')
                                 <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
-                            @else
+                                @elseif (strtolower($project->status) == 'asesoramiento')
                                 <p class="">El proyecto se encuentra en asesoramiento</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
+                                <form id="reviewForm" method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
@@ -206,9 +206,9 @@
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if ($project->like == 0)
-                                <p class="w-full">Este proyecto aun no cuenta con votos</p>
+                                <p>Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p class="w-full">Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
                             @endif
 
 
@@ -332,6 +332,36 @@
             disliked();
         </script>
     @endif
+
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                title: '!Listo!',
+                text: `¡El anteproyecto se encuentra en revision para todos los asesores!`,
+                icon: 'success',
+            });
+        </script>
+    @endif
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Una vez que pase a revisión, el proyecto estará disponible para su revisión por los asesores.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, pasar a revisión'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        });
+    </script>
 
     <script>
         function delVote() {
