@@ -4,7 +4,7 @@
     <div class="w-full py-8 md:px-[7em] md:mt-[2em] items-center sm:h-screen justify-center flex bg-white">
         <div class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
             <div class="w-full h-fit flex md:justify-start">
-                <h1 class="text-xl md:text-3xl text-center max-w-[70rem] truncate font-bold">Detalles de {{ $companies->name }}
+                <h1 class="text-xl md:text-3xl text-center  max-sm:mx-10 max-w-[70rem] truncate font-bold">Detalles de {{ $companies->name }}
                 </h1>
             </div>
 

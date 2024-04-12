@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->integer('user_id')->nullable()->index('user_id');
             $table->integer('academic_advisor_id')->nullable()->index('academic_advisor_id');
+            $table->unsignedInteger('foolscapNumber')->nullable();
             $table->integer('business_advisor_id')->nullable()->index('business_advisor_id');
             $table->integer('project_id')->nullable()->index('project_id');
             $table->integer('book_id')->nullable()->index('book_id');
