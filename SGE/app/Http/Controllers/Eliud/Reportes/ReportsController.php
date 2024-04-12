@@ -162,6 +162,11 @@ class ReportsController extends Controller
                 'division_id' => ($division->id),
                 'number' => 1,
             ]);
+
+            $lastDocCreated = DB::table('last_doc_createds')
+            ->where('division_id', $division->id)
+            ->orderByDesc('id')
+            ->first();
         }
 
         $getNumber = null;

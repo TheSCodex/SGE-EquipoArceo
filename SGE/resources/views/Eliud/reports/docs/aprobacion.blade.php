@@ -65,7 +65,7 @@
             </span>Autorización de digitalización.</p>
 
         <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
-            </span> {{'UTC/' . $division-> initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
+            </span> {{'UTC/' . $division->initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
     </div>
 
 
@@ -86,7 +86,7 @@
     <div style="position:absolute; width:100% ; margin: 10px; left:95;">
         <table style="width: 75%; border-collapse: collapse; border: 0.5px solid black;">
             <tr>
-                <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 1 ? 'X' : '' }}</td>
+                <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 1? 'X' : '' }}</td>
                 <td
                     style="padding-left:8px;font-weight: normal; text-align:justify; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Tradicional</td>
