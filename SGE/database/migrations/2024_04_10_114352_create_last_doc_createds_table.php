@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('last_doc_createds', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps();            
+            $table->integer('division_id')->nullable()->index('division_id');
             $table->unsignedInteger('number');
         });
     }

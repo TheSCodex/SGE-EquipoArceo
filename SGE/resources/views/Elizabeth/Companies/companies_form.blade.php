@@ -83,8 +83,11 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="p-2 mt-2 bg-primaryColor w-full  rounded-md text-white">Añadir empresa</button>
-            </form>
+                <div class="flex justify-center items-center">
+                    <button type="submit" class="p-2 bg-primaryColor w-full lg:w-[30vw]  rounded-md text-white my-[3%]">Añadir empresa</button>
+        
+                </div>          
+                 </form>
 
 
         </div>

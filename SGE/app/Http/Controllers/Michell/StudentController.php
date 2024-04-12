@@ -48,10 +48,14 @@ class StudentController extends Controller
             ->where('users.id', $student)
             ->whereNotNull('interns.project_id')
             ->get();
+
+        if (!$empresarial) {
+            $empresarial = null;
+        }
         // dd($empresarial);
 
 
-        $studentsCommentsCount = null;
+        $studentsCommentsCount = 0;
         $comments = [];
         //comentarios
         if ($studentProject) {

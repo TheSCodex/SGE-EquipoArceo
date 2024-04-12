@@ -74,7 +74,10 @@
                 
             </div>
         </div>
-        <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Actualizar empresa</button>
+        <div class="flex justify-center items-center">
+            <button type="submit" class="p-2 bg-primaryColor w-full lg:w-[30vw]  rounded-md text-white">Editar empresa</button>
+
+        </div>
     </form>
 
     

@@ -37,7 +37,7 @@ class InternSeeder extends Seeder
                 'user_id' => $estudianteUserIds[$i],
                 'academic_advisor_id' => $advisor->id,
                 'business_advisor_id' => $businessAdvisor->id,
-                'career_id' => $advisor->career_id,
+                'career_id' => $advisor->career_id != 21 ? $advisor->career_id : 10,
                 'book_id' => $book->id,
                 'period' => 'Mayo - Julio',
                 'student_status_id' => $status_id,

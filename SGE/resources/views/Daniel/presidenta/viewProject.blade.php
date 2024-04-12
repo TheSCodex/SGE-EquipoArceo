@@ -185,19 +185,21 @@
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
                         <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
-                            @if (strtolower($project->status) == 'aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
-                            @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">El proyecto se encuentra en revision</p>
-                            @else
-                                <p class="">Este proyecto aun no esta en revision</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
-                                        a revisión</button>
-                                </form>
-                            @endif
+                            <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
+                                @if (strtolower($project->status) == 'aprobado')
+                                    <p class="">El proyecto ha sido aprobado</p>
+                                @elseif (strtolower($project->status) == 'en revision')
+                                    <p class="">El proyecto se encuentra en revision</p>
+                                @else
+                                    <p class="">El proyecto se encuentra en asesoramiento</p>
+                                    <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
+                                            a revisión</button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,25 +211,25 @@
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if ($project->like == 0)
-                                <p>Este proyecto aun no cuenta con votos</p>
+                                <p class="w-full">Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p class="w-full">Este proyecto cuenta con {{ $project->like }} voto(s)</p>
                             @endif
 
 
                             @if (isset($projectLikes))
-                                <form method="POST"
+                                <form method="POST" id="delVoteForm"
                                     action="{{ route('anteproyecto-President.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="delVote()"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
                                         voto</button>
                                 </form>
                             @else
-                                <form method="POST"
+                                <form method="POST" id="voteForm"
                                     action="{{ route('anteproyecto-President.storeLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="confirmVote()"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
                                 </form>
                             @endif
@@ -310,4 +312,65 @@
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session()->has('liked'))
+<script>
+    function liked(){
+        Swal.fire({
+            title: '!Votado!',
+            text: `¡El voto ha sido agregado!`,
+            icon: 'success',
+        })
+    }
+    liked();
+</script>
+@endif
+@if(session()->has('disliked'))
+<script>
+    function disliked(){
+        Swal.fire({
+            title: 'Voto removido',
+            text: `El voto ha sido removido del proyecto`,
+            icon: 'success',
+        })
+    }
+    disliked();
+</script>
+@endif
+
+<script>
+    function delVote() {
+        Swal.fire({
+            title: '¿Deseas remover el voto del proyecto?',
+            text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: ' #d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, remover voto'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delVoteForm').submit();
+            }
+        });
+    }
+
+        function confirmVote() {
+        Swal.fire({
+            title: '¿Deseas votar el proyecto?',
+            text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, votar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('voteForm').submit();
+            }
+        });
+    }
+</script>
 @endsection
