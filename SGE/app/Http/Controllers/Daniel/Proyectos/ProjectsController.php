@@ -174,7 +174,7 @@ class ProjectsController extends Controller
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
 
-        
+        $selectedIds = $request->input('selectedIds');
 
         return redirect('/anteproyecto')->with('Created', 'Proyecto creado correctamente');
     }
