@@ -39,7 +39,7 @@
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                     @foreach ($roles as $role)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                        <h2 class="text-lg font-bold">Rol: 
+                        <h2 class="text-lg">Rol: 
                         @if ($role->title == "estudiante")
                             Estudiante
                         @elseif ($role->title == "asesorAcademico")
@@ -72,12 +72,12 @@
                             @endif
                         </ul>
                         <div class="flex justify-end mt-4 space-x-2">
-                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <td class="font-roboto py-5 cursor-pointer">
                                 <a href="{{ route('panel-roles.edit', $role->id) }}" class="flex justify-center">
                                     <img src="/img/logos/pencil.svg">
                                 </a>
                             </td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <td class="font-roboto py-5 cursor-pointer">
                                 {{-- Responsive --}}
                                 <form class="flex justify-center delete-form" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST"  onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
                                     @csrf
@@ -105,8 +105,8 @@
                             $counter = ($roles->currentPage() - 1) * $roles->perPage() + $loop->index + 1;
                         @endphp
                         <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                            <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                            <td class="font-roboto font-bold py-5 text-start pl-5">
+                            <td class="font-roboto py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                            <td class="font-roboto py-5 text-start pl-5">
                                 @if ($role->title == "estudiante")
                                     Estudiante
                                 @elseif ($role->title == "asesorAcademico")
