@@ -17,6 +17,7 @@ use App\Models\Division;
 use App\Models\Intern;
 use App\Models\Project;
 use App\Models\User;
+use App\Notifications\ProyectoEnRevision;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -60,18 +61,19 @@ class ProjectsController extends Controller
 
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user','area'));
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user', 'area'));
         }
-        
+
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
-        
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division','area'));
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
     }
 
-    public function ForRev(request $id){
+    public function ForRev(request $id)
+    {
         Project::where('id', $id->id)->update(['status' => 'Asesoramiento']);
-        return redirect()->back()->with('success', 'Anteproyecto ahora asesoramiento.');   
+        return redirect()->back()->with('success', 'Anteproyecto ahora asesoramiento.');
     }
 
     public function Colaborar(Request $request)
@@ -79,7 +81,6 @@ class ProjectsController extends Controller
         $user = auth()->user();
         $intern = $user->intern;
         $ProjectId = $intern->project_id;
-        
     }
     /**
      * Show the form for creating a new resource.
@@ -104,6 +105,7 @@ class ProjectsController extends Controller
         $defaultDivision = [$division->id => $division->name];
         // Construye un array asociativo para la opción predeterminada
         $defaultCareer = [$intern->career->id => $intern->career->name];
+        
 
         return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision', 'interns'));
     }
@@ -172,7 +174,9 @@ class ProjectsController extends Controller
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
 
-        return redirect('/anteproyecto')->with('success', 'Proyecto creado correctamente');
+        
+
+        return redirect('/anteproyecto')->with('Created', 'Proyecto creado correctamente');
     }
 
     /**

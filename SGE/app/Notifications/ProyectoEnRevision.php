@@ -51,7 +51,7 @@ class ProyectoEnRevision extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'El proyecto ' . $this->project->nombre . ' está ahora en revisión.'
+            'message' => 'El proyecto ' . $this->project->nombre . ' ha sido creado.'
         ];
     }
 }
