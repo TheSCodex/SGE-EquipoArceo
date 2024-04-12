@@ -85,14 +85,14 @@ class StudentAndAdvisorController extends Controller
         // Actualizar la cantidad de estudiantes asesorados por el asesor en la tabla academic_advisor
         DB::update("
         UPDATE academic_advisor AS aa
-        JOIN (
+        LEFT JOIN (
             SELECT academic_advisor_id, COUNT(*) AS total_students
             FROM interns
             GROUP BY academic_advisor_id
         ) AS intern_counts ON aa.id = intern_counts.academic_advisor_id
-        SET aa.quantity_advised = intern_counts.total_students
-        WHERE aa.id IN (SELECT academic_advisor_id FROM interns)
-");
+        SET aa.quantity_advised = COALESCE(intern_counts.total_students, 0)
+    ");
+    
 
         return redirect()->route('presidente.index')->with('success', 'Asesor asignado correctamente.');
     }
