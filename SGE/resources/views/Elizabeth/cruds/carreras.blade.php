@@ -6,7 +6,7 @@
     <section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class=" mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
+            <h1 class=" font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
 
             <div class="flex items-center flex-row justify-end">
                 <div>
@@ -35,19 +35,21 @@
             
         </div>
         <div class="flex mt-[2%] px-[4%]  ">
-            <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
-               <a href="panel-careers">
-                <button id="btnAll"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor text-white bg-primaryColor   rounded px-5 py-1 shadow-lg">Carreras</button>
-                </a>
-                <a href="panel-academies">
-                    <button id="btnWithAdvisor"
-                    class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
-                </a>
+            <section class=" text-sm md:space-x-6 space-x-2 flex">
                 <a href="panel-divisions">
                     <button id="btnWithOutAdvisor"
                     class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
                 </a>
+    
+                <a href="panel-academies">
+                    <button id="btnWithAdvisor"
+                    class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
+                </a>
+                <a href="panel-careers">
+                    <button id="btnAll"
+                        class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor text-white bg-primaryColor   rounded px-5 py-1 shadow-lg">Carreras</button>
+                    </a>
+    
             </section>
           </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
@@ -55,7 +57,7 @@
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                     @foreach ($careers as $career)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                        <h2 class="text-lg font-bold">{{ $career->name }}</h2>
+                        <h2 class="text-lg ">{{ $career->name }}</h2>
                         <p>Academia:
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
                         {{ $academy->name }}
@@ -91,9 +93,9 @@
                     </tr>
                     @foreach ($careers as $career)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
-                        <td class="font-roboto pl-5 font-bold py-5">{{ $career->name }}</td>
+                        <td class="font-roboto pl-5  py-5">{{ $career->name }}</td>
 
-                        <td class="font-roboto font-bold py-5 text-start ">
+                        <td class="font-roboto  py-5 text-start ">
                             @if ($academy = $academies->where('id', $career->academy_id)->first())
                             {{ $academy->name }}
                             @else
@@ -102,13 +104,13 @@
                         </td>
 
                         
-                        {{-- <td class="font-roboto font-bold py-5">{{ $career->position }}</td>  --}}
-                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        {{-- <td class="font-roboto  py-5">{{ $career->position }}</td>  --}}
+                        <td class="font-roboto  py-5 cursor-pointer ">
                             <a href="{{ route('panel-careers.edit', $career->id) }}" class="flex pl-2">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer " onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
+                        <td class="font-roboto  py-5 cursor-pointer " onclick="confirmDelete('{{ $career->name }}', '{{ $career->id }}')">
                             <form class="flex justify-center pl-4" id="deleteForm{{ $career->id }}" action="{{ route('panel-careers.destroy', $career->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -120,7 +122,7 @@
                  
                 </table>
                 @if($careers->isEmpty())
-                <p class="mt-4 text-red-500 text-center  text-lightGray font-bold text-2xl">Sin resultados</p>
+                <p class="mt-4 text-red-500 text-center  text-lightGray  text-2xl">Sin resultados</p>
                 @endif
                 {{$careers->links()}}
             </div>
