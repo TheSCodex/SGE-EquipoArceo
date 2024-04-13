@@ -12,16 +12,16 @@
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de Asesorados
                 </h1>
             </div>
-            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
                 <div class="w-full mb-5">
                     <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
                         @foreach ($projectsAdvisor as $project)
                             <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}" class="focus:outline-none">
                                 <div
-                                    class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
+                                    class="bg-white min-h-48 rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div
                                         class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                                        <h2 class="text-lg font-bold">{{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}</h2>
                                         <p class="text-sm text-center  font-bold text-primaryColor">
                                             {{ $project->like !== null ? $project->like : 0 }} Votos
                                         </p>

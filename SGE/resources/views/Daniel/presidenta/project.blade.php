@@ -21,7 +21,7 @@
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div
                                         class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                                        <h2 class="text-lg font-bold">{{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}</h2>
                                         <p class="text-sm text-center  font-bold text-primaryColor">
                                             {{ $project->like !== null ? $project->like : 0 }} Votos
                                         </p>
