@@ -45,7 +45,7 @@ class DivisionsController extends Controller
             'name' => 'required|string|max:255',
             'director_id' => 'required|integer',
             'directorAsistant_id' => 'required|integer',
-            'initials' => 'required|string|max:20'
+            'initials' => 'required|string|max:255'
         ]);
         
         $division = new Division;
