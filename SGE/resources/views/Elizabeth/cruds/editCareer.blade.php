@@ -35,15 +35,11 @@
                 </div>
             </div>
             <div class="mx-auto mt-10">
-                <button type="submit" class="p-2 bg-primaryColor w-[77vw]   rounded-md text-white">Editar carrera</button>
+                <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[30vw] bg-primaryColor">Editar carrera</button>
             </div>                
-            
+                 
             </form>
-                <div class="mx-auto">
-                    <a href="/panel-careers" type="submit" class="p-2 bg-lightGray text-center w-[77vw] mx-auto rounded-md text-white" >Cancelar</a>
-           
-                </div>
-            </div>
+
 </div>
 
 @endsection('contenido')

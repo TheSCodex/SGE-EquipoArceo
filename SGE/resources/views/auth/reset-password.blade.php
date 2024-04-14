@@ -14,10 +14,10 @@
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <div class="mb-6">
+        <div class="mb-6" style="display: none;">
           <label for="email" class="block text-lg font-semibold text-gray-700 mb-2">Email</label>
           <div class="relative">
-              <input type="email" disabled id="email" name="email" value="{{ old('email', $request->email) }}" placeholder="Email" class=" appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus autocomplete="username">
+              <input type="email" id="email" name="email" value="{{ old('email', $request->email) }}" placeholder="Email" class=" appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  required="" autofocus="" autocomplete="username">
           </div>
           @error('email')
               <p class="text-sm text-red mt-2">{{ $message }}</p>

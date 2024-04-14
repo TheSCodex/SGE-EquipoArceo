@@ -37,7 +37,8 @@
                                     </div>
                                     <div class="flex flex-wrap ">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
@@ -95,7 +96,8 @@
                                 </div>
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
@@ -169,8 +171,6 @@
                 </div>
             </div>
 
-
-
             <div
                 class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
                 <div
@@ -186,9 +186,9 @@
                                 <p class="">El proyecto ha sido aprobado</p>
                             @elseif (strtolower($project->status) == 'en revision')
                                 <p class="">El proyecto se encuentra en revision</p>
-                            @else
-                                <p class="">Este proyecto aun no esta en revision</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
+                                @elseif (strtolower($project->status) == 'asesoramiento')
+                                <p class="">El proyecto se encuentra en asesoramiento</p>
+                                <form id="reviewForm" method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
@@ -213,18 +213,18 @@
 
 
                             @if (isset($projectLikes))
-                                <form method="POST"
+                                <form method="POST" id="delVoteForm"
                                     action="{{ route('anteproyecto-Asesor.deleteLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="delVote()"
                                         class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Quitar
                                         voto</button>
                                 </form>
                             @else
-                                <form method="POST"
+                                <form method="POST" id="voteForm"
                                     action="{{ route('anteproyecto-Asesor.storeLike', ['id' => $project->id]) }}">
                                     @csrf
-                                    <button type="submit"
+                                    <button type="button" onclick="confirmVote()"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Votar</button>
                                 </form>
                             @endif
@@ -242,7 +242,7 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -287,7 +287,7 @@
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -306,4 +306,94 @@
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session()->has('liked'))
+        <script>
+            function liked() {
+                Swal.fire({
+                    title: '!Votado!',
+                    text: `¡El voto ha sido agregado!`,
+                    icon: 'success',
+                })
+            }
+            liked();
+        </script>
+    @endif
+    @if (session()->has('disliked'))
+        <script>
+            function disliked() {
+                Swal.fire({
+                    title: 'Voto removido',
+                    text: `El voto ha sido removido del proyecto`,
+                    icon: 'success',
+                })
+            }
+            disliked();
+        </script>
+    @endif
+
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                title: '!Listo!',
+                text: `¡El anteproyecto se encuentra en revision para todos los asesores!`,
+                icon: 'success',
+            });
+        </script>
+    @endif
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Una vez que pase a revisión, el proyecto estará disponible para su revisión por los asesores.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, pasar a revisión'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function delVote() {
+            Swal.fire({
+                title: '¿Deseas remover el voto del proyecto?',
+                text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: ' #d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, remover voto'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delVoteForm').submit();
+                }
+            });
+        }
+
+        function confirmVote() {
+            Swal.fire({
+                title: '¿Deseas votar el proyecto?',
+                text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, votar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('voteForm').submit();
+                }
+            });
+        }
+    </script>
 @endsection

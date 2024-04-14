@@ -91,7 +91,7 @@ class UsersSeeder extends Seeder
 
 
         $directorAssistants_names = [
-            'Norma Hernández',
+            'Norma Angélica Hernández Sandenal',
             'Mtro. Jorge Reyes',
             'Jennyfer Zamacona',
             'Juana Patricia Contrareas Tabares'

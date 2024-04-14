@@ -39,9 +39,9 @@
                         <p class="text-rose-700  text-center">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="flex justify-between mt-2">
+                <div class="w-full flex flex-col space-y-5">
                     <button type="submit" class="bg-[#00AB84]  my-3 rounded-lg py-2 px-4 text-white">Agregar</button>
-                    <a href="lista-asesores" class="bg-[#c5c5c5] text-gray-700 py-1 px-4 rounded-lg my-3 flex items-center text-center">Cancelar</a>
+                    <a href="lista-asesores" class="text-center text-[#888] hover:text-[#444] bg-gray-200 hover:bg-gray-300 font-bold rounded-md py-2">Cancelar</a>
                 </div>
             </form>
         </div>
