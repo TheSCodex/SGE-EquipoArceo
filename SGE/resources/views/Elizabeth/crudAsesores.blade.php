@@ -2,7 +2,7 @@
 @section('titulo', 'Panel de Asesores Empresariales')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-center items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores Empresariales</h1>
@@ -65,7 +65,7 @@
                     <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
                         Sin resultados</p>
                     @endif
-                    {{$advisors->links()}}
+                
                 </div>
             </div>
             <div class="hidden lg:block w-full">
@@ -81,6 +81,9 @@
                     </tr>
                     @if(count($advisors) > 0)
                         @foreach ($advisors as $advisor)
+                        @php
+                        $counter = ($advisors->currentPage() - 1) * $advisors->perPage() + $loop->index + 1;
+                    @endphp
                             <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20  ">
                                 <td class="font-roboto pl-5  py-5 ">{{ $advisor->name }}</td>
                                 <td class="font-roboto  py-5 ">{{ $advisor->email }}</td>
@@ -116,13 +119,15 @@
                     @endif
                 </table>
                 
-                {{$advisors->links()}}
+            
             </div>
         </div>
     </div>
-
+    
 </section>
-
+<div class="my-5 mx-auto mt-auto md:w-[80%]">
+    {{$advisors->links()}}
+</div>
 @if(session()->has('successAdd'))
 <script>
     function confirmAgregar(){
