@@ -29,8 +29,8 @@
                 @enderror
             </div>
         </div>
-        <div class="w-full flex flex-col space-y-2 ">
-            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
+        
+        <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
             <div class="space-y-2">
                 <p class="text-sm">Número telefónico</p>
                 <input type="text" name="phone" value="{{ old('phone', $advisor->phone) }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Teléfono">
@@ -58,19 +58,17 @@
                     <select class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" id="companie_id" name="companie_id">
                         <option value="">Selecciona una empresa</option>
                         @foreach($companies as $company)
-                            <option value="{{ $company->id }}" {{ old('companie_id') == $company->id ? 'selected' : '' }}>
+                            <option value="{{ $company->id }}" {{ old('companie_id', $advisor->companie_id) == $company->id ? 'selected' : '' }}>
                                 {{ $company->name }}
                             </option>
                         @endforeach
                     </select>  
                     @error('companie_id')
-                    <p class="text-[#ff0000] text-sm">
-                        {{ $message }}
-                    </p>
-                @enderror   
-                    
+                        <p class="text-[#ff0000] text-sm">{{ $message }}</p>
+                    @enderror   
                 </div>
             </div>
+            
             <div class="space-y-2">
                 <div class="form-group">
                     <p class="text-sm"></p>
@@ -84,7 +82,7 @@
         
         <button type="submit" class="p-2  self-center bg-primaryColor border-2 rounded-md px-4 w-[18em] md:w-[30vw]   text-white">Editar Asesor</button>
     
-        </div>
+        
     </form>
 </div>
 @endsection

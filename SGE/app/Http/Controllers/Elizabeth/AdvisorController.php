@@ -8,6 +8,7 @@ use App\Models\BusinessAdvisor;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 class AdvisorController extends Controller
@@ -15,13 +16,44 @@ class AdvisorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+
+    public function searchBusinessAdvisors(Request $request)
     {
-        // Obtener los asesores de la base de datos
-        $advisors = BusinessAdvisor::paginate(10);
+
+        $query = $request->input('query');
+        $advisors = BusinessAdvisor::where('name', 'like', '%' . $query . '%')
+        ->orWhere('email', 'like', '%' . $query . '%')
+        ->orWhere('phone', 'like', '%' . $query . '%')
+        ->orWhere('position', 'like', '%' . $query . '%')
+        ->orWhereHas('companie_id', function ($companiesQuery) use ($query) {
+            $companiesQuery->where('title', 'like', '%' . $query . '%');
+        })
+        
+        ->paginate(5);
+        
         // Cargar la vista y pasar los datos
         return view('Elizabeth.crudAsesores', compact('advisors'));
+
+
     }
+
+    public function index(Request $request)
+{
+    $query = $request->input('query');
+    $advisorsQuery = BusinessAdvisor::query();
+
+    // Aplicar el filtro de búsqueda si se proporciona una consulta
+    if (!empty($query)) {
+        $advisorsQuery->where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%');
+    }
+
+    $advisors = $advisorsQuery->paginate(5);
+
+    return view('Elizabeth.crudAsesores', compact('advisors', 'query'));
+}
+
 
     /**
      * Show the form for creating a new resource.
