@@ -300,6 +300,12 @@ Route::middleware('auth')->group(function () {
     // BUSQUEDA DE ROLES
     Route::get('/search/roles', [UserController::class, 'searchRoles'])->name('search.roles');
 
+    // BUSQUEDA DE COMPAÑIAS
+    Route::get('/search/companies', [companiesController::class, 'searchCompany'])->name('search.company');
+
+    // BUSQUEDA DE ASESOR EMPRESARIAL
+    Route::get('/search/businessAdvisors', [AdvisorController::class, 'searchBusinessAdvisors'])->name('search.advisors');
+
     // CRUD de Roles
     Route::resource('panel-roles', RoleController::class)->names('panel-roles')->middleware('roleorcan:admin,crud-roles-permisos');
 
