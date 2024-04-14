@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Pipa\RoleController;
 use App\Http\Controllers\Pipa\UserController;
+use App\Http\Controllers\Pipa\GroupController;
 use App\Http\Controllers\Luis\BooksController;
 use App\Http\Controllers\Luis\EventController;
 use App\Http\Controllers\Pipa\LoginController;
@@ -283,9 +284,21 @@ Route::middleware('auth')->group(function () {
 
     // inicio admin
     Route::resource('admin', AdministratorController::class)->names('admin')->middleware('role:admin');
-
+    
+    // CRUD de Grupos
+    Route::resource('panel-groups', GroupController::class)->names('panel-groups')->middleware('roleorcan:admin,crud-usuarios');
+    
     // CRUD de Usuarios
     Route::resource('panel-users', UserController::class)->names('panel-users')->middleware('roleorcan:admin,crud-usuarios');
+
+    // BUSQUEDA DE USUARIOS
+    Route::get('/search/groups', [GroupController::class, 'searchGroups'])->name('search.groups');
+
+    // BUSQUEDA DE GRUPOS
+    Route::get('/search/users', [UserController::class, 'searchUsers'])->name('search.users');
+    
+    // BUSQUEDA DE ROLES
+    Route::get('/search/roles', [UserController::class, 'searchRoles'])->name('search.roles');
 
     // CRUD de Roles
     Route::resource('panel-roles', RoleController::class)->names('panel-roles')->middleware('roleorcan:admin,crud-roles-permisos');
@@ -310,6 +323,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
+
+
+    // ! PERFIL
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
 });
 
 

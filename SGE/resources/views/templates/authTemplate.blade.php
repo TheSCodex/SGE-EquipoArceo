@@ -39,6 +39,12 @@
 
             <nav id="dropdownMenu" class="hidden lg:flex absolute right-5 z-50 mt-3 rounded-md border-primaryColor shadow border px-5 py-3 bg-white lg:shadow-none lg:static lg:border-none lg:mt-0 lg:justify-center lg:px-0 lg:py-0 lg:items-center">
                 <ul class="flex flex-col lg:flex-row gap-2 lg:gap-6">
+
+                    
+                    <li>    
+                        <a href="/profile" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Perfil</a>
+                    </li>
+
                     {{-- inicios de los roles --}}
 
                     @if($user->rol_id === 1) {{-- ! Rol de estudiante --}}
@@ -143,6 +149,11 @@
                             <a href="{{ route('panel-users.index') }}" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
                         </li>
                     @endcan
+                    @can('crud-usuarios')
+                    <li>
+                        <a href="{{ route('panel-groups.index') }}" class="hover:border-b-2 hover:border-primaryColor">Grupos</a>
+                    </li>
+                    @endcan
                     @can('crud-roles-permisos')
                         <li>
                             <a href="{{ route('panel-roles.index') }}" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>
@@ -163,7 +174,6 @@
                             <a href="{{ route('panel-careers.index') }}" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Carreras y divisiones</a>
                         </li>
                     @endcan
-
 
                     <!-- CERRAR SESION RESPONIVE -->
                     <hr class="lg:hidden w-full border-[0.3px] border-gray-500 mt-2">

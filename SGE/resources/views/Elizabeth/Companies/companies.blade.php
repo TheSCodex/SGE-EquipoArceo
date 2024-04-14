@@ -91,19 +91,19 @@
                                 </tr>
                                 @foreach ($companies as $index => $company)
                                     <tr class="transition duration-100 ease-in-out hover:bg-lightGray/20">
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate ">
+                                        <td class="font-roboto  py-5 max-w-[200px]  truncate ">
                                             {{ $company['name'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                        <td class="font-roboto  py-5 max-w-[200px]  truncate">
                                             {{ $company['email'] }}</td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                        <td class="font-roboto  py-5 max-w-[200px]  truncate">
                                             {{ $company['phone'] }}</td>
                                             
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">{{ $company['rfc'] }}
+                                        <td class="font-roboto  py-5 max-w-[200px]  truncate">{{ $company['rfc'] }}
                                         </td>
-                                        <td class="font-roboto font-bold py-5 max-w-[200px]  truncate">
+                                        <td class="font-roboto  py-5 max-w-[200px]  truncate">
                                             {{ $company->businessSector->title }}</td>
 
-                                        <td class="font-roboto font-bold pt-6 py-5 text-center">
+                                        <td class="font-roboto  pt-6 py-5 text-center">
                                             <form action="">
 
                                                 <a href="{{ route('panel-companies.show', $company->id) }}"
