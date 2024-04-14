@@ -5,7 +5,7 @@
     <form action="{{ url('panel-users/' . $user->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
         @csrf
         @method('PUT')
-        <div class="w-full h-fit flex justify-center md:justify-start">
+        <div class="w-full h-fit flex justify-center md:justify-start md:px-20">
             <h1 class="text-3xl font-bold">Editar usuario</h1>
         </div>
         @if(session('error'))
@@ -89,12 +89,16 @@
                         </p>
                     @enderror
                 </div>
-                @if ($user->rol_id == 1 || $user->rol_id == 2)
                     <div class=" space-y-2">
                         <p class="text-sm">Especialidad</p>
-                        <select name="career_id" id="careerSelect" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
+                        <select 
+                        @if (($user->rol_id != 1) && ($user->rol_id != 2)) disabled
+                                @endif
+                        name="career_id" id="careerSelect" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                             <option disabled value="">Seleccionar una carrera</option>
-                            <option disabled value="noNecesario">El rol seleccionado no requiere seleccionar una carrera</option>
+                            <option 
+                            @if (($user->rol_id != 1) && ($user->rol_id != 2)) selected disabled
+                                @endif value="noNecesario">El rol seleccionado no requiere seleccionar una carrera</option>
     
                             @foreach($careers as $career)
                                 @switch($user)
@@ -105,7 +109,7 @@
                                         <option value="{{ $career->id }}" {{ $academicAdvisor->career_id == $career->id ? 'selected' : '' }}>{{ $career->name }}</option>                                    
                                         @break
                                     @default
-                                        
+                                    <option value="{{ $career->id }}">{{ $career->name }}</option>
                                 @endswitch
                             @endforeach            
                         </select>
@@ -133,39 +137,19 @@
                         @enderror
                     </div>
                     
-                    <div class=" space-y-2 invisible">
+                    <div class="hidden md:block space-y-2 invisible">
                         <p class="text-sm"></p>
                         <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                        
                     </div>
                 </div>
 
-                @else
-                <div class=" space-y-2">
-                    <p class="text-sm">Grupo</p>
-                    <select name="group_id" id="groupSelect" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" disabled>
-                        <option disabled selected value="">Seleccionar un grupo</option>
-                        <option disabled value="noNecesario">El rol seleccionado no requiere seleccionar un grupo</option>
-                        {{-- @foreach($groups as $group)
-                            <option 
-                            @if(old('group_id') == $group->id) selected @endif
-                            value="{{ $group->id }}">{{ $group->name }}</option>
-                        @endforeach --}}
-                    </select>
-                    @error('group_id')
-                        <p class="text-[#ff0000] text-sm">
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-            </div>
+                
+                
+                <div class="p-5 flex justify-center">
 
-                @endif
-                
-                
-                
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
-        </div>
+                    <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
+                </div>
     </form>
 </div>
 
@@ -178,11 +162,14 @@
         const groupsByCareer = {!! json_encode($groupsByCareer) !!};
         const selectedRoleId = rolSelect.value;
         const selectedCareerId = careerSelect.value;
-
-
         
         if(selectedRoleId === "1") {
                 groupSelect.disabled = false; // Deshabilitar la selección de carrera
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
+        }
+
+        if(selectedRoleId === "2") {
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
         }
 
         if (selectedRoleId === "1" && selectedCareerId && groupsByCareer[selectedCareerId] && groupsByCareer[selectedCareerId].length > 0) {

@@ -1,6 +1,6 @@
 @extends('templates/authTemplate')
 @section('contenido')
-<div class="w-full h-screen flex justify-center items-center bg-white p-4">
+<div class="w-full h-screen flex justify-center items-start bg-white p-4">
     <div class="overflow-y-auto max-h-screen"> <!-- Agregado -->
     <form action="{{ route('panel-roles.update', $role->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full md:w-[40rem]">
         @csrf
@@ -20,7 +20,7 @@
             </div>
             <div class="w-full space-y-2">
                 <p class="text-sm">Permisos</p>
-                <div class="grid grid-cols-2 gap-4 overflow-y-scroll h-[250px]">
+                <div class="grid grid-cols-2 gap-4 overflow-y-scroll h-[350px] no-scrollbar py-5">
                     <div class="flex flex-col space-y-2"> <!-- Primera columna -->
                         @php
                             $permissionsArray = json_decode($role->permissions, true);

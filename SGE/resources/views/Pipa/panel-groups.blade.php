@@ -2,12 +2,15 @@
 @section('titulo', 'Lista de Grupos')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
+
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de grupos</h1>
             <div class="flex items-center flex-row justify-end">
-                <form action="{{ route('panel-groups.index') }}" method="GET" id="search-form">
+                <form action="{{ route('search.groups') }}" method="GET" id="search-form">
                     <div class="hidden md:flex items-center relative">
                         <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
@@ -33,7 +36,7 @@
 
         </div>
         
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between min-h-full">
 
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -66,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="hidden lg:block w-full">
+            <div class="hidden lg:block w-full h-screen">
                 <table class="text-start w-full">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
@@ -112,16 +115,15 @@
         </div>
         </div>
     </div>
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-            <div class="my-5 mx-auto md:w-full">
+    <div class="sm:p-8 sm:pt-0 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="w-11/12 mx-auto flex items-center justify-between">
+            <div class="mx-auto md:w-full">
                 {{$groups->links()}}
             </div>
         </div>
     </div>
 
 </section>
-
 <!-- Funciones JavaScript -->
 <script>
     function togglePermissions(groupId) {
@@ -146,12 +148,28 @@
     @endif
 </script>
 
-<script>
-    function searchGroups() {
-        var query = document.getElementById('search').value;
-        window.location.href = '{{ route("search.groups") }}?query=' + query;
-    }
-</script>
+{{-- <script>
+    
+    public function searchGroups(Request $request)
+{
+    $query = $request->input('query');
+
+    $groups = Group::where('name', 'like', '%' . $query . '%')
+                  ->orWhereHas('career', function($q) use ($query) {
+                      $q->where('name', 'like', '%' . $query . '%');
+                  })
+                  ->orWhereHas('career', function($q) use ($query) {
+                      $q->whereHas('groups', function($qq) use ($query) {
+                          $qq->where('name', 'like', '%' . $query . '%');
+                      });
+                  })
+                  ->paginate(10);
+
+    return view('search.groups', compact('groups'));
+}
+
+
+</script> --}}
 
 
 <script>

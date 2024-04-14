@@ -7,7 +7,7 @@
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de usuarios</h1>
             <div class="flex items-center flex-row justify-end">
-                <form action="{{ route('panel-users.index') }}" method="GET" id="search-form">
+                <form action="{{ route('search.users') }}" method="GET" id="search-form">
                     <div class="hidden md:flex items-center relative">
                         <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
@@ -167,7 +167,7 @@
     <div id="no-users-message" class="hidden mt-20 text-red-500 h-screen text-center text-lightGray font-bold text-2xl">Sin resultados.</div>
 
 </div>
-<div class="my-5 mx-auto mt-auto">
+<div class="my-5 mx-auto mt-auto md:w-[80%]">
     {{$users->links()}}
 </div>
 </section>

@@ -26,6 +26,23 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function searchUsers(Request $request)
+     {
+         $query = $request->input('query');
+     
+         $users = User::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('email', 'like', '%' . $query . '%')
+                     ->orWhereHas('role', function ($roleQuery) use ($query) {
+                         $roleQuery->where('title', 'like', '%' . $query . '%');
+                     })
+                     ->orWhere('identifier', 'like', '%' . $query . '%')
+                     ->paginate(10); // Change get() to paginate(10) or simplePaginate(10)
+     
+         return view('Pipa.panel-users', compact('users'));
+     }
+     
+
     public function index(Request $request)
     {
         if (Gate::denies('crud-usuarios')) {
@@ -117,7 +134,7 @@ class UserController extends Controller
                 \App\Models\AcademicAdvisor::create([
                     'user_id' => $user->id,
                     'career_id' => $request->career_id,
-                    'max_advisors' => 0,
+                    'max_advisors' => 1,
                     'quantity_advised' => 0,
                 ]);
             }
@@ -185,6 +202,11 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
+
+         // correo electrónico único
+         $request->validate([
+            'email' => 'unique:users,email',
+        ]);
     
         // ? Verificar si no se cambio el rol pero su algun dato diferente
 
@@ -242,7 +264,7 @@ class UserController extends Controller
                     $academicAdvisor = new AcademicAdvisor;
                     $academicAdvisor->user_id = $user->id;
                     $academicAdvisor->career_id = $request->career_id;
-                    $academicAdvisor->max_advisors = 0;
+                    $academicAdvisor->max_advisors = 1;
                     $academicAdvisor->quantity_advised = 0;
                     $academicAdvisor->save();
                     Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de asesores académicos');

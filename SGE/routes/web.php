@@ -292,7 +292,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('panel-users', UserController::class)->names('panel-users')->middleware('roleorcan:admin,crud-usuarios');
 
     // BUSQUEDA DE USUARIOS
-    Route::get('/search/groups', [UserController::class, 'searchGroups'])->name('search.groups');
+    Route::get('/search/groups', [GroupController::class, 'searchGroups'])->name('search.groups');
 
     // BUSQUEDA DE GRUPOS
     Route::get('/search/users', [UserController::class, 'searchUsers'])->name('search.users');
@@ -323,6 +323,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
+
+
+    // ! PERFIL
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
 });
 
 

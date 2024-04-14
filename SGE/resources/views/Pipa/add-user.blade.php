@@ -1,14 +1,15 @@
 @extends('templates/authTemplate')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
-    <form action="{{url('panel-users')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
-        <div class="w-full h-fit flex justify-center md:justify-start">
-            <h1 class="text-3xl font-bold">Añadir usuario</h1>
+<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white mb-10 md:mb-0 ">
+    <form action="{{url('panel-users')}}" method="POST" 
+    class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full">
+    <div class="w-full h-fit flex justify-center md:justify-start md:px-20">
+        <h1 class="text-3xl font-bold">Añadir usuario</h1>
             @csrf
         </div>  
 
-        <div class="w-full flex flex-col space-y-2 ">
+        <div class="w-full flex flex-col space-y-2">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Nombre</p>
@@ -143,7 +144,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const careerSelect = document.getElementById('careerSelect');
     const groupSelect = document.getElementById('groupSelect');
     const groupsByCareer = {!! json_encode($groupsByCareer) !!};
-    const addUsersAutomatic = document.getElementById('add-users-automatic'); 
+    const selectedRoleId = rolSelect.value;
+    const selectedCareerId = careerSelect.value;
+
+
+        if(selectedRoleId === "1") {
+                groupSelect.disabled = false; // Deshabilitar la selección de carrera
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
+        }
+
+        if(selectedRoleId === "2") {
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
+        }
+
+        if (selectedRoleId === "1" && selectedCareerId && groupsByCareer[selectedCareerId] && groupsByCareer[selectedCareerId].length > 0) {
+            groupSelect.innerHTML = '<option disabled value="">Seleccionar un grupo</option>'; // Cambiar el contenido del input
+    
+            groupsByCareer[selectedCareerId].forEach(group => {
+                const option = document.createElement('option');
+                option.value = group.id;
+                option.textContent = group.name;    
+                option.selected = group.id === {{ $user->interns?->group->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
+                groupSelect.appendChild(option);
+            });        
+            toggleGroupSelection(true, true); // Habilitar selección de grupo con mensaje si es estudiante
+        } else if (selectedRoleId === "1" && selectedCareerId && (!groupsByCareer[selectedCareerId] || groupsByCareer[selectedCareerId].length === 0)) {
+            // Si no hay grupos disponibles para la carrera seleccionada
+            groupSelect.innerHTML = '<option value="">No hay grupos disponibles para esta carrera</option>'; // Cambiar el contenido del input
+            toggleGroupSelection(false, false); // Deshabilitar selección de grupo sin mensaje
+        } else {
+            groupSelect.innerHTML = '<option value="">El rol seleccionado no requiere seleccionar un grupo</option>'; // Cambiar el contenido del input
+            toggleGroupSelection(false, false); // Si no se cumple la condición, deshabilitar selección de grupo sin mensaje
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Función para habilitar o deshabilitar la selección de grupo
     function toggleGroupSelection(enabled, isStudent) {
