@@ -2,24 +2,24 @@
 @section('titulo', 'Panel de Asesores Empresariales')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-screen flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores Empresariales</h1>
-
-            <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
-                    </div>
+        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Asesores Empresariales</h1>
+        <div class="flex items-center flex-row justify-end">
+            <form action="{{ route('search.advisors') }}" method="GET" id="search-form">
+                <div class="hidden md:flex items-center relative">
+                    <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                 </div>
-                <a href="{{ route('formAsesores')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
-                </a>
-            </div>
-
-
-            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+            </form>             
+            
+            
+            <a href="{{ route('formAsesores')}}"
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
+            </a>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
 
                 <div>
                     <div class="flex items-center relative" >
