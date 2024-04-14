@@ -189,7 +189,7 @@
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
                         @if (isset($project))
                             <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <p class="w-[70%]">Tu Anteproyecto esta guardado como borrador</p>
+                            <p class="w-[70%]">Tu Anteproyecto esta guardado como <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
@@ -205,7 +205,7 @@
                                 @if ($project->like == 0)
                                     <p class="w-full">Aun no tienes votos</p>
                                 @else
-                                    <p class="w-full">Tienes {{ $project->like }} voto(s)</p>
+                                    <p class="w-full">Tienes <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
                                 @endif
                             @else
                                 <p class="w-full">Aun no hay nada que votar</p>
