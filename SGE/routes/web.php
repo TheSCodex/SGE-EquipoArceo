@@ -292,7 +292,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('panel-users', UserController::class)->names('panel-users')->middleware('roleorcan:admin,crud-usuarios');
 
     // BUSQUEDA DE USUARIOS
-    Route::get('/search/groups', [UserController::class, 'searchGroups'])->name('search.groups');
+    Route::get('/search/groups', [GroupController::class, 'searchGroups'])->name('search.groups');
 
     // BUSQUEDA DE GRUPOS
     Route::get('/search/users', [UserController::class, 'searchUsers'])->name('search.users');
