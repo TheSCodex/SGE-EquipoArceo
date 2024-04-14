@@ -20,7 +20,7 @@
         <div class="w-full flex flex-col space-y-2 ">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
-                    <p class="text-sm">Nombre</p>
+                    <p class="space-y-2">Nombre</p>
                     <input type="text" name="name" value="{{ $user->name }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
                     @error('name')
                         <p class="text-[#ff0000] text-sm">
@@ -165,7 +165,7 @@
                 
                 
             <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
-
+        </div>
     </form>
 </div>
 
