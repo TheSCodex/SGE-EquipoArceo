@@ -2,8 +2,8 @@
 @section('titulo', 'Detalles de grupos')
 @section('contenido')
 
-<div class="w-full min-h-screen flex flex-col space-y-2">
-    <div class="w-full md:px-[7em] md:mt-[2em] flex flex-col bg-white">
+<div class="min-h-screen flex flex-col justify-start items-center space-y-2">
+    <div class="w-[90%] md:px-[7em] md:mt-[2em] flex flex-col bg-white">
         <div class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
             <div class="w-full h-fit flex justify-center md:justify-start">
                 <h1 class="text-xl md:text-3xl text-center font-bold">Detalles de {{$group->name}}</h1>

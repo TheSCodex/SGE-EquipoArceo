@@ -17,6 +17,10 @@ class GroupSeeder extends Seeder
         Group::create(['name' => 'SM52', 'career_id' => '7']);
         Group::create(['name' => 'SM53', 'career_id' => '7']);
         Group::create(['name' => 'SM54', 'career_id' => '7']);
+        Group::create(['name' => 'GA41', 'career_id' => '4']);
+        Group::create(['name' => 'GA42', 'career_id' => '4']);
+        Group::create(['name' => 'GA43', 'career_id' => '4']);
+        Group::create(['name' => 'GA44', 'career_id' => '4']);
 
     }
     

@@ -136,6 +136,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const careerSelect = document.getElementById('careerSelect');
     const groupSelect = document.getElementById('groupSelect');
     const groupsByCareer = {!! json_encode($groupsByCareer) !!};
+    const selectedRoleId = rolSelect.value;
+    const selectedCareerId = careerSelect.value;
+
+
+        if(selectedRoleId === "1") {
+                groupSelect.disabled = false; // Deshabilitar la selección de carrera
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
+        }
+
+        if(selectedRoleId === "2") {
+                careerSelect.disabled = false; // Deshabilitar la selección de carrera
+        }
+
+        if (selectedRoleId === "1" && selectedCareerId && groupsByCareer[selectedCareerId] && groupsByCareer[selectedCareerId].length > 0) {
+            groupSelect.innerHTML = '<option disabled value="">Seleccionar un grupo</option>'; // Cambiar el contenido del input
+    
+            groupsByCareer[selectedCareerId].forEach(group => {
+                const option = document.createElement('option');
+                option.value = group.id;
+                option.textContent = group.name;    
+                option.selected = group.id === {{ $user->interns?->group->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
+                groupSelect.appendChild(option);
+            });        
+            toggleGroupSelection(true, true); // Habilitar selección de grupo con mensaje si es estudiante
+        } else if (selectedRoleId === "1" && selectedCareerId && (!groupsByCareer[selectedCareerId] || groupsByCareer[selectedCareerId].length === 0)) {
+            // Si no hay grupos disponibles para la carrera seleccionada
+            groupSelect.innerHTML = '<option value="">No hay grupos disponibles para esta carrera</option>'; // Cambiar el contenido del input
+            toggleGroupSelection(false, false); // Deshabilitar selección de grupo sin mensaje
+        } else {
+            groupSelect.innerHTML = '<option value="">El rol seleccionado no requiere seleccionar un grupo</option>'; // Cambiar el contenido del input
+            toggleGroupSelection(false, false); // Si no se cumple la condición, deshabilitar selección de grupo sin mensaje
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Función para habilitar o deshabilitar la selección de grupo
     function toggleGroupSelection(enabled, isStudent) {
