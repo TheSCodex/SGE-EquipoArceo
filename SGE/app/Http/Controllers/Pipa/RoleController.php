@@ -14,14 +14,25 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Gate::denies('crud-roles-permisos')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
-        $roles = Role::paginate(3);
-        return view('Pipa.panel-roles', compact('roles'));
+    
+        $query = $request->input('query');
+        $rolesQuery = Role::query();
+    
+        // Aplicar el filtro de búsqueda si se proporciona una consulta
+        if (!empty($query)) {
+            $rolesQuery->where('title', 'like', '%' . $query . '%');
+        }
+    
+        $roles = $rolesQuery->paginate(3);
+    
+        return view('Pipa.panel-roles', compact('roles', 'query'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

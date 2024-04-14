@@ -143,6 +143,11 @@
                             <a href="{{ route('panel-users.index') }}" class="hover:border-b-2 hover:border-primaryColor">Usuarios</a>
                         </li>
                     @endcan
+                    @can('crud-usuarios')
+                    <li>
+                        <a href="{{ route('panel-groups.index') }}" class="hover:border-b-2 hover:border-primaryColor">Grupos</a>
+                    </li>
+                    @endcan
                     @can('crud-roles-permisos')
                         <li>
                             <a href="{{ route('panel-roles.index') }}" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Roles y permisos</a>

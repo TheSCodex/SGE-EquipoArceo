@@ -35,19 +35,21 @@
         
     </div>
     <div class="flex mt-[2%] px-[4%]  ">
-        <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
+        <section class=" text-sm md:space-x-6 space-x-2 flex">
+            <a href="panel-divisions">
+                <button id="btnWithOutAdvisor"
+                class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor text-white bg-primaryColor rounded px-5 py-1 shadow-lg">Divisiones</button>
+            </a>
+
+            <a href="panel-academies">
+                <button id="btnWithAdvisor"
+                class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
+            </a>
             <a href="panel-careers">
                 <button id="btnAll"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee]    rounded px-5 py-1 shadow-lg">Carreras</button>
                 </a>
-                <a href="panel-academies">
-                    <button id="btnWithAdvisor"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
-                </a>
-                <a href="panel-divisions">
-                    <button id="btnWithOutAdvisor"
-                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-primaryColor text-white rounded px-5 py-1 shadow-lg">Divisiones</button>
-                </a>
+
         </section>
       </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
@@ -94,9 +96,9 @@
                 </tr>
                 @foreach ($divisions as $division)
                 <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
-                    <td class="font-roboto pl-5 font-bold py-5">{{ $division->name }}</td>
+                    <td class="font-roboto pl-5 py-5">{{ $division->name }}</td>
 
-                   <td class="font-roboto font-bold py-5 text-start ">
+                   <td class="font-roboto  py-5 text-start ">
                         @if ($principal = $principals->where('id', $division->director_id)->first())
                             {{ $principal->name }}
                         @else
@@ -104,7 +106,7 @@
                         @endif    
                     </td>
 
-                    <td class="font-roboto font-bold py-5 text-start ">
+                    <td class="font-roboto  py-5 text-start ">
                         @if ($assistant = $assistants->where('id', $division->directorAsistant_id)->first())
                             {{ $assistant->name }}
                         @else
@@ -112,12 +114,12 @@
                         @endif
                     </td>
                     
-                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                    <td class="font-roboto py-5 cursor-pointer ">
                         <a href="{{ route('panel-divisions.edit', $division->id) }}" class="flex pl-2">
                             <img src="/img/logos/pencil.svg" >
                         </a>
                     </td>
-                    <td class="font-roboto font-bold py-5 cursor-pointer "onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
+                    <td class="font-roboto  py-5 cursor-pointer "onclick="confirmDelete('{{ $division->name }}','{{ $division->id }}')">
                         <form class="flex justify-center pr-[6%]" id="deleteForm{{ $division->id }}" action="{{ route('panel-divisions.destroy', $division->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

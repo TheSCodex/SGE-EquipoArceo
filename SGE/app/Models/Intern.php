@@ -18,7 +18,8 @@ class Intern extends Model
         'performance_area',
         'service_hour',
         'Group',
-        'career_id'
+        'career_id',
+        'group_id'
     ];
 
     public function user()
@@ -49,6 +50,11 @@ class Intern extends Model
     public function career()
     {
         return $this->hasOne(Career::class, 'id', 'career_id');
+    }
+
+    public function group()
+    {
+        return $this->hasOne(Group::class, 'id', 'group_id');
     }
 
     public function penalization()
