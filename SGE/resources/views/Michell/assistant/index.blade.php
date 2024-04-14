@@ -193,7 +193,7 @@
                 @endforeach  
             @else
                 <div class="bg-white rounded-md py-1.5 flex flex-col gap-3 min-h-[100px] grow justify-center   ">
-                    <p class="text-[#888] w-full text-center font-bold text-sm">Sin división</p>
+                    <p class="text-[#888] w-full text-center font-bold text-sm">No hay bajas</p>
                 </div>   
             @endif
 
