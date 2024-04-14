@@ -84,7 +84,6 @@ class ExcelExportController extends Controller
             $row++;
         }
 
-        // Eventos del asesor
         $calendarEvents = CalendarEvent::where('requester_id', $academic_advisor_id)->orderBy('date_start')->take(11)->get();
 
         $column = 'P';
