@@ -135,6 +135,7 @@
                     @else
                         <p>Sin asesor académico</p>
                     @endif
+
                 </div>
             </div>
 
