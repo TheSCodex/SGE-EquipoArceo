@@ -2,10 +2,11 @@
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="w-full md:px-[7em] md:mt-[2em] h-fit flex bg-white sm:h-screen mb-8">
-    <form action="{{ url('panel-groups/' . $group->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
+    <form action="{{ url('panel-groups/' . $group->id) }}" method="POST" 
+        class="min-h-screen flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
         @csrf
         @method('PUT')
-        <div class="w-full h-fit flex justify-center md:justify-start">
+        <div class="w-full h-fit flex justify-center md:justify-start md:px-20">
             <h1 class="text-3xl font-bold">Editar grupo</h1>
         </div>
         @if(session('error'))
@@ -52,8 +53,9 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
-
+            <div class="p-5 flex justify-center">
+                <button type="submit" class=" p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar grupo</button>
+            </div>
     </form>
 </div>
 

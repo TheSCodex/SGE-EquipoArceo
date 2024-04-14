@@ -5,8 +5,8 @@
     <form action="{{ url('panel-users/' . $user->id) }}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
         @csrf
         @method('PUT')
-        <div class="w-full h-fit flex justify-center md:justify-start">
-            <h1 class="text-3xl font-bold">Editar grupo</h1>
+        <div class="w-full h-fit flex justify-center md:justify-start md:px-20">
+            <h1 class="text-3xl font-bold">Editar usuario</h1>
         </div>
         @if(session('error'))
         <script>
@@ -137,7 +137,7 @@
                         @enderror
                     </div>
                     
-                    <div class=" space-y-2 invisible">
+                    <div class="hidden md:block space-y-2 invisible">
                         <p class="text-sm"></p>
                         <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                        
@@ -146,9 +146,10 @@
 
                 
                 
-                
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar grupo</button>
+                <div class="p-5 flex justify-center">
 
+                    <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Editar usuario</button>
+                </div>
     </form>
 </div>
 

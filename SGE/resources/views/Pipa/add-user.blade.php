@@ -1,14 +1,15 @@
 @extends('templates/authTemplate')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white">
-    <form action="{{url('panel-users')}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full ">
-        <div class="w-full h-fit flex justify-center md:justify-start">
-            <h1 class="text-3xl font-bold">Añadir usuario</h1>
+<div class="w-full md:px-[7em] md:mt-[2em] h-screen flex bg-white mb-10 md:mb-0 ">
+    <form action="{{url('panel-users')}}" method="POST" 
+    class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 md:w-full">
+    <div class="w-full h-fit flex justify-center md:justify-start md:px-20">
+        <h1 class="text-3xl font-bold">Añadir usuario</h1>
             @csrf
         </div>  
 
-        <div class="w-full flex flex-col space-y-2 ">
+        <div class="w-full flex flex-col space-y-2">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Nombre</p>
@@ -118,14 +119,15 @@
                         </p>
                     @enderror
                 </div>
-                <div class=" space-y-2 invisible">
+                <div class="hidden space-y-2 md:invisible md:block">
                     <p class="text-sm"></p>
                     <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
                    
                 </div>
             </div>
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir usuario</button>
-
+            <div class="p-5 flex justify-center">
+                <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir usuario</button>
+            </div>
     </form>
 </div>
 
