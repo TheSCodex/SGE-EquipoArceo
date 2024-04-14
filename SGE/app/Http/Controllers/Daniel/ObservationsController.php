@@ -95,7 +95,7 @@ class ObservationsController extends Controller
                 }
                 $comment->save();
 
-                return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
+                return redirect()->back()->with('Save', 'Comentario guardado exitosamente.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }
