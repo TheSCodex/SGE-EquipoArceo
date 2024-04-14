@@ -131,8 +131,10 @@
                 </div>
                 
             </div>
-            
-            <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir usuario</button>
+            <div class="p-5 flex justify-center">
+
+                <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir usuario</button>
+            </div>
 
     </form>
 </div>
