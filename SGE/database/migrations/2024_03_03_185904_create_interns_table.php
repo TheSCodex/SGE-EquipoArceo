@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('period')->nullable();
             $table->integer('service_hour')->nullable();
             $table->integer('career_id')->nullable()->index('career_id');
+            $table->integer('group_id')->nullable()->index('group_id');
             $table->string('generation')->nullable();
             $table->integer('study_grade_id')->nullable()->index('study_grade_id');
             $table->timestamps();
