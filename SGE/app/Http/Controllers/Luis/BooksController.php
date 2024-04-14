@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Luis\BookFormRequest;
 use App\Models\AcademicAdvisor;
+use App\Models\Academy;
 use App\Models\Book;
+use App\Models\Career;
+use App\Models\Division;
 use App\Models\Intern;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -21,20 +24,74 @@ class BooksController extends Controller
         if(Gate::denies('leer-lista-libros')){
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
+        $divisionOrAcademy = null;
+        $booksByAcademy = [];
+        $booksByDivision = [];
+
+        $user = auth()->user();
+        if($user->rol_id == 5){
+            $division = Division::where('directorAsistant_id', $user->id)->first();
+            $divisionOrAcademy = $division;
+        }
+        if($user->rol_id == 2){
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+            $career = Career::where('id', $academicAdvisor->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $divisionOrAcademy = $academy;
+        }
+
         $internsWithUserInfo = Intern::whereNotNull('book_id')
         ->with('user')
         ->get();
+
+        function getInternInfo($intern){
+            $career = Career::where('id', $intern->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $division = Division::where('id', $academy->division_id)->first();
+            return [
+                'user' => $intern->user,
+                'academy' => $academy,
+                'career' => $career,
+                'division' => $division,
+            ];
+        };
     
         // Preparar un arreglo que contenga la información del usuario asociada a cada libro
         $userInfoByBookId = [];
         foreach ($internsWithUserInfo as $intern) {
             $bookId = $intern->book_id;
-            $userInfoByBookId[$bookId][] = $intern->user;
+            $userInfoByBookId[$bookId][] = getInternInfo($intern);
+            
+        }
+        
+        $books = Book::paginate(5);
+
+        foreach ($books as $book) {
+            // Verificar si hay información del usuario asociada al libro
+            if(isset($userInfoByBookId[$book->id])) {
+                // Obtener el nombre de la academia o división correspondiente al libro
+                $bookInfo = $userInfoByBookId[$book->id][0];
+                $divisionName = $bookInfo['division']->name;
+                $academyName = $bookInfo['academy']->name;
+        
+                // Verificar si el usuario es un asistente
+                if($user->rol_id == 5){
+                    // Verificar si el nombre de la división coincide con la división del usuario
+                    if ($divisionOrAcademy->name == $divisionName) {
+                        $booksByDivision[$divisionName][] = $book;
+                    }
+                }
+                // Verificar si el usuario es un asesor académico
+                elseif($user->rol_id == 2){
+                    // Verificar si el nombre de la academia coincide con la academia del usuario
+                    if ($divisionOrAcademy->name == $academyName) {
+                        $booksByAcademy[$academyName][] = $book;
+                    }
+                }
+            }
         }
 
-        // dd($internsWithUserInfo);
-        $books = Book::paginate(5);
-        return view('Luis.book', compact('books', 'userInfoByBookId'));
+        return view('Luis.book', compact('books', 'userInfoByBookId', 'divisionOrAcademy', 'booksByAcademy', 'booksByDivision'));
     }
     
 
@@ -127,6 +184,7 @@ class BooksController extends Controller
                 $intern['academic_advisor'] = $academicAdvisor;
             }
         }
+        // dd($interns);
         return view('Luis.showBook', compact('book', 'internsIdentifier', 'interns'));
     }
 
