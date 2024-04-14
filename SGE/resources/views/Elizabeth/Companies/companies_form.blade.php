@@ -81,13 +81,20 @@
                                     {{ $sector->title }}</option>
                             @endforeach
                         </select>
+                        @error('businessSector')
+                            <p class="text-[#ff0000] text-sm">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex justify-center items-center">
-                    <button type="submit" class="p-2 bg-primaryColor w-full lg:w-[30vw]  rounded-md text-white my-[3%]">Añadir empresa</button>
-        
-                </div>          
-                 </form>
+                    <button type="submit"
+                        class="p-2 bg-primaryColor w-full lg:w-[30vw]  rounded-md text-white my-[3%]">Añadir
+                        empresa</button>
+
+                </div>
+            </form>
 
 
         </div>
