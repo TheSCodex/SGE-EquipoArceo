@@ -118,12 +118,19 @@
                         </p>
                     @enderror
                 </div>
-                <div class=" space-y-2 invisible">
+                <div class="space-y-2 invisible hidden" id="placeholder-addUsers">
                     <p class="text-sm"></p>
                     <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                   
+
                 </div>
+                <div class="space-y-2 invisible" id="add-users-automatic">
+                    <button type="button" class="w-[20em] md:w-[30em] bg-transparent  px-4 py-3 mt-6">
+                        <a class="text-primaryColor underline">Añadir usuarios masivamente</a>
+                    </button>
+                </div>
+                
             </div>
+            
             <button type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" id="submitBtn">Añadir usuario</button>
 
     </form>
@@ -136,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const careerSelect = document.getElementById('careerSelect');
     const groupSelect = document.getElementById('groupSelect');
     const groupsByCareer = {!! json_encode($groupsByCareer) !!};
+    const addUsersAutomatic = document.getElementById('add-users-automatic'); 
 
     // Función para habilitar o deshabilitar la selección de grupo
     function toggleGroupSelection(enabled, isStudent) {
@@ -204,7 +212,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
         });
+
+    // Función para habilitar el link de añadir usuarios masivamente
+    rolSelect.addEventListener('change', function(){
+        const selectedRoleId = rolSelect.value;
+        const isStudent = selectedRoleId === "1"; // Verificar si el rol es estudiante
+
+        const placeholderAddUsers = document.getElementById('placeholder-addUsers');
+        const addUsersAutomatic = document.getElementById('add-users-automatic');
+
+        if (isStudent) {
+            addUsersAutomatic.classList.remove('invisible', 'hidden'); // habilitar el link
+            placeholderAddUsers.classList.add('invisible');
+        } else {
+            addUsersAutomatic.classList.add('invisible');
+            placeholderAddUsers.classList.remove('invisible');
+        }
     });
+
+    addUsersAutomatic.addEventListener('click', function(){
+        
+    })    
+
+    });
+
 
 </script>
 
