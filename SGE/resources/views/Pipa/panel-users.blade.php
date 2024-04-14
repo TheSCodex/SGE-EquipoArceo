@@ -167,7 +167,7 @@
     <div id="no-users-message" class="hidden mt-20 text-red-500 h-screen text-center text-lightGray font-bold text-2xl">Sin resultados.</div>
 
 </div>
-<div class="my-5 mx-auto mt-auto">
+<div class="my-5 mx-auto mt-auto md:w-[80%]">
     {{$users->links()}}
 </div>
 </section>

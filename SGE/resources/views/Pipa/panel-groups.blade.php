@@ -36,7 +36,7 @@
 
         </div>
         
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between min-h-full">
 
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="hidden lg:block w-full">
+            <div class="hidden lg:block w-full h-screen">
                 <table class="text-start w-full">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
@@ -115,9 +115,9 @@
         </div>
         </div>
     </div>
-    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-            <div class="my-5 mx-auto md:w-full">
+    <div class="sm:p-8 sm:pt-0 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        <div class="w-11/12 mx-auto flex items-center justify-between">
+            <div class="mx-auto md:w-full">
                 {{$groups->links()}}
             </div>
         </div>

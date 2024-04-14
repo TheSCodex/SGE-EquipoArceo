@@ -105,8 +105,8 @@
                             $counter = ($roles->currentPage() - 1) * $roles->perPage() + $loop->index + 1;
                         @endphp
                         <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                            <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                            <td class="font-roboto font-bold py-5 text-start pl-5">
+                            <td class="font-roboto py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                            <td class="font-roboto py-5 text-start pl-5">
                                 @if ($role->title == "estudiante")
                                     Estudiante
                                 @elseif ($role->title == "asesorAcademico")
@@ -195,7 +195,7 @@
 
 </section>
 
-<!-- Funciones JavaScript -->
+<!-- Funciones JavaScript -->g
 <script>
     function togglePermissions(roleId) {
         var permissionsList = document.getElementById('permissions_' + roleId);
