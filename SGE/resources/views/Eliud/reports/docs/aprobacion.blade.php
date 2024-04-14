@@ -65,20 +65,20 @@
             </span>Autorización de digitalización.</p>
 
         <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
-            </span> {{'UTC/' . $division->initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
+            </span> {{'UTC/' . $division-> initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
     </div>
 
 
     <p
         style="line-height: 25px ;width: 100%; text-align:justify;width:100%; margin-top:20px; margin-bottom:10px; marger: 10px;line-height: none; ">
-        Se autoriza al (a) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
+        Se autoriza al (a) estudiante <span style="text-decoration: underline; font-weight:bolder;"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
         número de matrícula:
         <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
     </p>
 
     <div style="position: relative;height:1px">
         <div style="position: absolute; width: 250px; height:200px; top:50px; right:-5px">
-            <p > {{ $project?->name}}</p>
+            <p style="font-weight:bolder;"> {{ $project?->name}}</p>
         </div>
     
     </div>
@@ -95,7 +95,7 @@
                     Escribir el título</td>
             </tr>
             <tr>
-                <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 2 ? 'X' : '' }}</td>
+                <td style="width:34px  ; border: 0.5px solid black;"></td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Excelencia académica
@@ -106,7 +106,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 3 ? 'X' : '' }}</td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Experiencia Laboral
@@ -116,7 +116,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 4 ? 'X' : '' }}</td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 3 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Movilidad internacional
@@ -126,7 +126,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 5 ? 'X' : '' }}</td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 4 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Proyecto de investigación
@@ -136,7 +136,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 6 ? 'X' : '' }}</td>
+                <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 5 ? 'X' : '' }}</td>
                 <td
                     style="padding: 2px;paddier:5px; padding-left:8px; text-align: left; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Certificación Profesional
