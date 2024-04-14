@@ -26,6 +26,23 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function searchUsers(Request $request)
+     {
+         $query = $request->input('query');
+     
+         $users = User::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('email', 'like', '%' . $query . '%')
+                     ->orWhereHas('role', function ($roleQuery) use ($query) {
+                         $roleQuery->where('title', 'like', '%' . $query . '%');
+                     })
+                     ->orWhere('identifier', 'like', '%' . $query . '%')
+                     ->paginate(10); // Change get() to paginate(10) or simplePaginate(10)
+     
+         return view('Pipa.panel-users', compact('users'));
+     }
+     
+
     public function index(Request $request)
     {
         if (Gate::denies('crud-usuarios')) {

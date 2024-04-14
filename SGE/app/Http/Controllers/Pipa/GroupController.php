@@ -19,18 +19,18 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
 
-     public function searchGroups(Request $request)
-{
-    $query = $request->input('query');
+    public function searchGroups(Request $request)
+    {
+        $query = $request->input('query');
 
-    $groups = Group::where('name', 'like', '%' . $query . '%')
-                  ->orWhereHas('career', function($q) use ($query) {
-                      $q->where('name', 'like', '%' . $query . '%');
-                  })
-                  ->paginate(10);
+        $groups = Group::where('name', 'like', '%' . $query . '%')
+                    ->orWhereHas('career', function($q) use ($query) {
+                        $q->where('name', 'like', '%' . $query . '%');
+                    })
+                    ->paginate(10);
 
-    return view('Pipa.panel-groups', compact('groups')); // Reemplaza 'nombre_de_tu_vista' con el nombre real de tu vista
-}
+        return view('Pipa.panel-groups', compact('groups')); // Reemplaza 'nombre_de_tu_vista' con el nombre real de tu vista
+    }
 
     public function index(Request $request)
     {
