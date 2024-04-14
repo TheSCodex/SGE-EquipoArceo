@@ -43,9 +43,9 @@
                             <h4 class="text-lg font-medium text-white">
                                 Responder
                             </h4>
-                            <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-96" name="content" type="text" ">                     
+                            <input placeholder=" Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border-none border-transparent focus:outline-none focus:ring-0 hover:bg-white hover:text-black rounded-md p-2 w-80" name="content" type="text" ">                     
                         </div>
-                        <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
+                        <button class="bg-darkGreen border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
                             Guardar comentario 
                         </button>
                     </form>
@@ -87,9 +87,9 @@
                                         <h4 class="text-lg font-medium text-white">
                                             Responder
                                         </h4>
-                                        <input placeholder="Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border border-transparent rounded-md p-2 w-32 h-32 focus:border-green-500 overflow-y-auto overflow-hidden" name="content" type="text">
+                                        <input placeholder="Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)" class="bg-transparent text-base text-white border-none border-transparent focus:outline-none focus:ring-0 rounded-md p-2 w-32  overflow-y-auto overflow-hidden hover:bg-white hover:text-black" name="content" type="text">
                                     </div>
-                                    <button class="bg-darkGreen border-t border-black text-white px-3 py-2 rounded-md shadow-sm hover:bg-green-dark" type="submit">
+                                    <button class="bg-darkGreen border-t border-black text-white px-3 py-2 m-10 rounded-md shadow-sm hover:bg-green-dark" type="submit">
                                         Guardar comentario 
                                     </button>
                                 </form>
