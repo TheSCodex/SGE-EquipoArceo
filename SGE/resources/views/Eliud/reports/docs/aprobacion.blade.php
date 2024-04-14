@@ -71,7 +71,7 @@
 
     <p
         style="line-height: 25px ;width: 100%; text-align:justify;width:100%; margin-top:20px; margin-bottom:10px; marger: 10px;line-height: none; ">
-        Se autoriza al (a) estudiante <span style="text-decoration: underline; font-weight:bolder;"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
+        Se autoriza al (a) estudiante <span style="text-decoration: underline; font-weight:bolder;"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$group->name}}<span style="color: white">..</span></span> con
         número de matrícula:
         <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
     </p>
