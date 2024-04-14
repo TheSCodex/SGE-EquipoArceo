@@ -104,7 +104,7 @@
                                         Resolver
                                     </h4>
                                     <p class="text-base text-white">
-                                        Pendiente a revision
+                                        Comentario pendiente a resolucion
                                     </p>
                                 @else
                                     <h4 class="text-lg font-medium text-white">
