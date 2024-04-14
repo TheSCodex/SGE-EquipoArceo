@@ -43,12 +43,22 @@
                         <div
                             class="sm:w-full md:w-1/3 bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
                             <div>
-                                <h4 class="text-lg font-medium text-white">
-                                    Resolver
-                                </h4>
-                                <p class="text-base text-white">
-                                    Comentario... (Explica a tu asesor cómo resolviste su observación brevemente)
-                                </p>
+                                @if ($comment->status != 3)
+    <h4 class="text-lg font-medium text-white">
+        Resolver
+    </h4>
+    <p class="text-base text-white">
+        Pendiente a revision
+    </p>
+@else
+    <h4 class="text-lg font-medium text-white">
+        Resuelto
+    </h4>
+    <p class="text-base text-white">
+        Este comentario ya fue resuelto.
+    </p>
+@endif
+
                             </div>
                             <form action="{{ route('observations.update', $tutorComment->id) }}" method="POST">
                                 @csrf
@@ -89,12 +99,22 @@
                             <div
                                 class="w-full bg-primaryColor rounded-r-lg h-64 p-4 flex flex-col justify-between items-center text-center">
                                 <div>
+                                    @if ($comment->status != 3)
                                     <h4 class="text-lg font-medium text-white">
                                         Resolver
                                     </h4>
                                     <p class="text-base text-white">
-                                        Comentario...
+                                        Comentario pendiente a resolucion
                                     </p>
+                                @else
+                                    <h4 class="text-lg font-medium text-white">
+                                        Resuelto
+                                    </h4>
+                                    <p class="text-base text-white">
+                                        Este comentario ya fue resuelto.
+                                    </p>
+                                @endif
+                                
                                 </div>
                                 @if ($comment->status != 3)
                                     <form id="resolveForm" action="{{ route('observations.update', $comment->id) }}"
