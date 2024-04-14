@@ -49,32 +49,30 @@
                         @else
                             @php
                                 $showSinResultados = false;
+                                $userAuthInfo = auth()->user();
                             @endphp
                             @foreach ($books as $book)
                                 @if(isset($userInfoByBookId[$book->id]))
+                                        @if ($userAuthInfo->rol_id == 5)
+                                        @if (count($booksByDivision) == 0)
+                                        @if ($showSinResultados)
+                                        
+                                        @else
                                         @php
-                                            $user = auth()->user();
-                                        @endphp
-                                        @if ($user->rol_id == 5)
-                                            @if (count($booksByDivision) == 0)
-                                                    @if ($showSinResultados)
-                                                    
-                                                    @else
-                                                        @php
-                                                            $showSinResultados = true;
+                                                        $showSinResultados = true;
                                                         @endphp
-                                                        <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
+                                                    <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
                                                     @endif
-                                                @else
-                                                @foreach ($booksByDivision as $bookByDivision)
+                                                    @else
+                                                    @foreach ($booksByDivision as $bookByDivision)
                                                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
                                                         <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
                                                         <p class="text-sm text-gray-500">Autor: {{ $book->author }}</p>
                                                         <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
                                                         <p class="text-sm text-gray-500">proporcionado por: 
                                                             @if (isset($userInfoByBookId[$book->id]))
-                                                                @foreach ($userInfoByBookId[$book->id][0] as $user)
-                                                                <p class="text-sm text-gray-500">{{ $user->identifier }}</p>
+                                                                @foreach ($userInfoByBookId[$book->id] as $user)
+                                                                <p class="text-sm text-gray-500">{{ $user['user']->identifier }}</p>
                                                                 @endforeach
                                                             @else
                                                                 <p class="text-sm text-gray-500">Sin información</p>
@@ -104,7 +102,7 @@
                                                 @endforeach
                                             @endif
                                         @endif
-                                        @if ($user->rol_id == 2)
+                                        @if ($userAuthInfo->rol_id == 2)
                                             @if (count($booksByAcademy) == 0)
                                                 <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
                                                 @else
@@ -115,8 +113,8 @@
                                                         <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
                                                         <p class="text-sm text-gray-500">proporcionado por: 
                                                             @if (isset($userInfoByBookId[$book->id]))
-                                                                @foreach ($userInfoByBookId[$book->id][0] as $user)
-                                                                <p class="text-sm text-gray-500">{{ $user->identifier }}</p>
+                                                                @foreach ($userInfoByBookId[$book->id] as $user)
+                                                                <p class="text-sm text-gray-500">{{ $user['user']->identifier }}</p>
                                                                 @endforeach
                                                             @else
                                                                 <p class="text-sm text-gray-500">Sin información</p>
@@ -158,9 +156,9 @@
                     <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
                 @else
                     @php
-                        $user = auth()->user();
+                        $userAuthInfo = auth()->user();
                     @endphp
-                    @if ($user->rol_id == 2 && count($booksByAcademy) > 0)
+                    @if ($userAuthInfo->rol_id == 2 && count($booksByAcademy) > 0)
                         <table class="text-start w-full">
                             <thead>
                                 <tr>
@@ -196,8 +194,8 @@
                                                     <td class="font-roboto  py-5  text-left w-1/12">{{ $book->isbn }}</td>
                                                     <td class="font-roboto  py-5  text-left ">
                                                         @if (isset($userInfoByBookId[$book->id]))
-                                                            @foreach ($userInfoByBookId[$book->id][0] as $user)
-                                                                <p>{{$user->identifier}}</p>
+                                                        @foreach ($userInfoByBookId[$book->id] as $user)
+                                                                <p>{{$user['user']->identifier}}</p>
                                                             @endforeach
                                                         @else
                                                             <p>Sin información</p>
@@ -239,7 +237,7 @@
                             </tbody>
                         </table>
                     @endif
-                    @if ($user->rol_id == 5 && count($booksByDivision) > 0)
+                    @if ($userAuthInfo->rol_id == 5 && count($booksByDivision) > 0)
                         <table class="text-start w-full">
                             <thead>
                                 <tr>
@@ -275,8 +273,8 @@
                                                     <td class="font-roboto  py-5  text-left w-1/12">{{ $book->isbn }}</td>
                                                     <td class="font-roboto  py-5  text-left ">
                                                         @if (isset($userInfoByBookId[$book->id]))
-                                                            @foreach ($userInfoByBookId[$book->id][0] as $user)
-                                                                <p>{{$user->identifier}}</p>
+                                                            @foreach ($userInfoByBookId[$book->id] as $user)
+                                                                <p>{{$user['user']->identifier}}</p>
                                                             @endforeach
                                                         @else
                                                             <p>Sin información</p>
@@ -319,12 +317,12 @@
                         </table>
                     @endif
                 @endif
-                @if($user->rol_id == 2)
+                @if($userAuthInfo->rol_id == 2)
                 @if (count($booksByAcademy) == 0)
                     <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>                        
                 @endif    
             @endif
-            @if($user->rol_id == 5)     
+            @if($userAuthInfo->rol_id == 5)     
                 @if ( count($booksByDivision) == 0)
                     <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>                        
                 @endif
