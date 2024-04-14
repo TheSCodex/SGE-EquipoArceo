@@ -54,7 +54,7 @@
                                     @foreach ($advisors as $data)
                                         <tr
                                             class="data-row {{ $data->quantity_advised > 0 ? 'has-advisor' : 'no-advisor' }}">
-                                            <td class="py-4">{{ $data->name }}</td>
+                                            <td class="py-4">{{$data->last_name}} {{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
                                             @if ($data->quantity_advised >= 0)
                                                 @php

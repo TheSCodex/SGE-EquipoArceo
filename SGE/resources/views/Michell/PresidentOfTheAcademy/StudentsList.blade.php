@@ -43,64 +43,67 @@
                 <section class="space-y-6 max-md:mt-10">
                     {{-- Seccion de la tabla --}}
                     <section class="hidden md:block h-screen">
-                        <div class="h-[calc(100%-4rem)] overflow-y-hidden">
-                        <table id="dataTable" class="divide-y divide-[#999] w-[84rem]">
-                            <thead id="tableHeader" class="text-[#555] text-base">
-                                <tr>
-                                    <th scope="col" class="pr-[13rem] pb-4">Nombre de estudiantes</th>
-                                    <th scope="col" class="pr-[13rem] pb-4">Nombre del proyecto</th>
-                                    <th scope="col" class="pb-4 pr-[5rem]">Asesor académico</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm">
-                                @foreach ($dataStudents as $data)
-                                    <tr
-                                        class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px] font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
-
-                                        {{-- <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif> --}}
-                                        <td class="py-4">{{ $data->user->name }}</td>
-                                        <td class="py-4">Sistema de Estadias</td>
-                                        <td class="py-4">
-                                            @unless ($data->academicAdvisor)
-                                                <span class="text-gray-500">Sin asesor asignado</span>
-                                            @else
-                                                {{ $data->academicAdvisor->user->name }}
-                                            @endunless
-                                        </td>
-
-                                        <td class="py-4">
-                                            @if ($data->academicAdvisor)
-                                                {{-- Boton para cambiar de asesor --}}
-                                                <a href="{{ route('presidente.edit', $data->id) }}"
-                                                    class="text-primaryColor flex space-x-1 hover:bg-gray-100 p-1 rounded">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                                    </svg>
-                                                    <p class="font-bold">Cambias asesor</p>
-                                                </a>
-                                            @else
-                                                {{-- Boton de asignacion de asesor --}}
-                                                <a href="{{ route('presidente.edit', $data->id) }}"
-                                                    class="text-primaryColor flex space-x-1 hover:bg-gray-100 p-1 rounded">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p class="font-bold">Asignar asesor</p>
-                                                </a>
-                                            @endif
-                                        </td>
+                        <div class="h-[calc(100%-4rem)]">
+                            <table id="dataTable" class="divide-y divide-[#999] w-[84rem] font-montserrat">
+                                <thead id="tableHeader" class="text-[#555] text-base">
+                                    <tr>
+                                        <th scope="col" class="pr-[10rem] pb-4">Nombre de estudiantes</th>
+                                        <th scope="col" class="pr-[9rem] pb-4">Nombre del proyecto</th>
+                                        <th scope="col" class="pb-4 pr-[5rem]">Asesor académico</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <p id="noDataMessage"
-                            class="mt-20 text-red-500 hidden h-screen text-center text-lightGray font-bold text-2xl">
-                            Sin resultados</p>
+                                </thead>
+                                <tbody class="text-sm">
+                                    @foreach ($dataStudents as $data)
+                                        <tr
+                                            class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px] data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif">
+
+                                            {{-- <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif> --}}
+                                            <td class="py-4">{{ $data->user->last_name }} {{ $data->user->name }}</td>
+                                            <td class="py-4">
+                                                {{ $data->project ? $data->project->name : 'Sin proyecto asignado' }}</td>
+                                            <td class="py-4">
+                                                @unless ($data->academicAdvisor)
+                                                    <span class="text-gray-500">Sin asesor asignado</span>
+                                                @else
+                                                    {{ $data->academicAdvisor->user->last_name }}
+                                                    {{ $data->academicAdvisor->user->name }}
+                                                @endunless
+                                            </td>
+
+                                            <td class="py-4">
+                                                @if ($data->academicAdvisor)
+                                                    {{-- Boton para cambiar de asesor --}}
+                                                    <a href="{{ route('presidente.edit', $data->id) }}"
+                                                        class="text-primaryColor flex space-x-1 hover:bg-gray-100 p-1 rounded">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                            stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                                        </svg>
+                                                        <p class="font-bold">Cambias asesor</p>
+                                                    </a>
+                                                @else
+                                                    {{-- Boton de asignacion de asesor --}}
+                                                    <a href="{{ route('presidente.edit', $data->id) }}"
+                                                        class="text-primaryColor flex space-x-1 hover:bg-gray-100 p-1 rounded">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                            viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        <p class="font-bold">Asignar asesor</p>
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <p id="noDataMessage"
+                                class="mt-20 text-red-500 hidden h-screen text-center text-lightGray font-bold text-2xl">
+                                Sin resultados</p>
                         </div>
                         @if ($dataStudents->lastPage() > 1)
                             <div class="pagination">
