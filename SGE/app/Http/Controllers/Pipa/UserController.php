@@ -32,6 +32,8 @@ class UserController extends Controller
          $query = $request->input('query');
      
          $users = User::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('last_name', 'like', '%' . $query . '%')
+                     ->orWhere(DB::raw("CONCAT(name, ' ', last_name)"), 'like', '%' . $query . '%')
                      ->orWhere('email', 'like', '%' . $query . '%')
                      ->orWhereHas('role', function ($roleQuery) use ($query) {
                          $roleQuery->where('title', 'like', '%' . $query . '%');
