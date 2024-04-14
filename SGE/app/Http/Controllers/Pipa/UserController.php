@@ -134,7 +134,7 @@ class UserController extends Controller
                 \App\Models\AcademicAdvisor::create([
                     'user_id' => $user->id,
                     'career_id' => $request->career_id,
-                    'max_advisors' => 0,
+                    'max_advisors' => 1,
                     'quantity_advised' => 0,
                 ]);
             }
@@ -264,7 +264,7 @@ class UserController extends Controller
                     $academicAdvisor = new AcademicAdvisor;
                     $academicAdvisor->user_id = $user->id;
                     $academicAdvisor->career_id = $request->career_id;
-                    $academicAdvisor->max_advisors = 0;
+                    $academicAdvisor->max_advisors = 1;
                     $academicAdvisor->quantity_advised = 0;
                     $academicAdvisor->save();
                     Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de asesores académicos');
