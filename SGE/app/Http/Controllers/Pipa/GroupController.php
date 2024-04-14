@@ -97,6 +97,7 @@ class GroupController extends Controller
         if (Gate::denies('crud-usuarios')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
+
         $groups = Group::all(); 
         $careers = Career::all();
         $group = \App\Models\Group::find($id);
@@ -110,7 +111,7 @@ class GroupController extends Controller
     public function update(GroupRequest $request, string $id): RedirectResponse
     {
         $group = Group::findOrFail($id);
-
+    
         // Verificar si el nombre se ha modificado y si es así, aplicar la validación de unicidad
         if ($group->name !== $request->name) {
             $request->validate([
@@ -122,12 +123,16 @@ class GroupController extends Controller
                 'career_id' => 'bail|required',
             ]);
         }
-
+    
         $group->update($request->all());
-
+    
+        // Actualizar automáticamente la carrera en la tabla 'interns' para los internos relacionados con este grupo
+        Intern::where('group_id', $id)->update(['career_id' => $request->career_id]);
+    
         session()->flash('success', 'El grupo ' . $group->name . ' se ha editado correctamente.');
         return redirect()->route('panel-groups.index');
-    }   
+    }
+    
   
       
 

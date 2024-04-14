@@ -185,6 +185,11 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
+
+         // correo electrónico único
+         $request->validate([
+            'email' => 'unique:users,email',
+        ]);
     
         // ? Verificar si no se cambio el rol pero su algun dato diferente
 
