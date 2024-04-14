@@ -60,7 +60,7 @@
                                             {{-- <class="font-semibold data-row @if ($data->academicAdvisor) has-advisor @else no-advisor @endif> --}}
                                             <td class="py-4">{{ $data->user->last_name }} {{ $data->user->name }}</td>
                                             <td class="py-4">
-                                                {{ $data->project ? $data->project->name : 'Sin proyecto asignado' }}</td>
+                                                {{ $data->project ? $data->project->name : 'Sin anteproyecto' }}</td>
                                             <td class="py-4">
                                                 @unless ($data->academicAdvisor)
                                                     <span class="text-gray-500">Sin asesor asignado</span>
