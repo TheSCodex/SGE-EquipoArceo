@@ -43,7 +43,7 @@
             <nav id="dropdownMenu"
                 class="hidden lg:flex absolute right-5 z-50 mt-3 rounded-md border-primaryColor shadow border px-5 py-3 bg-white lg:shadow-none lg:static lg:border-none lg:mt-0 lg:justify-center lg:px-0 lg:py-0 lg:items-center">
                 <ul class="flex flex-col lg:flex-row gap-2 lg:gap-6">
-
+                    
                     {{-- inicios de los roles --}}
 
                     @if ($user?->rol_id === 1)
@@ -196,31 +196,21 @@
                                 class="text-nowrap hover:border-b-2 hover:border-primaryColor">Carreras y divisiones</a>
                         </li>
                     @endcan
+                    <li>    
+                        <a href="/profile" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Perfil</a>
+                    </li>
 
-                    @if (
-                        $user?->rol_id === 1 ||
-                            $user?->rol_id === 2 ||
-                            $user?->rol_id === 3 ||
-                            $user?->rol_id === 4 ||
-                            $user?->rol_id === 5 ||
-                            $user?->rol_id === 6)
-                        <li>
-                            <a href="/profile" class="text-nowrap hover:border-b-2 hover:border-primaryColor">Perfil</a>
-                        </li>
-                        <!-- CERRAR SESION RESPONIVE -->
-                        <hr class="lg:hidden w-full border-[0.3px] border-gray-500 mt-2">
-                        <li>
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}"
-                                class="flex lg:hidden">
-                                @csrf
-                                <button type="submit" class="hover:text-red font-medium"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Cerrar sesión') }}
-                                </button>
-                            </form>
-                        </li>
-
-                </ul>
+                    <!-- CERRAR SESION RESPONIVE -->
+                    <hr class="lg:hidden w-full border-[0.3px] border-gray-500 mt-2">
+                    <li>
+                        <form id="logout-form" method="POST" action="{{ route('logout') }}" class="flex lg:hidden">
+                            @csrf
+                            <button type="submit" class="hover:text-red font-medium" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Cerrar sesión') }}
+                            </button>
+                        </form>
+                    </li>
+                </ul>    
             </nav>
         </div>
 

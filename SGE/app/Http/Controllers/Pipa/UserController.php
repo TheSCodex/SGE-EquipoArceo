@@ -205,10 +205,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-         // correo electrónico único
+        if($request->email != $user->email){
+             // correo electrónico único
          $request->validate([
             'email' => 'unique:users,email',
         ]);
+        }
     
         // ? Verificar si no se cambio el rol pero su algun dato diferente
 
@@ -250,13 +252,14 @@ class UserController extends Controller
             }
 
             // despues de esas validaciones, verifica si se quiere cambiar el rol a estudiante
-
+            
             if ($request->input('rol_id') === '1') { 
                 // si no existe en la tabla de internos, lo inserta como estudiante
                 if (!Intern::where('user_id', $user->id)->exists()) {
                     $intern = new Intern();
                     $intern->user_id = $user->id;
                     $intern->career_id = $request->career_id;
+                    $intern->group_id = $request->group_id;
                     $intern->student_status_id = '1';
                     $intern->save();
                     Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de internos');

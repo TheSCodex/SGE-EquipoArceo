@@ -59,18 +59,18 @@
                 @endisset
             
             </div>
-            @if ($user->rol_id == "1")
+            @if ($user?->rol_id == "1")
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class=" space-y-2">
                     <p class="text-sm">Grupo:</p>
                     <div class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <p>{{$intern->group->name}}</p> 
+                        <p>{{$intern?->group?->name}}</p> 
                     </div>
                 </div>
                 <div class="hidden md:invisible md:block space-y-2">
                     <p class="text-sm">Identificador</p>
                     <div class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
-                        <p>{{$user->identifier}}</p> 
+                        <p>{{$user?->identifier}}</p> 
                     </div>
                 </div>
             
