@@ -53,7 +53,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Bimbo SA de CV</p>
+                <p>{{$company->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -68,7 +68,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Luis Villafaña</p>
+                <p>{{$advisor->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -84,7 +84,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>Ingenieria y Tecnologia</p>
+                    <p>{{$division->name}}</p>
                 </div>
             </div>
 
@@ -164,8 +164,8 @@
             data: {
                 labels: ["En revision", "Aprobado"],
                 datasets: [{
-                    label: 'Horas',
-                    data: [2, 3],
+                    label: 'Anteproyectos',
+                    data: [{{$revisionProjects}}, {{$approvedProjects}}],
                     backgroundColor: [
                         '#3E5366',
                         '#0FA987'

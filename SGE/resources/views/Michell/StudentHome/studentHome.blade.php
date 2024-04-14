@@ -40,7 +40,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">{{ $studentsCommentsCount }}</p>
+                        <p class="font-bold text-2xl">
+                            {{ $studentsCommentsCount }}</p>
                         <p class="text-sm text-black opacity-50">Comentarios</p>
                     </div>
                 </div>
@@ -86,8 +87,8 @@
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
                     <div class="flex flex-col">
-                        @if ($comments)
-                            <p class="text-[#888] ">Por el momento no tienes observaciones.</p>
+                        @if (count($comments) == 0)
+                            <p class="text-center text-[#888] ">Por el momento no tienes observaciones.</p>
                         @else
                             <div class="flex flex-col gap-3 mb-5">
                                 @foreach ($comments as $comment)
@@ -129,10 +130,10 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    @if (!$advisor || !$advisor->academicAdvisor)
-                        <p>Sin asesor académico</p>
-                    @else
+                    @if ($advisor && $advisor->academicAdvisor)
                         <p>{{ $advisor->academicAdvisor->user->name }}</p>
+                    @else
+                        <p>Sin asesor académico</p>
                     @endif
 
                 </div>
@@ -144,21 +145,25 @@
 
             <div class="space-y-2">
                 <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                    <div class="bg-primaryColor rounded-full p-1 ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="white" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
-                    @foreach ($empresarial as $item)
-                        <p>{{ $item->asesor_empresarial }}</p>
-                    @endforeach
 
+                    @if ($empresarial)
+                        <p class="text-center w-full text-[#888] ">Por el momento no tienes asesores.</p>
+                    @else
+                        @foreach ($empresarial as $item)
+                            <div class="bg-primaryColor rounded-full p-1 ml-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="white" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <p>{{ $item->asesor_empresarial }}</p>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
-            <div class=" font-roboto bg-white p-5 rounded-l">
+            <div class=" font-roboto bg-white p-5 rounded-l grow flex flex-col justify-center items-center">
 
                 <h3 class="text-lg font-medium text-center font-kanit mb-3">Actividades importantes</h3>
 
@@ -181,7 +186,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1   md:grid-cols-2 gap-3 h-[280px] grow">
+            <div class="grid grid-cols-1   md:grid-cols-1 gap-3 h-[280px] ">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     @if ($penalty === null)
                         <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!
@@ -204,35 +209,8 @@
                         <p class="text-lg font-normal">{{ $penalty->description }}</p>
                     @endif
                 </div>
-                <div
-                    class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full h-600px flex items-center justify-center flex-col">
-                    <p class="mb-5 text-center">Progreso</p>
-                    <div class="flex justify-center max-h-[150px]">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
             </div>
         </section>
     </div>
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["falta", 'completada'],
-                datasets: [{
-                    label: 'Horas',
-                    data: [2, 3],
-                    backgroundColor: [
-                        '#3E5366',
-                        '#0FA987'
-                    ],
-                    borderColor: [
-                        '#ffffffff'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-    </script>
+
 @endsection

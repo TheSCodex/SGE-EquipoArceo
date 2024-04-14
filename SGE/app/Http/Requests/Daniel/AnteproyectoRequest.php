@@ -23,7 +23,7 @@ class AnteproyectoRequest extends FormRequest
     {
         return [
             'name_student' => 'bail|required|regex:/^[\pL\s&.,-]+$/u',
-            'matricula' => 'bail|required|digits:8',
+            'matricula' => 'bail|required|min:6',
             'Group' => 'bail|required|regex:/^[a-zA-Z0-9\s-]+$/',
             'Numero' => 'bail|required|min:8',
             'division_academica' => 'bail|required|regex:/^[a-zA-Z0-9\s-]+$/',
@@ -31,8 +31,8 @@ class AnteproyectoRequest extends FormRequest
             'email_student' => 'bail|required|email',
             'Fecha_Inicio' => 'bail|required|date',
             'Fecha_Final' => 'bail|required|date',
-            'name_enterprise' => 'bail|required|regex:/^[a-zA-Z0-9\s&.,#-]+$/',
-            'direction_enterprise' => 'bail|required|regex:/^[a-zA-Z0-9\s.,#-]+$/',
+            'name_enterprise' => 'bail|required|string',
+            'direction_enterprise' => 'bail|required|string',
             'name_advisor' => 'bail|required|regex:/^[\pL\s&.,-]+$/u',
             'advisor_position' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
             'email_advisor' => 'bail|required|email',

@@ -25,6 +25,20 @@
                         </p>
                     @enderror
                 </div>
+                <div class="space-y-2">
+                    <p class="text-sm">Iniciales de la division</p>
+                    <input type="text" name="initials" value="{{ old('initials') }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Iniciales">
+                    @error('initials')
+                        <p class="text-[#ff0000] text-sm">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+   
+               
+                
+            </div>
+            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class=" space-y-2">
                     <p class="text-sm">Director</p>
                     <select name="director_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
@@ -43,9 +57,6 @@
                         </p>
                     @enderror
                 </div>
-                
-            </div>
-            <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
                     <p class="text-sm">Asistente del director</p>
                     <select name="directorAsistant_id" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]">
@@ -64,26 +75,14 @@
                         </p>
                     @enderror
                 </div>
-                <div class=" space-y-2">
-                    <p class="text-sm md:py-2"></p>
-                    <p  class="text-sm rounded-md border-white px-4 py-3 w-[20em] md:w-[35em]">
-                        
-                    </p>
-                    
-                  
-                </div>
             </div>
 
  
     <div class="mx-auto mt-10">
-             <button type="submit" class="p-2 bg-primaryColor w-[77vw]   rounded-md text-white">Añadir división</button>
+        <button type="submit" class="text-sm rounded-md px-4 py-3 w-[20em] sm:w-[60vw] text-white md:w-[30vw] bg-primaryColor">Añadir división</button>
     </div>                
          
     </form>
-    <div class="mx-auto">
-        <a href="/panel-divisions" type="submit" class="p-2 bg-lightGray text-center w-[77vw] mx-auto rounded-md text-white" >Cancelar</a>
-        
-    </div>
     
 </div>
 

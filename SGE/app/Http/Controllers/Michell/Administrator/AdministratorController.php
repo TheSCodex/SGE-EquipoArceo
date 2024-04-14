@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Michell\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Academy;
+use App\Models\BusinessAdvisor;
+use App\Models\Company;
+use App\Models\Division;
 use App\Models\Intern;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -30,14 +34,21 @@ class AdministratorController extends Controller
         
             $academy->approved_projects_count = $approvedProjectsCount;
             $academy->revision_projects_count = $revisionProjectsCount;
-        
             return $academy;
+
         });
 
-        // dd($academies);
+        $revisionProjects = Project::where('status', 'En revisión')->count();
+        $approvedProjects = Project::where('status', 'Aprobado')->count();
+
+        $division = Division::inRandomOrder()->first();
+        $advisor = BusinessAdvisor::inRandomOrder()->first();
+        $company = Company::inRandomOrder()->first();
+
+         //dd($academies);
 
         return view('Michell.Admisnistrator.inicioAdministrator', compact(
-            "academies"
+            "academies", "revisionProjects", "approvedProjects", "division", "advisor", "company"
         ));
     }
 
