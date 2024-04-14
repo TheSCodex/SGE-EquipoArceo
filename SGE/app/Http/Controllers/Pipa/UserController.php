@@ -18,20 +18,36 @@ use App\Models\Division;
 use App\Models\Academy;
 use Illuminate\Support\Facades\Log;
 use App\Models\Comment;
+use App\Models\Group;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Gate::denies('crud-usuarios')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
-        $users = User::paginate(10);
-        return view('Pipa.panel-users', compact('users'));
+    
+        $query = $request->input('query');
+        $usersQuery = User::query();
+    
+        // Aplicar el filtro de búsqueda si se proporciona una consulta
+        if (!empty($query)) {
+            $usersQuery->where('name', 'like', '%' . $query . '%')
+                       ->orWhere('last_name', 'like', '%' . $query . '%');
+        }
+    
+        $users = $usersQuery->paginate(10);
+    
+        return view('Pipa.panel-users', compact('users', 'query'));
     }
+    
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,11 +57,14 @@ class UserController extends Controller
         if (Gate::denies('crud-usuarios')) {
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
+    
         $roles = Role::all(); 
         $careers = Career::all();
-        return view('Pipa.add-user', compact('roles', 'careers'));
-        // return view('Pipa.add-user');
+        $groups = Group::all();
+        $groupsByCareer = $groups->groupBy('career_id')->toArray(); // Agrupar grupos por carrera
+        return view('Pipa.add-user', compact('groupsByCareer', 'roles', 'careers', 'groups'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -56,6 +75,20 @@ class UserController extends Controller
         $request->validate([
             'email' => 'unique:users,email',
         ]);
+
+        // if($request->rol_id === "1"){
+        //     $request->validate([
+        //         'career_id' => 'bail|required',
+        //         'group_id' => 'bail|required'
+        //     ]);
+        // };
+
+        // if($request->rol_id === "2"){
+        //     $request->validate([
+        //         'career_id' => 'bail|required',
+        //     ]);
+        // };
+
         $user = new \App\Models\User;
         $user->name = $request->name;
         $user->last_name = $request->last_name;
@@ -75,6 +108,7 @@ class UserController extends Controller
             if ($request->rol_id == 1) {
                 \App\Models\Intern::create([
                     'user_id' => $user->id,
+                    'group_id' => $request->group_id,
                     'career_id' => $request->career_id,
                     'student_status_id' => 1
                 ]);
@@ -87,6 +121,9 @@ class UserController extends Controller
                     'quantity_advised' => 0,
                 ]);
             }
+
+
+
             session()->flash('success', '¡El usuario se ha agregado exitosamente!');
             $users = User::paginate(10);
             return view ('Pipa.panel-users', compact('users'));
@@ -114,7 +151,6 @@ class UserController extends Controller
         return view('Pipa.show-user', compact('user', 'intern', 'career', 'academicAdvisor'));
     }
     
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -129,7 +165,18 @@ class UserController extends Controller
         $user = \App\Models\User::find($id);
         $intern = $user->interns;
         $career = $intern ? $intern->career : null;
-        return view('Pipa.edit-user', compact('user','roles', 'intern', 'career', 'careers'));
+        $userGroupID = $intern ? $intern->group_id : null;
+        $group = \App\Models\User::find($userGroupID);
+        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+        if ($group && $group->id) {
+            $group = Group::where('id', $group->id)->first();
+        } else {
+            // En caso de que $group o $group->id no estén presentes, asigna null a $group
+            $group = null;
+        }
+            $groups = Group::all();
+        $groupsByCareer = $groups->groupBy('career_id')->toArray(); // Agrupar grupos por carrera
+        return view('Pipa.edit-user', compact('user','roles', 'intern', 'career', 'careers', 'academicAdvisor', 'groupsByCareer', 'group', 'groups'));
     }
 
     /**
@@ -139,71 +186,98 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
     
-        // primero verifica si es asesor académico
-        if ($user->role->title === 'asesorAcademico') {
-            Log::info('El usuario es asesor académico.');
+        // ? Verificar si no se cambio el rol pero su algun dato diferente
 
-            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
-    
-            if ($academicAdvisor){
-            // despues verifica si tiene alumnos asesorados
-                $internCount = Intern::where('academic_advisor_id', $academicAdvisor->id)->count();
-                
-                if ($internCount > 0) {
-                    Log::info('El usuario tiene internos.');
-                    return redirect()
-                        ->back()
-                        ->with('error', 'No puedes cambiar el rol de un asesor académico que tiene alumnos asesorados.');
+        if ($request->rol_id != $user->rol_id) {
+            // primero verifica si es asesor académico
+            if ($user->role->title === 'asesorAcademico') {
+                Log::info('El usuario es asesor académico.');
+
+                $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+
+                if ($academicAdvisor){
+                // despues verifica si tiene alumnos asesorados
+                    $internCount = Intern::where('academic_advisor_id', $academicAdvisor->id)->count();
+                    
+                    if ($internCount > 0) {
+                        Log::info('El usuario tiene internos.');
+                        return redirect()
+                            ->back()
+                            ->with('error', 'No puedes cambiar el rol de un asesor académico que tiene alumnos asesorados.');
+                    } else {
+                        // si no tiene alumnos asesorados, eliminar el registro de la tabla de asesor academico
+                        $academicAdvisor->delete();
+                        Log::info('Se eliminó el usuario con ID ' . $user->id . ' de la tabla de asesores académicos.');
+                    }
                 } else {
-                    // si no tiene alumnos asesorados, eliminar el registro de la tabla de asesor academico
-                    $academicAdvisor->delete();
-                    Log::info('Se eliminó el usuario con ID ' . $user->id . ' de la tabla de asesores académicos.');
+                    Log::info('El usuario no existe en la tabla de asesores académico.');
                 }
-            } else {
-                Log::info('El usuario no existe en la tabla de asesores académico.');
+
+            } elseif ($user->role->title === 'estudiante') { // si no es asesor, verifica si el usuario es estudiante
+                Log::info('El usuario a editar es un estudiante.');
+
+                $intern = Intern::where('user_id', $user->id)->first();
+
+                // y verifica que exista en la tabla de internos para eliminar el registro
+                if($intern){
+                    $intern->delete();
+                    Log::info('El estudiante con ID ' . $user->id .  'se eliminó de la tabla internos.');
+                }
             }
 
-        } elseif ($user->role->title === 'estudiante') { // si no es asesor, verifica si el usuario es estudiante
-            Log::info('El usuario a editar es un estudiante.');
-    
-            $intern = Intern::where('user_id', $user->id)->first();
-    
-            // y verifica que exista en la tabla de internos para eliminar el registro
-            if($intern){
-                $intern->delete();
-                Log::info('El estudiante con ID ' . $user->id .  'se eliminó de la tabla internos.');
+            // despues de esas validaciones, verifica si se quiere cambiar el rol a estudiante
+
+            if ($request->input('rol_id') === '1') { 
+                // si no existe en la tabla de internos, lo inserta como estudiante
+                if (!Intern::where('user_id', $user->id)->exists()) {
+                    $intern = new Intern();
+                    $intern->user_id = $user->id;
+                    $intern->career_id = $request->career_id;
+                    $intern->student_status_id = '1';
+                    $intern->save();
+                    Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de internos');
+                }
+            } elseif ($request->input('rol_id') === '2'){ // si se quiere cambiar el rol a asesor academico
+                if (!AcademicAdvisor::where('user_id', $user->id)->exists()){
+                    $academicAdvisor = new AcademicAdvisor;
+                    $academicAdvisor->user_id = $user->id;
+                    $academicAdvisor->career_id = $request->career_id;
+                    $academicAdvisor->max_advisors = 0;
+                    $academicAdvisor->quantity_advised = 0;
+                    $academicAdvisor->save();
+                    Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de asesores académicos');
+                }
             }
         }
 
-        // despues de esas validaciones, verifica si se quiere cambiar el rol a estudiante
+        // Si se está modificando la carrera sin cambiar el rol
+        if ($request->rol_id == $user->rol_id && $user->role->title === 'asesorAcademico') {
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
 
-        if ($request->input('rol_id') === '1') { 
-            // si no existe en la tabla de internos, lo inserta como estudiante
-            if (!Intern::where('user_id', $user->id)->exists()) {
-                $intern = new Intern();
-                $intern->user_id = $user->id;
-                $intern->career_id = $request->career_id;
-                $intern->student_status_id = '1';
-                $intern->save();
-                Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de internos');
-            }
-        } elseif ($request->input('rol_id') === '2'){ // si se quiere cambiar el rol a asesor academico
-            if (!AcademicAdvisor::where('user_id', $user->id)->exists()){
-                $academicAdvisor = new AcademicAdvisor;
-                $academicAdvisor->user_id = $user->id;
+            if ($academicAdvisor) {
                 $academicAdvisor->career_id = $request->career_id;
-                $academicAdvisor->max_advisors = 0;
-                $academicAdvisor->quantity_advised = 0;
                 $academicAdvisor->save();
-                Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de asesores académicos');
+                Log::info('Se modificó la carrera del asesor académico con ID ' . $user->id . '.');
             }
         }
-    
+
+        // Si se está modificando la carrera sin cambiar el rol
+        if ($request->rol_id == $user->rol_id && $user->role->title === 'estudiante') {
+            $intern = Intern::where('user_id', $user->id)->first();
+
+            if ($intern) {
+                $intern->career_id = $request->career_id;
+                $intern->group_id = $request->group_id;
+                $intern->save();
+                Log::info('Se modificó la carrera del estudiante con ID ' . $user->id . '.');
+            }
+        }
+
         $user->update($request->all());
-    
+
         session()->flash('success', 'El usuario ' . $user->name . ' ' . $user->last_name . ' se ha editado correctamente.');
         return redirect()->route('panel-users.index');
-    }
+}
     
 
     /**
@@ -215,12 +289,20 @@ class UserController extends Controller
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
         $user = \App\Models\User::find($id);
+        $userId = $user->id;
         // si es un asesor que está en la tabla de asesores:
-        $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->exists();
-        $director = Division::where('director_id', $user->id)->exists();
+        $academicAdvisorHasInterns = Intern::whereExists(function ($query) use ($userId) {
+            $query->select(DB::raw(1))
+                ->from('academic_advisor')
+                ->whereColumn('academic_advisor_id', 'academic_advisor.id')
+                ->where('user_id', $userId);
+        })->exists();
+        
+
+            $director = Division::where('director_id', $user->id)->exists();
         $assistant = Division::where('directorAsistant_id', $user->id)->exists();
         $president = Academy::where('president_id', $user->id)->exists();
-        if ($academicAdvisor){
+        if ($academicAdvisorHasInterns){
             return redirect()
                 ->back()
                 ->with('error', 'No puedes eliminar a este usuario ya que está asignado como asesor a un alumno.');
@@ -238,6 +320,10 @@ class UserController extends Controller
             ->with('error', 'No puedes eliminar a este usuario ya que es asistente de dirección de una división.');
         }
 
+        if($user->rol_id == 2){
+            AcademicAdvisor::where('user_id', $userId)->delete();
+        }
+
         $user->delete();
         return redirect()->route('panel-users.index');
     }
@@ -251,4 +337,5 @@ class UserController extends Controller
             return false;
         }
     }
+
 }
