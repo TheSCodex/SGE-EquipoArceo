@@ -46,6 +46,8 @@
                 </div>
             </div>
         @endif
+        @if (!$projects == null)
+
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de la division
             </h1>
@@ -87,7 +89,8 @@
                             <p class="text-sm text-gray-500">Votos:
                                 {{ $project->like !== null ? $project->like : 0 }}
                             </p>
-                            <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
+                            <p class="text-sm text-gray-500">Asesor: {{ $project->interns->first()->academicAdvisor->user->name }}
+                                {{ $project->interns->first()->academicAdvisor->user->last_name }}</p>
                             <div class="flex justify-end mt-4 space-x-2">
                                 <td>
                                     <a href="{{ route('anteproyecto-President.store', $project->id) }}"
@@ -127,7 +130,8 @@
                         <td class="font-roboto font-medium py-5 pl-5">{{ $project->name }}</td>
                         <td class="font-roboto font-medium py-5 pl-8">
                             {{ $project->like !== null ? $project->like : 0 }}</td>
-                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->adviser->name }}</td>
+                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->interns->first()->academicAdvisor->user->name }}
+                            {{ $project->interns->first()->academicAdvisor->user->last_name }}</td>
                         <td class="font-roboto font-medium py-5 pl-5">{{ $project->start_date }}</td>
                         <td class="font-roboto font-medium py-5 pl-5">{{ ucfirst($project->status) }}</td>
 
@@ -143,6 +147,10 @@
                 </table>
             </div>
         </div>
+        @else
+        <div class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
+            projectos.</div>
+        @endif
         <div id="no-projects-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
             projectos.</div>
     </div>
@@ -212,7 +220,7 @@
         document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
+
     @if (session()->has('Changed'))
                 <script>
                     Swal.fire({

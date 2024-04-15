@@ -50,7 +50,7 @@ class ProyectsAdvisorController extends Controller
             'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
         ])
         ->paginate(10);
-        dd($projects);
+        //dd($projects);
 
         return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
     }

@@ -30,25 +30,31 @@ class ProjectsPresidentController extends Controller
         $projectsAdvisor = null;
         $userId = Auth::id();
         $rolId = Auth::user()->rol_id;
+        //dd($rolId);
 
-        if (Auth::user()->rolId === 4) {
+        if (Auth::user()->rol_id === 4) {
             $division = Division::where('director_id', $userId)->first();
-            $divisionId = $division->id;
-
-            $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
-                $query->whereHas('career', function ($query) use ($divisionId) {
-                    $query->whereHas('academy', function ($query) use ($divisionId) {
-                        $query->where('division_id', $divisionId);
-                    });
-                });
-            })
-                ->with([
-                    'adviser',
-                    'interns.user',
-                    'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
-                ])
-                ->paginate(10);
-            //dd($projects);
+            //dd($division);
+            if ($division) {
+                $divisionId = $division->id;
+                $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
+                        $query->whereHas('career', function ($query) use ($divisionId) {
+                            $query->whereHas('academy', function ($query) use ($divisionId) {
+                                $query->where('division_id', $divisionId);
+                            });
+                        });
+                    })
+                    ->whereIn('status', ['aprobado', 'en revision'])
+                    ->with([
+                        'adviser',
+                        'interns.user',
+                        'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
+                    ])
+                    ->paginate(10);
+            } else {
+                // Manejar el caso en que no se encontró ninguna división
+                $projects = [];
+            }
 
             return view('daniel.directorAcademy.projects')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
         } else {
