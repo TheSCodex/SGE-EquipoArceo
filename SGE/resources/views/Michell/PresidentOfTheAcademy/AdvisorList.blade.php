@@ -100,7 +100,7 @@
                             Sin resultados</p>
                         </div>
                     </section>
-                    <div class="max-md:hidden">
+                    <div class="max-md:hidde ">
                         {{ $advisors->links() }}
                     </div>
 
