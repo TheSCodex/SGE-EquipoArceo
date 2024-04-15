@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('last_doc_createds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();            
-            $table->integer('division_id')->nullable()->index('division_id');
-            $table->unsignedInteger('number');
+        Schema::disableForeignKeyConstraints();
+        Schema::create('groups', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('name')->nullable();
+            $table->integer('career_id')->nullable()->index('career_id');
+            $table->timestamps();        
         });
     }
 
@@ -24,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('last_doc_createds');
+        Schema::dropIfExists('groups');
+
     }
 };

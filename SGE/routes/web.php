@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Pipa\RoleController;
 use App\Http\Controllers\Pipa\UserController;
+use App\Http\Controllers\Pipa\GroupController;
 use App\Http\Controllers\Luis\BooksController;
 use App\Http\Controllers\Luis\EventController;
 use App\Http\Controllers\Pipa\LoginController;
@@ -89,6 +90,8 @@ Route::middleware('auth')->group(function () {
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores');
+    Route::match(['get', 'post'], 'EstatusCambiado', [ProjectsController::class, 'ForRev'])->name('ForRev');
+
 
 
     //Ruta para las observaciones del estudiante
@@ -281,9 +284,21 @@ Route::middleware('auth')->group(function () {
 
     // inicio admin
     Route::resource('admin', AdministratorController::class)->names('admin')->middleware('role:admin');
-
+    
+    // CRUD de Grupos
+    Route::resource('panel-groups', GroupController::class)->names('panel-groups')->middleware('roleorcan:admin,crud-usuarios');
+    
     // CRUD de Usuarios
     Route::resource('panel-users', UserController::class)->names('panel-users')->middleware('roleorcan:admin,crud-usuarios');
+
+    // BUSQUEDA DE USUARIOS
+    Route::get('/search/groups', [GroupController::class, 'searchGroups'])->name('search.groups');
+
+    // BUSQUEDA DE GRUPOS
+    Route::get('/search/users', [UserController::class, 'searchUsers'])->name('search.users');
+    
+    // BUSQUEDA DE ROLES
+    Route::get('/search/roles', [UserController::class, 'searchRoles'])->name('search.roles');
 
     // CRUD de Roles
     Route::resource('panel-roles', RoleController::class)->names('panel-roles')->middleware('roleorcan:admin,crud-roles-permisos');

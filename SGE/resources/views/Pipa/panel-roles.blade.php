@@ -2,16 +2,16 @@
 @section('titulo', 'Lista de Roles')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
         <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de roles</h1>
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                <form action="{{ route('panel-roles.index') }}" method="GET" id="search-form">
+                    <div class="hidden md:flex items-center relative">
+                        <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </div>
+                </form>  
                 <a href="/panel-roles/create"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo rol
                 </a>
@@ -105,8 +105,8 @@
                             $counter = ($roles->currentPage() - 1) * $roles->perPage() + $loop->index + 1;
                         @endphp
                         <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                            <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                            <td class="font-roboto font-bold py-5 text-start pl-5">
+                            <td class="font-roboto py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                            <td class="font-roboto py-5 text-start pl-5">
                                 @if ($role->title == "estudiante")
                                     Estudiante
                                 @elseif ($role->title == "asesorAcademico")
@@ -195,7 +195,7 @@
 
 </section>
 
-<!-- Funciones JavaScript -->
+<!-- Funciones JavaScript -->g
 <script>
     function togglePermissions(roleId) {
         var permissionsList = document.getElementById('permissions_' + roleId);
@@ -234,6 +234,14 @@
         });
     @endif
 </script>
+
+<script>
+    function searchRoles() {
+        var query = document.getElementById('search').value;
+        window.location.href = '{{ route("search.roles") }}?query=' + query;
+    }
+</script>
+
 
 <script>
     // Esta función confirma la eliminación de un usuario
@@ -288,7 +296,7 @@
     }
 
     // Llama a la función searchTable() cuando se modifica el contenido del campo de búsqueda
-    document.getElementById("search").addEventListener("input", searchTable);
+    // document.getElementById("search").addEventListener("input", searchTable);
 
 
 

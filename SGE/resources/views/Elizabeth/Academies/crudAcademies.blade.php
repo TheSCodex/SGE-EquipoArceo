@@ -35,19 +35,21 @@
         
     </div>
     <div class="flex mt-[2%] px-[4%] ">
-        <section class="font-bold text-sm md:space-x-6 space-x-2 flex">
-           <a href="panel-careers">
-            <button id="btnAll"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Carreras</button>
-            </a>
-            <a href="panel-academies">
-                <button id="btnWithAdvisor"
-                class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-primaryColor text-white rounded md:px-5 px-4 py-1 shadow-lg">Academias</button>
-            </a>
+        <section class=" text-sm md:space-x-6 space-x-2 flex">
             <a href="panel-divisions">
                 <button id="btnWithOutAdvisor"
                 class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
             </a>
+
+            <a href="panel-academies">
+                <button id="btnWithAdvisor"
+                class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor text-white bg-primaryColor rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
+            </a>
+            <a href="panel-careers">
+                <button id="btnAll"
+                    class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee]    rounded px-5 py-1 shadow-lg">Carreras</button>
+                </a>
+
         </section>
       </div>
     <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
@@ -92,9 +94,9 @@
                     @foreach ($academies as $academy)
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20">
                         {{-- dd($academy) --}}
-                        <td class="font-roboto pl-5 font-bold py-5">{{ $academy->name }}</td>
+                        <td class="font-roboto pl-5 py-5">{{ $academy->name }}</td>
 
-                        <td class="font-roboto font-bold py-5 text-start ">
+                        <td class="font-roboto  py-5 text-start ">
                             @if ($president = $presidents->where('id', $academy->president_id)->first())
                             {{ $president->name }}
                             @else
@@ -102,7 +104,7 @@
                             @endif    
                         </td>
 
-                        <td class="font-roboto font-bold py-5 text-start ">
+                        <td class="font-roboto  py-5 text-start ">
                             @if ($division = $divisions->where('id', $academy->division_id)->first())
                             {{ $division->name }}
                             @else

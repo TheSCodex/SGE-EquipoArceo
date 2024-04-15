@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('last_doc_createds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();            
-            $table->integer('division_id')->nullable()->index('division_id');
-            $table->unsignedInteger('number');
+        Schema::table('groups', function (Blueprint $table) {
+            $table->foreign(['career_id'], 'career_ibfk_1')->references(['id'])->on('careers')->onUpdate('no action')->onDelete('no action');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('last_doc_createds');
+        Schema::table('groups', function (Blueprint $table) {
+            $table->dropForeign('career_ibfk_1');
+        });
     }
 };
