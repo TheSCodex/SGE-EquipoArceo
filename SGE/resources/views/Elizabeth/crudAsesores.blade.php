@@ -81,9 +81,6 @@
                     </tr>
                     @if(count($advisors) > 0)
                         @foreach ($advisors as $advisor)
-                        @php
-                        $counter = ($advisors->currentPage() - 1) * $advisors->perPage() + $loop->index + 1;
-                    @endphp
                             <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20  ">
                                 <td class="font-roboto pl-5  py-5 ">{{ $advisor->name }}</td>
                                 <td class="font-roboto  py-5 ">{{ $advisor->email }}</td>
@@ -125,7 +122,7 @@
     </div>
     
 </section>
-<div class="my-5 mx-auto mt-auto md:w-[80%]">
+<div class="w-[90%] m-auto py-2  max-sm:flex justify-center">
     {{$advisors->links()}}
 </div>
 @if(session()->has('successAdd'))

@@ -18,25 +18,23 @@ class AdvisorController extends Controller
      */
 
 
-    public function searchBusinessAdvisors(Request $request)
-    {
+     public function searchBusinessAdvisors(Request $request)
+     {
+         $query = $request->input('query');
+     
+         $advisors = BusinessAdvisor::where('name', 'like', '%' . $query . '%')
+             ->orWhere('email', 'like', '%' . $query . '%')
+             ->orWhere('phone', 'like', '%' . $query . '%')
+             ->orWhere('position', 'like', '%' . $query . '%')
+             ->orWhereHas('company', function ($companyQuery) use ($query) {
+                 $companyQuery->where('name', 'like', '%' . $query . '%');
+             })
+             ->paginate(10);
+     
+         return view('Elizabeth.crudAsesores', compact('advisors'));
+     }
+     
 
-        $query = $request->input('query');
-        $advisors = BusinessAdvisor::where('name', 'like', '%' . $query . '%')
-        ->orWhere('email', 'like', '%' . $query . '%')
-        ->orWhere('phone', 'like', '%' . $query . '%')
-        ->orWhere('position', 'like', '%' . $query . '%')
-        ->orWhereHas('companie_id', function ($companiesQuery) use ($query) {
-            $companiesQuery->where('title', 'like', '%' . $query . '%');
-        })
-        
-        ->paginate(5);
-        
-        // Cargar la vista y pasar los datos
-        return view('Elizabeth.crudAsesores', compact('advisors'));
-
-
-    }
 
     public function index(Request $request)
 {
@@ -49,7 +47,7 @@ class AdvisorController extends Controller
                 ->orWhere('email', 'like', '%' . $query . '%');
     }
 
-    $advisors = $advisorsQuery->paginate(5);
+    $advisors = $advisorsQuery->paginate(10);
 
     return view('Elizabeth.crudAsesores', compact('advisors', 'query'));
 }
