@@ -21,7 +21,9 @@
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div
                                         class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}</h2>
+                                        <h2 class="text-lg font-bold">
+                                            {{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}
+                                        </h2>
                                         <p class="text-sm text-center  font-bold text-primaryColor">
                                             {{ $project->like !== null ? $project->like : 0 }} Votos
                                         </p>
@@ -55,6 +57,13 @@
                             placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
+                <form id="publishForm" action="{{ route('cambiar.estado.proyectos') }}" method="POST">
+                    @csrf
+                    <button type="submit"
+                        class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">
+                        Publicar Anteproyetos
+                    </button>
+                </form>
             </div>
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
                 <div>
@@ -64,6 +73,9 @@
                             type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
+                <button {{-- class="bg-[#02AB82] p-2 rounded-lg max-lg:w-44 text-white" --}}
+                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4"
+                    onclick="location.href='crear-asesores'">Crear asesor</button>
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
@@ -198,6 +210,37 @@
         }
 
         document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    @if (session()->has('Changed'))
+                <script>
+                    Swal.fire({
+                        title: '!Resuelto!',
+                        text: `¡Todos los anteproyectos han sido publicados para revisión!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
+
+    <script>
+        document.getElementById('publishForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¿Quieres publicar los anteproyectos?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, publicar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('publishForm').submit(); 
+                }
+            });
+        });
     </script>
 
 @endsection

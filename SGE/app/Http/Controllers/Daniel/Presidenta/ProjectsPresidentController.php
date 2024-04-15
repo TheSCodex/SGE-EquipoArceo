@@ -31,36 +31,45 @@ class ProjectsPresidentController extends Controller
         $userId = Auth::id();
         $rolId = Auth::user()->rol_id;
 
-        if (Auth::user()->rol_id === 4) {
+        if (Auth::user()->rolId === 4) {
             $division = Division::where('director_id', $userId)->first();
-        $divisionId = $division->id;
+            $divisionId = $division->id;
 
-        $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
-            $query->whereHas('career', function ($query) use ($divisionId) {
-                $query->whereHas('academy', function ($query) use ($divisionId) {
-                    $query->where('division_id', $divisionId);
+            $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
+                $query->whereHas('career', function ($query) use ($divisionId) {
+                    $query->whereHas('academy', function ($query) use ($divisionId) {
+                        $query->where('division_id', $divisionId);
+                    });
                 });
-            });
-        })
-            ->with(['adviser', 'interns.user'])
-            ->paginate(10);
-        
-        return view('daniel.directorAcademy.projects')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
-        }
-        else {
-        $academy = Academy::where('president_id', $userId)->first();
-        $divisionId = $academy->division->id;
+            })
+                ->with([
+                    'adviser',
+                    'interns.user',
+                    'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
+                ])
+                ->paginate(10);
+            //dd($projects);
 
-        $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
-            $query->whereHas('career', function ($query) use ($divisionId) {
-                $query->whereHas('academy', function ($query) use ($divisionId) {
-                    $query->where('division_id', $divisionId);
+            return view('daniel.directorAcademy.projects')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
+        } else {
+            $academy = Academy::where('president_id', $userId)->first();
+            $divisionId = $academy->division->id;
+
+            $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
+                $query->whereHas('career', function ($query) use ($divisionId) {
+                    $query->whereHas('academy', function ($query) use ($divisionId) {
+                        $query->where('division_id', $divisionId);
+                    });
                 });
-            });
-        })
-            ->with(['adviser', 'interns.user'])
-            ->paginate(10);
-        return view('daniel.presidenta.project')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
+            })
+                ->with([
+                    'adviser',
+                    'interns.user',
+                    'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
+                ])
+                ->paginate(10);
+            //dd($projects);
+            return view('daniel.presidenta.project')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
         }
     }
 
@@ -114,9 +123,9 @@ class ProjectsPresidentController extends Controller
         // $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
 
         $career = Career::where("id", $interns->career_id)->first();
-        
-        if(!$career || !$career->academy_id){
-            return view('Daniel.presidenta.viewProject', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+
+        if (!$career || !$career->academy_id) {
+            return view('Daniel.presidenta.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
@@ -203,6 +212,21 @@ class ProjectsPresidentController extends Controller
 
         // Redirigir a la página anterior o a donde desees
         return redirect()->back()->with('success', 'Comentario añadido correctamente.');
+    }
+
+    public function cambiarEstadoProyectos()
+    {
+        // Busca todos los proyectos que estén en estado 'borrador'
+        $proyectosBorrador = Project::where('status', 'Borrador')->get();
+
+        // Itera sobre los proyectos y cambia su estado a 'en revision'
+        foreach ($proyectosBorrador as $proyecto) {
+            $proyecto->status = 'en revision';
+            $proyecto->save();
+        }
+
+        // Redirecciona a la página o acción que desees después de cambiar los estados
+        return redirect()->back()->with('Changed', 'Anteproyectos publicados correctamente.');
     }
 
     /**

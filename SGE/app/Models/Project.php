@@ -48,19 +48,5 @@ class Project extends Model
     {
         return $this->hasMany(ProjectAdvisorsLikes::class, 'id_projects');
     }
-    public function invitations()
-    {
-        return $this->hasMany(Invitation::class);
-    }
-    public function inviteInterns($userIds)
-{
-    foreach ($userIds as $userId) {
-        if (!empty($userId)) {
-            $this->invitations()->create([
-                'user_id' => $userId,
-                'status' => 'pending'
-            ]);
-        }
-    }
-}
+   
 }
