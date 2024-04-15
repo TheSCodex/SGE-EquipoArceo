@@ -64,7 +64,7 @@
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
                                             <p class="mx-[1%] font-normal w-[40%]">
-                                                {{ $interns[0]->Group ?? 'No disponible' }}
+                                                {{ $interns[0]->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
 
                                 <div class="flex flex-wrap">
                                     <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                    <p class=" w-[50%] font-normal ">{{ $interns[0]->performance_area ?? 'No disponible' }}
                                     </p>
 
                                 </div>
@@ -334,6 +334,24 @@
                     Swal.fire({
                         title: '!Listo!',
                         text: `¡Tu anteproyecto sera revisado por tu asesor!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
+            @if (session()->has('Created'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto ha sido creado exitosamente!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
+            @if (session()->has('Edit'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto se ha editado correctamente!`,
                         icon: 'success',
                     });
                 </script>
