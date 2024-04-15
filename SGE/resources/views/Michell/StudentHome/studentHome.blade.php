@@ -135,6 +135,7 @@
                     @else
                         <p class="text-[#888] w-full text-center">Sin asesor académico</p>
                     @endif
+
                 </div>
             </div>
 

@@ -14,7 +14,7 @@
 <body>
     @extends('templates/authTemplate')
     @section('contenido')
-    <main class="flex flex-col justify-start items-center flex-grow min-h-[500px] ">
+    <main class="flex flex-col justify-start items-center flex-grow min-h-screen ">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
                 <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de actividades</h1>

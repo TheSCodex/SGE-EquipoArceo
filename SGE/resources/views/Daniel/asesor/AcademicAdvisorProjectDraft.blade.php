@@ -12,7 +12,7 @@
 
             <div class="w-[91w] sm:w-[85vw] sm:min-h-[78vh] items-center flex flex-wrap sm:justify-between flex-grow ">
                 <div
-                    class="max-h-[88vh] overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
+                    class="max-h-[88vh] self-start overflow-y-scroll no-scrollbar w-full sm:w-[68%] min-h-[50vh] sm:h-full flex flex-wrap lg-flex-col justify-between gap-[.5vh] md:gap-[1vh]">
                     <div
                         class="w-full bg-white px-[2%] sm:py-[.5%] flex-col rounded-sm font-semibold sm:font-bold my-[1%] sm:my-0">
                         <h3 class="text-lg">Nombre del proyecto:
@@ -179,23 +179,26 @@
                 </div>
                 <div
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
-                        <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
+                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%] ">
                             @if (strtolower($project->status) == 'aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
+                                <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
                             @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">El proyecto se encuentra en revision</p>
-                                @elseif (strtolower($project->status) == 'asesoramiento')
-                                <p class="">El proyecto se encuentra en asesoramiento</p>
-                                <form id="reviewForm" method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
-                                        a revisión</button>
-                                </form>
+                                <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
+                            @elseif (strtolower($project->status) == 'asesoramiento')
+                                <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
+                                <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
+                                action="{{ route('ForRev', ['id' => $project->id]) }}">
+                                @csrf
+                                <button type="submit"
+                                    class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
+                                </form>a revisión</button>
+                            @else
+                                <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                <p class="w-[70%]">El Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
                             @endif
-                        </div>
                     </div>
                 </div>
 
@@ -208,7 +211,7 @@
                             @if ($project->like == 0)
                                 <p>Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p>Este proyecto cuenta con <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
                             @endif
 
 
@@ -238,9 +241,9 @@
 
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold min-h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
-                            <div class='flex flex-wrap w-full'>
+                            <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
                                     @if ($comment->academic_advisor_id !== null)
                                         Asesor
@@ -333,7 +336,7 @@
         </script>
     @endif
 
-    @if (session()->has('success'))
+    @if (session()->has('onRev'))
         <script>
             Swal.fire({
                 title: '!Listo!',

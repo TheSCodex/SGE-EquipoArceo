@@ -2,24 +2,22 @@
 
 namespace App\Notifications;
 
-use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProyectoEnRevision extends Notification
+class ProyectoEditado extends Notification
 {
     use Queueable;
-
-    protected $project;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Project $project)
+    protected $student;
+    public function __construct($student)
     {
-        $this->project = $project;
+        $this->student=$student;
     }
 
     /**
@@ -27,10 +25,18 @@ class ProyectoEnRevision extends Notification
      *
      * @return array<int, string>
      */
-    public function via($notifiable)
+    public function via(object $notifiable): array
     {
         return ['database'];
     }
+
+    public function toDatabase($notifiable)
+{
+    return [
+        'message' => 'El anteproyecto de ' . $this->student.' ha sido modificado'
+    ];
+}
+
 
     /**
      * Get the mail representation of the notification.
@@ -48,10 +54,10 @@ class ProyectoEnRevision extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray($notifiable)
+    public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'El proyecto ' . $this->project->nombre . ' ha sido creado.'
+            //
         ];
     }
 }

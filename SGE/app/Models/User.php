@@ -44,6 +44,21 @@ class User extends Authenticatable
         return $this->hasOne(AcademicAdvisor::class, 'user_id');
     }
 
+    public function president()
+    {
+        return $this->hasOne(Academy::class, 'president_id');
+    }
+
+    public function director()
+    {
+        return $this->hasOne(Academy::class, 'director_id');
+    }
+
+    public function directorAsistant()
+    {
+        return $this->hasOne(Academy::class, 'directorAsistant_id');
+    }
+
     public function interns()
     {
         return $this->hasOne(Intern::class, 'user_id');

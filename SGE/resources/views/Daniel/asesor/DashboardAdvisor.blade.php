@@ -6,7 +6,8 @@
     <section class="flex flex-col justify-center items-center bg-[#F3F5F9] min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <h1 class="text-2xl font-bold text-green-500 pb-3 mt-2 mb-10 border-b border-slate-700  ">
-                Bienvenido, Asesor Academico!
+                Bienvenido, {{ $UserName['name'] }} {{ $UserName['last_name'] }}
+                !
             </h1>
 
             <article class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -20,10 +21,10 @@
 
                     <div class="rounded-lg h-auto bg-white flex flex-col gap-2 justify-center p-5 grow">
                         @forelse($notificaciones as $notificacion)
-                            <div class="flex items-center px-4 p-1 my-2 justify-between">
+                            <div class="flex items-center px-4 p-1 my-2 justify-between ">
                                 <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
                                     class="w-8 h-8 mr-2">
-                                <p class="text-sm font-roboto">{{ $notificacion->data['message'] }}</p>
+                                <p class="text-sm font-roboto w-[85%]">{{ $notificacion->data['message'] }}</p>
                             </div>
                         @empty
                             <div class="flex items-center px-4 p-1 my-2 justify-center flex-col">
@@ -107,23 +108,39 @@
                         <p class="text-center">No hay observaciones para mostrar.</p>
                     @else
                         @foreach ($comments as $comment)
-                            <div class="flex flex-col lg:flex-row justify-between my-2 mx-auto items-center  w-full">
-                                <div class=" ">
-                                    <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}</h3>
-                                    <p class="text-sm font-roboto">{{ $comment->content }}</p>
-                                </div>
-                                <div class="mt-5 lg:mt-0">
-                                    <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
-
-                                        <a href="{{ route('observationsAnteproyectoA', $comment->project_id) }}">Ampliar
-                                            Observaciones</a>
-                                    </button>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
+                            @if ($comment->hasChildComments())
+                                <div
+                                    class="flex flex-col lg:flex-row justify-between my-2 mx-auto bg-primaryColor/20 p-4 items-center rounded-md  w-full">
+                                    <div class="">
+                                        <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}</h3>
+                                        <p class="text-sm font-roboto">{{ $comment->content }}</p>
+                                    </div>
+                                    <div class="mt-5 lg:mt-0">
+                                        <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
+                                            <a href="{{ route('observationsAnteproyectoA', $comment->project_id) }}">Ver
+                                                Respuesta</a>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div
+                                        class="flex flex-col lg:flex-row justify-between my-2 mx-auto p-4 items-center rounded-md w-full">
+                                        <div class=" ">
+                                            <h3 class="font-medium text-lg font-roboto mb-2">{{ $comment->project->name }}
+                                            </h3>
+                                            <p class="text-sm font-roboto">{{ $comment->content }}</p>
+                                        </div>
+                                        <div class="mt-5 lg:mt-0">
+                                            <button class=" bg-primaryColor text-white px-5 py-1 rounded-lg">
+                                                <a href="{{ route('observationsAnteproyectoA', $comment->project_id) }}">Ampliar
+                                                    Observaciones</a>
+                                            </button>
+                                        </div>
+                            @endif
                 </div>
-            </article>
+                @endforeach
+                @endif
+        </div>
+        </article>
 
         </div>
     </section>
