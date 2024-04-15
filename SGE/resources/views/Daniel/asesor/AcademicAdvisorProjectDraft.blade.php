@@ -211,7 +211,7 @@
                             @if ($project->like == 0)
                                 <p>Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p>Este proyecto cuenta con <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
                             @endif
 
 
