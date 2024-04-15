@@ -21,7 +21,7 @@
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div
                                         class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                                        <h2 class="text-lg font-bold">{{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}</h2>
                                         <p class="text-sm text-center  font-bold text-primaryColor">
                                             {{ $project->like !== null ? $project->like : 0 }} Votos
                                         </p>
@@ -104,23 +104,28 @@
                         @php
                             $counter = ($projects->currentPage() - 1) * $projects->perPage() + $loop->index + 1;
                         @endphp
-                        <tr
-                            class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                            <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                            <td class="font-roboto font-bold py-5 pl-5">{{ $project->name }}</td>
-                            <td class="font-roboto font-bold py-5 pl-8">
-                                {{ $project->like !== null ? $project->like : 0 }}</td>
-                            <td class="font-roboto font-bold py-5 pl-5">{{ $project->adviser->name }}</td>
-                            <td class="font-roboto font-bold py-5 pl-5">{{ $project->start_date }}</td>
-                            <td class="font-roboto font-bold py-5 pl-5">{{ ucfirst($project->status) }}</td>
+                        @if (strtolower($project->status) == 'aprobado')
+                            <tr
+                                class="w-full transition duration-100 ease-in-out bg-green/20 hover:bg-green/40 border-b-gray-200 border-b-[0.5px]">
+                            @else
+                            <tr
+                                class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                        @endif
+                        <td class="font-roboto font-medium py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->name }}</td>
+                        <td class="font-roboto font-medium py-5 pl-8">
+                            {{ $project->like !== null ? $project->like : 0 }}</td>
+                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->adviser->name }}</td>
+                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->start_date }}</td>
+                        <td class="font-roboto font-medium py-5 pl-5">{{ ucfirst($project->status) }}</td>
 
-                            </td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer">
-                                <a href="{{ route('anteproyecto-President.store', $project->id) }}"
-                                    class="flex justify-center">
-                                    <img src="/img/ojoGreen.svg" class="w-7">
-                                </a>
-                            </td>
+                        </td>
+                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <a href="{{ route('anteproyecto-President.store', $project->id) }}"
+                                class="flex justify-center">
+                                <img src="/img/ojoGreen.svg" class="w-7">
+                            </a>
+                        </td>
                         </tr>
                     @endforeach
                 </table>

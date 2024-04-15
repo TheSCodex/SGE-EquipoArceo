@@ -40,12 +40,58 @@
                             <div style='color:red'>{{ $message }}</div>
                         @enderror
                     </div>
+                    <input type="hidden" name="selectedIds" id="selectedIds" value="">
+
                     <div class="w-[20%] justifify-end items-end p-4">
                         <button type="button"
                             class="bg-primaryColor mt-3 text-white text-md font-roboto rounded-lg h-auto p-3"
                             id="openModalButton">
                             Colaborar
                         </button>
+                    </div>
+                </div>
+                <div id="myModal" class="modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
+                    <div class="flex items-center justify-center min-h-screen">
+                        <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                            <div class="text-center mb-4">
+                                <h3 class="text-xl font-semibold">Invitar a colaborar</h3>
+                            </div>
+                            <div>
+                                <input type="text" id="searchInput" placeholder="Buscar usuario"
+                                    class="w-full border-gray-300 rounded-md p-2">
+
+                                <div id="searchResults">
+                                    @foreach ($interns as $intern)
+                                        @if ($intern->project_id === null)
+                                            <div
+                                                class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
+                                                <div class="flex items-center">
+                                                    <input type="checkbox"
+                                                        class="internCheckbox mr-4 h-6 w-6 rounded-full border-2 border-primaryColor focus:outline-none"
+                                                        data-id="{{ $intern->user->id }}">
+                                                    <div>
+                                                        <p class="name text-lg font-semibold text-gray-800">
+                                                            {{ $intern->user->name }}
+                                                        </p>
+                                                        <p class="identifier text-sm text-gray-600">
+                                                            {{ $intern->user->identifier }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="mt-6 flex justify-end">
+                                <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
+                                    id="closeModalButton">Cerrar
+                                </button>
+                                <input type="hidden" name="selectedIds" id="selectedIds">
+                                <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
+                                    invitación</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="Datos escolares flex gap-5">
@@ -275,93 +321,79 @@
             </form>
         </div>
     </section>
-    <div id="myModal" class="modal hidden bg-opacity-50 fixed z-10 inset-0 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-                <div class="text-center mb-4">
-                    <h3 class="text-xl font-semibold">Invitar a colaborar</h3>
-                </div>
-                <div>
-                    <input type="text" id="searchInput" placeholder="Buscar usuario"
-                        class="w-full border-gray-300 rounded-md p-2">
 
-                    <div id="searchResults">
-                        @foreach ($interns as $intern)
-                            @if ($intern->project_id === null)
-                                <div
-                                    class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
-                                    <div class="flex items-center">
-                                        <input type="checkbox"
-                                            class="internCheckbox mr-4 h-6 w-6 rounded-full border-2 border-primaryColor focus:outline-none"
-                                            data-id="{{ $intern->user->id }}">
-                                        <div>
-                                            <p class="name text-lg font-semibold text-gray-800">{{ $intern->user->name }}
-                                            </p>
-                                            <p class="identifier text-sm text-gray-600">{{ $intern->user->identifier }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-                <div class="mt-6 flex justify-end">
-                    <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
-                        id="closeModalButton">Cerrar
-                    </button>
-                    <input type="hidden" name="selectedIds" id="selectedIds">
-                    <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
-                        invitación</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        //Javascript para el modal
-        const openModalButton = document.getElementById('openModalButton');
-        const modal = document.getElementById('myModal');
-        const closeModalButton = document.getElementById('closeModalButton');
+        document.addEventListener('DOMContentLoaded', function() {
+            const openModalButton = document.getElementById('openModalButton');
+            const modal = document.getElementById('myModal');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const submitButton = document.querySelector('#myModal button[type="submit"]');
+            const selectedIdsInput = document.getElementById('selectedIds');
+            let selectedIds = [];
 
-        function openModal() {
-            modal.classList.remove('hidden');
-        }
+            function openModal() {
+                modal.classList.remove('hidden');
+            }
 
-        function closeModal() {
-            modal.classList.add('hidden');
-        }
-        openModalButton.addEventListener('click', openModal);
-        closeModalButton.addEventListener('click', closeModal);
+            function closeModal() {
+                modal.classList.add('hidden');
+                // Limpiar los IDs seleccionados al cerrar el modal
+                selectedIds = [];
+                selectedIdsInput.value = '';
+            }
 
-        sendInvitationsButton.addEventListener('click', function() {
-            var selectedIds = [];
-            var checkboxes = document.querySelectorAll('.internCheckbox:checked');
-            checkboxes.forEach(function(checkbox) {
-                var internId = checkbox.getAttribute('data-id');
-                selectedIds.push(internId);
+            function updateSelectedIds() {
+                selectedIds = [];
+                document.querySelectorAll('.internCheckbox:checked').forEach(function(checkbox) {
+                    selectedIds.push(checkbox.dataset.id);
+                });
+                selectedIdsInput.value = selectedIds.join(',');
+                console.log(selectedIds); // Imprimir los IDs seleccionados en la consola
+            }
+
+            openModalButton.addEventListener('click', openModal);
+            closeModalButton.addEventListener('click', closeModal);
+
+            submitButton.addEventListener('click', function(event) {
+                // Prevenir el envío del formulario por defecto
+                event.preventDefault();
+                // Actualizar los IDs seleccionados antes de enviar el formulario
+                updateSelectedIds();
+                // Mostrar alerta de SweetAlert
+                Swal.fire({
+                    title: '¡Datos guardados!',
+                    text: 'Los IDs seleccionados se han guardado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Cerrar el modal después de confirmar la alerta
+                        closeModal();
+                    }
+                });
             });
 
-            // Ahora `selectedIds` contiene los IDs de los usuarios seleccionados
-            console.log(selectedIds);
+            // Filtrar resultados según el término de búsqueda
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults').querySelectorAll('.result');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+
+                searchResults.forEach(function(result) {
+                    const name = result.querySelector('.name').textContent.toLowerCase();
+                    const identifier = result.querySelector('.identifier').textContent
+                        .toLowerCase();
+
+                    if (name.includes(searchTerm) || identifier.includes(searchTerm)) {
+                        result.style.display = 'block';
+                    } else {
+                        result.style.display = 'none';
+                    }
+                });
+            });
         });
-
-        //Javascript para el buscador
-        function searchInterns() {
-            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-
-            var interns = document.querySelectorAll('#searchResults > div');
-
-            interns.forEach(function(intern) {
-                var name = intern.querySelector('.name').innerText.toLowerCase();
-                var identifier = intern.querySelector('.identifier').innerText.toLowerCase();
-                if (name.includes(searchTerm) || identifier.includes(searchTerm)) {
-                    intern.style.display = 'block';
-                } else {
-                    intern.style.display = 'none';
-                }
-            });
-        }
-        document.getElementById('searchInput').addEventListener('keyup', searchInterns);
     </script>
 
     </div>
