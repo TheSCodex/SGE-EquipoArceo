@@ -34,6 +34,8 @@ class UserController extends Controller
         $query = $request->input('query');
 
         $users = User::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('last_name', 'like', '%' . $query . '%')
+                     ->orWhere(DB::raw("CONCAT(name, ' ', last_name)"), 'like', '%' . $query . '%')
             ->orWhere('email', 'like', '%' . $query . '%')
             ->orWhereHas('role', function ($roleQuery) use ($query) {
                 $roleQuery->where('title', 'like', '%' . $query . '%');
@@ -239,11 +241,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // correo electrónico único
-        $request->validate([
+        if($request->email != $user->email){
+             // correo electrónico único
+         $request->validate([
             'email' => 'unique:users,email',
         ]);
-
+        }
+    
         // ? Verificar si no se cambio el rol pero su algun dato diferente
 
         if ($request->rol_id != $user->rol_id) {
@@ -290,6 +294,7 @@ class UserController extends Controller
                     $intern = new Intern();
                     $intern->user_id = $user->id;
                     $intern->career_id = $request->career_id;
+                    $intern->group_id = $request->group_id;
                     $intern->student_status_id = '1';
                     $intern->save();
                     Log::info('Se insertó el usuario con ID ' . $user->id . ' a la tabla de internos');

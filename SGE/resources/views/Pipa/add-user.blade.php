@@ -156,9 +156,11 @@
                 </div>
                 
             </div>
-            
-            <button id="buttonSubmitNormal" type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir usuario</button>
+            <div class="p-5 flex justify-center">
+
+                <button id="buttonSubmitNormal" type="submit" class="p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen">Añadir usuario</button>
             <button id="buttonSubmitMassiveMode" type="submit" class=" hidden p-2 self-center bg-primaryColor w-[17.5em] md:w-[30rem] rounded-md text-white hover:bg-darkgreen" name="modo" value="masivo">Añadir usuarios</button>
+            </div>
 
     </form>
 </div>

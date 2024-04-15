@@ -127,7 +127,7 @@
                             <option disabled value="">Seleccionar un grupo</option>
                             <option value="noNecesario" @if ($group == null) selected @endif>El rol seleccionado no requiere seleccionar un grupo</option>
                             @foreach($groups as $groupOption)
-                                <option value="{{ $groupOption->id }}" {{ $user->interns?->group->id == $groupOption->id ? 'selected' : '' }}>{{ $groupOption->name }}</option>
+                                <option value={{ $groupOption?->id }} {{ $user?->interns?->group?->id == $groupOption?->id ? 'selected' : '' }}>{{ $groupOption->name }}</option>
                             @endforeach
                         </select>
                         @error('group_id')
@@ -179,7 +179,7 @@
                 const option = document.createElement('option');
                 option.value = group.id;
                 option.textContent = group.name;    
-                option.selected = group.id === {{ $user->interns?->group->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
+                option.selected = group.id === {{ $user?->interns?->group?->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
                 groupSelect.appendChild(option);
             });        
             toggleGroupSelection(true, true); // Habilitar selección de grupo con mensaje si es estudiante
