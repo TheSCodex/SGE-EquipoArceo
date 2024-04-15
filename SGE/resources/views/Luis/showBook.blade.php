@@ -67,7 +67,7 @@
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Asesor academico del alumno:</p>
                                 </div>                        
-                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none"  readonly value="{{$intern['academic_advisor']['user']['name']}} {{$intern['academic_advisor']['user']['last_name']}}">
+                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" readonly value="{{ $intern['academic_advisor'] ? $intern['academic_advisor']['user'] ? $intern['academic_advisor']['user']['name'] . ' ' . $intern['academic_advisor']['user']['last_name'] : '' : 'El estudiante no tiene ningun asesor academico asignado' }}">
                             </div>
                         </div>
                     </div>

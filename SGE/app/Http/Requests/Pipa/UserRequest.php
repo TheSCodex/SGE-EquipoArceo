@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
         'email' => 'bail|required',
         'rol_id' => 'bail|required',
         'identifier' => 'bail|required',
+        'identifiers'=> 'bail'
     ];
 
     // Aplicar reglas adicionales dependiendo del valor de rol_id

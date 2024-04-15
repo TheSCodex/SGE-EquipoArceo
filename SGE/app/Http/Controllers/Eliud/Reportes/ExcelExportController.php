@@ -14,6 +14,7 @@ use App\Models\CareerAcademy;
 use App\Models\Division;
 use App\Models\DocRevisions;
 use App\Models\FileHistory;
+use App\Models\Group;
 use App\Models\Intern;
 use App\Models\Project;
 use App\Models\StudyGrade;
@@ -83,7 +84,6 @@ class ExcelExportController extends Controller
             $row++;
         }
 
-        // Eventos del asesor
         $calendarEvents = CalendarEvent::where('requester_id', $academic_advisor_id)->orderBy('date_start')->take(11)->get();
 
         $column = 'P';
@@ -287,7 +287,9 @@ class ExcelExportController extends Controller
             $counter++;
         }
 
-        $group = $interns[0]->Group;
+        $group_id = $interns[0]->group_id;
+        $group = Group::find($group_id);
+        $groupName = $group->name;
 
         $grades = [
             1 => '1er Cuatrimestre',
@@ -304,8 +306,8 @@ class ExcelExportController extends Controller
             12 => '12Vo Cuatrimestre',
         ];
 
-        for ($i = 0; $i < strlen($group); $i++) {
-            $gradeNumber = intval(substr($group, $i, 1));
+        for ($i = 0; $i < strlen($groupName); $i++) {
+            $gradeNumber = intval(substr($groupName, $i, 1));
             if ($gradeNumber > 0) {
                 break;
             }

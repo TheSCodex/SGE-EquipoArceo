@@ -300,6 +300,12 @@ Route::middleware('auth')->group(function () {
     // BUSQUEDA DE ROLES
     Route::get('/search/roles', [UserController::class, 'searchRoles'])->name('search.roles');
 
+    // BUSQUEDA DE COMPAÑIAS
+    Route::get('/search/companies', [companiesController::class, 'searchCompany'])->name('search.company');
+
+    // BUSQUEDA DE ASESOR EMPRESARIAL
+    Route::get('/search/businessAdvisors', [AdvisorController::class, 'searchBusinessAdvisors'])->name('search.advisors');
+
     // CRUD de Roles
     Route::resource('panel-roles', RoleController::class)->names('panel-roles')->middleware('roleorcan:admin,crud-roles-permisos');
 
@@ -323,6 +329,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
+
+
+    // ! PERFIL
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
+    Route::get('/search/careers', [carrerasController::class, 'searchCareers'])->name('search.careers');
+    Route::get('/search/academies', [AcademiesController::class, 'searchAcademies'])->name('search.academies');
+    Route::get('/search/divisions', [DivisionsController::class, 'searchDivisions'])->name('search.divisions');
+    
 });
 
 
