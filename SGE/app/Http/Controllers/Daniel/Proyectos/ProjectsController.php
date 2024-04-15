@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Daniel\Proyectos;
 
-
+use App\Notifications\ProyectoEditado;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessSector;
@@ -225,6 +225,7 @@ class ProjectsController extends Controller
     public function update(AnteproyectoRequest $request, $id)
     {
         $project = Project::findOrFail($id);
+        
         $validatedData = $request->validated();
 
         $project->update([
@@ -265,6 +266,13 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
+
+        $advisorId = AcademicAdvisor::where('id', $intern->academic_advisor_id)->first();
+        $advisor = User::find($advisorId->user_id);
+        $student = User::find($intern->user_id);
+        $notification = $advisor->notify(new ProyectoEditado($student->name));
+
+        // Send the notification to the user
         return redirect('/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
     }
 

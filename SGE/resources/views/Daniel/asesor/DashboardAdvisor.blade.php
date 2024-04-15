@@ -21,10 +21,10 @@
 
                     <div class="rounded-lg h-auto bg-white flex flex-col gap-2 justify-center p-5 grow">
                         @forelse($notificaciones as $notificacion)
-                            <div class="flex items-center px-4 p-1 my-2 justify-between">
+                            <div class="flex items-center px-4 p-1 my-2 justify-between ">
                                 <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
                                     class="w-8 h-8 mr-2">
-                                <p class="text-sm font-roboto">{{ $notificacion->data['message'] }}</p>
+                                <p class="text-sm font-roboto w-[85%]">{{ $notificacion->data['message'] }}</p>
                             </div>
                         @empty
                             <div class="flex items-center px-4 p-1 my-2 justify-center flex-col">
