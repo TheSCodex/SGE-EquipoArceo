@@ -299,13 +299,19 @@ class ReportsController extends Controller
                 $interns = Intern::where('career_id', $career->id)->get();
                 $careerData = [
                     'name' => $career->name,
-                    'projects' => []
+                    'projects' => [],
+                    'groups' => []
                 ];
 
                 foreach ($interns as $intern) {
                     $project = Project::find($intern->project_id);
                     if ($project && $project->status == 'aprobado') {
                         $careerData['projects'][] = $project;
+                    }
+
+                    $group = Group::find($intern->group_id);
+                    if ($group) {
+                        $careerData['groups'][] = $group;
                     }
                 }
 
@@ -315,7 +321,7 @@ class ReportsController extends Controller
             $academiesData[] = $academyData;
         }
 
-        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division', 'group', 'user'));
+        return view('Eliud.reports.directorsReports', compact('academiesData', 'userData', 'files', 'division', 'user'));
     }
 
 
