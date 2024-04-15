@@ -19,11 +19,11 @@
                     </p>
                 @enderror
             </div>
-            <div class="space-y-2">
-                <p class="text-sm">Correo</p>
-                <input type="text" name="email" value="{{ old('email', $advisor->email) }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Correo">
+            <div class="space-y-2 ">
+                <p class="text-sm ">Correo</p>
+                <input type="text" name="email" value="{{ old('email', $advisor->email) }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] self-center flex" placeholder="Correo">
                 @error('email')
-                    <p class="text-[#ff0000] text-sm">
+                    <p class="text-[#ff0000] text-sm max-w-[70vw]">
                         {{ $message }}
                     </p>
                 @enderror
