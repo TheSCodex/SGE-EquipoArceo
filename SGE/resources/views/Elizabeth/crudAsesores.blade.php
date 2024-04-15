@@ -28,7 +28,7 @@
                     </div>
                 </form>
                 </div>
-                <a href="{{ route('panel-advisors.index')}}"
+                <a href="{{ route('panel-advisors.create')}}"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo Asesor Empresarial
                 </a>
             </div>
