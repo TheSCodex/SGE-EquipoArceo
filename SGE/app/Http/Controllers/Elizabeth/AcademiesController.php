@@ -14,6 +14,24 @@ class AcademiesController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function searchAcademies(Request $request)
+{
+    $query = $request->input('query');
+
+    $academies = Academy::where('name', 'like', '%' . $query . '%')
+        ->orWhereHas('president', function ($userQuery) use ($query) {
+            $userQuery->where('name', 'like', '%' . $query . '%');
+        })
+        ->orWhereHas('division', function ($divisionQuery) use ($query) {
+            $divisionQuery->where('name', 'like', '%' . $query . '%');
+        })
+        ->paginate(10);
+    $presidents = User::whereIn('id', $academies->pluck('president_id'))->get();
+    $divisions = Division::whereIn('id',$academies->pluck('division_id'))->get();
+    return view('Elizabeth.Academies.crudAcademies', compact('academies','presidents','divisions'));
+}
+
     public function index()
     {
         $academies = Academy::paginate(10);

@@ -88,14 +88,14 @@
 
                                 <td class="font-roboto  py-5">{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</td>
                                 
-                                <td class=" text-start  pl-5  font-roboto py-5">
+                                <td class=" text-start  pl-[2%]   font-roboto py-5">
                                     <a href="{{ route('panel-advisors.show', $advisor->id) }}"
                                                 class="flex justify-start">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
 
-                                <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                <td class="font-roboto font-bold py-5  pr-[2%] pl-[1%] cursor-pointer ">
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-center">
                                         <img src="/img/logos/pencil.svg">
                                     </a>
