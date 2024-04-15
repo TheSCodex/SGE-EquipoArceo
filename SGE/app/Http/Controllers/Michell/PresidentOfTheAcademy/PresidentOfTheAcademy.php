@@ -24,15 +24,19 @@ class PresidentOfTheAcademy extends Controller
     {
         $advisors = AcademicAdvisor::all();
         $businessConsultants = User::where('rol_id', 7)->get();
-        $votes=Project::sum('like');
+        $votes = Project::sum('like');
         // $dataStudents = Intern::with('user', 'academicAdvisor.user')->get();
-        
+
         $dataStudents = User::join('interns', 'users.id', '=', 'interns.user_id')
             ->whereNull('interns.project_id')
             ->select('users.name')
             ->get();
-        
-        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes', 'dataStudents'));
+
+        $dataProjects = Intern::with('user', 'project')
+            ->whereHas('project')
+            ->get();
+
+        return view('Michell.PresidentOfTheAcademy.inicioPresidentAcademy', compact('advisors', 'businessConsultants', 'votes', 'dataStudents', 'dataProjects'));
     }
 
     public function AdvisorList()
@@ -40,7 +44,7 @@ class PresidentOfTheAcademy extends Controller
         $advisors = AcademicAdvisor::join('users', 'academic_advisor.user_id', '=', 'users.id')
             ->join('careers', 'academic_advisor.career_id', '=', 'careers.id')
             ->where('users.rol_id', 2)
-            ->select('academic_advisor.id', 'users.name', 'careers.name AS career_name', 'academic_advisor.max_advisors', 'academic_advisor.quantity_advised')
+            ->select('academic_advisor.id', 'users.name', 'users.last_name', 'careers.name AS career_name', 'academic_advisor.max_advisors', 'academic_advisor.quantity_advised')
             // ->get();
             ->paginate(10);
 
@@ -158,18 +162,17 @@ class PresidentOfTheAcademy extends Controller
         // $user = User::find($id);
         // Desactivar restricciones de clave externa temporalmente
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    
+
         // Eliminar el registro
         $academic = AcademicAdvisor::find($id);
         $userId = $academic->user_id;
         $user = User::find($userId);
         $user->delete();
         $academic->delete();
-    
+
         // Reactivar restricciones de clave externa
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-    
+
         return redirect()->route('lista-asesores')->with('notificacion', 'Asesor eliminado correctamente');
     }
-    
 }
