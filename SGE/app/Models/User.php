@@ -98,4 +98,8 @@ class User extends Authenticatable
         $permissions = json_decode($this->role->permissions, true);
         return isset($permissions[$permission]) && $permissions[$permission];
     }
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
 }
