@@ -64,7 +64,7 @@
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
                                             <p class="mx-[1%] font-normal w-[40%]">
-                                                {{ $interns[0]->Group ?? 'No disponible' }}
+                                                {{ $interns[0]->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
 
                                 <div class="flex flex-wrap">
                                     <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                    <p class=" w-[50%] font-normal ">{{ $interns[0]->performance_area ?? 'No disponible' }}
                                     </p>
 
                                 </div>
@@ -189,28 +189,31 @@
                     <h3>Estado del Anteproyecto</h3>
                 </div>
                 <div
-                    class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <div class="w-[80%] flex items-center gap-[10%]">
+                    class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[18%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
+                    <div class="w-[80%] flex flex-wrap items-center gap-[10%]">
                         @if (isset($project))
-                            <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <div>
                                 @if (strtolower($project->status) == 'aprobado')
-                                    <p>Tu Anteproyecto ha sido aprobado</p>
+                                    <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
                                 @elseif (strtolower($project->status) == 'en revision')
-                                    <p>Tu Anteproyecto se encuentra en revision</p>
+                                    <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
                                 @elseif (strtolower($project->status) == 'asesoramiento')
-                                    <p>Tu Anteproyecto se encuentra en Asesoramiento</p>
+                                    <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
                                 @else
-                                    <p>Tu Anteproyecto esta guardado como borrador</p>
-                                    <form id="reviewForm" method="POST"
-                                        action="{{ route('ForRev', ['id' => $project->id]) }}">
+                                    <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                    <p class="w-[70%]">Tu Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
+                                    
+                                    <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
+                                        action="{{ route('ForAse', ['id' => $project->id]) }}">
                                         @csrf
                                         <button type="submit"
-                                            class="bg-[#02AB82] justify-end text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
-                                            a Revisión</button>
+                                            class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
+                                            a asesoramiento</button>
                                     </form>
                                 @endif
-                            </div>
+                            
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
@@ -226,7 +229,7 @@
                                 @if ($project->like == 0)
                                     <p class="w-full">Aun no tienes votos</p>
                                 @else
-                                    <p class="w-full">Tienes {{ $project->like }} voto(s)</p>
+                                    <p class="w-full">Tienes <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
                                 @endif
                             @else
                                 <p class="w-full">Aun no hay nada que votar</p>
@@ -250,7 +253,7 @@
                                     @elseif($comment->director_id !== null)
                                         Director de division
                                     @else
-                                        Tú
+                                        <span class="text-primaryColor">Tú</span>
                                     @endif
                                 </p>
                                 <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}
@@ -331,6 +334,24 @@
                     Swal.fire({
                         title: '!Listo!',
                         text: `¡Tu anteproyecto sera revisado por tu asesor!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
+            @if (session()->has('Created'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto ha sido creado exitosamente!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
+            @if (session()->has('Edit'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto se ha editado correctamente!`,
                         icon: 'success',
                     });
                 </script>

@@ -21,7 +21,9 @@
                                     class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
                                     <div
                                         class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
-                                        <h2 class="text-lg font-bold">{{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}</h2>
+                                        <h2 class="text-lg font-bold">
+                                            {{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}
+                                        </h2>
                                         <p class="text-sm text-center  font-bold text-primaryColor">
                                             {{ $project->like !== null ? $project->like : 0 }} Votos
                                         </p>
@@ -67,76 +69,88 @@
             </div>
         </div>
         <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
-
+            @if (!$projects == null)
             <div class="lg:hidden w-full mb-5">
-                <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($projects as $project)
-                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                            <h2 class="text-lg font-bold">{{ $project->name }}</h2>
-                            <p class="text-sm text-gray-500">Votos:
-                                {{ $project->like !== null ? $project->like : 0 }}
-                            </p>
-                            <p class="text-sm text-gray-500">Asesor: {{ $project->adviser->name }}</p>
-                            <div class="flex justify-end mt-4 space-x-2">
-                                <td>
-                                    <a href="{{ route('director-anteproyectos.view', $project->id) }}"
-                                        class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold"">
-                                        Ver detalles</a>
-                                </td>
+                    <div class="grid md:grid-cols-2 gap-4 w-full">
+                        @foreach ($projects as $project)
+                            <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                                <h2 class="text-lg font-bold">{{ $project->name }}</h2>
+                                <p class="text-sm text-gray-500">Votos:
+                                    {{ $project->like !== null ? $project->like : 0 }}
+                                </p>
+                                <p class="text-sm text-gray-500">Asesor:
+                                    {{ $project->interns->first()->academicAdvisor->user->name }}
+                                    {{ $project->interns->first()->academicAdvisor->user->last_name }}</p>
+                                <div class="flex justify-end mt-4 space-x-2">
+                                    <td>
+                                        <a href="{{ route('director-anteproyectos.view', $project->id) }}"
+                                            class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold"">
+                                            Ver detalles</a>
+                                    </td>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="hidden lg:block w-full">
-                <table class="text-start w-full">
-                    <tr class="w-full">
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5 w-[25%]">Nombre del proyecto
-                        </th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Votos </th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Asesor Academico</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Fecha de publicacion</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Estado</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
-                    </tr>
-
-                    @foreach ($projects as $project)
-                        @php
-                            $counter = ($projects->currentPage() - 1) * $projects->perPage() + $loop->index + 1;
-                        @endphp
-                        @if (strtolower($project->status) == 'aprobado')
-                            <tr
-                                class="w-full transition duration-100 ease-in-out bg-green/20 hover:bg-green/40 border-b-gray-200 border-b-[0.5px]">
-                            @else
-                            <tr
-                                class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                        @endif
-                        <td class="font-roboto font-medium py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->name }}</td>
-                        <td class="font-roboto font-medium py-5 pl-8">
-                            {{ $project->like !== null ? $project->like : 0 }}</td>
-                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->adviser->name }}</td>
-                        <td class="font-roboto font-medium py-5 pl-5">{{ $project->start_date }}</td>
-                        <td class="font-roboto font-medium py-5 pl-5">{{ ucfirst($project->status) }}</td>
-
-                        </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{ route('director-anteproyectos.view', $project->id) }}" class="flex justify-center">
-                                <img src="/img/ojoGreen.svg" class="w-7">
-                            </a>
-                        </td>
+                <div class="hidden lg:block w-full">
+                    <table class="text-start w-full">
+                        <tr class="w-full">
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5 w-[25%]">Nombre del proyecto
+                            </th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Votos </th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Asesor Academico</th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Fecha de publicacion</th>
+                            <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Estado</th>
+                            <th class="text-[#ACACAC] font-roboto text-xs ">Detalles</th>
                         </tr>
-                    @endforeach
-                </table>
-            </div>
+
+                        @foreach ($projects as $project)
+                            @php
+                                $counter = ($projects->currentPage() - 1) * $projects->perPage() + $loop->index + 1;
+                            @endphp
+                            @if (strtolower($project->status) == 'aprobado')
+                                <tr
+                                    class="w-full transition duration-100 ease-in-out bg-green/20 hover:bg-green/40 border-b-gray-200 border-b-[0.5px]">
+                                @else
+                                <tr
+                                    class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                            @endif
+                            <td class="font-roboto font-medium py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                            <td class="font-roboto font-medium py-5 pl-5">{{ $project->name }}</td>
+                            <td class="font-roboto font-medium py-5 pl-8">
+                                {{ $project->like !== null ? $project->like : 0 }}</td>
+                            <td class="font-roboto font-medium py-5 pl-5">
+                                {{ $project->interns->first()->academicAdvisor->user->name }}
+                                {{ $project->interns->first()->academicAdvisor->user->last_name }}</td>
+                            <td class="font-roboto font-medium py-5 pl-5">{{ $project->start_date }}</td>
+                            <td class="font-roboto font-medium py-5 pl-5">{{ ucfirst($project->status) }}</td>
+
+                            </td>
+                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                                <a href="{{ route('director-anteproyectos.view', $project->id) }}"
+                                    class="flex justify-center">
+                                    <img src="/img/ojoGreen.svg" class="w-7">
+                                </a>
+                            </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
         </div>
+    @else
+        <div class=" text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
+            projectos.</div>
+        @endif
+
         <div id="no-projects-message" class="hidden text-[#ACACAC] font-roboto text-center mt-6 ">No se encontraron
             projectos.</div>
     </div>
-    <div class="my-5 mx-auto">
-        {{ $projects->links() }}
-    </div>
+    @if ($projects)
+        <div class="my-5 mx-auto">
+            {{ $projects->links() }}
+        </div>
+    @endif
 
     </section>
 
