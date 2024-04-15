@@ -54,7 +54,7 @@
             @endif
 
             {{-- Cuadros normales --}}
-            <div class="sm:flex flex-wrap pb-5 max-h-[35vh] overflow-y-auto overflow-x-hidden overflow-y-transparent">
+            <div class="sm:flex flex-wrap pb-5 max-h-[35vh] overflow-y-auto overflow-x-hidden overflow-y-transparent no-scrollbar">
                 @php $counter = 0; @endphp
                 @foreach($normalComments as $comment)
                     @if($counter % 2 == 0)
