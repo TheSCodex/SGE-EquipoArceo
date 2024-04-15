@@ -16,7 +16,7 @@
                         </div>
                     </form>    
                 </div>
-                <a href="{{ route('newCareer')}}"
+                <a href="{{ route('panel-careers.create')}}"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
             </div>
@@ -29,7 +29,7 @@
                         <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <a href="{{ route('newCareer')}}"
+                <a href="{{ route('panel-careers.create')}}"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
 
