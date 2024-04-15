@@ -11,13 +11,16 @@
         <div class="w-full h-fit flex flex-col space-y-2">
             <div class="w-full space-y-2">
                 <p class="text-sm">Nombre del rol</p>
-                <input type="text" name="rol_name" value="{{ $role->title }}" class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3" placeholder="Nombre del rol">
+                <div class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3 bg-lightGray">
+                    {{ $role->title }}
+                </div>
                 @error('rol_name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
                     </p>
                 @enderror
             </div>
+            
             <div class="w-full space-y-2">
                 <p class="text-sm">Permisos</p>
                 <div class="grid grid-cols-2 gap-4 overflow-y-scroll h-[350px] no-scrollbar py-5">
