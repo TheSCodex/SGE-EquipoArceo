@@ -133,7 +133,7 @@
                     @if ($advisor && $advisor->academicAdvisor)
                         <p>{{ $advisor->academicAdvisor->user->name }}</p>
                     @else
-                        <p>Sin asesor académico</p>
+                        <p class="text-[#888] w-full text-center">Sin asesor académico</p>
                     @endif
 
                 </div>
@@ -186,7 +186,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1   md:grid-cols-1 gap-3 h-[280px] ">
+            <div class="grid grid-cols-1  md:grid-cols-1 gap-3 h-[230px] ">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     @if ($penalty === null)
                         <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!

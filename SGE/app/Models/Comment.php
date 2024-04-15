@@ -32,5 +32,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Comment::class, 'parent_comment_id');
     }
+    public function hasChildComments()
+    {
+        return Comment::where('parent_comment_id', $this->id)->exists();
+    }
 }
 

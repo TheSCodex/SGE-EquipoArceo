@@ -333,7 +333,7 @@
         </script>
     @endif
 
-    @if (session()->has('success'))
+    @if (session()->has('onRev'))
         <script>
             Swal.fire({
                 title: '!Listo!',

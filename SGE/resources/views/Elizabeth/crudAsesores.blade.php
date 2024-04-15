@@ -2,24 +2,24 @@
 @section('titulo', 'Panel de Asesores Empresariales')
 @section('contenido')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<section class="flex flex-col justify-center items-center  min-h-full flex-grow">
+<section class="flex flex-col justify-start items-center  min-h-screen flex-grow">
     <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-        <div class=" mt-5 mx-auto w-11/12 md:flex md:items-center md:justify-between border-b border-gray-200 pb-2">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Asesores Empresariales</h1>
-
-            <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
-                    </div>
+        <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+        <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de Asesores Empresariales</h1>
+        <div class="flex items-center flex-row justify-end">
+            <form action="{{ route('search.advisors') }}" method="GET" id="search-form">
+                <div class="hidden md:flex items-center relative">
+                    <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                 </div>
-                <a href="{{ route('formAsesores')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
-                </a>
-            </div>
-
-
-            <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
+            </form>             
+            
+            
+            <a href="{{ route('formAsesores')}}"
+                class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
+            </a>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
 
                 <div>
                     <div class="flex items-center relative" >
@@ -65,7 +65,7 @@
                     <p id="noDataMessage" class="mt-4 text-red-500 hidden text-center  text-lightGray font-bold text-2xl" style="display: block;">
                         Sin resultados</p>
                     @endif
-                    {{$advisors->links()}}
+                
                 </div>
             </div>
             <div class="hidden lg:block w-full">
@@ -88,14 +88,14 @@
 
                                 <td class="font-roboto  py-5">{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</td>
                                 
-                                <td class=" text-start  pl-5  font-roboto py-5">
+                                <td class=" text-start  pl-[2%]   font-roboto py-5">
                                     <a href="{{ route('panel-advisors.show', $advisor->id) }}"
                                                 class="flex justify-start">
                                                 <img src="/img/ojoGreen.svg" class="w-7">
                                             </a>
                                         </td>
 
-                                <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                <td class="font-roboto font-bold py-5  pr-[2%] pl-[1%] cursor-pointer ">
                                     <a href="{{ route('panel-advisors.edit', $advisor->id) }}" class="flex justify-center">
                                         <img src="/img/logos/pencil.svg">
                                     </a>
@@ -116,13 +116,15 @@
                     @endif
                 </table>
                 
-                {{$advisors->links()}}
+            
             </div>
         </div>
     </div>
-
+    
 </section>
-
+<div class="w-[90%] m-auto py-2  max-sm:flex justify-center">
+    {{$advisors->links()}}
+</div>
 @if(session()->has('successAdd'))
 <script>
     function confirmAgregar(){
