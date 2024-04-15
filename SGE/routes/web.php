@@ -86,11 +86,13 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para el formulario de anteproyectos
     Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create')->middleware('roleorcan:estudiante,crear-anteproyecto');
+    
     Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store')->middleware('roleorcan:estudiante,crear-anteproyecto');
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores');
     Route::match(['get', 'post'], 'EstatusCambiado', [ProjectsController::class, 'ForRev'])->name('ForRev');
+    Route::match(['get', 'post'], 'EstatusAsesoramiento', [ProjectsController::class, 'onAse'])->name('ForAse');
 
 
 
@@ -169,6 +171,8 @@ Route::middleware('auth')->group(function () {
     Route::post('anteproyecto/{id}/presidentLike', [ProjectsPresidentController::class, 'storeLike'])->name('anteproyecto-President.storeLike');
     Route::post('anteproyecto/{id}/presidentDeleteLike', [ProjectsPresidentController::class, 'deleteLike'])->name('anteproyecto-President.deleteLike');
     Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'view'])->name('anteproyecto-President.view');
+    Route::post('/cambiar-estado-proyectos', [ProjectsPresidentController::class, 'cambiarEstadoProyectos'])->name('cambiar.estado.proyectos');
+
 
     Route::get("observaciones/presidente/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoPresi');
     Route::put('observaciones/presidente/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updatePresidente');
