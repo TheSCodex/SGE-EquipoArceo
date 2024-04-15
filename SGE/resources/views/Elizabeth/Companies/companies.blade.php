@@ -35,7 +35,7 @@
                                 type="search" placeholder="Buscar...." style="color: green;">
                         </div>
                     </div>
-                    <a href="/panel-companies-create"
+                    <a href="/panel-companies/create"
                         class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar
                         nueva empresa</a>
                 </div>
