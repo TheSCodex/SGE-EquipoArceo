@@ -23,6 +23,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+
 
 
 
@@ -31,6 +33,10 @@ class ExcelExportController extends Controller
 {
     public function downloadExcelFile($academic_advisor_id)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $filePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía_' . time() . '.xlsx');
@@ -126,6 +132,10 @@ class ExcelExportController extends Controller
 
     public function generateExcelFormatFile()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+        
         $filePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía_' . time() . '.xlsx');
@@ -157,6 +167,11 @@ class ExcelExportController extends Controller
 
     public function downloadLibrosFile()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
+
         $filePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS_' . time() . '.xlsx');
@@ -219,6 +234,10 @@ class ExcelExportController extends Controller
 
     public function downloadEgresadosFile(EgresadosRequest $request)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
 
         $validatedData = $request->validate([
             'startFolio' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
