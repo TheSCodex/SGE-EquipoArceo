@@ -14,7 +14,7 @@
             </form>             
             
             
-            <a href="{{ route('formAsesores')}}"
+            <a href="{{ route('panel-advisors.create')}}"
                 class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar un nuevo Asesor Empresarial
             </a>
         </div>
@@ -22,11 +22,13 @@
         <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
 
                 <div>
+                <form action="{{ route('search.advisors') }}" method="GET" id="search-form">
                     <div class="flex items-center relative" >
-                        <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
+                        <input name='query' id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
+                </form>
                 </div>
-                <a href="{{ route('formAsesores')}}"
+                <a href="{{ route('panel-advisors.index')}}"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo Asesor Empresarial
                 </a>
             </div>
@@ -184,44 +186,6 @@
             }
         });
     }
-    function searchTable() {
-        var searchText = document.getElementById("search").value.toLowerCase();
-        var rows = document.querySelectorAll("table tr");
-        for (var i = 1; i < rows.length; i++) {
-            var row = rows[i];
-            var found = false;
-            for (var j = 0; j < row.cells.length; j++) {
-                var cell = row.cells[j];
-                if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
-
-    // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-    document.getElementById("search").addEventListener("input", searchTable);
 </script>
 
-
-<script>
-    function searchMobileTable() {
-        var searchText = document.getElementById("searchMovil").value.toLowerCase();
-        var advisors = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
-
-        advisors.forEach(function(advisor) {
-            var advisorText = advisor.innerText.toLowerCase();
-            var found = advisorText.indexOf(searchText) > -1;
-            advisor.style.display = found ? "" : "none";
-        });
-    }
-
-    document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
-</script>
 @endsection
