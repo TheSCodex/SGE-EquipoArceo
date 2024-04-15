@@ -337,54 +337,96 @@ class UserController extends Controller
     }
 
     // Método para crear los usuarios con la API
-    
+
     private function createUsersInBulk($request)
     {
         $rules = [
             'identifiers' => 'required',
-            'identifiers.*' => 'required', 
+            'identifiers.*' => 'required',
         ];
-    
+
         $messages = [
             'identifiers.required' => 'Por favor ingresa al menos un identificador.',
             'identifiers.array' => 'Los identificadores deben ser proporcionados como un array.',
             'identifiers.*.required' => 'Cada identificador es requerido.',
         ];
-    
+
         $validator = Validator::make($request->all(), $rules, $messages);
-    
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $identifiers = $request->identifiers;
         $identifiers = explode(", ", $identifiers[0]);
+
+
         foreach ($identifiers as $identifier) {
             try {
                 // solicitud a la API para obtener los datos del usuario
                 $apiUrl = 'http://localhost:3000/users/' . trim($identifier);
+                $response = Http::get($apiUrl);
 
-                $response = Http::get($apiUrl);    
                 if ($response->successful()) {
                     $userData = $response->json();
-    
+
+                    // para separar el nombre completo
                     $parts = explode(' ', $userData['nombreCompleto']);
 
                     $last_name = array_shift($parts) . ' ' . array_shift($parts);
                     $name = implode(' ', $parts);
 
-                    \App\Models\User::create([
-                        'name' => $name, 
-                        'last_name' => $last_name, 
-                        'email' => $userData['matricula'] . '@utcancun.edu.mx',
-                        'rol_id' => 1,
-                        'identifier' => $userData['matricula'],
-                        'password' => bcrypt(Str::random(8)),
-                    ]);
-                    
+                    // para obtener la carrera de la api
+                    $carreraApi = $userData['carrera'];
+                    $career = Career::where('name', $carreraApi)->first();
+                    if ($career) {
+                        $careerId = $career->id;
+
+                        // obtener el grupo
+                        $groupApi = $userData['grupo'];
+                        $group = Group::where('name', $groupApi)->first();
+
+                        if ($group) {
+                            $groupId = $group->id;
+                            $user = new \App\Models\User();
+
+                            try {
+                                $user = new \App\Models\User();
+                                $user->name = $name;
+                                $user->last_name = $last_name;
+                                $user->email = $userData['matricula'] . '@utcancun.edu.mx';
+                                $user->rol_id = 1;
+                                $randomPassword = Str::random(8);
+                                $user->save();
+                                try {
+                                    \App\Models\Intern::create([
+                                        'user_id' => $user->id,
+                                        'group_id' => $groupId,
+                                        'career_id' => $careerId,
+                                        'student_status_id' => 1
+                                    ]);
+                                } catch (\Exception $e) {
+                                    Log::error('Error al crear el usuario: ' . $e->getMessage());
+                                    session()->flash('error', 'Error al crear el usuario:' . $e->getMessage());
+                                    return redirect()->route('panel-users.create');
+                                }
+                            } catch (\Exception $e) {
+                                Log::error('Error al crear el usuario: ' . $e->getMessage());
+                                session()->flash('error', 'Error al crear el usuario:' . $e->getMessage());
+                                return redirect()->route('panel-users.create');
+                            }
+
+
+                        } else {
+                            session()->flash('error', 'La solicitud falló para la matrícula: ' . $identifier . '. No se encontró el grupo: ' . $groupApi);
+                            return redirect()->route('panel-users.create');
+                        }
+                    } else {
+                        session()->flash('error', 'La solicitud falló para la matrícula: ' . $identifier . '. No se encontró la carrera especificada: ' . $carreraApi);
+                        return redirect()->route('panel-users.create');
+                    }
                 } else {
-                    Log::info('La solicitud a la API falló para la matrícula: ' . $identifier . '. Código de estado: ' . $response->status());
-                    session()->flash('error', 'Hubo un error recuperando los datos de los usuarios.');
+                    session()->flash('error', 'La solicitud falló para la matrícula: ' . $identifier . '. Código de estado: ' . $response->status());
                     return redirect()->route('panel-users.create');
                 }
             } catch (\Exception $e) {
@@ -392,12 +434,12 @@ class UserController extends Controller
                 return redirect()->route('panel-users.create');
             }
         }
-    
+
         session()->flash('success', '¡Los usuarios se han agregado exitosamente!');
         $users = User::paginate(10);
-        return view('Pipa.panel-users', compact('users'));    
+        return view('Pipa.panel-users', compact('users'));
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
