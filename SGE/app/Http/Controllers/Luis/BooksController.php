@@ -63,7 +63,7 @@ class BooksController extends Controller
             $userInfoByBookId[$bookId][] = getInternInfo($intern);
             
         }
-        
+            // dd($userInfoByBookId);
         $books = Book::paginate(5);
 
         foreach ($books as $book) {
