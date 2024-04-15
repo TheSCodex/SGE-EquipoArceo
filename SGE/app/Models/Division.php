@@ -20,4 +20,14 @@ class Division extends Model
     {
         return $this->hasMany(Academy::class);
     }
+
+    public function director()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function directorasistant()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
