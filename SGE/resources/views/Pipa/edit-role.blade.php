@@ -11,9 +11,10 @@
         <div class="w-full h-fit flex flex-col space-y-2">
             <div class="w-full space-y-2">
                 <p class="text-sm">Nombre del rol</p>
-                <div class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3 bg-lightGray">
+                <div class="text-sm w-full rounded-md border-lightGray border-2 px-4 py-3">
                     {{ $role->title }}
                 </div>
+                <input type="text" name="rol_name" value="{{ $role->title }}" class="hidden text-sm w-full rounded-md border-lightGray border-2 px-4 py-3 bg-gray-400" placeholder="Nombre del rol">
                 @error('rol_name')
                     <p class="text-[#ff0000] text-sm">
                         {{ $message }}
