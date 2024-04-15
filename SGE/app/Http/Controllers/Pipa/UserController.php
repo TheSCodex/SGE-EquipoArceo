@@ -399,6 +399,7 @@ class UserController extends Controller
                                 $user = new \App\Models\User();
                                 $user->name = $name;
                                 $user->last_name = $last_name;
+                                $user->identifier = $identifier;
                                 $user->email = $userData['matricula'] . '@utcancun.edu.mx';
                                 $user->rol_id = 1;
                                 $randomPassword = Str::random(8);
