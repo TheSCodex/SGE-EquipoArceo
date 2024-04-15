@@ -14,11 +14,28 @@ class DivisionsController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function searchDivisions(Request $request)
+    {
+        $query = $request->input('query');
+    
+        $divisions = Division::where('name', 'like', '%' . $query . '%')
+            ->orWhereHas('director', function ($directorQuery) use ($query) {
+                $directorQuery->where('name', 'like', '%' . $query . '%');
+            })
+            ->orWhereHas('directorAsistant', function ($directorAsistantQuery) use ($query) {
+                $directorAsistantQuery->where('name', 'like', '%' . $query . '%');
+            })
+            ->paginate(10);
+        $principals = User::whereIn('id', $divisions->pluck('director_id'))->get();
+        $assistants = User::whereIn('id',$divisions->pluck('directorAsistant_id'))->get();
+        return view('Elizabeth.Divisions.crudDivisiones', compact('divisions','principals','assistants'));
+    }
+
     public function index()
     {
-       $divisions = Division::paginate(10);
-       $principals = User::whereIn('id', $divisions->pluck('director_id'))->get();
-       $assistants = User::whereIn('id',$divisions->pluck('directorAsistant_id'))->get();
+        $divisions = Division::paginate(10);
+        $principals = User::whereIn('id', $divisions->pluck('director_id'))->get();
+        $assistants = User::whereIn('id',$divisions->pluck('directorAsistant_id'))->get();
         return view('Elizabeth.Divisions.crudDivisiones',compact('divisions','principals','assistants'));
     }
 

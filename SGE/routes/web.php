@@ -336,6 +336,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
+    Route::get('/search/careers', [carrerasController::class, 'searchCareers'])->name('search.careers');
+    Route::get('/search/academies', [AcademiesController::class, 'searchAcademies'])->name('search.academies');
+    Route::get('/search/divisions', [DivisionsController::class, 'searchDivisions'])->name('search.divisions');
+    
 });
 
 
