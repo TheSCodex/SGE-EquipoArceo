@@ -77,7 +77,7 @@ class BooksController extends Controller
                 // Verificar si el usuario es un asistente
                 if($user->rol_id == 5){
                     // Verificar si el nombre de la división coincide con la división del usuario
-                    if ($divisionOrAcademy->name == $divisionName) {
+                    if ($divisionOrAcademy?->name == $divisionName) {
                         $booksByDivision[$divisionName][] = $book;
                     }
                 }

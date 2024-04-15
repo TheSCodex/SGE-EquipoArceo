@@ -33,7 +33,7 @@ class ProjectsPresidentController extends Controller
 
         if (Auth::user()->rol_id === 4) {
             $division = Division::where('director_id', $userId)->first();
-        $divisionId = $division->id;
+        $divisionId = $division?->id;
 
         $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
             $query->whereHas('career', function ($query) use ($divisionId) {
@@ -49,7 +49,7 @@ class ProjectsPresidentController extends Controller
         }
         else {
         $academy = Academy::where('president_id', $userId)->first();
-        $divisionId = $academy->division->id;
+        $divisionId = $academy?->division?->id;
 
         $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
             $query->whereHas('career', function ($query) use ($divisionId) {
