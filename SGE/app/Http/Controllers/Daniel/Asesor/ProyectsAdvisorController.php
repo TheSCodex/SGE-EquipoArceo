@@ -43,9 +43,14 @@ class ProyectsAdvisorController extends Controller
                 });
             });
         })
-            ->whereIn('status', ['aprobado', 'en revision'])
-            ->with(['adviser', 'interns.user'])
-            ->paginate(10);
+        ->whereIn('status', ['aprobado', 'en revision'])
+        ->with([
+            'adviser',
+            'interns.user',
+            'interns.academicAdvisor.user' // Cargar la relación para obtener el nombre del asesor académico
+        ])
+        ->paginate(10);
+        //dd($projects);
 
         return view('Daniel.asesor.ProyectsAdvisor')->with(['projects' => $projects, 'projectsAdvisor' => $projectsAdvisor]);
     }

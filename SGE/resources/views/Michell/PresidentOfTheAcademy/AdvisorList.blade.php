@@ -54,7 +54,7 @@
                                     @foreach ($advisors as $data)
                                         <tr
                                             class="data-row {{ $data->quantity_advised > 0 ? 'has-advisor' : 'no-advisor' }}">
-                                            <td class="py-4">{{ $data->name }}</td>
+                                            <td class="py-4">{{$data->last_name}} {{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
                                             @if ($data->quantity_advised >= 0)
                                                 @php
@@ -67,12 +67,15 @@
                                                         $colorClass = 'text-red'; // Rojo
                                                     }
                                                 @endphp
-                                                <td class="py-4"><span
-                                                        class="{{ $colorClass }}">{{ $data->quantity_advised }}</span>
-                                                    Estudiantes</td>
-                                            @else
-                                                <td class="py-4"><span class="text-primaryColor ">0</span> Estudiantes
-                                                </td>
+                                                @if ($data->quantity_advised == 0)
+                                                    <td class="py-4"><span class="{{ $colorClass }}">0</span>
+                                                        Estudiantes
+                                                    </td>
+                                                @else
+                                                    <td class="py-4"><span
+                                                            class="{{ $colorClass }}">{{ $data->quantity_advised }}</span>
+                                                        Estudiantes</td>
+                                                @endif
                                             @endif
                                             <td class="py-4"><span
                                                     class="text-primaryColor">{{ $data->max_advisors }}</span> Estudiantes
@@ -96,11 +99,11 @@
                                 </tbody>
                             </table>
                             <p id="noDataMessage"
-                            class="mt-20 text-red-500 hidden h-screen text-center text-lightGray font-bold text-2xl">
-                            Sin resultados</p>
+                                class="mt-20 text-red-500 hidden h-screen text-center text-lightGray font-bold text-2xl">
+                                Sin resultados</p>
                         </div>
                     </section>
-                    <div class="max-md:hidden">
+                    <div class="max-md:hidde ">
                         {{ $advisors->links() }}
                     </div>
 

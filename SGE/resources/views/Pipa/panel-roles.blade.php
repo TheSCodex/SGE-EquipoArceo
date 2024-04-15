@@ -11,10 +11,10 @@
                     <div class="hidden md:flex items-center relative">
                         <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </form>  
-                <a href="/panel-roles/create"
+                </div>
+                {{-- <a href="/panel-roles/create"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo rol
-                </a>
+                </a> --}}
             </div>
             
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
@@ -26,9 +26,9 @@
                 </div>
 
 
-                <a href="/panel-roles/create"
+                {{-- <a href="/panel-roles/create"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo rol
-                </a>
+                </a> --}}
             </div>
 
         </div>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="hidden lg:block w-full">
-                <table class="text-start w-full">
+                <table class="text-start w-[80%] ml-32">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Nombre</th>

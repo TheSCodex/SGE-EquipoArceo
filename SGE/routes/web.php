@@ -171,6 +171,8 @@ Route::middleware('auth')->group(function () {
     Route::post('anteproyecto/{id}/presidentLike', [ProjectsPresidentController::class, 'storeLike'])->name('anteproyecto-President.storeLike');
     Route::post('anteproyecto/{id}/presidentDeleteLike', [ProjectsPresidentController::class, 'deleteLike'])->name('anteproyecto-President.deleteLike');
     Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'view'])->name('anteproyecto-President.view');
+    Route::post('/cambiar-estado-proyectos', [ProjectsPresidentController::class, 'cambiarEstadoProyectos'])->name('cambiar.estado.proyectos');
+
 
     Route::get("observaciones/presidente/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoPresi');
     Route::put('observaciones/presidente/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updatePresidente');
