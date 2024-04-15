@@ -37,7 +37,8 @@
                                     </div>
                                     <div class="flex flex-wrap ">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
@@ -95,7 +96,8 @@
                                 </div>
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
@@ -169,8 +171,6 @@
                 </div>
             </div>
 
-
-
             <div
                 class="sm:w-[31%] h-[82%] sm:min-h-[78vh] flex flex-wrap sm:flex-col justify-between mt-[1%] sm:mt-0 self-start gap-[1vh]">
                 <div
@@ -179,23 +179,26 @@
                 </div>
                 <div
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
-                        <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row">
+                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%] ">
                             @if (strtolower($project->status) == 'aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
+                                <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
                             @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">El proyecto se encuentra en revision</p>
+                                <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
+                            @elseif (strtolower($project->status) == 'asesoramiento')
+                                <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
+                                <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
+                                action="{{ route('ForRev', ['id' => $project->id]) }}">
+                                @csrf
+                                <button type="submit"
+                                    class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
+                                </form>a revisión</button>
                             @else
-                                <p class="">Este proyecto aun no esta en revision</p>
-                                <form method="POST" action="{{ route('OnRev', ['id' => $project->id]) }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Pasar
-                                        a revisión</button>
-                                </form>
+                                <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                <p class="w-[70%]">El Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
                             @endif
-                        </div>
                     </div>
                 </div>
 
@@ -206,9 +209,9 @@
                         <img src="{{ asset('img/iconosDaniel/votos.svg') }}" class="w-[15%]" />
                         <div class="w-[70%] flex justify-between flex-wrap flex-row-reverse">
                             @if ($project->like == 0)
-                                <p class="w-full">Este proyecto aun no cuenta con votos</p>
+                                <p>Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p class="w-full">Este proyecto cuenta con {{ $project->like }} voto(s)</p>
+                                <p>Este proyecto cuenta con {{ $project->like }} voto(s)</p>
                             @endif
 
 
@@ -242,7 +245,7 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -260,16 +263,15 @@
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
                             observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
-
-                            <button type="submit" class="w-[4vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>
@@ -288,7 +290,7 @@
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -309,62 +311,92 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session()->has('liked'))
-<script>
-    function liked(){
-        Swal.fire({
-            title: '!Votado!',
-            text: `¡El voto ha sido agregado!`,
-            icon: 'success',
-        })
-    }
-    liked();
-</script>
-@endif
-@if(session()->has('disliked'))
-<script>
-    function disliked(){
-        Swal.fire({
-            title: 'Voto removido',
-            text: `El voto ha sido removido del proyecto`,
-            icon: 'success',
-        })
-    }
-    disliked();
-</script>
-@endif
-
-<script>
-    function delVote() {
-        Swal.fire({
-            title: '¿Deseas remover el voto del proyecto?',
-            text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: ' #d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, remover voto'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delVoteForm').submit();
+    @if (session()->has('liked'))
+        <script>
+            function liked() {
+                Swal.fire({
+                    title: '!Votado!',
+                    text: `¡El voto ha sido agregado!`,
+                    icon: 'success',
+                })
             }
+            liked();
+        </script>
+    @endif
+    @if (session()->has('disliked'))
+        <script>
+            function disliked() {
+                Swal.fire({
+                    title: 'Voto removido',
+                    text: `El voto ha sido removido del proyecto`,
+                    icon: 'success',
+                })
+            }
+            disliked();
+        </script>
+    @endif
+
+    @if (session()->has('onRev'))
+        <script>
+            Swal.fire({
+                title: '!Listo!',
+                text: `¡El anteproyecto se encuentra en revision para todos los asesores!`,
+                icon: 'success',
+            });
+        </script>
+    @endif
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Una vez que pase a revisión, el proyecto estará disponible para su revisión por los asesores.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, pasar a revisión'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
         });
-    }
+    </script>
+
+    <script>
+        function delVote() {
+            Swal.fire({
+                title: '¿Deseas remover el voto del proyecto?',
+                text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: ' #d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, remover voto'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delVoteForm').submit();
+                }
+            });
+        }
 
         function confirmVote() {
-        Swal.fire({
-            title: '¿Deseas votar el proyecto?',
-            text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, votar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('voteForm').submit();
-            }
-        });
-    }
-</script>
+            Swal.fire({
+                title: '¿Deseas votar el proyecto?',
+                text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, votar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('voteForm').submit();
+                }
+            });
+        }
+    </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Models\Intern;
 use App\Models\Project;
 
 class ObservationsAcademicAdvisor extends Controller
@@ -62,7 +63,7 @@ class ObservationsAcademicAdvisor extends Controller
                 $comment->academic_advisor_id = $userId;
                 $comment->save();
 
-                return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
+                return redirect()->back()->with('save', 'Comentario guardado exitosamente.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }

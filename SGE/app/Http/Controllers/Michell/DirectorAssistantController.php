@@ -58,7 +58,15 @@ class DirectorAssistantController extends Controller
 
         // Obtener periodo actual
         $period = Intern::whereIn("interns.career_id", $careersId)->latest()->select("period")->first();
-        //dd($careersId);
+        // dd($careersId);
+        // dd($period);
+
+        if (isset($period["period"])) {
+            $period = $period["period"];
+        }
+        else {
+            $period = 0;
+        }
 
         // Contar proyectos aprobados, en revisión y totales
         $projectMetrics = [

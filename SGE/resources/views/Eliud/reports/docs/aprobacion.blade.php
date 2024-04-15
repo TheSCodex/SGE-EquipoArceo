@@ -65,20 +65,20 @@
             </span>Autorización de digitalización.</p>
 
         <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
-            </span> xxxx</p>
+            </span> {{'UTC/' . $division-> initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
     </div>
 
 
     <p
         style="line-height: 25px ;width: 100%; text-align:justify;width:100%; margin-top:20px; margin-bottom:10px; marger: 10px;line-height: none; ">
-        Se autoriza al (a) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
+        Se autoriza al (a) estudiante <span style="text-decoration: underline; font-weight:bolder;"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
         número de matrícula:
         <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
     </p>
 
     <div style="position: relative;height:1px">
         <div style="position: absolute; width: 250px; height:200px; top:50px; right:-5px">
-            <p > {{ $project?->name}}</p>
+            <p style="font-weight:bolder;"> {{ $project?->name}}</p>
         </div>
     
     </div>
@@ -162,16 +162,16 @@
     <div
         style="position: relative; height:100px; width: 100%; display: flex; justify-content: center; margin-top:40px; marger: 10px;">
         <div
-            style="position:absolute;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            style="position:absolute; width: 250px ;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
             <p style="text-align: center; font-weight: 700;">ASESOR ACADÉMICO</p>
             <p style="text-align: center;font-weight:100 ; margin-top: 40px">____________________________________</p>
-            <p style="text-align: center;font-size:12pt; ">Nombre y firma
+            <p style="text-align: center;font-size:12pt; ">{{$user->name}} {{$user->last_name}}
             </p>
         </div>
-        <div style="position:absolute; right :-20px; margin: 10px;">
+        <div style="position:absolute;  width: 250px ; right :-20px; margin: 10px;">
             <p style="text-align: center; font-weight: 700;">COMISIÓN ACADÉMICA</p>
             <p style="text-align: center; font-weight:100 ;margin-top: 40px">____________________________________</p>
-            <p style="text-align: center; font-size:12pt;">Nombre, cargo, firma y sello de </br>
+            <p style="text-align: center; font-size:12pt;">{{ $director?->name . ' ' . $director?->last_name}} director(a) {{($division?->name)}} </br>
                 Dirección</p>
         </div>
     </div>

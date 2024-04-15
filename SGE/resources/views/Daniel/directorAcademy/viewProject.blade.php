@@ -180,17 +180,20 @@
                 </div>
                 <div
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
-                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%]">
-                        <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                        <div class="w-[70%] flex justify-between flex-wrap flex-row">
+                    <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%] ">
                             @if (strtolower($project->status) == 'aprobado')
-                                <p class="">El proyecto ha sido aprobado</p>
+                                <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
                             @elseif (strtolower($project->status) == 'en revision')
-                                <p class="">El proyecto se encuentra en revision</p>
+                                <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
+                            @elseif (strtolower($project->status) == 'asesoramiento')
+                                <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">El Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
                             @else
-                                <p class="">Este proyecto aun no esta en revision</p>
+                                <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                <p class="w-[70%]">El Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
                             @endif
-                        </div>
                     </div>
                 </div>
 
@@ -251,21 +254,19 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectoP') }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
-                            observaciones</a>
-                            
-                        <form method="POST" action="{{ route('anteproyecto-Director.store', ['id' => $project->id]) }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-[1vh] items-center">
+                        <a href="{{ route('observationsAnteproyectoDire', ['id' => $project->id]) }}"
+                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</a>
+                        <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>

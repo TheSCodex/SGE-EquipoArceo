@@ -82,13 +82,13 @@
                     @if(count($advisors) > 0)
                         @foreach ($advisors as $advisor)
                             <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20  ">
-                                <td class="font-roboto pl-5 font-bold py-5 ">{{ $advisor->name }}</td>
-                                <td class="font-roboto font-bold py-5 ">{{ $advisor->email }}</td>
-                                <td class="font-roboto font-bold py-5">{{ $advisor->phone }}</td>
+                                <td class="font-roboto pl-5  py-5 ">{{ $advisor->name }}</td>
+                                <td class="font-roboto  py-5 ">{{ $advisor->email }}</td>
+                                <td class="font-roboto  py-5">{{ $advisor->phone }}</td>
 
-                                <td class="font-roboto font-bold py-5">{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</td>
+                                <td class="font-roboto  py-5">{{ $advisor->company ? $advisor->company->name : 'Sin empresa asociada' }}</td>
                                 
-                                <td class=" text-start  pl-5  font-roboto font-bold py-5">
+                                <td class=" text-start  pl-5  font-roboto py-5">
                                     <a href="{{ route('panel-advisors.show', $advisor->id) }}"
                                                 class="flex justify-start">
                                                 <img src="/img/ojoGreen.svg" class="w-7">

@@ -19,7 +19,7 @@
             </div>
         </div>
         @error('new_password')
-        <p class="text-sm text-red-600">{{$message}}</p>
+        <p class="text-sm text-red">{{$message}}</p>
         @enderror
       </div>
       <div class="mb-6">
@@ -31,7 +31,7 @@
             </div>
         </div>
         @error('confirmed_password')
-        <p class="text-sm text-red-600">{{$message}}</p>
+        <p class="text-sm text-red">{{$message}}</p>
         @enderror
         
     </div>

@@ -43,7 +43,8 @@
                                     </div>
                                     <div class="flex flex-wrap ">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
@@ -62,7 +63,8 @@
 
                                         <div class="flex w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns[0]->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $interns[0]->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -101,7 +103,8 @@
                                 </div>
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class="w-[50%] font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
                             </div>
@@ -161,6 +164,7 @@
                                     {{ $project->activities_to_do }}
                                 </p>
                             </div>
+
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
                                 class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
                         </div>
@@ -185,11 +189,31 @@
                     <h3>Estado del Anteproyecto</h3>
                 </div>
                 <div
-                    class=" w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center ">
-                    <div class="w-[80%] flex flex-wrap items-center gap-[10%] ">
+                    class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[18%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
+                    <div class="w-[80%] flex flex-wrap items-center gap-[10%]">
                         @if (isset($project))
-                            <img src="{{ asset('img/iconosDaniel/estado.svg') }}" class="w-[15%]" />
-                            <p class="w-[70%]">Tu Anteproyecto esta guardado como <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
+                                @if (strtolower($project->status) == 'aprobado')
+                                    <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
+                                @elseif (strtolower($project->status) == 'en revision')
+                                    <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
+                                @elseif (strtolower($project->status) == 'asesoramiento')
+                                    <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
+                                @else
+                                    <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                    <p class="w-[70%]">Tu Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
+                                    
+                                    <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
+                                        action="{{ route('ForAse', ['id' => $project->id]) }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
+                                            a asesoramiento</button>
+                                    </form>
+                                @endif
+                            
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
@@ -222,34 +246,34 @@
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
                                     @elseif($comment->director_id !== null)
                                         Director de division
                                     @else
-                                        Tú
+                                        <span class="text-primaryColor">Tú</span>
                                     @endif
                                 </p>
-                                <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}</p>
+                                <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}
+                                </p>
                             </div>
                         @endforeach
                         <a href="{{ route('observationsAnteproyecto') }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%] self-end">Ver
                             observaciones</a>
-
                         <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
-                            class="w-full font-normal flex  h-[fit] self-end mb-2 items-center">
+                            class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
-                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                            <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%] pr-[1.5vw]" name="content"
+                                placeholder="Ingrese su comentario" style="padding-right: calc(1.5vw + 10px);"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
 
-                            <button type="submit" class="w-[1.5vw] mx-[.3vw] h-full">
+                            <button type="submit" class="absolute inset-y-0 right-0 w-[1.5vw] h-full">
                                 <img src="{{ asset('img/iconosDaniel/vector.svg') }}" class="h-full w-full"
                                     alt="Votos icon" />
                             </button>
@@ -261,15 +285,13 @@
                         <div class="flex flex-wrap text-center items-center h-[90%]">
                             <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
                         </div>
-
-
                         <form method="POST"
                             action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
 
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -288,12 +310,37 @@
                         </div>
                 @endif
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script>
+                document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: 'Tu anteproyecto estará disponible para su revisión por tu asesor.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Continuar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            event.target.submit();
+                        }
+                    });
+                });
+            </script>
+            @if (session()->has('success'))
+                <script>
+                    Swal.fire({
+                        title: '!Listo!',
+                        text: `¡Tu anteproyecto sera revisado por tu asesor!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
         </div>
+
         </div>
+
     </section>
-
-
-
-
-
 @endsection

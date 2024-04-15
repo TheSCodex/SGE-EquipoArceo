@@ -74,8 +74,10 @@
                 
             </div>
         </div>
-        <button type="submit" class="p-2 bg-primaryColor w-full  rounded-md text-white">Actualizar empresa</button>
-        <a  href="/panel-companies" class="p-2 block text-center  bg-slate-300 w-full  rounded-md text-white">Cancelar</a>       
+        <div class="flex justify-center items-center">
+            <button type="submit" class="p-2 bg-primaryColor w-full lg:w-[30vw]  rounded-md text-white">Editar empresa</button>
+
+        </div>
     </form>
 
     

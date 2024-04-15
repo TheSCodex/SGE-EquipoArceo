@@ -70,7 +70,7 @@
     <p
         style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none;">
         Sirva la presente para informarle que el (la) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> ha concluido satisfactoriamente la elaboración de su memoria titulada
-        <span style="text-decoration:underline"><span style="color:white">...</span> {{ $project?->name}}<span style="color:white">...</span></span>
+        <span style="text-decoration:underline;font-weight:bolder;"><span  style="color:white">...</span> {{ $project?->name}}<span style="color:white">...</span></span>
         que como requisito para la conclusión de su estadía y proceso de titulación establece la normatividad de la
         Universidad Tecnológica de Cancún.
 
@@ -94,13 +94,13 @@
             style="position:absolute;left:-20px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
             <p style="text-align: center;">ASESOR EMPRESARIAL</p>
             <p style="text-align: center;font-weight:100 ; margin-top: 40px">________________________________</p>
-            <p style="text-align: center;font-size:12pt; ">Nombre y firma
+            <p style="text-align: center;font-size:12pt; ">{{$business_advisors?->name}}
             </p>
         </div>
         <div style="position:absolute; right :-20px; margin: 10px;">
             <p style="text-align: center;">ASESOR ACADÉMICO</p>
             <p style="text-align: center; font-weight:100 ;margin-top: 40px">________________________________</p>
-            <p style="text-align: center; font-size:12pt;"> Nombre y firma</p>
+            <p style="text-align: center; font-size:12pt;">{{$user?->name}} {{$user?->last_name}}</p>
         </div>
     </div>
 

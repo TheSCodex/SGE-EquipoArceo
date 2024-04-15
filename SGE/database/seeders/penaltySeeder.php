@@ -12,11 +12,6 @@ class penaltySeeder extends Seeder
     /**
      * Run the database seeds.
      * <option value="1">Amonestación escrita
-                                                                            </option>
-                                                                            <option value="2">Amonestación con horas de
-                                                                                labor social</option>
-                                                                            <option value="3">Cancelación de Estadía
-                                                                            </option>
      */
     public function run(): void
     {
@@ -65,7 +60,13 @@ class penaltySeeder extends Seeder
             'description' => 'POR TEMAS RELACIONADOS EN GESTIÓN EMPRESARIAL',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+        ]);
 
+        DB::table('penalizations')->insert([
+            'penalty_name' => 'Penalización no definida',
+            'description' => 'Penalización no definida',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
     }
 }

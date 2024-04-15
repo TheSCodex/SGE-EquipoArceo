@@ -10,16 +10,16 @@
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Empresas</p>
 
-                    <a href="panel-users" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="panel-companies" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
                 <div class="bg-[#02AB82] rounded-md grid place-content-center px-2 py-5 gap-3 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Anteproyectos</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Carreras y divisiones</p>
 
-                    <a href="" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="panel-careers" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
@@ -31,7 +31,7 @@
                    
                 </div>
 
-                <p class="text-[#828282]">Carreras de la division</p>
+                <p class="text-[#828282]">Por academias</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
@@ -53,7 +53,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Bimbo SA de CV</p>
+                <p>{{$company->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -68,7 +68,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Luis Villafaña</p>
+                <p>{{$advisor->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -84,7 +84,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>Ingenieria y Tecnologia</p>
+                    <p>{{$division->name}}</p>
                 </div>
             </div>
 
@@ -99,24 +99,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        let academies = {{ Js::from($academies) }}
+        let academyNames = academies.map(academy => academy.name);
+        let approvedProjectsCount = academies.map(academy => academy.approved_projects_count);
+        let revisionProjectsCount = academies.map(academy => academy.revision_projects_count)
+
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Mayo", "Junio", "Julio"],
+                labels: academyNames,
                 datasets: [{
-                        label: 'Tecnologías de la Información',
-                        data: [65, 20, 10],
+                        label: 'Proyetos aprobados',
+                        data: approvedProjectsCount,
                         backgroundColor: '#0FA987',
                         borderColor: '#ffffffff',
                         borderWidth: 1
                     },
                     {
-                        label: 'Mantenimiento',
-                        data: [39, 45, 85],
+                        label: 'Proyetos revisión',
+                        data: revisionProjectsCount,
                         backgroundColor: '#3E5366',
                         borderColor: '#ffffffff',
-                        borderWidth: 2
+                        borderWidth: 1
                     }
                 ]
             },
@@ -125,8 +131,6 @@
                     x: {
                         ticks: {
                             min: 0,
-                            max: 120,
-                            stepSize: 20
                         }
                     }
                 },
@@ -140,13 +144,12 @@
                     bar: {
                         borderWidth: 2, 
                         borderRadius: 5, 
-                        barThickness: 200 
+                        barThickness: 100 
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        suggestedMax: 120
                     }
                 }
             }
@@ -161,8 +164,8 @@
             data: {
                 labels: ["En revision", "Aprobado"],
                 datasets: [{
-                    label: 'Horas',
-                    data: [2, 3],
+                    label: 'Anteproyectos',
+                    data: [{{$revisionProjects}}, {{$approvedProjects}}],
                     backgroundColor: [
                         '#3E5366',
                         '#0FA987'

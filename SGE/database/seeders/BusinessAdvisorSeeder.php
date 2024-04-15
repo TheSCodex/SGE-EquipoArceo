@@ -17,10 +17,8 @@ class BusinessAdvisorSeeder extends Seeder
         // Crear 10 asesores empresariales
         for ($i = 0; $i < 10; $i++) {
             // Generar números de teléfono aleatorios
-            $phone = '5'; // Prefijo del país
-            for ($j = 0; $j < 9; $j++) {
-                $phone .= rand(0, 9); // Genera un dígito aleatorio del 0 al 9 y lo concatena al número de teléfono
-            }
+            $phone = '5512345678'; // Prefijo del país
+            
 
             // Generar datos aleatorios para cada asesor
             $advisorData = [

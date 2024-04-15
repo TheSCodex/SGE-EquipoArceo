@@ -96,8 +96,8 @@ class ProjectDraftController extends Controller
      */
 
     public function onRev(request $id){
-        Project::where('id', $id->id)->update(['status' => 'En revision']);
-        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+        Project::where('id', $id->id)->update(['status' => 'en revision']);
+        return redirect()->back()->with('onRev', 'Anteproyecto ahora en revision.');   
     }
 
     public function storeLike(project $id){
@@ -121,7 +121,7 @@ class ProjectDraftController extends Controller
 
         if($likeCount >= 3 && isset($inReview)){
             Project::where('id', $projectId)->update([
-                'status' => 'Aprobado',
+                'status' => 'aprobado',
                 'approval date' => DB::raw('now()')
             ]);
         }
