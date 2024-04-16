@@ -24,9 +24,9 @@ class BooksController extends Controller
         if(Gate::denies('leer-lista-libros')){
             abort(403,'No tienes permiso para acceder a esta sección.');
         }
+
         $divisionOrAcademy = null;
-        $booksByAcademy = [];
-        $booksByDivision = [];
+
 
         $user = auth()->user();
         if($user->rol_id == 5){
@@ -40,9 +40,8 @@ class BooksController extends Controller
             $divisionOrAcademy = $academy;
         }
 
-        $internsWithUserInfo = Intern::whereNotNull('book_id')
-        ->with('user')
-        ->get();
+        
+        $internsWithUserInfo = Intern::whereNotNull('book_id')->with('user')->get();
 
         function getInternInfo($intern){
             $career = Career::where('id', $intern->career_id)->first();
@@ -63,35 +62,68 @@ class BooksController extends Controller
             $userInfoByBookId[$bookId][] = getInternInfo($intern);
             
         }
-            // dd($userInfoByBookId);
-        $books = Book::paginate(5);
+
+        // Obtener todos los libros
+        $books = Book::all();
+        $booksByAcademy = [];
+        $booksByDivision = [];
+
+
+
 
         foreach ($books as $book) {
             // Verificar si hay información del usuario asociada al libro
-            if(isset($userInfoByBookId[$book->id])) {
-                // Obtener el nombre de la academia o división correspondiente al libro
-                $bookInfo = $userInfoByBookId[$book->id][0];
-                $divisionName = $bookInfo['division']->name;
-                $academyName = $bookInfo['academy']->name;
+            if (isset($userInfoByBookId[$book->id])) {
+                // Utilizar un conjunto para mantener un registro de los libros ya agregados
+                $addedBooks = [];
         
-                // Verificar si el usuario es un asistente
-                if($user->rol_id == 5){
-                    // Verificar si el nombre de la división coincide con la división del usuario
-                    if ($divisionOrAcademy->name == $divisionName) {
-                        $booksByDivision[$divisionName][] = $book;
+                // Otro for por si hay más de un estudiante asociado al libro
+                foreach ($userInfoByBookId[$book->id] as $internBookInfo) {
+                    // Obtener el nombre de la academia o división correspondiente al libro
+                    $divisionName = $internBookInfo['division']->name;
+                    $academyName = $internBookInfo['academy']->name;
+        
+                    // Verificar si el usuario es un asistente
+                    if ($user->rol_id == 5) {
+                        // Verificar si el nombre de la división coincide con la división del usuario
+                        if ($divisionOrAcademy->name == $divisionName && !isset($addedBooks[$book->id])) {
+                            $booksByDivision[$divisionName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
                     }
-                }
-                // Verificar si el usuario es un asesor académico
-                elseif($user->rol_id == 2){
-                    // Verificar si el nombre de la academia coincide con la academia del usuario
-                    if ($divisionOrAcademy->name == $academyName) {
-                        $booksByAcademy[$academyName][] = $book;
+                    // Verificar si el usuario es un asesor académico
+                    elseif ($user->rol_id == 2) {
+                        // Verificar si el nombre de la academia coincide con la academia del usuario
+                        if ($divisionOrAcademy->name == $academyName && !isset($addedBooks[$book->id])) {
+                            $booksByAcademy[$academyName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
                     }
                 }
             }
         }
+        
+        // Crear arrays para almacenar libros paginados por división y academia
+        $paginatedBooksByDivision = [];
+        $paginatedBooksByAcademy = [];
 
-        return view('Luis.book', compact('books', 'userInfoByBookId', 'divisionOrAcademy', 'booksByAcademy', 'booksByDivision'));
+        function paginateBooks($booksArray) {
+            $paginatedBooks = [];
+        
+            foreach ($booksArray as $group => $books) {
+                $bookIds = collect($books)->pluck('id')->unique();
+                $query = Book::whereIn('id', $bookIds)->paginate(10);
+                $paginatedBooks[$group] = $query;
+            }
+        
+            return $paginatedBooks;
+        }
+        
+        $paginatedBooksByDivision = paginateBooks($booksByDivision);
+        $paginatedBooksByAcademy = paginateBooks($booksByAcademy);
+        
+        // dd($paginatedBooksByAcademy[$divisionOrAcademy->name]);
+        return view('Luis.book', compact('books', 'userInfoByBookId', 'divisionOrAcademy', 'booksByAcademy', 'booksByDivision', 'paginatedBooksByDivision', 'paginatedBooksByAcademy'));
     }
     
 
