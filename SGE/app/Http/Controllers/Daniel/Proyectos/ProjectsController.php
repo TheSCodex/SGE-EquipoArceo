@@ -115,6 +115,7 @@ class ProjectsController extends Controller
      */
     public function store(AnteproyectoRequest $request)
     {
+        dd($request);
         $validatedData = $request->validated();
 
         $project = new Project([
