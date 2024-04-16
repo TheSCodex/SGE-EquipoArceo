@@ -50,7 +50,12 @@
     <div style="text-align: right; margin-top:10px; margin-bottom: 10px;">
         <p style="margin-bottom: 2px; margin-top:2px; "><span style=" font-weight: bold;">Asunto:</span>Sancion por
             incumplimiento.</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Cancún, Q.Roo; a {{ date('d') - 1 }} de {{ date('F') }} de
+        <p style="margin-bottom: 2px; margin-top:2px; ">Cancún, Q.Roo; a {{ date('d') - 1 }} de 
+            <?php
+            setlocale(LC_TIME, 'spanish'); 
+            echo strftime('%B');
+            ?>
+             de
             {{ date('Y') }}
         </p>
     </div>
