@@ -18,7 +18,6 @@ class Academy extends Model
     public function president()
     {
         return $this->belongsTo(User::class);
-        
     }
 
     public function division()

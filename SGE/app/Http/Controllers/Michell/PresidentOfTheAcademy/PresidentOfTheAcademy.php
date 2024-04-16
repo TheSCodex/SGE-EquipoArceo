@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Career;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use App\Models\Academy;
+
 
 
 
@@ -51,6 +53,8 @@ class PresidentOfTheAcademy extends Controller
         return view('Michell.PresidentOfTheAcademy.AdvisorList', ['advisors' => $advisors]);
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -59,7 +63,25 @@ class PresidentOfTheAcademy extends Controller
         //* Obtener carreras
         $career = Career::all();
         // * Obtener asesores academicos
-        $advisors = User::where('rol_id', 2)->select('id', 'name')->get();
+        // $advisors = User::where('rol_id', 2)->select('id', 'name')->get();
+        $userId = auth()->user()->id;
+        $academy = Academy::where('president_id', $userId)->first();
+
+        $idAcademy = $academy->id;
+        $careerAcademy = Career::where('academy_id', $idAcademy)->first();
+        $idCareer = $careerAcademy->id;
+        // $advisors = AcademicAdvisor::where('career_id', $idCareer)->get();
+
+        $advisors = AcademicAdvisor::select('academic_advisor.id', 'users.name')
+    ->join('users', 'users.id', '=', 'academic_advisor.user_id')
+    ->where('academic_advisor.career_id', $idCareer)
+    ->get();
+
+        // dd($advisors);
+
+        // dd($advisors);
+
+
 
 
         return view('Michell.PresidentOfTheAcademy.AdvisorForm', ['career' => $career, 'advisors' => $advisors]);

@@ -199,7 +199,6 @@ Route::middleware('auth')->group(function () {
 
     // El apartado de reportes para la directora 
     // comentado pq comparte ruta con el de asistente
-    // Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director')->middleware('roleorcan:director,leer-reportes');
 
     // El acceso al CRUD/Listado de documentos para la directora
     Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director')->middleware('roleorcan:director,gestionar-documentos');
@@ -313,26 +312,18 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para CRUD de Empresas
     Route::resource('/panel-companies', CompaniesController::class)->names(['index' => 'companies.index'])->middleware('roleorcan:admin,crud-empresas');
-    Route::get('/panel-companies-create', [CompaniesController::class, 'create'])->name('companies_form')->middleware('roleorcan:admin,crud-empresas');
-    Route::get('/panel-companies/{id}/edit', [CompaniesController::class, 'edit'])->name('panel-companies.edit')->middleware('roleorcan:admin,crud-empresas');
+   
 
-    // RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+    // RUTAS PARA EL CRUD SE ASESORES EMPRESARIALES
     Route::resource('/panel-advisors', AdvisorController::class)->names('panel-advisors')->middleware('roleorcan:admin,crud-asesores');
-    Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores')->middleware('roleorcan:admin,crud-asesores');
-    Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit')->middleware('roleorcan:admin,crud-asesores');
-    Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy')->middleware('roleorcan:admin,crud-asesores');
+
 
 
     // Rutas para CRUD de Carreras y Academias
     Route::resource('/panel-careers', carrerasController::class)->names('panel-careers')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get('/panel-careers-create', [carrerasController::class, 'create'])->name('newCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-
-
+   
     // ! PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

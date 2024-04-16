@@ -57,15 +57,19 @@
                                             <td class="py-4">{{$data->last_name}} {{ $data->name }}</td>
                                             <td class="py-4 pr-12">{{ $data->career_name }}</td>
                                             @if ($data->quantity_advised >= 0)
-                                                @php
-                                                    $percentage = ($data->quantity_advised / $data->max_advisors) * 100;
-                                                    if ($percentage <= 33) {
-                                                        $colorClass = 'text-primaryColor'; // Verde
-                                                    } elseif ($percentage <= 66) {
-                                                        $colorClass = 'text-orange'; // Naranja
-                                                    } else {
-                                                        $colorClass = 'text-red'; // Rojo
-                                                    }
+                                            @php
+                                            if ($data->quantity_advised == 0) {
+                                                $colorClass = 'text-primaryColor'; // Verde
+                                            }else{
+                                                $percentage = ($data->quantity_advised / $data->max_advisors) * 100;
+                                                if ($percentage <= 33) {
+                                                    $colorClass = 'text-primaryColor'; // Verde
+                                                } elseif ($percentage <= 66) {
+                                                    $colorClass = 'text-orange'; // Naranja
+                                                } else {
+                                                    $colorClass = 'text-red'; // Rojo
+                                                }
+                                            }
                                                 @endphp
                                                 @if ($data->quantity_advised == 0)
                                                     <td class="py-4"><span class="{{ $colorClass }}">0</span>
