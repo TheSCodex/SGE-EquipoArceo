@@ -69,7 +69,7 @@
     </div>
     <p
         style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none;">
-        Sirva la presente para informarle que el (la) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> ha concluido satisfactoriamente la elaboración de su memoria titulada
+        Sirva la presente para informarle que el (la) estudiante <span style="text-decoration: underline; font-weight:bolder;"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> ha concluido satisfactoriamente la elaboración de su memoria titulada
         <span style="text-decoration:underline;font-weight:bolder;"><span  style="color:white">...</span> {{ $project?->name}}<span style="color:white">...</span></span>
         que como requisito para la conclusión de su estadía y proceso de titulación establece la normatividad de la
         Universidad Tecnológica de Cancún.
