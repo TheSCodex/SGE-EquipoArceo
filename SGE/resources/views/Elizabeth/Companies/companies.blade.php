@@ -2,17 +2,6 @@
 @section('titulo', 'Panel de Compañias')
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        .table-cell {
-            max-width: 200px;
-            /* Ajusta este valor según tus necesidades */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            /* Esto agregará puntos suspensivos (...) al final del texto si se corta */
-            white-space: nowrap;
-            /* Esto evitará que el texto se envuelva y se muestre en una sola línea */
-        }
-    </style>
     
     @if(session('success'))
     <script>
@@ -30,12 +19,14 @@
                 <div class="flex items-center flex-row justify-end">
                     <div>
                         <div class="hidden md:flex items-center relative">
-                            <input id='search'
-                                class="border-primaryColor placeholder-primaryColor border-b border rounded-md "
-                                type="search" placeholder="Buscar...." style="color: green;">
+                            <form action="{{ route('search.company') }}" method="GET" id="search-form">
+                                <div class="hidden md:flex items-center relative">
+                                    <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
+                                </div>
+                            </form>    
                         </div>
                     </div>
-                    <a href="/panel-companies-create"
+                    <a href="/panel-companies/create"
                         class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar
                         nueva empresa</a>
                 </div>
@@ -54,7 +45,7 @@
 
                     </div>
                 </div>
-                <a href="/panel-companies-create"
+                <a href="/panel-companies/create"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva empresa</a>
 
             </div>
@@ -203,9 +194,11 @@
                 <!-- Display table on larger screens -->
 
             </div>
-            {{ $companies->links() }}
 
     </main>
+    <div class="w-[90%] m-auto py-2  max-sm:flex justify-center  ">
+        {{ $companies->links() }}
+    </div>
 
 
 
@@ -238,41 +231,39 @@
         }
 
 
-        function searchTable() {
-            var searchText = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("table tr");
-            for (var i = 1; i < rows.length; i++) {
-                var row = rows[i];
-                var found = false;
-                for (var j = 0; j < row.cells.length; j++) {
-                    var cell = row.cells[j];
-                    if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
-                        found = true;
-                        break;
-                    }
+        $(document).ready(function() {
+        // Función para realizar la búsqueda en tiempo real
+        $('#search').on('input', function() {
+            var query = $(this).val();
+            $.ajax({
+                url: "{{ route('companies.index') }}",
+                type: "GET",
+                data: { query: query },
+                success: function(response) {
+                    $('#user-list').html(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
                 }
-                if (found) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            }
-        }
-
-        // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-        document.getElementById("search").addEventListener("input", searchTable);
-
-        function searchMobileTable() {
-            var searchText = document.getElementById("searchMovil").value.toLowerCase();
-            var advisors = document.querySelectorAll(".grid.md\\:grid-cols-2.gap-4.w-full > div");
-
-            advisors.forEach(function(advisor) {
-                var advisorText = advisor.innerText.toLowerCase();
-                var found = advisorText.indexOf(searchText) > -1;
-                advisor.style.display = found ? "" : "none";
             });
-        }
+        });
 
-        document.getElementById("searchMovil").addEventListener("input", searchMobileTable);
+        // Función para limpiar el campo de búsqueda y restaurar la lista original de usuarios
+        $('#search').on('search', function() {
+            var query = $(this).val();
+            if (query === '') {
+                $.ajax({
+                    url: "{{ route('companies.index') }}",
+                    type: "GET",
+                    success: function(response) {
+                        $('#user-list').html(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
     </script>
 @endsection

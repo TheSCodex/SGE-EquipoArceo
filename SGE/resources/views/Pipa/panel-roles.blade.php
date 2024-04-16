@@ -11,10 +11,10 @@
                     <div class="hidden md:flex items-center relative">
                         <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </form>  
-                <a href="/panel-roles/create"
+                </div>
+                {{-- <a href="/panel-roles/create"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo rol
-                </a>
+                </a> --}}
             </div>
             
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
@@ -26,9 +26,9 @@
                 </div>
 
 
-                <a href="/panel-roles/create"
+                {{-- <a href="/panel-roles/create"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo rol
-                </a>
+                </a> --}}
             </div>
 
         </div>
@@ -39,7 +39,7 @@
                 <div class="grid md:grid-cols-2 gap-4 w-full">
                     @foreach ($roles as $role)
                     <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                        <h2 class="text-lg font-bold">Rol: 
+                        <h2 class="text-lg">Rol: 
                         @if ($role->title == "estudiante")
                             Estudiante
                         @elseif ($role->title == "asesorAcademico")
@@ -72,12 +72,12 @@
                             @endif
                         </ul>
                         <div class="flex justify-end mt-4 space-x-2">
-                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <td class="font-roboto py-5 cursor-pointer">
                                 <a href="{{ route('panel-roles.edit', $role->id) }}" class="flex justify-center">
                                     <img src="/img/logos/pencil.svg">
                                 </a>
                             </td>
-                            <td class="font-roboto font-bold py-5 cursor-pointer">
+                            <td class="font-roboto py-5 cursor-pointer">
                                 {{-- Responsive --}}
                                 <form class="flex justify-center delete-form" id="deleteForm{{ $role->id }}" action="{{ route('panel-roles.destroy', $role->id) }}" method="POST"  onclick="confirmDelete('{{ $role->title }}', '{{ $role->id }}')">
                                     @csrf
@@ -92,7 +92,7 @@
             </div>
 
             <div class="hidden lg:block w-full">
-                <table class="text-start w-full">
+                <table class="text-start w-[80%] ml-32">
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Nombre</th>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Daniel\Proyectos;
 
-
+use App\Notifications\ProyectoEditado;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessSector;
@@ -17,6 +17,7 @@ use App\Models\Division;
 use App\Models\Intern;
 use App\Models\Project;
 use App\Models\User;
+use App\Notifications\ProyectoEnRevision;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -60,18 +61,19 @@ class ProjectsController extends Controller
 
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user','area'));
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user', 'area'));
         }
-        
+
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
-        
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division','area'));
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
     }
 
-    public function ForRev(request $id){
+    public function ForRev(request $id)
+    {
         Project::where('id', $id->id)->update(['status' => 'Asesoramiento']);
-        return redirect()->back()->with('success', 'Anteproyecto ahora asesoramiento.');   
+        return redirect()->back()->with('success', 'Anteproyecto ahora asesoramiento.');
     }
 
     public function Colaborar(Request $request)
@@ -79,7 +81,6 @@ class ProjectsController extends Controller
         $user = auth()->user();
         $intern = $user->intern;
         $ProjectId = $intern->project_id;
-        
     }
     /**
      * Show the form for creating a new resource.
@@ -94,6 +95,7 @@ class ProjectsController extends Controller
         $interns = Intern::whereHas('career.academy.division', function ($query) use ($divisionId) {
             $query->where('id', $divisionId);
         })->where('user_id', '!=', $user->id)->get();
+        //dd($interns);
 
         $careersDivision = $division->academies->flatMap(function ($academy) {
             return $academy->careers;
@@ -104,6 +106,7 @@ class ProjectsController extends Controller
         $defaultDivision = [$division->id => $division->name];
         // Construye un array asociativo para la opción predeterminada
         $defaultCareer = [$intern->career->id => $intern->career->name];
+        
 
         return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision', 'interns'));
     }
@@ -162,9 +165,9 @@ class ProjectsController extends Controller
         }
         $intern->save();
 
-        // $user = auth()->user();
-        // $user->phoneNumber = $validatedData['Numero'];
-        // $user->save();
+        $user = User::where('id', $userId)->first();
+        $user->phoneNumber = $validatedData['Numero'];
+        $user->save();
 
         $project->adviser_id = $businessAdvisor->id;
         $project->save();
@@ -172,7 +175,9 @@ class ProjectsController extends Controller
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
 
-        return redirect('/anteproyecto')->with('success', 'Proyecto creado correctamente');
+        $selectedIds = $request->input('selectedIds');
+
+        return redirect('/anteproyecto')->with('Created', 'Proyecto creado correctamente');
     }
 
     /**
@@ -216,6 +221,7 @@ class ProjectsController extends Controller
     public function update(AnteproyectoRequest $request, $id)
     {
         $project = Project::findOrFail($id);
+        
         $validatedData = $request->validated();
 
         $project->update([
@@ -229,21 +235,17 @@ class ProjectsController extends Controller
         ]);
 
         if ($project->BusinessAdvisor) {
-            $project->BusinessAdvisor->Company()->update([
-                'name' => $validatedData['name_enterprise'],
-                'address' => $validatedData['direction_enterprise'],
-            ]);
-        }
-
-        if ($project->BusinessAdvisor) {
+            // Actualizar el modelo BusinessAdvisor
             $project->BusinessAdvisor->update([
                 'name' => $validatedData['name_advisor'],
                 'email' => $validatedData['email_advisor'],
                 'phone' => $validatedData['Phone_advisor'],
                 'position' => $validatedData['advisor_position'],
             ]);
-
+        
+            // Verificar si existe la relación Company
             if ($project->BusinessAdvisor->companie) {
+                // Actualizar el modelo Company
                 $project->BusinessAdvisor->companie->update([
                     'name' => $validatedData['name_enterprise'],
                     'address' => $validatedData['direction_enterprise'],
@@ -256,7 +258,18 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
-        return redirect('/anteproyecto')->with('success', 'Proyecto actualizado correctamente');
+        
+
+        $advisorId = AcademicAdvisor::where('id', $intern->academic_advisor_id)->first();
+        if ($advisorId) {
+            // $advisorId no es nulo, por lo tanto, podemos continuar con la lógica
+            $advisor = User::find($advisorId->user_id);
+            $student = User::find($intern->user_id);
+            $notification = $advisor->notify(new ProyectoEditado($student->name));
+        }
+
+        // Send the notification to the user
+        return redirect('/anteproyecto')->with('Edit', 'Proyecto actualizado correctamente');
     }
 
     /**
