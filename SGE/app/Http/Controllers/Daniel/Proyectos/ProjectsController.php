@@ -71,7 +71,9 @@ class ProjectsController extends Controller
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
+        //dd($intern);
+
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'intern', 'interns', 'user', 'career', 'division',));
     }
 
     public function ForRev(request $id)
@@ -165,13 +167,15 @@ class ProjectsController extends Controller
                 'performance_area' => $validatedData['position_student'],
                 'Group' => $validatedData['Group'],
                 'project_id' => $project->id,
-                'career_id' => $validatedData['proyecto_educativo']
+                'career_id' => $validatedData['proyecto_educativo'],
+                'business_advisor_id' => $businessAdvisor->id,
             ]);
         } else {
             $intern->performance_area = $validatedData['position_student'];
             $intern->Group = $validatedData['Group'];
             $intern->project_id = $project->id;
             $intern->career_id = $validatedData['proyecto_educativo'];
+            $intern->business_advisor_id = $businessAdvisor->id;
         }
         $intern->save();
 
@@ -181,6 +185,9 @@ class ProjectsController extends Controller
 
         $project->adviser_id = $businessAdvisor->id;
         $project->save();
+
+        $intern->business_advisor_id = $businessAdvisor->id;
+        $intern->save();
 
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
@@ -249,23 +256,20 @@ class ProjectsController extends Controller
             'end_date' => $validatedData['Fecha_Final']
         ]);
 
-        if ($project->BusinessAdvisor) {
-            // Actualizar el modelo BusinessAdvisor
-            $project->BusinessAdvisor->update([
-                'name' => $validatedData['name_advisor'],
-                'email' => $validatedData['email_advisor'],
-                'phone' => $validatedData['Phone_advisor'],
-                'position' => $validatedData['advisor_position'],
-            ]);
+        $businessAdvisor = BusinessAdvisor::findOrFail($project->adviser_id);
+        $businessAdvisor->update([
+            'name' => $validatedData['name_advisor'],
+            'email' => $validatedData['email_advisor'],
+            'phone' => $validatedData['Phone_advisor'],
+            'position' => $validatedData['advisor_position'],
+        ]);
 
-            // Verificar si existe la relación Company
-            if ($project->BusinessAdvisor->companie) {
-                // Actualizar el modelo Company
-                $project->BusinessAdvisor->companie->update([
-                    'name' => $validatedData['name_enterprise'],
-                    'address' => $validatedData['direction_enterprise'],
-                ]);
-            }
+        if ($businessAdvisor->company) {
+            // Actualizar el modelo Company
+            $businessAdvisor->company->update([
+                'name' => $validatedData['name_enterprise'],
+                'address' => $validatedData['direction_enterprise'],
+            ]);
         }
 
         $intern = Intern::where('project_id', $project->id)->first();
