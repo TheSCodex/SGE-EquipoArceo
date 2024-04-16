@@ -3,10 +3,53 @@
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
     </script>
-    <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
-        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
-                <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
+    @if (!$projectsAdvisor == null)
+        <section class="flex flex-col justify-start items-center  min-h-screen h-full flex-grow">
+        @else
+            <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
+    @endif
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        @if (!$projectsAdvisor == null)
+            <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
+                <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Anteproyectos de Asesorados
+                </h1>
+            </div>
+            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between ">
+                <div class="w-full mb-5">
+                    <div class="grid  md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+                        @foreach ($projectsAdvisor as $project)
+                            <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}" class="focus:outline-none">
+                                <div
+                                    class="bg-white min-h-48 rounded-lg shadow-md p-4 drop-shadow-2xl transform transition-transform hover:scale-105">
+                                    <div
+                                        class="border-b border-gray-500 pb-1 gap-1  w-11/12 md:flex md:items-center md:justify-between">
+                                        <h2 class="text-lg font-bold">
+                                            {{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}
+                                        </h2>
+                                        <p class="text-sm text-center  font-bold text-primaryColor">
+                                            {{ $project->like !== null ? $project->like : 0 }} Votos
+                                        </p>
+                                    </div>
+
+                                    <p class="text-sm my-2 text-gray-500">
+                                        {{ strlen($project->description) > 100 ? substr($project->description, 0, 100) . '...' : $project->description }}
+                                    </p>
+                                    <div class="flex mt-4 space-x-2">
+                                        @foreach ($project->interns as $intern)
+                                            <p class="text-sm text-gray-500">{{ $intern->user->name }}
+                                                {{ $intern->user->last_name }}
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+        <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
+            <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
 
             <div class="flex flex-row items-center justify-end">
                 <div>
@@ -149,29 +192,30 @@
                                                                     @csrf
                                                                     @method('PUT')
 
-                                                                    <div class="flex flex-col justify-between mt-2">
-                                                                        <label for="motivo">Elija el tipo de Sanción por
-                                                                            motivo</label>
-                                                                        <select name="motivo" id="motivo">
-                                                                            <option value="1">Por motivos académicos
-                                                                            </option>
-                                                                            <option value="2">Por temas Relacionados
-                                                                                con la gestión empresarial</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="flex flex-col justify-between mt-2">
-                                                                        <label for="tipo">Elija el tipo de
-                                                                            Sanción</label>
-                                                                        <select name="tipo" id="tipo"
-                                                                            onchange="toggleServiceHours(this)">
-                                                                            <option value="1">Amonestación escrita
-                                                                            </option>
-                                                                            <option value="2">Amonestación con horas
-                                                                                de
-                                                                                labor social</option>
-                                                                            <option value="3">Cancelación de Estadía
-                                                                            </option>
-                                                                        </select>
+                                                                <div class="flex flex-col justify-between mt-2">
+                                                                    <label for="motivo">Elija el tipo de Sanción por
+                                                                        motivo</label>
+                                                                    <select name="motivo" id="motivo">
+                                                                        <option value="1">Por motivos académicos
+                                                                        </option>
+                                                                        <option value="2">Por temas Relacionados
+                                                                            con la gestión empresarial</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="flex flex-col justify-between mt-2">
+                                                                    <label for="tipo">Elija el tipo de
+                                                                        Sanción</label>
+                                                                    <select name="tipo" id="tipo"
+                                                                        onchange="toggleServiceHours(this)">
+                                                                        <option value="1">Amonestación escrita
+                                                                        </option>
+                                                                        <option value="2">Amonestación con horas
+                                                                               
+                                                                            de
+                                                                            labor social</option>
+                                                                        <option value="3">Cancelación de Estadía
+                                                                        </option>
+                                                                    </select>
 
                                                                     <div id="serviceHoursContainer"
                                                                         class="flex flex-col justify-between w-full mt-2">
