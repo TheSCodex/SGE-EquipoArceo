@@ -43,7 +43,7 @@
                 <section class="space-y-6 max-md:mt-10">
                     {{-- Seccion de la tabla --}}
                     <section class="hidden md:block h-screen">
-                        <div class="h-[calc(100%-4rem)]">
+                        <div class="h-[calc(100%-4rem)] overflow-x-hidden">
                             <table id="dataTable" class="divide-y divide-[#999] w-[84rem] font-montserrat">
                                 <thead id="tableHeader" class="text-[#555] text-base">
                                     <tr>

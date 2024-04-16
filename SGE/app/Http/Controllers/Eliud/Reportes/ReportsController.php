@@ -10,11 +10,13 @@ use App\Models\Career;
 use App\Models\Division;
 use App\Models\DocRevisions;
 use App\Models\FileHistory;
+use App\Models\Group;
 use App\Models\Intern;
 use App\Models\lastDocCreated;
 use App\Models\Project;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,10 @@ class ReportsController extends Controller
 {
     public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         if ($request->input('tipo') == '2') {
 
             $request->validate([
@@ -44,7 +50,7 @@ class ReportsController extends Controller
 
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
-
+        $group = Group::find($interns->group_id);
         $docRevision = DocRevisions::find(4);
 
         $penaltyType = $request->input('tipo');
@@ -113,7 +119,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours', 'user'));
+        $pdf->loadView('Eliud.reports.docs.sancion', compact('student', 'director', 'division', 'group', 'career', 'project', 'motivo', 'tipo', 'interns', 'docRevision', 'serviceHours', 'user'));
         session()->flash('form_success', true);
         return $pdf->stream();
 
@@ -123,6 +129,10 @@ class ReportsController extends Controller
 
     public function printSansion()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $path = public_path('img\Eliud\docs\Sansion.pdf');
 
         return response()->make(file_get_contents($path), 200, [
@@ -133,6 +143,9 @@ class ReportsController extends Controller
 
     public function printCartaAprobacion()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
 
         $path = public_path('img\Eliud\docs\CartAprobacion.pdf');
 
@@ -144,6 +157,10 @@ class ReportsController extends Controller
 
     public function printReportCartaDigitalizacion(Request $request, string $id, string $motivo = null)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $user = auth()->user();
         $motivo = $motivo ?? $request->input('motivo');
         $userData = User::find($user->id);
@@ -155,6 +172,7 @@ class ReportsController extends Controller
         $division = Division::find($academie->division_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(3);
+        $group = Group::find($interns[0]->group_id);
         $lastDocCreated = lastDocCreated::where('division_id', $division->id)->first();
 
         if ($lastDocCreated == null) {
@@ -196,7 +214,7 @@ class ReportsController extends Controller
             'academic_advisor_id' => $interns[0]?->academic_advisor_id,
             'student' => $student?->name . ' ' . $student?->last_name,
             'student_identifier' => $student->identifier,
-            'student_group' => $interns[0]?->Group,
+            'student_group' => $group?->name,
             'division' => $division?->name,
             'director' => $director?->name . ' ' . $director?->last_name,
             'career' => $career?->name,
@@ -214,12 +232,16 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'interns', 'project', 'docRevision', 'motivo', 'getNumber'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'group', 'interns', 'project', 'docRevision', 'motivo', 'getNumber'));
         return $pdf->stream();
     }
 
     public function printCartaMemoria()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $path = public_path('img\Eliud\docs\CartaMemoria.pdf');
 
         return response()->make(file_get_contents($path), 200, [
@@ -230,11 +252,16 @@ class ReportsController extends Controller
 
     public function printReportCartaAprobacion(string $id)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $user = auth()->user();
         $userData = User::find($user->id);
         $student = User::find($id);
         $interns = Intern::where('user_id', $id)->get();
         $project = Project::find($interns[0]->project_id);
+        $group = Group::find($interns[0]->group_id);
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
@@ -268,7 +295,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'project', 'docRevision', 'business_advisors', 'user'));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'group', 'project', 'docRevision', 'business_advisors', 'user'));
         return $pdf->stream();
     }
 
@@ -277,6 +304,10 @@ class ReportsController extends Controller
      */
     public function directorIndex()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+        
         $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);
@@ -296,13 +327,19 @@ class ReportsController extends Controller
                 $interns = Intern::where('career_id', $career->id)->get();
                 $careerData = [
                     'name' => $career->name,
-                    'projects' => []
+                    'projects' => [],
+                    'groups' => []
                 ];
 
                 foreach ($interns as $intern) {
                     $project = Project::find($intern->project_id);
                     if ($project && $project->status == 'aprobado') {
                         $careerData['projects'][] = $project;
+                    }
+
+                    $group = Group::find($intern->group_id);
+                    if ($group) {
+                        $careerData['groups'][] = $group;
                     }
                 }
 

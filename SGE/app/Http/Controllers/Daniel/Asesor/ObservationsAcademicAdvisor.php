@@ -63,7 +63,7 @@ class ObservationsAcademicAdvisor extends Controller
                 $comment->academic_advisor_id = $userId;
                 $comment->save();
 
-                return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
+                return redirect()->back()->with('save', 'Comentario guardado exitosamente.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }

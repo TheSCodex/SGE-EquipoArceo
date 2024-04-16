@@ -14,6 +14,7 @@ use App\Models\CareerAcademy;
 use App\Models\Division;
 use App\Models\DocRevisions;
 use App\Models\FileHistory;
+use App\Models\Group;
 use App\Models\Intern;
 use App\Models\Project;
 use App\Models\StudyGrade;
@@ -22,6 +23,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+
 
 
 
@@ -30,6 +33,10 @@ class ExcelExportController extends Controller
 {
     public function downloadExcelFile($academic_advisor_id)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $filePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía_' . time() . '.xlsx');
@@ -83,7 +90,6 @@ class ExcelExportController extends Controller
             $row++;
         }
 
-        // Eventos del asesor
         $calendarEvents = CalendarEvent::where('requester_id', $academic_advisor_id)->orderBy('date_start')->take(11)->get();
 
         $column = 'P';
@@ -126,6 +132,10 @@ class ExcelExportController extends Controller
 
     public function generateExcelFormatFile()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+        
         $filePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/AEP-P03-F01 Control de estadía_' . time() . '.xlsx');
@@ -157,6 +167,11 @@ class ExcelExportController extends Controller
 
     public function downloadLibrosFile()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
+
         $filePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS.xlsx');
 
         $newFilePath = storage_path('app/spreadsheets/DONACIONES DE LIBROS_' . time() . '.xlsx');
@@ -219,6 +234,10 @@ class ExcelExportController extends Controller
 
     public function downloadEgresadosFile(EgresadosRequest $request)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
 
         $validatedData = $request->validate([
             'startFolio' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
@@ -287,7 +306,9 @@ class ExcelExportController extends Controller
             $counter++;
         }
 
-        $group = $interns[0]->Group;
+        $group_id = $interns[0]->group_id;
+        $group = Group::find($group_id);
+        $groupName = $group->name;
 
         $grades = [
             1 => '1er Cuatrimestre',
@@ -304,8 +325,8 @@ class ExcelExportController extends Controller
             12 => '12Vo Cuatrimestre',
         ];
 
-        for ($i = 0; $i < strlen($group); $i++) {
-            $gradeNumber = intval(substr($group, $i, 1));
+        for ($i = 0; $i < strlen($groupName); $i++) {
+            $gradeNumber = intval(substr($groupName, $i, 1));
             if ($gradeNumber > 0) {
                 break;
             }
