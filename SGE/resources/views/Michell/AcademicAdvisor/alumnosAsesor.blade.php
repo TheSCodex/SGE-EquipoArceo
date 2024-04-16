@@ -1,8 +1,7 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
@@ -117,7 +116,8 @@
                                                         <div class="modal-content  w-[24%]">
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">¿Desea generar la
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">¿Desea
+                                                                    generar la
                                                                     Sancion para el estudiante?
                                                                 </h5>
                                                                 <button type="button" id="clo" class="w-10 h-10"
@@ -188,12 +188,13 @@
                                                                         </p>
                                                                     @endforeach
                                                                     <div class="grid grid-cols-2 gap-5">
-                                                                        <button type="submit"
-                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                         <button type="button" id="clo"
                                                                             data-dismiss="modal" aria-label="Close"
-                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                     </div>
+
 
                                                                 </form>
                                                             </div>
@@ -245,12 +246,14 @@
 
 
                                                                     <div class="grid grid-cols-2 gap-5">
-                                                                        <button type="submit"
-                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+
                                                                         <button type="button" id="clo"
                                                                             data-dismiss="modal" aria-label="Close"
-                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                     </div>
+
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -323,12 +326,14 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="grid grid-cols-2 gap-5">
-                                                                        <button type="submit"
-                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+
                                                                         <button type="button" id="clo"
                                                                             data-dismiss="modal" aria-label="Close"
-                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                     </div>
+
 
                                                                 </form>
                                                             </div>
