@@ -1,7 +1,8 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
     @if (!$projectsAdvisor == null)
         <section class="flex flex-col justify-start items-center  min-h-screen h-full flex-grow">
         @else
@@ -150,30 +151,46 @@
                                         </form> --}}
 
 
-                                            <div id="getSancion{{ $user->id }}" tabindex="-1" role="dialog"
-                                                aria-labelledby="myModalLabel" aria-hidden="true"
-                                                class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
-                                                <div role="document"
-                                                    class="flex justify-center p-10 justify-items-center mt-72">
-                                                    <div class="modal-content  w-[24%]">
-                                                        <div
-                                                            class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                            <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
-                                                                Sancion para el estudiante
-                                                            </h5>
-                                                            <button type="button"
-                                                                class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                id="clo" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
+                                                <div id="getSancion{{ $user->id }}" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myModalLabel" aria-hidden="true"
+                                                    class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
+                                                    <div role="document"
+                                                        class="flex justify-center p-10 justify-items-center mt-72">
+                                                        <div class="modal-content  w-[24%]">
+                                                            <div
+                                                                class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">¿Desea generar la
+                                                                    Sancion para el estudiante?
+                                                                </h5>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"
+                                                                        stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00" height="32.00"
+                                                                                rx="16" fill="#ff0000"
+                                                                                strokewidth="0"></rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke="#7a6767"
+                                                                            stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
 
-                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form target="_blank"
-                                                                action="{{ route('download.sancion', $user->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('PUT')
+                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.sancion', $user->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
 
                                                                 <div class="flex flex-col justify-between mt-2">
                                                                     <label for="motivo">Elija el tipo de Sanción por
@@ -193,6 +210,7 @@
                                                                         <option value="1">Amonestación escrita
                                                                         </option>
                                                                         <option value="2">Amonestación con horas
+                                                                               
                                                                             de
                                                                             labor social</option>
                                                                         <option value="3">Cancelación de Estadía
@@ -208,37 +226,59 @@
                                                                     </div>
                                                                 </div>
 
-                                                                @foreach ($errors->all() as $error)
-                                                                    <p class="p-2 text-red">{{ $error }}
-                                                                    </p>
-                                                                @endforeach
-                                                                <button type="submit"
-                                                                    class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
-                                                            </form>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <p class="p-2 text-red">{{ $error }}
+                                                                        </p>
+                                                                    @endforeach
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
 
-                                            <div id="getCartaAprobacion{{ $user->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-                                                class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
-                                                <div role="document"
-                                                    class="flex justify-center p-10 justify-items-center mt-80">
-                                                    <div class="modal-content  w-[24%]">
-                                                        <div
-                                                            class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                            <h5 class="ml-2" id="modalAgregarEstudianteLabel">
-                                                                Generar
-                                                                Carta de Aprobacion de Memoria
-                                                            </h5>
-                                                            <button type="button"
-                                                                class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                id="clo" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
+                                                <div id="getCartaAprobacion{{ $user->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                    class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
+                                                    <div role="document"
+                                                        class="flex justify-center p-10 justify-items-center mt-80">
+                                                        <div class="modal-content  w-[24%]">
+                                                            <div
+                                                                class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    ¿Desea generar la
+                                                                    Carta de Aprobacion de Memoria?
+                                                                </h5>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        stroke="#ffffff" stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00"
+                                                                                height="32.00" rx="16"
+                                                                                fill="#ff0000" strokewidth="0"></rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke="#7a6767" stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
 
                                                         <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
                                                             <form target="_blank"
@@ -247,82 +287,109 @@
                                                                 @csrf
 
 
-                                                                <button type="submit"
-                                                                    class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
-                                                            </form>
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
 
-                                            <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-                                                class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
-                                                <div role="document"
-                                                    class="flex justify-center p-10 justify-items-center mt-80">
-                                                    <div class="modal-content  w-[24%]">
-                                                        <div
-                                                            class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                            <h5 class="ml-2" id="modalAgregarEstudianteLabel">
-                                                                Generar
-                                                                Carta de Digitalizacion de Memoria
-                                                            </h5>
-                                                            <button type="button"
-                                                                class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                id="clo" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                            <form target="_blank"
-                                                                action="{{ route('download.digitalizacion', $user->id) }}"
-                                                                method="POST">
-                                                                @csrf
+                                                <div id="getCartaDigitalizacion{{ $user->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                    class="myModal2 fade fixed hidden inset-0 h-[100%] w-[100%] justify-center items-center bg-black bg-opacity-50">
+                                                    <div role="document"
+                                                        class="flex justify-center p-10 justify-items-center mt-80">
+                                                        <div class="modal-content  w-[24%]">
+                                                            <div
+                                                                class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">
+                                                                    ¿Desea generar la
+                                                                    Carta de Digitalizacion de Memoria?
+                                                                </h5>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        stroke="#ffffff" stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00"
+                                                                                height="32.00" rx="16"
+                                                                                fill="#ff0000" strokewidth="0"></rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke="#7a6767" stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                            <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.digitalizacion', $user->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
 
-                                                                <div class="flex flex-col justify-between mt-2">
-                                                                    <label for="motivo">Elija el tipo de
-                                                                        Estadía</label>
-                                                                    <select name="motivo" id="motivo">
-                                                                        <option value="1">
-                                                                            Tradicional
-                                                                        </option>
-                                                                        <option value="2">
-                                                                            Excelencia académica
-                                                                        </option>
-                                                                        <option value="3">
-                                                                            Experiencia Laboral
-                                                                        </option>
-                                                                        <option value="4">
-                                                                            Movilidad internacional
-                                                                        </option>
-                                                                        <option value="5">
-                                                                            Proyecto de investigación
-                                                                        </option>
-                                                                        <option value="6">
-                                                                            Certificación Profesional
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
+                                                                    <div class="flex flex-col justify-between mt-2">
+                                                                        <label for="motivo">Elija el tipo de
+                                                                            Estadía</label>
+                                                                        <select name="motivo" id="motivo">
+                                                                            <option value="1">
+                                                                                Tradicional
+                                                                            </option>
+                                                                            <option value="2">
+                                                                                Excelencia académica
+                                                                            </option>
+                                                                            <option value="3">
+                                                                                Experiencia Laboral
+                                                                            </option>
+                                                                            <option value="4">
+                                                                                Movilidad internacional
+                                                                            </option>
+                                                                            <option value="5">
+                                                                                Proyecto de investigación
+                                                                            </option>
+                                                                            <option value="6">
+                                                                                Certificación Profesional
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar        </button>
+                                                                    </div>
 
-                                                                <button type="submit"
-                                                                    class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
-                                                            </form>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
 
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-sm text-center text-gray-500">
+                                        No hay estudiantes asesorados.
                                     </td>
                                 </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="5" class="px-6 py-4 text-sm text-center text-gray-500">
-                                    No hay estudiantes asesorados.
-                                </td>
-                            </tr>
 
                         @endif
                     </tbody>
@@ -435,29 +502,29 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener todos los botones de eliminar y agregar un listener para mostrar la alerta
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const form = this.closest('form');
-                    Swal.fire({
-                        title: '¿Estás seguro?',
-                        text: 'Esta acción no se puede deshacer',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Sí, dar de baja'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtener todos los botones de eliminar y agregar un listener para mostrar la alerta
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const form = this.closest('form');
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: 'Esta acción no se puede deshacer',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, dar de baja'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
                     });
                 });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
