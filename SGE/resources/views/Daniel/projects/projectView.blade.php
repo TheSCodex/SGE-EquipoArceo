@@ -97,7 +97,7 @@
 
                                 <div class="flex flex-wrap">
                                     <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $interns[0]->performance_area ?? 'No disponible' }}
+                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name  ?? 'No disponible' }}
                                     </p>
 
                                 </div>
@@ -124,7 +124,7 @@
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
                                     <p class="font-normal w-[50%]">
-                                        {{ $area->title ?? 'No disponible' }}</p>
+                                        {{ $intern->performance_area ?? 'No disponible' }}</p>
                                 </div>
 
                                 <div class="flex flex-wrap">
