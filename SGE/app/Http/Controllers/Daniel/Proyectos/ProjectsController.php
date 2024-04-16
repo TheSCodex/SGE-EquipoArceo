@@ -19,6 +19,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Notifications\ProyectoEnRevision;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectsController extends Controller
 {
@@ -27,6 +28,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
+        //if (Gate::denies('ver-anteproyecto')) {
+        //    abort(403, 'No tienes permiso para acceder a esta sección.');
+        //}
         $userId = Auth::id();
         $intern = Intern::where("user_id", $userId)->first();
         $interns = Intern::where("user_id", $userId)->get();
@@ -87,6 +91,9 @@ class ProjectsController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('crear-anteproyecto')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         $user = auth()->user();
         $intern = Intern::where('user_id', $user->id)->first();
         $divisionId = $intern->career->academy->division_id;
@@ -106,7 +113,7 @@ class ProjectsController extends Controller
         $defaultDivision = [$division->id => $division->name];
         // Construye un array asociativo para la opción predeterminada
         $defaultCareer = [$intern->career->id => $intern->career->name];
-        
+
 
         return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision', 'interns'));
     }
@@ -116,6 +123,9 @@ class ProjectsController extends Controller
      */
     public function store(AnteproyectoRequest $request)
     {
+        if (Gate::denies('crear-anteproyecto')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         $validatedData = $request->validated();
 
         $project = new Project([
@@ -192,6 +202,9 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('editar-anteproyecto')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         $project = Project::find($id);
         if (!$project) {
             return redirect()->route('/anteproyecto')->with('error', 'Proyecto no encontrado.');
@@ -220,10 +233,12 @@ class ProjectsController extends Controller
      */
     public function update(AnteproyectoRequest $request, $id)
     {
-        $project = Project::findOrFail($id);
-        
-        $validatedData = $request->validated();
+        if (Gate::denies('editar-anteproyecto')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
 
+        $project = Project::findOrFail($id);
+        $validatedData = $request->validated();
         $project->update([
             'name' => $validatedData['name_proyect'],
             'description' => $validatedData['objetivo_general'],
@@ -242,7 +257,7 @@ class ProjectsController extends Controller
                 'phone' => $validatedData['Phone_advisor'],
                 'position' => $validatedData['advisor_position'],
             ]);
-        
+
             // Verificar si existe la relación Company
             if ($project->BusinessAdvisor->companie) {
                 // Actualizar el modelo Company
@@ -258,7 +273,7 @@ class ProjectsController extends Controller
             'performance_area' => $validatedData['position_student'],
             'group' => $validatedData['Group']
         ]);
-        
+
 
         $advisorId = AcademicAdvisor::where('id', $intern->academic_advisor_id)->first();
         if ($advisorId) {
