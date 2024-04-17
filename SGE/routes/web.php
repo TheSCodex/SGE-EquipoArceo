@@ -216,8 +216,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('re-download.digitalizacion.director');
     Route::put('/docRevision/{id}', [DocumentsController::class, 'UpdateDocRevision'])->name('docRevision.update');
 
-    Route::get("observaciones/directora/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
-    Route::put('observaciones/directora/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
+    Route::get("observaciones/director/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
+    Route::put('observaciones/director/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
     //Ruta de la lista de los anteproyectos
     Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('director-anteproyectos')->middleware('roleorcan:director,');
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');

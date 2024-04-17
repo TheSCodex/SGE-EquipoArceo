@@ -351,7 +351,7 @@
                         </div>
 
 
-                        <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
+                        <form method="POST" action="{{ route('anteproyecto-Director.store', ['id' => $project->id]) }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
