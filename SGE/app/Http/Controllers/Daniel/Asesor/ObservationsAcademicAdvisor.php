@@ -75,19 +75,26 @@ class ObservationsAcademicAdvisor extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        try {
-            // Buscar el comentario por su ID
-            $comment = Comment::findOrFail($id);
+    /**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, $id)
+{
+    try {
+        // Buscar el comentario por su ID
+        $comment = Comment::findOrFail($id);
 
-            // Actualizar el estado del comentario a 3 (resuelto y enviado a revisión)
-            $comment->status = 3;
-            $comment->save();
+        // Actualizar el estado del comentario a 3 (resuelto y enviado a revisión)
+        $comment->status = 3;
+        $comment->save();
 
-            return redirect()->back()->with('success', 'El comentario ha sido marcado como resuelto y enviado a revisión.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Ocurrió un error al marcar el comentario como resuelto y enviar a revisión: ' . $e->getMessage());
-        }
+        // Buscar y actualizar todos los comentarios relacionados
+        Comment::where('parent_comment_id', $comment->id)->update(['status' => 3]);
+
+        return redirect()->back()->with('success', 'El comentario y sus comentarios relacionados han sido marcados como resueltos y enviados a revisión.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Ocurrió un error al marcar el comentario como resuelto y enviar a revisión: ' . $e->getMessage());
     }
+}
+
 }
