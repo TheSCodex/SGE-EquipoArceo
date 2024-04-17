@@ -122,7 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/asesor', [DashboardAdvisorController::class, "index"])->name('inicio-asesor')->middleware('role:asesorAcademico');
 
     Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor')->middleware('roleorcan:asesorAcademico,leer-anteproyectos-asignados');
-    Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
+    Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.index')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
 
     //Ruta de los alumnos del asesor
     Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
@@ -136,7 +136,7 @@ Route::middleware('auth')->group(function () {
     // ! Ruta de las observaciones del asesor
     Route::get("observaciones/asesor/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA')->middleware('roleorcan:asesorAcademico, leer-observaciones-asesor');
     Route::put('observaciones/asesor/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update')->middleware('roleorcan:asesorAcademico, actualizar-observaciones');
-    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico, ver-anteproyecto+');
+    Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
     Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
     //Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
     Route::match(['get', 'post'], 'CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev')->middleware('roleorcan:asesorAcademico, publicar-anteproyecto');
@@ -219,7 +219,7 @@ Route::middleware('auth')->group(function () {
     Route::get("observaciones/directora/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
     Route::put('observaciones/directora/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
     //Ruta de la lista de los anteproyectos
-    Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos')->middleware('roleorcan:director,');
+    Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('director-anteproyectos')->middleware('roleorcan:director,');
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/storeLike', [ProjectsDirectorController::class, 'storeLike'])->name('anteproyecto-Director.storeLike')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/deleteLike', [ProjectsDirectorController::class, 'deleteLike'])->name('anteproyecto-Director.deleteLike')->middleware('roleorcan:director,');
