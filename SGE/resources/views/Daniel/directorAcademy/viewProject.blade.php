@@ -26,51 +26,54 @@
                         <div class="w-full flex flex-wrap px-[3%] self-start py-[2vh]">
                             @if (isset($project))
                                 <h2 class="w-full text-xl font-bold mt-[1vh]">Datos del alumno </h2>
-                                <div class='w-[100%] lg:w-[50%]'>
-                                    <div class="flex flex-wrap ">
-                                        <p class="w-[50%]  text-lg sm:text-lg">Nombre completo:</p>
-                                        <p class="w-[50%] font-normal">{{ $user->name ?? 'No disponible' }}</p>
+                                <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mr-4"></div>
+                                <div class='w-[100%] lg:w-[45%]'>
+                                    <div class="grid grid-cols-1">
+                                        <p class="text-lg sm:text-lg">Nombre completo:</p>
+                                        <p class="font-normal">{{ $user->name ?? 'No disponible' }} {{ $user->last_name }}
+                                        </p>
                                     </div>
-                                    <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Division ácademica: </p>
-                                        <p class="w-[50%] font-normal">{{ $division->name ?? 'No disponible' }}</p>
+                                    <div class="grid grid-cols-1">
+                                        <p class=" text-lg sm:text-lg">Division ácademica: </p>
+                                        <p class="w-full font-normal">{{ $division->name ?? 'No disponible' }}</p>
                                     </div>
-                                    <div class="flex flex-wrap ">
+                                    <div class="grid grid-cols-1">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">{{ $user->email ?? 'No disponible' }}</p>
+                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                            {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
-                                <div class='w-[100%] lg:w-[50%]'>
-                                    <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Programa educativo: </p>
-                                        <p class="w-[50%] font-normal">{{ $career->name ?? 'No disponible' }}</p>
+                                <div class='w-[100%] lg:w-[55%]'>
+                                    <div class="grid grid-cols-1">
+                                        <p class=" text-lg sm:text-lg">Programa educativo: </p>
+                                        <p class=" font-normal">{{ $career->name ?? 'No disponible' }}</p>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex flex-wrap w-[50%]">
+                                        <div class="grid grid-cols-1 w-[50%]">
                                             <p class="w-[50%] text-lg sm:text-lg overflow-hidden">Matricula:</p>
                                             <p class="font-normal w-[50%] overflow-hidden px-[1%]">
                                                 {{ $user->identifier ?? 'No disponible' }}</p>
                                         </div>
-
-                                        <div class="flex w-[50%]">
+                                        <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">{{ $interns->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] font-normal w-[40%]">
+                                                {{ $interns[0]->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex w-[50%]">
+                                        <div class="grid grid-cols-1 w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha inicio:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                            <p class="mx-[1%] font-normal w-full">
                                                 {{ $project->start_date ?? 'No disponible' }}</p>
                                         </div>
 
-                                        <div class="flex w-[50%]">
+                                        <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha final:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                            <p class="mx-[1%] font-normal w-full">
                                                 {{ $project->end_date ?? 'No disponible' }}</p>
                                         </div>
                                     </div>
@@ -78,81 +81,81 @@
                                 </div>
                         </div>
 
-                        <div class="w-full flex flex-wrap px-[3%] self-start border-b-2 border-black py-[2vh]">
+                        <div class="w-full flex flex-wrap px-[3%] ">
                             <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
-                            <div class='w-[100%] lg:w-[50%]'>
-                                <div class="flex flex-wrap">
+                            <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mr-4"></div>
+                            <div class='w-[100%] lg:w-[45%]'>
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Nombre de la empresa:
                                     <p>
                                     <p class="w-[50%] font-normal">{{ $company->name ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Asesor empresarial: </p>
+                                    <p class=" font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
                                     </p>
 
                                 </div>
-                                <div class="flex flex-wrap">
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">{{ $businessAdvisor->email ?? 'No disponible' }}
+                                    <p class=" font-normal overflow-hidden">
+                                        {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
+                                </div>
+                                <div class="">
                                 </div>
                             </div>
 
-                            <div class='w-[100%] lg:w-[50%]'>
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Direccion: </p>
-                                    <p class="w-[50%] font-normal">{{ $company->address ?? 'No disponible' }}</p>
-                                </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="w-[50%] font-normal">
+                            <div class='w-[100%] lg:w-[55%]'>
+
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Cargo que desempeña: </p>
+                                    <p class=" font-normal">
                                         {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Area donde se realizara el proyecto :</p>
                                     <p class="font-normal w-[50%]">
-                                        {{ $area->title ?? 'No disponible' }}</p>
+                                        {{ $intern->performance_area ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
                                     <p class="font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
                                     </p>
                                 </div>
-
+                                <div class="">
+                                </div>
                             </div>
+                            <p class="w-full lg:w-[45%] mt-1 text-lg sm:text-lg">Direccion de la empresa: </p>
+                            <p class="w-full lg:w-[55%] mt-1 font-normal">{{ $company->address ?? 'No disponible' }}</p>
                         </div>
 
-
                         <div
-                            class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Área de desempeño</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->description }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Planteamiento del problema</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->problem_statement }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg ">Justificación</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->project_justificaction }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Actividades a realizar</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->activities_to_do }}
-                                </p>
+                            class="flex flex-wrap flex-col flex-grow items-left px-[3%] justify-evenly mt-[1.5%]  w-full text-justify">
+                            <h2 class="w-full text-xl font-bold">Anteproyecto</h2>
+                            <div class="Linea separadora my-2 bg-[#000000] h-[2px] w-[98%] mr-4"></div>
+                            <div class="min-h-[40vh] gap-[4vh]  justify-evenly w-full text-justify">
+
+                                <div class="w-full grid ">
+                                    <p class=" text-lg sm:text-lg">Objetivo</p>
+                                    <p class=" font-normal text-md">{{ $project->description }}</p>
+                                </div>
+                                <div class="w-full grid mt-4 ">
+                                    <p class=" text-lg sm:text-lg">Planteamiento del problema</p>
+                                    <p class=" font-normal text-md">{{ $project->problem_statement }}</p>
+                                </div>
+                                <div class="w-full grid  mt-4 ">
+                                    <p class="text-lg sm:text-lg">Justificación</p>
+                                    <p class=" font-normal text-md">{{ $project->project_justificaction }}</p>
+                                </div>
+                                <div class="w-full grid  mt-4">
+                                    <p class=" text-lg sm:text-lg">Actividades a realizar</p>
+                                    <p class=" font-normal text-md">{{ $project->activities_to_do }}</p>
+                                </div>
                             </div>
                         </div>
                     @else
@@ -181,19 +184,27 @@
                 <div
                     class=" w-full min-h-[12vh] bg-white px-[2%] py-[.8%] rounded-sm font-semibold h-[14%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center h-full gap-[10%] ">
-                            @if (strtolower($project->status) == 'aprobado')
-                                <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
-                                <p class=" w-[70%]">El Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
-                            @elseif (strtolower($project->status) == 'en revision')
-                                <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
-                                <p class=" w-[70%]">El Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
-                            @elseif (strtolower($project->status) == 'asesoramiento')
-                                <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
-                                <p class=" w-[70%]">El Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
-                            @else
-                                <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
-                                <p class="w-[70%]">El Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
-                            @endif
+                        @if (strtolower($project->status) == 'aprobado')
+                            <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                            <p class=" w-[70%]">El Anteproyecto ha sido <span
+                                    class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span>
+                            </p>
+                        @elseif (strtolower($project->status) == 'en revision')
+                            <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                            <p class=" w-[70%]">El Anteproyecto se encuentra en <span
+                                    class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span>
+                            </p>
+                        @elseif (strtolower($project->status) == 'asesoramiento')
+                            <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                            <p class=" w-[70%]">El Anteproyecto se encuentra en <span
+                                    class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span>
+                            </p>
+                        @else
+                            <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                            <p class="w-[70%]">El Anteproyecto esta guardado como <span
+                                    class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span>
+                            </p>
+                        @endif
                     </div>
                 </div>
 
@@ -206,7 +217,9 @@
                             @if ($project->like == 0)
                                 <p class="w-full">Este proyecto aun no cuenta con votos</p>
                             @else
-                                <p class="w-full">Este proyecto cuenta con <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
+                                <p class="w-full">Este proyecto cuenta con <span
+                                        class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }}
+                                        voto(s)</span></p>
                             @endif
 
                             @if (isset($projectLikes))
@@ -238,9 +251,9 @@
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full'>
-                                
+
                                 <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
+                                    @if ($comment->academic_advisor_id !== null)
                                         Asesor
                                     @elseif($comment->president_id !== null)
                                         Presidente de academia
@@ -255,7 +268,8 @@
                         @endforeach
 
                         <a href="{{ route('observationsAnteproyectoDire', ['id' => $project->id]) }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</a>
+                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
+                            observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
                             class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
@@ -284,7 +298,7 @@
                             class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
                             <textarea class="w-[90%] rounded-md py-0 border-black border-opacity-[20%]" name="content"
-                                placeholder="Ingrese su comentario" ></textarea>    
+                                placeholder="Ingrese su comentario"></textarea>
                             @error('content')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
@@ -305,62 +319,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session()->has('liked'))
-<script>
-    function liked(){
-        Swal.fire({
-            title: '!Votado!',
-            text: `¡El voto ha sido agregado!`,
-            icon: 'success',
-        })
-    }
-    liked();
-</script>
-@endif
-@if(session()->has('disliked'))
-<script>
-    function disliked(){
-        Swal.fire({
-            title: 'Voto removido',
-            text: `El voto ha sido removido del proyecto`,
-            icon: 'success',
-        })
-    }
-    disliked();
-</script>
-@endif
-
-<script>
-    function delVote() {
-        Swal.fire({
-            title: '¿Deseas remover el voto del proyecto?',
-            text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: ' #d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, remover voto'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delVoteForm').submit();
+    @if (session()->has('liked'))
+        <script>
+            function liked() {
+                Swal.fire({
+                    title: '!Votado!',
+                    text: `¡El voto ha sido agregado!`,
+                    icon: 'success',
+                })
             }
-        });
-    }
+            liked();
+        </script>
+    @endif
+    @if (session()->has('disliked'))
+        <script>
+            function disliked() {
+                Swal.fire({
+                    title: 'Voto removido',
+                    text: `El voto ha sido removido del proyecto`,
+                    icon: 'success',
+                })
+            }
+            disliked();
+        </script>
+    @endif
+
+    <script>
+        function delVote() {
+            Swal.fire({
+                title: '¿Deseas remover el voto del proyecto?',
+                text: `Estás a punto de eliminar el voto del proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: ' #d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, remover voto'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delVoteForm').submit();
+                }
+            });
+        }
 
         function confirmVote() {
-        Swal.fire({
-            title: '¿Deseas votar el proyecto?',
-            text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, votar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('voteForm').submit();
-            }
-        });
-    }
-</script>
+            Swal.fire({
+                title: '¿Deseas votar el proyecto?',
+                text: `Estás a punto de votar el proyecto, ¿estas seguro?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, votar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('voteForm').submit();
+                }
+            });
+        }
+    </script>
 @endsection

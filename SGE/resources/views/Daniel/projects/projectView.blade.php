@@ -98,14 +98,14 @@
                                 </div>
 
                                 <div class="grid grid-cols-1">
-                                    <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                    <p class=" text-lg sm:text-lg">Asesor empresarial: </p>
+                                    <p class=" font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
                                     </p>
 
                                 </div>
                                 <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">
+                                    <p class=" font-normal overflow-hidden">
                                         {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
@@ -117,8 +117,8 @@
                             <div class='w-[100%] lg:w-[55%]'>
 
                                 <div class="grid grid-cols-1">
-                                    <p class="w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="w-[50%] font-normal">
+                                    <p class=" text-lg sm:text-lg">Cargo que desempeña: </p>
+                                    <p class=" font-normal">
                                         {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
 
