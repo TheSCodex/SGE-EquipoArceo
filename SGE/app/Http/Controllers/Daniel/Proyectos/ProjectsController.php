@@ -88,7 +88,7 @@ class ProjectsController extends Controller
 
         //dd($intern);
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division',, 'userIds', 'AdvCommenters'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division', 'userIds', 'AdvCommenters'));
     }
 
     public function ForRev(request $id)
