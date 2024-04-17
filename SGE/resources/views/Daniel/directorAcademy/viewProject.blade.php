@@ -237,22 +237,80 @@
                     <div
                         class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
-                            <div class='flex flex-wrap w-full'>
-                                
-                                <p class=' text-black w-full font-semibold text-sm'>
-                                    @if($comment->academic_advisor_id !== null)
-                                        Asesor
-                                    @elseif($comment->president_id !== null)
-                                        Presidente de academia
-                                    @elseif($comment->director_id !== null)
-                                        Director de division
-                                    @else
-                                        Estudiante
-                                    @endif
-                                </p>
-                                <p class=' text-black w-full font-normal text-sm'>{{ $comment->content }}</p>
-                            </div>
-                        @endforeach
+                        <div class='flex flex-wrap w-full mb-[2vh]'>
+                            <p class=' text-black w-full font-semibold text-sm'>
+                                @if ($comment->academic_advisor_id !== null)
+                                    @foreach ($AdvCommentersNames as $Adv)
+                                        @foreach ($AdvCommenters as $advTab)
+                                            @if($advTab->id == $comment->academic_advisor_id && $advTab->user_id == $Adv->id)
+                                                @if($Adv->id == $CurrentUser)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    
+                                                    {{head(explode(' ', $Adv->name))}}
+                                                    {{head(explode(' ', $Adv->last_name))}}
+                                                    <span class=' text-black opacity-[40%]'>(Asesor academico)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
+                                    @endforeach
+                                @elseif($comment->president_id !== null)
+                                    @foreach ($PrezCommenters as $PrezCommenter)
+                                        @if($PrezCommenter->id == $comment->president_id)
+                                            @if($PrezCommenter->id == $CurrentUser)
+                                                <span class="text-primaryColor">Tú</span>
+                                            @else
+                                                {{head(explode(' ', $PrezCommenter->name))}}
+                                                {{head(explode(' ', $PrezCommenter->last_name))}}
+                                                <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                            @endif
+                                        @endif  
+                                    @endforeach
+                                @elseif($comment->director_id !== null)
+                                    @foreach ($DirCommenters as $DirCommenter)
+                                        @if($DirCommenter->id == $comment->director_id)
+                                            @if($DirCommenter->id == $CurrentUser)
+                                                <span class="text-primaryColor">Tú</span>
+                                            @else
+                                                {{head(explode(' ', $DirCommenter->name))}}
+                                                {{head(explode(' ', $DirCommenter->last_name))}}
+                                                <span class=' text-black opacity-[40%]'>(Directora de división)</span>
+                                            @endif
+                                        @endif  
+                                    @endforeach
+                                @else
+                                    @foreach ($InternCommenters as $InternCommenter)
+                                        @if($InternCommenter->id == $comment->interns_id)
+                                            @if($InternCommenter->id == $CurrentUser)
+                                                <span class="text-primaryColor">Tú</span>
+                                            @else
+                                                {{head(explode(' ', $InternCommenter->name))}}
+                                                {{head(explode(' ', $InternCommenter->last_name))}}
+                                            @endif
+                                            @if($InternCommenter->rol_id == 1)
+                                                @if($InternCommenter->id != $CurrentUser)
+                                                    
+                                                    <span class=' text-black opacity-[40%]'>(Estudiante)</span>
+                                                @endif
+                                            @elseif($InternCommenter->rol_id == 2)
+                                                <span class=' text-black opacity-[40%]'>(Asesor academico)</span>
+                                            @elseif($InternCommenter->rol_id == 3)
+                                                <span class=' text-black opacity-[40%]'>(Presidente de academia)</span>
+                                            @elseif($InternCommenter->rol_id == 4)
+                                                <span class=' text-black opacity-[40%]'>(Drectora de división)</span>
+                                            @elseif($InternCommenter->rol_id == 5)
+                                                <span class=' text-black opacity-[40%]'>(Asistente de dirección)</span>
+                                            @elseif($InternCommenter->rol_id == 6)
+                                                <span class=' text-black opacity-[40%]'>(Administrador)</span>
+                                            @endif
+                                        @endif  
+                                    @endforeach
+                                @endif
+                            </p>
+                            <p class=' text-black opacity-[70%] w-full font-normal text-sm'>{{ $comment->content }}
+                            </p>
+                        </div>
+                    @endforeach
 
                         <a href="{{ route('observationsAnteproyectoDire', ['id' => $project->id]) }}"
                             class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver observaciones</a>

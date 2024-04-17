@@ -58,18 +58,31 @@ class ProjectsController extends Controller
         // dd($user);
 
         $comments = Comment::where("project_id", $intern->project_id)->get();
-        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+        
+        $DirIds = $comments->pluck('director_id')->toArray();
+        $DirCommenters = User::whereIn("id", $DirIds)->get();
+
+        $PrezIds = $comments->pluck('president_id')->toArray();
+        $PrezCommenters = User::whereIn("id", $PrezIds)->get();
+
+        $AdvIds = $comments->pluck('academic_advisor_id')->toArray();
+        $AdvCommenters = AcademicAdvisor::whereIn("id", $AdvIds)->get();
+        $userIds = $AdvCommenters->pluck('user_id')->toArray();
+        $AdvCommentersNames = User::whereIn("id", $userIds)->get();
+
+        $InternIds = $comments->pluck('interns_id')->toArray();
+        $InternCommenters = User::whereIn("id", $InternIds)->get();
 
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user', 'area'));
+        $userIds = $AdvCommenters->pluck('user_id')->toArray();
+        return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters'));
         }
 
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division', 'area', 'userIds', 'AdvCommenters'));
     }
 
     public function ForRev(request $id)

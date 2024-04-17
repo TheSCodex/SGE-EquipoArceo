@@ -34,51 +34,51 @@
                                 <h2 class="w-full text-xl font-bold mt-[1vh]">Datos del alumno </h2>
                                 <div class='w-[100%] lg:w-[50%]'>
                                     <div class="flex flex-wrap ">
-                                        <p class="w-[50%]  text-lg sm:text-lg">Nombre completo:</p>
-                                        <p class="w-[50%] font-normal">{{ $user->name ?? 'No disponible' }}</p>
+                                        <p class="w-[100%]">Nombre completo:</p>
+                                        <p class="w-[100%] font-normal text-[#777777]">{{ $user->name ?? 'Nombre disponible' }} {{ $user->last_name ?? 'Apellido no disponible' }}</p>
                                     </div>
                                     <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Division ácademica: </p>
-                                        <p class="w-[50%] font-normal">{{ $division->name ?? 'No disponible' }}</p>
+                                        <p class="w-[100%]">Division ácademica: </p>
+                                        <p class="w-[100%] font-normal text-[#777777]">{{ $division->name ?? 'No disponible' }}</p>
                                     </div>
                                     <div class="flex flex-wrap ">
-                                        <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
-                                        <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
+                                        <p class="w-[100%] ">Correo electronico:</p>
+                                        <p class="w-[100%] font-normal text-[#777777]">
                                             {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
                                 <div class='w-[100%] lg:w-[50%]'>
                                     <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Programa educativo: </p>
-                                        <p class="w-[50%] font-normal">{{ $career->name ?? 'No disponible' }}</p>
+                                        <p class="w-[100%]">Programa educativo: </p>
+                                        <p class="w-[100%] font-normal text-[#777777]">{{ $career->name ?? 'No disponible' }}</p>
                                     </div>
 
                                     <div class="flex w-full">
                                         <div class="flex flex-wrap w-[50%]">
-                                            <p class="w-[50%] text-lg sm:text-lg overflow-hidden">Matricula:</p>
-                                            <p class="font-normal w-[50%] overflow-hidden px-[1%]">
+                                            <p class="w-[100%]">Matricula:</p>
+                                            <p class="w-[100%] font-normal text-[#777777]">
                                                 {{ $user->identifier ?? 'No disponible' }}</p>
                                         </div>
 
-                                        <div class="flex w-[50%]">
-                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                        <div class="flex flex-wrap w-[50%]">
+                                            <p class="w-[100%]">Grupo:</p>
+                                            <p class="w-[100%] font-normal text-[#777777]">
                                                 {{ $interns[0]->Group ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex w-[50%]">
-                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha inicio:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                        <div class="flex flex-wrap w-[50%]">
+                                            <p class="w-[100%]">Fecha inicio:</p>
+                                            <p class="w-[100%] font-normal text-[#777777]">
                                                 {{ $project->start_date ?? 'No disponible' }}</p>
                                         </div>
 
-                                        <div class="flex w-[50%]">
-                                            <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha final:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                        <div class="flex flex-wrap w-[50%]">
+                                            <p class="w-[100%]">Fecha final:</p>
+                                            <p class="w-[100%] font-normal text-[#777777]">
                                                 {{ $project->end_date ?? 'No disponible' }}</p>
                                         </div>
                                     </div>
@@ -90,20 +90,20 @@
                             <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
                             <div class='w-[100%] lg:w-[50%]'>
                                 <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Nombre de la empresa:
-                                    <p>
-                                    <p class="w-[50%] font-normal">{{ $company->name ?? 'No disponible' }}</p>
+                                    <p class="w-[100%]">Nombre de la empresa:
+                                    </p>
+                                    <p class="w-[100%] font-normal text-[#777777]">{{ $company->name ?? 'No disponible' }}</p>
                                 </div>
 
                                 <div class="flex flex-wrap">
-                                    <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
+                                    <p class=" w-[100%]">Asesor empresarial: </p>
+                                    <p class="w-[100%] font-normal text-[#777777]">{{ $businessAdvisor->name ?? 'No disponible' }}
                                     </p>
 
                                 </div>
                                 <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">
+                                    <p class="w-[100%]">Correo electronico:</p>
+                                    <p class="w-[100%] font-normal text-[#777777]">
                                         {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
@@ -111,28 +111,29 @@
 
                             <div class='w-[100%] lg:w-[50%]'>
                                 <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Direccion: </p>
-                                    <p class="w-[50%] font-normal">{{ $company->address ?? 'No disponible' }}</p>
+                                    <p class="w-[100%]">Direccion: </p>
+                                    <p class="w-[100%] font-normal text-[#777777]">{{ $company->address ?? 'No disponible' }}</p>
                                 </div>
 
                                 <div class="flex flex-wrap">
                                     <p class="w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="w-[50%] font-normal">
+                                    <p class="w-[100%] font-normal text-[#777777]">
                                         {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
-                                    <p class="font-normal w-[50%]">
+                            <div class="flex w-full">
+                                <div class="flex flex-wrap w-[50%]">
+                                    <p class="w-[100%]">Area de desempeño:</p>
+                                    <p class="w-[100%] font-normal text-[#777777]">
                                         {{ $area->title ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
-                                    <p class="font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
+                                <div class="flex flex-wrap w-[50%]">
+                                    <p class="w-[100%]">Numero de teléfono:</p>
+                                    <p class="w-[100%] font-normal text-[#777777]">{{ $businessAdvisor->phone ?? 'No disponible' }}
                                     </p>
                                 </div>
-
+                            </div>
                             </div>
                         </div>
 
@@ -247,16 +248,73 @@
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
                                     @if ($comment->academic_advisor_id !== null)
-                                        Asesor
+                                        @foreach ($AdvCommentersNames as $Adv)
+                                            @foreach ($AdvCommenters as $advTab)
+                                                @if($advTab->id == $comment->academic_advisor_id && $advTab->user_id == $Adv->id)
+                                                    @if($Adv->id == $user->id)
+                                                        <span class="text-primaryColor">Tú</span>
+                                                    @else
+                                                        {{head(explode(' ', $Adv->name))}}
+                                                        {{head(explode(' ', $Adv->last_name))}}
+                                                        <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                                    @endif
+                                                @endif  
+                                            @endforeach
+                                        @endforeach
                                     @elseif($comment->president_id !== null)
-                                        Presidente de academia
+                                        @foreach ($PrezCommenters as $PrezCommenter)
+                                            @if($PrezCommenter->id == $comment->president_id)
+                                                @if($PrezCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $PrezCommenter->name))}}
+                                                    {{head(explode(' ', $PrezCommenter->last_name))}}
+                                                    <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @elseif($comment->director_id !== null)
-                                        Director de division
+                                        @foreach ($DirCommenters as $DirCommenter)
+                                            @if($DirCommenter->id == $comment->director_id)
+                                                @if($DirCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $DirCommenter->name))}}
+                                                    {{head(explode(' ', $DirCommenter->last_name))}}
+                                                    <span class=' text-black opacity-[40%]'>(Directora de división)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @else
-                                        <span class="text-primaryColor">Tú</span>
+                                        @foreach ($InternCommenters as $InternCommenter)
+                                            @if($InternCommenter->id == $comment->interns_id)
+                                                @if($InternCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $InternCommenter->name))}}
+                                                    {{head(explode(' ', $InternCommenter->last_name))}}
+                                                @endif
+                                                @if($InternCommenter->rol_id == 1)
+                                                    @if($InternCommenter->id != $user->id)
+                                                        
+                                                        <span class=' text-black opacity-[40%]'>(Estudiante)</span>
+                                                    @endif
+                                                @elseif($InternCommenter->rol_id == 2)
+                                                    <span class=' text-black opacity-[40%]'>(Asesor)</span>
+                                                @elseif($InternCommenter->rol_id == 3)
+                                                    <span class=' text-black opacity-[40%]'>(Presidente de academia)</span>
+                                                @elseif($InternCommenter->rol_id == 4)
+                                                    <span class=' text-black opacity-[40%]'>(Drectora de división)</span>
+                                                @elseif($InternCommenter->rol_id == 5)
+                                                    <span class=' text-black opacity-[40%]'>(Asistente de dirección)</span>
+                                                @elseif($InternCommenter->rol_id == 6)
+                                                    <span class=' text-black opacity-[40%]'>(Administrador)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @endif
                                 </p>
-                                <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}
+                                <p class=' text-black opacity-[70%] w-full font-normal text-sm'>{{ $comment->content }}
                                 </p>
                             </div>
                         @endforeach
