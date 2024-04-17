@@ -17,11 +17,11 @@
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
             <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros - {{$divisionOrAcademy->name}}</h1>
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                <form action="{{ route('search.books') }}" method="GET" id="search-form">
+                    <div class="hidden md:flex items-center relative">
+                        <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </div>
+                </form>   
                 @if(Auth::user()->can('crear-libro'))
                     <a href="{{route('libros-asistente.create')}}"
                         class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
@@ -29,11 +29,11 @@
                 @endif
             </div>
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
-                <div>
-                    <div class="flex items-center relative" >
+                <form action="{{ route('search.books') }}" method="GET" id="search-form">
+                    <div class="flex items-center relative">
                         <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </div>
+                </form>   
                 @if(Auth::user()->can('crear-libro'))
                     <a href="{{route('libros-asistente.create')}}"
                         class="md:hidden bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo libro
@@ -51,6 +51,8 @@
                     $booksToShow = $booksByAcademy;
                 }
                 $nameDivisionOrAcademy = $divisionOrAcademy->name;
+                // dd($nameDivisionOrAcademy);
+                // dd($paginatedBooksByAcademy);
             @endphp
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
@@ -328,7 +330,7 @@
         </div>
         
     </section>
-    <script>
+    {{-- <script>
         function searchTable() {
             var searchText = document.getElementById("search").value.toLowerCase();
             var rows = document.querySelectorAll("table tr");
@@ -351,7 +353,7 @@
         }
         // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
         document.getElementById("search").addEventListener("input", searchTable);
-    </script>
+    </script> --}}
     @endsection
 </body>
 
