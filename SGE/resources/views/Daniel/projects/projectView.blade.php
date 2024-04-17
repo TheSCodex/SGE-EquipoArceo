@@ -64,8 +64,7 @@
                                         </div>
                                         <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] text-[#777777]"> font-normal w-[40%]">
-                                                {{ $interns[0]->Group ?? 'No disponible' }}
+                                            <p class="mx-[1%] text-[#777777] font-normal w-[40%]">
                                                 {{ $interns[0]->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
