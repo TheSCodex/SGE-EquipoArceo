@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
 
     // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
     Route::get('/estudiante', [StudentController::class, "studentHome"])->name('inicio-estudiante')->middleware('role:estudiante');
+    Route::post('/estudiante/DelCollab/{id}', [ProjectsController::class, 'DeleteCollab'])->name('projects.DeleteCollab');
+    Route::post('/estudiante/AcceptCollab/{id}', [ProjectsController::class, 'AcceptCollab'])->name('projects.AcceptCollab');
 
     //Ruta de la vista del anteproyecto del estudiante
     Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto')->middleware('role:estudiante');

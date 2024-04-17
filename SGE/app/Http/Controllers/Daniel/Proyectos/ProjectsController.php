@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Daniel\Proyectos;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessSector;
+use App\Notifications\CollabInvitation;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Daniel\AnteproyectoRequest;
@@ -19,6 +20,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Notifications\ProyectoEnRevision;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 
 class ProjectsController extends Controller
 {
@@ -82,6 +84,21 @@ class ProjectsController extends Controller
         $intern = $user->intern;
         $ProjectId = $intern->project_id;
     }
+
+    public function DeleteCollab(Request $request, $id)
+    {
+        $notification = DatabaseNotification::find($id);
+        $notification->delete();
+        return redirect()->back()->with('droppped', 'Notificacion eliminada con exito.');
+    }
+    public function AcceptCollab(Request $request, $id)
+    {
+        $userId = Auth::id();
+        $notification = DatabaseNotification::find($id);
+        Intern::where('user_id', $userId)->update(['project_id'=>$notification->data['idProject']]);
+        $notification->delete();
+        return redirect()->back()->with('droppped', 'Notificacion eliminada con exito.');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -115,7 +132,6 @@ class ProjectsController extends Controller
      */
     public function store(AnteproyectoRequest $request)
     {
-        dd($request);
         $validatedData = $request->validated();
 
         $project = new Project([
@@ -172,10 +188,22 @@ class ProjectsController extends Controller
         $project->adviser_id = $businessAdvisor->id;
         $project->save();
 
+        
+        if($request->selectedIds){
+            $idString = explode(',', $request->selectedIds);
+            foreach ( $idString as $id){
+                $member = User::find($id);
+                $notification = $member->notify(new CollabInvitation($project));
+            };
+            dd($project);
+        }
+
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
 
         $selectedIds = $request->input('selectedIds');
+
+
 
         return redirect('/anteproyecto')->with('Created', 'Proyecto creado correctamente');
     }
