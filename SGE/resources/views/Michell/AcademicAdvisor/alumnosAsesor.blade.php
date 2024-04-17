@@ -74,10 +74,12 @@
                                             {{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                         <td>
                                             <div class="flex justify-center gap-3">
+                                                @if ($intern->project_id)
                                                 <a href="{{ route('anteproyecto-Asesor.index', $intern->project_id) }}"
                                                     class="px-4 py-1 font-bold text-white rounded bg-[#0FA987] hover:bg-[#185c4d]">
-                                                    Ver Anteproyecto
+                                                    Anteproyecto
                                                 </a>
+                                                @endif
                                                 <button id="editBtn" type="button" data-toggle="modal"
                                                     data-target="#getSancion{{ $user->id }}"
                                                     class="px-4 py-1 font-bold text-white rounded bg-[#3E5366] hover:bg-[#212c36]">

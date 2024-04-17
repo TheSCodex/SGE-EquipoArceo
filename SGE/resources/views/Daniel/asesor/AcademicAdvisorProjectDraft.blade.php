@@ -252,13 +252,15 @@
                     </div>
                 </div>
 
-                <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
+                <div class="w-full flex justify-between bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
                     <h3>Observaciones</h3>
+                    <a href="{{ route('observationsAnteproyectoA', ['id' => $project->id]) }}"
+                        class=" text-sm text-[#02AB82] font-lg ">Ver mas</a>
                 </div>
 
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] no-scrollbar py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
@@ -276,9 +278,6 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('observationsAnteproyectoA', ['id' => $project->id]) }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md self-end my-[1vh]">Ver
-                            observaciones</a>
                         <form method="POST" action="{{ route('anteproyecto-Asesor.store', ['id' => $project->id]) }}"
                             class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf

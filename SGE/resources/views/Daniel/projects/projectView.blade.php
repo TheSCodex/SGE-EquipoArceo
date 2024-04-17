@@ -140,11 +140,12 @@
                             <p class="w-full lg:w-[55%] mt-1 font-normal">{{ $company->address ?? 'No disponible' }}</p>
                         </div>
 
-                        <div class="flex flex-wrap flex-col flex-grow items-left px-[3%] justify-evenly mt-[1.5%]  w-full text-justify">
+                        <div
+                            class="flex flex-wrap flex-col flex-grow items-left px-[3%] justify-evenly mt-[1.5%]  w-full text-justify">
                             <h2 class="w-full text-xl font-bold">Anteproyecto</h2>
                             <div class="Linea separadora my-2 bg-[#000000] h-[2px] w-[98%] mr-4"></div>
                             <div class="min-h-[40vh] gap-[4vh]  justify-evenly w-full text-justify">
-                                
+
                                 <div class="w-full grid ">
                                     <p class=" text-lg sm:text-lg">Objetivo</p>
                                     <p class=" font-normal text-md">{{ $project->description }}</p>
@@ -162,10 +163,10 @@
                                     <p class=" font-normal text-md">{{ $project->activities_to_do }}</p>
                                 </div>
                             </div>
-                            
-                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}" class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3 mb-2">Editar</a>
+
+                            <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
+                                class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3 mb-2">Editar</a>
                         </div>
-                        
                     @else
                         <div
                             class="flex flex-wrap flex-col flex-grow items-center justify-center sm:min-h-[70vh] mt-[1.5%] gap-[10] ">
@@ -244,12 +245,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
+                <div class="w-full flex justify-between bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
                     <h3>Observaciones</h3>
+                    <a href="{{ route('observationsAnteproyecto') }}"
+                        class=" text-sm text-[#02AB82] font-lg ">Ver mas</a>
                 </div>
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] no-scrollbar rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
@@ -267,9 +270,7 @@
                                 </p>
                             </div>
                         @endforeach
-                        <a href="{{ route('observationsAnteproyecto') }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%] self-end">Ver
-                            observaciones</a>
+                        
                         <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
                             class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
