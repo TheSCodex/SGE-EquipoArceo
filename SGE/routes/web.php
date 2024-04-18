@@ -270,7 +270,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('libros', BooksController::class)->names('libros-asistente')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
 
     // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
-    Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
+    Route::get('/buscar/libros', [BooksController::class, 'searchBooks'])->name('search.books');
 
     Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
     Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
