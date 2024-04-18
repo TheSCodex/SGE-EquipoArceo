@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eliud\Reportes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Michell\PresidentOfTheAcademy\PresidentOfTheAcademy;
 use App\Models\AcademicAdvisor;
 use App\Models\Academy;
 use App\Models\BusinessAdvisor;
@@ -170,6 +171,8 @@ class ReportsController extends Controller
         $career = Career::find($interns[0]->career_id);
         $academie = Academy::find($career->academy_id);
         $division = Division::find($academie->division_id);
+        
+        $president = User::find($academie->president_id);
         $director = User::find($division->director_id);
         $docRevision = DocRevisions::find(3);
         $group = Group::find($interns[0]->group_id);
@@ -222,6 +225,7 @@ class ReportsController extends Controller
             'reason' => $motivo,
             'interns' => $interns[0]?->id,
             'docNumberCreated' => $getNumber ? $getNumber : $interns[0]->foolscapNumber,
+            'president' =>  $president?->name . ' ' . $president?->last_name,
 
         ];
 
@@ -232,7 +236,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'group', 'interns', 'project', 'docRevision', 'motivo', 'getNumber'));
+        $pdf->loadView('Eliud.reports.docs.aprobacion', compact('student', 'user', 'director', 'division', 'group', 'interns', 'project', 'docRevision', 'motivo', 'getNumber', 'president'));
         return $pdf->stream();
     }
 
@@ -285,7 +289,7 @@ class ReportsController extends Controller
             'career' => $career?->name,
             'project' => $project?->name,
             'interns' => $interns[0]?->id,
-            'business_advisors' => $business_advisors->name, 
+            'business_advisors' => $business_advisors->name,
         ];
 
         $authUser = auth()->user();
@@ -295,7 +299,7 @@ class ReportsController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'group', 'project', 'docRevision', 'business_advisors', 'user'));
+        $pdf->loadView('Eliud.reports.docs.memoria', compact('student', 'director', 'division', 'group', 'project', 'docRevision', 'business_advisors', 'user', ));
         return $pdf->stream();
     }
 

@@ -121,13 +121,13 @@
                                 @endphp
                                 <tr
                                     class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                                    <td class="font-roboto font-bold py-5 cursor-pointer">{{ $counter }}</td>
-                                    <td class="py-5 font-bold font-roboto">{{ $doc['title'] }}</td>
-                                    <td class="py-5 font-bold font-roboto">{{ $doc['advisor_identifier'] }}</td>
-                                    <td class="py-5 font-bold font-roboto">{{ $doc['advisor_email'] }}</td>
-                                    <td class="py-5 font-bold font-roboto">{{ $doc['advisor_name'] }}
+                                    <td class="font-roboto py-5 cursor-pointer">{{ $counter }}</td>
+                                    <td class="py-5 font-roboto">{{ $doc['title'] }}</td>
+                                    <td class="py-5 font-roboto">{{ $doc['advisor_identifier'] }}</td>
+                                    <td class="py-5 font-roboto">{{ $doc['advisor_email'] }}</td>
+                                    <td class="py-5 font-roboto">{{ $doc['advisor_name'] }}
                                         {{ $doc['advisor_lastName'] }}</td>
-                                    <td class="py-5 font-bold font-roboto">
+                                    <td class="py-5 font-roboto">
                                         <form method="POST"
                                             @if (Auth::user()->role->title == 'director') action="{{ route('docs.destroy-director', $doc->id) }}"
                                 @elseif(Auth::user()->role->title == 'asistenteDireccion')

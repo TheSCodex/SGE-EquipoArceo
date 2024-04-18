@@ -80,26 +80,26 @@ Route::middleware('auth')->group(function () {
 
     // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
     Route::get('/estudiante', [StudentController::class, "studentHome"])->name('inicio-estudiante')->middleware('role:estudiante');
+    Route::post('/estudiante/DelCollab/{id}', [ProjectsController::class, 'DeleteCollab'])->name('projects.DeleteCollab');
+    Route::post('/estudiante/AcceptCollab/{id}', [ProjectsController::class, 'AcceptCollab'])->name('projects.AcceptCollab');
 
     //Ruta de la vista del anteproyecto del estudiante
-    Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto')->middleware('role:estudiante');
-
+    Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto')->middleware('role:estudiante, ver-anteproyecto');
     // Rutas para el formulario de anteproyectos
     Route::get("anteproyecto/nuevo", [ProjectsController::class, 'create'])->name('formanteproyecto.create')->middleware('roleorcan:estudiante,crear-anteproyecto');
-    
     Route::post("anteproyecto/nuevo", [ProjectsController::class, 'store'])->name('formanteproyecto.store')->middleware('roleorcan:estudiante,crear-anteproyecto');
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
-    Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores');
+    Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores')->middleware('roleorcan:estudiante, colaborar-anteproyecto');
     Route::match(['get', 'post'], 'EstatusCambiado', [ProjectsController::class, 'ForRev'])->name('ForRev');
-    Route::match(['get', 'post'], 'EstatusAsesoramiento', [ProjectsController::class, 'onAse'])->name('ForAse');
+    Route::match(['get', 'post'], 'EstatusAsesoramiento', [ProjectsController::class, 'onAse'])->name('ForAse')->middleware('roleorcan: estudiante, asesorar-anteproyecto');
 
 
 
     //Ruta para las observaciones del estudiante
     Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
-    Route::post("observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
-    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar');
+    Route::post("observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store')->middleware('roleorcan:estudiante, hacer-observaciones');
+    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar')->middleware('roleorcan:estudiantes, responder-observaciones') ;
 
 
     // Vista del calendario del estudiante
@@ -122,7 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/asesor', [DashboardAdvisorController::class, "index"])->name('inicio-asesor')->middleware('role:asesorAcademico');
 
     Route::get('anteproyectos', [ProyectsAdvisorController::class, "index"])->name('anteproyectos-asesor')->middleware('roleorcan:asesorAcademico,leer-anteproyectos-asignados');
-    Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
+    Route::get('anteproyecto/{id} ', [ProjectDraftController::class, 'index'])->name('anteproyecto-Asesor.index')->middleware('roleorcan:asesorAcademico,leer-anteproyecto-detalle');
 
     //Ruta de los alumnos del asesor
     Route::post('estudiantess/busqueda', [AcademicAdvisorController::class, 'search'])->name('student.search')->middleware('roleorcan:asesorAcademico,leer-estudiantes-asignados');
@@ -134,12 +134,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('download.digitalizacion')->middleware('roleorcan:asesorAcademico,generar-reportes-documentos');
 
     // ! Ruta de las observaciones del asesor
-    Route::get("observaciones/asesor/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA');
-    Route::put('observaciones/asesor/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update');
+    Route::get("observaciones/asesor/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoA')->middleware('roleorcan:asesorAcademico, leer-observaciones-asesor');
+    Route::put('observaciones/asesor/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.update')->middleware('roleorcan:asesorAcademico, actualizar-observaciones');
     Route::post('anteproyecto/{id}/store', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,');
     Route::post('anteproyecto/{id}/storeLike', [ProjectDraftController::class, 'storeLike'])->name('anteproyecto-Asesor.storeLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
-    Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store');
-    Route::match(['get', 'post'], 'CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev');
+    //Route::post('anteproyecto/{id}', [ProjectDraftController::class, 'store'])->name('anteproyecto-Asesor.store')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
+    Route::match(['get', 'post'], 'CambiarEstatus', [ProjectDraftController::class, 'OnRev'])->name('OnRev')->middleware('roleorcan:asesorAcademico, publicar-anteproyecto');
     Route::post('anteproyecto/{id}/deleteLike', [ProjectDraftController::class, 'deleteLike'])->name('anteproyecto-Asesor.deleteLike')->middleware('roleorcan:asesorAcademico,votar-anteproyecto');
     // Ruta para el crud de actividades
     Route::resource('actividades', EventController::class)->names('actividades')->middleware('roleorcan:asesorAcademico,leer-calendario');
@@ -164,9 +164,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/presidente', [PresidentOfTheAcademy::class, "index"])->name('inicio-presidente')->middleware('role:presidenteAcademia');
 
     //Ruta de la lista de los anteproyectos
-    Route::get('anteproyectos-division', [ProjectsPresidentController::class, 'index'])->name('anteproyectos-presidente');
-    Route::get("observaciones", [ProjectsPresidentController::class, "index"])->name('observationsAnteproyectoP');
-    Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'store'])->name('anteproyecto-President.store');
+    Route::get('anteproyectos-division', [ProjectsPresidentController::class, 'index'])->name('anteproyectos-presidente')->middleware('role:presidenteAcademia, lista-anteproyectos');
+    Route::get("observaciones", [ProjectsPresidentController::class, "index"])->name('observationsAnteproyectoP')->middleware('role:presidenteAcademia, observaciones-rpresidente');
+    Route::get('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'store'])->name('anteproyecto-President.store')->middleware('role:presidenteAcademia');
     Route::post('anteproyecto/president/{id}', [ProjectsPresidentController::class, 'store'])->name('anteproyecto-President.store');
     Route::post('anteproyecto/{id}/presidentLike', [ProjectsPresidentController::class, 'storeLike'])->name('anteproyecto-President.storeLike');
     Route::post('anteproyecto/{id}/presidentDeleteLike', [ProjectsPresidentController::class, 'deleteLike'])->name('anteproyecto-President.deleteLike');
@@ -216,10 +216,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('re-download.digitalizacion.director');
     Route::put('/docRevision/{id}', [DocumentsController::class, 'UpdateDocRevision'])->name('docRevision.update');
 
-    Route::get("observaciones/directora/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
-    Route::put('observaciones/directora/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
+    Route::get("observaciones/director/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
+    Route::put('observaciones/director/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
     //Ruta de la lista de los anteproyectos
-    Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('anteproyectos')->middleware('roleorcan:director,');
+    Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('director-anteproyectos')->middleware('roleorcan:director,');
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/storeLike', [ProjectsDirectorController::class, 'storeLike'])->name('anteproyecto-Director.storeLike')->middleware('roleorcan:director,');
     Route::post('director/anteproyecto/{id}/deleteLike', [ProjectsDirectorController::class, 'deleteLike'])->name('anteproyecto-Director.deleteLike')->middleware('roleorcan:director,');
@@ -270,7 +270,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('libros', BooksController::class)->names('libros-asistente')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
 
     // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
-    Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
+    Route::get('/buscar/libros', [BooksController::class, 'searchBooks'])->name('search.books');
 
     Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
     Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
@@ -314,26 +314,18 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para CRUD de Empresas
     Route::resource('/panel-companies', CompaniesController::class)->names(['index' => 'companies.index'])->middleware('roleorcan:admin,crud-empresas');
-    Route::get('/panel-companies-create', [CompaniesController::class, 'create'])->name('companies_form')->middleware('roleorcan:admin,crud-empresas');
-    Route::get('/panel-companies/{id}/edit', [CompaniesController::class, 'edit'])->name('panel-companies.edit')->middleware('roleorcan:admin,crud-empresas');
+   
 
-    // RUTAS PARA EL CRUD SE ASESORES ACADEMICOS
+    // RUTAS PARA EL CRUD SE ASESORES EMPRESARIALES
     Route::resource('/panel-advisors', AdvisorController::class)->names('panel-advisors')->middleware('roleorcan:admin,crud-asesores');
-    Route::get('/panel-advisors-create', [AdvisorController::class, 'create'])->name('formAsesores')->middleware('roleorcan:admin,crud-asesores');
-    Route::get('/panel-advisors-edit/{id}', [AdvisorController::class, 'edit'])->name('panel-advisors.edit')->middleware('roleorcan:admin,crud-asesores');
-    Route::delete('/panel-advisors/{id}', [AdvisorController::class, 'destroy'])->name('panel-advisors.destroy')->middleware('roleorcan:admin,crud-asesores');
+
 
 
     // Rutas para CRUD de Carreras y Academias
     Route::resource('/panel-careers', carrerasController::class)->names('panel-careers')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get('/panel-careers-create', [carrerasController::class, 'create'])->name('newCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/editCareer", [carrerasController::class, 'edit'])->name('editCareer')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::resource('/panel-divisions', DivisionsController::class)->names('panel-divisions')->middleware('roleorcan:admin,crud-carreras-divisiones');
     Route::resource('/panel-academies', AcademiesController::class)->names('panel-academies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/panel-divisions-create", [DivisionsController::class, 'create'])->name('newDivision')->middleware('roleorcan:admin,crud-carreras-divisiones');
-    Route::get("/panel-academies-create", [AcademiesController::class, 'create'])->name('newAcademies')->middleware('roleorcan:admin,crud-carreras-divisiones');
-
-
+   
     // ! PERFIL
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

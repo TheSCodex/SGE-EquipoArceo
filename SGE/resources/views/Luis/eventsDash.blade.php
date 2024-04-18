@@ -78,7 +78,7 @@
                                         </button>
                                     </form>
                                 </div>
-                                @if ($event->status == 'Programada')
+                                {{-- @if ($event->status == 'Programada')
                                     <div class="flex justify-center align-middle">
                                         <form action="{{ route('actividades.cancel', $event->id) }}" class="cancel-event" method="POST">
                                             @csrf
@@ -92,7 +92,7 @@
                                             <button class="bg-primaryColor px-3 py-2 rounded-xl font-semibold font-montserrat text-white">Reprogramar</button>
                                         </form>
                                     </div>    
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </div>

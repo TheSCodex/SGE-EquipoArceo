@@ -32,53 +32,54 @@
                         <div class="w-full flex flex-wrap px-[3%] self-start py-[2vh]">
                             @if (isset($project))
                                 <h2 class="w-full text-xl font-bold mt-[1vh]">Datos del alumno </h2>
-                                <div class='w-[100%] lg:w-[50%]'>
-                                    <div class="flex flex-wrap ">
-                                        <p class="w-[50%]  text-lg sm:text-lg">Nombre completo:</p>
-                                        <p class="w-[50%] font-normal">{{ $user->name ?? 'No disponible' }}</p>
+                                <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mr-4"></div>
+                                <div class='w-[100%] lg:w-[45%]'>
+                                    <div class="grid grid-cols-1">
+                                        <p class="text-lg sm:text-lg">Nombre completo:</p>
+                                        <p class="font-normal">{{ $user->name ?? 'No disponible' }} {{ $user->last_name  ?? 'No disponible' }}
+                                        </p>
                                     </div>
-                                    <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Division ácademica: </p>
-                                        <p class="w-[50%] font-normal">{{ $division->name ?? 'No disponible' }}</p>
+                                    <div class="grid grid-cols-1">
+                                        <p class=" text-lg sm:text-lg">Division ácademica: </p>
+                                        <p class="w-full font-normal">{{ $division->name ?? 'No disponible' }}</p>
                                     </div>
-                                    <div class="flex flex-wrap ">
+                                    <div class="grid grid-cols-1">
                                         <p class="w-[50%] text-lg sm:text-lg ">Correo electronico:</p>
                                         <p class="w-[50%] font-normal overflow-hidden pr-[1%]">
                                             {{ $user->email ?? 'No disponible' }}</p>
                                     </div>
                                 </div>
 
-                                <div class='w-[100%] lg:w-[50%]'>
-                                    <div class="flex flex-wrap">
-                                        <p class="w-[50%] text-lg sm:text-lg">Programa educativo: </p>
-                                        <p class="w-[50%] font-normal">{{ $career->name ?? 'No disponible' }}</p>
+                                <div class='w-[100%] lg:w-[55%]'>
+                                    <div class="grid grid-cols-1">
+                                        <p class=" text-lg sm:text-lg">Programa educativo: </p>
+                                        <p class=" font-normal">{{ $career->name ?? 'No disponible' }}</p>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex flex-wrap w-[50%]">
+                                        <div class="grid grid-cols-1 w-[50%]">
                                             <p class="w-[50%] text-lg sm:text-lg overflow-hidden">Matricula:</p>
                                             <p class="font-normal w-[50%] overflow-hidden px-[1%]">
                                                 {{ $user->identifier ?? 'No disponible' }}</p>
                                         </div>
-
-                                        <div class="flex w-[50%]">
+                                        <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                            <p class="mx-[1%] text-[#777777] font-normal w-[40%]">
                                                 {{ $interns[0]->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div class="flex w-full">
-                                        <div class="flex w-[50%]">
+                                        <div class="grid grid-cols-1 w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha inicio:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                            <p class="mx-[1%] font-normal w-full">
                                                 {{ $project->start_date ?? 'No disponible' }}</p>
                                         </div>
 
-                                        <div class="flex w-[50%]">
+                                        <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg">Fecha final:</p>
-                                            <p class="mx-[1%] font-normal w-[40%]">
+                                            <p class="mx-[1%] font-normal w-full">
                                                 {{ $project->end_date ?? 'No disponible' }}</p>
                                         </div>
                                     </div>
@@ -86,87 +87,85 @@
                                 </div>
                         </div>
 
-                        <div class="w-full flex flex-wrap px-[3%] self-start border-b-2 border-black py-[2vh]">
+                        <div class="w-full flex flex-wrap px-[3%] ">
                             <h2 class="w-full text-xl font-bold mb-[vh]">Datos de la empresa</h2>
-                            <div class='w-[100%] lg:w-[50%]'>
-                                <div class="flex flex-wrap">
+                            <div class="Linea separadora bg-[#000000] h-[2px] my-2 w-[98%] mr-4"></div>
+                            <div class='w-[100%] lg:w-[45%]'>
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Nombre de la empresa:
                                     <p>
                                     <p class="w-[50%] font-normal">{{ $company->name ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class=" w-[50%] text-lg sm:text-lg">Asesor empresarial: </p>
-                                    <p class=" w-[50%] font-normal ">{{ $interns[0]->performance_area ?? 'No disponible' }}
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Asesor empresarial: </p>
+                                    <p class=" font-normal ">{{ $businessAdvisor->name ?? 'No disponible' }}
                                     </p>
 
                                 </div>
-                                <div class="flex flex-wrap">
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Correo electronico:</p>
-                                    <p class="w-[50%] font-normal overflow-hidden">
+                                    <p class=" font-normal overflow-hidden">
                                         {{ $businessAdvisor->email ?? 'No disponible' }}
                                     </p>
                                 </div>
+                                <div class="">
+                                </div>
                             </div>
 
-                            <div class='w-[100%] lg:w-[50%]'>
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Direccion: </p>
-                                    <p class="w-[50%] font-normal">{{ $company->address ?? 'No disponible' }}</p>
-                                </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Cargo que desempeña: </p>
-                                    <p class="w-[50%] font-normal">
+                            <div class='w-[100%] lg:w-[55%]'>
+
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Cargo que desempeña: </p>
+                                    <p class=" font-normal">
                                         {{ $businessAdvisor->position ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <p class="w-[50%] text-lg sm:text-lg">Area de desempeño:</p>
+                                <div class="grid grid-cols-1">
+                                    <p class=" text-lg sm:text-lg">Area donde se realizara el proyecto :</p>
                                     <p class="font-normal w-[50%]">
-                                        {{ $area->title ?? 'No disponible' }}</p>
+                                        {{ $intern->performance_area ?? 'No disponible' }}</p>
                                 </div>
 
-                                <div class="flex flex-wrap">
+                                <div class="grid grid-cols-1">
                                     <p class="w-[50%] text-lg sm:text-lg">Numero de teléfono:</p>
                                     <p class="font-normal w-[50%]">{{ $businessAdvisor->phone ?? 'No disponible' }}
                                     </p>
                                 </div>
-
+                                <div class="">
+                                </div>
                             </div>
+                            <p class="w-full lg:w-[45%] mt-1 text-lg sm:text-lg">Direccion de la empresa: </p>
+                            <p class="w-full lg:w-[55%] mt-1 font-normal">{{ $company->address ?? 'No disponible' }}</p>
                         </div>
 
-
-
                         <div
-                            class="flex flex-wrap flex-col flex-grow items-left justify-evenly min-h-[57vh] mt-[1.5%] gap-[4vh] w-full text-justify">
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Objetivo</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->description }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Planteamiento del problema</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->problem_statement }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg ">Justificación</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->project_justificaction }}
-                                </p>
-                            </div>
-                            <div class="w-full flex flex-wrap justify-center">
-                                <p class=" w-[80%] sm:w-[100%] text-lg sm:text-lg">Actividades a realizar</p>
-                                <p class=" w-[80%] sm:w-[100%] font-normal text-md">
-                                    {{ $project->activities_to_do }}
-                                </p>
+                            class="flex flex-wrap flex-col flex-grow items-left px-[3%] justify-evenly mt-[1.5%]  w-full text-justify">
+                            <h2 class="w-full text-xl font-bold">Anteproyecto</h2>
+                            <div class="Linea separadora my-2 bg-[#000000] h-[2px] w-[98%] mr-4"></div>
+                            <div class="min-h-[40vh] gap-[4vh]  justify-evenly w-full text-justify">
+
+                                <div class="w-full grid ">
+                                    <p class=" text-lg sm:text-lg">Objetivo</p>
+                                    <p class=" font-normal text-md">{{ $project->description }}</p>
+                                </div>
+                                <div class="w-full grid mt-4 ">
+                                    <p class=" text-lg sm:text-lg">Planteamiento del problema</p>
+                                    <p class=" font-normal text-md">{{ $project->problem_statement }}</p>
+                                </div>
+                                <div class="w-full grid  mt-4 ">
+                                    <p class="text-lg sm:text-lg">Justificación</p>
+                                    <p class=" font-normal text-md">{{ $project->project_justificaction }}</p>
+                                </div>
+                                <div class="w-full grid  mt-4">
+                                    <p class=" text-lg sm:text-lg">Actividades a realizar</p>
+                                    <p class=" font-normal text-md">{{ $project->activities_to_do }}</p>
+                                </div>
                             </div>
 
                             <a href="{{ route('editAnteproyecto.edit', ['id' => $project->id]) }}"
-                                class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3">Editar</a>
+                                class="self-end px-[2vw] bg-primaryColor text-white text-md font-roboto rounded-lg h-auto p-3 mb-2">Editar</a>
                         </div>
                     @else
                         <div
@@ -192,28 +191,35 @@
                     class="w-full h-fit min-h-[12vh] sm:m-0 bg-white px-[2%] py-[.8%] rounded-sm font-semibold sm:h-[18%] text-black text-opacity-[50%] flex flex-wrap justify-center items-center">
                     <div class="w-[80%] flex flex-wrap items-center gap-[10%]">
                         @if (isset($project))
-                                @if (strtolower($project->status) == 'aprobado')
-                                    <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
-                                    <p class=" w-[70%]">Tu Anteproyecto ha sido <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span></p>
-                                @elseif (strtolower($project->status) == 'en revision')
-                                    <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
-                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span></p>
-                                @elseif (strtolower($project->status) == 'asesoramiento')
-                                    <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
-                                    <p class=" w-[70%]">Tu Anteproyecto se encuentra en  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span></p>
-                                @else
-                                    <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
-                                    <p class="w-[70%]">Tu Anteproyecto esta guardado como  <span class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span></p>
-                                    
-                                    <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
-                                        action="{{ route('ForAse', ['id' => $project->id]) }}">
-                                        @csrf
-                                        <button type="submit"
-                                            class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
-                                            a asesoramiento</button>
-                                    </form>
-                                @endif
-                            
+                            @if (strtolower($project->status) == 'aprobado')
+                                <img src="{{ asset('img/iconosDaniel/aprobado.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">Tu Anteproyecto ha sido <span
+                                        class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Aprobado</span>
+                                </p>
+                            @elseif (strtolower($project->status) == 'en revision')
+                                <img src="{{ asset('img/iconosDaniel/revision.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">Tu Anteproyecto se encuentra en <span
+                                        class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Revision</span>
+                                </p>
+                            @elseif (strtolower($project->status) == 'asesoramiento')
+                                <img src="{{ asset('img/iconosDaniel/asesoramiento.svg') }}" class="w-[15%]" />
+                                <p class=" w-[70%]">Tu Anteproyecto se encuentra en <span
+                                        class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Asesoramiento</span>
+                                </p>
+                            @else
+                                <img src="{{ asset('img/iconosDaniel/borrador.svg') }}" class="w-[15%]" />
+                                <p class="w-[70%]">Tu Anteproyecto esta guardado como <span
+                                        class="text-primaryColor font-bold border-b-[0.4vh] border-b-primaryColor px-1">Borrador</span>
+                                </p>
+
+                                <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
+                                    action="{{ route('ForAse', ['id' => $project->id]) }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
+                                        a asesoramiento</button>
+                                </form>
+                            @endif
                         @else
                             <img src="{{ asset('img/iconosDaniel/eraser-solid.svg') }}" class="w-[15%]" />
                             <p class="w-[70%]">Aun no hay nada que guardar</p>
@@ -229,7 +235,9 @@
                                 @if ($project->like == 0)
                                     <p class="w-full">Aun no tienes votos</p>
                                 @else
-                                    <p class="w-full">Tienes <span class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }} voto(s)</span></p>
+                                    <p class="w-full">Tienes <span
+                                            class="text-primaryColor border-b-[.4vh] border-b-primaryColor px-1 font-bold py-0.5">{{ $project->like }}
+                                            voto(s)</span></p>
                                 @endif
                             @else
                                 <p class="w-full">Aun no hay nada que votar</p>
@@ -237,32 +245,89 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
+                <div class="w-full flex justify-between bg-white px-[2%] py-[.8%] rounded-sm font-semimbold sm:font-bold text-sm">
                     <h3>Observaciones</h3>
+                    <a href="{{ route('observationsAnteproyecto') }}"
+                        class=" text-sm text-[#02AB82] font-lg ">Ver mas</a>
                 </div>
                 @if (isset($comments) && count($comments) > 0)
                     <div
-                        class="w-full bg-white px-[10%] py-[.8%] rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
+                        class="w-full bg-white px-[10%] py-[.8%] no-scrollbar rounded-sm font-bold h-[52vh]  flex flex-wrap justify-center items-center text-xl overflow-y-auto">
                         @foreach ($comments as $comment)
                             <div class='flex flex-wrap w-full mb-[2vh]'>
                                 <p class=' text-black w-full font-semibold text-sm'>
                                     @if ($comment->academic_advisor_id !== null)
-                                        Asesor
+                                        @foreach ($AdvCommentersNames as $Adv)
+                                            @foreach ($AdvCommenters as $advTab)
+                                                @if($advTab->id == $comment->academic_advisor_id && $advTab->user_id == $Adv->id)
+                                                    @if($Adv->id == $user->id)
+                                                        <span class="text-primaryColor">Tú</span>
+                                                    @else
+                                                        {{head(explode(' ', $Adv->name))}}
+                                                        {{head(explode(' ', $Adv->last_name))}}
+                                                        <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                                    @endif
+                                                @endif  
+                                            @endforeach
+                                        @endforeach
                                     @elseif($comment->president_id !== null)
-                                        Presidente de academia
+                                        @foreach ($PrezCommenters as $PrezCommenter)
+                                            @if($PrezCommenter->id == $comment->president_id)
+                                                @if($PrezCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $PrezCommenter->name))}}
+                                                    {{head(explode(' ', $PrezCommenter->last_name))}}
+                                                    <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @elseif($comment->director_id !== null)
-                                        Director de division
+                                        @foreach ($DirCommenters as $DirCommenter)
+                                            @if($DirCommenter->id == $comment->director_id)
+                                                @if($DirCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $DirCommenter->name))}}
+                                                    {{head(explode(' ', $DirCommenter->last_name))}}
+                                                    <span class=' text-black opacity-[40%]'>(Directora de división)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @else
-                                        <span class="text-primaryColor">Tú</span>
+                                        @foreach ($InternCommenters as $InternCommenter)
+                                            @if($InternCommenter->id == $comment->interns_id)
+                                                @if($InternCommenter->id == $user->id)
+                                                    <span class="text-primaryColor">Tú</span>
+                                                @else
+                                                    {{head(explode(' ', $InternCommenter->name))}}
+                                                    {{head(explode(' ', $InternCommenter->last_name))}}
+                                                @endif
+                                                @if($InternCommenter->rol_id == 1)
+                                                    @if($InternCommenter->id != $user->id)
+                                                        
+                                                        <span class=' text-black opacity-[40%]'>(Estudiante)</span>
+                                                    @endif
+                                                @elseif($InternCommenter->rol_id == 2)
+                                                    <span class=' text-black opacity-[40%]'>(Asesor)</span>
+                                                @elseif($InternCommenter->rol_id == 3)
+                                                    <span class=' text-black opacity-[40%]'>(Presidente de academia)</span>
+                                                @elseif($InternCommenter->rol_id == 4)
+                                                    <span class=' text-black opacity-[40%]'>(Drectora de división)</span>
+                                                @elseif($InternCommenter->rol_id == 5)
+                                                    <span class=' text-black opacity-[40%]'>(Asistente de dirección)</span>
+                                                @elseif($InternCommenter->rol_id == 6)
+                                                    <span class=' text-black opacity-[40%]'>(Administrador)</span>
+                                                @endif
+                                            @endif  
+                                        @endforeach
                                     @endif
                                 </p>
-                                <p class=' text-black opacity-[60%] w-full font-normal text-sm'>{{ $comment->content }}
+                                <p class=' text-black opacity-[70%] w-full font-normal text-sm'>{{ $comment->content }}
                                 </p>
                             </div>
                         @endforeach
-                        <a href="{{ route('observationsAnteproyecto') }}"
-                            class="bg-[#02AB82] text-sm text-white font-lg px-[.5vw] py-[.2vw] rounded-md my-[2%] self-end">Ver
-                            observaciones</a>
+                        
                         <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
                             class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf

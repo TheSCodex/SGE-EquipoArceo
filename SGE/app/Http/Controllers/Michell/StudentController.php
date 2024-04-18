@@ -23,6 +23,7 @@ class StudentController extends Controller
     public function studentHome()
     {
         $user  = auth()->user();
+        
         $student = $user->id;
         // if ($student === null) {
         //     $student = 1;
@@ -108,7 +109,8 @@ class StudentController extends Controller
         ->first();
         // dd($penalizations);
 
-
+        $notificaciones = Auth::user()->unreadNotifications;
+        
         return view('Michell.StudentHome.studentHome', [
     
             'advisor' => $advisor,
@@ -121,7 +123,8 @@ class StudentController extends Controller
             "studentsCommentsCount" => $studentsCommentsCount,
             'votes' => $votes,
             'penalty' => $penalizations,
-            "mensaje" => $mensaje
+            "mensaje" => $mensaje,
+            'notificaciones' => $notificaciones
         ]);
     }
 
