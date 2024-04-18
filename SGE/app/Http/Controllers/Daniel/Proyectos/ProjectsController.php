@@ -75,15 +75,18 @@ class ProjectsController extends Controller
         $AdvCommentersNames = User::whereIn("id", $userIds)->get();
 
         $InternIds = $comments->pluck('interns_id')->toArray();
-        $UserIntern = Intern::whereIn("id", $InternIds)->pluck('user_id')->toArray();
-        $InternCommenters = User::whereIn("id", $UserIntern)->get();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
+        
 
         //dd($InternCommenters);
+        
 
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
             $userIds = $AdvCommenters->pluck('user_id')->toArray();
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area', 'userIds', 'AdvCommenters'));
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area', 'userIds', 'AdvCommenters' ,'UserInterns'));
         }
 
         $academy = Academy::where("id", $career->academy_id)->first();
@@ -91,7 +94,7 @@ class ProjectsController extends Controller
 
         //dd($intern);
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division', 'userIds', 'AdvCommenters'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division', 'userIds', 'AdvCommenters', 'UserInterns'));
     }
 
     public function ForRev(request $id)
