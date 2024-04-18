@@ -29,8 +29,8 @@ class ProjectsDirectorController extends Controller
         $projectsAdvisor = null;
         $userId = Auth::id();
         $division = Division::where('director_id', $userId)->first();
-        $divisionId = $division->id;
-        
+        $divisionId = $division?->id;
+        // dd($divisionId);
 
         $projects = Project::whereHas('interns', function ($query) use ($divisionId) {
             $query->whereHas('career', function ($query) use ($divisionId) {

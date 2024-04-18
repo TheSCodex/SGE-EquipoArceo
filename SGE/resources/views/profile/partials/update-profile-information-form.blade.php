@@ -61,7 +61,7 @@
                     <p class="text-sm space-y-2">Correo</p>
                     <input type="text" name="email" value="{{ $user->email }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Correo">
                     @error('email')
-                    <p class="text-[#ff0000] text-sm">
+                    <p class="text-[#ff0000] max-sm:w-64 break-words text-sm">
                         {{ $message }}
                     </p>
                     @enderror
