@@ -87,8 +87,7 @@
                                     <div class="flex items-center">
                                         <div class="ml-4">
                                             <h4 class="text-base font-medium text-gray-700">
-                                                {{ $comment->interns_id ? 'Estudiante' : 'Asesor' }}
-                                            </h4>
+                                                {{ $comment->loggedUserName }}                                            </h4>
                                             <p class="text-sm text-gray-500">
                                                 {{ is_string($comment->fecha_hora) ? $comment->fecha_hora : $comment->fecha_hora->format('d/m/Y \a \l\a\s H:i') }}
                                             </p>
