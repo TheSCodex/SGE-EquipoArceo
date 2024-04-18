@@ -351,7 +351,7 @@
                             <p class=' text-black opacity-[60%] '>No hay comentarios en tu anteproyecto.</p>
                         </div>
                         <form method="POST"
-                            action="{{ route('observationsAnteproyecto.store', ['id' => $project->id]) }}"
+                            action="{{ route('observationsAnteproyecto.store') }}"
                             class="w-full font-normal flex mt-[-3vh] h-[fit] items-center">
                             @csrf
 
