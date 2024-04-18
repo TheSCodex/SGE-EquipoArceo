@@ -9,14 +9,17 @@ use App\Models\User;
 use App\Models\AcademicAdvisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ObservationsController extends Controller
 {
     public function index()
     {
+        if (Gate::denies('leer-observaciones')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         // Obtenemos el ID del usuario autenticado
         $userId = Auth::id();
-
         // Buscamos el intern relacionado con el usuario autenticado
         $intern = Intern::where('user_id', $userId)->first();
         

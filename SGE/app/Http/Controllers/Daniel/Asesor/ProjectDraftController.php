@@ -27,7 +27,9 @@ class ProjectDraftController extends Controller
     public function index(project $id)
     {   
         $userId = Auth::id();
+        $CurrentUser = $userId;
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
+        
         
         $interns = Intern::where("project_id", $id->id)->first();
         
@@ -53,9 +55,20 @@ class ProjectDraftController extends Controller
         }
     
         $comments = Comment::where("project_id", $projectId)->get();
-        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
+        
+        $DirIds = $comments->pluck('director_id')->toArray();
+        $DirCommenters = User::whereIn("id", $DirIds)->get();
 
+        $PrezIds = $comments->pluck('president_id')->toArray();
+        $PrezCommenters = User::whereIn("id", $PrezIds)->get();
+
+        $AdvIds = $comments->pluck('academic_advisor_id')->toArray();
+        $AdvCommenters = AcademicAdvisor::whereIn("id", $AdvIds)->get();
+        $userIds = $AdvCommenters->pluck('user_id')->toArray();
+        $AdvCommentersNames = User::whereIn("id", $userIds)->get();
+
+        $InternIds = $comments->pluck('interns_id')->toArray();
+        $InternCommenters = User::whereIn("id", $InternIds)->get();
         $project = Project::find($interns->project_id);
         
     
@@ -85,9 +98,9 @@ class ProjectDraftController extends Controller
  //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters', 'CurrentUser'));
         } else {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'projectLikes', 'area'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division', 'area', 'userIds', 'AdvCommenters', 'CurrentUser'));
         }
     }
 
@@ -97,7 +110,7 @@ class ProjectDraftController extends Controller
 
     public function onRev(request $id){
         Project::where('id', $id->id)->update(['status' => 'en revision']);
-        return redirect()->back()->with('success', 'Anteproyecto ahora en revision.');   
+        return redirect()->back()->with('onRev', 'Anteproyecto ahora en revision.');   
     }
 
     public function storeLike(project $id){

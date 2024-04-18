@@ -9,12 +9,14 @@
             <h1 class=" font-bold font-montserrat text-xl mb-2 text-center md:text-left"> Lista de Carreras</h1>
 
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
-                    </div>
+                <div class="hidden md:flex items-center relative">
+                    <form action="{{ route('search.careers') }}" method="GET" id="search-form">
+                        <div class="hidden md:flex items-center relative">
+                            <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
+                        </div>
+                    </form>    
                 </div>
-                <a href="{{ route('newCareer')}}"
+                <a href="{{ route('panel-careers.create')}}"
                     class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
             </div>
@@ -27,7 +29,7 @@
                         <input id='searchMovil' class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
                 </div>
-                <a href="{{ route('newCareer')}}"
+                <a href="{{ route('panel-careers.create')}}"
                     class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nueva carrera
                 </a>
 
@@ -36,16 +38,16 @@
         </div>
         <div class="flex mt-[2%] px-[4%]  ">
             <section class=" text-sm md:space-x-6 space-x-2 flex">
-                <a href="panel-divisions">
+                <a href="{{ route('panel-divisions.index') }}">
                     <button id="btnWithOutAdvisor"
                     class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor focus:text-white bg-[#eee] rounded px-5 py-1 shadow-lg">Divisiones</button>
                 </a>
     
-                <a href="panel-academies">
+                <a href="{{ route('panel-academies.index') }}">
                     <button id="btnWithAdvisor"
                     class="hover:text-white hover:bg-primaryColor  focus:bg-primaryColor focus:text-white bg-[#eee] rounded md:px-5 px-4 py-1  shadow-lg">Academias</button>
                 </a>
-                <a href="panel-careers">
+                <a href="{{ route('panel-careers.index') }}">
                     <button id="btnAll"
                         class="hover:text-white hover:bg-primaryColor focus:bg-primaryColor text-white bg-primaryColor   rounded px-5 py-1 shadow-lg">Carreras</button>
                     </a>
@@ -124,13 +126,16 @@
                 @if($careers->isEmpty())
                 <p class="mt-4 text-red-500 text-center  text-lightGray  text-2xl">Sin resultados</p>
                 @endif
-                {{$careers->links()}}
+             
             </div>
         </div>
     </div>
     
         
 </section>
+<div class="w-[90%] m-auto py-2  max-sm:flex justify-center  ">
+    {{ $careers->links() }}
+</div>
 @if(session()->has('successAdd'))
 <script>
     function confirmAgregar(){
@@ -185,29 +190,10 @@
                 }
             });
         }
-        function searchTable() {
-            var searchText = document.getElementById("search").value.toLowerCase();
-            var rows = document.querySelectorAll("table tr");
-            for (var i = 1; i < rows.length; i++) {
-                var row = rows[i];
-                var found = false;
-                for (var j = 0; j < row.cells.length; j++) {
-                    var cell = row.cells[j];
-                    if (cell.textContent.toLowerCase().indexOf(searchText) > -1) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (found) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            }
-        }
+
         
             // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
-            document.getElementById("search").addEventListener("input", searchTable);
+            
     </script>
     
         

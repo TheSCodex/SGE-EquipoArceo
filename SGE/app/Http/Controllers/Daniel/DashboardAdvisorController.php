@@ -19,7 +19,10 @@ class DashboardAdvisorController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        //Obtener el id del asesor
+        $UserName = [
+            'name' => Auth::user()->name,
+            'last_name' => Auth::user()->last_name
+        ];        //Obtener el id del asesor
         $academicAdvisor = AcademicAdvisor::where('user_id', $userId)->value('id');
         // Obtener comentarios del asesor
         $comments = Comment::with('project')
@@ -34,7 +37,9 @@ class DashboardAdvisorController extends Controller
         // Contar la cantidad de proyectos aprobados
         $approvedProjects = Project::where('status', 'Aprobado')->count();
 
-        $totalComments = Comment::where('academic_advisor_id', $academicAdvisor)->count();
+        $totalComments = Comment::where('academic_advisor_id', $academicAdvisor)
+            ->where('status', 1)
+            ->count();
 
         //Trae los datos de los asesorados
         $internUserIds = Intern::where('academic_advisor_id', $academicAdvisor)->pluck('user_id');
@@ -49,7 +54,8 @@ class DashboardAdvisorController extends Controller
             'comments' => $comments,
             'Intern' => $Intern,
             'totalComments' => $totalComments,
-            'notificaciones' => $notificaciones, 
+            'notificaciones' => $notificaciones,
+            'UserName' => $UserName,
         ]);
     }
 

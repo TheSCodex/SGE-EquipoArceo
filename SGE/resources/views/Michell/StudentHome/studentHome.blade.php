@@ -74,7 +74,27 @@
                     </div>
                     <div>
                         @if (isset($mensaje))
-                            <p>{{ $mensaje }}</p>
+                            @if( count($notificaciones) > 0)
+                                @foreach ($notificaciones as $notificacion)
+                                    <p>{{ $notificacion->data['message'] }}</p>
+                                    <div class="w-[90%] flex justify-around py-[.5vw] ">
+                                        <form method="POST" id="AcceptCollab"
+                                            action="{{ route('projects.AcceptCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-primaryColor text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Aceptar</button>
+                                        </form>
+                                        <form method="POST" id="DeleteCollab"
+                                            action="{{ route('projects.DeleteCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Rechazar</button>
+                                        </form>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>{{ $mensaje }}</p>
+                            @endif
                         @else
                             <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
                         @endif
@@ -133,7 +153,7 @@
                     @if ($advisor && $advisor->academicAdvisor)
                         <p>{{ $advisor->academicAdvisor->user->name }}</p>
                     @else
-                        <p>Sin asesor académico</p>
+                        <p class="text-[#888] w-full text-center">Sin asesor académico</p>
                     @endif
 
                 </div>
@@ -186,7 +206,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-1   md:grid-cols-1 gap-3 h-[280px] ">
+            <div class="grid grid-cols-1  md:grid-cols-1 gap-3 h-[230px] ">
                 <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
                     @if ($penalty === null)
                         <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!

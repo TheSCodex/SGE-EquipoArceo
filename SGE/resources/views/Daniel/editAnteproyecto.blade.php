@@ -219,7 +219,7 @@
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Objetivo General:</h2>
-                    <textarea name="objetivo_general" rows="4" placeholder="Define el objetivo general del anteproyecto" required
+                    <textarea name="objetivo_general" rows="8" placeholder="Define el objetivo general del anteproyecto" required
                         class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('objetivo_general', $project->description) }}</textarea><br>
                     @error('objetivo_general')
                         <div style='color:red'>{{ $message }}</div>
@@ -227,7 +227,7 @@
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Planteamiento del problema:</h2>
-                    <textarea name="planteamiento" rows="4"
+                    <textarea name="planteamiento" rows="8"
                         placeholder="Exponen los aspectos, elementos y relaciones del problema de tu proyecto." required
                         class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('planteamiento', $project->problem_statement) }}</textarea><br>
                     @error('planteamiento')
@@ -236,7 +236,7 @@
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-1 font-medium">Justificación:</h2>
-                    <textarea name="Justificacion" rows="4"
+                    <textarea name="Justificacion" rows="8"
                         placeholder="Escribe tu justificación, debe manifestarse de manera clara y precisa del por qué y para qué se va llevar a cabo el estudio. Incluye causas y propósitos que motivan la investigación. Contesta las preguntas: ¿Cuáles son los beneficios que este trabajo proporcionará? ¿Quiénes serán los beneficiados? ¿Cuál es su utilidad?"
                         required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('Justificacion', $project->project_justificaction) }}</textarea>
                     @error('Justificacion')
@@ -245,7 +245,7 @@
                 </div>
                 <div class="w-[97%]">
                     <h2 class="font-roboto mb-4 m font-medium">Actividades a realizar:</h2>
-                    <textarea name="activities" rows="4"
+                    <textarea name="activities" rows="16"
                         placeholder="Enlista las actividades que vas a llevar a cabo de manera ordenada." required
                         class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities', $project->activities_to_do) }}</textarea><br>
                     @error('activities')

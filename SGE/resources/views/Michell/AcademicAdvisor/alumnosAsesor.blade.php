@@ -2,8 +2,10 @@
 @section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
+
+    <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+
             <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
                 <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
 
@@ -48,6 +50,7 @@
                                 <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Estado
                                 </th>
+
                                 <th class="px-6 py-3 text-xs font-bold tracking-wider text-left uppercase text-black-500">
                                     Amonestacion</th>
                                 <th
@@ -71,6 +74,12 @@
                                             {{ $intern->penalization->penalty_name ?? 'N/A' }}</td>
                                         <td>
                                             <div class="flex justify-center gap-3">
+                                                @if ($intern->project_id)
+                                                <a href="{{ route('anteproyecto-Asesor.index', $intern->project_id) }}"
+                                                    class="px-4 py-1 font-bold text-white rounded bg-[#0FA987] hover:bg-[#185c4d]">
+                                                    Anteproyecto
+                                                </a>
+                                                @endif
                                                 <button id="editBtn" type="button" data-toggle="modal"
                                                     data-target="#getSancion{{ $user->id }}"
                                                     class="px-4 py-1 font-bold text-white rounded bg-[#3E5366] hover:bg-[#212c36]">
@@ -98,6 +107,7 @@
                                                     </button>
                                                 </form>
 
+
                                                 {{-- <form action="{{ route('intern.destroy', $intern->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -116,18 +126,37 @@
                                                         <div class="modal-content  w-[24%]">
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
-                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">Generar
-                                                                    Sancion para el estudiante
+                                                                <h5 class="ml-2" id="modalAgregarEstudianteLabel">¿Desea
+                                                                    generar la
+                                                                    Sancion para el estudiante?
                                                                 </h5>
-                                                                <button type="button"
-                                                                    class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                    id="clo" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"
+                                                                        stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00" height="32.00"
+                                                                                rx="16" fill="#ff0000"
+                                                                                strokewidth="0">
+                                                                            </rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke="#7a6767"
+                                                                            stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
                                                                 </button>
                                                             </div>
 
                                                             <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
-                                                                <form target="_blank" action="{{ route('download.sancion', $user->id) }}"
+                                                                <form target="_blank"
+                                                                    action="{{ route('download.sancion', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('PUT')
@@ -149,7 +178,9 @@
                                                                             onchange="toggleServiceHours(this)">
                                                                             <option value="1">Amonestación escrita
                                                                             </option>
-                                                                            <option value="2">Amonestación con horas de
+                                                                            <option value="2">Amonestación con horas
+
+                                                                                de
                                                                                 labor social</option>
                                                                             <option value="3">Cancelación de Estadía
                                                                             </option>
@@ -168,8 +199,15 @@
                                                                         <p class="p-2 text-red">{{ $error }}
                                                                         </p>
                                                                     @endforeach
-                                                                    <button type="submit"
-                                                                        class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
+                                                                        </button>
+                                                                    </div>
+
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -186,14 +224,29 @@
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
                                                                 <h5 class="ml-2" id="modalAgregarEstudianteLabel">
-                                                                    Generar
-                                                                    Carta de Aprobacion de Memoria
+                                                                    ¿Desea generar la
+                                                                    Carta de Aprobacion de Memoria?
                                                                 </h5>
-                                                                <button type="button"
-                                                                    class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                    id="clo" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        stroke="#ffffff" stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00"
+                                                                                height="32.00" rx="16"
+                                                                                fill="#ff0000" strokewidth="0"></rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke="#7a6767" stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
                                                                 </button>
                                                             </div>
 
@@ -204,8 +257,14 @@
                                                                     @csrf
 
 
-                                                                    <button type="submit"
-                                                                        class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
+                                                                        </button>
+                                                                    </div>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -222,14 +281,29 @@
                                                             <div
                                                                 class="flex items-center justify-between p-3 font-bold bg-white rounded-tl-2xl rounded-tr-2xl">
                                                                 <h5 class="ml-2" id="modalAgregarEstudianteLabel">
-                                                                    Generar
-                                                                    Carta de Digitalizacion de Memoria
+                                                                    ¿Desea generar la
+                                                                    Carta de Digitalizacion de Memoria?
                                                                 </h5>
-                                                                <button type="button"
-                                                                    class="flex items-center justify-center w-6 h-6 text-white rounded-full bg-red"
-                                                                    id="clo" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
+                                                                <button type="button" id="clo" class="w-10 h-10"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <svg fill="#ffffff" width="30px" height="30px"
+                                                                        viewBox="0 0 32.00 32.00" version="1.1"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        stroke="#ffffff" stroke-width="1.088">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            <rect x="0" y="0" width="32.00"
+                                                                                height="32.00" rx="16"
+                                                                                fill="#ff0000" strokewidth="0"></rect>
+                                                                        </g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke="#7a6767" stroke-width="1.6"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path
+                                                                                d="M16 0c-8.836 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 30.032c-7.72 0-14-6.312-14-14.032s6.28-14 14-14 14 6.28 14 14-6.28 14.032-14 14.032zM21.657 10.344c-0.39-0.39-1.023-0.39-1.414 0l-4.242 4.242-4.242-4.242c-0.39-0.39-1.024-0.39-1.415 0s-0.39 1.024 0 1.414l4.242 4.242-4.242 4.242c-0.39 0.39-0.39 1.024 0 1.414s1.024 0.39 1.415 0l4.242-4.242 4.242 4.242c0.39 0.39 1.023 0.39 1.414 0s0.39-1.024 0-1.414l-4.242-4.242 4.242-4.242c0.391-0.391 0.391-1.024 0-1.414z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
                                                                 </button>
                                                             </div>
                                                             <div class="p-3 bg-white rounded-bl-2xl rounded-br-2xl">
@@ -262,9 +336,15 @@
                                                                             </option>
                                                                         </select>
                                                                     </div>
+                                                                    <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="submit"
+                                                                            class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
+                                                                        </button>
+                                                                    </div>
 
-                                                                    <button type="submit"
-                                                                        class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Generar</button>
                                                                 </form>
                                                             </div>
                                                         </div>

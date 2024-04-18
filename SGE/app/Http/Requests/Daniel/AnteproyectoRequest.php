@@ -37,7 +37,7 @@ class AnteproyectoRequest extends FormRequest
             'advisor_position' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
             'email_advisor' => 'bail|required|email',
             'Phone_advisor' => 'bail|required|min:8',
-            'position_student' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
+            'position_student' => 'bail|required|regex:/^[\pL\s&.,-]+$/u',
             'name_proyect' => 'bail|required|regex:/^[\pL\s&.,-]+$/u',
             'objetivo_general' => 'bail|required|string',
             'planteamiento' => 'bail|required|string',
