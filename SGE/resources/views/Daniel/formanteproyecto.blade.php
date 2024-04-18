@@ -298,13 +298,13 @@
                     <textarea name="activities" rows="16"
                         placeholder=
                         "1. Investigación y análisis de requisitos del sistema. 
-                        2. Diseño de la arquitectura del sistema y la interfaz de usuario. 
-                        3. Desarrollo de la base de datos para el almacenamiento de información de libros y usuarios.
-                        4. Implementación de las funcionalidades principales del sistema, incluyendo la búsqueda, préstamo y devolución de libros.
-                        5. Pruebas unitarias y de integración para garantizar el correcto funcionamiento del sistema.
-                        6. Despliegue del sistema en un entorno de producción y capacitación del personal de la biblioteca en su uso.
-                        7. Evaluación del sistema por parte de los usuarios y ajustes según retroalimentación recibida.
-                        8. Documentación completa del sistema para futuras referencias y mantenimiento."
+2. Diseño de la arquitectura del sistema y la interfaz de usuario. 
+3. Desarrollo de la base de datos para el almacenamiento de información de libros y usuarios.
+4. Implementación de las funcionalidades principales del sistema, incluyendo la búsqueda, préstamo y devolución de libros.
+5. Pruebas unitarias y de integración para garantizar el correcto funcionamiento del sistema.
+6. Despliegue del sistema en un entorno de producción y capacitación del personal de la biblioteca en su uso.
+7. Evaluación del sistema por parte de los usuarios y ajustes según retroalimentación recibida.
+8. Documentación completa del sistema para futuras referencias y mantenimiento."
                         required class="w-full border-lightGray border-2 px-4 py-3 rounded-md p-2">{{ old('activities') }}</textarea><br>
                     @error('activities')
                         <div style='color:red'>{{ $message }}</div>
