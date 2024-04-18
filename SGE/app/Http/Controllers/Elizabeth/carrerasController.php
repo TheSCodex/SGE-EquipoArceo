@@ -18,6 +18,26 @@ class carrerasController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function searchCareers(Request $request)
+    {
+
+        $query = $request->input('query');
+        
+        $careers = Career::where('name', 'like', '%' . $query . '%')
+        ->orWhereHas('academy', function ($academiesQuery) use ($query) {
+            $academiesQuery->where('name', 'like', '%' . $query . '%');
+        })->paginate(5);
+        
+        $academies = Academy::where('name', 'like', '%' . $query . '%')
+        ->orWhereHas('careers', function ($careersQuery) use ($query) {
+            $careersQuery->where('name', 'like', '%' . $query . '%');
+        })->paginate(10);
+
+        // Cargar la vista y pasar los datos
+        return view('Elizabeth.cruds.carreras', compact('careers','academies'));
+
+
+    }
     public function index()
 {
     $careers = Career::paginate(10);

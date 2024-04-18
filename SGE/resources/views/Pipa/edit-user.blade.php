@@ -20,7 +20,7 @@
         <div class="w-full flex flex-col space-y-2 ">
             <div class="flex md:flex-row flex-col items-center md:items-start justify-around">
                 <div class="space-y-2">
-                    <p class="text-sm">Nombre</p>
+                    <p class="space-y-2">Nombre</p>
                     <input type="text" name="name" value="{{ $user->name }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Nombre">
                     @error('name')
                         <p class="text-[#ff0000] text-sm">
@@ -127,7 +127,7 @@
                             <option disabled value="">Seleccionar un grupo</option>
                             <option value="noNecesario" @if ($group == null) selected @endif>El rol seleccionado no requiere seleccionar un grupo</option>
                             @foreach($groups as $groupOption)
-                                <option value="{{ $groupOption->id }}" {{ $user->interns?->group->id == $groupOption->id ? 'selected' : '' }}>{{ $groupOption->name }}</option>
+                                <option value={{ $groupOption?->id }} {{ $user?->interns?->group?->id == $groupOption?->id ? 'selected' : '' }}>{{ $groupOption->name }}</option>
                             @endforeach
                         </select>
                         @error('group_id')
@@ -179,7 +179,7 @@
                 const option = document.createElement('option');
                 option.value = group.id;
                 option.textContent = group.name;    
-                option.selected = group.id === {{ $user->interns?->group->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
+                option.selected = group.id === {{ $user?->interns?->group?->id ?? 'null' }}; // Seleccionar el grupo actual del usuario si coincide con la lista filtrada
                 groupSelect.appendChild(option);
             });        
             toggleGroupSelection(true, true); // Habilitar selección de grupo con mensaje si es estudiante

@@ -57,7 +57,12 @@
     <div style="text-align: right; margin-top:20px; marger: 20px;">
 
         <p style="marger: 2px; margin-top:10px; font-size:12t; ">Cancún, Quintana Roo; a {{ date('d') - 1 }} de
-            {{ date('F') }} de
+            
+            <?php
+            setlocale(LC_TIME, 'spanish'); 
+            echo strftime('%B');
+            ?>
+             de
             {{ date('Y') }}
         </p>
         <p style="marger: 2px; margin-top:30px; position: relative;right:25px "><span
@@ -65,20 +70,20 @@
             </span>Autorización de digitalización.</p>
 
         <p style="marger: 2px; margin-top:2px; position:relative; right:125px"><span style=" font-weight: bold;">Of:
-            </span> {{'UTC/' . $division->initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
+            </span> {{'UTC/' . $division-> initials .'/M-' . ($getNumber ? $getNumber : $interns[0]->foolscapNumber) . '/' . date('Y')  }}</p>
     </div>
 
 
     <p
         style="line-height: 25px ;width: 100%; text-align:justify;width:100%; margin-top:20px; margin-bottom:10px; marger: 10px;line-height: none; ">
-        Se autoriza al (a) estudiante <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->name}} {{$student?->last_name}}<span style="color: white">..</span></span> del grupo <span style="text-decoration: underline"><span style="color: white">..</span> {{$interns[0]->Group}}<span style="color: white">..</span></span> con
+        Se autoriza al (a) estudiante <span style=" font-weight:bolder;"> {{$student?->name}} {{$student?->last_name}}</span> del grupo <span style="font-weight:bolder"> {{$group->name}}</span> con
         número de matrícula:
-        <span style="text-decoration: underline"><span style="color: white">..</span> {{$student?->identifier}}<span style="color: white">..</span></span> la digitalización de la MEMORIA en modalidad:
+        <span style="font-weight:bolder"> {{$student?->identifier}}</span> la digitalización de la MEMORIA en modalidad:
     </p>
 
     <div style="position: relative;height:1px">
         <div style="position: absolute; width: 250px; height:200px; top:50px; right:-5px">
-            <p > {{ $project?->name}}</p>
+            <p style="font-weight:bolder;"> {{ $project?->name}}</p>
         </div>
     
     </div>
@@ -86,7 +91,7 @@
     <div style="position:absolute; width:100% ; margin: 10px; left:95;">
         <table style="width: 75%; border-collapse: collapse; border: 0.5px solid black;">
             <tr>
-                <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 1 ? 'X' : '' }}</td>
+                <td style="width:34px; text-align: center; flex  border:0.5px solid black;">{{$motivo == 1 ? 'X' : '' }}</td>
                 <td
                     style="padding-left:8px;font-weight: normal; text-align:justify; border: 0.5px solid black;font-weight: 700; padding-bottom: 15px;">
                     Tradicional</td>
@@ -171,14 +176,14 @@
         <div style="position:absolute;  width: 250px ; right :-20px; margin: 10px;">
             <p style="text-align: center; font-weight: 700;">COMISIÓN ACADÉMICA</p>
             <p style="text-align: center; font-weight:100 ;margin-top: 40px">____________________________________</p>
-            <p style="text-align: center; font-size:12pt;">{{ $director?->name . ' ' . $director?->last_name}} director(a) {{($division?->name)}} </br>
+            <p style="text-align: center; font-size:12pt;"> Presidente {{ $president?->name . ' ' . $president?->last_name}} de la {{($division?->name)}} </br>
                 Dirección</p>
         </div>
     </div>
 
     <div style="margin-top: 60px; width:100%; padding:50px; position: absolute; right:-75">
         <table style="width: 85%; border-collapse: collapse; border: 0.5px solid black; font-size: 12px;">
-            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: {{$docRevision->updated_at->format('j \d\e F \d\e\l Y')}}</td>
+            <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: {{ $docRevision->updated_at->formatLocalized('%e de %B del %Y') }}</td>
             <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. {{ $docRevision->revision_number }}</td>
             <td style=" padding:2px; text-align: center; border: 0.5px solid black;">{{ $docRevision->revision_id }}</td>
 

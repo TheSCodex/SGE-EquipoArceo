@@ -6,16 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Intern;
 use App\Models\User;
+use App\Models\AcademicAdvisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ObservationsController extends Controller
 {
     public function index()
     {
+        if (Gate::denies('leer-observaciones')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         // Obtenemos el ID del usuario autenticado
         $userId = Auth::id();
-
         // Buscamos el intern relacionado con el usuario autenticado
         $intern = Intern::where('user_id', $userId)->first();
         
@@ -32,15 +36,16 @@ class ObservationsController extends Controller
             // Buscamos los comentarios normales relacionados con el project_id del intern
             $normalComments = Comment::where('project_id', $projectId)->get();
 
-            // Obtenemos el nombre del usuario logeado
-            $loggedUserName = Auth::user()->name;
-
-            // Iteramos sobre los comentarios normales y asignamos el nombre del usuario logeado si está asociado
+            // Iteramos sobre los comentarios normales y asignamos el nombre del usuario correspondiente
             foreach ($normalComments as $comment) {
                 if ($comment->interns_id) {
-                    $comment->loggedUserName = $loggedUserName;
+                    // Si el comentario es de un estudiante, obtenemos su nombre
+                    $student = User::find($comment->interns_id);
+                    $comment->loggedUserName = $student ? $student->name : "Estudiante Desconocido";
                 } else {
-                    $comment->loggedUserName = "Asesor";
+                    // Si el comentario es del asesor, obtenemos su nombre a partir del academic_advisor_id
+                    $advisor = AcademicAdvisor::find($academicAdvisorId);
+                    $comment->loggedUserName = $advisor ? User::find($advisor->user_id)->name : "Asesor Desconocido";
                 }
             }
 
@@ -51,7 +56,8 @@ class ObservationsController extends Controller
             ]);
         } else {
             // Si no se encuentra un intern relacionado con el usuario autenticado, retorna un error o redirecciona según la lógica de tu aplicación
-            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');        }
+            return redirect()->route('/estudiante')->with('error', 'No se encontró intern relacionado con este usuario.');
+        }
     }
 
     public function create()
@@ -61,6 +67,9 @@ class ObservationsController extends Controller
 
     public function store(Request $request)
     {
+        if (Gate::denies('responder-observaciones')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         // Validar el formulario
         $request->validate([
             'content' => 'required|string',
@@ -95,7 +104,7 @@ class ObservationsController extends Controller
                 }
                 $comment->save();
 
-                return redirect()->back()->with('success', 'Comentario guardado exitosamente.');
+                return redirect()->back()->with('Save', 'Comentario guardado exitosamente.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }

@@ -62,12 +62,12 @@
                         <td>                    
                             <a href="{{route('panel-users.show', $user->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer ">
+                        <td class="font-roboto py-5 cursor-pointer ">
                             <a href="{{ route('panel-users.edit', $user->id) }}" class="flex justify-center">
                                 <img src="/img/logos/pencil.svg">
                             </a>
                         </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <td class="font-roboto py-5 cursor-pointer">
                             <form class="flex justify-start delete-form" data-user-name="{{ $user->name }} {{ $user->last_name }}" data-user-id="{{ $user->id }}" action="{{ route('panel-users.destroy', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -120,10 +120,10 @@
                         $counter = ($users->currentPage() - 1) * $users->perPage() + $loop->index + 1;
                     @endphp
                     <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
-                        <td class="font-roboto font-bold py-5 cursor-pointer pl-5">{{ $counter }}</td>
-                        <td class="font-roboto font-bold py-5 pl-5">{{ $user->name }} {{ $user->last_name }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $user->email }}</td>
-                        <td class="font-roboto font-bold py-5">
+                        <td class="font-roboto py-5 cursor-pointer pl-5">{{ $counter }}</td>
+                        <td class="font-roboto py-5 pl-5">{{ $user->name }} {{ $user->last_name }}</td>
+                        <td class="font-roboto py-5">{{ $user->email }}</td>
+                        <td class="font-roboto py-5">
                             @if ($user->role->title == "estudiante")
                                 Estudiante
                             @elseif ($user->role->title == "asesorAcademico")
@@ -140,8 +140,8 @@
                                 {{$user->role->title}}
                             @endif
                         </td>
-                        <td class="font-roboto font-bold py-5 text-center">{{ $user->identifier }}</td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
+                        <td class="font-roboto py-5 text-center">{{ $user->identifier }}</td>
+                        <td class="font-roboto py-5 cursor-pointer">
                             <a href="{{ route('panel-users.show', $user->id )}}" class="flex justify-center">
                                 <img src="/img/ojoGreen.svg" class="w-7">
                             </a>
