@@ -399,6 +399,15 @@
                     });
                 </script>
             @endif
+            @if (session()->has('Comment'))
+                <script>
+                    Swal.fire({
+                        title: '!Añadido!',
+                        text: `¡Tu observacion ha sido añadida exitosamente!`,
+                        icon: 'success',
+                    });
+                </script>
+            @endif
             @if (session()->has('Edit'))
                 <script>
                     Swal.fire({
