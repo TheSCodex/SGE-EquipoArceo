@@ -74,7 +74,27 @@
                     </div>
                     <div>
                         @if (isset($mensaje))
-                            <p>{{ $mensaje }}</p>
+                            @if( count($notificaciones) > 0)
+                                @foreach ($notificaciones as $notificacion)
+                                    <p>{{ $notificacion->data['message'] }}</p>
+                                    <div class="w-[90%] flex justify-around py-[.5vw] ">
+                                        <form method="POST" id="AcceptCollab"
+                                            action="{{ route('projects.AcceptCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-primaryColor text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Aceptar</button>
+                                        </form>
+                                        <form method="POST" id="DeleteCollab"
+                                            action="{{ route('projects.DeleteCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Rechazar</button>
+                                        </form>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>{{ $mensaje }}</p>
+                            @endif
                         @else
                             <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
                         @endif
