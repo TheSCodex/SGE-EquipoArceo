@@ -201,7 +201,6 @@ Route::middleware('auth')->group(function () {
 
     // El apartado de reportes para la directora 
     // comentado pq comparte ruta con el de asistente
-    // Route::get('/reportes', [ReportsController::class, "directorIndex"])->name('reportes-director')->middleware('roleorcan:director,leer-reportes');
 
     // El acceso al CRUD/Listado de documentos para la directora
     Route::resource('/director/documentos', DocumentsController::class)->names('documentos-director')->middleware('roleorcan:director,gestionar-documentos');

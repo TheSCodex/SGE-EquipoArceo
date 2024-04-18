@@ -399,22 +399,30 @@ class UserController extends Controller
                                 $user = new \App\Models\User();
                                 $user->name = $name;
                                 $user->last_name = $last_name;
-                                $user->identifier = $identifier;
-                                $user->email = $userData['matricula'] . '@utcancun.edu.mx';
+                                $emailApi = $userData['matricula'] . '@utcancun.edu.mx';
+                                $user->email = $emailApi;
+                                $user->identifier = $userData['matricula'];
                                 $user->rol_id = 1;
                                 $randomPassword = Str::random(8);
-                                $user->save();
-                                try {
-                                    \App\Models\Intern::create([
-                                        'user_id' => $user->id,
-                                        'group_id' => $groupId,
-                                        'career_id' => $careerId,
-                                        'student_status_id' => 1
-                                    ]);
-                                } catch (\Exception $e) {
-                                    Log::error('Error al crear el usuario: ' . $e->getMessage());
-                                    session()->flash('error', 'Error al crear el usuario:' . $e->getMessage());
-                                    return redirect()->route('panel-users.create');
+                                $user->password = bcrypt($randomPassword);
+                                if (!$this->checkInternetConnection()) {
+                                    session()->flash('error', 'No se pudo enviar el correo electrónico a la dirección ' . $emailApi . ' debido a la falta de conexión a Internet.');
+                                    return redirect()->route('panel-users.index');
+                                } else {
+                                    $user->notify(new \App\Notifications\NewUserPasswordNotification($randomPassword, $emailApi, $name, $last_name));
+                                    $user->save();
+                                    try {
+                                        \App\Models\Intern::create([
+                                            'user_id' => $user->id,
+                                            'group_id' => $groupId,
+                                            'career_id' => $careerId,
+                                            'student_status_id' => 1
+                                        ]);
+                                    } catch (\Exception $e) {
+                                        Log::error('Error al crear el usuario: ' . $e->getMessage());
+                                        session()->flash('error', 'Error al crear el usuario:' . $e->getMessage());
+                                        return redirect()->route('panel-users.create');
+                                    }
                                 }
                             } catch (\Exception $e) {
                                 Log::error('Error al crear el usuario: ' . $e->getMessage());

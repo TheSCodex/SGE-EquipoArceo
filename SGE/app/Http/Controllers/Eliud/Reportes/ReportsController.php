@@ -16,6 +16,7 @@ use App\Models\lastDocCreated;
 use App\Models\Project;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,10 @@ class ReportsController extends Controller
 {
     public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         if ($request->input('tipo') == '2') {
 
             $request->validate([
@@ -124,6 +129,10 @@ class ReportsController extends Controller
 
     public function printSansion()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $path = public_path('img\Eliud\docs\Sansion.pdf');
 
         return response()->make(file_get_contents($path), 200, [
@@ -134,6 +143,9 @@ class ReportsController extends Controller
 
     public function printCartaAprobacion()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
 
         $path = public_path('img\Eliud\docs\CartAprobacion.pdf');
 
@@ -145,6 +157,10 @@ class ReportsController extends Controller
 
     public function printReportCartaDigitalizacion(Request $request, string $id, string $motivo = null)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $user = auth()->user();
         $motivo = $motivo ?? $request->input('motivo');
         $userData = User::find($user->id);
@@ -222,6 +238,10 @@ class ReportsController extends Controller
 
     public function printCartaMemoria()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $path = public_path('img\Eliud\docs\CartaMemoria.pdf');
 
         return response()->make(file_get_contents($path), 200, [
@@ -232,6 +252,10 @@ class ReportsController extends Controller
 
     public function printReportCartaAprobacion(string $id)
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+
         $user = auth()->user();
         $userData = User::find($user->id);
         $student = User::find($id);
@@ -280,6 +304,10 @@ class ReportsController extends Controller
      */
     public function directorIndex()
     {
+        if (Gate::denies('generar-reportes-documentos')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+        
         $files = FileHistory::all();
         $user = auth()->user();
         $userData = User::find($user->id);

@@ -63,8 +63,8 @@ class DocumentsController extends Controller
         $doc->update($request->all());
         $doc->save();
 
-        return redirect()->route('reportes-asistente') // Reemplaza 'nombre_ruta' con el nombre de la ruta a la que quieres redirigir
-            ->with('success', 'Document updated successfully.');
+        return redirect()->route('reportes-director')
+            ->with('success', 'Documento actualizado exitosamente.');
     }
     
 
