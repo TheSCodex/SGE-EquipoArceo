@@ -8,6 +8,7 @@ use App\Models\Intern;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Project_division;
+use Illuminate\Support\Facades\DB;
 
 class AcademicAdvisorController extends Controller
 {
@@ -24,7 +25,10 @@ class AcademicAdvisorController extends Controller
         $userId = auth()->user()->id;    
         $academicAdvisor = AcademicAdvisor::where('user_id', $userId)->first();    
         if ($academicAdvisor) {
-            $interns = Intern::where('academic_advisor_id', $academicAdvisor->id)->paginate(10);            
+            $interns = Intern::where('academic_advisor_id', $academicAdvisor->id)
+            ->where('student_status_id', 1)
+            ->paginate(10);
+            
             return view('michell.academicadvisor.alumnosAsesor', compact('interns'));
         }    
         return null;
