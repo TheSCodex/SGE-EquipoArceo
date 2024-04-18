@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
 
     // ! No muevan esta ruta, ESA ES LA PANTALLA DE INICIO DEL ESTUDIANTE {{studentHome}}
     Route::get('/estudiante', [StudentController::class, "studentHome"])->name('inicio-estudiante')->middleware('role:estudiante');
+    Route::post('/estudiante/DelCollab/{id}', [ProjectsController::class, 'DeleteCollab'])->name('projects.DeleteCollab');
+    Route::post('/estudiante/AcceptCollab/{id}', [ProjectsController::class, 'AcceptCollab'])->name('projects.AcceptCollab');
 
     //Ruta de la vista del anteproyecto del estudiante
     Route::get('anteproyecto', [ProjectsController::class, 'index'])->name('anteproyecto')->middleware('role:estudiante, ver-anteproyecto');
@@ -214,8 +216,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/d-Generate/AprobacionView/{id}', [ReportsController::class, 'printReportCartaDigitalizacion'])->name('re-download.digitalizacion.director');
     Route::put('/docRevision/{id}', [DocumentsController::class, 'UpdateDocRevision'])->name('docRevision.update');
 
-    Route::get("observaciones/directora/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
-    Route::put('observaciones/directora/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
+    Route::get("observaciones/director/{id}", [ObservationsAcademicAdvisor::class, "index"])->name('observationsAnteproyectoDire');
+    Route::put('observaciones/director/{id}/update', [ObservationsAcademicAdvisor::class, 'update'])->name('observations.updateDirectora');
     //Ruta de la lista de los anteproyectos
     Route::get('director/anteproyectos', [ProjectsDirectorController::class, 'index'])->name('director-anteproyectos')->middleware('roleorcan:director,');
     Route::get('director/anteproyectos/{id}', [ProjectsDirectorController::class, 'view'])->name('director-anteproyectos.view')->middleware('roleorcan:director,');
@@ -268,7 +270,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('libros', BooksController::class)->names('libros-asistente')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
 
     // Ruta para el filtrado de libros (Igual podria quitarse aun no estoy seguro)
-    Route::post('libros/busqueda', [BooksController::class, 'search'])->name('libros.search')->middleware('roleorcan:asistenteDireccion,leer-lista-libros');
+    Route::get('/buscar/libros', [BooksController::class, 'searchBooks'])->name('search.books');
 
     Route::get('/Download/SancionView/{id}', [ReportsController::class, 'printReportSancion'])->name('download.sansion')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');
     Route::get('/Download/MemoriaView/{id}', [ReportsController::class, 'printReportCartaMemoria'])->name('download.memoria')->middleware('roleorcan:asistenteDireccion,generar-reportes-documentos');

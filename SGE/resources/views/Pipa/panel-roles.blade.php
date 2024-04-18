@@ -195,7 +195,7 @@
 
 </section>
 
-<!-- Funciones JavaScript -->g
+<!-- Funciones JavaScript -->
 <script>
     function togglePermissions(roleId) {
         var permissionsList = document.getElementById('permissions_' + roleId);

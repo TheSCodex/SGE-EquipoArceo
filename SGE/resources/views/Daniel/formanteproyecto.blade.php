@@ -68,6 +68,7 @@
                                                 class="result flex items-center justify-between bg-white rounded-lg shadow-md p-4 mb-2 hover:bg-gray-100">
                                                 <div class="flex items-center">
                                                     <input type="checkbox"
+                                                        onchange={updateSelectedIds()}
                                                         class="internCheckbox mr-4 h-6 w-6 rounded-full border-2 border-primaryColor focus:outline-none"
                                                         data-id="{{ $intern->user->id }}">
                                                     <div>
@@ -88,7 +89,7 @@
                                 <button type="button" class="bg-gray-300 text-gray-700 rounded-lg px-4 py-2 mr-2"
                                     id="closeModalButton">Cerrar
                                 </button>
-                                <input type="hidden" name="selectedIds" id="selectedIds">
+                                <input type="hidden" name="selectedIds" id="inputIds" >
                                 <button type="submit" class="bg-primaryColor text-white rounded-lg px-4 py-2">Enviar
                                     invitación</button>
                             </div>
@@ -325,6 +326,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    function updateSelectedIds() {
+        selectedIds = [];
+        document.querySelectorAll('.internCheckbox:checked').forEach(function(checkbox) {
+            selectedIds.push(checkbox.dataset.id);
+        });
+        document.getElementById('inputIds').value = selectedIds;
+        console.log(document.getElementById('inputIds').value)
+    }
+
         document.addEventListener('DOMContentLoaded', function() {
             const openModalButton = document.getElementById('openModalButton');
             const modal = document.getElementById('myModal');
