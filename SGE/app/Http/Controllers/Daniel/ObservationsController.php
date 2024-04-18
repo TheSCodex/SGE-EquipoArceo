@@ -67,9 +67,9 @@ class ObservationsController extends Controller
 
     public function store(Request $request)
     {
-        if (Gate::denies('responder-observaciones')) {
-            abort(403, 'No tienes permiso para acceder a esta sección.');
-        }
+        //if (Gate::denies('hacer-observaciones')) {
+        //    abort(403, 'No tienes permiso para acceder a esta sección.');
+        //}
         // Validar el formulario
         $request->validate([
             'content' => 'required|string',

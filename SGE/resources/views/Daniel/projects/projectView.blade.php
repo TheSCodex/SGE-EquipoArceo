@@ -213,7 +213,7 @@
                                 </p>
 
                                 <form class="w-full flex justify-end pt-1" id="reviewForm" method="POST"
-                                    action="{{ route('ForAse', ['id' => $project->id]) }}">
+                                    action="{{ route('ForRev', ['id' => $project->id]) }}">
                                     @csrf
                                     <button type="submit"
                                         class="bg-[#02AB82] text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw] text-sm ">Pasar
@@ -328,7 +328,7 @@
                             </div>
                         @endforeach
                         
-                        <form method="POST" action="{{ route('observationsAnteproyecto.store') }}"
+                        <form method="POST" action="{{ route('observationsAnteproyecto') }}"
                             class="relative w-full font-normal flex  h-[fit] self-end mb-[1vh]">
                             @csrf
 
