@@ -123,7 +123,9 @@ class ProjectsPresidentController extends Controller
         $AdvCommentersNames = User::whereIn("id", $userIds)->get();
 
         $InternIds = $comments->pluck('interns_id')->toArray();
-        $InternCommenters = User::whereIn("id", $InternIds)->get();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
 
         $project = Project::find($interns->project_id);
 
@@ -144,7 +146,7 @@ class ProjectsPresidentController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
 
         if (!$career || !$career->academy_id) {
-            return view('Daniel.presidenta.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
+            return view('Daniel.presidenta.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'UserInterns', 'CurrentUser', 'AdvCommenters','PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
@@ -153,9 +155,9 @@ class ProjectsPresidentController extends Controller
         //Reemplazar tan pronto como haya un modelo
 
         if (!$projectLikes) {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area'));
         } else {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area', 'projectLikes'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area', 'projectLikes'));
         }
     }
 
