@@ -265,7 +265,7 @@
                                                     @else
                                                         {{head(explode(' ', $Adv->name))}}
                                                         {{head(explode(' ', $Adv->last_name))}}
-                                                        <span class=' text-black opacity-[40%]'>(Presidente de la academia)</span>
+                                                        <span class=' text-black opacity-[40%]'>(Asesor academico)</span>
                                                     @endif
                                                 @endif  
                                             @endforeach
@@ -295,31 +295,18 @@
                                             @endif  
                                         @endforeach
                                     @else
-                                        @foreach ($InternCommenters as $InternCommenter)
-                                            @if($InternCommenter->id == $comment->interns_id)
-                                                @if($InternCommenter->id == $user->id)
-                                                    <span class="text-primaryColor">Tú</span>
-                                                @else
-                                                    {{head(explode(' ', $InternCommenter->name))}}
-                                                    {{head(explode(' ', $InternCommenter->last_name))}}
-                                                @endif
-                                                @if($InternCommenter->rol_id == 1)
-                                                    @if($InternCommenter->id != $user->id)
-                                                        
+                                        @foreach ($InternCommenters as $names)
+                                            @foreach ($UserInterns as $internRow)
+                                                @if($internRow->id == $comment->interns_id && $internRow->user_id == $names->id)
+                                                    @if($names->id == $user->id)
+                                                        <span class="text-primaryColor">Tú</span>
+                                                    @else
+                                                        {{head(explode(' ', $names->name))}}
+                                                        {{head(explode(' ', $names->last_name))}}
                                                         <span class=' text-black opacity-[40%]'>(Estudiante)</span>
                                                     @endif
-                                                @elseif($InternCommenter->rol_id == 2)
-                                                    <span class=' text-black opacity-[40%]'>(Asesor)</span>
-                                                @elseif($InternCommenter->rol_id == 3)
-                                                    <span class=' text-black opacity-[40%]'>(Presidente de academia)</span>
-                                                @elseif($InternCommenter->rol_id == 4)
-                                                    <span class=' text-black opacity-[40%]'>(Drectora de división)</span>
-                                                @elseif($InternCommenter->rol_id == 5)
-                                                    <span class=' text-black opacity-[40%]'>(Asistente de dirección)</span>
-                                                @elseif($InternCommenter->rol_id == 6)
-                                                    <span class=' text-black opacity-[40%]'>(Administrador)</span>
-                                                @endif
-                                            @endif  
+                                                @endif  
+                                            @endforeach
                                         @endforeach
                                     @endif
                                 </p>
