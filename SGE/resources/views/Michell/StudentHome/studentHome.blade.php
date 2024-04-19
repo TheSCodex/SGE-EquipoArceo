@@ -96,7 +96,7 @@
                                 <p>{{ $mensaje }}</p>
                             @endif
                         @else
-                            <p>Día {{ $TotalDeDias }} de {{ $diaActual }}</p>
+                            <p>Día {{ $diaActual }} de {{ $TotalDeDias }}</p>
                         @endif
                     </div>
                 </div>
