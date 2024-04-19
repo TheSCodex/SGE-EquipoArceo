@@ -68,7 +68,9 @@ class ProjectDraftController extends Controller
         $AdvCommentersNames = User::whereIn("id", $userIds)->get();
 
         $InternIds = $comments->pluck('interns_id')->toArray();
-        $InternCommenters = User::whereIn("id", $InternIds)->get();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
         $project = Project::find($interns->project_id);
         
     
@@ -89,7 +91,7 @@ class ProjectDraftController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
         
         if(!$career || !$career->academy_id){
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters','interns' , 'AdvCommenters', 'CurrentUser', 'UserInterns','user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
@@ -98,9 +100,9 @@ class ProjectDraftController extends Controller
  //Reemplazar tan pronto como haya un modelo
         
         if (!$projectLikes) {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters', 'CurrentUser'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters', 'CurrentUser'));
         } else {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division', 'area', 'userIds', 'AdvCommenters', 'CurrentUser'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division', 'area', 'userIds', 'AdvCommenters', 'CurrentUser'));
         }
     }
 

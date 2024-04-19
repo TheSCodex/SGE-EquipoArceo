@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Intern;
 use App\Models\Project;
+use App\Models\AcademicAdvisor; // Importa el modelo User
+use App\Models\User; // Importa el modelo User
 
 class ObservationsAcademicAdvisor extends Controller
 {
@@ -32,6 +34,24 @@ class ObservationsAcademicAdvisor extends Controller
         $normalComments = $comments->filter(function ($comment) {
             return is_null($comment->interns_id) || $comment->interns_id === 1; // Ajustar el valor según corresponda
         });
+
+        // Iteramos sobre los comentarios normales y asignamos el nombre del usuario correspondiente
+        foreach ($normalComments as $comment) {
+            if ($comment->interns_id) {
+                // Si el comentario es de un estudiante, obtenemos su nombre
+                $student = User::find($comment->interns_id);
+                $comment->loggedUserName = $student ? $student->name : "Estudiante Desconocido";
+            } else {
+                // Si el comentario es del asesor, obtenemos su nombre a partir del academic_advisor_id
+                $advisor = AcademicAdvisor::find($comment->academic_advisor_id);
+                if ($advisor) {
+                    $user = User::find($advisor->user_id);
+                    $comment->loggedUserName = $user ? $user->name . ' ' . $user->last_name : "Asesor Desconocido";
+                } else {
+                    $comment->loggedUserName = "Asesor Desconocido";
+                }
+            }
+        }
 
         return view('Daniel.asesor.ObservationsAdvisor', compact('project', 'tutorComment', 'normalComments'));
     }
@@ -85,7 +105,10 @@ class ObservationsAcademicAdvisor extends Controller
             $comment->status = 3;
             $comment->save();
 
-            return redirect()->back()->with('success', 'El comentario ha sido marcado como resuelto y enviado a revisión.');
+            // Buscar y actualizar todos los comentarios relacionados
+            Comment::where('parent_comment_id', $comment->id)->update(['status' => 3]);
+
+            return redirect()->back()->with('success', 'El comentario y sus comentarios relacionados han sido marcados como resueltos y enviados a revisión.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocurrió un error al marcar el comentario como resuelto y enviar a revisión: ' . $e->getMessage());
         }
