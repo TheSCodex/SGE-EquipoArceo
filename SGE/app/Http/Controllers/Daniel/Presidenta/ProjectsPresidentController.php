@@ -82,6 +82,7 @@ class ProjectsPresidentController extends Controller
     public function View(project $id)
     {
         $userId = Auth::id();
+        $CurrentUser = $userId;
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
 
         $interns = Intern::where("project_id", $id->id)->first();
@@ -109,8 +110,22 @@ class ProjectsPresidentController extends Controller
         }
 
         $comments = Comment::where("project_id", $projectId)->get();
-        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();
+
+        $DirIds = $comments->pluck('director_id')->toArray();
+        $DirCommenters = User::whereIn("id", $DirIds)->get();
+
+        $PrezIds = $comments->pluck('president_id')->toArray();
+        $PrezCommenters = User::whereIn("id", $PrezIds)->get();
+
+        $AdvIds = $comments->pluck('academic_advisor_id')->toArray();
+        $AdvCommenters = AcademicAdvisor::whereIn("id", $AdvIds)->get();
+        $userIds = $AdvCommenters->pluck('user_id')->toArray();
+        $AdvCommentersNames = User::whereIn("id", $userIds)->get();
+
+        $InternIds = $comments->pluck('interns_id')->toArray();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
 
         $project = Project::find($interns->project_id);
 
@@ -131,7 +146,7 @@ class ProjectsPresidentController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
 
         if (!$career || !$career->academy_id) {
-            return view('Daniel.presidenta.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'commenters', 'interns', 'user'));
+            return view('Daniel.presidenta.viewProject', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'UserInterns', 'CurrentUser', 'AdvCommenters','PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
@@ -140,9 +155,9 @@ class ProjectsPresidentController extends Controller
         //Reemplazar tan pronto como haya un modelo
 
         if (!$projectLikes) {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area'));
         } else {
-            return view('Daniel.presidenta.viewProject', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area', 'projectLikes'));
+            return view('Daniel.presidenta.viewProject', compact('comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'AdvCommenters', 'CurrentUser', 'InternCommenters','project', 'company', 'businessAdvisor', 'interns', 'user', 'career', 'division', 'area', 'projectLikes'));
         }
     }
 

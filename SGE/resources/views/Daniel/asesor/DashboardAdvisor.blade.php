@@ -23,8 +23,8 @@
                         @forelse($notificaciones as $notificacion)
                             <div class="flex items-center px-4 p-1 my-2 justify-between ">
                                 <img src="{{ asset('img/iconosDaniel/Group 1000004276.svg') }}" alt="Notificacion"
-                                    class="w-8 h-8 mr-2">
-                                <p class="text-sm font-roboto w-[85%]">{{ $notificacion->data['message'] }}</p>
+                                    class="w-8 h-8 mr-1">
+                                <p class="text-md font-semibold w-[85%]">{{ $notificacion->data['message'] }}</p>
                             </div>
                         @empty
                             <div class="flex items-center px-4 p-1 my-2 justify-center flex-col">

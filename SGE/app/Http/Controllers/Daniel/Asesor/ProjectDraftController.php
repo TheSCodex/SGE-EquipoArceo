@@ -27,9 +27,12 @@ class ProjectDraftController extends Controller
     public function index(project $id)
     {   
         $userId = Auth::id();
+        $CurrentUser = $userId;
         $AcadAdvi = AcademicAdvisor::where("user_id", $userId)->first();
         
+        
         $interns = Intern::where("project_id", $id->id)->first();
+        //dd($interns);
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
@@ -38,7 +41,6 @@ class ProjectDraftController extends Controller
         $projectId = $id->id;
         $project = Project::find($projectId);
 
-        $businessSector = null;
         $businessAdvisor = null;
         $company = null;
 
@@ -47,15 +49,27 @@ class ProjectDraftController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
-                $area = BusinessSector::find($company->business_sector_id);
                 //dd($company);
             }
         }
     
         $comments = Comment::where("project_id", $projectId)->get();
-        $commenterIds = $comments->pluck('academic_advisor_id')->toArray();
-        $commenters = AcademicAdvisor::whereIn("id", $commenterIds)->get();    
+        
+        $DirIds = $comments->pluck('director_id')->toArray();
+        $DirCommenters = User::whereIn("id", $DirIds)->get();
 
+        $PrezIds = $comments->pluck('president_id')->toArray();
+        $PrezCommenters = User::whereIn("id", $PrezIds)->get();
+
+        $AdvIds = $comments->pluck('academic_advisor_id')->toArray();
+        $AdvCommenters = AcademicAdvisor::whereIn("id", $AdvIds)->get();
+        $userIds = $AdvCommenters->pluck('user_id')->toArray();
+        $AdvCommentersNames = User::whereIn("id", $userIds)->get();
+
+        $InternIds = $comments->pluck('interns_id')->toArray();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
         $project = Project::find($interns->project_id);
         
     
@@ -76,18 +90,18 @@ class ProjectDraftController extends Controller
         $career = Career::where("id", $interns->career_id)->first();
         
         if(!$career || !$career->academy_id){
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','commenters','interns','user'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact( 'project', 'company', 'businessAdvisor','comments','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters','interns' , 'AdvCommenters', 'CurrentUser', 'UserInterns','user'));
         }
         $academy = Academy::where("id", $career->academy_id)->first();
         $division = Division::where("id", $academy->division_id)->first();
 
         $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
  //Reemplazar tan pronto como haya un modelo
-        
+        //dd($division);
         if (!$projectLikes) {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'area'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user','career', 'division', 'userIds','AdvCommenters', 'CurrentUser'));
         } else {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'commenters', 'interns', 'user', 'career', 'division', 'projectLikes', 'area'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division',  'userIds', 'AdvCommenters', 'CurrentUser'));
         }
     }
 

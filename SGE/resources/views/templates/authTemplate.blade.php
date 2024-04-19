@@ -118,7 +118,11 @@
                     @endcan
                     @can('leer-anteproyectos-division')
                         <li>
+                            @if (auth()->user()->role->title == 'director')
+                            <a href="{{ route('director-anteproyectos')}}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
+                            @else
                             <a href="{{ route('anteproyectos-presidente')}}" class="hover:border-b-2 hover:border-primaryColor">Anteproyectos</a>
+                            @endif
                         </li>
                     @endcan
                     @can('generar-reportes-documentos')
