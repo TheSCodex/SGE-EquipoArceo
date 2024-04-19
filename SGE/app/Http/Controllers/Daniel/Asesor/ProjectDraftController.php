@@ -32,6 +32,7 @@ class ProjectDraftController extends Controller
         
         
         $interns = Intern::where("project_id", $id->id)->first();
+        //dd($interns);
         
         if(!$interns){
             return view('Daniel.asesor.AcademicAdvisorProjectDraft');
@@ -40,7 +41,6 @@ class ProjectDraftController extends Controller
         $projectId = $id->id;
         $project = Project::find($projectId);
 
-        $businessSector = null;
         $businessAdvisor = null;
         $company = null;
 
@@ -49,7 +49,6 @@ class ProjectDraftController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
-                $area = BusinessSector::find($company->business_sector_id);
                 //dd($company);
             }
         }
@@ -98,11 +97,11 @@ class ProjectDraftController extends Controller
 
         $projectLikes = DB::table('projects_likes')->where('id_academic_advisor', $userId)->where('id_projects', $projectId)->first();
  //Reemplazar tan pronto como haya un modelo
-        
+        //dd($division);
         if (!$projectLikes) {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters', 'CurrentUser'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('project', 'company', 'businessAdvisor', 'comments', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user','career', 'division', 'userIds','AdvCommenters', 'CurrentUser'));
         } else {
-            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division', 'area', 'userIds', 'AdvCommenters', 'CurrentUser'));
+            return view('Daniel.asesor.AcademicAdvisorProjectDraft', compact('comments', 'project', 'company', 'businessAdvisor', 'UserInterns','DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'career', 'division',  'userIds', 'AdvCommenters', 'CurrentUser'));
         }
     }
 
