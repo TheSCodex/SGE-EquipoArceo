@@ -91,15 +91,14 @@ Route::middleware('auth')->group(function () {
     Route::get("anteproyecto/edit/{id}", [ProjectsController::class, 'edit'])->name('editAnteproyecto.edit')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::put("anteproyecto/edit/{id}", [ProjectsController::class, 'update'])->name('UpdateAnteproyecto.update')->middleware('roleorcan:estudiante,editar-anteproyecto');
     Route::post("/invitar-colaboradores", [ProjectsController::class, 'Colaborar'])->name('invitar.colaboradores')->middleware('roleorcan:estudiante, colaborar-anteproyecto');
-    Route::match(['get', 'post'], 'EstatusCambiado', [ProjectsController::class, 'ForRev'])->name('ForRev');
-    Route::match(['get', 'post'], 'EstatusAsesoramiento', [ProjectsController::class, 'onAse'])->name('ForAse')->middleware('roleorcan: estudiante, asesorar-anteproyecto');
+    Route::match(['get', 'post'], 'EstatusCambiado', [ProjectsController::class, 'ForRev'])->name('ForRev')->middleware('roleorcan:estudiante, asesorar-anteproyecto');
+    //Route::match(['get', 'post'], 'EstatusAsesoramiento', [ProjectsController::class, 'onAse'])->name('ForAse')->middleware('roleorcan: estudiante, asesorar-anteproyecto');
 
 
 
     //Ruta para las observaciones del estudiante
     Route::get("anteproyecto/observaciones", [ObservationsController::class, "index"])->name('observationsAnteproyecto')->middleware('roleorcan:estudiante,leer-observaciones');
-    Route::post("observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store')->middleware('roleorcan:estudiante, hacer-observaciones');
-    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('comentarios.guardar')->middleware('roleorcan:estudiantes, responder-observaciones') ;
+    Route::post("anteproyecto/observaciones", [ObservationsController::class, "store"])->name('observationsAnteproyecto.store');
 
 
     // Vista del calendario del estudiante

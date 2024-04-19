@@ -30,10 +30,10 @@
                             $permissionsArray = json_decode($role->permissions, true);
                         @endphp
                         @foreach($permissionsArray as $permission => $value)
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" name="permissions[{{ $permission }}]" value="true" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ $value ? 'checked' : '' }}>
-                                <label for="{{ $permission }}" class="text-sm">{{ $permission }}</label>
-                            </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" name="permissions[]" value="{{ $permission }}" class="text-sm rounded border-lightGray border-2 px-4 py-3" {{ $value ? 'checked' : '' }}>
+                            <label for="{{ $permission }}" class="text-sm">{{ $permission }}</label>
+                        </div>
                         @endforeach
                     </div>
                 </div>

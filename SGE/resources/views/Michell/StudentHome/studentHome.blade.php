@@ -103,7 +103,7 @@
 
             </div>
 
-            <div class="bg-white rounded-md font-kanit py-8">
+            <div class="bg-white rounded-md font-kanit py-8 min-h-[300px]">
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
                     <div class="flex flex-col">
@@ -143,14 +143,14 @@
 
             <div class="space-y-2">
                 <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                    <div class="bg-primaryColor rounded-full p-1 ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="white" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
                     @if ($advisor && $advisor->academicAdvisor)
+                        <div class="bg-primaryColor rounded-full p-1 ml-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
                         <p>{{ $advisor->academicAdvisor->user->name }}</p>
                     @else
                         <p class="text-[#888] w-full text-center">Sin asesor académico</p>
@@ -166,7 +166,7 @@
             <div class="space-y-2">
                 <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
 
-                    @if ($empresarial)
+                    @if (!$empresarial)
                         <p class="text-center w-full text-[#888] ">Por el momento no tienes asesores.</p>
                     @else
                         @foreach ($empresarial as $item)
