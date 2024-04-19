@@ -103,7 +103,7 @@
 
             </div>
 
-            <div class="bg-white rounded-md font-kanit py-8">
+            <div class="bg-white rounded-md font-kanit py-8 min-h-[300px]">
                 <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
                     <div class="flex flex-col">
