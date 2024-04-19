@@ -25,7 +25,7 @@ use Mockery\Undefined;
 
 class ReportsController extends Controller
 {
-    public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null)
+    public function printReportSancion(Request $request, string $id, string $tipo = null, string $motivo = null, string $serviceHours = null, string $penaltyType = null, string $penaltyReason = null)
     {
         if (Gate::denies('generar-reportes-documentos')) {
             abort(403, 'No tienes permiso para acceder a esta sección.');
@@ -54,8 +54,8 @@ class ReportsController extends Controller
         $group = Group::find($interns->group_id);
         $docRevision = DocRevisions::find(4);
 
-        $penaltyType = $request->input('tipo');
-        $penaltyReason = $request->input('motivo');
+        $penaltyType = $tipo ?? $request->input('tipo');
+        $penaltyReason = $motivo ?? $request->input('motivo');
 
         $penaltyTypeMapping = [
             '1' => 'Amonestación escrita',
@@ -111,6 +111,8 @@ class ReportsController extends Controller
             'type' => $tipo,
             'reason' => $motivo,
             'serviceHours' => $serviceHours,
+            'penaltyType' => $penaltyType,
+            'penaltyReason' => $penaltyReason
         ];
 
         $authUser = auth()->user();
