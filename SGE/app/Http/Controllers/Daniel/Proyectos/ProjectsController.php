@@ -62,7 +62,7 @@ class ProjectsController extends Controller
         // dd($user);
 
         $comments = Comment::where("project_id", $intern->project_id)->get();
-        
+
         $DirIds = $comments->pluck('director_id')->toArray();
         $DirCommenters = User::whereIn("id", $DirIds)->get();
 
@@ -75,12 +75,18 @@ class ProjectsController extends Controller
         $AdvCommentersNames = User::whereIn("id", $userIds)->get();
 
         $InternIds = $comments->pluck('interns_id')->toArray();
-        $InternCommenters = User::whereIn("id", $InternIds)->get();
+        $UserInterns = Intern::whereIn('id', $InternIds)->get();
+        $UIIds = $UserInterns->pluck('user_id')->toArray();
+        $InternCommenters = User::whereIn("id", $UIIds)->get();
+        
+
+        //dd($InternCommenters);
+        
 
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
-        $userIds = $AdvCommenters->pluck('user_id')->toArray();
-        return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area','userIds','AdvCommenters'));
+            $userIds = $AdvCommenters->pluck('user_id')->toArray();
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area', 'userIds', 'AdvCommenters' ,'UserInterns'));
         }
 
         $academy = Academy::where("id", $career->academy_id)->first();
@@ -88,7 +94,7 @@ class ProjectsController extends Controller
 
         //dd($intern);
 
-        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division', 'userIds', 'AdvCommenters'));
+        return view('Daniel.Projects.ProjectView', compact('comments', 'project', 'company', 'businessAdvisor', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'intern', 'interns', 'user', 'career', 'division', 'userIds', 'AdvCommenters', 'UserInterns'));
     }
 
     public function ForRev(request $id)
@@ -114,7 +120,7 @@ class ProjectsController extends Controller
     {
         $userId = Auth::id();
         $notification = DatabaseNotification::find($id);
-        Intern::where('user_id', $userId)->update(['project_id'=>$notification->data['idProject']]);
+        Intern::where('user_id', $userId)->update(['project_id' => $notification->data['idProject']]);
         $notification->delete();
         return redirect()->back()->with('droppped', 'Notificacion eliminada con exito.');
     }
@@ -219,10 +225,10 @@ class ProjectsController extends Controller
         $intern->business_advisor_id = $businessAdvisor->id;
         $intern->save();
 
-        
-        if($request->selectedIds){
+
+        if ($request->selectedIds) {
             $idString = explode(',', $request->selectedIds);
-            foreach ( $idString as $id){
+            foreach ($idString as $id) {
                 $member = User::find($id);
                 $notification = $member->notify(new CollabInvitation($project));
             };

@@ -74,7 +74,7 @@
                     <tr>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">N°</th>
                         <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Grupo</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Carrera</th>
+                        <th class="text-[#ACACAC] font-roboto text-xs text-start pl-5">Carrera</th>
                         <th class="text-[#ACACAC] font-roboto text-xs px-5">Detalles</th>
                         <th class="text-[#ACACAC] font-roboto text-xs px-5">Editar</th>
                         <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
@@ -86,7 +86,7 @@
                         <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
                             <td class="font-roboto ld py-5 cursor-pointer pl-5">{{ $counter }}</td>
                             <td class="font-roboto py-5 text-start pl-5">{{$group->name}}</td>
-                            <td class="font-roboto py-5 text-start">{{$group->career->name}}</td>
+                            <td class="font-roboto py-5 text-start pl-5">{{$group->career->name}}</td>
                             <td class="font-roboto font-bold py-5 cursor-pointer">
                                 <a href="{{ route('panel-groups.show', $group->id )}}" class="flex justify-center">
                                     <img src="/img/ojoGreen.svg" class="w-7">
