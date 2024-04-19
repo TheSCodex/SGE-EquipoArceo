@@ -89,8 +89,12 @@
                             <p class="text-sm text-gray-500">Votos:
                                 {{ $project->like !== null ? $project->like : 0 }}
                             </p>
+                            @if($project->interns->first()->academicAdvisor)
                             <p class="text-sm text-gray-500">Asesor: {{ $project->interns->first()->academicAdvisor->user->name }}
                                 {{ $project->interns->first()->academicAdvisor->user->last_name }}</p>
+                            @else
+                            <p class="text-sm text-gray-500">Asesor: No tiene asesor</p>
+                            @endif
                             <div class="flex justify-end mt-4 space-x-2">
                                 <td>
                                     <a href="{{ route('anteproyecto-President.store', $project->id) }}"
@@ -130,8 +134,12 @@
                         <td class="font-roboto font-medium py-5 pl-5">{{ $project->name }}</td>
                         <td class="font-roboto font-medium py-5 pl-8">
                             {{ $project->like !== null ? $project->like : 0 }}</td>
+                            @if($project->interns->first()->academicAdvisor)
                         <td class="font-roboto font-medium py-5 pl-5">{{ $project->interns->first()->academicAdvisor->user->name }}
                             {{ $project->interns->first()->academicAdvisor->user->last_name }}</td>
+                            @else
+                            <td class="font-roboto font-medium py-5 pl-5">No tiene asesor</td>
+                            @endif
                         <td class="font-roboto font-medium py-5 pl-5">{{ $project->start_date }}</td>
                         <td class="font-roboto font-medium py-5 pl-5">{{ ucfirst($project->status) }}</td>
 

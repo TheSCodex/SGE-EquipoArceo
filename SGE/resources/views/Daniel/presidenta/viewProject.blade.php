@@ -59,7 +59,7 @@
                                         <div class="grid w-[50%]">
                                             <p class=" w-[80%] sm:w-[60%] text-lg sm:text-lg ">Grupo:</p>
                                             <p class="mx-[1%] font-normal w-[40%]">
-                                                {{ $interns[0]->group->name ?? 'No disponible' }}
+                                                {{ $interns->group->name ?? 'No disponible' }}
                                             </p>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                 <div class="grid grid-cols-1">
                                     <p class=" text-lg sm:text-lg">Area donde se realizara el proyecto :</p>
                                     <p class="font-normal w-[50%]">
-                                        {{ $intern->performance_area ?? 'No disponible' }}</p>
+                                        {{ $interns->performance_area ?? 'No disponible' }}</p>
                                 </div>
 
                                 <div class="grid grid-cols-1">
