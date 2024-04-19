@@ -53,7 +53,6 @@ class ProjectsController extends Controller
             //dd($project);
             if ($businessAdvisor) {
                 $company = Company::find($businessAdvisor->companie_id);
-                $area = BusinessSector::find($company->business_sector_id);
                 //dd($company);
             }
         }
@@ -86,7 +85,7 @@ class ProjectsController extends Controller
         $career = Career::where("id", $intern->career_id)->first();
         if (!$career || !$career->academy_id) {
             $userIds = $AdvCommenters->pluck('user_id')->toArray();
-            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'area', 'userIds', 'AdvCommenters' ,'UserInterns'));
+            return view('Daniel.Projects.ProjectView', compact('project', 'company', 'businessAdvisor', 'comments', 'DirCommenters', 'PrezCommenters', 'AdvCommentersNames', 'InternCommenters', 'interns', 'user', 'userIds', 'AdvCommenters' ,'UserInterns'));
         }
 
         $academy = Academy::where("id", $career->academy_id)->first();
@@ -151,7 +150,6 @@ class ProjectsController extends Controller
         $defaultDivision = [$division->id => $division->name];
         // Construye un array asociativo para la opción predeterminada
         $defaultCareer = [$intern->career->id => $intern->career->name];
-
 
         return view('daniel.formanteproyecto', compact('user', 'intern', 'divisions', 'careersDivision', 'defaultCareer', 'defaultDivision', 'interns'));
     }
@@ -232,15 +230,11 @@ class ProjectsController extends Controller
                 $member = User::find($id);
                 $notification = $member->notify(new CollabInvitation($project));
             };
-            dd($project);
+            //dd($project);
         }
 
         $businessAdvisor->companie_id = $company->id;
         $businessAdvisor->save();
-
-        $selectedIds = $request->input('selectedIds');
-
-
 
         return redirect('/anteproyecto')->with('Created', 'Proyecto creado correctamente');
     }
