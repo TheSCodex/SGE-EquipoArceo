@@ -5,6 +5,12 @@ namespace Database\Seeders;
 use App\Models\Intern;
 use App\Models\User;
 use App\Models\AcademicAdvisor;
+use App\Models\Book;
+use App\Models\BusinessAdvisor;
+use App\Models\GradeOfStudy;
+use App\Models\Group;
+use App\Models\StudyGrade;
+use App\Models\Groups;
 use Illuminate\Database\Seeder;
 
 class InternSeeder extends Seeder
@@ -19,15 +25,32 @@ class InternSeeder extends Seeder
         })->pluck('id');
 
         $academicAdvisors = AcademicAdvisor::all();
+        $businessAdvisors = BusinessAdvisor::all();
+        $books = Book::all();
+        $studyGrades = StudyGrade::all();
+        $groups = Group::all();
 
         for ($i = 0; $i < count($estudianteUserIds); $i++) {
             $advisor = $academicAdvisors[$i % count($academicAdvisors)];
+            $businessAdvisor = $businessAdvisors[$i % count($businessAdvisors)];
+            $book = $books[$i % count($books)];
+            $degree = $studyGrades[$i % count($studyGrades)];
+            $group = $groups[$i % count($groups)];
+            $status_id = rand(1,2);
             Intern::create([
                 'user_id' => $estudianteUserIds[$i],
                 'academic_advisor_id' => $advisor->id,
-                'career_id' => $advisor->career_id,
+                'business_advisor_id' => $businessAdvisor->id,
+                'career_id' => $advisor->career_id != 21 ? $advisor->career_id : 10,
+                'book_id' => $book->id,
                 'period' => 'Mayo - Julio',
+                'student_status_id' => $status_id,
+                'group' => 'SM51',
+                'generation' => '2022 - 2024',
+                'study_grade_id' => $degree->id,
+                'group_id' => $degree->id,
             ]);
         }
     }
 }
+

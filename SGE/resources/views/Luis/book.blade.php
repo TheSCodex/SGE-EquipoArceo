@@ -6,160 +6,331 @@
     <title>CRUD Libros</title>
     @vite('resources/css/app.css')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     {{-- Bootstrap Icons --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
-    {{-- <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px; /* Espacio vertical entre filas */
-            width: 100%;
-        }
-
-        /* Estilo para las celdas de la tabla */
-        th, td {
-            padding: 10px; /* Espacio interno de las celdas */
-        }
-    </style> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
     @extends('templates/authTemplate')
-        {{-- Test --}}
-        {{-- @php
-        $books = [
-            ['nombre' => 'Clean Code: A Handbook of  Software ', 'autor' => 'Robert C. Martin', 'isbn' => '978-0-13-235088-4', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'The Pragmatic Programmer', 'autor' => 'Andrew Hunt, David Thomas', 'isbn' => '978-0-13-595705-9', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Code Complete: Practical Handbook', 'autor' => 'Steve McConnell', 'isbn' => '978-0-7356-1967-8', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Refactoring: Improving the Design ', 'autor' => 'Maritin Fowler', 'isbn' => '978-0-201-48567-7', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'Continuous Delivery: Reliable Software ', 'autor' => 'Jez Humble, David Farley', 'isbn' => '978-0-321-60191-9', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-            ['nombre' => 'The Mythical Man-Month', 'autor' => 'Frederick P. Brooks Jr.', 'isbn' => '978-0-201-83595-3', 'proporcionadopor' => '2239XXXX', 'fecha' => '08-Dec-2021',  ],
-           
-        ];
-        @endphp --}}
     @section('contenido')
-    <section class="flex flex-col justify-center items-center  min-h-full flex-grow ">
+    <section class="flex flex-col justify-center items-center flex-grow ">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="border-b border-gray-200 mt-5 pb-2 mx-auto w-11/12 md:flex md:items-center md:justify-between">
-            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros</h1>
+            <h1 class="font-bold font-montserrat text-xl mb-2 text-center md:text-left">Lista de libros - {{$divisionOrAcademy->name}}</h1>
             <div class="flex items-center flex-row justify-end">
-                <div>
-                    <div class="hidden md:flex items-center relative" >
-                        <input  id='search' class="border-primaryColor placeholder-primaryColor border-b border rounded-md " type="search" placeholder="Buscar...." style="color: green;">
+                <form action="{{ route('search.books') }}" method="GET" id="search-form">
+                    <div class="hidden md:flex items-center relative">
+                        <input name="query" id="search" class="border-primaryColor placeholder-primaryColor border-b border rounded-md" type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </div>
-                <a href="{{route('libros-asistente.create')}}"
-                    class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
-                </a>
+                </form>   
+                @if(Auth::user()->can('crear-libro'))
+                    <a href="{{route('libros-asistente.create')}}"
+                        class="hidden md:block bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
+                    </a>
+                @endif
             </div>
-            
             <div class="flex flex-col sm:flex-row justify-between md:hidden mt-2 mx-auto">
-                
-                <div>
-                    <div class="flex items-center relative" >
+                <form action="{{ route('search.books') }}" method="GET" id="search-form">
+                    <div class="flex items-center relative">
                         <input class="border-primaryColor placeholder-primaryColor border-b border rounded-md w-full mb-2 sm:mb-0 " type="search" placeholder="Buscar...." style="color: green;">
                     </div>
-                </div>
-                <a href="{{route('libros-asistente.create')}}"
-                    class=" bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4">Agregar nuevo libro
-                </a>
-    
+                </form>   
+                @if(Auth::user()->can('crear-libro'))
+                    <a href="{{route('libros-asistente.create')}}"
+                        class="md:hidden bg-primaryColor text-lg py-2 px-4 rounded-md text-white md:ml-4 text-center">Agregar nuevo libro
+                    </a>
+                @endif
             </div>
         </div>
-
-        <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+        <div class="mt-6 w-11/12 mx-auto flex items-start justify-between min-h-screen ">
+            @php
+                $userAuthInfo = auth()->user();
+                $booksToShow = [];
+                if ($userAuthInfo->rol_id == 5) {
+                    $booksToShow = $booksByDivision;
+                } elseif ($userAuthInfo->rol_id == 2) {
+                    $booksToShow = $booksByAcademy;
+                }
+                $nameDivisionOrAcademy = $divisionOrAcademy->name;
+                // dd($nameDivisionOrAcademy);
+                // dd($paginatedBooksByAcademy);
+            @endphp
             <div class="lg:hidden w-full mb-5">
                 <div class="grid md:grid-cols-2 gap-4 w-full">
-                    @foreach ($books as $book)
-                    <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
-                        <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
-                        <p class="text-sm text-gray-500">Autor: {{ $book->author }}</p>
-                        <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
-                        <p class="text-sm text-gray-500">proporcionado por: 
-                            @if (isset($userInfoByBookId[$book->id]))
-                            @foreach ($userInfoByBookId[$book->id] as $user)
-                                <p class="text-sm text-gray-500">{{ $user->identifier }}</p>
+                    @if ($userAuthInfo->rol_id == 2)
+                        @if (empty($paginatedBooksByAcademy[$nameDivisionOrAcademy]))
+                            <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
+                        @else
+                            @foreach ($paginatedBooksByAcademy as $divisionAcademy)
+                                @foreach ($divisionAcademy as $book)
+                                    @if(isset($userInfoByBookId[$book->id]))
+                                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                                            <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
+                                            <p class="text-sm text-gray-500">Autor: {{ $book->author }}</p>
+                                            <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
+                                            <p class="text-sm text-gray-500">proporcionado por: 
+                                                @if (isset($userInfoByBookId[$book->id]))
+                                                    @foreach ($userInfoByBookId[$book->id] as $user)
+                                                    <p class="text-sm text-gray-500">{{ $user['user']->identifier }}</p>
+                                                    @endforeach
+                                                @else
+                                                    <p class="text-sm text-gray-500">Sin información</p>
+                                                @endif
+                                            </p>
+                                            <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book->created_at, 0, 10) }}</p>
+                                            <div class="flex justify-end mt-4 space-x-4">
+                                                @if(Auth::user()->can('leer-lista-libros'))
+                                                <a href="{{route('libros-asistente.show', $book->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                                                @endif
+                                                @if(Auth::user()->can('editar-libro'))
+                                                <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
+                                                    <img src="/img/logos/pencil.svg">
+                                                </a>
+                                                @endif
+                                                @if(Auth::user()->can('eliminar-libro'))
+                                                <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">
+                                                        <img src="/img/logos/trash.svg">
+                                                    </button>
+                                                </form>    
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endforeach
-                            @else
-                                <p class="text-sm text-gray-500">Sin información</p>
-                            @endif
-                        </p>
-                        <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book->created_at, 0, 10) }}</p>
-                        <div class="flex justify-end mt-4 space-x-4">
-                            <a href="{{route('libros-asistente.show', $book->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
-                            <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
-                                <img src="/img/logos/pencil.svg">
-                            </a>
-                            <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">
-                                    <img src="/img/logos/trash.svg">
-                                </button>
-                            </form>    
-                        </div>
-                    </div>
-                    @endforeach
+                        @endif
+                    @endif
+                    @if ($userAuthInfo->rol_id == 5)
+                        @if (empty($paginatedBooksByDivision[$nameDivisionOrAcademy]))
+                            <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
+                        @else
+                            @foreach ($paginatedBooksByDivision as $divisionAcademy)
+                                @foreach ($divisionAcademy as $book)
+                                    @if(isset($userInfoByBookId[$book->id]))
+                                        <div class="bg-white rounded-lg shadow-md p-4 drop-shadow-2xl">
+                                            <h2 class="text-lg font-bold">Titulo: {{ $book->title }}</h2>
+                                            <p class="text-sm text-gray-500">Autor: {{ $book->author }}</p>
+                                            <p class="text-sm text-gray-500">ISBN: {{ $book->isbn }}</p>
+                                            <p class="text-sm text-gray-500">proporcionado por: 
+                                                @if (isset($userInfoByBookId[$book->id]))
+                                                    @foreach ($userInfoByBookId[$book->id] as $user)
+                                                    <p class="text-sm text-gray-500">{{ $user['user']->identifier }}</p>
+                                                    @endforeach
+                                                @else
+                                                    <p class="text-sm text-gray-500">Sin información</p>
+                                                @endif
+                                            </p>
+                                            <p class="text-sm text-gray-500">Fecha de adición: {{ substr($book->created_at, 0, 10) }}</p>
+                                            <div class="flex justify-end mt-4 space-x-4">
+                                                @if(Auth::user()->can('leer-lista-libros'))
+                                                <a href="{{route('libros-asistente.show', $book->id)}}" class="bg-primaryColor hover:bg-darkBlue ease-in duration-100 py-2 px-4 text-white rounded-xl font-semibold">Ver detalles</a>
+                                                @endif
+                                                @if(Auth::user()->can('editar-libro'))
+                                                <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
+                                                    <img src="/img/logos/pencil.svg">
+                                                </a>
+                                                @endif
+                                                @if(Auth::user()->can('eliminar-libro'))
+                                                <form action="{{ route('libros-asistente.destroy', $book->id) }}" class="delete-book flex justify-center" method="POST" >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">
+                                                        <img src="/img/logos/trash.svg">
+                                                    </button>
+                                                </form>    
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
+                    @endif  
                 </div>
             </div>
             <div class="hidden lg:block w-full">
-                <table class="text-start w-full">
-                    <tr>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Nombre</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Autor</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">ISBN</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Proporcionado por</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs text-start">Fecha de adición</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Detalles</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Editar</th>
-                        <th class="text-[#ACACAC] font-roboto text-xs">Eliminar</th>
-                    </tr>
-                    @foreach ($books as $book)
-                    <tr>
-                        <td class="font-roboto font-bold py-5 w-3/12 text-left ">{{ $book->title }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $book->author }}</td>
-                        <td class="font-roboto font-bold py-5">{{ $book->isbn }}</td>
-                        <td class="font-roboto font-bold py-5">
-                            @if (isset($userInfoByBookId[$book->id]))
-                                @foreach ($userInfoByBookId[$book->id] as $user)
-                                    <p>{{ $user->identifier }}</p>
+                @if ($userAuthInfo->rol_id == 2)
+                    @if (empty($paginatedBooksByAcademy[$nameDivisionOrAcademy]))
+                        <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
+                    @else
+                        <table class="text-start w-full">
+                            <thead>
+                                <tr>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left pl-5">N°</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Autor</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Proporcionado por</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Fecha de adición</th>
+                                    @if(Auth::user()->can('leer-lista-libros'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Detalles</th>
+                                    @endif
+                                    @if(Auth::user()->can('editar-libro'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Editar</th>
+                                    @endif
+                                    @if(Auth::user()->can('eliminar-libro'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Eliminar</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($paginatedBooksByAcademy as $divisionAcademy)
+                                    @if(isset($userInfoByBookId[$book->id]))
+                                        @foreach ($divisionAcademy as $book)
+                                            @php
+                                                $counter = ($divisionAcademy->currentPage() - 1) * $divisionAcademy->perPage() + $loop->index + 1;
+                                            @endphp
+                                            <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                                                <td class="font-roboto  py-5 w-1/12 pl-5">{{ $counter }}</td>
+                                                <td class="font-roboto  py-5  w-3/12 pr-10">{{ $book->title }}</td>
+                                                <td class="font-roboto  py-5  text-left ">{{ $book->author }}</td>
+                                                <td class="font-roboto  py-5  text-left w-1/12">{{ $book->isbn }}</td>
+                                                <td class="font-roboto  py-5  text-left ">
+                                                    @if (isset($userInfoByBookId[$book->id]))
+                                                        @foreach ($userInfoByBookId[$book->id] as $user)
+                                                            <p>{{$user['user']->identifier}}</p>
+                                                        @endforeach
+                                                    @else
+                                                        <p>Sin información</p>
+                                                    @endif
+                                                </td>
+                                                <td class="font-roboto  py-5  text-left">{{ substr($book->created_at, 0, 10) }}</td>
+                                                @if(Auth::user()->can('leer-lista-libros'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                                                        <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
+                                                            <img src="/img/ojoGreen.svg" class="w-7">
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @if(Auth::user()->can('editar-libro'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                                        <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
+                                                            <img src="/img/logos/pencil.svg">
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @if(Auth::user()->can('eliminar-libro'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                                                        <form class="delete-book flex justify-center " action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit">
+                                                                <img src="/img/logos/trash.svg">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 @endforeach
-                            @else
-                                <p>Sin información</p>
-                            @endif
-                        </td>
-                        <td class="font-roboto font-bold py-5">{{ substr($book->created_at, 0, 10) }}</td>
-                        
-                        <td class="font-roboto font-bold py-5 cursor-pointer ">
-                            <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
-                                <img src="/img/logos/pencil.svg">
-                            </a>
-                        </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <form class="flex justify-center" action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">
-                                    <img src="/img/logos/trash.svg">
-                                </button>
-                            </form>
-                        </td>
-                        <td class="font-roboto font-bold py-5 cursor-pointer">
-                            <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
-                                <img src="/img/ojoGreen.svg" class="w-7">
-                            </a>
-                        </td>
+                            </tbody>
+                        </table>
+                    @endif
+                @endif
+                @if ($userAuthInfo->rol_id == 5)
+                    @if (empty($paginatedBooksByDivision[$nameDivisionOrAcademy]))
+                        <h1 class="text-xl font-bold text-center text-lightGray">Sin resultados</h1>
+                    @else
+                        <table class="text-start w-full">
+                            <thead>
+                                <tr>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left pl-5">N°</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Nombre</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Autor</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">ISBN</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Proporcionado por</th>
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Fecha de adición</th>
+                                    @if(Auth::user()->can('leer-lista-libros'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Detalles</th>
+                                    @endif
+                                    @if(Auth::user()->can('editar-libro'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Editar</th>
+                                    @endif
+                                    @if(Auth::user()->can('eliminar-libro'))
+                                    <th class="text-[#ACACAC] font-roboto text-xs text-left">Eliminar</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($paginatedBooksByDivision as $divisionAcademy)
+                                    @if(isset($userInfoByBookId[$book->id]))
+                                        @foreach ($divisionAcademy as $book)
+                                            @php
+                                                $counter = ($divisionAcademy->currentPage() - 1) * $divisionAcademy->perPage() + $loop->index + 1;
+                                            @endphp
+                                            <tr class="w-full transition duration-100 ease-in-out hover:bg-lightGray/20 border-b-gray-200 border-b-[0.5px]">
+                                                <td class="font-roboto  py-5 w-1/12 pl-5">{{ $counter }}</td>
+                                                <td class="font-roboto  py-5  w-3/12 pr-10">{{ $book->title }}</td>
+                                                <td class="font-roboto  py-5  text-left ">{{ $book->author }}</td>
+                                                <td class="font-roboto  py-5  text-left w-1/12">{{ $book->isbn }}</td>
+                                                <td class="font-roboto  py-5  text-left ">
+                                                    @if (isset($userInfoByBookId[$book->id]))
+                                                        @foreach ($userInfoByBookId[$book->id] as $user)
+                                                            <p>{{$user['user']->identifier}}</p>
+                                                        @endforeach
+                                                    @else
+                                                        <p>Sin información</p>
+                                                    @endif
+                                                </td>
+                                                <td class="font-roboto  py-5  text-left">{{ substr($book->created_at, 0, 10) }}</td>
+                                                @if(Auth::user()->can('leer-lista-libros'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                                                        <a href="{{route('libros-asistente.show', $book->id)}}" class="flex justify-center">
+                                                            <img src="/img/ojoGreen.svg" class="w-7">
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @if(Auth::user()->can('editar-libro'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer ">
+                                                        <a href="{{route('libros-asistente.edit', $book->id)}}" class="flex justify-center">
+                                                            <img src="/img/logos/pencil.svg">
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @if(Auth::user()->can('eliminar-libro'))
+                                                    <td class="font-roboto font-bold py-5 cursor-pointer">
+                                                        <form class="delete-book flex justify-center " action="{{ route('libros-asistente.destroy', $book->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit">
+                                                                <img src="/img/logos/trash.svg">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                @endif
 
-                    </tr>
-                    @endforeach
-                </table>
+                
             </div>
         </div>
-    </div>
-    <div class="my-5 mx-auto">
-        {{$books->links()}}
-    </div>
+
+        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+            <div class="mt-6 w-11/12 mx-auto flex items-center justify-between">
+                <div class="my-5 mx-auto md:w-full">
+
+                @if (!empty($divisionOrAcademy))
+                    @if (isset($paginatedBooksByDivision[$nameDivisionOrAcademy]))
+                        {{ $paginatedBooksByDivision[$nameDivisionOrAcademy]->links() }}
+                    @elseif (isset($paginatedBooksByAcademy[$nameDivisionOrAcademy]))
+                        {{ $paginatedBooksByAcademy[$nameDivisionOrAcademy]->links() }}
+                    @endif
+                @endif
+                </div>
+            </div>
+        </div>
+        
     </section>
-    <script>
+    {{-- <script>
         function searchTable() {
             var searchText = document.getElementById("search").value.toLowerCase();
             var rows = document.querySelectorAll("table tr");
@@ -182,7 +353,7 @@
         }
         // Llamamos a la función searchTable() cuando se modifica el contenido del input de búsqueda
         document.getElementById("search").addEventListener("input", searchTable);
-    </script>
+    </script> --}}
     @endsection
 </body>
 

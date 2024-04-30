@@ -17,4 +17,8 @@ class Companie extends Model
         'rfc',
         'business_sector_id',
     ];
+    public function businessSector()
+    {
+        return $this->belongsTo(BusinessSector::class);
+    }
 }

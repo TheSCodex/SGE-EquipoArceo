@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Luis;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Luis\BookFormRequest;
 use App\Models\AcademicAdvisor;
+use App\Models\Academy;
 use App\Models\Book;
+use App\Models\Career;
+use App\Models\Division;
 use App\Models\Intern;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,30 +19,295 @@ class BooksController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function searchBooks(Request $request)
     {
-        $internsWithUserInfo = Intern::whereNotNull('book_id')
-        ->with('user')
-        ->get();
+        $query = $request->input('query');
+        
+
+        $divisionOrAcademy = null;
+
+
+        $userAuthInfo = auth()->user();
+        if($userAuthInfo->rol_id == 5){
+            $division = Division::where('directorAsistant_id', $userAuthInfo->id)->first();
+            $divisionOrAcademy = $division;
+        }
+        if($userAuthInfo->rol_id == 2){
+            $academicAdvisor = AcademicAdvisor::where('user_id', $userAuthInfo->id)->first();
+            $career = Career::where('id', $academicAdvisor->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $divisionOrAcademy = $academy;
+        }
+
+        
+        $internsWithUserInfo = Intern::whereNotNull('book_id')->with('user')->get();
+
+
+        function getInternInfo($intern){
+            $career = Career::where('id', $intern->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $division = Division::where('id', $academy->division_id)->first();
+            return [
+                'user' => $intern->user,
+                'academy' => $academy,
+                'career' => $career,
+                'division' => $division,
+            ];
+        };
     
         // Preparar un arreglo que contenga la información del usuario asociada a cada libro
         $userInfoByBookId = [];
         foreach ($internsWithUserInfo as $intern) {
             $bookId = $intern->book_id;
-            $userInfoByBookId[$bookId][] = $intern->user;
+            $userInfoByBookId[$bookId][] = getInternInfo($intern);
+            
+        }
+        // Obtener todos los libros
+        $books = Book::all();
+        $booksByAcademy = [];
+        $booksByDivision = [];
+
+
+
+
+        foreach ($books as $book) {
+            // Verificar si hay información del usuario asociada al libro
+            if (isset($userInfoByBookId[$book->id])) {
+                // Utilizar un conjunto para mantener un registro de los libros ya agregados
+                $addedBooks = [];
+        
+                // Otro for por si hay más de un estudiante asociado al libro
+                foreach ($userInfoByBookId[$book->id] as $internBookInfo) {
+                    // Obtener el nombre de la academia o división correspondiente al libro
+                    $divisionName = $internBookInfo['division']->name;
+                    $academyName = $internBookInfo['academy']->name;
+        
+                    // Verificar si el usuario es un asistente
+                    if ($userAuthInfo->rol_id == 5) {
+                        // Verificar si el nombre de la división coincide con la división del usuario
+                        if ($divisionOrAcademy->name == $divisionName && !isset($addedBooks[$book->id])) {
+                            $booksByDivision[$divisionName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
+                    }
+                    // Verificar si el usuario es un asesor académico
+                    elseif ($userAuthInfo->rol_id == 2) {
+                        // Verificar si el nombre de la academia coincide con la academia del usuario
+                        if ($divisionOrAcademy->name == $academyName && !isset($addedBooks[$book->id])) {
+                            $booksByAcademy[$academyName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
+                    }
+                }
+            }
         }
 
-        // dd($internsWithUserInfo);
-        $books = Book::paginate(5);
-        return view('Luis.book', compact('books', 'userInfoByBookId'));
+        // dd($booksByDivision);
+        // dd($booksByAcademy);
+        //Filtrar en base a la query
+        $filteredBooksByDivision = [];
+        $filteredBooksByAcademy = [];
+
+        foreach ($booksByDivision as $divisionName => $books) {
+            foreach ($books as $book) {
+                if (isset($userInfoByBookId[$book->id])) {
+                    foreach ($userInfoByBookId[$book->id] as $user) {
+                        if (str_contains(strtolower($book->title), strtolower($query)) || 
+                            str_contains(strtolower($book->author), strtolower($query)) || 
+                            str_contains(strtolower($book->isbn), strtolower($query)) || 
+                            str_contains(strtolower($book->price), strtolower($query)) || 
+                            str_contains(strtolower($user['user']->name), strtolower($query)) || 
+                            str_contains(strtolower($user['user']->identifier), strtolower($query))) {
+                            
+                            // Verificar si la clave de la división existe en el array $filteredBooksByDivision
+                            if (!isset($filteredBooksByDivision[$divisionName])) {
+                                // Si no existe, crear un nuevo array para esa clave
+                                $filteredBooksByDivision[$divisionName] = [];
+                            }
+                            // Verificar que el libro no esté repetido en la misma división
+                            if (!in_array($book, $filteredBooksByDivision[$divisionName])) {
+                                $filteredBooksByDivision[$divisionName][] = $book;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        // Filtrar por academia
+        foreach ($booksByAcademy as $academyName => $books) {
+            foreach ($books as $book) {
+                if (isset($userInfoByBookId[$book->id])) {
+                    foreach ($userInfoByBookId[$book->id] as $user) {
+                        if (str_contains(strtolower($book->title), strtolower($query)) || 
+                            str_contains(strtolower($book->author), strtolower($query)) || 
+                            str_contains(strtolower($book->isbn), strtolower($query)) || 
+                            str_contains(strtolower($book->price), strtolower($query)) || 
+                            str_contains(strtolower($user['user']->identifier), strtolower($query))) {
+                            
+                            // Verificar si la clave de la academia existe en el array $filteredBooksByAcademy
+                            if (!isset($filteredBooksByAcademy[$academyName])) {
+                                // Si no existe, crear un nuevo array para esa clave
+                                $filteredBooksByAcademy[$academyName] = [];
+                            }
+                            // Verificar que el libro no esté repetido en la misma academia
+                            if (!in_array($book, $filteredBooksByAcademy[$academyName])) {
+                                $filteredBooksByAcademy[$academyName][] = $book;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // Crear arrays para almacenar libros paginados por división y academia
+        $paginatedBooksByDivision = [];
+        $paginatedBooksByAcademy = [];
+
+        function paginateBooks($booksArray) {
+            // dd($booksArray);
+            $paginatedBooks = [];
+        
+            foreach ($booksArray as $group => $books) {
+                $bookIds = collect($books)->pluck('id')->unique();
+                $query = Book::whereIn('id', $bookIds)->paginate(10);
+                $paginatedBooks[$group] = $query;
+            }
+        
+            return $paginatedBooks;
+        }
+
+        if($userAuthInfo->rol_id == 2){
+            $paginatedBooksByAcademy = paginateBooks($filteredBooksByAcademy);
+            // dd($paginatedBooksByAcademy);
+        }
+        if($userAuthInfo->rol_id == 5){
+            
+            $paginatedBooksByDivision = paginateBooks($filteredBooksByDivision);
+        }
+
+        // dd($paginatedBooksByDivision);
+        return view('Luis.book', compact('books', 'userInfoByBookId', 'divisionOrAcademy', 'booksByAcademy', 'booksByDivision', 'paginatedBooksByDivision', 'paginatedBooksByAcademy'));
     }
+
     
+    public function index()
+    {
+        if(Gate::denies('leer-lista-libros')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
+
+        $divisionOrAcademy = null;
+
+
+        $user = auth()->user();
+        if($user->rol_id == 5){
+            $division = Division::where('directorAsistant_id', $user->id)->first();
+            $divisionOrAcademy = $division;
+        }
+        if($user->rol_id == 2){
+            $academicAdvisor = AcademicAdvisor::where('user_id', $user->id)->first();
+            $career = Career::where('id', $academicAdvisor->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $divisionOrAcademy = $academy;
+        }
+
+        
+        $internsWithUserInfo = Intern::whereNotNull('book_id')->with('user')->get();
+
+        function getInternInfo($intern){
+            $career = Career::where('id', $intern->career_id)->first();
+            $academy = Academy::where('id', $career->academy_id)->first();
+            $division = Division::where('id', $academy->division_id)->first();
+            return [
+                'user' => $intern->user,
+                'academy' => $academy,
+                'career' => $career,
+                'division' => $division,
+            ];
+        };
+    
+        // Preparar un arreglo que contenga la información del usuario asociada a cada libro
+        $userInfoByBookId = [];
+        foreach ($internsWithUserInfo as $intern) {
+            $bookId = $intern->book_id;
+            $userInfoByBookId[$bookId][] = getInternInfo($intern);
+            
+        }
+
+        // Obtener todos los libros
+        $books = Book::all();
+        $booksByAcademy = [];
+        $booksByDivision = [];
+
+
+
+
+        foreach ($books as $book) {
+            // Verificar si hay información del usuario asociada al libro
+            if (isset($userInfoByBookId[$book->id])) {
+                // Utilizar un conjunto para mantener un registro de los libros ya agregados
+                $addedBooks = [];
+        
+                // Otro for por si hay más de un estudiante asociado al libro
+                foreach ($userInfoByBookId[$book->id] as $internBookInfo) {
+                    // Obtener el nombre de la academia o división correspondiente al libro
+                    $divisionName = $internBookInfo['division']->name;
+                    $academyName = $internBookInfo['academy']->name;
+        
+                    // Verificar si el usuario es un asistente
+                    if ($user->rol_id == 5) {
+                        // Verificar si el nombre de la división coincide con la división del usuario
+                        if ($divisionOrAcademy->name == $divisionName && !isset($addedBooks[$book->id])) {
+                            $booksByDivision[$divisionName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
+                    }
+                    // Verificar si el usuario es un asesor académico
+                    elseif ($user->rol_id == 2) {
+                        // Verificar si el nombre de la academia coincide con la academia del usuario
+                        if ($divisionOrAcademy->name == $academyName && !isset($addedBooks[$book->id])) {
+                            $booksByAcademy[$academyName][] = $book;
+                            $addedBooks[$book->id] = true; // Marcar el libro como agregado
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Crear arrays para almacenar libros paginados por división y academia
+        $paginatedBooksByDivision = [];
+        $paginatedBooksByAcademy = [];
+
+        function paginateBooks($booksArray) {
+            $paginatedBooks = [];
+        
+            foreach ($booksArray as $group => $books) {
+                $bookIds = collect($books)->pluck('id')->unique();
+                $query = Book::whereIn('id', $bookIds)->paginate(10);
+                $paginatedBooks[$group] = $query;
+            }
+        
+            return $paginatedBooks;
+        }
+        
+        $paginatedBooksByDivision = paginateBooks($booksByDivision);
+        $paginatedBooksByAcademy = paginateBooks($booksByAcademy);
+        
+        // dd($paginatedBooksByAcademy[$divisionOrAcademy->name]);
+        return view('Luis.book', compact('books', 'userInfoByBookId', 'divisionOrAcademy', 'booksByAcademy', 'booksByDivision', 'paginatedBooksByDivision', 'paginatedBooksByAcademy'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        if(Gate::denies('crear-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         return view('Luis.newBookForm');
     }
 
@@ -47,11 +316,14 @@ class BooksController extends Controller
      */
     public function store(BookFormRequest $request)
     {
-        
+        if(Gate::denies('crear-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $books = new \App\Models\Book;
         $books->title = $request->title;
         $books->author = $request->author;
         $books->isbn = $request->isbn;
+        $books->price = $request->price;
     
         $problems = [];
         $allUsersExistAndAreInterns = true;
@@ -80,10 +352,10 @@ class BooksController extends Controller
         }
 
         if (!$allUsersExistAndAreInterns) {
-            return redirect()->route('libros-asistente.create')->with('problems', $problems);
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
         }
         if (count($problems) > 0) {
-            return redirect()->route('libros-asistente.create')->with('problems', $problems);
+            return redirect()->route('libros-asistente.create')->withInput()->with('problems', $problems);
         }
     
         // Aquí guarda el libro y los internos
@@ -94,7 +366,7 @@ class BooksController extends Controller
             $intern->save();
         }
     
-        return redirect('asistente/libros')->with('success', 'El libro se ha agregado correctamente');
+        return redirect()->route('libros-asistente.index')->with('success', 'El libro se ha agregado correctamente');
     }
     
 
@@ -103,6 +375,9 @@ class BooksController extends Controller
      */
     public function show(string $id)
     {
+        if(Gate::denies('leer-lista-libros')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::find($id);
         $interns = Intern::with('user')->where('book_id', $id)->get();
         $internsIdentifier = [];
@@ -114,6 +389,7 @@ class BooksController extends Controller
                 $intern['academic_advisor'] = $academicAdvisor;
             }
         }
+        // dd($interns);
         return view('Luis.showBook', compact('book', 'internsIdentifier', 'interns'));
     }
 
@@ -122,6 +398,9 @@ class BooksController extends Controller
      */
     public function edit(string $id)
     {
+        if(Gate::denies('editar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book=Book::find($id);
         $interns = Intern::where('book_id', $id)->get();
         $internsIdentifier = [];
@@ -138,12 +417,20 @@ class BooksController extends Controller
      */
     public function update(BookFormRequest $request, string $id): RedirectResponse
     {
+        if(Gate::denies('editar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::find($id);
     
         // Validar identificadores de estudiantes
         $problems = [];
-        $identifiers = preg_split('/,\s*/', $request->identifier_student); // Usar expresión regular para dividir la cadena
+        $identifiers = preg_split('/\s*,\s*/', $request->identifier_student);
+        $identifiers = array_filter($identifiers, 'strlen'); // Filtrar identificadores vacíos
+        $identifiers = array_unique($identifiers); // Eliminar identificadores duplicados
+        // dd($identifiers);
         foreach ($identifiers as $identifier) {
+            // Ignorar identificadores vacíos
+
             $user = User::where('identifier', $identifier)->first();
             if ($user === null) {
                 $problems[] = "El usuario con identificador $identifier no existe";
@@ -155,10 +442,11 @@ class BooksController extends Controller
                     $problems[] = "El usuario con identificador $identifier ya está asociado a otro libro";
                 }
             }
+
         }
     
         if (!empty($problems)) {
-            return redirect()->back()->with('problems', $problems);
+            return redirect()->back()->withInput()->with('problems', $problems);
         }
 
         // Desvincular estudiantes anteriores y vincular nuevos estudiantes
@@ -204,6 +492,9 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('eliminar-libro')){
+            abort(403,'No tienes permiso para acceder a esta sección.');
+        }
         $book = Book::findOrFail($id);
 
         $interns = Intern::where('book_id', $id)->get();

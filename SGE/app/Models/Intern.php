@@ -16,7 +16,10 @@ class Intern extends Model
         'book_id',
         'student_status_id',
         'performance_area',
-        'Group'
+        'service_hour',
+        'Group',
+        'career_id',
+        'group_id'
     ];
 
     public function user()
@@ -31,7 +34,7 @@ class Intern extends Model
 
     public function project()
     {
-        return $this->hasOne(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function book()
@@ -42,5 +45,31 @@ class Intern extends Model
     public function studentStatus()
     {
         return $this->belongsTo(StudentStatus::class, "student_status_id");
+    }
+
+    public function career()
+    {
+        return $this->hasOne(Career::class, 'id', 'career_id');
+    }
+
+    public function group()
+    {
+        return $this->hasOne(Group::class, 'id', 'group_id');
+    }
+
+    public function penalization()
+    {
+        return $this->belongsTo(penalization::class);
+    }
+    //Para extraer el nombre del asesor empresarial que tiene el proyecto
+    public function businessAdvisor()
+    {
+        return $this->belongsTo(Project::class, 'project_id', 'id')
+            ->with('adviser');
+    }
+
+    public function studyGrade()
+    {
+        return $this->belongsTo(StudyGrade::class);
     }
 }

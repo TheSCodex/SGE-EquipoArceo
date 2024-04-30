@@ -6,8 +6,9 @@
 
 @section('contenido')
     <section class="pt-4 bg-[#f3f5f9] flex flex-col items-center justify-center flex-grow min-h-full">
+       
         <div class="lg:px-8 px-6 text-left w-full mb-[2vh] sm:mb-0">
-            <div class="container mx-auto  font-roboto">
+            <div class="container mx-auto font-roboto">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-between">
                         <h1 class="mt-2 text-2xl font-bold">Buenos días {{ $userData->name }} {{ $userData->last_name }}!
@@ -25,7 +26,7 @@
                         </p>
                         <div
                             class="flex justify-between bg-[#02ab82] text-white py-6 px-4 mt-8 h-[67px] w-full rounded-b-lg">
-                            <a href="/exportar/1" class="hover:cursor-pointer ">Generar</a>
+                            <a href="/exportar" class="hover:cursor-pointer ">Generar</a>
                         </div>
                         <div class='absolute right-5 rounded-full h-8 w-8 opacity-50 bg-[#02ab82] top-5'></div>
                     </div>
@@ -64,7 +65,7 @@
 
                     {{ $academie->links('Eliud.reports.paginate') }}
                     <div class="absolute m-5 ml-16 ">
-                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $academie[0]->name }}</h2>
+                        <h2 class=" text-[#828282]">APROBACION DE PROYECTOS de la {{ $academie[0]?->name }}</h2>
                         <p class="text-[#828282] text-xs">Por academia</p>
                     </div>
                     <div class="mt-20 ml-10 mr-10 h-96">
@@ -107,7 +108,7 @@
                             </div>
                             <button
                                 class="bg-[#02ab82] text-white py-2 w-[243px] h-[35px] mt-5 rounded hover:bg-[rgb(2,151,171)]">
-                                <a href="/asistente/documentos">
+                                <a href="/documentos">
                                     Visitar Listado
                                 </a>
                             </button>

@@ -24,8 +24,9 @@ class BookFormRequest extends FormRequest
         return [
             'title' => 'bail|required|string|max:255',
             'author' => 'bail|required|string|max:255',
-            'isbn' => 'bail|required|string|max:255',
+            'isbn' => 'bail|required|string|max:17',
             'identifier_student' => 'bail|required|string',
+            'price' => 'bail|required|numeric',
         ];
     }
 }

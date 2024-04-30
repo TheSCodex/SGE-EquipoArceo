@@ -18,13 +18,18 @@ return new class extends Migration
             $table->integer('id', true);
             $table->integer('user_id')->nullable()->index('user_id');
             $table->integer('academic_advisor_id')->nullable()->index('academic_advisor_id');
+            $table->unsignedInteger('foolscapNumber')->nullable();
+            $table->integer('business_advisor_id')->nullable()->index('business_advisor_id');
             $table->integer('project_id')->nullable()->index('project_id');
             $table->integer('book_id')->nullable()->index('book_id');
             $table->integer('penalty_id')->nullable()->index('penalty_id');
             $table->integer('student_status_id')->nullable()->index('student_status_id');
             $table->string('period')->nullable();
-            $table->timestamp('service_hour')->nullable();
+            $table->integer('service_hour')->nullable();
             $table->integer('career_id')->nullable()->index('career_id');
+            $table->integer('group_id')->nullable()->index('group_id');
+            $table->string('generation')->nullable();
+            $table->integer('study_grade_id')->nullable()->index('study_grade_id');
             $table->timestamps();
 
         });

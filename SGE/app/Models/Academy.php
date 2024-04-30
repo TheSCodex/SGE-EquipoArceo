@@ -12,9 +12,10 @@ class Academy extends Model
     protected $fillable = [
         'name',
         'president_id',
+        'division_id',
     ];
 
-    public function user()
+    public function president()
     {
         return $this->belongsTo(User::class);
     }
@@ -22,5 +23,10 @@ class Academy extends Model
     public function division()
     {
         return $this->belongsTo(Division::class);
+    }
+
+    public function careers()
+    {
+        return $this->hasMany(Career::class);
     }
 }

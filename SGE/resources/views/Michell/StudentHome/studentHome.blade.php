@@ -1,24 +1,36 @@
 @extends('templates/authTemplate')
 @section('contenido')
-
     <div class="bg-[#F3F5F9] p-5 lg:gap-5 grid grid-cols-1 lg:grid-cols-3 grow">
         <section class="col-span-2 gap-3 flex flex-1 flex-col">
             <div class="bg-white rounded-md py-2">
-                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Proyecto</h1>
+                <h1 class="text-lg font-medium font-kanit ml-6 max-md:text-center">Anteproyecto</h1>
             </div>
             <div class="font-kanit">
                 <div class=" bg-primaryColor text-white rounded-md p-7">
-                    <h3 class="font-bold text-lg md:text-xl">Tu propuesta</h3>
-                    <p class="my-3">Desarrollar un software integral para la gestión eficiente de eventos académicos, facilitando la planificación, organización y seguimiento de conferencias  seminarios, talleres y actividades similares en entornos educativos...</p>
-                    <a 
-                        href="estudidante/anteproyecto"
-                        class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm"
-                    >
-                        Iniciar
-                    </a>
+                    @if ($studentProject)
+                        <h3 class="font-bold text-lg md:text-xl">{{ $studentProject->name }}</h3>
+                        <div class="my-2">
+                            <p>Estatus: <span class="uppercase font-bold text-sm">{{ $studentProject->status }}</span></p>
+                            <p class="mb-4 break-words line-clamp-3">Descripción: <span
+                                    class="font-normal">{{ $studentProject->description }}</span></p>
+                            <a href="anteproyecto"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                                Detalles
+                            </a>
+                        </div>
+                    @else
+                        <p class="text-center font-bold text-lg md:text-xl mb-5">Todavía no has creado una propuesta</p>
+
+                        <div class="flex justify-center">
+                            <a href="anteproyecto/nuevo"
+                                class="text-[#555] bg-white py-2 px-7 font-normal font-roboto rounded-md text-sm">
+                                Crear propuesta
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">    
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 grow">
                 <div class="bg-white font-kanit flex gap-4 rounded-md items-center p-3">
                     <div class=" bg-primaryColor rounded-full p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -28,8 +40,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Comentarios en la version mas reciente de tu propuesta</p>
+                        <p class="font-bold text-2xl">
+                            {{ $studentsCommentsCount }}</p>
+                        <p class="text-sm text-black opacity-50">Comentarios</p>
                     </div>
                 </div>
 
@@ -42,8 +55,12 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">2</p>
-                        <p class="text-sm text-black opacity-50">Votos de aprobacion</p>
+                        @if ($votes)
+                            <p class="font-bold text-2xl">{{ $votes->like }}</p>
+                        @else
+                            <p class="font-bold text-2xl">0</p>
+                        @endif
+                        <p class="text-sm text-black opacity-50">Votos de los asesores</p>
                     </div>
                 </div>
 
@@ -56,48 +73,65 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">24 / 120</p>
-                        <p class="text-sm text-black opacity-50">Dias restantes</p>
+                        @if (isset($mensaje))
+                            @if( count($notificaciones) > 0)
+                                @foreach ($notificaciones as $notificacion)
+                                    <p>{{ $notificacion->data['message'] }}</p>
+                                    <div class="w-[90%] flex justify-around py-[.5vw] ">
+                                        <form method="POST" id="AcceptCollab"
+                                            action="{{ route('projects.AcceptCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-primaryColor text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Aceptar</button>
+                                        </form>
+                                        <form method="POST" id="DeleteCollab"
+                                            action="{{ route('projects.DeleteCollab', ['id' => $notificacion->id]) }}">
+                                            @csrf
+                                            <button 
+                                                class="bg-red text-white rounded-lg px-[1vw] self-end mb-[-1vh] mr-[-2vw]">Rechazar</button>
+                                        </form>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>{{ $mensaje }}</p>
+                            @endif
+                        @else
+                            <p>Día {{ $diaActual }} de {{ $TotalDeDias }}</p>
+                        @endif
                     </div>
                 </div>
 
             </div>
 
-            <div class="bg-white rounded-md font-kanit py-8">
+            <div class="bg-white rounded-md font-kanit py-8 min-h-[300px]">
+                <h3 class="font-semibold ml-10 md:text-center mb-5">Observaciones recientes</h3>
                 <div class="mx-10 flex flex-col justify-between">
-                    <div class="flex flex-col gap-5">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <div class="col-span-2">
-                                <p class="text-xl text-[#555]">Elsa Luz Rios</p>
-                                <p class=" text-[#888] line-clamp-3">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
+                    <div class="flex flex-col">
+                        @if (count($comments) == 0)
+                            <p class="text-center text-[#888] ">Por el momento no tienes observaciones.</p>
+                        @else
+                            <div class="flex flex-col gap-3 mb-5">
+                                @foreach ($comments as $comment)
+                                    <div class="">
+                                        @php
+                                            $formatedDate = \Carbon\Carbon::parse($comment->fecha_hora);
+                                        @endphp
+                                        <p class="text-[#888] font-semibold text-sm">{{ $formatedDate->diffForHumans() }}
+                                        </p>
+                                        <p class="text-[#888] line-clamp-3">{{ $comment->content }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-span-1 grid place-content-center">
-                                <a 
-                                    href="estudiante/observaciones"
-                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm"
-                                >
+                                <a href="anteproyecto/observaciones"
+                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm">
                                     Ampliar observación
                                 </a>
                             </div>
-                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white text-center max-md:w-full py-1 w-[28%] max-xl:px-14 max-md:py-2">Ampliar observación</a>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <div class="col-span-2">
-                                <p class="text-xl text-[#555]">Elsa Luz Rios</p>
-                                <p class=" text-[#888] line-clamp-3">La estructura de tu propuesta es correcta pero necesito que expandas tu justificación e incluyas referencias para tus argumentos</p>
-                            </div>
-                            <div class="col-span-1 grid place-content-center">
-                                <a 
-                                    href="estudiante/observaciones"
-                                    class="bg-primaryColor rounded-md text-white text-center py-2 px-5 text-sm"
-                                >
-                                    Ampliar observación
-                                </a>
-                            </div>
-                            <a href="estudiante/anteproyecto/observaciones" class="bg-primaryColor rounded-md text-white max-md:w-full py-1 w-[28%] text-center max-xl:px-14 max-md:py-2">Ampliar observación</a>
-                        </div>
+                        @endif
                     </div>
-                    <a href="estudiante/anteproyecto/observaciones"observaciones class="flex w-full justify-end items-end text-[#888] text-sm max-md:justify-center max-md:my-6">Ver todo</a>
+
+
                 </div>
             </div>
         </section>
@@ -109,14 +143,19 @@
 
             <div class="space-y-2">
                 <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                    <div class="bg-primaryColor rounded-full p-1 ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="white" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
-                    <p>Elsa Luz Rios</p>
+                    @if ($advisor && $advisor->academicAdvisor)
+                        <div class="bg-primaryColor rounded-full p-1 ml-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <p>{{ $advisor->academicAdvisor->user->name }}</p>
+                    @else
+                        <p class="text-[#888] w-full text-center">Sin asesor académico</p>
+                    @endif
+
                 </div>
             </div>
 
@@ -126,137 +165,72 @@
 
             <div class="space-y-2">
                 <div class="flex font-roboto text-base items-center space-x-5 bg-white rounded-md py-2">
-                    <div class="bg-primaryColor rounded-full p-1 ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="white" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
-                    <p>Luis Villafaña</p>
+
+                    @if (!$empresarial)
+                        <p class="text-center w-full text-[#888] ">Por el momento no tienes asesores.</p>
+                    @else
+                        @foreach ($empresarial as $item)
+                            <div class="bg-primaryColor rounded-full p-1 ml-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="white" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <p>{{ $item->asesor_empresarial }}</p>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
-            <div class=" font-roboto bg-white p-5 rounded-md">
+            <div class=" font-roboto bg-white p-5 rounded-l grow flex flex-col justify-center items-center">
 
-                <h3 class="text-lg font-medium font-kanit mb-3">Actividades importantes</h3>
-                    
+                <h3 class="text-lg font-medium text-center font-kanit mb-3">Actividades importantes</h3>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 place-items-center">
                     <div class="">
-                        <h3 class="text-darkBlue text-sm font-bold mb-2">Hoy 15/02/2024</h3>
-                        <ol class="border-l border-dashed border-primaryColor font-roboto">
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div
-                                        class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Revision de memoria</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        8:40 a 9:30
-                                    </time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div
-                                        class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        10:50 a 11:40
-                                    </time>
-                                </div>
-                            </li>
+
                         </ol>
                     </div>
                     <div class="">
-                        <h3 class="text-darkBlue font-bold text-sm  mb-2">Martes 20/02/2024</h3>
-                        <ol class="border-l border-dashed border-primaryColor font-roboto">
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div
-                                        class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Revision de memoria</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        8:40 a 9:30
-                                    </time>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex-start flex items-center pt-3">
-                                    <div
-                                        class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-primaryColor">
-                                    </div>
-                                    <h4 class="text-sm font-semibold">Reunión con Mario Hugo</h4>
-                                </div>
-                                <div class="ml-4">
-                                    <time class="text-[#888] text-sm">
-                                        10:50 a 11:40
-                                    </time>
-                                </div>
-                            </li>
                         </ol>
                     </div>
-                    <a href="estudiante/calendario" class="block bg-primaryColor text-white px-14 font-bold text-center text-sm py-1 rounded-md mb-3 max-md:w-[90%] max-md:ml-4">Ver más</a>
 
                 </div>
 
                 <div class="flex justify-center">
-                    <a 
-                        href="estudiante/eventos" 
-                        class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3"
-                    >
+                    <a href="calendario"
+                        class="bg-primaryColor text-white px-6 font-bold text-center text-sm py-1 rounded-md mt-3">
                         Ver más
                     </a>
                 </div>
 
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="bg-white p-5 font-black flex flex-col justify-center">
-                    <p class="text-center mb-5">No has recibido ninguna penalización hasta el momento, buen trabajo!</p>
-                    <div class="flex justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled" width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M13 3a3 3 0 0 1 2.995 2.824l.005 .176v4h2a3 3 0 0 1 2.98 2.65l.015 .174l.005 .176l-.02 .196l-1.006 5.032c-.381 1.626 -1.502 2.796 -2.81 2.78l-.164 -.008h-8a1 1 0 0 1 -.993 -.883l-.007 -.117l.001 -9.536a1 1 0 0 1 .5 -.865a2.998 2.998 0 0 0 1.492 -2.397l.007 -.202v-1a3 3 0 0 1 3 -3z" stroke-width="0" fill="currentColor" />
-                            <path d="M5 10a1 1 0 0 1 .993 .883l.007 .117v9a1 1 0 0 1 -.883 .993l-.117 .007h-1a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-7a2 2 0 0 1 1.85 -1.995l.15 -.005h1z" stroke-width="0" fill="currentColor" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="bg-white p-5 font-black max-md:w-full max-md:text-center max-xl:w-full">
-                    <p class="mb-5 text-center">Progreso</p>
-                    <div class="flex justify-center max-h-[150px]">
-                        <canvas id="myChart"></canvas>
-                    </div>
+            <div class="grid grid-cols-1  md:grid-cols-1 gap-3 h-[230px] ">
+                <div class="bg-white p-5 font-black flex flex-col justify-center h-600px">
+                    @if ($penalty === null)
+                        <p class="text-center mb-5">No has recibido ninguna amonestación hasta el momento, buen trabajo!
+                        </p>
+                        <div class="flex justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled"
+                                width="70" height="70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M13 3a3 3 0 0 1 2.995 2.824l.005 .176v4h2a3 3 0 0 1 2.98 2.65l.015 .174l.005 .176l-.02 .196l-1.006 5.032c-.381 1.626 -1.502 2.796 -2.81 2.78l-.164 -.008h-8a1 1 0 0 1 -.993 -.883l-.007 -.117l.001 -9.536a1 1 0 0 1 .5 -.865a2.998 2.998 0 0 0 1.492 -2.397l.007 -.202v-1a3 3 0 0 1 3 -3z"
+                                    stroke-width="0" fill="currentColor" />
+                                <path
+                                    d="M5 10a1 1 0 0 1 .993 .883l.007 .117v9a1 1 0 0 1 -.883 .993l-.117 .007h-1a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-7a2 2 0 0 1 1.85 -1.995l.15 -.005h1z"
+                                    stroke-width="0" fill="currentColor" />
+                            </svg>
+                        </div>
+                    @else
+                        <h2>{{ $penalty->penalty_name }}</h2>
+                        <p class="text-lg font-normal">{{ $penalty->description }}</p>
+                    @endif
                 </div>
             </div>
         </section>
     </div>
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["falta",'completada'],
-                datasets: [{
-                    label: 'Horas',
-                    data: [ 2, 3],
-                    backgroundColor: [
-                        '#3E5366',
-                        '#0FA987'
-                    ],
-                    borderColor: [
-                        '#ffffffff'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-    </script>
+
 @endsection

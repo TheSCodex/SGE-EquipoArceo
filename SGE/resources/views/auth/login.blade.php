@@ -19,7 +19,7 @@
                 <label for="user_email" class="block text-lg font-semibold text-gray-800 mb-2">Correo electrónico</label>
                 <input type="email" id="user_email" name="email" value="{{ old('email') }}" placeholder="user@gmail.com" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-800 leading-tight focus:outline-none focus:shadow-outline font-montserrat">
                 @error('email')
-                    <p class="text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-sm text-red">{{ $message }}</p>
                 @enderror
             </div>
             <div class="mb-6">
@@ -27,11 +27,11 @@
                 <div class="relative">
                     <input type="password" id="user_password" name="password" value="{{ old('password') }}" placeholder="Contraseña" class="appearance-none border rounded-lg w-full py-3 px-4 text-lg text-gray-800 leading-tight focus:outline-none focus:shadow-outline font-montserrat">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                        <img src="/img/eye.png" id="togglePasswordVisibility" class="w-6 cursor-pointer" alt="">
+                        <img src="/img/invisible.png" id="togglePasswordVisibility" class="w-6 cursor-pointer" alt="">
                     </div>
                 </div>
                 @error('password')
-                    <p class="text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-sm text-red">{{ $message }}</p>
                 @enderror
                 <a class="mt-3 inline-block align-baseline font-semibold text-lg hover:text-primaryColor" href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
             </div>
@@ -45,10 +45,14 @@
 <script>
     document.getElementById("togglePasswordVisibility").addEventListener("click", function() {
         var passwordInput = document.getElementById("user_password");
+        var passwordImg = document.getElementById("togglePasswordVisibility");
+
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
+            passwordImg.src = "/img/visible.png";
         } else {
             passwordInput.type = "password";
+            passwordImg.src = "/img/invisible.png";
         }
     });
 </script>

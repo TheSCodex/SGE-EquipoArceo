@@ -1,4 +1,4 @@
-@extends('templates/authTemplate')
+@extends('templates.authTemplate')
 
 @section('contenido')
     <div class="bg-[#F3F5F9] grid grid-cols-1 lg:grid-cols-3 lg:gap-5 px-5 py-7">
@@ -10,16 +10,16 @@
 
             <div class="grid grid-cols-2 gap-x-3 h-full">
                 <div class="bg-[#02AB82] rounded-md grid place-content-center gap-3 px-2 py-5 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Estudiantes</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Empresas</p>
 
-                    <a href="panel-users" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="panel-companies" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
                 <div class="bg-[#02AB82] rounded-md grid place-content-center px-2 py-5 gap-3 md:gap-9">
-                    <p class="text-lg md:text-2xl text-white font-bold">Anteproyectos</p>
+                    <p class="text-lg md:text-2xl text-white font-bold">Carreras y divisiones</p>
 
-                    <a href="" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
+                    <a href="panel-careers" type="button" class="bg-white text-gray-500 rounded-md w-fit m-auto px-6 py-1 text-xs md:text-sm shadow-md">
                         Ver todo
                     </a>
                 </div>
@@ -28,14 +28,10 @@
             <div class="bg-white rounded-md py-7 px-10">
                 <div class="flex justify-between">
                     <p class="text-[#828282] uppercase text-sm md:text-lg font-bold">Aprobación de anteproyectos</p>
-                    <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="12.8856" cy="10.8065" rx="12.0282" ry="10.3881" fill="#BDBDBD"/>
-                    <rect x="10.8809" y="8.49805" width="4.00938" height="9.23382" rx="2.00469" fill="white"/>
-                    <rect x="10.8809" y="3.88135" width="4.00938" height="3.46268" rx="1.73134" fill="white"/>
-                    </svg>
+                   
                 </div>
 
-                <p class="text-[#828282]">Carreras de la division</p>
+                <p class="text-[#828282]">Por academias</p>
 
                 <hr class="border-2 border-[#ECECEC] my-5" />
 
@@ -57,7 +53,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Bimbo SA de CV</p>
+                <p>{{$company->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -72,7 +68,7 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <p>Luis Villafaña</p>
+                <p>{{$advisor->name}}</p>
             </div>
 
             <div class="bg-white rounded-md py-2">
@@ -88,7 +84,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <p>Ingenieria y Tecnologia</p>
+                    <p>{{$division->name}}</p>
                 </div>
             </div>
 
@@ -96,33 +92,37 @@
                 <h3 class="text-sm md:text-lg text-center text-[#828282] font-semibold">Indice de aprobación</h3>
                 <hr class="border-2 border-[#ECECEC] my-5">
                 
-                <div class="p-3 flex justify-center">
-                    <img src="{{ asset('img/administratorDashboardChart.png') }}" alt="Total proyectos" class="max-h-[200px]" />
-                </div>
+                <canvas id="total-proyectos" class="max-h-[200px]"></canvas>
             </div>
         </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        let academies = {{ Js::from($academies) }}
+        let academyNames = academies.map(academy => academy.name);
+        let approvedProjectsCount = academies.map(academy => academy.approved_projects_count);
+        let revisionProjectsCount = academies.map(academy => academy.revision_projects_count)
+
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Mayo", "Junio", "Julio"],
+                labels: academyNames,
                 datasets: [{
-                        label: 'Tecnologías de la Información',
-                        data: [65, 20, 10],
+                        label: 'Proyetos aprobados',
+                        data: approvedProjectsCount,
                         backgroundColor: '#0FA987',
                         borderColor: '#ffffffff',
                         borderWidth: 1
                     },
                     {
-                        label: 'Mantenimiento',
-                        data: [39, 45, 85],
+                        label: 'Proyetos revisión',
+                        data: revisionProjectsCount,
                         backgroundColor: '#3E5366',
                         borderColor: '#ffffffff',
-                        borderWidth: 2
+                        borderWidth: 1
                     }
                 ]
             },
@@ -131,8 +131,6 @@
                     x: {
                         ticks: {
                             min: 0,
-                            max: 120,
-                            stepSize: 20
                         }
                     }
                 },
@@ -146,17 +144,44 @@
                     bar: {
                         borderWidth: 2, 
                         borderRadius: 5, 
-                        barThickness: 200 
+                        barThickness: 100 
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        suggestedMax: 120
                     }
                 }
             }
 
         });
     </script>
-@endsection
+
+    <script>
+        var ctx = document.getElementById('total-proyectos').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["En revision", "Aprobado"],
+                datasets: [{
+                    label: 'Anteproyectos',
+                    data: [{{$revisionProjects}}, {{$approvedProjects}}],
+                    backgroundColor: [
+                        '#3E5366',
+                        '#0FA987'
+                    ],
+                    borderColor: [
+                        '#ffffffff'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        });
+    </script>
+    @endsection
+

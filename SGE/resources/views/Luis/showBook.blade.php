@@ -13,7 +13,7 @@
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
             <div class="w-full md:px-[7em] md:my-[2em] flex ">
                 <div  class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0 min-h-[400px]">
-                    <h1 class="text-2xl font-bold mb-5 text-center">Información sobre el libro</h1>
+                    <h1 class="text-2xl font-bold mb-5 mt-20 lg:mt-0 text-center lg:text-left">Información sobre el libro</h1>
                     <div class="w-full flex flex-col space-y-1">
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class="space-y-2 mb-4 lg:mx-5">
@@ -37,6 +37,13 @@
                                 <textarea id="identifier_student" name="identifier_student" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" rows="1" placeholder="Introduce cada matricula separada por una coma" readonly>@foreach ($internsIdentifier as $index => $internIdentifier){{$internIdentifier}}{{ $index < count($internsIdentifier) - 1 ? ', ' : '' }}@endforeach</textarea>
                             </div>
                         </div>
+                        <div class="flex lg:flex-row flex-col items-center md:items-start justify-start">
+                            <div class="space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm">Precio:</p>
+                                <input type="text" id="price" name="price" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el precio del libro" value="{{ $book->price }}" readonly>
+                            </div>
+                        </div>
+
                     </div>
                     @foreach ($interns as $intern)
                     <div class="w-full flex flex-col space-y-1 ">
@@ -60,7 +67,7 @@
                                 <div class="flex flex-row w-full justify-between">
                                     <p class="text-sm space-y-2">Asesor academico del alumno:</p>
                                 </div>                        
-                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none"  readonly value="{{$intern['academic_advisor']['user']['name']}} {{$intern['academic_advisor']['user']['last_name']}}">
+                                <input type="text" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em] resize-none" readonly value="{{ $intern['academic_advisor'] ? $intern['academic_advisor']['user'] ? $intern['academic_advisor']['user']['name'] . ' ' . $intern['academic_advisor']['user']['last_name'] : '' : 'El estudiante no tiene ningun asesor academico asignado' }}">
                             </div>
                         </div>
                     </div>

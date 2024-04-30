@@ -19,7 +19,7 @@ class CompanieFactory extends Factory
         return [
             'name' => $this->faker->company,
             'address' => $this->faker->address,
-            'phone' => $this->faker->phoneNumber,
+            'phone' => $this->faker->numerify('998######'),
             'email' => $this->faker->unique()->safeEmail,
             'registration_date' => $this->faker->date,
             'rfc' => $this->faker->regexify('[A-Z0-9]{13}'),

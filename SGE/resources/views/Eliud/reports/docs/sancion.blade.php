@@ -46,17 +46,23 @@
     <div style="width:115%; position: relative; right:15; ">
         <img style=" width:100%; height: 110px" src="{{ public_path('img/Eliud/img_01.png') }}" alt="Logo UT" />
     </div>
+
     <div style="text-align: right; margin-top:10px; margin-bottom: 10px;">
         <p style="margin-bottom: 2px; margin-top:2px; "><span style=" font-weight: bold;">Asunto:</span>Sancion por
             incumplimiento.</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Cancún, Q.Roo; a {{ date('d') - 1 }} de {{ date('F') }} de
+        <p style="margin-bottom: 2px; margin-top:2px; ">Cancún, Q.Roo; a {{ date('d') - 1 }} de 
+            <?php
+            setlocale(LC_TIME, 'spanish'); 
+            echo strftime('%B');
+            ?>
+             de
             {{ date('Y') }}
         </p>
     </div>
-    <div style="font-weight:bolder; text-decoration: underline; margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
-        <p style="margin-bottom: 2px; margin-top:2px; ">Nombre del (a) Estudiante</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Matricula</p>
-        <p style="margin-bottom: 2px; margin-top:2px; ">Programa Educativo</p>
+    <div style="font-weight:normal;margin-top:10px; margin-bottom: 35px;font-size: 12pt;">
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder;">Nombre del (a) Estudiante</span>--}} {{$student?->name}} {{$student?->last_name}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder; ">Matricula</span> --}} {{$student?->identifier}}</p>
+        <p style="margin-bottom: 2px; margin-top:2px;text-decoration: underline; font-weight:bolder ">{{--<span style="text-decoration: underline; font-weight:bolder;">Programa Educativo</span>--}} {{$career?->name}} </p>
     </div>
 
     <p style="width: 100%; text-align:justify; margin-top:20px; margin-top:10px; margin-bottom: 10px;line-height: none; font-size:10.5pt">
@@ -77,18 +83,18 @@
                             POR MOTIVOS ACADÉMICOS</th>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 1 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación
                             escrita</td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span>{{ $serviceHours ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 1 ? $tipo == 3 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Cancelación de
                             Estadía.</td>
                     </tr>
@@ -104,18 +110,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="width:34px  ; border: 0.5px solid black;"></td>
+                        <td style="width:34px  ; border: 0.5px solid black;">{{$motivo == 2 ? $tipo == 1 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación
                             escrita</td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? $tipo == 2 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Amonestación con
-                            <em>*</em> ___ horas de labor social.
+                            <em>*</em> <span style="text-decoration: underline"><span style="color:white">..</span> {{ $serviceHours ? $serviceHours : '0'}}<span style="color:white">..</span></span> horas de labor social.
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:34px; text-align: center; border:0.5px solid black;"></td>
+                        <td style="width:34px; text-align: center; border:0.5px solid black;">{{$motivo == 2 ? $tipo == 3 ? 'X' : '' : '' }}</td>
                         <td style="padding: 2px;padding-bottom:5px; padding-left:8px; text-align: left; border-bottom: 0.5px solid black;">Cancelación de
                             Estadía.</td>
                     </tr>
@@ -134,17 +140,16 @@
         <div
             style="position: relative; height:100px; width: 100%; display: flex; justify-content: center; margin-top:20px; margin-bottom: 10px;">
             <div
-                style="position:absolute;left:0px; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
+                style="position:absolute;left:0px; width: 250px ; margin: 10px; display:flex; align-items: center; justify-content: center; flex-direction: column;">
                 <p style="text-align: center;font-weight:bolder">A T E N T A M E N T E</p>
                 <p style="text-align: center; margin-top: 70px">________________________________</p>
-                <p style="text-align: center; margin-top:10px">Nombre y firma del Asesor (a)
-                    <br /> Académico (a)
+                <p style="text-align: center; margin-top:10px">{{$user->name}} {{$user->last_name}}
                 </p>
             </div>
-            <div style="position:absolute; right :0px; margin: 10px;">
+            <div style="position:absolute; width: 250px ; right :0px; margin: 10px;">
                 <p style="text-align: center;font-weight:bolder;">ENTERADO</p>
                 <p style="text-align: center; margin-top: 70px">________________________________</p>
-                <p style="text-align: center; margin-top:10px"> Nombre y firma del (a) Estudiante </p>
+                <p style="text-align: center; margin-top:10px"> {{$student->name}} {{$student->last_name}} </p>
             </div>
         </div>
 
@@ -160,10 +165,9 @@
 
         <div style="margin-top: 20px; padding-right: 40px; padding-left:50px">
             <table style="width: 100%; border-collapse: collapse; border: 0.5px solid black; font-size: 12px;">
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: 31 de julio
-                    de 2023</td>
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. 5</td>
-                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">AEP-P03-F06</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Fecha de Revisión: {{$docRevision->updated_at->format('j \d\e F \d\e\l Y')}}</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">Revisión No. {{ $docRevision->revision_number }}</td>
+                <td style=" padding:2px; text-align: center; border: 0.5px solid black;">{{ $docRevision->revision_id }}</td>
 
             </table>
         </div>

@@ -26,7 +26,7 @@ class Project extends Model
 
     public function adviser()
     {
-        return $this->belongsTo(BusinessAdvisor::class, 'adviser_id');
+        return $this->belongsTo(BusinessAdvisor::class, 'adviser_id', 'id');
     }
 
     public function internshipType()
@@ -48,4 +48,5 @@ class Project extends Model
     {
         return $this->hasMany(ProjectAdvisorsLikes::class, 'id_projects');
     }
+   
 }

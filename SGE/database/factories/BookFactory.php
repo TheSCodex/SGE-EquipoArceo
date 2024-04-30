@@ -20,6 +20,7 @@ class BookFactory extends Factory
             'title'=>$this->faker->sentence(),
             'author'=>$this->faker->name(),
             'isbn'=>$this->faker->randomNumber(5, true),
+            'price'=>$this->faker->randomFloat(2, 10, 100),
         ];
     }
 }

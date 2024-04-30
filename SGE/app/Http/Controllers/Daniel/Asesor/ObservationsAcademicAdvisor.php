@@ -7,24 +7,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Intern;
+use App\Models\Project;
+use App\Models\AcademicAdvisor; // Importa el modelo User
+use App\Models\User; // Importa el modelo User
+
 class ObservationsAcademicAdvisor extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Project $id)
     {
-        $userId = Auth::id();
-        //return view('Daniel.Asesor.ObservationsAdvisor')->with('userId', $userId);
-        //quiero que con el $userId busque en la tabla interns  pero aun no lo termino jaja
-    }
+        // Obtener el proyecto usando el ID proporcionado en la ruta
+        $project = $id;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // Obtener el ID del usuario autenticado (asesor académico)
+        $userId = Auth::id();
+
+        // Obtener todos los comentarios relacionados con el proyecto
+        $comments = Comment::where('project_id', $project->id)->get();
+
+        // Verificar si hay algún comentario del tutor
+        $tutorComment = $comments->where('academic_advisor_id', $userId)->first();
+
+        // Filtrar los comentarios normales y los comentarios del estudiante
+        $normalComments = $comments->filter(function ($comment) {
+            return is_null($comment->interns_id) || $comment->interns_id === 1; // Ajustar el valor según corresponda
+        });
+
+        // Iteramos sobre los comentarios normales y asignamos el nombre del usuario correspondiente
+        foreach ($normalComments as $comment) {
+            if ($comment->interns_id) {
+                // Si el comentario es de un estudiante, obtenemos su nombre
+                $student = User::find($comment->interns_id);
+                $comment->loggedUserName = $student ? $student->name : "Estudiante Desconocido";
+            } else {
+                // Si el comentario es del asesor, obtenemos su nombre a partir del academic_advisor_id
+                $advisor = AcademicAdvisor::find($comment->academic_advisor_id);
+                if ($advisor) {
+                    $user = User::find($advisor->user_id);
+                    $comment->loggedUserName = $user ? $user->name . ' ' . $user->last_name : "Asesor Desconocido";
+                } else {
+                    $comment->loggedUserName = "Asesor Desconocido";
+                }
+            }
+        }
+
+        return view('Daniel.asesor.ObservationsAdvisor', compact('project', 'tutorComment', 'normalComments'));
     }
 
     /**
@@ -32,38 +61,56 @@ class ObservationsAcademicAdvisor extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validar el formulario si es necesario
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        // Obtener el ID del proyecto desde el formulario
+        $projectId = $request->input('projectId');
+
+        // Verificar si el usuario autenticado es un asesor académico
+        $intern = Intern::where('academic_advisor_id', $userId)->where('project_id', $projectId)->first();
+
+        if ($intern) {
+            try {
+                // Guardar el comentario en la base de datos
+                $comment = new Comment();
+                $comment->content = $request->input('content');
+                $comment->fecha_hora = now();
+                $comment->status = 1;
+                $comment->project_id = $projectId;
+                $comment->academic_advisor_id = $userId;
+                $comment->save();
+
+                return redirect()->back()->with('save', 'Comentario guardado exitosamente.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
+            }
+        } else {
+            return redirect()->route('asesor')->with('error', 'No se encontró intern relacionado con este usuario o proyecto.');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        try {
+            // Buscar el comentario por su ID
+            $comment = Comment::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            // Actualizar el estado del comentario a 3 (resuelto y enviado a revisión)
+            $comment->status = 3;
+            $comment->save();
+
+            // Buscar y actualizar todos los comentarios relacionados
+            Comment::where('parent_comment_id', $comment->id)->update(['status' => 3]);
+
+            return redirect()->back()->with('success', 'El comentario y sus comentarios relacionados han sido marcados como resueltos y enviados a revisión.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Ocurrió un error al marcar el comentario como resuelto y enviar a revisión: ' . $e->getMessage());
+        }
     }
 }

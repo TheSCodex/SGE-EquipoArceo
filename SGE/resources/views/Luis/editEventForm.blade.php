@@ -11,13 +11,19 @@
     @section('contenido')
     <section class="flex flex-col justify-center items-center  min-h-full flex-grow">
         <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-            @if(session('errorFecha'))
-                <div class=" w-full bg-[#B31312] rounded-xl flex flex-col justify-center align-middle">
-                    <h1 class=" text-lg text-white font-montserrat py-3 ml-3">&bull; {{session('errorFecha')}}</h1>
-                </div>
-            @endif
+
             <div class="w-full md:px-[7em] md:my-[2em] flex bg-white">        
                 <form action="{{route('actividades.update', $event->id)}}" method="POST" class="flex flex-col font-montserrat space-y-5 w-full mt-4 md:mt-0  ">
+                    @if(session('errorFecha'))
+                    <div class=" w-full bg-[#eb7575] rounded-xl flex flex-col justify-center align-middle h-16">
+                        <h1 class=" text-lg text-white font-montserrat ml-2">&bull; {{session('errorFecha')}}</h1>
+                    </div>
+                @endif
+                @if(session('errorHorario'))
+                    <div class="w-full bg-[#eb7575] rounded-xl flex flex-col justify-center align-middle h-16">
+                        <h1 class="text-lg text-white font-montserrat ml-2">&bull; {{session('errorHorario')}}</h1>
+                    </div>
+                @endif
                     @csrf
                     @method('PUT')
                     <div class="w-full h-fit flex justify-center md:justify-start">
@@ -52,11 +58,10 @@
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Tipo de actividad:</p>
                                 <select type="text" id="eventType" name="eventType" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Introduce el tipo de actividad">
-                                    <option value="Planificación de proyecto" @if($event->eventType == 'Planificación de proyecto') selected @endif>Planificación de proyecto</option>
-                                    <option value="Revisión de memoria" @if($event->eventType == 'Revisión de memoria') selected @endif>Revisión de memoria</option>
-                                    <option value="Asesoria" @if($event->eventType == 'Asesoria') selected @endif>Asesoría</option>
+                                    <option value="Planificación de anteproyecto" @if($event->eventType == 'Planificación de anteproyecto') selected @endif>Planificación de anteproyecto</option>
+                                    <option value="Asesoría de memorias" @if($event->eventType == 'Asesoría de memorias') selected @endif>Asesoría de memorias</option>
                                     <option value="Liberación de documento" @if($event->eventType == 'Liberación de documento') selected @endif>Liberación de documento</option>
-                                    <option value="Sanción" @if($event->eventType == 'Sanción') selected @endif>Sanción</option>
+                                    <option value="Sanción de servicio social" @if($event->eventType == 'Sanción de servicio social') selected @endif>Sanción de servicio social</option>
                                 </select>
                                 
                                 @error('eventType')
@@ -76,14 +81,19 @@
                             </div>
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
-                            <div class=" space-y-2 mb-4 lg:mx-5">
-                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
-                                <input type="text" id="location" name="location" value="{{ $event->location }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad">
-                                @error('location')
+                            <div class=" space-y-2 mb-4 lg:mx-5 ">
+                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
+                                <select type="text" id="status" name="status" value="{{ $event->status }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad">
+                                    <option @if($event->status == 'Programada') selected @endif>Programada</option>
+                                    <option @if($event->status == 'En proceso') selected @endif>En proceso</option>
+                                    <option @if($event->status == 'Terminada') selected @endif>Terminada</option>
+                                    <option @if($event->status == 'Cancelada') selected @endif>Cancelada</option>                                    
+                                </select>                                
+                                @error('status')
                                     <p class="text-[#ff0000] text-sm">
                                         {{ $message }}
                                     </p>
-                                @enderror
+                                    @enderror
                             </div>
                             <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Fecha y hora de inicio de la actividad:</p>
@@ -97,6 +107,15 @@
                         </div>
                         <div class="flex lg:flex-row flex-col items-center md:items-start justify-around">
                             <div class=" space-y-2 mb-4 lg:mx-5">
+                                <p class="text-sm space-y-2">Ubicación de la actividad:</p>
+                                <input type="text" id="location" name="location" value="{{ $event->location }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica donde se llevara a cabo la actividad">
+                                @error('location')
+                                    <p class="text-[#ff0000] text-sm">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class=" space-y-2 mb-4 lg:mx-5">
                                 <p class="text-sm space-y-2">Fecha y hora de fin de la actividad:</p>
                                 <input type="datetime-local" id="date_end" name="date_end" value="{{ $event->date_end }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica la hora de la actividad">
                                 @error('date_end')
@@ -104,20 +123,6 @@
                                         {{ $message }}
                                     </p>
                                 @enderror
-                            </div>
-                            <div class=" space-y-2 mb-4 lg:mx-5 pb-10">
-                                <p class="text-sm space-y-2">Estatus de la actividad:</p>
-                                <select type="text" id="status" name="status" value="{{ $event->status }}" class="text-sm rounded-md border-lightGray border-2 px-4 py-3 w-[20em] md:w-[35em]" placeholder="Indica el estatus de la actividad">
-                                    <option @if($event->status == 'Programada') selected @endif>Programada</option>
-                                    <option @if($event->status == 'En proceso') selected @endif>En proceso</option>
-                                    <option @if($event->status == 'Terminada') selected @endif>Terminada</option>
-                                    <option @if($event->status == 'Cancelada') selected @endif>Cancelada</option>                                    
-                                </select>                                
-                                @error('status')
-                                    <p class="text-[#ff0000] text-sm">
-                                        {{ $message }}
-                                    </p>
-                                    @enderror
                             </div>
                         </div>
                     </div>

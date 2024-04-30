@@ -20,14 +20,26 @@ class UserRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
-            'last_name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
-            'email' => 'bail|required',
-            'rol_id' => 'bail|required',
-            'identifier' => 'bail|required',
-            'career_id' => 'bail|required'
-        ];
+{
+    $rules = [
+        'name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
+        'last_name' => 'bail|required|regex:/^[a-zA-Z\s]+$/',
+        'email' => 'bail|required',
+        'rol_id' => 'bail|required',
+        'identifier' => 'bail|required',
+        'identifiers'=> 'bail'
+    ];
+
+    // Aplicar reglas adicionales dependiendo del valor de rol_id
+    $rolId = $this->input('rol_id');
+
+    if ($rolId === '1') {
+        $rules['career_id'] = 'bail|required';
+        $rules['group_id'] = 'bail|required';
+    } elseif ($rolId === '2') {
+        $rules['career_id'] = 'bail|required';
     }
+
+    return $rules;
+}
 }

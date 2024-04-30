@@ -17,6 +17,9 @@ class UsersSeeder extends Seeder
 
         $rolEstudiante = Role::where('title', 'estudiante')->first();
         $rolAsesorAcademico = Role::where('title', 'asesorAcademico')->first();
+        $rolPresidenteAcademia = Role::where('title', 'presidenteAcademia')->first();
+        $rolDirector = Role::where('title', 'director')->first();
+        $rolDirectorAssistant = Role::where('title', 'asistenteDireccion')->first();
 
         // Crear 10 usuarios estudiante
         for ($i = 0; $i < 16; $i++) {
@@ -39,5 +42,72 @@ class UsersSeeder extends Seeder
             $user->role()->associate($rolAsesorAcademico);
             $user->save();
         }
-    }
+                    
+                    // Nombres específicos para presidentes académicos
+        $presidentes_nombres = [
+            'Marco Antonio Mondragon',
+            'Gabriela Solis Curiel',
+            'Veronica Bolaños Lopez',
+            'Gilberto David Cetina Mijangos',
+            'Diana Gonzalez Alvarez',
+            'Angelina Gatica',
+            'Angel Calvario',
+            'Myrna Lopez',
+            'Elenor Director',
+            'Carrillo Director',
+            'Dra.Marisela Alvarez Ibarra',
+            'Mtra.Ana Isabel Romero Flores'
+        ];
+
+        // Crear 10 usuarios presidente académico
+        for ($i = 0; $i < 10; $i++) {
+            $user = User::factory()->create([
+                'name' => $presidentes_nombres[$i], // Asignar nombres específicos
+                'email' => strtolower($presidentes_nombres[$i]) . '@utcancun.edu.mx',
+                'password' => bcrypt('12345678'),
+            ]);
+            $user->role()->associate($rolPresidenteAcademia);
+            $user->save();
+        }
+
+        // Nombres específicos para directores
+        $directores_nombres = [
+            'Rocío Arceo',
+            'Manuel Enrique Rivero Rivero',
+            'Hector Luis Soto',
+            'Mariana Recio Lopez'
+        ];
+
+        // Crear 4 usuarios director
+        for ($i = 0; $i < 4; $i++) {
+            $user = User::factory()->create([
+                'name' => $directores_nombres[$i], // Asignar nombres específicos
+                'email' => strtolower(str_replace(' ', '', $directores_nombres[$i])) . '@utcancun.edu.mx',
+                'password' => bcrypt('12345678'),
+            ]);
+            $user->role()->associate($rolDirector);
+            $user->save();
+        }
+
+
+        $directorAssistants_names = [
+            'Norma Angélica Hernández Sandenal',
+            'Mtro. Jorge Reyes',
+            'Jennyfer Zamacona',
+            'Juana Patricia Contrareas Tabares'
+        ];
+        
+        for ($i = 0; $i < 4; $i++) {
+            $user = User::factory()->create([
+                'name' => $directorAssistants_names[$i],
+                'email' => strtolower(str_replace(' ', '', $directorAssistants_names[$i])) . '@utcancun.edu.mx',
+                'password' => bcrypt('12345678'),
+            ]);
+            $user->role()->associate($rolDirectorAssistant);
+            $user->save();
+        }
+    
+    
+}
+
 }
