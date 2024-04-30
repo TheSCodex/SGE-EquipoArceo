@@ -189,19 +189,38 @@
 
                 // Al hacer clic en el botón "Todos"
                 $("#btnAll").click(function() {
-                    $(".data-row").show();
+                    showAll();
                 });
 
                 // Al hacer clic en el botón "Con asesor"
                 $("#btnWithAdvisor").click(function() {
+                    showAll()
                     $(".data-row").hide();
                     $(".has-advisor").show();
+                    const visibleRows = document.querySelectorAll('.has-advisor[style=""]');
+                    if (visibleRows.length === 0) {
+                        noDataMessage.style.display = 'block'
+                        hideTableAndPagination()
+                    } else {
+                        updateNoDataMessage.style.display = 'none'
+                        showTableAndPagination();
+
+                    }
                 });
 
                 // Al hacer clic en el botón "Sin asesor"
                 $("#btnWithOutAdvisor").click(function() {
+                    showAll()
                     $(".data-row").hide();
                     $(".no-advisor").show();
+                    const visibleRows = document.querySelectorAll('.no-advisor[style=""]')
+                    if (visibleRows.length === 0) {
+                        noDataMessage.style.display = 'block'
+                        hideTableAndPagination();
+                    } else {
+                        noDataMessage.style.display = 'none'
+                        showTableAndPagination(); // Mostrar tabla y paginador
+                    }
                 });
             });
 
@@ -284,6 +303,12 @@
                 } else {
                     noDataMessage.style.display = 'none';
                 }
+            }
+
+            function showAll() {
+                $(".data-row").show();
+                showTableAndPagination();
+                updateNoDataMessage();
             }
 
             // Función para mostrar la tabla y el paginador

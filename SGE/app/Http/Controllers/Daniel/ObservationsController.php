@@ -9,14 +9,17 @@ use App\Models\User;
 use App\Models\AcademicAdvisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ObservationsController extends Controller
 {
     public function index()
     {
+        if (Gate::denies('leer-observaciones')) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
         // Obtenemos el ID del usuario autenticado
         $userId = Auth::id();
-
         // Buscamos el intern relacionado con el usuario autenticado
         $intern = Intern::where('user_id', $userId)->first();
         
@@ -41,8 +44,13 @@ class ObservationsController extends Controller
                     $comment->loggedUserName = $student ? $student->name : "Estudiante Desconocido";
                 } else {
                     // Si el comentario es del asesor, obtenemos su nombre a partir del academic_advisor_id
-                    $advisor = AcademicAdvisor::find($academicAdvisorId);
-                    $comment->loggedUserName = $advisor ? User::find($advisor->user_id)->name : "Asesor Desconocido";
+                    $advisor = AcademicAdvisor::find($comment->academic_advisor_id);
+                    if ($advisor) {
+                        $user = User::find($advisor->user_id);
+                        $comment->loggedUserName = $user ? $user->name . ' ' . $user->last_name : "Asesor Desconocido";
+                    } else {
+                        $comment->loggedUserName = "Asesor Desconocido";
+                    }
                 }
             }
 
@@ -64,8 +72,8 @@ class ObservationsController extends Controller
 
     public function store(Request $request)
     {
-        // Validar el formulario
-        $request->validate([
+         // Validar el formulario
+         $request->validate([
             'content' => 'required|string',
         ]);
 
@@ -98,7 +106,7 @@ class ObservationsController extends Controller
                 }
                 $comment->save();
 
-                return redirect()->back()->with('Save', 'Comentario guardado exitosamente.');
+                return redirect()->back()->with('Comment', 'Comentario guardado exitosamente.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Ocurrió un error al guardar el comentario: ' . $e->getMessage());
             }

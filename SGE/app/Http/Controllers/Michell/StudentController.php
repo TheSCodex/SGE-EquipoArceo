@@ -23,7 +23,10 @@ class StudentController extends Controller
     public function studentHome()
     {
         $user  = auth()->user();
+        
         $student = $user->id;
+
+        // dd($student);
         // if ($student === null) {
         //     $student = 1;
         // }
@@ -32,9 +35,8 @@ class StudentController extends Controller
         // dd($intern);
 
         $studentProject = Intern::join("projects", "interns.project_id", "=", "projects.id")
-            ->where("interns.id", "=", $student)
+            ->where("interns.user_id", "=", $student)
             ->first();
-
    
         $advisor = $intern->load("academicAdvisor.user");
 
@@ -108,7 +110,11 @@ class StudentController extends Controller
         ->first();
         // dd($penalizations);
 
+        $notificaciones = Auth::user()->unreadNotifications;
 
+
+        // dd($empresarial);
+        
         return view('Michell.StudentHome.studentHome', [
     
             'advisor' => $advisor,
@@ -121,7 +127,8 @@ class StudentController extends Controller
             "studentsCommentsCount" => $studentsCommentsCount,
             'votes' => $votes,
             'penalty' => $penalizations,
-            "mensaje" => $mensaje
+            "mensaje" => $mensaje,
+            'notificaciones' => $notificaciones
         ]);
     }
 
