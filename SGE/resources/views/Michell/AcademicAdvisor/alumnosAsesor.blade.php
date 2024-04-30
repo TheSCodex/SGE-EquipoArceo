@@ -1,13 +1,55 @@
 @extends('templates/authTemplate')
 @section('titulo', 'Estudiantes Asesorados')
 @section('contenido')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <section class="flex flex-col justify-start items-center  min-h-full h-screen flex-grow">
-        <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
+    @if (!$projectsAdvisor == null)
+        <section class="flex flex-col items-center justify-start flex-grow h-full min-h-screen">
+        @else
+            <section class="flex flex-col items-center justify-start flex-grow h-screen min-h-full">
+    @endif
+    <div class="sm:p-8 text-left w-[90%] mb-[2vh] sm:mb-0 ">
+        @if (!$projectsAdvisor == null)
             <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
-                <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
+                <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Anteproyectos de Asesorados
+                </h1>
+            </div>
+            <div class="flex items-center justify-between w-11/12 mx-auto mt-6 ">
+                <div class="w-full mb-5">
+                    <div class="grid w-full gap-4 md:grid-cols-3 lg:grid-cols-5">
+                        @foreach ($projectsAdvisor as $project)
+                            <a href="{{ route('anteproyecto-Asesor.store', $project->id) }}" class="focus:outline-none">
+                                <div
+                                    class="p-4 transition-transform transform bg-white rounded-lg shadow-md min-h-48 drop-shadow-2xl hover:scale-105">
+                                    <div
+                                        class="w-11/12 gap-1 pb-1 border-b border-gray-500 md:flex md:items-center md:justify-between">
+                                        <h2 class="text-lg font-bold">
+                                            {{ strlen($project->name) > 13 ? substr($project->name, 0, 13) . '...' : $project->name }}
+                                        </h2>
+                                        <p class="text-sm font-bold text-center text-primaryColor">
+                                            {{ $project->like !== null ? $project->like : 0 }} Votos
+                                        </p>
+                                    </div>
+
+                                    <p class="my-2 text-sm text-gray-500">
+                                        {{ strlen($project->description) > 100 ? substr($project->description, 0, 100) . '...' : $project->description }}
+                                    </p>
+                                    <div class="flex mt-4 space-x-2">
+                                        @foreach ($project->interns as $intern)
+                                            <p class="text-sm text-gray-500">{{ $intern->user->name }}
+                                                {{ $intern->user->last_name }}
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+        <div class="w-11/12 pb-2 mx-auto mt-5 border-b border-gray-200 md:flex md:items-center md:justify-between">
+            <h1 class="mb-2 text-xl font-bold text-center font-montserrat md:text-left">Estudiantes Asesorados</h1>
 
                 <div class="flex flex-row items-center justify-end">
                     <div>
@@ -200,6 +242,9 @@
                                                                         </p>
                                                                     @endforeach
                                                                     <div class="grid grid-cols-2 gap-5">
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
                                                                         <button type="submit"
                                                                             class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                         <button type="button" id="clo"
@@ -207,6 +252,7 @@
                                                                             class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
                                                                         </button>
                                                                     </div>
+
 
                                                                 </form>
                                                             </div>
@@ -258,6 +304,10 @@
 
 
                                                                     <div class="grid grid-cols-2 gap-5">
+
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
                                                                         <button type="submit"
                                                                             class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                         <button type="button" id="clo"
@@ -265,6 +315,7 @@
                                                                             class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
                                                                         </button>
                                                                     </div>
+
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -337,6 +388,10 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="grid grid-cols-2 gap-5">
+
+                                                                        <button type="button" id="clo"
+                                                                            data-dismiss="modal" aria-label="Close"
+                                                                            class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar</button>
                                                                         <button type="submit"
                                                                             class="bg-[#00AB84] w-full my-3 rounded-lg py-1 text-white">Aceptar</button>
                                                                         <button type="button" id="clo"
@@ -344,6 +399,7 @@
                                                                             class="bg-[#7a6767] w-full my-3 rounded-lg py-1 text-white">Cancelar
                                                                         </button>
                                                                     </div>
+
 
                                                                 </form>
                                                             </div>
